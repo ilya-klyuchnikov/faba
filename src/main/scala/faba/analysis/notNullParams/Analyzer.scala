@@ -106,6 +106,7 @@ case class Analyzer(richControlFlow: RichControlFlow, paramIndex: Int) {
           case Some(ps) =>
             results = results + (stateIndex -> results(ps.index))
           case None =>
+            // TODO - specialized code starts
             val insnNode = methodNode.instructions.get(insnIndex)
             val nextHistory = if (loopEnter) conf :: history else history
             val (nextFrame, subResult) = execute(frame, insnNode)
@@ -133,7 +134,6 @@ case class Analyzer(richControlFlow: RichControlFlow, paramIndex: Int) {
                 val nextState = PendingState({id += 1; id}, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
                 pending.push(MakeResult(state, subResult, List(nextState.index)))
                 pending.push(ProceedState(nextState))
-              // if not instanceOf
               case IFEQ if popValue(frame) == InstanceOfCheckValue =>
                 val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
                 val nextState = PendingState({id += 1; id}, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
@@ -161,6 +161,7 @@ case class Analyzer(richControlFlow: RichControlFlow, paramIndex: Int) {
                 pending.push(MakeResult(state, subResult, nextStates.map(_.index)))
                 pending.pushAll(nextStates.map(s => ProceedState(s)))
             }
+            // TODO - specialized code ends
         }
     }
 

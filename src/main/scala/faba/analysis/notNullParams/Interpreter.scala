@@ -28,7 +28,6 @@ case class ExternalUsage(cnf: CNF) extends ParamUsage {
   }
 
   def join(other: ExternalUsage) = ExternalUsage(this.cnf join other.cnf)
-  def meet(other: ExternalUsage) = ExternalUsage(this.cnf join other.cnf)
   override def toResult: Result = ConditionalNPE(cnf)
 }
 
