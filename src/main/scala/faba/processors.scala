@@ -73,8 +73,14 @@ object NotNullParametersProcessor extends Processor {
     val solvingEnd = System.currentTimeMillis()
     println("saving to file ...")
 
+    val outs = ArrayBuffer[String]()
+    for ((parameter, v) <- solutions) {
+      outs.append(parameter.toString.replace('/', '.'))
+    }
+
+    val outsSorted = outs.sorted
     printToFile(new File(outFile)) { out =>
-      for ((parameter, _) <- solutions) {
+      for (parameter <- outsSorted) {
         out.println(parameter)
       }
     }
