@@ -46,15 +46,15 @@ object Result {
       case (_, Bottom) => r1
       case (SolutionWrapper(nt1, Dependence(p1, params1)), SolutionWrapper(nt2, Dependence(p2, params2))) =>
         val nullTaken = nt1 || nt2
-        val partial: Option[PartialSolution] = (p1, p2) match {
+        val partial: Option[Value] = (p1, p2) match {
           case (None, _) => p2
           case (_, None) => p1
           case (Some(ps1), Some(ps2)) if ps1 == ps2 =>
             Some(ps1)
-          case _ => Some(AnyComponent)
+          case _ => Some(Top)
         }
         val params: Set[Parameter] = partial match {
-          case Some(AnyComponent) => Set()
+          case Some(Top) => Set()
           case _ => params1 ++ params2
         }
         SolutionWrapper(nullTaken, Dependence(partial, params))
@@ -101,9 +101,9 @@ case class Analyzer(richControlFlow: RichControlFlow, paramIndex: Int) {
 
   def mkEquation(result: Result): Equation = result match {
     case Bottom =>
-      Equation(parameter, Dependence(Some(AnyComponent), Set()))
+      Equation(parameter, Dependence(Some(Top), Set()))
     case SolutionWrapper(false, _) =>
-      Equation(parameter, Dependence(Some(AnyComponent), Set()))
+      Equation(parameter, Dependence(Some(Top), Set()))
     case SolutionWrapper(true, sol) =>
       Equation(parameter, sol)
   }
@@ -163,11 +163,11 @@ case class Analyzer(richControlFlow: RichControlFlow, paramIndex: Int) {
                 val returnValue = popValue(frame)
                 returnValue match {
                   case FalseValue() =>
-                    val solution: SolutionWrapper = SolutionWrapper(nullPathTaken, Dependence(Some(FalseComponent), Set()))
+                    val solution: SolutionWrapper = SolutionWrapper(nullPathTaken, Dependence(Some(False), Set()))
                     results = results + (stateIndex -> solution)
                     computed = computed.updated(insnIndex, state :: computed(insnIndex))
                   case TrueValue() =>
-                    val solution: SolutionWrapper = SolutionWrapper(nullPathTaken, Dependence(Some(TrueComponent), Set()))
+                    val solution: SolutionWrapper = SolutionWrapper(nullPathTaken, Dependence(Some(True), Set()))
                     results = results + (stateIndex -> solution)
                     computed = computed.updated(insnIndex, state :: computed(insnIndex))
                   case CallResultValue(_, param) =>
@@ -175,12 +175,12 @@ case class Analyzer(richControlFlow: RichControlFlow, paramIndex: Int) {
                     results = results + (stateIndex -> solution)
                     computed = computed.updated(insnIndex, state :: computed(insnIndex))
                   case _ =>
-                    val solution: SolutionWrapper = SolutionWrapper(nullPathTaken, Dependence(Some(AnyComponent), Set()))
+                    val solution: SolutionWrapper = SolutionWrapper(nullPathTaken, Dependence(Some(Top), Set()))
                     results = results + (stateIndex -> solution)
                     computed = computed.updated(insnIndex, state :: computed(insnIndex))
                 }
               case ATHROW =>
-                results = results + (stateIndex -> SolutionWrapper(nullPathTaken, Dependence(Some(AnyComponent), Set())))
+                results = results + (stateIndex -> SolutionWrapper(nullPathTaken, Dependence(Some(Top), Set())))
                 computed = computed.updated(insnIndex, state :: computed(insnIndex))
               case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
                 val nextInsnIndex = insnIndex + 1

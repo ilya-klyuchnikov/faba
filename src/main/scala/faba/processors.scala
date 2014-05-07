@@ -133,7 +133,7 @@ object NullBooleanContractsProcessor extends Processor with App {
         for (i <- argumentTypes.indices) {
           val sort = argumentTypes(i).getSort
           if (sort == Type.OBJECT || sort == Type.ARRAY) {
-            solver.addEquation(Equation(Parameter(className, methodNode.name, methodNode.desc, i), Dependence(Some(AnyComponent), Set())))
+            solver.addEquation(Equation(Parameter(className, methodNode.name, methodNode.desc, i), Dependence(Some(Top), Set())))
           }
         }
       }
