@@ -6,10 +6,12 @@ import java.io.File
 import scala.collection.mutable.ArrayBuffer
 
 import faba.analysis._
+import faba.analysis.engine._
 
-object NotNullParametersProcessor extends Processor with App {
+object NotNullParametersProcessor extends Processor {
 
   import faba.analysis.notNullParams._
+  val solver = new Solver[Id, Value]()
 
   override def processClass(classReader: ClassReader): Unit =
     classReader.accept(new ClassVisitor(Opcodes.ASM5) {
@@ -49,7 +51,7 @@ object NotNullParametersProcessor extends Processor with App {
       for (i <- argumentTypes.indices) {
         val sort = argumentTypes(i).getSort
         if (sort == Type.OBJECT || sort == Type.ARRAY) {
-          solver.addEquation(Equation(Parameter(className, methodNode.name, methodNode.desc, i), Nullable))
+          solver.addEquation(Equation(Parameter(className, methodNode.name, methodNode.desc, i), Final(Nullity.Nullable)))
         }
       }
     }
@@ -60,22 +62,19 @@ object NotNullParametersProcessor extends Processor with App {
     try { op(p) } finally { p.close() }
   }
 
-  val solver = new Solver()
-  if (args.length != 2) {
-    println(s"Usage: faba.NotNullParametersProcessor inputJar outputFile")
-  } else {
-    val source = JarFileSource(new File(args(0)))
+
+  def process(source: Source, outFile: String) {
     val indexStart = System.currentTimeMillis()
     println("indexing ...")
     source.process(this)
     val indexEnd = System.currentTimeMillis()
     println("solving ...")
-    solver.solve()
+    val solutions = solver.solve().filter(_._2 == Nullity.NotNull)
     val solvingEnd = System.currentTimeMillis()
     println("saving to file ...")
 
-    printToFile(new File(args(1))) { out =>
-      for (Equation(parameter, NotNull) <- solver.solved) {
+    printToFile(new File(outFile)) { out =>
+      for ((parameter, _) <- solutions) {
         out.println(parameter)
       }
     }
@@ -87,12 +86,21 @@ object NotNullParametersProcessor extends Processor with App {
     println(s"saving took ${(writingEnd - solvingEnd)/1000.0} sec")
   }
 
+  def main(args: Array[String]) {
+    if (args.length != 2) {
+      println(s"Usage: faba.NullBooleanContractsProcessor inputJar outputFile")
+    } else {
+      process(JarFileSource(new File(args(0))), args(1))
+    }
+  }
+
 }
 
-object NullBooleanContractsProcessor extends Processor with App {
+object NullBooleanContractsProcessor extends Processor {
 
   import faba.analysis.contracts._
-  import faba.analysis.engine._
+
+  val solver = new Solver[Parameter, Value]()
 
   override def processClass(classReader: ClassReader): Unit =
     classReader.accept(new ClassVisitor(Opcodes.ASM5) {
@@ -147,11 +155,7 @@ object NullBooleanContractsProcessor extends Processor with App {
     try { op(p) } finally { p.close() }
   }
 
-  val solver = new Solver[Parameter, Value]()
-  if (args.length != 2) {
-    println(s"Usage: faba.NullBooleanContractsProcessor inputJar outputFile")
-  } else {
-    val source = JarFileSource(new File(args(0)))
+  def process(source: Source, outFile: String) {
     val indexStart = System.currentTimeMillis()
     println("indexing ...")
     source.process(this)
@@ -163,26 +167,35 @@ object NullBooleanContractsProcessor extends Processor with App {
 
     val outs = ArrayBuffer[(String, String)]()
     for ((parameter, v) <- solutions) {
-        outs.append((parameter.toString.replace('/', '.'), v.toString))
+      outs.append((parameter.toString.replace('/', '.'), v.toString))
     }
 
     val outsSorted = outs.sortBy(_._1)
-    printToFile(new File(args(1))) { out =>
-      for ((x, y) <- outsSorted) {
-        out.println(x)
-        out.println(y)
-        out.println()
-      }
+    printToFile(new File(outFile)) {
+      out =>
+        for ((x, y) <- outsSorted) {
+          out.println(x)
+          out.println(y)
+          out.println()
+        }
     }
 
     val writingEnd = System.currentTimeMillis()
 
     println("====")
-    println(s"indexing took ${(indexEnd - indexStart)/1000.0} sec")
-    println(s"solving took ${(solvingEnd - indexEnd)/1000.0} sec")
-    println(s"saving took ${(writingEnd - solvingEnd)/1000.0} sec")
+    println(s"indexing took ${(indexEnd - indexStart) / 1000.0} sec")
+    println(s"solving took ${(solvingEnd - indexEnd) / 1000.0} sec")
+    println(s"saving took ${(writingEnd - solvingEnd) / 1000.0} sec")
 
     println(s"${solutions.size} contracts")
+  }
+
+  def main(args: Array[String]) {
+    if (args.length != 2) {
+      println(s"Usage: faba.NullBooleanContractsProcessor inputJar outputFile")
+    } else {
+      process(JarFileSource(new File(args(0))), args(1))
+    }
   }
 
 }

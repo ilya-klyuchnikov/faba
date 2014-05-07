@@ -6,28 +6,31 @@ import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.Type
 
 sealed trait ParamUsage {
-  def join(other: ParamUsage): ParamUsage
+  def meet(other: ParamUsage): ParamUsage
   def toResult: Result
 }
 
+// Nullable, Top
 object NoUsage extends ParamUsage {
-  override def join(other: ParamUsage) = other
-  override def toResult: Result = Bottom
+  override def meet(other: ParamUsage) = other
+  override def toResult: Result = Identity
 }
 
+// NotNull, Bottom
 object DeReference extends ParamUsage {
-  override def join(other: ParamUsage) = DeReference
+  override def meet(other: ParamUsage) = DeReference
   override def toResult: Result = NPE
 }
 
-case class ExternalUsage(cnf: CNF) extends ParamUsage {
-  override def join(other: ParamUsage): ParamUsage = other match {
+case class ExternalUsage(cnf: DNF) extends ParamUsage {
+  // intersect
+  override def meet(other: ParamUsage): ParamUsage = other match {
     case NoUsage => this
     case DeReference => DeReference
     case other: ExternalUsage => join(other)
   }
 
-  def join(other: ExternalUsage) = ExternalUsage(this.cnf join other.cnf)
+  def join(other: ExternalUsage) = ExternalUsage(this.cnf meet other.cnf)
   override def toResult: Result = ConditionalNPE(cnf)
 }
 
@@ -94,7 +97,7 @@ object Interpreter extends BasicInterpreter {
         val mNode = insn.asInstanceOf[MethodInsnNode]
         for (i <- shift until values.size()) {
           if (values.get(i).isInstanceOf[ParamValue]) {
-            _usage = _usage join ExternalUsage(Parameter(mNode.owner, mNode.name, mNode.desc, i - shift))
+            _usage = _usage meet ExternalUsage(Parameter(mNode.owner, mNode.name, mNode.desc, i - shift))
           }
         }
       case _ =>

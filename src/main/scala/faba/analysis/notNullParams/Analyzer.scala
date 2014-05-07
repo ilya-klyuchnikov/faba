@@ -8,6 +8,7 @@ import scala.collection.mutable
 import scala.collection.immutable.IntMap
 
 import faba.analysis.RichControlFlow
+import faba.analysis.engine._
 
 class ParamValue(tp: Type) extends BasicValue(tp)
 object InstanceOfCheckValue extends BasicValue(Type.INT_TYPE)
@@ -17,31 +18,37 @@ case class Parameter(className: String, methodName: String, methodDesc: String, 
 }
 
 sealed trait Result
-case object Bottom extends Result
+case object Identity extends Result
+
+// todo - top, nullable
 case object Return extends Result
+// todo - bottom, notnull
 case object NPE extends Result
-case class ConditionalNPE(cnf: CNF) extends Result
+// todo - Pending, component
+case class ConditionalNPE(cnf: DNF) extends Result
 
 object Result {
-  def meet(r1: Result, r2: Result): Result = (r1, r2) match {
-    case (Bottom, _) => r2
-    case (_, Bottom) => r1
+  // |, union
+  def join(r1: Result, r2: Result): Result = (r1, r2) match {
+    case (Identity, _) => r2
+    case (_, Identity) => r1
     case (Return, _) => Return
     case (_, Return) => Return
     case (NPE, NPE) => NPE
-    case (NPE, r2:ConditionalNPE) => r2
-    case (r1:ConditionalNPE, NPE) => r1
-    case (ConditionalNPE(e1), ConditionalNPE(e2)) => ConditionalNPE(e1 meet e2)
+    case (NPE, r2: ConditionalNPE) => r2
+    case (r1: ConditionalNPE, NPE) => r1
+    case (ConditionalNPE(e1), ConditionalNPE(e2)) => ConditionalNPE(e1 join e2)
   }
 
-  def join(r1: Result, r2: Result): Result = (r1, r2) match {
-    case (Bottom, _) => r2
-    case (_, Bottom) => r1
+  // &, intersection
+  def meet(r1: Result, r2: Result): Result = (r1, r2) match {
+    case (Identity, _) => r2
+    case (_, Identity) => r1
     case (Return, _) => r2
     case (_, Return) => r1
     case (NPE, _) => NPE
     case (_, NPE) => r2
-    case (ConditionalNPE(e1), ConditionalNPE(e2)) => ConditionalNPE(e1 join e2)
+    case (ConditionalNPE(e1), ConditionalNPE(e2)) => ConditionalNPE(e1 meet e2)
   }
 }
 
@@ -67,7 +74,7 @@ case class Analyzer(richControlFlow: RichControlFlow, paramIndex: Int) {
   private val methodNode = controlFlow.methodNode
   private val parameter = Parameter(controlFlow.className, methodNode.name, methodNode.desc, paramIndex)
 
-  def analyze(): Equation = {
+  def analyze(): Equation[Id, Value] = {
     var id = 0
 
     val startState =
@@ -82,8 +89,10 @@ case class Analyzer(richControlFlow: RichControlFlow, paramIndex: Int) {
 
     while (pending.nonEmpty) pending.pop() match {
       case MakeResult(state, delta, subIndices) =>
-        val subResult = subIndices.map(results).reduce(Result.meet)
-        val result = Result.join(delta, subResult)
+        // TODO - specialized code how to combine starts
+        val subResult = subIndices.map(results).reduce(Result.join)
+        val result = Result.meet(delta, subResult)
+        // TODO - specialized code how to combine ends
         results = results + (state.index -> result)
         val insnIndex = state.conf.insnIndex
         computed = computed.updated(insnIndex, state :: computed(insnIndex))
@@ -100,7 +109,7 @@ case class Analyzer(richControlFlow: RichControlFlow, paramIndex: Int) {
         val loop = loopEnter && history.exists(prevConf => isInstance(conf, prevConf))
 
         if (loop) {
-          results = results + (stateIndex -> Bottom)
+          results = results + (stateIndex -> Identity)
           computed = computed.updated(insnIndex, state :: computed(insnIndex))
         } else computed(insnIndex).find(state.isInstanceOf(_)) match {
           case Some(ps) =>
@@ -122,7 +131,7 @@ case class Analyzer(richControlFlow: RichControlFlow, paramIndex: Int) {
                 results = results + (stateIndex -> NPE)
                 computed = computed.updated(insnIndex, state :: computed(insnIndex))
               case ATHROW =>
-                results = results + (stateIndex -> Bottom)
+                results = results + (stateIndex -> Identity)
                 computed = computed.updated(insnIndex, state :: computed(insnIndex))
               case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
                 val nextInsnIndex = insnIndex + 1
@@ -161,28 +170,30 @@ case class Analyzer(richControlFlow: RichControlFlow, paramIndex: Int) {
                 pending.push(MakeResult(state, subResult, nextStates.map(_.index)))
                 pending.pushAll(nextStates.map(s => ProceedState(s)))
             }
-            // TODO - specialized code ends
+          // TODO - specialized code ends
         }
     }
 
     mkEquation(results(0))
   }
 
-  private def mkEquation(result: Result) = result match {
-    case Bottom | Return => Equation(parameter, Nullable)
-    case NPE => Equation(parameter, NotNull)
-    case ConditionalNPE(cnf) => Equation(parameter, Dependence(cnf))
+  private def mkEquation(result: Result): Equation[Id, Value] = result match {
+    case Identity | Return => Equation(parameter, Final(Nullity.Nullable))
+    case NPE => Equation(parameter, Final(Nullity.NotNull))
+    case ConditionalNPE(cnf) =>
+      require(cnf.forall(_.nonEmpty))
+      Equation(parameter, Pending(Nullity.NotNull, cnf.map(p => Component(false, p))))
   }
 
   private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
-      case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
-        (frame, Bottom)
-      case _ =>
-        val nextFrame = new Frame(frame)
-        Interpreter.reset()
-        nextFrame.execute(insnNode, Interpreter)
-        (nextFrame, Interpreter.getUsage.toResult)
-    }
+    case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
+      (frame, Identity)
+    case _ =>
+      val nextFrame = new Frame(frame)
+      Interpreter.reset()
+      nextFrame.execute(insnNode, Interpreter)
+      (nextFrame, Interpreter.getUsage.toResult)
+  }
 
   private def createStartFrame(): Frame[BasicValue] = {
     val frame = new Frame[BasicValue](methodNode.maxLocals, methodNode.maxStack)
