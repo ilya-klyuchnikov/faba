@@ -1,4 +1,4 @@
-package faba
+package faba.source
 
 import scala.language.existentials
 import scala.collection.JavaConverters._

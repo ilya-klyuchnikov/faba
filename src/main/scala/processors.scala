@@ -5,12 +5,13 @@ import org.objectweb.asm.tree.MethodNode
 import java.io.File
 import scala.collection.mutable.ArrayBuffer
 
-import faba.analysis._
-import faba.analysis.engine._
+import faba.cfg._
+import faba.engine._
+import faba.source._
 
 object NotNullParametersProcessor extends Processor {
 
-  import faba.analysis.notNullParams._
+  import faba.parameters._
   val solver = new Solver[Id, Value]()
 
   override def processClass(classReader: ClassReader): Unit =
@@ -27,17 +28,17 @@ object NotNullParametersProcessor extends Processor {
     }, 0)
 
   def processMethod(className: String, methodNode: MethodNode) {
-    val cfg = ControlFlowGraph.buildControlFlowGraph(className, methodNode)
+    val graph = cfg.buildControlFlowGraph(className, methodNode)
     var added = false
     val argumentTypes = Type.getArgumentTypes(methodNode.desc)
-    if (cfg.transitions.nonEmpty)  {
-      val dfs = DFSTree.build(cfg.transitions)
-      val reducible = dfs.back.isEmpty || Reducibility.reducible(cfg, dfs)
+    if (graph.transitions.nonEmpty)  {
+      val dfs = cfg.buildDFSTree(graph.transitions)
+      val reducible = dfs.back.isEmpty || cfg.reducible(graph, dfs)
       if (reducible) {
         for (i <- argumentTypes.indices) {
           val sort = argumentTypes(i).getSort
           if (sort == Type.OBJECT || sort == Type.ARRAY) {
-            val equation = Analyzer(RichControlFlow(cfg, dfs), i).analyze()
+            val equation = Analyzer(RichControlFlow(graph, dfs), i).analyze()
             solver.addEquation(equation)
           }
         }
@@ -104,7 +105,7 @@ object NotNullParametersProcessor extends Processor {
 
 object NullBooleanContractsProcessor extends Processor {
 
-  import faba.analysis.contracts._
+  import faba.contracts._
 
   val solver = new Solver[Parameter, Value]()
 
@@ -122,19 +123,19 @@ object NullBooleanContractsProcessor extends Processor {
     }, 0)
 
   def processMethod(className: String, methodNode: MethodNode) {
-    val cfg = ControlFlowGraph.buildControlFlowGraph(className, methodNode)
+    val graph = cfg.buildControlFlowGraph(className, methodNode)
     var added = false
     val argumentTypes = Type.getArgumentTypes(methodNode.desc)
     val resultType = Type.getReturnType(methodNode.desc)
     if (Type.BOOLEAN_TYPE == resultType) {
-      if (cfg.transitions.nonEmpty)  {
-        val dfs = DFSTree.build(cfg.transitions)
-        val reducible = dfs.back.isEmpty || Reducibility.reducible(cfg, dfs)
+      if (graph.transitions.nonEmpty)  {
+        val dfs = cfg.buildDFSTree(graph.transitions)
+        val reducible = dfs.back.isEmpty || cfg.reducible(graph, dfs)
         if (reducible) {
           for (i <- argumentTypes.indices) {
             val sort = argumentTypes(i).getSort
             if (sort == Type.OBJECT || sort == Type.ARRAY) {
-              val equation = Analyzer(RichControlFlow(cfg, dfs), i).analyze()
+              val equation = Analyzer(RichControlFlow(graph, dfs), i).analyze()
               solver.addEquation(equation)
             }
           }

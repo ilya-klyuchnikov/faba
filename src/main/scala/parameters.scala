@@ -1,14 +1,34 @@
-package faba.analysis.notNullParams
+package faba.parameters
 
 import org.objectweb.asm.{Opcodes, Type}
-import org.objectweb.asm.tree.analysis.{Frame, BasicValue}
-import org.objectweb.asm.tree.{JumpInsnNode, AbstractInsnNode}
-import org.objectweb.asm.Opcodes.{RETURN => VRETURN, _}
+import org.objectweb.asm.tree.analysis.{BasicInterpreter, Frame, BasicValue}
+import org.objectweb.asm.tree.{MethodInsnNode, TypeInsnNode, JumpInsnNode, AbstractInsnNode}
+import org.objectweb.asm.Opcodes._
 import scala.collection.mutable
 import scala.collection.immutable.IntMap
 
-import faba.analysis.RichControlFlow
-import faba.analysis.engine._
+import faba.cfg._
+import faba.engine._
+
+object `package` {
+  type DNF = Set[Set[Parameter]]
+
+  implicit class CnfOps(val cnf1: DNF) {
+    def join(cnf2: DNF): DNF =
+      cnf1 ++ cnf2
+
+    def meet(cnf2: DNF): DNF =
+      for {disj1 <- cnf1; disj2 <- cnf2} yield disj1 ++ disj2
+  }
+
+  object Nullity extends Enumeration {
+    val NotNull, Nullable = Value
+  }
+  implicit val nullityLattice = ELattice(Nullity)
+
+  type Id = Parameter
+  type Value = Nullity.Value
+}
 
 class ParamValue(tp: Type) extends BasicValue(tp)
 object InstanceOfCheckValue extends BasicValue(Type.INT_TYPE)
@@ -124,7 +144,7 @@ case class Analyzer(richControlFlow: RichControlFlow, paramIndex: Int) {
               results = results + (stateIndex -> NPE)
               computed = computed.updated(insnIndex, state :: computed(insnIndex))
             } else insnNode.getOpcode match {
-              case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | VRETURN =>
+              case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
                 results = results + (stateIndex -> Return)
                 computed = computed.updated(insnIndex, state :: computed(insnIndex))
               case ATHROW if nullPathTaken =>
@@ -250,4 +270,105 @@ object Analyzer {
 
   def popValue(frame: Frame[BasicValue]): BasicValue =
     frame.getStack(frame.getStackSize - 1)
+}
+
+sealed trait ParamUsage {
+  def meet(other: ParamUsage): ParamUsage
+  def toResult: Result
+}
+
+// Nullable, Top
+object NoUsage extends ParamUsage {
+  override def meet(other: ParamUsage) = other
+  override def toResult: Result = Identity
+}
+
+// NotNull, Bottom
+object DeReference extends ParamUsage {
+  override def meet(other: ParamUsage) = DeReference
+  override def toResult: Result = NPE
+}
+
+case class ExternalUsage(cnf: DNF) extends ParamUsage {
+  // intersect
+  override def meet(other: ParamUsage): ParamUsage = other match {
+    case NoUsage => this
+    case DeReference => DeReference
+    case other: ExternalUsage => join(other)
+  }
+
+  def join(other: ExternalUsage) = ExternalUsage(this.cnf meet other.cnf)
+  override def toResult: Result = ConditionalNPE(cnf)
+}
+
+object ExternalUsage {
+  def apply(passing: Parameter): ExternalUsage = ExternalUsage(Set(Set(passing)))
+}
+
+object Interpreter extends BasicInterpreter {
+  private var _usage: ParamUsage = NoUsage
+  def reset(): Unit = {
+    _usage = NoUsage
+  }
+
+  def getUsage: ParamUsage =
+    _usage
+
+  override def unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue = {
+    val opCode = insn.getOpcode
+    opCode match {
+      case GETFIELD | ARRAYLENGTH | MONITOREXIT if value.isInstanceOf[ParamValue] =>
+        _usage = DeReference
+      case CHECKCAST if value.isInstanceOf[ParamValue] =>
+        return new ParamValue(Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc))
+      case INSTANCEOF if value.isInstanceOf[ParamValue] =>
+        return InstanceOfCheckValue
+      case _ =>
+    }
+    super.unaryOperation(insn, value)
+  }
+
+  override def binaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue): BasicValue = {
+    val opCode = insn.getOpcode
+    opCode match {
+      case IALOAD | LALOAD | FALOAD | DALOAD | AALOAD | BALOAD | CALOAD | SALOAD | PUTFIELD
+        if v1.isInstanceOf[ParamValue] =>
+        _usage = DeReference
+      case _ =>
+
+    }
+    super.binaryOperation(insn, v1, v2)
+  }
+
+  override def ternaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue, v3: BasicValue): BasicValue = {
+    val opCode = insn.getOpcode
+    opCode match {
+      case IASTORE | LASTORE | FASTORE | DASTORE | AASTORE | BASTORE | CASTORE | SASTORE
+        if v1.isInstanceOf[ParamValue] =>
+        _usage = DeReference
+      case _ =>
+
+    }
+    super.ternaryOperation(insn, v1, v2, v3)
+  }
+
+  override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
+    val opCode = insn.getOpcode
+    val static = opCode == INVOKESTATIC
+    val shift = if (static) 0 else 1
+    if (opCode != MULTIANEWARRAY && !static && values.get(0).isInstanceOf[ParamValue]) {
+      _usage = DeReference
+    }
+    opCode match {
+      case INVOKESTATIC | INVOKESPECIAL =>
+        val mNode = insn.asInstanceOf[MethodInsnNode]
+        for (i <- shift until values.size()) {
+          if (values.get(i).isInstanceOf[ParamValue]) {
+            _usage = _usage meet ExternalUsage(Parameter(mNode.owner, mNode.name, mNode.desc, i - shift))
+          }
+        }
+      case _ =>
+    }
+    super.naryOperation(insn, values)
+  }
 }

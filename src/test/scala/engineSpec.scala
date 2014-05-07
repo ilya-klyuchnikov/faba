@@ -3,7 +3,7 @@ package faba.test
 import org.scalatest.prop.TableDrivenPropertyChecks
 import org.scalatest.FunSuite
 
-import faba.analysis.engine._
+import faba.engine._
 
 class engineSpec extends FunSuite with TableDrivenPropertyChecks {
 
