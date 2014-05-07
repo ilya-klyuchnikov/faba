@@ -4,8 +4,7 @@ import scala.collection.mutable
 
 package object engine {
 
-  // - bounded lattice (top, bot)
-  // - enumerated (all elements, except top and bot are not comparable)
+  // - complete finite lattice
   trait Lattice[T] extends PartialOrdering[T] {
     val top: T
     val bot: T

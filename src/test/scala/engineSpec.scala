@@ -5,7 +5,7 @@ import org.scalatest.FunSuite
 
 import faba.analysis.engine._
 
-class EngineSpec extends FunSuite with TableDrivenPropertyChecks {
+class engineSpec extends FunSuite with TableDrivenPropertyChecks {
 
   case class Utils[Id, Val:Lattice]() {
     val top = implicitly[Lattice[Val]].top
