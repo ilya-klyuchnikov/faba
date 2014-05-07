@@ -91,7 +91,8 @@ object NotNullParametersProcessor extends Processor with App {
 
 object NullBooleanContractsProcessor extends Processor with App {
 
-  import faba.analysis.nullBooleanContracts._
+  import faba.analysis.contracts._
+  import faba.analysis.core.engine._
 
   override def processClass(classReader: ClassReader): Unit =
     classReader.accept(new ClassVisitor(Opcodes.ASM5) {
@@ -133,7 +134,7 @@ object NullBooleanContractsProcessor extends Processor with App {
         for (i <- argumentTypes.indices) {
           val sort = argumentTypes(i).getSort
           if (sort == Type.OBJECT || sort == Type.ARRAY) {
-            solver.addEquation(Equation(Parameter(className, methodNode.name, methodNode.desc, i), Dependence(Some(Top), Set())))
+            solver.addEquation(Equation(Parameter(className, methodNode.name, methodNode.desc, i), Final(ContractValues.Top)))
           }
         }
       }
@@ -146,7 +147,7 @@ object NullBooleanContractsProcessor extends Processor with App {
     try { op(p) } finally { p.close() }
   }
 
-  val solver = new Solver()
+  val solver = new Solver[Parameter, Value]()
   if (args.length != 2) {
     println(s"Usage: faba.NullBooleanContractsProcessor inputJar outputFile")
   } else {
@@ -156,13 +157,13 @@ object NullBooleanContractsProcessor extends Processor with App {
     source.process(this)
     val indexEnd = System.currentTimeMillis()
     println("solving ...")
-    solver.solve()
+    val solutions = solver.solve().filterNot(_._2 == ContractValues.Top)
     val solvingEnd = System.currentTimeMillis()
     println("saving to file ...")
 
     val outs = ArrayBuffer[(String, String)]()
-    for (Equation(parameter, Dependence(Some(x), _)) <- solver.solved) {
-      outs.append((parameter.toString.replace('/', '.'), x.toString))
+    for ((parameter, v) <- solutions) {
+        outs.append((parameter.toString.replace('/', '.'), v.toString))
     }
 
     val outsSorted = outs.sortBy(_._1)
@@ -181,7 +182,7 @@ object NullBooleanContractsProcessor extends Processor with App {
     println(s"solving took ${(solvingEnd - indexEnd)/1000.0} sec")
     println(s"saving took ${(writingEnd - solvingEnd)/1000.0} sec")
 
-    println(s"${solver.solved.size} contracts")
+    println(s"${solutions.size} contracts")
   }
 
 }
