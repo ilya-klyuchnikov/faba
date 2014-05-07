@@ -92,7 +92,7 @@ object NotNullParametersProcessor extends Processor with App {
 object NullBooleanContractsProcessor extends Processor with App {
 
   import faba.analysis.contracts._
-  import faba.analysis.core.engine._
+  import faba.analysis.engine._
 
   override def processClass(classReader: ClassReader): Unit =
     classReader.accept(new ClassVisitor(Opcodes.ASM5) {

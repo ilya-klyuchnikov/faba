@@ -1,4 +1,4 @@
-package faba.analysis.core
+package faba.analysis
 
 import scala.collection.mutable
 

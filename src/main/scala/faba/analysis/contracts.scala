@@ -6,7 +6,7 @@ import org.objectweb.asm.tree.{MethodInsnNode, TypeInsnNode, JumpInsnNode, Abstr
 import scala.collection.mutable
 import scala.collection.immutable.IntMap
 import org.objectweb.asm.Opcodes._
-import faba.analysis.core.engine._
+import faba.analysis.engine._
 
 package object contracts {
 
