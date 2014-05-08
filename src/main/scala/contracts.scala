@@ -84,11 +84,11 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
   import Utils._
 
   override val identity: Result = Identity
-  private val methodNode =
-    controlFlow.methodNode
+
+  private val methodNode = controlFlow.methodNode
   private val method = Method(controlFlow.className, methodNode.name, methodNode.desc)
   private val aKey = AKey(method, InOut(paramIndex, in))
-  val interpreter = InOutInterpreter(in)
+  private val interpreter = InOutInterpreter(in)
 
   override def stateInstance(curr: PendingState, prev: PendingState): Boolean =
     curr.isInstanceOf(prev)
@@ -198,6 +198,30 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
         pending.push(ProceedState(nextState))
       case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] && in == Values.Null =>
         val nextInsnIndex = insnIndex + 1
+        val nextState = PendingState({
+          id += 1; id
+        }, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
+        pending.push(MakeResult(state, Identity, List(nextState.index)))
+        pending.push(ProceedState(nextState))
+      case IFEQ if popValue(frame).isInstanceOf[ParamValue] =>
+        val nextInsnIndex = in match {
+          case Values.False =>
+            methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+          case Values.True =>
+            insnIndex + 1
+        }
+        val nextState = PendingState({
+          id += 1; id
+        }, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
+        pending.push(MakeResult(state, Identity, List(nextState.index)))
+        pending.push(ProceedState(nextState))
+      case IFNE if popValue(frame).isInstanceOf[ParamValue] =>
+        val nextInsnIndex = in match {
+          case Values.False =>
+            insnIndex + 1
+          case Values.True =>
+            methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+        }
         val nextState = PendingState({
           id += 1; id
         }, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
