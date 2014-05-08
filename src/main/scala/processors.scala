@@ -105,112 +105,7 @@ object NotNullParametersProcessor extends Processor {
 
 }
 
-object NullBooleanContractsProcessor extends Processor {
-
-  import faba.contracts._
-
-  val solver = new Solver[AKey, Value]()
-
-  override def processClass(classReader: ClassReader): Unit =
-    classReader.accept(new ClassVisitor(Opcodes.ASM5) {
-      override def visitMethod(access: Int, name: String, desc: String, signature: String, exceptions: Array[String]) = {
-        val node = new MethodNode(Opcodes.ASM5, access, name, desc, signature, exceptions)
-        new MethodVisitor(Opcodes.ASM5, node) {
-          override def visitEnd(): Unit = {
-            super.visitEnd()
-            processMethod(classReader.getClassName, node)
-          }
-        }
-      }
-    }, 0)
-
-  def processMethod(className: String, methodNode: MethodNode) {
-    val graph = cfg.buildControlFlowGraph(className, methodNode)
-    var added = false
-    val argumentTypes = Type.getArgumentTypes(methodNode.desc)
-    val resultType = Type.getReturnType(methodNode.desc)
-    if (Type.BOOLEAN_TYPE == resultType) {
-      if (graph.transitions.nonEmpty)  {
-        val dfs = cfg.buildDFSTree(graph.transitions)
-        val reducible = dfs.back.isEmpty || cfg.reducible(graph, dfs)
-        if (reducible) {
-          for (i <- argumentTypes.indices) {
-            val sort = argumentTypes(i).getSort
-            if (sort == Type.OBJECT || sort == Type.ARRAY) {
-              val equation = new InOutAnalysis(RichControlFlow(graph, dfs), i, Values.Null).analyze()
-              solver.addEquation(equation)
-            }
-          }
-          added = true
-        } else {
-          println(s"Warning: CFG for $className ${methodNode.name}${methodNode.desc} is not reducible. Skipped")
-        }
-      }
-
-      if (!added) {
-        val method = Method(className, methodNode.name, methodNode.desc)
-        for (i <- argumentTypes.indices) {
-          val sort = argumentTypes(i).getSort
-          if (sort == Type.OBJECT || sort == Type.ARRAY) {
-            solver.addEquation(Equation(AKey(method, InOut(i, Values.Null)), Final(Values.Top)))
-          }
-        }
-      }
-    }
-
-  }
-
-  def printToFile(f: java.io.File)(op: java.io.PrintWriter => Unit) {
-    val p = new java.io.PrintWriter(f)
-    try { op(p) } finally { p.close() }
-  }
-
-  def process(source: Source, outFile: String) {
-    val indexStart = System.currentTimeMillis()
-    println("indexing ...")
-    source.process(this)
-    val indexEnd = System.currentTimeMillis()
-    println("solving ...")
-    val solutions = solver.solve().filterNot(_._2 == Values.Top)
-    val solvingEnd = System.currentTimeMillis()
-    println("saving to file ...")
-
-    val outs = ArrayBuffer[(String, String)]()
-    for ((parameter, v) <- solutions) {
-      outs.append((parameter.toString.replace('/', '.'), v.toString))
-    }
-
-    val outsSorted = outs.sortBy(_._1)
-    printToFile(new File(outFile)) {
-      out =>
-        for ((x, y) <- outsSorted) {
-          out.println(x)
-          out.println(y)
-          out.println()
-        }
-    }
-
-    val writingEnd = System.currentTimeMillis()
-
-    println("====")
-    println(s"indexing took ${(indexEnd - indexStart) / 1000.0} sec")
-    println(s"solving took ${(solvingEnd - indexEnd) / 1000.0} sec")
-    println(s"saving took ${(writingEnd - solvingEnd) / 1000.0} sec")
-
-    println(s"${solutions.size} contracts")
-  }
-
-  def main(args: Array[String]) {
-    if (args.length != 2) {
-      println(s"Usage: faba.NullBooleanContractsProcessor inputJar outputFile")
-    } else {
-      process(JarFileSource(new File(args(0))), args(1))
-    }
-  }
-
-}
-
-object NullObjectContractsProcessor extends Processor {
+object InOutProcessor extends Processor {
 
   import faba.contracts._
 
@@ -235,16 +130,23 @@ object NullObjectContractsProcessor extends Processor {
     val argumentTypes = Type.getArgumentTypes(methodNode.desc)
     val resultType = Type.getReturnType(methodNode.desc)
     val resultSort = resultType.getSort
-    if (resultSort == Type.OBJECT || resultSort == Type.ARRAY) {
+
+    if (resultSort == Type.OBJECT || resultSort == Type.ARRAY || Type.BOOLEAN_TYPE == resultType) {
       if (graph.transitions.nonEmpty)  {
         val dfs = cfg.buildDFSTree(graph.transitions)
         val reducible = dfs.back.isEmpty || cfg.reducible(graph, dfs)
         if (reducible) {
           for (i <- argumentTypes.indices) {
-            val sort = argumentTypes(i).getSort
+            val argType = argumentTypes(i)
+            val sort = argType.getSort
             if (sort == Type.OBJECT || sort == Type.ARRAY) {
-              val equation = new InOutAnalysis(RichControlFlow(graph, dfs), i, Values.Null).analyze()
-              solver.addEquation(equation)
+              solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), i, Values.Null).analyze())
+              solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), i, Values.NotNull).analyze())
+            }
+            if (argType == Type.BOOLEAN_TYPE) {
+              // TODO
+              //solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), i, Values.Null).analyze())
+              //solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), i, Values.NotNull).analyze())
             }
           }
           added = true
@@ -259,115 +161,11 @@ object NullObjectContractsProcessor extends Processor {
           val sort = argumentTypes(i).getSort
           if (sort == Type.OBJECT || sort == Type.ARRAY) {
             solver.addEquation(Equation(AKey(method, InOut(i, Values.Null)), Final(Values.Top)))
-          }
-        }
-      }
-    }
-  }
-
-  def printToFile(f: java.io.File)(op: java.io.PrintWriter => Unit) {
-    val p = new java.io.PrintWriter(f)
-    try { op(p) } finally { p.close() }
-  }
-
-  def process(source: Source, outFile: String) {
-    val indexStart = System.currentTimeMillis()
-    println("indexing ...")
-    source.process(this)
-    val indexEnd = System.currentTimeMillis()
-    println("solving ...")
-    val solutions = solver.solve().filterNot(_._2 == Values.Top)
-    val solvingEnd = System.currentTimeMillis()
-    println("saving to file ...")
-
-    val outs = ArrayBuffer[(String, String)]()
-    for ((parameter, v) <- solutions) {
-      outs.append((parameter.toString.replace('/', '.'), v.toString))
-    }
-
-    val outsSorted = outs.sortBy(_._1)
-    printToFile(new File(outFile)) {
-      out =>
-        for ((x, y) <- outsSorted) {
-          out.println(x)
-          out.println(y)
-          out.println()
-        }
-    }
-
-    val writingEnd = System.currentTimeMillis()
-
-    println("====")
-    println(s"indexing took ${(indexEnd - indexStart) / 1000.0} sec")
-    println(s"solving took ${(solvingEnd - indexEnd) / 1000.0} sec")
-    println(s"saving took ${(writingEnd - solvingEnd) / 1000.0} sec")
-
-    println(s"${solutions.size} contracts")
-  }
-
-  def main(args: Array[String]) {
-    if (args.length != 2) {
-      println(s"Usage: faba.NullBooleanContractsProcessor inputJar outputFile")
-    } else {
-      process(JarFileSource(new File(args(0))), args(1))
-    }
-  }
-
-}
-
-object NotNullBooleanContractsProcessor extends Processor {
-
-  import faba.contracts._
-
-  val solver = new Solver[AKey, Value]()
-
-  override def processClass(classReader: ClassReader): Unit =
-    classReader.accept(new ClassVisitor(Opcodes.ASM5) {
-      override def visitMethod(access: Int, name: String, desc: String, signature: String, exceptions: Array[String]) = {
-        val node = new MethodNode(Opcodes.ASM5, access, name, desc, signature, exceptions)
-        new MethodVisitor(Opcodes.ASM5, node) {
-          override def visitEnd(): Unit = {
-            super.visitEnd()
-            processMethod(classReader.getClassName, node)
-          }
-        }
-      }
-    }, 0)
-
-  def processMethod(className: String, methodNode: MethodNode) {
-    val graph = cfg.buildControlFlowGraph(className, methodNode)
-    var added = false
-    val argumentTypes = Type.getArgumentTypes(methodNode.desc)
-    val resultType = Type.getReturnType(methodNode.desc)
-    if (Type.BOOLEAN_TYPE == resultType) {
-      if (graph.transitions.nonEmpty)  {
-        val dfs = cfg.buildDFSTree(graph.transitions)
-        val reducible = dfs.back.isEmpty || cfg.reducible(graph, dfs)
-        if (reducible) {
-          for (i <- argumentTypes.indices) {
-            val sort = argumentTypes(i).getSort
-            if (sort == Type.OBJECT || sort == Type.ARRAY) {
-              val equation = new InOutAnalysis(RichControlFlow(graph, dfs), i, Values.NotNull).analyze()
-              solver.addEquation(equation)
-            }
-          }
-          added = true
-        } else {
-          println(s"Warning: CFG for $className ${methodNode.name}${methodNode.desc} is not reducible. Skipped")
-        }
-      }
-
-      if (!added) {
-        val method = Method(className, methodNode.name, methodNode.desc)
-        for (i <- argumentTypes.indices) {
-          val sort = argumentTypes(i).getSort
-          if (sort == Type.OBJECT || sort == Type.ARRAY) {
             solver.addEquation(Equation(AKey(method, InOut(i, Values.NotNull)), Final(Values.Top)))
           }
         }
       }
     }
-
   }
 
   def printToFile(f: java.io.File)(op: java.io.PrintWriter => Unit) {
@@ -377,27 +175,108 @@ object NotNullBooleanContractsProcessor extends Processor {
 
   def process(source: Source, outFile: String) {
     val indexStart = System.currentTimeMillis()
+
     println("indexing ...")
     source.process(this)
     val indexEnd = System.currentTimeMillis()
+
     println("solving ...")
-    val solutions = solver.solve().filterNot(_._2 == Values.Top)
+    val solutions: Map[AKey, Value] =
+      solver.solve().filterNot(_._2 == Values.Top)
     val solvingEnd = System.currentTimeMillis()
+
     println("saving to file ...")
 
-    val outs = ArrayBuffer[(String, String)]()
-    for ((parameter, v) <- solutions) {
-      outs.append((parameter.toString.replace('/', '.'), v.toString))
+    {
+      val outs = ArrayBuffer[(String, String)]()
+      for ((aKey, v) <- solutions) {
+        (aKey.direction, v) match {
+          case (InOut(_, Values.Null), Values.False) =>
+            outs.append((aKey.toString.replace('/', '.'), v.toString))
+          case (InOut(_, Values.Null), Values.True) =>
+            outs.append((aKey.toString.replace('/', '.'), v.toString))
+          case _ =>
+        }
+      }
+
+      val outsSorted = outs.sortBy(_._1)
+      printToFile(new File(s"$outFile-null-boolean.txt")) {
+        out =>
+          for ((x, y) <- outsSorted) {
+            out.println(x)
+            out.println(y)
+            out.println()
+          }
+      }
     }
 
-    val outsSorted = outs.sortBy(_._1)
-    printToFile(new File(outFile)) {
-      out =>
-        for ((x, y) <- outsSorted) {
-          out.println(x)
-          out.println(y)
-          out.println()
+    {
+      val outs = ArrayBuffer[(String, String)]()
+      for ((aKey, v) <- solutions) {
+        (aKey.direction, v) match {
+          case (InOut(_, Values.NotNull), Values.False) =>
+            outs.append((aKey.toString.replace('/', '.'), v.toString))
+          case (InOut(_, Values.NotNull), Values.True) =>
+            outs.append((aKey.toString.replace('/', '.'), v.toString))
+          case _ =>
         }
+      }
+
+      val outsSorted = outs.sortBy(_._1)
+      printToFile(new File(s"$outFile-notnull-boolean.txt")) {
+        out =>
+          for ((x, y) <- outsSorted) {
+            out.println(x)
+            out.println(y)
+            out.println()
+          }
+      }
+    }
+
+    {
+      val outs = ArrayBuffer[(String, String)]()
+      for ((aKey, v) <- solutions) {
+        (aKey.direction, v) match {
+          case (InOut(_, Values.Null), Values.Null) =>
+            outs.append((aKey.toString.replace('/', '.'), v.toString))
+          case (InOut(_, Values.Null), Values.NotNull) =>
+            outs.append((aKey.toString.replace('/', '.'), v.toString))
+          case _ =>
+        }
+      }
+
+      val outsSorted = outs.sortBy(_._1)
+      printToFile(new File(s"$outFile-null-object.txt")) {
+        out =>
+          for ((x, y) <- outsSorted) {
+            out.println(x)
+            out.println(y)
+            out.println()
+          }
+      }
+    }
+
+    {
+      val outs = ArrayBuffer[(String, String)]()
+      for ((aKey, v) <- solutions) {
+        (aKey.direction, v) match {
+          case (InOut(_, Values.NotNull), Values.Null) =>
+            outs.append((aKey.toString.replace('/', '.'), v.toString))
+          case (InOut(_, Values.NotNull), Values.NotNull) =>
+            outs.append((aKey.toString.replace('/', '.'), v.toString))
+          case _ =>
+        }
+      }
+
+      val outsSorted = outs.sortBy(_._1)
+      printToFile(new File(s"$outFile-notnull-object.txt")) {
+        out =>
+          for ((x, y) <- outsSorted) {
+            out.println(x)
+            out.println(y)
+            out.println()
+          }
+      }
     }
 
     val writingEnd = System.currentTimeMillis()
@@ -412,7 +291,7 @@ object NotNullBooleanContractsProcessor extends Processor {
 
   def main(args: Array[String]) {
     if (args.length != 2) {
-      println(s"Usage: faba.NotNullBooleanContractsProcessor inputJar outputFile")
+      println(s"Usage: faba.InOutProcessor inputJar outputFile")
     } else {
       process(JarFileSource(new File(args(0))), args(1))
     }

@@ -87,8 +87,8 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
   private val methodNode =
     controlFlow.methodNode
   private val method = Method(controlFlow.className, methodNode.name, methodNode.desc)
-  private val aKey = AKey(method, InOut(paramIndex, Values.Null))
-  val interpreter = InOutInterpreter(Values.Null)
+  private val aKey = AKey(method, InOut(paramIndex, in))
+  val interpreter = InOutInterpreter(in)
 
   override def stateInstance(curr: PendingState, prev: PendingState): Boolean =
     curr.isInstanceOf(prev)
