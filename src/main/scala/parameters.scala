@@ -67,12 +67,11 @@ object Result {
 
 case class Configuration(insnIndex: Int, frame: Frame[BasicValue])
 case class PendingState(index: Int, conf: Configuration, history: List[Configuration], nullPathTaken: Boolean) extends AState[Configuration]{
-  import Analyzer._
   def isInstanceOf(prevState: PendingState) =
     nullPathTaken == prevState.nullPathTaken &&
-      isInstance(conf, prevState.conf) &&
+      Utils.isInstance(conf, prevState.conf) &&
       history.size == prevState.history.size &&
-      (history, prevState.history).zipped.forall(isInstance)
+      (history, prevState.history).zipped.forall(Utils.isInstance)
   val stateIndex = index
   val insnIndex = conf.insnIndex
 }
@@ -81,10 +80,9 @@ sealed trait PendingAction
 case class ProceedState(state: PendingState) extends PendingAction
 case class MakeResult(state: PendingState, subResult: Result, subIndices: List[Int]) extends PendingAction
 
-class NotNullParameterAnalysis(val richControlFlow: RichControlFlow,
+class NotNullInAnalysis(val richControlFlow: RichControlFlow,
                                val paramIndex: Int) extends Analysis[Id, Value, Configuration, PendingState, Result] {
-
-  import Analyzer._
+  import Utils._
 
   override val identity: Result = Identity
   private val methodNode =
@@ -220,7 +218,7 @@ class NotNullParameterAnalysis(val richControlFlow: RichControlFlow,
 
 }
 
-object Analyzer {
+object Utils {
   def isInstance(curr: Configuration, prev: Configuration): Boolean = {
     if (curr.insnIndex != prev.insnIndex) {
       return false

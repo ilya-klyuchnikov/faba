@@ -39,7 +39,7 @@ object NotNullParametersProcessor extends Processor {
         for (i <- argumentTypes.indices) {
           val sort = argumentTypes(i).getSort
           if (sort == Type.OBJECT || sort == Type.ARRAY) {
-            val equation = new NotNullParameterAnalysis(RichControlFlow(graph, dfs), i).analyze()
+            val equation = new NotNullInAnalysis(RichControlFlow(graph, dfs), i).analyze()
             solver.addEquation(equation)
           }
         }
@@ -137,7 +137,7 @@ object NullBooleanContractsProcessor extends Processor {
           for (i <- argumentTypes.indices) {
             val sort = argumentTypes(i).getSort
             if (sort == Type.OBJECT || sort == Type.ARRAY) {
-              val equation = Analyzer(RichControlFlow(graph, dfs), i).analyze()
+              val equation = new NullBooleanInOutAnalysis(RichControlFlow(graph, dfs), i).analyze()
               solver.addEquation(equation)
             }
           }
