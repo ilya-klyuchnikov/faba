@@ -7,41 +7,38 @@ import org.objectweb.asm.Opcodes._
 
 import faba.analysis._
 import faba.cfg._
+import faba.data._
 import faba.engine._
 
 object `package` {
-  type DNF = Set[Set[Parameter]]
 
-  implicit class CnfOps(val cnf1: DNF) {
-    def join(cnf2: DNF): DNF =
-      cnf1 ++ cnf2
-
-    def meet(cnf2: DNF): DNF =
-      for {disj1 <- cnf1; disj2 <- cnf2} yield disj1 ++ disj2
-  }
-
-  object Nullity extends Enumeration {
-    val NotNull, Nullable = Value
-  }
-  implicit val nullityLattice = ELattice(Nullity)
-
-  type Id = Parameter
+  type Id = AKey
   type Value = Nullity.Value
+
+  type SoP = Set[Set[AKey]]
+
+  implicit class SopOps(val sop1: SoP) {
+    def join(sop2: SoP): SoP =
+      sop1 ++ sop2
+
+    def meet(sop2: SoP): SoP =
+      for {
+        prod1 <- sop1
+        prod2 <- sop2
+      } yield prod1 ++ prod2
+  }
+
 }
 
 class ParamValue(tp: Type) extends BasicValue(tp)
 object InstanceOfCheckValue extends BasicValue(Type.INT_TYPE)
-
-case class Parameter(className: String, methodName: String, methodDesc: String, arg: Int) {
-  override def toString = s"$className $methodName$methodDesc #$arg"
-}
 
 sealed trait Result
 case object Identity extends Result
 
 case object Return extends Result
 case object NPE extends Result
-case class ConditionalNPE(cnf: DNF) extends Result
+case class ConditionalNPE(cnf: SoP) extends Result
 
 object Result {
   // |, union
@@ -92,8 +89,8 @@ class NotNullParameterAnalysis(val richControlFlow: RichControlFlow,
   override val identity: Result = Identity
   private val methodNode =
     controlFlow.methodNode
-  private val parameter =
-    Parameter(controlFlow.className, methodNode.name, methodNode.desc, paramIndex)
+  private val method = Method(controlFlow.className, methodNode.name, methodNode.desc)
+  private val parameter = AKey(method, In(paramIndex))
 
   override def stateInstance(curr: PendingState, prev: PendingState): Boolean =
     curr.isInstanceOf(prev)
@@ -267,7 +264,7 @@ object DeReference extends ParamUsage {
   override def toResult: Result = NPE
 }
 
-case class ExternalUsage(cnf: DNF) extends ParamUsage {
+case class ExternalUsage(cnf: SoP) extends ParamUsage {
   // intersect
   override def meet(other: ParamUsage): ParamUsage = other match {
     case NoUsage => this
@@ -280,7 +277,7 @@ case class ExternalUsage(cnf: DNF) extends ParamUsage {
 }
 
 object ExternalUsage {
-  def apply(passing: Parameter): ExternalUsage = ExternalUsage(Set(Set(passing)))
+  def apply(passing: AKey): ExternalUsage = ExternalUsage(Set(Set(passing)))
 }
 
 object Interpreter extends BasicInterpreter {
@@ -342,7 +339,8 @@ object Interpreter extends BasicInterpreter {
         val mNode = insn.asInstanceOf[MethodInsnNode]
         for (i <- shift until values.size()) {
           if (values.get(i).isInstanceOf[ParamValue]) {
-            _usage = _usage meet ExternalUsage(Parameter(mNode.owner, mNode.name, mNode.desc, i - shift))
+            val method = Method(mNode.owner, mNode.name, mNode.desc)
+            _usage = _usage meet ExternalUsage(AKey(method, In(i - shift)))
           }
         }
       case _ =>

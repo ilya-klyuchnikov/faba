@@ -6,6 +6,7 @@ import java.io.File
 import scala.collection.mutable.ArrayBuffer
 
 import faba.cfg._
+import faba.data._
 import faba.engine._
 import faba.source._
 
@@ -49,10 +50,11 @@ object NotNullParametersProcessor extends Processor {
     }
 
     if (!added) {
+      val method = Method(className, methodNode.name, methodNode.desc)
       for (i <- argumentTypes.indices) {
         val sort = argumentTypes(i).getSort
         if (sort == Type.OBJECT || sort == Type.ARRAY) {
-          solver.addEquation(Equation(Parameter(className, methodNode.name, methodNode.desc, i), Final(Nullity.Nullable)))
+          solver.addEquation(Equation(AKey(method, In(i)), Final(Nullity.Nullable)))
         }
       }
     }
@@ -107,7 +109,7 @@ object NullBooleanContractsProcessor extends Processor {
 
   import faba.contracts._
 
-  val solver = new Solver[Parameter, Value]()
+  val solver = new Solver[AKey, Value]()
 
   override def processClass(classReader: ClassReader): Unit =
     classReader.accept(new ClassVisitor(Opcodes.ASM5) {
@@ -146,10 +148,11 @@ object NullBooleanContractsProcessor extends Processor {
       }
 
       if (!added) {
+        val method = Method(className, methodNode.name, methodNode.desc)
         for (i <- argumentTypes.indices) {
           val sort = argumentTypes(i).getSort
           if (sort == Type.OBJECT || sort == Type.ARRAY) {
-            solver.addEquation(Equation(Parameter(className, methodNode.name, methodNode.desc, i), Final(ContractValues.Top)))
+            solver.addEquation(Equation(AKey(method, InOut(i, Values.Null)), Final(Values.Top)))
           }
         }
       }
@@ -168,7 +171,7 @@ object NullBooleanContractsProcessor extends Processor {
     source.process(this)
     val indexEnd = System.currentTimeMillis()
     println("solving ...")
-    val solutions = solver.solve().filterNot(_._2 == ContractValues.Top)
+    val solutions = solver.solve().filterNot(_._2 == Values.Top)
     val solvingEnd = System.currentTimeMillis()
     println("saving to file ...")
 

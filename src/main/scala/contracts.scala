@@ -7,27 +7,19 @@ import scala.collection.mutable
 import scala.collection.immutable.IntMap
 import org.objectweb.asm.Opcodes._
 
-import faba.engine._
 import faba.cfg._
+import faba.data._
+import faba.engine._
 
 object `package` {
-  implicit val contractValuesLattice = ELattice(ContractValues)
-  type Value = ContractValues.Value
+  type Value = Values.Value
 }
 
 case class ParamValue(tp: Type) extends BasicValue(tp)
 case class InstanceOfCheckValue() extends BasicValue(Type.INT_TYPE)
 case class TrueValue() extends BasicValue(Type.INT_TYPE)
 case class FalseValue() extends BasicValue(Type.INT_TYPE)
-case class CallResultValue(tp: Type, parameter: Parameter) extends BasicValue(tp)
-
-case class Parameter(className: String, methodName: String, methodDesc: String, arg: Int) {
-  override def toString = s"$className $methodName$methodDesc #$arg"
-}
-
-object ContractValues extends Enumeration {
-  val Bot, NotNull, Null, True, False, Top = Value
-}
+case class CallResultValue(tp: Type, parameter: AKey) extends BasicValue(tp)
 
 case class Configuration(insnIndex: Int, frame: Frame[BasicValue])
 
@@ -51,7 +43,7 @@ sealed trait Result
 case object Bottom extends Result
 case class SolutionWrapper(nullTaken: Boolean, sol: Dependence) extends Result
 
-case class Dependence(partial: Option[Value], params: Set[Parameter])
+case class Dependence(partial: Option[Value], params: Set[AKey])
 
 object Result {
   def meet(r1: Result, r2: Result): Result = {
@@ -65,10 +57,10 @@ object Result {
           case (_, None) => p1
           case (Some(ps1), Some(ps2)) if ps1 == ps2 =>
             Some(ps1)
-          case _ => Some(ContractValues.Top)
+          case _ => Some(Values.Top)
         }
-        val params: Set[Parameter] = partial match {
-          case Some(ContractValues.Top) => Set()
+        val params: Set[AKey] = partial match {
+          case Some(Values.Top) => Set()
           case _ => params1 ++ params2
         }
         SolutionWrapper(nullTaken, Dependence(partial, params))
@@ -84,7 +76,8 @@ case class Analyzer(richControlFlow: RichControlFlow, paramIndex: Int) {
   private val controlFlow = richControlFlow.controlFlow
   private val dfsTree = richControlFlow.dfsTree
   private val methodNode = controlFlow.methodNode
-  private val parameter = Parameter(controlFlow.className, methodNode.name, methodNode.desc, paramIndex)
+  private val method = Method(controlFlow.className, methodNode.name, methodNode.desc)
+  private val parameter = AKey(method, InOut(paramIndex, Values.Null))
 
   def generalize(configuration: Configuration): Configuration = {
     //println("generalizing")
@@ -114,19 +107,19 @@ case class Analyzer(richControlFlow: RichControlFlow, paramIndex: Int) {
   }
 
 
-  def mkEquation(result: Result): Equation[Parameter, Value] = result match {
+  def mkEquation(result: Result): Equation[AKey, Value] = result match {
     case Bottom =>
-      Equation(parameter, Final(ContractValues.Top))
+      Equation(parameter, Final(Values.Top))
     case SolutionWrapper(false, _) =>
-      Equation(parameter, Final(ContractValues.Top))
+      Equation(parameter, Final(Values.Top))
     case SolutionWrapper(true, sol) if sol.params.isEmpty =>
-      Equation(parameter, Final(sol.partial.getOrElse(ContractValues.Top)))
+      Equation(parameter, Final(sol.partial.getOrElse(Values.Top)))
     case SolutionWrapper(true, sol) =>
-      Equation(parameter, Pending[Parameter, Value](sol.partial.getOrElse(ContractValues.Bot), sol.params.map(p => Component(false, Set(p)))))
+      Equation(parameter, Pending[AKey, Value](sol.partial.getOrElse(Values.Bot), sol.params.map(p => Component(false, Set(p)))))
   }
 
 
-  def analyze(): Equation[Parameter, Value] = {
+  def analyze(): Equation[AKey, Value] = {
     var id = 0
 
     val startState =
@@ -180,11 +173,11 @@ case class Analyzer(richControlFlow: RichControlFlow, paramIndex: Int) {
                 val returnValue = popValue(frame)
                 returnValue match {
                   case FalseValue() =>
-                    val solution: SolutionWrapper = SolutionWrapper(nullPathTaken, Dependence(Some(ContractValues.False), Set()))
+                    val solution: SolutionWrapper = SolutionWrapper(nullPathTaken, Dependence(Some(Values.False), Set()))
                     results = results + (stateIndex -> solution)
                     computed = computed.updated(insnIndex, state :: computed(insnIndex))
                   case TrueValue() =>
-                    val solution: SolutionWrapper = SolutionWrapper(nullPathTaken, Dependence(Some(ContractValues.True), Set()))
+                    val solution: SolutionWrapper = SolutionWrapper(nullPathTaken, Dependence(Some(Values.True), Set()))
                     results = results + (stateIndex -> solution)
                     computed = computed.updated(insnIndex, state :: computed(insnIndex))
                   case CallResultValue(_, param) =>
@@ -192,12 +185,12 @@ case class Analyzer(richControlFlow: RichControlFlow, paramIndex: Int) {
                     results = results + (stateIndex -> solution)
                     computed = computed.updated(insnIndex, state :: computed(insnIndex))
                   case _ =>
-                    val solution: SolutionWrapper = SolutionWrapper(nullPathTaken, Dependence(Some(ContractValues.Top), Set()))
+                    val solution: SolutionWrapper = SolutionWrapper(nullPathTaken, Dependence(Some(Values.Top), Set()))
                     results = results + (stateIndex -> solution)
                     computed = computed.updated(insnIndex, state :: computed(insnIndex))
                 }
               case ATHROW =>
-                results = results + (stateIndex -> SolutionWrapper(nullPathTaken, Dependence(Some(ContractValues.Top), Set())))
+                results = results + (stateIndex -> SolutionWrapper(nullPathTaken, Dependence(Some(Values.Top), Set())))
                 computed = computed.updated(insnIndex, state :: computed(insnIndex))
               case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
                 val nextInsnIndex = insnIndex + 1
@@ -367,9 +360,10 @@ object Interpreter extends BasicInterpreter {
         val mNode = insn.asInstanceOf[MethodInsnNode]
         for (i <- shift until values.size()) {
           if (values.get(i).isInstanceOf[ParamValue]) {
+            val method = Method(mNode.owner, mNode.name, mNode.desc)
             return CallResultValue(
               Type.getReturnType(insn.asInstanceOf[MethodInsnNode].desc),
-              Parameter(mNode.owner, mNode.name, mNode.desc, i - shift)
+              AKey(method, InOut(i - shift, Values.Null))
             )
           }
         }
