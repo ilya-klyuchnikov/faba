@@ -4,9 +4,8 @@ import org.objectweb.asm.{Opcodes, Type}
 import org.objectweb.asm.tree.analysis.{BasicInterpreter, Frame, BasicValue}
 import org.objectweb.asm.tree.{MethodInsnNode, TypeInsnNode, JumpInsnNode, AbstractInsnNode}
 import org.objectweb.asm.Opcodes._
-import scala.collection.mutable
-import scala.collection.immutable.IntMap
 
+import faba.analysis._
 import faba.cfg._
 import faba.engine._
 
@@ -40,11 +39,8 @@ case class Parameter(className: String, methodName: String, methodDesc: String, 
 sealed trait Result
 case object Identity extends Result
 
-// todo - top, nullable
 case object Return extends Result
-// todo - bottom, notnull
 case object NPE extends Result
-// todo - Pending, component
 case class ConditionalNPE(cnf: DNF) extends Result
 
 object Result {
@@ -73,131 +69,45 @@ object Result {
 }
 
 case class Configuration(insnIndex: Int, frame: Frame[BasicValue])
-case class PendingState(index: Int, conf: Configuration, history: List[Configuration], nullPathTaken: Boolean) {
+case class PendingState(index: Int, conf: Configuration, history: List[Configuration], nullPathTaken: Boolean) extends AState[Configuration]{
   import Analyzer._
   def isInstanceOf(prevState: PendingState) =
     nullPathTaken == prevState.nullPathTaken &&
       isInstance(conf, prevState.conf) &&
       history.size == prevState.history.size &&
       (history, prevState.history).zipped.forall(isInstance)
+  val stateIndex = index
+  val insnIndex = conf.insnIndex
 }
 
 sealed trait PendingAction
 case class ProceedState(state: PendingState) extends PendingAction
 case class MakeResult(state: PendingState, subResult: Result, subIndices: List[Int]) extends PendingAction
 
-case class Analyzer(richControlFlow: RichControlFlow, paramIndex: Int) {
+class NotNullParameterAnalysis(val richControlFlow: RichControlFlow,
+                               val paramIndex: Int) extends Analysis[Id, Value, Configuration, PendingState, Result] {
+
   import Analyzer._
 
-  private val controlFlow = richControlFlow.controlFlow
-  private val dfsTree = richControlFlow.dfsTree
-  private val methodNode = controlFlow.methodNode
-  private val parameter = Parameter(controlFlow.className, methodNode.name, methodNode.desc, paramIndex)
+  override val identity: Result = Identity
+  private val methodNode =
+    controlFlow.methodNode
+  private val parameter =
+    Parameter(controlFlow.className, methodNode.name, methodNode.desc, paramIndex)
 
-  def analyze(): Equation[Id, Value] = {
-    var id = 0
+  override def stateInstance(curr: PendingState, prev: PendingState): Boolean =
+    curr.isInstanceOf(prev)
 
-    val startState =
-      PendingState(0, Configuration(0, createStartFrame()), Nil, false)
-    val pending =
-      mutable.Stack[PendingAction](ProceedState(startState))
+  override def confInstance(curr: Configuration, prev: Configuration): Boolean =
+    isInstance(curr, prev)
 
-    // the key is insnIndex
-    var computed = IntMap[List[PendingState]]().withDefaultValue(Nil)
-    // the key is stateIndex
-    var results = IntMap[Result]()
+  override def createStartState(): PendingState =
+    PendingState(0, Configuration(0, createStartFrame()), Nil, false)
 
-    while (pending.nonEmpty) pending.pop() match {
-      case MakeResult(state, delta, subIndices) =>
-        // TODO - specialized code how to combine starts
-        val subResult = subIndices.map(results).reduce(Result.join)
-        val result = Result.meet(delta, subResult)
-        // TODO - specialized code how to combine ends
-        results = results + (state.index -> result)
-        val insnIndex = state.conf.insnIndex
-        computed = computed.updated(insnIndex, state :: computed(insnIndex))
-      case ProceedState(state) =>
+  override def combineResults(delta: Result, subResults: List[Result]): Result =
+    Result.meet(delta, subResults.reduce(Result.join))
 
-        val stateIndex = state.index
-        val conf = state.conf
-        val insnIndex = conf.insnIndex
-        val history = state.history
-        val nullPathTaken = state.nullPathTaken
-        val frame = conf.frame
-
-        val loopEnter = dfsTree.loopEnters(insnIndex)
-        val loop = loopEnter && history.exists(prevConf => isInstance(conf, prevConf))
-
-        if (loop) {
-          results = results + (stateIndex -> Identity)
-          computed = computed.updated(insnIndex, state :: computed(insnIndex))
-        } else computed(insnIndex).find(state.isInstanceOf(_)) match {
-          case Some(ps) =>
-            results = results + (stateIndex -> results(ps.index))
-          case None =>
-            // TODO - specialized code starts
-            val insnNode = methodNode.instructions.get(insnIndex)
-            val nextHistory = if (loopEnter) conf :: history else history
-            val (nextFrame, subResult) = execute(frame, insnNode)
-            // early return
-            if (subResult == NPE) {
-              results = results + (stateIndex -> NPE)
-              computed = computed.updated(insnIndex, state :: computed(insnIndex))
-            } else insnNode.getOpcode match {
-              case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
-                results = results + (stateIndex -> Return)
-                computed = computed.updated(insnIndex, state :: computed(insnIndex))
-              case ATHROW if nullPathTaken =>
-                results = results + (stateIndex -> NPE)
-                computed = computed.updated(insnIndex, state :: computed(insnIndex))
-              case ATHROW =>
-                results = results + (stateIndex -> Identity)
-                computed = computed.updated(insnIndex, state :: computed(insnIndex))
-              case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
-                val nextInsnIndex = insnIndex + 1
-                val nextState = PendingState({id += 1; id}, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
-                pending.push(MakeResult(state, subResult, List(nextState.index)))
-                pending.push(ProceedState(nextState))
-              case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
-                val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-                val nextState = PendingState({id += 1; id}, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
-                pending.push(MakeResult(state, subResult, List(nextState.index)))
-                pending.push(ProceedState(nextState))
-              case IFEQ if popValue(frame) == InstanceOfCheckValue =>
-                val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-                val nextState = PendingState({id += 1; id}, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
-                pending.push(MakeResult(state, subResult, List(nextState.index)))
-                pending.push(ProceedState(nextState))
-              case IFNE if popValue(frame) == InstanceOfCheckValue =>
-                val nextInsnIndex = insnIndex + 1
-                val nextState = PendingState({id += 1; id}, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
-                pending.push(MakeResult(state, subResult, List(nextState.index)))
-                pending.push(ProceedState(nextState))
-              case _ =>
-                val nextInsnIndices = controlFlow.transitions(insnIndex)
-                val nextStates = nextInsnIndices.map {
-                  nextInsnIndex =>
-                    val nextFrame1 = if (controlFlow.errorTransitions(insnIndex -> nextInsnIndex)) {
-                      val handler = new Frame(frame)
-                      handler.clearStack()
-                      handler.push(new BasicValue(Type.getType("java/lang/Throwable")))
-                      handler
-                    } else {
-                      nextFrame
-                    }
-                    PendingState({id += 1; id}, Configuration(nextInsnIndex, nextFrame1), nextHistory, nullPathTaken)
-                }
-                pending.push(MakeResult(state, subResult, nextStates.map(_.index)))
-                pending.pushAll(nextStates.map(s => ProceedState(s)))
-            }
-          // TODO - specialized code ends
-        }
-    }
-
-    mkEquation(results(0))
-  }
-
-  private def mkEquation(result: Result): Equation[Id, Value] = result match {
+  override def mkEquation(result: Result): Equation[Id, Value] = result match {
     case Identity | Return => Equation(parameter, Final(Nullity.Nullable))
     case NPE => Equation(parameter, Final(Nullity.NotNull))
     case ConditionalNPE(cnf) =>
@@ -205,14 +115,71 @@ case class Analyzer(richControlFlow: RichControlFlow, paramIndex: Int) {
       Equation(parameter, Pending(Nullity.NotNull, cnf.map(p => Component(false, p))))
   }
 
-  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
-    case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
-      (frame, Identity)
-    case _ =>
-      val nextFrame = new Frame(frame)
-      Interpreter.reset()
-      nextFrame.execute(insnNode, Interpreter)
-      (nextFrame, Interpreter.getUsage.toResult)
+  var id = 0
+
+  override def processState(state: PendingState): Unit = {
+    val stateIndex = state.index
+    val conf = state.conf
+    val insnIndex = conf.insnIndex
+    val history = state.history
+    val nullPathTaken = state.nullPathTaken
+    val frame = conf.frame
+    val loopEnter = dfsTree.loopEnters(insnIndex)
+    val insnNode = methodNode.instructions.get(insnIndex)
+    val nextHistory = if (loopEnter) conf :: history else history
+    val (nextFrame, subResult) = execute(frame, insnNode)
+
+    if (subResult == NPE) {
+      // pruning
+      results = results + (stateIndex -> NPE)
+      computed = computed.updated(insnIndex, state :: computed(insnIndex))
+    } else insnNode.getOpcode match {
+      case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
+        results = results + (stateIndex -> Return)
+        computed = computed.updated(insnIndex, state :: computed(insnIndex))
+      case ATHROW if nullPathTaken =>
+        results = results + (stateIndex -> NPE)
+        computed = computed.updated(insnIndex, state :: computed(insnIndex))
+      case ATHROW =>
+        results = results + (stateIndex -> Identity)
+        computed = computed.updated(insnIndex, state :: computed(insnIndex))
+      case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
+        val nextInsnIndex = insnIndex + 1
+        val nextState = PendingState({id += 1; id}, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
+        pending.push(MakeResult(state, subResult, List(nextState.index)))
+        pending.push(ProceedState(nextState))
+      case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
+        val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+        val nextState = PendingState({id += 1; id}, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
+        pending.push(MakeResult(state, subResult, List(nextState.index)))
+        pending.push(ProceedState(nextState))
+      case IFEQ if popValue(frame) == InstanceOfCheckValue =>
+        val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+        val nextState = PendingState({id += 1; id}, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
+        pending.push(MakeResult(state, subResult, List(nextState.index)))
+        pending.push(ProceedState(nextState))
+      case IFNE if popValue(frame) == InstanceOfCheckValue =>
+        val nextInsnIndex = insnIndex + 1
+        val nextState = PendingState({id += 1; id}, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
+        pending.push(MakeResult(state, subResult, List(nextState.index)))
+        pending.push(ProceedState(nextState))
+      case _ =>
+        val nextInsnIndices = controlFlow.transitions(insnIndex)
+        val nextStates = nextInsnIndices.map {
+          nextInsnIndex =>
+            val nextFrame1 = if (controlFlow.errorTransitions(insnIndex -> nextInsnIndex)) {
+              val handler = new Frame(frame)
+              handler.clearStack()
+              handler.push(new BasicValue(Type.getType("java/lang/Throwable")))
+              handler
+            } else {
+              nextFrame
+            }
+            PendingState({id += 1; id}, Configuration(nextInsnIndex, nextFrame1), nextHistory, nullPathTaken)
+        }
+        pending.push(MakeResult(state, subResult, nextStates.map(_.index)))
+        pending.pushAll(nextStates.map(s => ProceedState(s)))
+    }
   }
 
   private def createStartFrame(): Frame[BasicValue] = {
@@ -243,6 +210,17 @@ case class Analyzer(richControlFlow: RichControlFlow, paramIndex: Int) {
     }
     frame
   }
+
+  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
+    case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
+      (frame, Identity)
+    case _ =>
+      val nextFrame = new Frame(frame)
+      Interpreter.reset()
+      nextFrame.execute(insnNode, Interpreter)
+      (nextFrame, Interpreter.getUsage.toResult)
+  }
+
 }
 
 object Analyzer {
