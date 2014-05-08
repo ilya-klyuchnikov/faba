@@ -1,14 +1,15 @@
 package faba.contracts
 
-import org.objectweb.asm.{Opcodes, Type}
+import org.objectweb.asm.{Handle, Opcodes, Type}
 import org.objectweb.asm.Opcodes._
-import org.objectweb.asm.tree.analysis.{BasicInterpreter, Frame, BasicValue}
-import org.objectweb.asm.tree.{MethodInsnNode, TypeInsnNode, JumpInsnNode, AbstractInsnNode}
+import org.objectweb.asm.tree.analysis.{BasicValue, BasicInterpreter, Frame}
+import org.objectweb.asm.tree._
 
 import faba.analysis._
 import faba.cfg._
 import faba.data._
 import faba.engine._
+import scala.Some
 
 object `package` {
   type Value = Values.Value
@@ -18,6 +19,8 @@ case class ParamValue(tp: Type) extends BasicValue(tp)
 case class InstanceOfCheckValue() extends BasicValue(Type.INT_TYPE)
 case class TrueValue() extends BasicValue(Type.INT_TYPE)
 case class FalseValue() extends BasicValue(Type.INT_TYPE)
+case class NullValue() extends BasicValue(Type.getObjectType("null"))
+case class NotNullValue(tp: Type) extends BasicValue(tp)
 case class CallResultValue(tp: Type, parameter: AKey) extends BasicValue(tp)
 
 case class Configuration(insnIndex: Int, frame: Frame[BasicValue])
@@ -45,6 +48,7 @@ sealed trait Result
 case object Identity extends Result
 case class SolutionWrapper(pathTaken: Boolean, sol: Dependence) extends Result
 
+// TODO - migrate to Partial
 case class Dependence(partial: Option[Value], params: Set[AKey])
 
 object Result {
@@ -71,8 +75,8 @@ object Result {
   }
 }
 
-class NullBooleanInOutAnalysis(val richControlFlow: RichControlFlow,
-                               val paramIndex: Int) extends Analysis[AKey, Value, Configuration, PendingState, Result] {
+class NullInOutAnalysis(val richControlFlow: RichControlFlow,
+                        val paramIndex: Int) extends Analysis[AKey, Value, Configuration, PendingState, Result] {
   import Utils._
 
   override val identity: Result = Identity
@@ -80,7 +84,7 @@ class NullBooleanInOutAnalysis(val richControlFlow: RichControlFlow,
     controlFlow.methodNode
   private val method = Method(controlFlow.className, methodNode.name, methodNode.desc)
   private val aKey = AKey(method, InOut(paramIndex, Values.Null))
-  val interpreter = Interpreter(Values.Null)
+  val interpreter = InOutInterpreter(Values.Null)
 
   override def stateInstance(curr: PendingState, prev: PendingState): Boolean =
     curr.isInstanceOf(prev)
@@ -122,7 +126,8 @@ class NullBooleanInOutAnalysis(val richControlFlow: RichControlFlow,
     val nextFrame = execute(frame, insnNode)
     // early return
     insnNode.getOpcode match {
-      case IRETURN =>
+      // FIXME - general code starts
+      case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
         val returnValue = popValue(frame)
         returnValue match {
           case FalseValue() =>
@@ -137,6 +142,20 @@ class NullBooleanInOutAnalysis(val richControlFlow: RichControlFlow,
             val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(None, Set(param)))
             results = results + (stateIndex -> solution)
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          case NullValue() =>
+            val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(Some(Values.Null), Set()))
+            results = results + (stateIndex -> solution)
+            computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          case NotNullValue(_) =>
+            val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(Some(Values.NotNull), Set()))
+            results = results + (stateIndex -> solution)
+            computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          // FIXME - specialized code inside general code starts
+          case ParamValue(_) =>
+            val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(Some(Values.Null), Set()))
+            results = results + (stateIndex -> solution)
+            computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          // FIXME - specialized code inside general code end
           case _ =>
             val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(Some(Values.Top), Set()))
             results = results + (stateIndex -> solution)
@@ -145,6 +164,7 @@ class NullBooleanInOutAnalysis(val richControlFlow: RichControlFlow,
       case ATHROW =>
         results = results + (stateIndex -> SolutionWrapper(pathTaken, Dependence(Some(Values.Top), Set())))
         computed = computed.updated(insnIndex, state :: computed(insnIndex))
+      // FIXME - general code ends
       case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
         val nextInsnIndex = insnIndex + 1
         val nextState = PendingState({
@@ -242,6 +262,10 @@ class NullBooleanInOutAnalysis(val richControlFlow: RichControlFlow,
         frame.setLocal(i, BasicValue.INT_VALUE)
       case FalseValue() =>
         frame.setLocal(i, BasicValue.INT_VALUE)
+      case NullValue() =>
+        frame.setLocal(i, BasicValue.UNINITIALIZED_VALUE)
+      case NotNullValue(tp) =>
+        frame.setLocal(i, new BasicValue(tp))
       case _ =>
     }
 
@@ -256,6 +280,10 @@ class NullBooleanInOutAnalysis(val richControlFlow: RichControlFlow,
         frame.push(BasicValue.INT_VALUE)
       case FalseValue() =>
         frame.push(BasicValue.INT_VALUE)
+      case NullValue() =>
+        frame.push(BasicValue.UNINITIALIZED_VALUE)
+      case NotNullValue(tp) =>
+        frame.push(new BasicValue(tp))
       case _ =>
         frame.push(v)
     }
@@ -264,7 +292,7 @@ class NullBooleanInOutAnalysis(val richControlFlow: RichControlFlow,
 }
 
 class NotNullBooleanInOutAnalysis(val richControlFlow: RichControlFlow,
-                               val paramIndex: Int) extends Analysis[AKey, Value, Configuration, PendingState, Result] {
+                                  val paramIndex: Int) extends Analysis[AKey, Value, Configuration, PendingState, Result] {
   import Utils._
 
   override val identity: Result = Identity
@@ -272,7 +300,7 @@ class NotNullBooleanInOutAnalysis(val richControlFlow: RichControlFlow,
     controlFlow.methodNode
   private val method = Method(controlFlow.className, methodNode.name, methodNode.desc)
   private val aKey = AKey(method, InOut(paramIndex, Values.NotNull))
-  val interpreter = Interpreter(Values.NotNull)
+  val interpreter = InOutInterpreter(Values.NotNull)
 
   override def stateInstance(curr: PendingState, prev: PendingState): Boolean =
     curr.isInstanceOf(prev)
@@ -485,13 +513,32 @@ object Utils {
 }
 
 
-case class Interpreter(inValue: Value) extends BasicInterpreter {
+case class InOutInterpreter(inValue: Value) extends BasicInterpreter {
+
   override def newOperation(insn: AbstractInsnNode): BasicValue =
     insn.getOpcode match {
       case ICONST_0 =>
         FalseValue()
       case ICONST_1 =>
         TrueValue()
+      case ACONST_NULL =>
+        NullValue()
+      case LDC =>
+        val cst = insn.asInstanceOf[LdcInsnNode].cst
+        cst match {
+          case tp: Type if tp.getSort == Type.OBJECT || tp.getSort == Type.ARRAY =>
+            NotNullValue(Type.getObjectType("java/lang/Class"))
+          case tp: Type if tp.getSort == Type.METHOD  =>
+            NotNullValue(Type.getObjectType("java/lang/invoke/MethodType"))
+          case s: String =>
+            NotNullValue(Type.getObjectType("java/lang/String"))
+          case h: Handle =>
+            NotNullValue(Type.getObjectType("java/lang/invoke/MethodHandle"))
+          case _ =>
+            super.newOperation(insn)
+        }
+      case NEW =>
+        NotNullValue(Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc))
       case _ =>
         super.newOperation(insn)
     }
@@ -502,6 +549,8 @@ case class Interpreter(inValue: Value) extends BasicInterpreter {
         new ParamValue(Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc))
       case INSTANCEOF if value.isInstanceOf[ParamValue] =>
         InstanceOfCheckValue()
+      case NEWARRAY | ANEWARRAY =>
+        NotNullValue(super.unaryOperation(insn, value).getType)
       case _ =>
         super.unaryOperation(insn, value)
     }
@@ -525,6 +574,8 @@ case class Interpreter(inValue: Value) extends BasicInterpreter {
           }
         }
         super.naryOperation(insn, values)
+      case MULTIANEWARRAY | INVOKEDYNAMIC =>
+        NotNullValue(super.naryOperation(insn, values).getType)
       case _ =>
         super.naryOperation(insn, values)
     }
