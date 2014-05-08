@@ -30,6 +30,8 @@ Ad-hoc testing
     runMain faba.NotNullParametersProcessor /Users/lambdamix/code/kanva-micro/data/commons-lang3-3.3.2.jar commons-params.txt
     runMain faba.NullBooleanContractsProcessor /Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/jre/lib/rt.jar jdk-null-contracts.txt
     runMain faba.NullBooleanContractsProcessor /Users/lambdamix/code/kanva-micro/data/commons-lang3-3.3.2.jar commons-null-contracts.txt
+    runMain faba.NotNullBooleanContractsProcessor /Users/lambdamix/code/kanva-micro/data/commons-lang3-3.3.2.jar commons-notnull-contracts.txt
+    runMain faba.NotNullBooleanContractsProcessor /Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/jre/lib/rt.jar jdk-notnull-contracts.txt
 
 ## Idea integration
 
