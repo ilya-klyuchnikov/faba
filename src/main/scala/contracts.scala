@@ -79,16 +79,19 @@ object Result {
 
 // only null, not nulls are supported as in for now
 class InOutAnalysis(val richControlFlow: RichControlFlow,
-                    val paramIndex: Int,
-                    val in: Value) extends Analysis[AKey, Value, Configuration, PendingState, Result] {
+                    val direction: ADirection) extends Analysis[AKey, Value, Configuration, PendingState, Result] {
   import Utils._
 
   override val identity: Result = Identity
 
   private val methodNode = controlFlow.methodNode
   private val method = Method(controlFlow.className, methodNode.name, methodNode.desc)
-  private val aKey = AKey(method, InOut(paramIndex, in))
-  private val interpreter = InOutInterpreter(in)
+  private val aKey = AKey(method, direction)
+  private val interpreter = InOutInterpreter(direction)
+  private val optIn: Option[Value] = direction match {
+    case InOut(_, in) => Some(in)
+    case _ => None
+  }
 
   override def stateInstance(curr: PendingState, prev: PendingState): Boolean =
     curr.isInstanceOf(prev)
@@ -153,6 +156,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
             results = results + (stateIndex -> solution)
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
           case ParamValue(_) =>
+            val InOut(_, in) = direction
             val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(Some(in), Set()))
             results = results + (stateIndex -> solution)
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
@@ -165,10 +169,10 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
         results = results + (stateIndex -> SolutionWrapper(pathTaken, Dependence(Some(Values.Top), Set())))
         computed = computed.updated(insnIndex, state :: computed(insnIndex))
       case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
-        val nextInsnIndex = in match {
-          case Values.Null =>
+        val nextInsnIndex = direction match {
+          case InOut(_, Values.Null) =>
             insnIndex + 1
-          case Values.NotNull =>
+          case InOut(_, Values.NotNull) =>
             methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
         }
         val nextState = PendingState({
@@ -177,10 +181,10 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
         pending.push(MakeResult(state, Identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
-        val nextInsnIndex = in match {
-          case Values.Null =>
+        val nextInsnIndex = direction match {
+          case InOut(_, Values.Null) =>
             methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          case Values.NotNull =>
+          case InOut(_, Values.NotNull) =>
             insnIndex + 1
         }
         val nextState = PendingState({
@@ -188,7 +192,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
         }, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
         pending.push(MakeResult(state, Identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
-      case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] && in == Values.Null =>
+      case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
         val nextInsnIndex =
           methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
         val nextState = PendingState({
@@ -196,7 +200,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
         }, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
         pending.push(MakeResult(state, Identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
-      case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] && in == Values.Null =>
+      case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
         val nextInsnIndex = insnIndex + 1
         val nextState = PendingState({
           id += 1; id
@@ -204,10 +208,10 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
         pending.push(MakeResult(state, Identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFEQ if popValue(frame).isInstanceOf[ParamValue] =>
-        val nextInsnIndex = in match {
-          case Values.False =>
+        val nextInsnIndex = direction match {
+          case InOut(_, Values.False) =>
             methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          case Values.True =>
+          case InOut(_, Values.True) =>
             insnIndex + 1
         }
         val nextState = PendingState({
@@ -216,10 +220,10 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
         pending.push(MakeResult(state, Identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFNE if popValue(frame).isInstanceOf[ParamValue] =>
-        val nextInsnIndex = in match {
-          case Values.False =>
+        val nextInsnIndex = direction match {
+          case InOut(_, Values.False) =>
             insnIndex + 1
-          case Values.True =>
+          case InOut(_, Values.True) =>
             methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
         }
         val nextState = PendingState({
@@ -262,7 +266,11 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
       local += 1
     }
     for (i <- 0 until args.size) {
-      val value = if (i == paramIndex) new ParamValue(args(i)) else new BasicValue(args(i))
+
+      val value = direction match {
+        case InOut(`i`, _) => new ParamValue(args(i))
+        case _ => new BasicValue(args(i))
+      }
       frame.setLocal(local, value)
       local += 1
       if (args(i).getSize == 2) {
@@ -368,7 +376,7 @@ object Utils {
 }
 
 
-case class InOutInterpreter(inValue: Value) extends BasicInterpreter {
+case class InOutInterpreter(direction: ADirection) extends BasicInterpreter {
 
   override def newOperation(insn: AbstractInsnNode): BasicValue =
     insn.getOpcode match {
@@ -411,7 +419,6 @@ case class InOutInterpreter(inValue: Value) extends BasicInterpreter {
     }
 
 
-  // TODO - here only the first param is taken into account (for simplicity)
   override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
     val opCode = insn.getOpcode
     val static = opCode == INVOKESTATIC
@@ -419,14 +426,20 @@ case class InOutInterpreter(inValue: Value) extends BasicInterpreter {
     opCode match {
       case INVOKESTATIC | INVOKESPECIAL =>
         val mNode = insn.asInstanceOf[MethodInsnNode]
-        for (i <- shift until values.size()) {
-          if (values.get(i).isInstanceOf[ParamValue]) {
-            val method = Method(mNode.owner, mNode.name, mNode.desc)
-            return CallResultValue(
-              Type.getReturnType(insn.asInstanceOf[MethodInsnNode].desc),
-              AKey(method, InOut(i - shift, inValue))
-            )
-          }
+        // TODO - here only the first param is taken into account (for simplicity),
+        // TODO - consider all parameters
+        direction match {
+          case InOut(_, inValue) =>
+            for (i <- shift until values.size()) {
+              if (values.get(i).isInstanceOf[ParamValue]) {
+                val method = Method(mNode.owner, mNode.name, mNode.desc)
+                return CallResultValue(
+                  Type.getReturnType(insn.asInstanceOf[MethodInsnNode].desc),
+                  AKey(method, InOut(i - shift, inValue))
+                )
+              }
+            }
+          case _ =>
         }
         super.naryOperation(insn, values)
       case MULTIANEWARRAY | INVOKEDYNAMIC =>

@@ -140,12 +140,12 @@ object InOutProcessor extends Processor {
             val argType = argumentTypes(i)
             val sort = argType.getSort
             if (sort == Type.OBJECT || sort == Type.ARRAY) {
-              solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), i, Values.Null).analyze())
-              solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), i, Values.NotNull).analyze())
+              solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.Null)).analyze())
+              solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.NotNull)).analyze())
             }
             if (argType == Type.BOOLEAN_TYPE) {
-              solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), i, Values.False).analyze())
-              solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), i, Values.True).analyze())
+              solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.False)).analyze())
+              solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.True)).analyze())
             }
           }
           added = true
