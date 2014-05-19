@@ -131,7 +131,10 @@ object InOutProcessor extends Processor {
     val resultType = Type.getReturnType(methodNode.desc)
     val resultSort = resultType.getSort
 
-    if (resultSort == Type.OBJECT || resultSort == Type.ARRAY || Type.BOOLEAN_TYPE == resultType) {
+    val isReferenceResult = resultSort == Type.OBJECT || resultSort == Type.ARRAY
+    val isBooleanResult = Type.BOOLEAN_TYPE == resultType
+
+    if (isReferenceResult || isBooleanResult) {
       if (graph.transitions.nonEmpty)  {
         val dfs = cfg.buildDFSTree(graph.transitions)
         val reducible = dfs.back.isEmpty || cfg.reducible(graph, dfs)
@@ -147,6 +150,9 @@ object InOutProcessor extends Processor {
               solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.False)).analyze())
               solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.True)).analyze())
             }
+          }
+          if (isReferenceResult) {
+            solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), Out).analyze())
           }
           added = true
         } else {
@@ -167,6 +173,9 @@ object InOutProcessor extends Processor {
             solver.addEquation(Equation(AKey(method, InOut(i, Values.False)), Final(Values.Top)))
             solver.addEquation(Equation(AKey(method, InOut(i, Values.True)), Final(Values.Top)))
           }
+        }
+        if (isReferenceResult) {
+          solver.addEquation(Equation(AKey(method, Out), Final(Values.Top)))
         }
       }
     }
@@ -316,6 +325,29 @@ object InOutProcessor extends Processor {
 
       val outsSorted = outs.sortBy(_._1)
       printToFile(new File(s"$outFile-true.txt")) {
+        out =>
+          for ((x, y) <- outsSorted) {
+            out.println(x)
+            out.println(y)
+            out.println()
+          }
+      }
+    }
+
+    {
+      val outs = ArrayBuffer[(String, String)]()
+      for ((aKey, v) <- solutions) {
+        (aKey.direction, v) match {
+          case (Out, Values.NotNull) =>
+            outs.append((aKey.toString.replace('/', '.'), v.toString))
+          case (Out, Values.Null) =>
+            outs.append((aKey.toString.replace('/', '.'), v.toString))
+          case _ =>
+        }
+      }
+
+      val outsSorted = outs.sortBy(_._1)
+      printToFile(new File(s"$outFile-return.txt")) {
         out =>
           for ((x, y) <- outsSorted) {
             out.println(x)

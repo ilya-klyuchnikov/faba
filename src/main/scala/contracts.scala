@@ -9,7 +9,6 @@ import faba.analysis._
 import faba.cfg._
 import faba.data._
 import faba.engine._
-import scala.Some
 
 object `package` {
   type Value = Values.Value
@@ -21,7 +20,7 @@ case class TrueValue() extends BasicValue(Type.INT_TYPE)
 case class FalseValue() extends BasicValue(Type.INT_TYPE)
 case class NullValue() extends BasicValue(Type.getObjectType("null"))
 case class NotNullValue(tp: Type) extends BasicValue(tp)
-case class CallResultValue(tp: Type, parameter: AKey) extends BasicValue(tp)
+case class CallResultValue(tp: Type, inters: Set[AKey]) extends BasicValue(tp)
 
 case class Configuration(insnIndex: Int, frame: Frame[BasicValue])
 
@@ -46,47 +45,18 @@ case class PendingState(index: Int,
 sealed trait PendingAction
 case class ProceedState(state: PendingState) extends PendingAction
 case class MakeResult(state: PendingState, subIndices: List[Int]) extends PendingAction
-sealed trait Result
-case object Identity extends Result
-case class SolutionWrapper(pathTaken: Boolean, sol: Dependence) extends Result
 
-// TODO - migrate to Partial
-case class Dependence(partial: Option[Value], params: Set[AKey])
-
-object Result {
-  def meet(r1: Result, r2: Result): Result = {
-    val result = (r1, r2) match {
-      case (Identity, _) => r2
-      case (_, Identity) => r1
-      case (SolutionWrapper(nt1, Dependence(p1, params1)), SolutionWrapper(nt2, Dependence(p2, params2))) =>
-        val pathTaken = nt1 || nt2
-        val partial: Option[Value] = (p1, p2) match {
-          case (None, _) => p2
-          case (_, None) => p1
-          case (Some(ps1), Some(ps2)) if ps1 == ps2 =>
-            Some(ps1)
-          case _ => Some(Values.Top)
-        }
-        val params: Set[AKey] = partial match {
-          case Some(Values.Top) => Set()
-          case _ => params1 ++ params2
-        }
-        SolutionWrapper(pathTaken, Dependence(partial, params))
-    }
-    result
-  }
-}
-
-// only null, not nulls are supported as in for now
 class InOutAnalysis(val richControlFlow: RichControlFlow,
-                    val direction: ADirection) extends Analysis[AKey, Value, Configuration, PendingState, Result] {
+                    val direction: ADirection) extends Analysis[AKey, Value, Configuration, PendingState, Result[AKey, Value]] {
+  type MyResult = Result[AKey, Value]
   import Utils._
 
-  override val identity: Result = Identity
+  override val identity = Final(Values.Bot)
 
   private val methodNode = controlFlow.methodNode
   private val method = Method(controlFlow.className, methodNode.name, methodNode.desc)
   private val aKey = AKey(method, direction)
+
   private val interpreter = InOutInterpreter(direction)
   private val optIn: Option[Value] = direction match {
     case InOut(_, in) => Some(in)
@@ -102,19 +72,11 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
   override def createStartState(): PendingState =
     PendingState(0, Configuration(0, createStartFrame()), Nil, false)
 
-  override def combineResults(delta: Result, subResults: List[Result]): Result =
-    subResults.reduce(Result.meet)
+  override def combineResults(delta: MyResult, subResults: List[MyResult]): MyResult =
+    subResults.reduce(_ join _)
 
-  override def mkEquation(result: Result): Equation[AKey, Value] = result match {
-    case Identity =>
-      Equation(aKey, Final(Values.Top))
-    case SolutionWrapper(false, _) =>
-      Equation(aKey, Final(Values.Top))
-    case SolutionWrapper(true, sol) if sol.params.isEmpty =>
-      Equation(aKey, Final(sol.partial.getOrElse(Values.Top)))
-    case SolutionWrapper(true, sol) =>
-      Equation(aKey, Pending[AKey, Value](sol.partial.getOrElse(Values.Bot), sol.params.map(p => Component(false, Set(p)))))
-  }
+  override def mkEquation(result: MyResult): Equation[AKey, Value] =
+      Equation(aKey, result)
 
   var id = 0
 
@@ -136,37 +98,39 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
       case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
         popValue(frame) match {
           case FalseValue() =>
-            val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(Some(Values.False), Set()))
-            results = results + (stateIndex -> solution)
+            val result = Final(Values.False)
+            results = results + (stateIndex -> result)
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
           case TrueValue() =>
-            val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(Some(Values.True), Set()))
-            results = results + (stateIndex -> solution)
-            computed = computed.updated(insnIndex, state :: computed(insnIndex))
-          case CallResultValue(_, param) =>
-            val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(None, Set(param)))
-            results = results + (stateIndex -> solution)
+            val result = Final(Values.True)
+            results = results + (stateIndex -> result)
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
           case NullValue() =>
-            val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(Some(Values.Null), Set()))
-            results = results + (stateIndex -> solution)
+            val result = Final(Values.Null)
+            results = results + (stateIndex -> result)
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
           case NotNullValue(_) =>
-            val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(Some(Values.NotNull), Set()))
-            results = results + (stateIndex -> solution)
+            val result = Final(Values.NotNull)
+            results = results + (stateIndex -> result)
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
           case ParamValue(_) =>
             val InOut(_, in) = direction
-            val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(Some(in), Set()))
-            results = results + (stateIndex -> solution)
+            val result = Final(in)
+            results = results + (stateIndex -> result)
+            computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          case CallResultValue(_, keys) =>
+            val result = Pending[AKey, Value](Values.Bot, Set(Component(false, keys)))
+            results = results + (stateIndex -> result)
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
           case _ =>
-            val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(Some(Values.Top), Set()))
-            results = results + (stateIndex -> solution)
+            // TODO - may return Top no
+            val result = Final(Values.Top)
+            results = results + (stateIndex -> result)
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
         }
       case ATHROW =>
-        results = results + (stateIndex -> SolutionWrapper(pathTaken, Dependence(Some(Values.Top), Set())))
+        // TODO - really, this may be Values.bot, discussable
+        results = results + (stateIndex -> Final(Values.Top))
         computed = computed.updated(insnIndex, state :: computed(insnIndex))
       case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
         val nextInsnIndex = direction match {
@@ -178,7 +142,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
         val nextState = PendingState({
           id += 1; id
         }, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
-        pending.push(MakeResult(state, Identity, List(nextState.index)))
+        pending.push(MakeResult(state, identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
         val nextInsnIndex = direction match {
@@ -190,7 +154,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
         val nextState = PendingState({
           id += 1; id
         }, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
-        pending.push(MakeResult(state, Identity, List(nextState.index)))
+        pending.push(MakeResult(state, identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
         val nextInsnIndex =
@@ -198,14 +162,14 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
         val nextState = PendingState({
           id += 1; id
         }, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
-        pending.push(MakeResult(state, Identity, List(nextState.index)))
+        pending.push(MakeResult(state, identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
         val nextInsnIndex = insnIndex + 1
         val nextState = PendingState({
           id += 1; id
         }, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
-        pending.push(MakeResult(state, Identity, List(nextState.index)))
+        pending.push(MakeResult(state, identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFEQ if popValue(frame).isInstanceOf[ParamValue] =>
         val nextInsnIndex = direction match {
@@ -217,7 +181,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
         val nextState = PendingState({
           id += 1; id
         }, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
-        pending.push(MakeResult(state, Identity, List(nextState.index)))
+        pending.push(MakeResult(state, identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFNE if popValue(frame).isInstanceOf[ParamValue] =>
         val nextInsnIndex = direction match {
@@ -229,7 +193,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
         val nextState = PendingState({
           id += 1; id
         }, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
-        pending.push(MakeResult(state, Identity, List(nextState.index)))
+        pending.push(MakeResult(state, identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case _ =>
         val nextInsnIndices = controlFlow.transitions(insnIndex)
@@ -247,7 +211,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
               id += 1; id
             }, Configuration(nextInsnIndex, nextFrame1), nextHistory, pathTaken)
         }
-        pending.push(MakeResult(state, Identity, nextStates.map(_.index)))
+        pending.push(MakeResult(state, identity, nextStates.map(_.index)))
         pending.pushAll(nextStates.map(s => ProceedState(s)))
     }
   }
@@ -266,10 +230,11 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
       local += 1
     }
     for (i <- 0 until args.size) {
-
       val value = direction match {
-        case InOut(`i`, _) => new ParamValue(args(i))
-        case _ => new BasicValue(args(i))
+        case InOut(`i`, _) =>
+          new ParamValue(args(i))
+        case _ =>
+          new BasicValue(args(i))
       }
       frame.setLocal(local, value)
       local += 1
@@ -364,8 +329,16 @@ object Utils {
       case FalseValue() => true
       case _ => false
     }
-    case CallResultValue(_, prevParam) => curr match {
-      case CallResultValue(_, currParam) => currParam == prevParam
+    case NullValue() => curr match {
+      case NullValue() => true
+      case _ => false
+    }
+    case NotNullValue(_) => curr match {
+      case NotNullValue(_) => true
+      case _ => false
+    }
+    case CallResultValue(_, prevInters) => curr match {
+      case CallResultValue(_, currInters) => currInters == prevInters
       case _ => false
     }
     case _: BasicValue => true
@@ -418,28 +391,38 @@ case class InOutInterpreter(direction: ADirection) extends BasicInterpreter {
         super.unaryOperation(insn, value)
     }
 
-
+  // this is very dense code, be aware
   override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
     val opCode = insn.getOpcode
     val static = opCode == INVOKESTATIC
     val shift = if (static) 0 else 1
     opCode match {
+      // TODO - it doesn't cover a case when class is final
       case INVOKESTATIC | INVOKESPECIAL =>
         val mNode = insn.asInstanceOf[MethodInsnNode]
-        // TODO - here only the first param is taken into account (for simplicity),
-        // TODO - consider all parameters
         direction match {
           case InOut(_, inValue) =>
+            var keys = Set[AKey]()
+            val method = Method(mNode.owner, mNode.name, mNode.desc)
             for (i <- shift until values.size()) {
               if (values.get(i).isInstanceOf[ParamValue]) {
-                val method = Method(mNode.owner, mNode.name, mNode.desc)
-                return CallResultValue(
-                  Type.getReturnType(insn.asInstanceOf[MethodInsnNode].desc),
-                  AKey(method, InOut(i - shift, inValue))
-                )
+                keys = keys + AKey(method, InOut(i - shift, inValue))
               }
             }
+            if (Type.getReturnType(mNode.desc).getSort == Type.OBJECT) {
+              keys = keys + AKey(method, Out)
+            }
+            if (keys.nonEmpty) {
+              return CallResultValue(Type.getReturnType(mNode.desc), keys)
+            }
           case _ =>
+            if (Type.getReturnType(mNode.desc).getSort == Type.OBJECT) {
+              val method = Method(mNode.owner, mNode.name, mNode.desc)
+              return CallResultValue(
+                Type.getReturnType(mNode.desc),
+                Set(AKey(method, Out))
+              )
+            }
         }
         super.naryOperation(insn, values)
       case MULTIANEWARRAY | INVOKEDYNAMIC =>
