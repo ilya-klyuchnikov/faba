@@ -7,12 +7,36 @@ object `package` {
     @inline def &(y: Val): Val =
       l.meet(x, y)
 
+    @inline def meet(y: Val): Val =
+      l.meet(x, y)
+
     @inline def |(y: Val): Val =
+      l.join(x, y)
+
+    @inline def join(y: Val): Val =
       l.join(x, y)
   }
 
   // sum of products
   type SoP[T] = Set[Component[T]]
+
+  implicit class ResultOps[Id, Val](r1: Result[Id, Val])(implicit l: Lattice[Val]) {
+    val top: Val = l.top
+    @inline def join(r2: Result[Id, Val]): Result[Id, Val] = (r1, r2) match {
+      case (Final(`top`), _) =>
+        Final(`top`)
+      case (_, Final(`top`)) =>
+        Final(`top`)
+      case (Final(v1), Final(v2)) =>
+        Final(v1 join v2)
+      case (Final(v1), Pending(v2, comps2)) =>
+         Pending(v1 join v2, comps2)
+      case (Pending(v1, comps1), Final(v2)) =>
+        Pending(v1 join v2, comps1)
+      case (Pending(v1, comps1), Pending(v2, comps2)) =>
+        Pending(v1 join v2, comps1 union comps2)
+    }
+  }
 }
 
 // complete finite lattice
@@ -108,6 +132,8 @@ final class Solver[Id, Val:Lattice] {
     equation.rhs match {
       case Final(value) =>
         moving enqueue (equation.id -> value)
+      case Pending(`top`, _) =>
+        moving enqueue (equation.id -> top)
       case p@Pending(_, sop) =>
         for (trigger <- sop.map(_.ids).flatten) {
           dependencies(trigger) = dependencies.getOrElse(trigger, Set()) + equation.id

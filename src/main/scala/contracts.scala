@@ -1,9 +1,9 @@
 package faba.contracts
 
-import org.objectweb.asm.{Opcodes, Type}
+import org.objectweb.asm.{Handle, Opcodes, Type}
 import org.objectweb.asm.Opcodes._
-import org.objectweb.asm.tree.analysis.{BasicInterpreter, Frame, BasicValue}
-import org.objectweb.asm.tree.{MethodInsnNode, TypeInsnNode, JumpInsnNode, AbstractInsnNode}
+import org.objectweb.asm.tree.analysis.{BasicValue, BasicInterpreter, Frame}
+import org.objectweb.asm.tree._
 
 import faba.analysis._
 import faba.cfg._
@@ -18,11 +18,16 @@ case class ParamValue(tp: Type) extends BasicValue(tp)
 case class InstanceOfCheckValue() extends BasicValue(Type.INT_TYPE)
 case class TrueValue() extends BasicValue(Type.INT_TYPE)
 case class FalseValue() extends BasicValue(Type.INT_TYPE)
-case class CallResultValue(tp: Type, parameter: AKey) extends BasicValue(tp)
+case class NullValue() extends BasicValue(Type.getObjectType("null"))
+case class NotNullValue(tp: Type) extends BasicValue(tp)
+case class CallResultValue(tp: Type, inters: Set[AKey]) extends BasicValue(tp)
 
 case class Configuration(insnIndex: Int, frame: Frame[BasicValue])
 
-case class PendingState(index: Int, conf: Configuration, history: List[Configuration], pathTaken: Boolean) extends AState[Configuration] {
+case class PendingState(index: Int,
+                        conf: Configuration,
+                        history: List[Configuration],
+                        pathTaken: Boolean) extends AState[Configuration] {
 
   import Utils._
   def isInstanceOf(prevState: PendingState) = {
@@ -30,7 +35,6 @@ case class PendingState(index: Int, conf: Configuration, history: List[Configura
       isInstance(conf, prevState.conf) &&
       history.size == prevState.history.size &&
       (history, prevState.history).zipped.forall(isInstance)
-
     result
   }
 
@@ -41,46 +45,23 @@ case class PendingState(index: Int, conf: Configuration, history: List[Configura
 sealed trait PendingAction
 case class ProceedState(state: PendingState) extends PendingAction
 case class MakeResult(state: PendingState, subIndices: List[Int]) extends PendingAction
-sealed trait Result
-case object Identity extends Result
-case class SolutionWrapper(pathTaken: Boolean, sol: Dependence) extends Result
 
-case class Dependence(partial: Option[Value], params: Set[AKey])
-
-object Result {
-  def meet(r1: Result, r2: Result): Result = {
-    val result = (r1, r2) match {
-      case (Identity, _) => r2
-      case (_, Identity) => r1
-      case (SolutionWrapper(nt1, Dependence(p1, params1)), SolutionWrapper(nt2, Dependence(p2, params2))) =>
-        val pathTaken = nt1 || nt2
-        val partial: Option[Value] = (p1, p2) match {
-          case (None, _) => p2
-          case (_, None) => p1
-          case (Some(ps1), Some(ps2)) if ps1 == ps2 =>
-            Some(ps1)
-          case _ => Some(Values.Top)
-        }
-        val params: Set[AKey] = partial match {
-          case Some(Values.Top) => Set()
-          case _ => params1 ++ params2
-        }
-        SolutionWrapper(pathTaken, Dependence(partial, params))
-    }
-    result
-  }
-}
-
-class NullBooleanInOutAnalysis(val richControlFlow: RichControlFlow,
-                               val paramIndex: Int) extends Analysis[AKey, Value, Configuration, PendingState, Result] {
+class InOutAnalysis(val richControlFlow: RichControlFlow,
+                    val direction: ADirection) extends Analysis[AKey, Value, Configuration, PendingState, Result[AKey, Value]] {
+  type MyResult = Result[AKey, Value]
   import Utils._
 
-  override val identity: Result = Identity
-  private val methodNode =
-    controlFlow.methodNode
+  override val identity = Final(Values.Bot)
+
+  private val methodNode = controlFlow.methodNode
   private val method = Method(controlFlow.className, methodNode.name, methodNode.desc)
-  private val aKey = AKey(method, InOut(paramIndex, Values.Null))
-  val interpreter = Interpreter(Values.Null)
+  private val aKey = AKey(method, direction)
+
+  private val interpreter = InOutInterpreter(direction)
+  private val optIn: Option[Value] = direction match {
+    case InOut(_, in) => Some(in)
+    case _ => None
+  }
 
   override def stateInstance(curr: PendingState, prev: PendingState): Boolean =
     curr.isInstanceOf(prev)
@@ -91,19 +72,11 @@ class NullBooleanInOutAnalysis(val richControlFlow: RichControlFlow,
   override def createStartState(): PendingState =
     PendingState(0, Configuration(0, createStartFrame()), Nil, false)
 
-  override def combineResults(delta: Result, subResults: List[Result]): Result =
-    subResults.reduce(Result.meet)
+  override def combineResults(delta: MyResult, subResults: List[MyResult]): MyResult =
+    subResults.reduce(_ join _)
 
-  override def mkEquation(result: Result): Equation[AKey, Value] = result match {
-    case Identity =>
-      Equation(aKey, Final(Values.Top))
-    case SolutionWrapper(false, _) =>
-      Equation(aKey, Final(Values.Top))
-    case SolutionWrapper(true, sol) if sol.params.isEmpty =>
-      Equation(aKey, Final(sol.partial.getOrElse(Values.Top)))
-    case SolutionWrapper(true, sol) =>
-      Equation(aKey, Pending[AKey, Value](sol.partial.getOrElse(Values.Bot), sol.params.map(p => Component(false, Set(p)))))
-  }
+  override def mkEquation(result: MyResult): Equation[AKey, Value] =
+      Equation(aKey, result)
 
   var id = 0
 
@@ -122,56 +95,105 @@ class NullBooleanInOutAnalysis(val richControlFlow: RichControlFlow,
     val nextFrame = execute(frame, insnNode)
     // early return
     insnNode.getOpcode match {
-      case IRETURN =>
-        val returnValue = popValue(frame)
-        returnValue match {
+      case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
+        popValue(frame) match {
           case FalseValue() =>
-            val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(Some(Values.False), Set()))
-            results = results + (stateIndex -> solution)
+            val result = Final(Values.False)
+            results = results + (stateIndex -> result)
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
           case TrueValue() =>
-            val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(Some(Values.True), Set()))
-            results = results + (stateIndex -> solution)
+            val result = Final(Values.True)
+            results = results + (stateIndex -> result)
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
-          case CallResultValue(_, param) =>
-            val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(None, Set(param)))
-            results = results + (stateIndex -> solution)
+          case NullValue() =>
+            val result = Final(Values.Null)
+            results = results + (stateIndex -> result)
+            computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          case NotNullValue(_) =>
+            val result = Final(Values.NotNull)
+            results = results + (stateIndex -> result)
+            computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          case ParamValue(_) =>
+            val InOut(_, in) = direction
+            val result = Final(in)
+            results = results + (stateIndex -> result)
+            computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          case CallResultValue(_, keys) =>
+            val result = Pending[AKey, Value](Values.Bot, Set(Component(false, keys)))
+            results = results + (stateIndex -> result)
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
           case _ =>
-            val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(Some(Values.Top), Set()))
-            results = results + (stateIndex -> solution)
+            // TODO - may return Top no
+            val result = Final(Values.Top)
+            results = results + (stateIndex -> result)
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
         }
       case ATHROW =>
-        results = results + (stateIndex -> SolutionWrapper(pathTaken, Dependence(Some(Values.Top), Set())))
+        // TODO - really, this may be Values.bot, discussable
+        results = results + (stateIndex -> Final(Values.Top))
         computed = computed.updated(insnIndex, state :: computed(insnIndex))
       case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
-        val nextInsnIndex = insnIndex + 1
+        val nextInsnIndex = direction match {
+          case InOut(_, Values.Null) =>
+            insnIndex + 1
+          case InOut(_, Values.NotNull) =>
+            methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+        }
         val nextState = PendingState({
           id += 1; id
         }, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
-        pending.push(MakeResult(state, Identity, List(nextState.index)))
+        pending.push(MakeResult(state, identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
-        val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+        val nextInsnIndex = direction match {
+          case InOut(_, Values.Null) =>
+            methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+          case InOut(_, Values.NotNull) =>
+            insnIndex + 1
+        }
         val nextState = PendingState({
           id += 1; id
         }, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
-        pending.push(MakeResult(state, Identity, List(nextState.index)))
+        pending.push(MakeResult(state, identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
-      case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
-        val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+      case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
+        val nextInsnIndex =
+          methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
         val nextState = PendingState({
           id += 1; id
         }, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
-        pending.push(MakeResult(state, Identity, List(nextState.index)))
+        pending.push(MakeResult(state, identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
-      case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
+      case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
         val nextInsnIndex = insnIndex + 1
         val nextState = PendingState({
           id += 1; id
         }, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
-        pending.push(MakeResult(state, Identity, List(nextState.index)))
+        pending.push(MakeResult(state, identity, List(nextState.index)))
+        pending.push(ProceedState(nextState))
+      case IFEQ if popValue(frame).isInstanceOf[ParamValue] =>
+        val nextInsnIndex = direction match {
+          case InOut(_, Values.False) =>
+            methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+          case InOut(_, Values.True) =>
+            insnIndex + 1
+        }
+        val nextState = PendingState({
+          id += 1; id
+        }, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
+        pending.push(MakeResult(state, identity, List(nextState.index)))
+        pending.push(ProceedState(nextState))
+      case IFNE if popValue(frame).isInstanceOf[ParamValue] =>
+        val nextInsnIndex = direction match {
+          case InOut(_, Values.False) =>
+            insnIndex + 1
+          case InOut(_, Values.True) =>
+            methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+        }
+        val nextState = PendingState({
+          id += 1; id
+        }, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
+        pending.push(MakeResult(state, identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case _ =>
         val nextInsnIndices = controlFlow.transitions(insnIndex)
@@ -189,7 +211,7 @@ class NullBooleanInOutAnalysis(val richControlFlow: RichControlFlow,
               id += 1; id
             }, Configuration(nextInsnIndex, nextFrame1), nextHistory, pathTaken)
         }
-        pending.push(MakeResult(state, Identity, nextStates.map(_.index)))
+        pending.push(MakeResult(state, identity, nextStates.map(_.index)))
         pending.pushAll(nextStates.map(s => ProceedState(s)))
     }
   }
@@ -208,7 +230,12 @@ class NullBooleanInOutAnalysis(val richControlFlow: RichControlFlow,
       local += 1
     }
     for (i <- 0 until args.size) {
-      val value = if (i == paramIndex) new ParamValue(args(i)) else new BasicValue(args(i))
+      val value = direction match {
+        case InOut(`i`, _) =>
+          new ParamValue(args(i))
+        case _ =>
+          new BasicValue(args(i))
+      }
       frame.setLocal(local, value)
       local += 1
       if (args(i).getSize == 2) {
@@ -242,184 +269,10 @@ class NullBooleanInOutAnalysis(val richControlFlow: RichControlFlow,
         frame.setLocal(i, BasicValue.INT_VALUE)
       case FalseValue() =>
         frame.setLocal(i, BasicValue.INT_VALUE)
-      case _ =>
-    }
-
-    val stack = (0 until frame.getStackSize).map(frame.getStack)
-    frame.clearStack()
-
-    // pushing back
-    for (v <- stack) v match {
-      case CallResultValue(tp, _) =>
-        frame.push(new BasicValue(tp))
-      case TrueValue() =>
-        frame.push(BasicValue.INT_VALUE)
-      case FalseValue() =>
-        frame.push(BasicValue.INT_VALUE)
-      case _ =>
-        frame.push(v)
-    }
-    configuration
-  }
-}
-
-class NotNullBooleanInOutAnalysis(val richControlFlow: RichControlFlow,
-                               val paramIndex: Int) extends Analysis[AKey, Value, Configuration, PendingState, Result] {
-  import Utils._
-
-  override val identity: Result = Identity
-  private val methodNode =
-    controlFlow.methodNode
-  private val method = Method(controlFlow.className, methodNode.name, methodNode.desc)
-  private val aKey = AKey(method, InOut(paramIndex, Values.NotNull))
-  val interpreter = Interpreter(Values.NotNull)
-
-  override def stateInstance(curr: PendingState, prev: PendingState): Boolean =
-    curr.isInstanceOf(prev)
-
-  override def confInstance(curr: Configuration, prev: Configuration): Boolean =
-    isInstance(curr, prev)
-
-  override def createStartState(): PendingState =
-    PendingState(0, Configuration(0, createStartFrame()), Nil, false)
-
-  override def combineResults(delta: Result, subResults: List[Result]): Result =
-    subResults.reduce(Result.meet)
-
-  override def mkEquation(result: Result): Equation[AKey, Value] = result match {
-    case Identity =>
-      Equation(aKey, Final(Values.Top))
-    case SolutionWrapper(false, _) =>
-      Equation(aKey, Final(Values.Top))
-    case SolutionWrapper(true, sol) if sol.params.isEmpty =>
-      Equation(aKey, Final(sol.partial.getOrElse(Values.Top)))
-    case SolutionWrapper(true, sol) =>
-      Equation(aKey, Pending[AKey, Value](sol.partial.getOrElse(Values.Bot), sol.params.map(p => Component(false, Set(p)))))
-  }
-
-  var id = 0
-
-  override def processState(state: PendingState): Unit = {
-    val stateIndex = state.index
-    val preConf = state.conf
-    val insnIndex = preConf.insnIndex
-    val loopEnter = dfsTree.loopEnters(insnIndex)
-    val conf: Configuration =
-      if (loopEnter) generalize(preConf) else preConf
-    val history = state.history
-    val pathTaken = state.pathTaken
-    val frame = conf.frame
-    val insnNode = methodNode.instructions.get(insnIndex)
-    val nextHistory = if (loopEnter) conf :: history else history
-    val nextFrame = execute(frame, insnNode)
-    // early return
-    insnNode.getOpcode match {
-      case IRETURN =>
-        val returnValue = popValue(frame)
-        returnValue match {
-          case FalseValue() =>
-            val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(Some(Values.False), Set()))
-            results = results + (stateIndex -> solution)
-            computed = computed.updated(insnIndex, state :: computed(insnIndex))
-          case TrueValue() =>
-            val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(Some(Values.True), Set()))
-            results = results + (stateIndex -> solution)
-            computed = computed.updated(insnIndex, state :: computed(insnIndex))
-          case CallResultValue(_, param) =>
-            val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(None, Set(param)))
-            results = results + (stateIndex -> solution)
-            computed = computed.updated(insnIndex, state :: computed(insnIndex))
-          case _ =>
-            val solution: SolutionWrapper = SolutionWrapper(pathTaken, Dependence(Some(Values.Top), Set()))
-            results = results + (stateIndex -> solution)
-            computed = computed.updated(insnIndex, state :: computed(insnIndex))
-        }
-      case ATHROW =>
-        results = results + (stateIndex -> SolutionWrapper(pathTaken, Dependence(Some(Values.Top), Set())))
-        computed = computed.updated(insnIndex, state :: computed(insnIndex))
-      case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
-        val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-        val nextState = PendingState({
-          id += 1; id
-        }, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
-        pending.push(MakeResult(state, Identity, List(nextState.index)))
-        pending.push(ProceedState(nextState))
-      case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
-        val nextInsnIndex = insnIndex + 1
-        val nextState = PendingState({
-          id += 1; id
-        }, Configuration(nextInsnIndex, nextFrame), nextHistory, true)
-        pending.push(MakeResult(state, Identity, List(nextState.index)))
-        pending.push(ProceedState(nextState))
-      case _ =>
-        val nextInsnIndices = controlFlow.transitions(insnIndex)
-        val nextStates = nextInsnIndices.map {
-          nextInsnIndex =>
-            val nextFrame1 = if (controlFlow.errorTransitions(insnIndex -> nextInsnIndex)) {
-              val handler = new Frame(frame)
-              handler.clearStack()
-              handler.push(new BasicValue(Type.getType("java/lang/Throwable")))
-              handler
-            } else {
-              nextFrame
-            }
-            PendingState({
-              id += 1; id
-            }, Configuration(nextInsnIndex, nextFrame1), nextHistory, pathTaken)
-        }
-        pending.push(MakeResult(state, Identity, nextStates.map(_.index)))
-        pending.pushAll(nextStates.map(s => ProceedState(s)))
-    }
-  }
-
-  private def createStartFrame(): Frame[BasicValue] = {
-    val frame = new Frame[BasicValue](methodNode.maxLocals, methodNode.maxStack)
-    val returnType = Type.getReturnType(methodNode.desc)
-    val returnValue = if (returnType == Type.VOID_TYPE) null else new BasicValue(returnType)
-    frame.setReturn(returnValue)
-
-    val args = Type.getArgumentTypes(methodNode.desc)
-    var local = 0
-    if ((methodNode.access & Opcodes.ACC_STATIC) == 0) {
-      val basicValue = new BasicValue(Type.getObjectType(controlFlow.className))
-      frame.setLocal(local, basicValue)
-      local += 1
-    }
-    for (i <- 0 until args.size) {
-      val value = if (i == paramIndex) new ParamValue(args(i)) else new BasicValue(args(i))
-      frame.setLocal(local, value)
-      local += 1
-      if (args(i).getSize == 2) {
-        frame.setLocal(local, BasicValue.UNINITIALIZED_VALUE)
-        local += 1
-      }
-    }
-    while (local < methodNode.maxLocals) {
-      frame.setLocal(local, BasicValue.UNINITIALIZED_VALUE)
-      local += 1
-    }
-    frame
-  }
-
-  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
-    case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
-      frame
-    case _ =>
-      val nextFrame = new Frame(frame)
-      nextFrame.execute(insnNode, interpreter)
-      nextFrame
-  }
-
-  def generalize(configuration: Configuration): Configuration = {
-    //println("generalizing")
-    val frame = configuration.frame
-    for (i <- 0 until frame.getLocals) frame.getLocal(i) match {
-      case CallResultValue(tp, _) =>
+      case NullValue() =>
+        frame.setLocal(i, BasicValue.UNINITIALIZED_VALUE)
+      case NotNullValue(tp) =>
         frame.setLocal(i, new BasicValue(tp))
-      case TrueValue() =>
-        frame.setLocal(i, BasicValue.INT_VALUE)
-      case FalseValue() =>
-        frame.setLocal(i, BasicValue.INT_VALUE)
       case _ =>
     }
 
@@ -434,13 +287,16 @@ class NotNullBooleanInOutAnalysis(val richControlFlow: RichControlFlow,
         frame.push(BasicValue.INT_VALUE)
       case FalseValue() =>
         frame.push(BasicValue.INT_VALUE)
+      case NullValue() =>
+        frame.push(BasicValue.UNINITIALIZED_VALUE)
+      case NotNullValue(tp) =>
+        frame.push(new BasicValue(tp))
       case _ =>
         frame.push(v)
     }
     configuration
   }
 }
-
 
 object Utils {
   def isInstance(curr: Configuration, prev: Configuration): Boolean = {
@@ -473,8 +329,16 @@ object Utils {
       case FalseValue() => true
       case _ => false
     }
-    case CallResultValue(_, prevParam) => curr match {
-      case CallResultValue(_, currParam) => currParam == prevParam
+    case NullValue() => curr match {
+      case NullValue() => true
+      case _ => false
+    }
+    case NotNullValue(_) => curr match {
+      case NotNullValue(_) => true
+      case _ => false
+    }
+    case CallResultValue(_, prevInters) => curr match {
+      case CallResultValue(_, currInters) => currInters == prevInters
       case _ => false
     }
     case _: BasicValue => true
@@ -485,13 +349,32 @@ object Utils {
 }
 
 
-case class Interpreter(inValue: Value) extends BasicInterpreter {
+case class InOutInterpreter(direction: ADirection) extends BasicInterpreter {
+
   override def newOperation(insn: AbstractInsnNode): BasicValue =
     insn.getOpcode match {
       case ICONST_0 =>
         FalseValue()
       case ICONST_1 =>
         TrueValue()
+      case ACONST_NULL =>
+        NullValue()
+      case LDC =>
+        val cst = insn.asInstanceOf[LdcInsnNode].cst
+        cst match {
+          case tp: Type if tp.getSort == Type.OBJECT || tp.getSort == Type.ARRAY =>
+            NotNullValue(Type.getObjectType("java/lang/Class"))
+          case tp: Type if tp.getSort == Type.METHOD  =>
+            NotNullValue(Type.getObjectType("java/lang/invoke/MethodType"))
+          case s: String =>
+            NotNullValue(Type.getObjectType("java/lang/String"))
+          case h: Handle =>
+            NotNullValue(Type.getObjectType("java/lang/invoke/MethodHandle"))
+          case _ =>
+            super.newOperation(insn)
+        }
+      case NEW =>
+        NotNullValue(Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc))
       case _ =>
         super.newOperation(insn)
     }
@@ -502,29 +385,48 @@ case class Interpreter(inValue: Value) extends BasicInterpreter {
         new ParamValue(Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc))
       case INSTANCEOF if value.isInstanceOf[ParamValue] =>
         InstanceOfCheckValue()
+      case NEWARRAY | ANEWARRAY =>
+        NotNullValue(super.unaryOperation(insn, value).getType)
       case _ =>
         super.unaryOperation(insn, value)
     }
 
-
-  // TODO - here only the first param is taken into account (for simplicity)
+  // this is very dense code, be aware
   override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
     val opCode = insn.getOpcode
     val static = opCode == INVOKESTATIC
     val shift = if (static) 0 else 1
     opCode match {
+      // TODO - it doesn't cover a case when class is final
       case INVOKESTATIC | INVOKESPECIAL =>
         val mNode = insn.asInstanceOf[MethodInsnNode]
-        for (i <- shift until values.size()) {
-          if (values.get(i).isInstanceOf[ParamValue]) {
+        direction match {
+          case InOut(_, inValue) =>
+            var keys = Set[AKey]()
             val method = Method(mNode.owner, mNode.name, mNode.desc)
-            return CallResultValue(
-              Type.getReturnType(insn.asInstanceOf[MethodInsnNode].desc),
-              AKey(method, InOut(i - shift, inValue))
-            )
-          }
+            for (i <- shift until values.size()) {
+              if (values.get(i).isInstanceOf[ParamValue]) {
+                keys = keys + AKey(method, InOut(i - shift, inValue))
+              }
+            }
+            if (Type.getReturnType(mNode.desc).getSort == Type.OBJECT) {
+              keys = keys + AKey(method, Out)
+            }
+            if (keys.nonEmpty) {
+              return CallResultValue(Type.getReturnType(mNode.desc), keys)
+            }
+          case _ =>
+            if (Type.getReturnType(mNode.desc).getSort == Type.OBJECT) {
+              val method = Method(mNode.owner, mNode.name, mNode.desc)
+              return CallResultValue(
+                Type.getReturnType(mNode.desc),
+                Set(AKey(method, Out))
+              )
+            }
         }
         super.naryOperation(insn, values)
+      case MULTIANEWARRAY | INVOKEDYNAMIC =>
+        NotNullValue(super.naryOperation(insn, values).getType)
       case _ =>
         super.naryOperation(insn, values)
     }
