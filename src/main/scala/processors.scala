@@ -10,6 +10,7 @@ import faba.data._
 import faba.engine._
 import faba.source._
 
+@deprecated
 object NotNullParametersProcessor extends Processor {
 
   import faba.parameters._
@@ -105,11 +106,13 @@ object NotNullParametersProcessor extends Processor {
 
 }
 
-object InOutProcessor extends Processor {
+object Main extends Processor {
 
   import faba.contracts._
+  import faba.parameters._
 
-  val solver = new Solver[AKey, Value]()
+  val outSolver = new Solver[AKey, Values.Value]()
+  val inSolver = new Solver[AKey, Nullity.Value]()
 
   override def processClass(classReader: ClassReader): Unit =
     classReader.accept(new ClassVisitor(Opcodes.ASM5) {
@@ -143,16 +146,17 @@ object InOutProcessor extends Processor {
             val argType = argumentTypes(i)
             val sort = argType.getSort
             if (sort == Type.OBJECT || sort == Type.ARRAY) {
-              solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.Null)).analyze())
-              solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.NotNull)).analyze())
+              outSolver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.Null)).analyze())
+              outSolver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.NotNull)).analyze())
+              inSolver.addEquation(new NotNullInAnalysis(RichControlFlow(graph, dfs), i).analyze())
             }
             if (argType == Type.BOOLEAN_TYPE) {
-              solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.False)).analyze())
-              solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.True)).analyze())
+              outSolver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.False)).analyze())
+              outSolver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.True)).analyze())
             }
           }
           if (isReferenceResult) {
-            solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), Out).analyze())
+            outSolver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), Out).analyze())
           }
           added = true
         } else {
@@ -166,16 +170,17 @@ object InOutProcessor extends Processor {
           val argType: Type = argumentTypes(i)
           val sort = argType.getSort
           if (sort == Type.OBJECT || sort == Type.ARRAY) {
-            solver.addEquation(Equation(AKey(method, InOut(i, Values.Null)), Final(Values.Top)))
-            solver.addEquation(Equation(AKey(method, InOut(i, Values.NotNull)), Final(Values.Top)))
+            outSolver.addEquation(Equation(AKey(method, InOut(i, Values.Null)), Final(Values.Top)))
+            outSolver.addEquation(Equation(AKey(method, InOut(i, Values.NotNull)), Final(Values.Top)))
+            inSolver.addEquation(Equation(AKey(method, In(i)), Final(Nullity.Nullable)))
           }
           if (argType == Type.BOOLEAN_TYPE) {
-            solver.addEquation(Equation(AKey(method, InOut(i, Values.False)), Final(Values.Top)))
-            solver.addEquation(Equation(AKey(method, InOut(i, Values.True)), Final(Values.Top)))
+            outSolver.addEquation(Equation(AKey(method, InOut(i, Values.False)), Final(Values.Top)))
+            outSolver.addEquation(Equation(AKey(method, InOut(i, Values.True)), Final(Values.Top)))
           }
         }
         if (isReferenceResult) {
-          solver.addEquation(Equation(AKey(method, Out), Final(Values.Top)))
+          outSolver.addEquation(Equation(AKey(method, Out), Final(Values.Top)))
         }
       }
     }
@@ -194,26 +199,28 @@ object InOutProcessor extends Processor {
     val indexEnd = System.currentTimeMillis()
 
     println("solving ...")
-    val solutions: Map[AKey, Value] =
-      solver.solve().filterNot(_._2 == Values.Top)
+    val outSolutions: Map[AKey, Values.Value] =
+      outSolver.solve().filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
+
+    val inSolutions: Map[AKey, Nullity.Value] =
+      inSolver.solve().filter(_._2 == Nullity.NotNull)
+
     val solvingEnd = System.currentTimeMillis()
 
     println("saving to file ...")
 
     {
       val outs = ArrayBuffer[(String, String)]()
-      for ((aKey, v) <- solutions) {
-        (aKey.direction, v) match {
-          case (InOut(_, Values.Null), Values.False) =>
-            outs.append((aKey.toString.replace('/', '.'), v.toString))
-          case (InOut(_, Values.Null), Values.True) =>
+      for ((aKey, v) <- outSolutions) {
+        aKey.direction match {
+          case InOut(_, Values.Null)=>
             outs.append((aKey.toString.replace('/', '.'), v.toString))
           case _ =>
         }
       }
 
       val outsSorted = outs.sortBy(_._1)
-      printToFile(new File(s"$outFile-null-boolean.txt")) {
+      printToFile(new File(s"$outFile-null.txt")) {
         out =>
           for ((x, y) <- outsSorted) {
             out.println(x)
@@ -225,18 +232,16 @@ object InOutProcessor extends Processor {
 
     {
       val outs = ArrayBuffer[(String, String)]()
-      for ((aKey, v) <- solutions) {
-        (aKey.direction, v) match {
-          case (InOut(_, Values.NotNull), Values.False) =>
-            outs.append((aKey.toString.replace('/', '.'), v.toString))
-          case (InOut(_, Values.NotNull), Values.True) =>
+      for ((aKey, v) <- outSolutions) {
+        aKey.direction match {
+          case InOut(_, Values.NotNull) =>
             outs.append((aKey.toString.replace('/', '.'), v.toString))
           case _ =>
         }
       }
 
       val outsSorted = outs.sortBy(_._1)
-      printToFile(new File(s"$outFile-notnull-boolean.txt")) {
+      printToFile(new File(s"$outFile-notnull.txt")) {
         out =>
           for ((x, y) <- outsSorted) {
             out.println(x)
@@ -248,55 +253,9 @@ object InOutProcessor extends Processor {
 
     {
       val outs = ArrayBuffer[(String, String)]()
-      for ((aKey, v) <- solutions) {
-        (aKey.direction, v) match {
-          case (InOut(_, Values.Null), Values.Null) =>
-            outs.append((aKey.toString.replace('/', '.'), v.toString))
-          case (InOut(_, Values.Null), Values.NotNull) =>
-            outs.append((aKey.toString.replace('/', '.'), v.toString))
-          case _ =>
-        }
-      }
-
-      val outsSorted = outs.sortBy(_._1)
-      printToFile(new File(s"$outFile-null-object.txt")) {
-        out =>
-          for ((x, y) <- outsSorted) {
-            out.println(x)
-            out.println(y)
-            out.println()
-          }
-      }
-    }
-
-    {
-      val outs = ArrayBuffer[(String, String)]()
-      for ((aKey, v) <- solutions) {
-        (aKey.direction, v) match {
-          case (InOut(_, Values.NotNull), Values.Null) =>
-            outs.append((aKey.toString.replace('/', '.'), v.toString))
-          case (InOut(_, Values.NotNull), Values.NotNull) =>
-            outs.append((aKey.toString.replace('/', '.'), v.toString))
-          case _ =>
-        }
-      }
-
-      val outsSorted = outs.sortBy(_._1)
-      printToFile(new File(s"$outFile-notnull-object.txt")) {
-        out =>
-          for ((x, y) <- outsSorted) {
-            out.println(x)
-            out.println(y)
-            out.println()
-          }
-      }
-    }
-
-    {
-      val outs = ArrayBuffer[(String, String)]()
-      for ((aKey, v) <- solutions) {
-        (aKey.direction, v) match {
-          case (InOut(_, Values.False), _) =>
+      for ((aKey, v) <- outSolutions) {
+        aKey.direction match {
+          case InOut(_, Values.False) =>
             outs.append((aKey.toString.replace('/', '.'), v.toString))
           case _ =>
         }
@@ -315,9 +274,9 @@ object InOutProcessor extends Processor {
 
     {
       val outs = ArrayBuffer[(String, String)]()
-      for ((aKey, v) <- solutions) {
-        (aKey.direction, v) match {
-          case (InOut(_, Values.True), _) =>
+      for ((aKey, v) <- outSolutions) {
+        aKey.direction match {
+          case InOut(_, Values.True) =>
             outs.append((aKey.toString.replace('/', '.'), v.toString))
           case _ =>
         }
@@ -336,7 +295,7 @@ object InOutProcessor extends Processor {
 
     {
       val outs = ArrayBuffer[(String, String)]()
-      for ((aKey, v) <- solutions) {
+      for ((aKey, v) <- outSolutions) {
         (aKey.direction, v) match {
           case (Out, Values.NotNull) =>
             outs.append((aKey.toString.replace('/', '.'), v.toString))
@@ -357,6 +316,21 @@ object InOutProcessor extends Processor {
       }
     }
 
+    {
+      val outs = ArrayBuffer[String]()
+      for ((parameter, v) <- inSolutions) {
+        outs.append(parameter.toString.replace('/', '.'))
+      }
+
+      val outsSorted = outs.sorted
+      printToFile(new File(s"$outFile-params.txt")) { out =>
+        for (parameter <- outsSorted) {
+          out.println(parameter)
+        }
+      }
+
+    }
+
     val writingEnd = System.currentTimeMillis()
 
     println("====")
@@ -364,12 +338,12 @@ object InOutProcessor extends Processor {
     println(s"solving took ${(solvingEnd - indexEnd) / 1000.0} sec")
     println(s"saving took ${(writingEnd - solvingEnd) / 1000.0} sec")
 
-    println(s"${solutions.size} contracts")
+    println(s"${outSolutions.size} contracts")
   }
 
   def main(args: Array[String]) {
     if (args.length != 2) {
-      println(s"Usage: faba.InOutProcessor inputJar outputFile")
+      println(s"Usage: faba.Main inputJar outputFile")
     } else {
       process(JarFileSource(new File(args(0))), args(1))
     }
