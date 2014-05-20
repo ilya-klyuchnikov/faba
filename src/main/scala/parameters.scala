@@ -13,8 +13,6 @@ import faba.engine._
 object `package` {
 
   type Id = AKey
-  type Value = Nullity.Value
-
   type SoP = Set[Set[AKey]]
 
   implicit class SopOps(val sop1: SoP) {
@@ -41,7 +39,7 @@ case object NPE extends Result
 case class ConditionalNPE(cnf: SoP) extends Result
 
 object Result {
-  // |, union
+
   def join(r1: Result, r2: Result): Result = (r1, r2) match {
     case (Identity, _) => r2
     case (_, Identity) => r1
@@ -53,7 +51,6 @@ object Result {
     case (ConditionalNPE(e1), ConditionalNPE(e2)) => ConditionalNPE(e1 join e2)
   }
 
-  // &, intersection
   def meet(r1: Result, r2: Result): Result = (r1, r2) match {
     case (Identity, _) => r2
     case (_, Identity) => r1
@@ -103,11 +100,11 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow,
     Result.meet(delta, subResults.reduce(Result.join))
 
   override def mkEquation(result: Result): Equation[Id, Value] = result match {
-    case Identity | Return => Equation(parameter, Final(Nullity.Nullable))
-    case NPE => Equation(parameter, Final(Nullity.NotNull))
+    case Identity | Return => Equation(parameter, Final(Values.Top))
+    case NPE => Equation(parameter, Final(Values.NotNull))
     case ConditionalNPE(cnf) =>
       require(cnf.forall(_.nonEmpty))
-      Equation(parameter, Pending(Nullity.NotNull, cnf.map(p => Component(false, p))))
+      Equation(parameter, Pending(Values.NotNull, cnf.map(p => Component(false, p))))
   }
 
   var id = 0
@@ -125,7 +122,6 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow,
     val (nextFrame, subResult) = execute(frame, insnNode)
 
     if (subResult == NPE) {
-      // pruning
       results = results + (stateIndex -> NPE)
       computed = computed.updated(insnIndex, state :: computed(insnIndex))
     } else insnNode.getOpcode match {
