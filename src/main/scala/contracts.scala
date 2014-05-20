@@ -296,6 +296,8 @@ case class InOutInterpreter(direction: Direction) extends BasicInterpreter {
       case INVOKESTATIC | INVOKESPECIAL =>
         val mNode = insn.asInstanceOf[MethodInsnNode]
         val method = Method(mNode.owner, mNode.name, mNode.desc)
+        val retType = Type.getReturnType(mNode.desc)
+        val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
         direction match {
           case InOut(_, inValue) =>
             var keys = Set[Key]()
@@ -303,12 +305,12 @@ case class InOutInterpreter(direction: Direction) extends BasicInterpreter {
               if (values.get(i).isInstanceOf[ParamValue])
                 keys = keys + Key(method, InOut(i - shift, inValue))
             }
-            if (Type.getReturnType(mNode.desc).getSort == Type.OBJECT)
+            if (isRefRetType)
               keys = keys + Key(method, Out)
             if (keys.nonEmpty)
               return CallResultValue(Type.getReturnType(mNode.desc), keys)
           case _ =>
-            if (Type.getReturnType(mNode.desc).getSort == Type.OBJECT)
+            if (isRefRetType)
               return CallResultValue(Type.getReturnType(mNode.desc), Set(Key(method, Out)))
         }
         super.naryOperation(insn, values)
