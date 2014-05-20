@@ -1,6 +1,6 @@
 package faba.contracts
 
-import org.objectweb.asm.{Handle, Opcodes, Type}
+import org.objectweb.asm.{Handle, Type}
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.tree.analysis.{BasicValue, BasicInterpreter, Frame}
 import org.objectweb.asm.tree._
@@ -10,19 +10,11 @@ import faba.cfg._
 import faba.data._
 import faba.engine._
 
-sealed trait PendingAction
-case class ProceedState(state: State) extends PendingAction
-case class MakeResult(state: State, subIndices: List[Int]) extends PendingAction
-
 class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction) extends Analysis[Result[Key, Value]] {
   type MyResult = Result[Key, Value]
   import Utils._
 
   override val identity = Final(Values.Bot)
-
-  private val methodNode = controlFlow.methodNode
-  private val method = Method(controlFlow.className, methodNode.name, methodNode.desc)
-  private val aKey = Key(method, direction)
 
   private val interpreter = InOutInterpreter(direction)
   private val optIn: Option[Value] = direction match {
@@ -39,12 +31,16 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
 
   override def confInstance(curr: Conf, prev: Conf): Boolean =
     isInstance(curr, prev)
-  override def createStartState(): State =
-    State(0, Conf(0, createStartFrame()), Nil, false)
+
   override def combineResults(delta: MyResult, subResults: List[MyResult]): MyResult =
     subResults.reduce(_ join _)
   override def mkEquation(result: MyResult): Equation[Key, Value] =
       Equation(aKey, result)
+  override def isEarlyResult(res: MyResult): Boolean = res match {
+    case Final(Values.Top)      => true
+    case Pending(Values.Top, _) => true
+    case _                      => false
+  }
 
   var id = 0
 
@@ -53,15 +49,14 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     val preConf = state.conf
     val insnIndex = preConf.insnIndex
     val loopEnter = dfsTree.loopEnters(insnIndex)
-    val conf: Conf =
-      if (loopEnter) generalize(preConf) else preConf
+    val conf = if (loopEnter) generalize(preConf) else preConf
     val history = state.history
     val taken = state.taken
     val frame = conf.frame
     val insnNode = methodNode.instructions.get(insnIndex)
     val nextHistory = if (loopEnter) conf :: history else history
     val nextFrame = execute(frame, insnNode)
-    // TODO early return
+
     insnNode.getOpcode match {
       case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
         popValue(frame) match {
@@ -85,14 +80,10 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             results = results + (stateIndex -> Pending[Key, Value](Values.Bot, Set(Component(false, keys))))
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
           case _ =>
-            // TODO - may return Top right now
-            results = results + (stateIndex -> Final(Values.Top))
-            computed = computed.updated(insnIndex, state :: computed(insnIndex))
+            earlyResult = Some(Final(Values.Top))
         }
       case ATHROW =>
-        // TODO - really, this may be Values.bot, discussable
-        results = results + (stateIndex -> Final(Values.Top))
-        computed = computed.updated(insnIndex, state :: computed(insnIndex))
+        earlyResult = Some(Final(Values.Top))
       case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
         val nextInsnIndex = direction match {
           case InOut(_, Values.Null) =>
@@ -161,40 +152,6 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
         pending.push(MakeResult(state, identity, nextStates.map(_.index)))
         pending.pushAll(nextStates.map(s => ProceedState(s)))
     }
-  }
-
-  private def createStartFrame(): Frame[BasicValue] = {
-    val frame = new Frame[BasicValue](methodNode.maxLocals, methodNode.maxStack)
-    val returnType = Type.getReturnType(methodNode.desc)
-    val returnValue = if (returnType == Type.VOID_TYPE) null else new BasicValue(returnType)
-    frame.setReturn(returnValue)
-
-    val args = Type.getArgumentTypes(methodNode.desc)
-    var local = 0
-    if ((methodNode.access & Opcodes.ACC_STATIC) == 0) {
-      val basicValue = new BasicValue(Type.getObjectType(controlFlow.className))
-      frame.setLocal(local, basicValue)
-      local += 1
-    }
-    for (i <- 0 until args.size) {
-      val value = direction match {
-        case InOut(`i`, _) =>
-          new ParamValue(args(i))
-        case _ =>
-          new BasicValue(args(i))
-      }
-      frame.setLocal(local, value)
-      local += 1
-      if (args(i).getSize == 2) {
-        frame.setLocal(local, BasicValue.UNINITIALIZED_VALUE)
-        local += 1
-      }
-    }
-    while (local < methodNode.maxLocals) {
-      frame.setLocal(local, BasicValue.UNINITIALIZED_VALUE)
-      local += 1
-    }
-    frame
   }
 
   private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
@@ -289,8 +246,6 @@ object Utils {
     case _: BasicValue => true
   }
 
-  def popValue(frame: Frame[BasicValue]): BasicValue =
-    frame.getStack(frame.getStackSize - 1)
 }
 
 case class InOutInterpreter(direction: Direction) extends BasicInterpreter {

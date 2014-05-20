@@ -24,7 +24,9 @@ object Main extends Processor {
   var trueTime: Long = 0
   var nullTime: Long = 0
   var notNullTime: Long = 0
-
+  var cfgTime: Long = 0
+  var reducibleTime: Long = 0
+  var dfsTime: Long = 0
 
   override def processClass(classReader: ClassReader): Unit =
     classReader.accept(new ClassVisitor(Opcodes.ASM5) {
@@ -45,11 +47,32 @@ object Main extends Processor {
     System.currentTimeMillis() - start
   }
 
+  def buildCFG(className: String, methodNode: MethodNode) = {
+    val start = System.currentTimeMillis()
+    val result = cfg.buildControlFlowGraph(className, methodNode)
+    cfgTime += System.currentTimeMillis() - start
+    result
+  }
+
+  def isReducible(graph: ControlFlowGraph, dfs: DFSTree): Boolean = {
+    val start = System.currentTimeMillis()
+    val result = cfg.reducible(graph, dfs)
+    reducibleTime += System.currentTimeMillis() - start
+    result
+  }
+
+  def buildDFSTree(transitions: Array[List[Int]]): DFSTree = {
+    val start = System.currentTimeMillis()
+    val result = cfg.buildDFSTree(transitions)
+    dfsTime += System.currentTimeMillis() - start
+    result
+  }
+
   def processMethod(className: String, methodNode: MethodNode) {
     val method = Method(className, methodNode.name, methodNode.desc)
     extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
 
-    val graph = cfg.buildControlFlowGraph(className, methodNode)
+    val graph = buildCFG(className, methodNode)
 
     var added = false
     val argumentTypes = Type.getArgumentTypes(methodNode.desc)
@@ -60,14 +83,14 @@ object Main extends Processor {
     val isBooleanResult = Type.BOOLEAN_TYPE == resultType
 
     if (graph.transitions.nonEmpty)  {
-      val dfs = cfg.buildDFSTree(graph.transitions)
-      val reducible = dfs.back.isEmpty || cfg.reducible(graph, dfs)
+      val dfs = buildDFSTree(graph.transitions)
+      val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
       if (reducible) {
         for (i <- argumentTypes.indices) {
           val argType = argumentTypes(i)
           val sort = argType.getSort
           if (sort == Type.OBJECT || sort == Type.ARRAY) {
-            paramsTime += time(solver.addEquation(new NotNullInAnalysis(RichControlFlow(graph, dfs), i).analyze()))
+            paramsTime += time(solver.addEquation(new NotNullInAnalysis(RichControlFlow(graph, dfs), In(i)).analyze()))
           }
           if (isReferenceResult || isBooleanResult) {
             if (sort == Type.OBJECT || sort == Type.ARRAY) {
@@ -149,12 +172,15 @@ object Main extends Processor {
     println(s"saving took ${(writingEnd - solvingEnd) / 1000.0} sec")
     println(s"${solutions.size} contracts")
     println("INDEXING TIME")
-    println(s"params  ${paramsTime / 1000.0} sec")
-    println(s"results ${outTime / 1000.0} sec")
-    println(s"false   ${falseTime / 1000.0} sec")
-    println(s"true    ${trueTime / 1000.0} sec")
-    println(s"null    ${nullTime / 1000.0} sec")
-    println(s"!null   ${notNullTime / 1000.0} sec")
+    println(s"params      ${paramsTime / 1000.0} sec")
+    println(s"results     ${outTime / 1000.0} sec")
+    println(s"false       ${falseTime / 1000.0} sec")
+    println(s"true        ${trueTime / 1000.0} sec")
+    println(s"null        ${nullTime / 1000.0} sec")
+    println(s"!null       ${notNullTime / 1000.0} sec")
+    println(s"cfg         ${cfgTime / 1000.0} sec")
+    println(s"dfs         ${dfsTime / 1000.0} sec")
+    println(s"reducible   ${reducibleTime / 1000.0} sec")
   }
 
   def main(args: Array[String]) {

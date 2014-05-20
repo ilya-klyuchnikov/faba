@@ -1,6 +1,6 @@
 package faba.parameters
 
-import org.objectweb.asm.{Opcodes, Type}
+import org.objectweb.asm.Type
 import org.objectweb.asm.tree.analysis.{BasicInterpreter, Frame, BasicValue}
 import org.objectweb.asm.tree.{MethodInsnNode, TypeInsnNode, JumpInsnNode, AbstractInsnNode}
 import org.objectweb.asm.Opcodes._
@@ -12,7 +12,6 @@ import faba.engine._
 
 object `package` {
 
-  type Id = Key
   type SoP = Set[Set[Key]]
 
   implicit class SopOps(val sop1: SoP) {
@@ -59,18 +58,11 @@ object Result {
   }
 }
 
-sealed trait PendingAction
-case class ProceedState(state: State) extends PendingAction
-case class MakeResult(state: State, subResult: Result, subIndices: List[Int]) extends PendingAction
-
-class NotNullInAnalysis(val richControlFlow: RichControlFlow, val paramIndex: Int) extends Analysis[Result] {
+class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction) extends Analysis[Result] {
   import Utils._
 
   override val identity: Result = Identity
-  private val methodNode =
-    controlFlow.methodNode
-  private val method = Method(controlFlow.className, methodNode.name, methodNode.desc)
-  private val parameter = Key(method, In(paramIndex))
+  private val parameter = Key(method, direction)
 
   override def stateInstance(curr: State, prev: State): Boolean = {
     curr.taken == prev.taken &&
@@ -82,19 +74,19 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val paramIndex: In
   override def confInstance(curr: Conf, prev: Conf): Boolean =
     isInstance(curr, prev)
 
-  override def createStartState(): State =
-    State(0, Conf(0, createStartFrame()), Nil, false)
-
   override def combineResults(delta: Result, subResults: List[Result]): Result =
     Result.meet(delta, subResults.reduce(Result.join))
 
-  override def mkEquation(result: Result): Equation[Id, Value] = result match {
+  override def mkEquation(result: Result): Equation[Key, Value] = result match {
     case Identity | Return => Equation(parameter, Final(Values.Top))
     case NPE => Equation(parameter, Final(Values.NotNull))
     case ConditionalNPE(cnf) =>
       require(cnf.forall(_.nonEmpty))
       Equation(parameter, Pending(Values.NotNull, cnf.map(p => Component(false, p))))
   }
+
+  override def isEarlyResult(res: Result): Boolean =
+    res == Return
 
   var id = 0
 
@@ -115,8 +107,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val paramIndex: In
       computed = computed.updated(insnIndex, state :: computed(insnIndex))
     } else insnNode.getOpcode match {
       case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
-        results = results + (stateIndex -> Return)
-        computed = computed.updated(insnIndex, state :: computed(insnIndex))
+        earlyResult = Some(Return)
       case ATHROW if taken =>
         results = results + (stateIndex -> NPE)
         computed = computed.updated(insnIndex, state :: computed(insnIndex))
@@ -133,12 +124,12 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val paramIndex: In
         val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true)
         pending.push(MakeResult(state, subResult, List(nextState.index)))
         pending.push(ProceedState(nextState))
-      case IFEQ if popValue(frame) == InstanceOfCheckValue =>
+      case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
         val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
         val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true)
         pending.push(MakeResult(state, subResult, List(nextState.index)))
         pending.push(ProceedState(nextState))
-      case IFNE if popValue(frame) == InstanceOfCheckValue =>
+      case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
         val nextInsnIndex = insnIndex + 1
         val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true)
         pending.push(MakeResult(state, subResult, List(nextState.index)))
@@ -160,35 +151,6 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val paramIndex: In
         pending.push(MakeResult(state, subResult, nextStates.map(_.index)))
         pending.pushAll(nextStates.map(s => ProceedState(s)))
     }
-  }
-
-  private def createStartFrame(): Frame[BasicValue] = {
-    val frame = new Frame[BasicValue](methodNode.maxLocals, methodNode.maxStack)
-    val returnType = Type.getReturnType(methodNode.desc)
-    val returnValue = if (returnType == Type.VOID_TYPE) null else new BasicValue(returnType)
-    frame.setReturn(returnValue)
-
-    val args = Type.getArgumentTypes(methodNode.desc)
-    var local = 0
-    if ((methodNode.access & Opcodes.ACC_STATIC) == 0) {
-      val basicValue = new BasicValue(Type.getObjectType(controlFlow.className))
-      frame.setLocal(local, basicValue)
-      local += 1
-    }
-    for (i <- 0 until args.size) {
-      val value = if (i == paramIndex) new ParamValue(args(i)) else new BasicValue(args(i))
-      frame.setLocal(local, value)
-      local += 1
-      if (args(i).getSize == 2) {
-        frame.setLocal(local, BasicValue.UNINITIALIZED_VALUE)
-        local += 1
-      }
-    }
-    while (local < methodNode.maxLocals) {
-      frame.setLocal(local, BasicValue.UNINITIALIZED_VALUE)
-      local += 1
-    }
-    frame
   }
 
   private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
@@ -230,8 +192,6 @@ object Utils {
       true
   }
 
-  def popValue(frame: Frame[BasicValue]): BasicValue =
-    frame.getStack(frame.getStackSize - 1)
 }
 
 sealed trait ParamUsage {

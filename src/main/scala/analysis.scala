@@ -7,7 +7,7 @@ import faba.cfg._
 import faba.data._
 import faba.engine._
 import org.objectweb.asm.tree.analysis.{BasicValue, Frame}
-import org.objectweb.asm.Type
+import org.objectweb.asm.{Opcodes, Type}
 
 case class ParamValue(tp: Type) extends BasicValue(tp)
 case class InstanceOfCheckValue() extends BasicValue(Type.INT_TYPE)
@@ -30,10 +30,14 @@ abstract class Analysis[Res] {
   case class MakeResult(state: State, subResult: Res, indices: List[Int]) extends PendingAction
 
   val richControlFlow: RichControlFlow
+  val direction: Direction
   val controlFlow = richControlFlow.controlFlow
+  val methodNode = controlFlow.methodNode
+  val method = Method(controlFlow.className, methodNode.name, methodNode.desc)
   val dfsTree = richControlFlow.dfsTree
+  val aKey = Key(method, direction)
 
-  def createStartState(): State
+  def createStartState(): State = State(0, Conf(0, createStartFrame()), Nil, false)
   def combineResults(delta: Res, subResults: List[Res]): Res
   def mkEquation(result: Res): Equation[Key, Value]
 
@@ -42,6 +46,7 @@ abstract class Analysis[Res] {
   def identity: Res
 
   def processState(state: State): Unit
+  def isEarlyResult(res: Res): Boolean
 
   val pending = mutable.Stack[PendingAction]()
   // the key is insnIndex
@@ -49,15 +54,21 @@ abstract class Analysis[Res] {
   // the key is stateIndex
   var results = IntMap[Res]()
 
-  def analyze(): Equation[Key, Value] = {
+  var earlyResult: Option[Res] = None
+
+  final def analyze(): Equation[Key, Value] = {
     pending.push(ProceedState(createStartState()))
 
-    while (pending.nonEmpty) pending.pop() match {
+    while (pending.nonEmpty && earlyResult.isEmpty) pending.pop() match {
       case MakeResult(state, delta, subIndices) =>
         val result = combineResults(delta, subIndices.map(results))
-        val insnIndex = state.insnIndex
-        results = results + (state.index -> result)
-        computed = computed.updated(insnIndex, state :: computed(insnIndex))
+        if (isEarlyResult(result)) {
+          earlyResult = Some(result)
+        } else {
+          val insnIndex = state.insnIndex
+          results = results + (state.index -> result)
+          computed = computed.updated(insnIndex, state :: computed(insnIndex))
+        }
       case ProceedState(state) =>
         val stateIndex = state.index
         val insnIndex = state.insnIndex
@@ -78,6 +89,45 @@ abstract class Analysis[Res] {
         }
     }
 
-    mkEquation(results(0))
+    mkEquation(earlyResult.getOrElse(results(0)))
   }
+
+  final protected def createStartFrame(): Frame[BasicValue] = {
+    val frame = new Frame[BasicValue](methodNode.maxLocals, methodNode.maxStack)
+    val returnType = Type.getReturnType(methodNode.desc)
+    val returnValue = if (returnType == Type.VOID_TYPE) null else new BasicValue(returnType)
+    frame.setReturn(returnValue)
+
+    val args = Type.getArgumentTypes(methodNode.desc)
+    var local = 0
+    if ((methodNode.access & Opcodes.ACC_STATIC) == 0) {
+      val basicValue = new BasicValue(Type.getObjectType(controlFlow.className))
+      frame.setLocal(local, basicValue)
+      local += 1
+    }
+    for (i <- 0 until args.size) {
+      val value = direction match {
+        case InOut(`i`, _) =>
+          new ParamValue(args(i))
+        case In(`i`) =>
+          new ParamValue(args(i))
+        case _ =>
+          new BasicValue(args(i))
+      }
+      frame.setLocal(local, value)
+      local += 1
+      if (args(i).getSize == 2) {
+        frame.setLocal(local, BasicValue.UNINITIALIZED_VALUE)
+        local += 1
+      }
+    }
+    while (local < methodNode.maxLocals) {
+      frame.setLocal(local, BasicValue.UNINITIALIZED_VALUE)
+      local += 1
+    }
+    frame
+  }
+
+  final def popValue(frame: Frame[BasicValue]): BasicValue =
+    frame.getStack(frame.getStackSize - 1)
 }
