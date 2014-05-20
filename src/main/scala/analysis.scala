@@ -43,7 +43,6 @@ abstract class Analysis[Id, Val:Lattice, Conf, State<:AState[Conf], Res] {
     IntMap[Res]()
 
   def analyze(): Equation[Id, Val] = {
-
     pending.push(ProceedState(createStartState()))
 
     while (pending.nonEmpty) pending.pop() match {
@@ -62,15 +61,12 @@ abstract class Analysis[Id, Val:Lattice, Conf, State<:AState[Conf], Res] {
         val fold = loopEnter && history.exists(prevConf => confInstance(conf, prevConf))
 
         if (fold) {
-          // folding
           results = results + (stateIndex -> identity)
           computed = computed.updated(insnIndex, state :: computed(insnIndex))
         } else computed(insnIndex).find(prevState => stateInstance(state, prevState)) match {
           case Some(ps) =>
-            // sharing
             results = results + (stateIndex -> results(ps.stateIndex))
           case None =>
-            // driving
             processState(state)
         }
     }
