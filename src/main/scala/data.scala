@@ -21,12 +21,12 @@ case class Method(internalClassName: String, methodName: String, methodDesc: Str
     }
 }
 
-sealed trait ADirection
-case class In(paramIndex: Int) extends ADirection
-case class InOut(paramIndex: Int, in: Value) extends ADirection
-case object Out extends ADirection
+sealed trait Direction
+case class In(paramIndex: Int) extends Direction
+case class InOut(paramIndex: Int, in: Value) extends Direction
+case object Out extends Direction
 
-case class AKey(method: Method, direction: ADirection) {
+case class Key(method: Method, direction: Direction) {
   override def toString = direction match {
     case Out => s"$method"
     case In(index) => s"$method #$index"
@@ -45,7 +45,7 @@ object `package` {
 
 object XmlUtils {
 
-  def toXmlAnnotations(solutions: Iterable[(AKey, Value)], extras: Map[Method, MethodExtra]): List[Elem] = {
+  def toXmlAnnotations(solutions: Iterable[(Key, Value)], extras: Map[Method, MethodExtra]): List[Elem] = {
     var annotations = Map[String, List[Elem]]()
     val inOuts = mutable.HashMap[Method, List[(InOut, Value)]]()
     for ((key, value) <- solutions) {

@@ -15,8 +15,18 @@ object Main extends Processor {
   import faba.contracts._
   import faba.parameters._
 
-  val solver = new Solver[AKey, Values.Value]()
+  val solver = new Solver[Key, Values.Value]()
   var extras = Map[Method, MethodExtra]()
+
+  var paramsTime: Long = 0
+  var outTime: Long = 0
+  var falseTime: Long = 0
+  var trueTime: Long = 0
+  var nullTime: Long = 0
+  var notNullTime: Long = 0
+  var cfgTime: Long = 0
+  var reducibleTime: Long = 0
+  var dfsTime: Long = 0
 
   override def processClass(classReader: ClassReader): Unit =
     classReader.accept(new ClassVisitor(Opcodes.ASM5) {
@@ -31,11 +41,38 @@ object Main extends Processor {
       }
     }, 0)
 
+  def time(f: => Unit): Long = {
+    val start = System.currentTimeMillis()
+    f
+    System.currentTimeMillis() - start
+  }
+
+  def buildCFG(className: String, methodNode: MethodNode) = {
+    val start = System.currentTimeMillis()
+    val result = cfg.buildControlFlowGraph(className, methodNode)
+    cfgTime += System.currentTimeMillis() - start
+    result
+  }
+
+  def isReducible(graph: ControlFlowGraph, dfs: DFSTree): Boolean = {
+    val start = System.currentTimeMillis()
+    val result = cfg.reducible(graph, dfs)
+    reducibleTime += System.currentTimeMillis() - start
+    result
+  }
+
+  def buildDFSTree(transitions: Array[List[Int]]): DFSTree = {
+    val start = System.currentTimeMillis()
+    val result = cfg.buildDFSTree(transitions)
+    dfsTime += System.currentTimeMillis() - start
+    result
+  }
+
   def processMethod(className: String, methodNode: MethodNode) {
     val method = Method(className, methodNode.name, methodNode.desc)
     extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
 
-    val graph = cfg.buildControlFlowGraph(className, methodNode)
+    val graph = buildCFG(className, methodNode)
 
     var added = false
     val argumentTypes = Type.getArgumentTypes(methodNode.desc)
@@ -46,28 +83,28 @@ object Main extends Processor {
     val isBooleanResult = Type.BOOLEAN_TYPE == resultType
 
     if (graph.transitions.nonEmpty)  {
-      val dfs = cfg.buildDFSTree(graph.transitions)
-      val reducible = dfs.back.isEmpty || cfg.reducible(graph, dfs)
+      val dfs = buildDFSTree(graph.transitions)
+      val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
       if (reducible) {
         for (i <- argumentTypes.indices) {
           val argType = argumentTypes(i)
           val sort = argType.getSort
           if (sort == Type.OBJECT || sort == Type.ARRAY) {
-            solver.addEquation(new NotNullInAnalysis(RichControlFlow(graph, dfs), i).analyze())
+            paramsTime += time(solver.addEquation(new NotNullInAnalysis(RichControlFlow(graph, dfs), In(i)).analyze()))
           }
           if (isReferenceResult || isBooleanResult) {
             if (sort == Type.OBJECT || sort == Type.ARRAY) {
-              solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.Null)).analyze())
-              solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.NotNull)).analyze())
+              nullTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.Null)).analyze()))
+              notNullTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.NotNull)).analyze()))
             }
             if (argType == Type.BOOLEAN_TYPE) {
-              solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.False)).analyze())
-              solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.True)).analyze())
+              falseTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.False)).analyze()))
+              trueTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.True)).analyze()))
             }
           }
         }
         if (isReferenceResult) {
-          solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), Out).analyze())
+          outTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), Out).analyze()))
         }
         added = true
       } else {
@@ -81,17 +118,17 @@ object Main extends Processor {
         val argType: Type = argumentTypes(i)
         val sort = argType.getSort
         if (sort == Type.OBJECT || sort == Type.ARRAY) {
-          solver.addEquation(Equation(AKey(method, InOut(i, Values.Null)), Final(Values.Top)))
-          solver.addEquation(Equation(AKey(method, InOut(i, Values.NotNull)), Final(Values.Top)))
-          solver.addEquation(Equation(AKey(method, In(i)), Final(Values.Top)))
+          solver.addEquation(Equation(Key(method, InOut(i, Values.Null)), Final(Values.Top)))
+          solver.addEquation(Equation(Key(method, InOut(i, Values.NotNull)), Final(Values.Top)))
+          solver.addEquation(Equation(Key(method, In(i)), Final(Values.Top)))
         }
         if (argType == Type.BOOLEAN_TYPE) {
-          solver.addEquation(Equation(AKey(method, InOut(i, Values.False)), Final(Values.Top)))
-          solver.addEquation(Equation(AKey(method, InOut(i, Values.True)), Final(Values.Top)))
+          solver.addEquation(Equation(Key(method, InOut(i, Values.False)), Final(Values.Top)))
+          solver.addEquation(Equation(Key(method, InOut(i, Values.True)), Final(Values.Top)))
         }
       }
       if (isReferenceResult) {
-        solver.addEquation(Equation(AKey(method, Out), Final(Values.Top)))
+        solver.addEquation(Equation(Key(method, Out), Final(Values.Top)))
       }
     }
   }
@@ -111,12 +148,12 @@ object Main extends Processor {
     val indexEnd = System.currentTimeMillis()
 
     println("solving ...")
-    val solutions: Map[AKey, Values.Value] =
+    val solutions: Map[Key, Values.Value] =
       solver.solve().filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
     val solvingEnd = System.currentTimeMillis()
     println("saving to file ...")
 
-    val byPackage: Map[String, Map[AKey, Values.Value]] =
+    val byPackage: Map[String, Map[Key, Values.Value]] =
       solutions.groupBy(_._1.method.internalPackageName)
 
     for ((pkg, solution) <- byPackage) {
@@ -133,8 +170,17 @@ object Main extends Processor {
     println(s"indexing took ${(indexEnd - indexStart) / 1000.0} sec")
     println(s"solving took ${(solvingEnd - indexEnd) / 1000.0} sec")
     println(s"saving took ${(writingEnd - solvingEnd) / 1000.0} sec")
-
     println(s"${solutions.size} contracts")
+    println("INDEXING TIME")
+    println(s"params      ${paramsTime / 1000.0} sec")
+    println(s"results     ${outTime / 1000.0} sec")
+    println(s"false       ${falseTime / 1000.0} sec")
+    println(s"true        ${trueTime / 1000.0} sec")
+    println(s"null        ${nullTime / 1000.0} sec")
+    println(s"!null       ${notNullTime / 1000.0} sec")
+    println(s"cfg         ${cfgTime / 1000.0} sec")
+    println(s"dfs         ${dfsTime / 1000.0} sec")
+    println(s"reducible   ${reducibleTime / 1000.0} sec")
   }
 
   def main(args: Array[String]) {
