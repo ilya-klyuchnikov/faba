@@ -1,19 +1,29 @@
 package faba.analysis
 
 import scala.collection.mutable
-
-import faba.cfg._
-import faba.engine._
 import scala.collection.immutable.IntMap
 
-trait AState[C] {
-  val stateIndex: Int
-  val insnIndex: Int
-  val conf: C
-  val history: List[C]
+import faba.cfg._
+import faba.data._
+import faba.engine._
+import org.objectweb.asm.tree.analysis.{BasicValue, Frame}
+import org.objectweb.asm.Type
+
+case class ParamValue(tp: Type) extends BasicValue(tp)
+case class InstanceOfCheckValue() extends BasicValue(Type.INT_TYPE)
+case class TrueValue() extends BasicValue(Type.INT_TYPE)
+case class FalseValue() extends BasicValue(Type.INT_TYPE)
+case class NullValue() extends BasicValue(Type.getObjectType("null"))
+case class NotNullValue(tp: Type) extends BasicValue(tp)
+case class CallResultValue(tp: Type, inters: Set[Key]) extends BasicValue(tp)
+
+case class Conf(insnIndex: Int, frame: Frame[BasicValue])
+
+case class State(index: Int, conf: Conf, history: List[Conf], taken: Boolean) {
+  val insnIndex: Int = conf.insnIndex
 }
 
-abstract class Analysis[Id, Val:Lattice, Conf, State<:AState[Conf], Res] {
+abstract class Analysis[Res] {
 
   sealed trait PendingAction
   case class ProceedState(state: State) extends PendingAction
@@ -25,7 +35,7 @@ abstract class Analysis[Id, Val:Lattice, Conf, State<:AState[Conf], Res] {
 
   def createStartState(): State
   def combineResults(delta: Res, subResults: List[Res]): Res
-  def mkEquation(result: Res): Equation[Id, Val]
+  def mkEquation(result: Res): Equation[Key, Value]
 
   def confInstance(curr: Conf, prev: Conf): Boolean
   def stateInstance(curr: State, prev: State): Boolean
@@ -33,26 +43,23 @@ abstract class Analysis[Id, Val:Lattice, Conf, State<:AState[Conf], Res] {
 
   def processState(state: State): Unit
 
-  val pending =
-    mutable.Stack[PendingAction]()
+  val pending = mutable.Stack[PendingAction]()
   // the key is insnIndex
-  var computed =
-    IntMap[List[State]]().withDefaultValue(Nil)
+  var computed = IntMap[List[State]]().withDefaultValue(Nil)
   // the key is stateIndex
-  var results =
-    IntMap[Res]()
+  var results = IntMap[Res]()
 
-  def analyze(): Equation[Id, Val] = {
+  def analyze(): Equation[Key, Value] = {
     pending.push(ProceedState(createStartState()))
 
     while (pending.nonEmpty) pending.pop() match {
       case MakeResult(state, delta, subIndices) =>
         val result = combineResults(delta, subIndices.map(results))
         val insnIndex = state.insnIndex
-        results = results + (state.stateIndex -> result)
+        results = results + (state.index -> result)
         computed = computed.updated(insnIndex, state :: computed(insnIndex))
       case ProceedState(state) =>
-        val stateIndex = state.stateIndex
+        val stateIndex = state.index
         val insnIndex = state.insnIndex
         val conf = state.conf
         val history = state.history
@@ -65,7 +72,7 @@ abstract class Analysis[Id, Val:Lattice, Conf, State<:AState[Conf], Res] {
           computed = computed.updated(insnIndex, state :: computed(insnIndex))
         } else computed(insnIndex).find(prevState => stateInstance(state, prevState)) match {
           case Some(ps) =>
-            results = results + (stateIndex -> results(ps.stateIndex))
+            results = results + (stateIndex -> results(ps.index))
           case None =>
             processState(state)
         }
