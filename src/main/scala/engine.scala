@@ -117,15 +117,10 @@ final class Solver[Id, Val:Lattice] {
   val top = implicitly[Lattice[Val]].top
   val bot = implicitly[Lattice[Val]].bot
 
-  private val dependencies =
-    mutable.HashMap[Id, Set[Id]]()
-
-  private val pending =
-    mutable.HashMap[Id, Pending[Id, Val]]()
-  private val moving =
-    mutable.Queue[Solution]()
-  private var solved =
-    Map[Id, Val]()
+  private val dependencies = mutable.HashMap[Id, Set[Id]]()
+  private val pending = mutable.HashMap[Id, Pending[Id, Val]]()
+  private val moving = mutable.Queue[Solution]()
+  private var solved = Map[Id, Val]()
 
   def this(equations: List[Equation[Id, Val]]) {
     this()

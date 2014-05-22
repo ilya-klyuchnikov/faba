@@ -2,13 +2,13 @@ package faba
 
 import org.objectweb.asm.{MethodVisitor, Opcodes, ClassVisitor, ClassReader, Type}
 import org.objectweb.asm.tree.MethodNode
-import java.io.File
+import _root_.java.io.{PrintWriter, File}
 
 import faba.cfg._
 import faba.data._
 import faba.engine._
 import faba.source._
-import scala.xml.{PrettyPrinter}
+import scala.xml.PrettyPrinter
 
 object Main extends Processor {
 
@@ -133,9 +133,9 @@ object Main extends Processor {
     }
   }
 
-  def printToFile(f: java.io.File)(op: java.io.PrintWriter => Unit) {
+  def printToFile(f: File)(op: PrintWriter => Unit) {
     f.getParentFile.mkdirs()
-    val p = new java.io.PrintWriter(f)
+    val p = new PrintWriter(f)
     try { op(p) } finally { p.close() }
   }
 

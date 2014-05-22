@@ -10,6 +10,8 @@ object `package` {
   def buildControlFlowGraph(className: String, methodNode: MethodNode): ControlFlowGraph =
     ControlFlowBuilder(className, methodNode).buildCFG()
 
+  // Graphs: Theory and Algorithms. by K. Thulasiraman , M. N. S. Swamy (1992)
+  // 11.7.2 DFS of a directed graph
   def buildDFSTree(transitions: Array[List[Int]]): DFSTree = {
     type Edge = (Int, Int)
 
@@ -66,6 +68,8 @@ object `package` {
     DFSTree(preOrder, postOrder, tree, forward, back, cross, loopEnters)
   }
 
+  // Tarjan. Testing flow graph reducibility.
+  // Journal of Computer and System Sciences 9.3 (1974): 355-365.
   def reducible(cfg: ControlFlowGraph, dfs: DFSTree): Boolean = {
     val size = cfg.transitions.length
 
@@ -100,25 +104,13 @@ object `package` {
   }
 }
 
-/**
- * Control flow graph specialized for bytecode
- *
- * @param className - internal class name
- * @param methodNode - method node corresponding to this CFG
- * @param transitions - all transitions
- * @param errorTransitions - marker set for error transitions
- */
 case class ControlFlowGraph(className: String,
                             methodNode: MethodNode,
                             transitions: Array[List[Int]],
                             errorTransitions: Set[(Int, Int)])
 
-
 case class RichControlFlow(controlFlow: ControlFlowGraph,
                            dfsTree: DFSTree)
-
-
-
 
 private case class ControlFlowBuilder(className: String,
                                       methodNode: MethodNode) extends Analyzer(new BasicInterpreter()) {
