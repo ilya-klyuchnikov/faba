@@ -12,7 +12,6 @@ import faba.engine._
 
 class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction) extends Analysis[Result[Key, Value]] {
   type MyResult = Result[Key, Value]
-  import Utils._
 
   override val identity = Final(Values.Bot)
 
@@ -22,20 +21,12 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     case _ => None
   }
 
-  override def stateInstance(curr: State, prev: State): Boolean = {
-    curr.taken == prev.taken &&
-      Utils.isInstance(curr.conf, prev.conf) &&
-      curr.history.size == prev.history.size &&
-      (curr.history, prev.history).zipped.forall(Utils.isInstance)
-  }
-
-  override def confInstance(curr: Conf, prev: Conf): Boolean =
-    isInstance(curr, prev)
-
   override def combineResults(delta: MyResult, subResults: List[MyResult]): MyResult =
     subResults.reduce(_ join _)
+
   override def mkEquation(result: MyResult): Equation[Key, Value] =
       Equation(aKey, result)
+
   override def isEarlyResult(res: MyResult): Boolean = res match {
     case Final(Values.Top)      => true
     case Pending(Values.Top, _) => true
@@ -198,54 +189,6 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     }
     configuration
   }
-}
-
-object Utils {
-  def isInstance(curr: Conf, prev: Conf): Boolean = {
-    if (curr.insnIndex != prev.insnIndex) {
-      return false
-    }
-    val currFr = curr.frame
-    val prevFr = prev.frame
-    for (i <- 0 until currFr.getLocals if !isInstance(currFr.getLocal(i), prevFr.getLocal(i)))
-      return false
-    for (i <- 0 until currFr.getStackSize if !isInstance(currFr.getStack(i), prevFr.getStack(i)))
-      return false
-    true
-  }
-
-  def isInstance(curr: BasicValue, prev: BasicValue): Boolean = prev match {
-    case (_: ParamValue) => curr match {
-      case _: ParamValue => true
-      case _ => false
-    }
-    case InstanceOfCheckValue() => curr match {
-      case InstanceOfCheckValue() => true
-      case _ => false
-    }
-    case TrueValue() => curr match {
-      case TrueValue() => true
-      case _ => false
-    }
-    case FalseValue() => curr match {
-      case FalseValue() => true
-      case _ => false
-    }
-    case NullValue() => curr match {
-      case NullValue() => true
-      case _ => false
-    }
-    case NotNullValue(_) => curr match {
-      case NotNullValue(_) => true
-      case _ => false
-    }
-    case CallResultValue(_, prevInters) => curr match {
-      case CallResultValue(_, currInters) => currInters == prevInters
-      case _ => false
-    }
-    case _: BasicValue => true
-  }
-
 }
 
 case class InOutInterpreter(direction: Direction) extends BasicInterpreter {

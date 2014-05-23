@@ -59,20 +59,9 @@ object Result {
 }
 
 class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction) extends Analysis[Result] {
-  import Utils._
 
   override val identity: Result = Identity
   private val parameter = Key(method, direction)
-
-  override def stateInstance(curr: State, prev: State): Boolean = {
-    curr.taken == prev.taken &&
-      Utils.isInstance(curr.conf, prev.conf) &&
-      curr.history.size == prev.history.size &&
-      (curr.history, prev.history).zipped.forall(Utils.isInstance)
-  }
-
-  override def confInstance(curr: Conf, prev: Conf): Boolean =
-    isInstance(curr, prev)
 
   override def combineResults(delta: Result, subResults: List[Result]): Result =
     Result.meet(delta, subResults.reduce(Result.join))
@@ -168,35 +157,6 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
       Interpreter.reset()
       nextFrame.execute(insnNode, Interpreter)
       (nextFrame, Interpreter.getUsage.toResult)
-  }
-
-}
-
-object Utils {
-  def isInstance(curr: Conf, prev: Conf): Boolean = {
-    if (curr.insnIndex != prev.insnIndex) {
-      return false
-    }
-    val currFr = curr.frame
-    val prevFr = prev.frame
-    for (i <- 0 until currFr.getLocals if !isInstance(currFr.getLocal(i), prevFr.getLocal(i)))
-      return false
-    for (i <- 0 until currFr.getStackSize if !isInstance(currFr.getStack(i), prevFr.getStack(i)))
-      return false
-    true
-  }
-
-  def isInstance(curr: BasicValue, prev: BasicValue): Boolean = prev match {
-    case (_: ParamValue) => curr match {
-      case _: ParamValue => true
-      case _ => false
-    }
-    case InstanceOfCheckValue() => curr match {
-      case InstanceOfCheckValue() => true
-      case _ => false
-    }
-    case _ =>
-      true
   }
 
 }

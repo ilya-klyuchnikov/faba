@@ -31,22 +31,27 @@ abstract class Analysis[Res] {
 
   val richControlFlow: RichControlFlow
   val direction: Direction
+  def identity: Res
+  def processState(state: State): Unit
+  def isEarlyResult(res: Res): Boolean
+  def combineResults(delta: Res, subResults: List[Res]): Res
+  def mkEquation(result: Res): Equation[Key, Value]
+
   val controlFlow = richControlFlow.controlFlow
   val methodNode = controlFlow.methodNode
   val method = Method(controlFlow.className, methodNode.name, methodNode.desc)
   val dfsTree = richControlFlow.dfsTree
   val aKey = Key(method, direction)
 
-  def createStartState(): State = State(0, Conf(0, createStartFrame()), Nil, false, false)
-  def combineResults(delta: Res, subResults: List[Res]): Res
-  def mkEquation(result: Res): Equation[Key, Value]
+  final def createStartState(): State = State(0, Conf(0, createStartFrame()), Nil, false, false)
+  final def confInstance(curr: Conf, prev: Conf): Boolean = Utils.isInstance(curr, prev)
+  final def stateInstance(curr: State, prev: State): Boolean = {
+    curr.taken == prev.taken &&
+      Utils.isInstance(curr.conf, prev.conf) &&
+      curr.history.size == prev.history.size &&
+      (curr.history, prev.history).zipped.forall(Utils.isInstance)
+  }
 
-  def confInstance(curr: Conf, prev: Conf): Boolean
-  def stateInstance(curr: State, prev: State): Boolean
-  def identity: Res
-
-  def processState(state: State): Unit
-  def isEarlyResult(res: Res): Boolean
 
   val pending = mutable.Stack[PendingAction]()
   // the key is insnIndex
@@ -92,7 +97,7 @@ abstract class Analysis[Res] {
     mkEquation(earlyResult.getOrElse(results(0)))
   }
 
-  final protected def createStartFrame(): Frame[BasicValue] = {
+  final def createStartFrame(): Frame[BasicValue] = {
     val frame = new Frame[BasicValue](methodNode.maxLocals, methodNode.maxStack)
     val returnType = Type.getReturnType(methodNode.desc)
     val returnValue = if (returnType == Type.VOID_TYPE) null else new BasicValue(returnType)
@@ -130,4 +135,52 @@ abstract class Analysis[Res] {
 
   final def popValue(frame: Frame[BasicValue]): BasicValue =
     frame.getStack(frame.getStackSize - 1)
+}
+
+object Utils {
+  def isInstance(curr: Conf, prev: Conf): Boolean = {
+    if (curr.insnIndex != prev.insnIndex) {
+      return false
+    }
+    val currFr = curr.frame
+    val prevFr = prev.frame
+    for (i <- 0 until currFr.getLocals if !isInstance(currFr.getLocal(i), prevFr.getLocal(i)))
+      return false
+    for (i <- 0 until currFr.getStackSize if !isInstance(currFr.getStack(i), prevFr.getStack(i)))
+      return false
+    true
+  }
+
+  def isInstance(curr: BasicValue, prev: BasicValue): Boolean = prev match {
+    case (_: ParamValue) => curr match {
+      case _: ParamValue => true
+      case _ => false
+    }
+    case InstanceOfCheckValue() => curr match {
+      case InstanceOfCheckValue() => true
+      case _ => false
+    }
+    case TrueValue() => curr match {
+      case TrueValue() => true
+      case _ => false
+    }
+    case FalseValue() => curr match {
+      case FalseValue() => true
+      case _ => false
+    }
+    case NullValue() => curr match {
+      case NullValue() => true
+      case _ => false
+    }
+    case NotNullValue(_) => curr match {
+      case NotNullValue(_) => true
+      case _ => false
+    }
+    case CallResultValue(_, prevInters) => curr match {
+      case CallResultValue(_, currInters) => currInters == prevInters
+      case _ => false
+    }
+    case _: BasicValue => true
+  }
+
 }
