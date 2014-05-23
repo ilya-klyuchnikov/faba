@@ -86,7 +86,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
   }
 
   override def isEarlyResult(res: Result): Boolean =
-    res == Return
+    false
 
   var id = 0
 
@@ -101,13 +101,20 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     val insnNode = methodNode.instructions.get(insnIndex)
     val nextHistory = if (loopEnter) conf :: history else history
     val (nextFrame, subResult) = execute(frame, insnNode)
+    val hasCompanions = state.hasCompanions
+    val notEmptySubResult = subResult != Identity
 
     if (subResult == NPE) {
       results = results + (stateIndex -> NPE)
       computed = computed.updated(insnIndex, state :: computed(insnIndex))
     } else insnNode.getOpcode match {
       case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
-        earlyResult = Some(Return)
+        if (!hasCompanions) {
+          earlyResult = Some(Return)
+        } else {
+          results = results + (stateIndex -> Return)
+          computed = computed.updated(insnIndex, state :: computed(insnIndex))
+        }
       case ATHROW if taken =>
         results = results + (stateIndex -> NPE)
         computed = computed.updated(insnIndex, state :: computed(insnIndex))
@@ -116,22 +123,22 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
         computed = computed.updated(insnIndex, state :: computed(insnIndex))
       case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
         val nextInsnIndex = insnIndex + 1
-        val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true)
+        val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
         pending.push(MakeResult(state, subResult, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
         val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-        val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true)
+        val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
         pending.push(MakeResult(state, subResult, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
         val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-        val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true)
+        val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
         pending.push(MakeResult(state, subResult, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
         val nextInsnIndex = insnIndex + 1
-        val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true)
+        val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
         pending.push(MakeResult(state, subResult, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case _ =>
@@ -146,7 +153,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
             } else {
               nextFrame
             }
-            State({id += 1; id}, Conf(nextInsnIndex, nextFrame1), nextHistory, taken)
+            State({id += 1; id}, Conf(nextInsnIndex, nextFrame1), nextHistory, taken, hasCompanions || notEmptySubResult)
         }
         pending.push(MakeResult(state, subResult, nextStates.map(_.index)))
         pending.pushAll(nextStates.map(s => ProceedState(s)))

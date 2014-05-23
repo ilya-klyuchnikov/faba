@@ -19,7 +19,7 @@ case class CallResultValue(tp: Type, inters: Set[Key]) extends BasicValue(tp)
 
 case class Conf(insnIndex: Int, frame: Frame[BasicValue])
 
-case class State(index: Int, conf: Conf, history: List[Conf], taken: Boolean) {
+case class State(index: Int, conf: Conf, history: List[Conf], taken: Boolean, hasCompanions: Boolean) {
   val insnIndex: Int = conf.insnIndex
 }
 
@@ -37,7 +37,7 @@ abstract class Analysis[Res] {
   val dfsTree = richControlFlow.dfsTree
   val aKey = Key(method, direction)
 
-  def createStartState(): State = State(0, Conf(0, createStartFrame()), Nil, false)
+  def createStartState(): State = State(0, Conf(0, createStartFrame()), Nil, false, false)
   def combineResults(delta: Res, subResults: List[Res]): Res
   def mkEquation(result: Res): Equation[Key, Value]
 
