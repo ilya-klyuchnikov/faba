@@ -12,9 +12,11 @@ sealed trait Source {
   def process(processor: Processor): Unit
 }
 
-case class ClassSource(clazz: Class[_]) extends Source {
+case class ClassSource(classes: Class[_]*) extends Source {
   override def process(processor: Processor): Unit =
-    processor.processClass(new ClassReader(clazz.getCanonicalName))
+    classes.foreach { clazz =>
+      processor.processClass(new ClassReader(clazz.getCanonicalName))
+    }
 }
 
 case class JarFileSource(file: File) extends Source {
