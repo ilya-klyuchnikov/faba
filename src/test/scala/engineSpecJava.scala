@@ -56,16 +56,15 @@ class engineSpecJava extends FunSuite with TableDrivenPropertyChecks {
 
   type Id = Symbol
 
-  implicit val nullityLattice = new ELattice(Nullity.NotNull, Nullity.Nullable)
-  val nullityUtils = Utils[Id, Nullity](nullityLattice)
 
   implicit val valueLattice = new ELattice(Value.Bot, Value.Top)
   val valueUtils = Utils[Id, Value](valueLattice)
 
-  test("Modeling @NotNull parameters equations") {
+  import Value._
+  import valueUtils._
 
-    import Nullity._
-    import nullityUtils._
+
+  test("Modeling @NotNull parameters equations") {
 
     val equationSets =
       Table(
@@ -76,18 +75,18 @@ class engineSpecJava extends FunSuite with TableDrivenPropertyChecks {
         ),
         List(
           'a := NotNull,
-          'b := Nullable,
+          'b := Top,
           'c := I('a) U I('b)
         ),
         List(
           'a := NotNull,
-          'b := Nullable,
+          'b := Top,
           'c := I('a) U I('a, 'b)
         )
       )
 
     forAll(equationSets) { equations =>
-      val solution = new Solver(nullityLattice, equations).solve()
+      val solution = new Solver(valueLattice, equations).solve()
       info(s"equations: ${equations.map(pretty).mkString(" ")}")
       info(s"solution : ${solution}")
       assert(solution validFor_? equations, "invalid solution")
@@ -95,8 +94,6 @@ class engineSpecJava extends FunSuite with TableDrivenPropertyChecks {
   }
 
   test("Modeling contract equations") {
-    import Value._
-    import valueUtils._
 
     val equationSets =
       Table(

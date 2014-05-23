@@ -7,11 +7,10 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.MethodNode;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Main implements Processor {
+public class JavaProcessor implements Processor {
     final static ELattice<Value> valueLattice = new ELattice<Value>(Value.Bot, Value.Top);
     final Solver<Key, Value> solver = new Solver<>(valueLattice);
     final Map<Method, MethodExtra> extras = new HashMap<>();
@@ -51,20 +50,6 @@ public class Main implements Processor {
                         methodNode.desc + " " +
                         "is not reducible");
             }
-        }
-    }
-
-    private void process(Source source, String outDir) {
-        long indexStart = System.currentTimeMillis();
-        source.process(this);
-        long indexEnd = System.currentTimeMillis();
-    }
-
-    public static void main(String[] args) {
-        if (args.length != 2) {
-            System.out.println("Usage: faba.java.Main inputJar outDir");
-        } else {
-            new Main().process(new JarFileSource(new File(args[0])), args[1]);
         }
     }
 }

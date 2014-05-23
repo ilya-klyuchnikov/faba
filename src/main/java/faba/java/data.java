@@ -51,11 +51,6 @@ enum Value {
     Bot, NotNull, Null, True, False, Top
 }
 
-// for tests
-enum Nullity {
-    NotNull, Nullable
-}
-
 interface Direction {}
 final class In implements Direction {
     final int paramIndex;

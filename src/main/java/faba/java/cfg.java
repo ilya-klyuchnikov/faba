@@ -204,6 +204,16 @@ final class ControlFlowGraph {
     }
 }
 
+final class RichControlFlow {
+    final ControlFlowGraph controlFlow;
+    final DFSTree dfsTree;
+
+    RichControlFlow(ControlFlowGraph controlFlow, DFSTree dfsTree) {
+        this.controlFlow = controlFlow;
+        this.dfsTree = dfsTree;
+    }
+}
+
 final class ControlFlowBuilder extends Analyzer<BasicValue> {
     static final BasicInterpreter INTERPRETER = new BasicInterpreter();
     final String className;

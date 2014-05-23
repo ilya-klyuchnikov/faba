@@ -45,13 +45,13 @@ abstract class Analysis[Res] {
 
   final def createStartState(): State = State(0, Conf(0, createStartFrame()), Nil, false, false)
   final def confInstance(curr: Conf, prev: Conf): Boolean = Utils.isInstance(curr, prev)
+  // this is for sharing
   final def stateInstance(curr: State, prev: State): Boolean = {
     curr.taken == prev.taken &&
       Utils.isInstance(curr.conf, prev.conf) &&
       curr.history.size == prev.history.size &&
       (curr.history, prev.history).zipped.forall(Utils.isInstance)
   }
-
 
   val pending = mutable.Stack[PendingAction]()
   // the key is insnIndex
@@ -75,7 +75,6 @@ abstract class Analysis[Res] {
           computed = computed.updated(insnIndex, state :: computed(insnIndex))
         }
       case ProceedState(state) =>
-        val stateIndex = state.index
         val insnIndex = state.insnIndex
         val conf = state.conf
         val history = state.history
@@ -84,11 +83,11 @@ abstract class Analysis[Res] {
         val fold = loopEnter && history.exists(prevConf => confInstance(conf, prevConf))
 
         if (fold) {
-          results = results + (stateIndex -> identity)
+          results = results + (state.index -> identity)
           computed = computed.updated(insnIndex, state :: computed(insnIndex))
         } else computed(insnIndex).find(prevState => stateInstance(state, prevState)) match {
           case Some(ps) =>
-            results = results + (stateIndex -> results(ps.index))
+            results = results + (state.index -> results(ps.index))
           case None =>
             processState(state)
         }
