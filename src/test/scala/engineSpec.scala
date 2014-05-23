@@ -4,6 +4,7 @@ import org.scalatest.prop.TableDrivenPropertyChecks
 import org.scalatest.FunSuite
 
 import faba.engine._
+import faba.data._
 
 class engineSpec extends FunSuite with TableDrivenPropertyChecks {
 
@@ -56,22 +57,11 @@ class engineSpec extends FunSuite with TableDrivenPropertyChecks {
 
   type Id = Symbol
 
-  object Nullity extends Enumeration {
-    val NotNull, Nullable = Value
-  }
-  implicit val nullityLattice = ELattice(Nullity)
-  val nullityUtils = Utils[Id, Nullity.Value]()
-
-  object ContractValues extends Enumeration {
-    val Bot, NotNull, Null, True, False, Top = Value
-  }
-  implicit val contractValuesLattice = ELattice(ContractValues)
-  val contractValuesUtils = Utils[Id, ContractValues.Value]()
+  val valuesUtils = Utils[Id, Values.Value]()
+  import Values._
+  import valuesUtils._
 
   test("Modeling @NotNull parameters equations") {
-
-    import nullityUtils._
-    import Nullity._
 
     val equationSets =
       Table(
@@ -82,17 +72,15 @@ class engineSpec extends FunSuite with TableDrivenPropertyChecks {
         ),
         List(
           'a := NotNull,
-          'b := Nullable,
+          'b := Top,
           'c := I('a) U I('b)
         ),
         List(
           'a := NotNull,
-          'b := Nullable,
+          'b := Top,
           'c := I('a) U I('a, 'b)
         )
       )
-
-    info(s"lattice: ${Nullity.values}")
 
     forAll(equationSets) { equations =>
       val solution = new Solver(equations).solve()
@@ -103,9 +91,6 @@ class engineSpec extends FunSuite with TableDrivenPropertyChecks {
   }
 
   test("Modeling contract equations") {
-
-    import contractValuesUtils._
-    import ContractValues._
 
     val equationSets =
       Table(
@@ -132,8 +117,6 @@ class engineSpec extends FunSuite with TableDrivenPropertyChecks {
           'c := I('a) U I('a, 'b)
         )
       )
-
-    info(s"lattice: ${ContractValues.values}")
 
     forAll(equationSets) { equations =>
       val solution = new Solver(equations).solve()

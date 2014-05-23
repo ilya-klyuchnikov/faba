@@ -93,7 +93,11 @@ case class Component[Id](touched: Boolean, ids: Set[Id]) {
     Component(touched, ids - id)
 
   def remove_!(id: Id) =
-    Component(true, ids - id)
+    if (ids.contains(id)) {
+      Component(true, ids - id)
+    } else {
+      this
+    }
 
   def isEmpty =
     ids.isEmpty
