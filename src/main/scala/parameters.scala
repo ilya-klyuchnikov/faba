@@ -32,7 +32,11 @@ case object Identity extends Result
 
 case object Return extends Result
 case object NPE extends Result
-case class ConditionalNPE(cnf: SoP) extends Result
+case class ConditionalNPE(sop: SoP) extends Result
+
+object ConditionalNPE {
+  def apply(passing: Key): ConditionalNPE = ConditionalNPE(Set(Set(passing)))
+}
 
 object Result {
 
@@ -156,58 +160,25 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
       val nextFrame = new Frame(frame)
       Interpreter.reset()
       nextFrame.execute(insnNode, Interpreter)
-      (nextFrame, Interpreter.getUsage.toResult)
+      (nextFrame, Interpreter.getSubResult)
   }
 
-}
-
-sealed trait ParamUsage {
-  def meet(other: ParamUsage): ParamUsage
-  def toResult: Result
-}
-
-// Nullable, Top
-object NoUsage extends ParamUsage {
-  override def meet(other: ParamUsage) = other
-  override def toResult: Result = Identity
-}
-
-// NotNull, Bottom
-object DeReference extends ParamUsage {
-  override def meet(other: ParamUsage) = DeReference
-  override def toResult: Result = NPE
-}
-
-case class ExternalUsage(cnf: SoP) extends ParamUsage {
-  // intersect
-  override def meet(other: ParamUsage): ParamUsage = other match {
-    case NoUsage => this
-    case DeReference => DeReference
-    case other: ExternalUsage => join(other)
-  }
-
-  def join(other: ExternalUsage) = ExternalUsage(this.cnf meet other.cnf)
-  override def toResult: Result = ConditionalNPE(cnf)
-}
-
-object ExternalUsage {
-  def apply(passing: Key): ExternalUsage = ExternalUsage(Set(Set(passing)))
 }
 
 object Interpreter extends BasicInterpreter {
-  private var _usage: ParamUsage = NoUsage
+  private var _subResult: Result = Identity
   def reset(): Unit = {
-    _usage = NoUsage
+    _subResult = Identity
   }
 
-  def getUsage: ParamUsage =
-    _usage
+  def getSubResult: Result =
+    _subResult
 
   override def unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue = {
     val opCode = insn.getOpcode
     opCode match {
       case GETFIELD | ARRAYLENGTH | MONITOREXIT if value.isInstanceOf[ParamValue] =>
-        _usage = DeReference
+        _subResult = NPE
       case CHECKCAST if value.isInstanceOf[ParamValue] =>
         return new ParamValue(Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc))
       case INSTANCEOF if value.isInstanceOf[ParamValue] =>
@@ -222,7 +193,7 @@ object Interpreter extends BasicInterpreter {
     opCode match {
       case IALOAD | LALOAD | FALOAD | DALOAD | AALOAD | BALOAD | CALOAD | SALOAD | PUTFIELD
         if v1.isInstanceOf[ParamValue] =>
-        _usage = DeReference
+        _subResult = NPE
       case _ =>
 
     }
@@ -234,7 +205,7 @@ object Interpreter extends BasicInterpreter {
     opCode match {
       case IASTORE | LASTORE | FASTORE | DASTORE | AASTORE | BASTORE | CASTORE | SASTORE
         if v1.isInstanceOf[ParamValue] =>
-        _usage = DeReference
+        _subResult = NPE
       case _ =>
 
     }
@@ -246,7 +217,7 @@ object Interpreter extends BasicInterpreter {
     val static = opCode == INVOKESTATIC
     val shift = if (static) 0 else 1
     if (opCode != MULTIANEWARRAY && !static && values.get(0).isInstanceOf[ParamValue]) {
-      _usage = DeReference
+      _subResult = NPE
     }
     opCode match {
       case INVOKESTATIC | INVOKESPECIAL =>
@@ -254,7 +225,7 @@ object Interpreter extends BasicInterpreter {
         for (i <- shift until values.size()) {
           if (values.get(i).isInstanceOf[ParamValue]) {
             val method = Method(mNode.owner, mNode.name, mNode.desc)
-            _usage = _usage meet ExternalUsage(Key(method, In(i - shift)))
+            _subResult = Result.meet(_subResult, ConditionalNPE(Key(method, In(i - shift))))
           }
         }
       case _ =>
