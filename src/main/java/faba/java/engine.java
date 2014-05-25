@@ -63,6 +63,26 @@ final class Component<Id> {
     boolean isEmptyAndTouched() {
         return ids.isEmpty() && touched;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Component component = (Component) o;
+
+        if (touched != component.touched) return false;
+        if (!ids.equals(component.ids)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (touched ? 1 : 0);
+        result = 31 * result + ids.hashCode();
+        return result;
+    }
 }
 
 interface Result<Id, T> {}
@@ -70,6 +90,13 @@ final class Final<Id, T> implements Result<Id, T> {
     final T value;
     Final(T value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "Final{" +
+                "value=" + value +
+                '}';
     }
 }
 

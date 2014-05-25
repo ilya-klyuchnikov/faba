@@ -58,6 +58,25 @@ final class In implements Direction {
     In(int paramIndex) {
         this.paramIndex = paramIndex;
     }
+
+    @Override
+    public String toString() {
+        return "In(" + paramIndex + ")";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        In in = (In) o;
+        if (paramIndex != in.paramIndex) return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return paramIndex;
+    }
 }
 
 final class InOut implements Direction {
@@ -68,9 +87,44 @@ final class InOut implements Direction {
         this.paramIndex = paramIndex;
         this.value = value;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        InOut inOut = (InOut) o;
+
+        if (paramIndex != inOut.paramIndex) return false;
+        if (value != inOut.value) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = paramIndex;
+        result = 31 * result + value.hashCode();
+        return result;
+    }
 }
 
-final class Out implements Direction {}
+final class Out implements Direction {
+    @Override
+    public String toString() {
+        return "Out()";
+    }
+
+    @Override
+    public int hashCode() {
+        return 1;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Out;
+    }
+}
 
 final class Key {
     final Method method;
@@ -79,6 +133,34 @@ final class Key {
     Key(Method method, Direction direction) {
         this.method = method;
         this.direction = direction;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Key key = (Key) o;
+
+        if (!direction.equals(key.direction)) return false;
+        if (!method.equals(key.method)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = method.hashCode();
+        result = 31 * result + direction.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Key{" +
+                "method=" + method +
+                ", direction=" + direction +
+                '}';
     }
 }
 
