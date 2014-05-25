@@ -241,21 +241,22 @@ case class InOutInterpreter(direction: Direction) extends BasicInterpreter {
         val method = Method(mNode.owner, mNode.name, mNode.desc)
         val retType = Type.getReturnType(mNode.desc)
         val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
-        direction match {
-          case InOut(_, inValue) =>
-            var keys = Set[Key]()
-            for (i <- shift until values.size()) {
-              if (values.get(i).isInstanceOf[ParamValue])
-                keys = keys + Key(method, InOut(i - shift, inValue))
-            }
-            if (isRefRetType)
-              keys = keys + Key(method, Out)
-            if (keys.nonEmpty)
-              return CallResultValue(Type.getReturnType(mNode.desc), keys)
-          case _ =>
-            if (isRefRetType)
-              return CallResultValue(Type.getReturnType(mNode.desc), Set(Key(method, Out)))
-        }
+        if (Type.VOID_TYPE != retType)
+          direction match {
+            case InOut(_, inValue) =>
+              var keys = Set[Key]()
+              for (i <- shift until values.size()) {
+                if (values.get(i).isInstanceOf[ParamValue])
+                  keys = keys + Key(method, InOut(i - shift, inValue))
+              }
+              if (isRefRetType)
+                keys = keys + Key(method, Out)
+              if (keys.nonEmpty)
+                return CallResultValue(Type.getReturnType(mNode.desc), keys)
+            case _ =>
+              if (isRefRetType)
+                return CallResultValue(Type.getReturnType(mNode.desc), Set(Key(method, Out)))
+          }
         super.naryOperation(insn, values)
       case MULTIANEWARRAY | INVOKEDYNAMIC =>
         NotNullValue(super.naryOperation(insn, values).getType)
