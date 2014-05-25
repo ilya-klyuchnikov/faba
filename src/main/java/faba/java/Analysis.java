@@ -3,6 +3,7 @@ package faba.java;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm.tree.analysis.AnalyzerException;
 import org.objectweb.asm.tree.analysis.BasicValue;
 import org.objectweb.asm.tree.analysis.Frame;
 
@@ -149,6 +150,7 @@ class MakeResult<Res> implements PendingAction<Res> {
     final Res subResult;
     final List<Integer> indices;
 
+    // TODO - indices array
     MakeResult(State state, Res subResult, List<Integer> indices) {
         this.state = state;
         this.subResult = subResult;
@@ -160,10 +162,10 @@ abstract class Analysis<Res> {
     final RichControlFlow richControlFlow;
     final Direction direction;
     final ControlFlowGraph controlFlow;
-    private final MethodNode methodNode;
-    private final Method method;
-    private final DFSTree dfsTree;
-    private final Res myIdentity;
+    final MethodNode methodNode;
+    final Method method;
+    final DFSTree dfsTree;
+    final Res myIdentity;
 
     final Deque<PendingAction<Res>> pending = new LinkedList<>();
     final Map<Integer, List<State>> computed = new HashMap<>();
@@ -175,7 +177,7 @@ abstract class Analysis<Res> {
     abstract Res combineResults(Res delta, List<Res> subResults);
     abstract boolean isEarlyResult(Res res);
     abstract Equation<Key, Value> mkEquation(Res result);
-    abstract void processState(State state);
+    abstract void processState(State state) throws AnalyzerException;
 
     protected Analysis(RichControlFlow richControlFlow, Direction direction) {
         this.richControlFlow = richControlFlow;
@@ -210,9 +212,9 @@ abstract class Analysis<Res> {
         return true;
     }
 
-    final Equation<Key, Value> analyze() {
+    final Equation<Key, Value> analyze() throws AnalyzerException {
         pending.push(new ProceedState<Res>(createStartState()));
-        while (!pending.isEmpty() && earlyResult != null) {
+        while (!pending.isEmpty() && earlyResult == null) {
             PendingAction<Res> action = pending.pop();
             if (action instanceof MakeResult) {
                 MakeResult<Res> makeResult = (MakeResult<Res>) action;
@@ -321,7 +323,7 @@ abstract class Analysis<Res> {
     }
 
     final BasicValue popValue(Frame<BasicValue> frame) {
-        return frame.getStack(frame.getMaxStackSize() - 1);
+        return frame.getStack(frame.getStackSize() - 1);
     }
 }
 
