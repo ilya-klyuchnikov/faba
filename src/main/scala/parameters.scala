@@ -29,7 +29,6 @@ object `package` {
 
 sealed trait Result
 case object Identity extends Result
-
 case object Return extends Result
 case object NPE extends Result
 case class ConditionalNPE(sop: SoP) extends Result
@@ -74,7 +73,6 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     case Identity | Return => Equation(parameter, Final(Values.Top))
     case NPE => Equation(parameter, Final(Values.NotNull))
     case ConditionalNPE(cnf) =>
-      require(cnf.forall(_.nonEmpty))
       Equation(parameter, Pending(Values.NotNull, cnf.map(p => Component(false, p))))
   }
 
@@ -90,9 +88,8 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     val history = state.history
     val taken = state.taken
     val frame = conf.frame
-    val loopEnter = dfsTree.loopEnters(insnIndex)
     val insnNode = methodNode.instructions.get(insnIndex)
-    val nextHistory = if (loopEnter) conf :: history else history
+    val nextHistory = if (dfsTree.loopEnters(insnIndex)) conf :: history else history
     val (nextFrame, subResult) = execute(frame, insnNode)
     val hasCompanions = state.hasCompanions
     val notEmptySubResult = subResult != Identity
@@ -175,9 +172,8 @@ object Interpreter extends BasicInterpreter {
     _subResult
 
   override def unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue = {
-    val opCode = insn.getOpcode
-    opCode match {
-      case GETFIELD | ARRAYLENGTH | MONITOREXIT if value.isInstanceOf[ParamValue] =>
+    insn.getOpcode match {
+      case GETFIELD | ARRAYLENGTH | MONITORENTER if value.isInstanceOf[ParamValue] =>
         _subResult = NPE
       case CHECKCAST if value.isInstanceOf[ParamValue] =>
         return new ParamValue(Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc))
@@ -189,8 +185,7 @@ object Interpreter extends BasicInterpreter {
   }
 
   override def binaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue): BasicValue = {
-    val opCode = insn.getOpcode
-    opCode match {
+    insn.getOpcode match {
       case IALOAD | LALOAD | FALOAD | DALOAD | AALOAD | BALOAD | CALOAD | SALOAD | PUTFIELD
         if v1.isInstanceOf[ParamValue] =>
         _subResult = NPE
@@ -201,13 +196,11 @@ object Interpreter extends BasicInterpreter {
   }
 
   override def ternaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue, v3: BasicValue): BasicValue = {
-    val opCode = insn.getOpcode
-    opCode match {
+    insn.getOpcode match {
       case IASTORE | LASTORE | FASTORE | DASTORE | AASTORE | BASTORE | CASTORE | SASTORE
         if v1.isInstanceOf[ParamValue] =>
         _subResult = NPE
       case _ =>
-
     }
     super.ternaryOperation(insn, v1, v2, v3)
   }

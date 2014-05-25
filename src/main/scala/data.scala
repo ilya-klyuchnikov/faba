@@ -120,8 +120,8 @@ object XmlUtils {
   def canonical(name: String): String =
     name.replace('/', '.').replace('$', '.')
 
-  private def simpleName(name: String): String = {
-    val cn = canonical(name)
+  private def simpleName(internalName: String): String = {
+    val cn = canonical(internalName)
     cn.lastIndexOf('.') match {
       case -1 => cn
       case i => cn.substring(i + 1)
@@ -145,7 +145,7 @@ object XmlUtils {
     private val sb = new StringBuilder("(")
     private var first = true
 
-    def parameters(): String = sb.toString() + ")"
+    def parameters(): String = sb.append(')').toString
 
     override def visitParameterType(): SignatureVisitor = {
       if (first) {
