@@ -200,15 +200,12 @@ class NonNullInAnalysis extends Analysis<PResult> {
             return;
         }
 
-        if (opcode == IFNONNULL ) {
-            BasicValue popped = popValue(frame);
-            if (popped instanceof ParamValue) {
-                int nextInsnIndex = insnIndex + 1;
-                State nextState = new State(++id, new Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult);
-                pending.push(new MakeResult<PResult>(state, subResult, Collections.singletonList(nextState.index)));
-                pending.push(new ProceedState<PResult>(nextState));
-                return;
-            }
+        if (opcode == IFNONNULL && popValue(frame) instanceof ParamValue) {
+            int nextInsnIndex = insnIndex + 1;
+            State nextState = new State(++id, new Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult);
+            pending.push(new MakeResult<PResult>(state, subResult, Collections.singletonList(nextState.index)));
+            pending.push(new ProceedState<PResult>(nextState));
+            return;
         }
 
         if (opcode == IFNULL && popValue(frame) instanceof ParamValue) {
