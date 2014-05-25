@@ -129,7 +129,7 @@ object XmlUtils {
   }
 
   private def parameters(method: Method, extra: MethodExtra): String = {
-    extra.signature match {
+    val result = extra.signature match {
       case Some(sig) =>
         val renderer = new GenericMethodParametersRenderer()
         new SignatureReader(sig).accept(renderer)
@@ -137,6 +137,11 @@ object XmlUtils {
       case None =>
         val argTypes = Type.getArgumentTypes(method.methodDesc)
         argTypes.map(t => canonical(t.getClassName)).mkString("(", ", ",")")
+    }
+    if ((extra.access & Opcodes.ACC_VARARGS) != 0) {
+      result.replace("[])", "...)")
+    } else {
+      result
     }
   }
 
