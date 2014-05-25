@@ -40,6 +40,24 @@ final class JarFileSource implements Source {
     }
 }
 
+final class ClassSource implements Source {
+    final Class<?> aClass;
+
+    ClassSource(Class<?> aClass) {
+        this.aClass = aClass;
+    }
+
+    @Override
+    public void process(Processor processor) {
+        try {
+            processor.processClass(new ClassReader(aClass.getCanonicalName()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
 interface Processor {
     void processClass(ClassReader classReader);
 }

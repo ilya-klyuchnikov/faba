@@ -1,13 +1,13 @@
 package faba.java;
 
 
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.*;
 import org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm.tree.analysis.AnalyzerException;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class JavaProcessor implements Processor {
@@ -17,19 +17,19 @@ public class JavaProcessor implements Processor {
 
     @Override
     public void processClass(final ClassReader classReader) {
-       classReader.accept(new ClassVisitor(Opcodes.ASM5) {
-           @Override
-           public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
-               final MethodNode node = new MethodNode(Opcodes.ASM5, access, name, desc, signature, exceptions);
-               return new MethodVisitor(Opcodes.ASM5, node) {
-                   @Override
-                   public void visitEnd() {
-                       super.visitEnd();
-                       processMethod(classReader.getClassName(), node);
-                   }
-               };
-           }
-       }, 0);
+        classReader.accept(new ClassVisitor(Opcodes.ASM5) {
+            @Override
+            public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
+                final MethodNode node = new MethodNode(Opcodes.ASM5, access, name, desc, signature, exceptions);
+                return new MethodVisitor(Opcodes.ASM5, node) {
+                    @Override
+                    public void visitEnd() {
+                        super.visitEnd();
+                        processMethod(classReader.getClassName(), node);
+                    }
+                };
+            }
+        }, 0);
     }
 
     void processMethod(String className, MethodNode methodNode) {
@@ -37,12 +37,36 @@ public class JavaProcessor implements Processor {
         extras.put(method, new MethodExtra(methodNode.signature, methodNode.access));
 
         ControlFlowGraph graph = cfg.buildControlFlowGraph(className, methodNode);
+        boolean added = false;
+        Type[] argumentTypes = Type.getArgumentTypes(methodNode.desc);
+        Type resultType = Type.getReturnType(methodNode.desc);
+        int resultSort = resultType.getSort();
+
+        boolean isReferenceResult = resultSort == Type.OBJECT || resultSort == Type.ARRAY;
+        boolean isBooleanResult = Type.BOOLEAN_TYPE == resultType;
 
         if (graph.transitions.length > 0) {
             DFSTree dfs = cfg.buildDFSTree(graph.transitions);
             boolean reducible = dfs.back.isEmpty() || cfg.reducible(graph, dfs);
             if (reducible) {
-
+                List<Equation<Key, Value>> toAdd = new LinkedList<>();
+                try {
+                    for (int i = 0; i < argumentTypes.length; i++) {
+                        Type argType = argumentTypes[i];
+                        int argSort = argType.getSort();
+                        boolean isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY;
+                        if (isReferenceArg) {
+                            Equation<Key, Value> equation = new NonNullInAnalysis(new RichControlFlow(graph, dfs), new In(i)).analyze();
+                            toAdd.add(equation);
+                        }
+                    }
+                    added = true;
+                    for (Equation<Key, Value> equation : toAdd) {
+                        solver.addEquation(equation);
+                    }
+                } catch (AnalyzerException e) {
+                    throw new RuntimeException();
+                }
             } else {
                 System.out.println("CFG for " +
                         className + " " +
@@ -51,5 +75,32 @@ public class JavaProcessor implements Processor {
                         "is not reducible");
             }
         }
+
+        if (!added) {
+            method = new Method(className, methodNode.name, methodNode.desc);
+            for (int i = 0; i < argumentTypes.length; i++) {
+                Type argType = argumentTypes[i];
+                int argSort = argType.getSort();
+                boolean isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY;
+
+                if (isReferenceArg) {
+                    if (isReferenceResult || isBooleanResult) {
+                        solver.addEquation(new Equation<Key, Value>(new Key(method, new InOut(i, Value.Null)), new Final<Key, Value>(Value.Top)));
+                        solver.addEquation(new Equation<Key, Value>(new Key(method, new InOut(i, Value.NotNull)), new Final<Key, Value>(Value.Top)));
+                    }
+                    solver.addEquation(new Equation<Key, Value>(new Key(method, new In(i)), new Final<Key, Value>(Value.Top)));
+                }
+                if (Type.BOOLEAN_TYPE.equals(argType)) {
+                    if (isReferenceResult || isBooleanResult) {
+                        solver.addEquation(new Equation<Key, Value>(new Key(method, new InOut(i, Value.False)), new Final<Key, Value>(Value.Top)));
+                        solver.addEquation(new Equation<Key, Value>(new Key(method, new InOut(i, Value.True)), new Final<Key, Value>(Value.Top)));
+                    }
+                }
+            }
+            if (isReferenceResult) {
+                solver.addEquation(new Equation<Key, Value>(new Key(method, new Out()), new Final<Key, Value>(Value.Top)));
+            }
+        }
+
     }
 }
