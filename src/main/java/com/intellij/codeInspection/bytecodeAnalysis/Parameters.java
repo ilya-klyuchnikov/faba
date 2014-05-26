@@ -130,7 +130,6 @@ class NonNullInAnalysis extends Analysis<PResult> {
 
     @Override
     Equation<Key, Value> mkEquation(PResult result) {
-        Objects.requireNonNull(result);
         if (Identity == result || Return == result) {
             return new Equation<Key, Value>(parameter, new Final<Key, Value>(Value.Top));
         }
@@ -351,7 +350,7 @@ class NonNullInInterpreter extends BasicInterpreter {
         int opcode = insn.getOpcode();
         boolean isStaticInvoke = opcode == INVOKESTATIC;
         int shift = isStaticInvoke ? 0 : 1;
-        if (opcode != MULTIANEWARRAY && !isStaticInvoke && values.get(0) instanceof ParamValue) {
+        if ((opcode == INVOKESPECIAL || opcode ==INVOKEINTERFACE || opcode == INVOKEVIRTUAL) && values.get(0) instanceof ParamValue) {
             subResult = NPE;
         }
         switch (opcode) {

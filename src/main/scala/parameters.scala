@@ -209,7 +209,7 @@ object Interpreter extends BasicInterpreter {
     val opCode = insn.getOpcode
     val static = opCode == INVOKESTATIC
     val shift = if (static) 0 else 1
-    if (opCode != MULTIANEWARRAY && !static && values.get(0).isInstanceOf[ParamValue]) {
+    if ((opCode == INVOKESPECIAL || opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) && values.get(0).isInstanceOf[ParamValue]) {
       _subResult = NPE
     }
     opCode match {
