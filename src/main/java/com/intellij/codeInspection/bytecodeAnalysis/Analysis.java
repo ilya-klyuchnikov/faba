@@ -1,4 +1,4 @@
-package faba.java;
+package com.intellij.codeInspection.bytecodeAnalysis;
 
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -8,7 +8,6 @@ import org.objectweb.asm.tree.analysis.BasicValue;
 import org.objectweb.asm.tree.analysis.Frame;
 
 import java.util.*;
-import static faba.java.AbstractValues.*;
 
 class AbstractValues {
     static final class ParamValue extends BasicValue {
@@ -199,14 +198,14 @@ abstract class Analysis<Res> {
         if (curr.taken != prev.taken) {
             return false;
         }
-        if (!isInstance(curr.conf, prev.conf)) {
+        if (!AbstractValues.isInstance(curr.conf, prev.conf)) {
             return false;
         }
         if (curr.history.size() != prev.history.size()) {
             return false;
         }
         for (int i = 0; i < curr.history.size(); i++) {
-            if (!isInstance(curr.history.get(i), prev.history.get(i))) {
+            if (!AbstractValues.isInstance(curr.history.get(i), prev.history.get(i))) {
                 return false;
             }
         }
@@ -248,7 +247,7 @@ abstract class Analysis<Res> {
                 boolean fold = false;
                 if (dfsTree.loopEnters.contains(insnIndex)) {
                     for (Conf prev : history) {
-                        if (isInstance(conf, prev)) {
+                        if (AbstractValues.isInstance(conf, prev)) {
                             fold = true;
                         }
                     }
@@ -304,10 +303,10 @@ abstract class Analysis<Res> {
         for (int i = 0; i < args.length; i++) {
             BasicValue value;
             if (direction instanceof InOut && ((InOut)direction).paramIndex == i) {
-                value = new ParamValue(args[i]);
+                value = new AbstractValues.ParamValue(args[i]);
             }
             else if (direction instanceof In && ((In)direction).paramIndex == i) {
-                value = new ParamValue(args[i]);
+                value = new AbstractValues.ParamValue(args[i]);
             }
             else {
                 value = new BasicValue(args[i]);
@@ -336,4 +335,3 @@ abstract class Analysis<Res> {
         return result;
     }
 }
-

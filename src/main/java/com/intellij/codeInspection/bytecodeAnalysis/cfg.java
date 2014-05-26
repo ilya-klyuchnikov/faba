@@ -1,4 +1,4 @@
-package faba.java;
+package com.intellij.codeInspection.bytecodeAnalysis;
 
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.analysis.Analyzer;

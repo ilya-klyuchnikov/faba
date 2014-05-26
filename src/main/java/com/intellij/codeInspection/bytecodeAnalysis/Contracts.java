@@ -1,4 +1,4 @@
-package faba.java;
+package com.intellij.codeInspection.bytecodeAnalysis;
 
 import org.objectweb.asm.Handle;
 import org.objectweb.asm.Type;
@@ -10,7 +10,7 @@ import org.objectweb.asm.tree.analysis.Frame;
 
 import java.util.*;
 
-import static faba.java.AbstractValues.*;
+import static com.intellij.codeInspection.bytecodeAnalysis.AbstractValues.*;
 import static org.objectweb.asm.Opcodes.*;
 
 class InOutAnalysis extends Analysis<Result<Key, Value>> {

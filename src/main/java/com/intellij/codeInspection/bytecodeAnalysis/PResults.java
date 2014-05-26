@@ -1,4 +1,4 @@
-package faba.java;
+package com.intellij.codeInspection.bytecodeAnalysis;
 
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.AbstractInsnNode;
@@ -12,12 +12,12 @@ import org.objectweb.asm.tree.analysis.Frame;
 
 import java.util.*;
 
-import static faba.java.AbstractValues.InstanceOfCheckValue;
-import static faba.java.AbstractValues.ParamValue;
-import static faba.java.Parameters.*;
+import static com.intellij.codeInspection.bytecodeAnalysis.AbstractValues.InstanceOfCheckValue;
+import static com.intellij.codeInspection.bytecodeAnalysis.AbstractValues.ParamValue;
+import static com.intellij.codeInspection.bytecodeAnalysis.PResults.*;
 import static org.objectweb.asm.Opcodes.*;
 
-abstract class Parameters {
+abstract class PResults {
     // SoP = sum of products
     static Set<Set<Key>> join(Set<Set<Key>> sop1, Set<Set<Key>> sop2) {
         Set<Set<Key>> sop = new HashSet<Set<Key>>();
