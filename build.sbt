@@ -12,4 +12,6 @@ libraryDependencies += "org.scalatest" %% "scalatest" % "2.1.6" % "test"
 
 scalacOptions += "-feature"
 
+javacOptions ++= Seq("-source", "1.6")
+
 fork := true

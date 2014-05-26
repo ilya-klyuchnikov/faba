@@ -110,22 +110,22 @@ interface Result<Id, T> {
                 return r2;
             }
             if (r1 instanceof Final && r2 instanceof Final) {
-                return new Final<>(lattice.join(((Final<?, T>) r1).value, ((Final<?, T>) r2).value));
+                return new Final<Id, T>(lattice.join(((Final<?, T>) r1).value, ((Final<?, T>) r2).value));
             }
             if (r1 instanceof Final && r2 instanceof Pending) {
                 Pending<Id, T> pending = (Pending<Id, T>) r2;
-                return new Pending<>(lattice.join(((Final<Id, T>) r1).value, pending.infinum), pending.delta);
+                return new Pending<Id, T>(lattice.join(((Final<Id, T>) r1).value, pending.infinum), pending.delta);
             }
             if (r1 instanceof Pending && r2 instanceof Final) {
                 Pending<Id, T> pending = (Pending<Id, T>) r1;
-                return new Pending<>(lattice.join(((Final<Id, T>) r2).value, pending.infinum), pending.delta);
+                return new Pending<Id, T>(lattice.join(((Final<Id, T>) r2).value, pending.infinum), pending.delta);
             }
             Pending<Id, T> pending1 = (Pending<Id, T>) r1;
             Pending<Id, T> pending2 = (Pending<Id, T>) r2;
             Set<Component<Id>> delta = new HashSet<Component<Id>>();
             delta.addAll(pending1.delta);
             delta.addAll(pending2.delta);
-            return new Pending<>(lattice.join(pending1.infinum, pending2.infinum), delta);
+            return new Pending<Id, T>(lattice.join(pending1.infinum, pending2.infinum), delta);
         }
     }
 }
@@ -191,10 +191,10 @@ final class Equation<Id, T> {
 
 final class Solver<Id, Val extends Enum<Val>> {
     private final ELattice<Val> lattice;
-    private final HashMap<Id, Set<Id>> dependencies = new HashMap<>();
-    private final HashMap<Id, Pending<Id, Val>> pending = new HashMap<>();
-    private final Queue<Solution<Id, Val>> moving = new LinkedList<>();
-    private final HashMap<Id, Val> solved = new HashMap<>();
+    private final HashMap<Id, Set<Id>> dependencies = new HashMap<Id, Set<Id>>();
+    private final HashMap<Id, Pending<Id, Val>> pending = new HashMap<Id, Pending<Id, Val>>();
+    private final Queue<Solution<Id, Val>> moving = new LinkedList<Solution<Id, Val>>();
+    private final HashMap<Id, Val> solved = new HashMap<Id, Val>();
 
     Solver(ELattice<Val> lattice) {
         this.lattice = lattice;
@@ -210,19 +210,19 @@ final class Solver<Id, Val extends Enum<Val>> {
     void addEquation(Equation<Id, Val> equation) {
         if (equation.rhs instanceof Final) {
             Final<Id, Val> finalResult = (Final<Id, Val>) equation.rhs;
-            moving.add(new Solution<>(equation.id, finalResult.value));
+            moving.add(new Solution<Id, Val>(equation.id, finalResult.value));
         }
         else if (equation.rhs instanceof Pending) {
             Pending<Id, Val> pendingResult = (Pending<Id, Val>) equation.rhs;
             if (pendingResult.infinum.equals(lattice.top)) {
-                moving.add(new Solution<>(equation.id, lattice.top));
+                moving.add(new Solution<Id, Val>(equation.id, lattice.top));
             }
             else {
                 for (Component<Id> component : pendingResult.delta) {
                     for (Id trigger : component.ids) {
                         Set<Id> set = dependencies.get(trigger);
                         if (set == null) {
-                            set = new HashSet<>();
+                            set = new HashSet<Id>();
                             dependencies.put(trigger, set);
                         }
                         set.add(equation.id);
@@ -245,7 +245,7 @@ final class Solver<Id, Val extends Enum<Val>> {
                         Result<Id, Val> pend1 = substitute(pend, sol.id, sol.value);
                         if (pend1 instanceof Final) {
                             Final<Id, Val> fi = (Final<Id, Val>) pend1;
-                            moving.add(new Solution<>(dId, fi.value));
+                            moving.add(new Solution<Id, Val>(dId, fi.value));
                         }
                         else {
                             pending.put(dId, (Pending<Id, Val>) pend1);
@@ -260,44 +260,44 @@ final class Solver<Id, Val extends Enum<Val>> {
 
     Result<Id, Val> substitute(Pending<Id, Val> pending, Id id, Val value) {
         if (value.equals(lattice.bot)) {
-            HashSet<Component<Id>> delta = new HashSet<>();
+            HashSet<Component<Id>> delta = new HashSet<Component<Id>>();
             for (Component<Id> component : pending.delta) {
                 if (!component.ids.contains(id)) {
                     delta.add(component);
                 }
             }
             if (delta.isEmpty()) {
-                return new Final<>(pending.infinum);
+                return new Final<Id, Val>(pending.infinum);
             }
             else {
-                return new Pending<>(pending.infinum, delta);
+                return new Pending<Id, Val>(pending.infinum, delta);
             }
         }
         else if (value.equals(lattice.top)) {
-            HashSet<Component<Id>> delta = new HashSet<>();
+            HashSet<Component<Id>> delta = new HashSet<Component<Id>>();
             for (Component<Id> component : pending.delta) {
                 Component<Id> component1 = component.remove(id);
                 if (!component1.isEmptyAndTouched()) {
                     if (component1.isEmpty()) {
-                        return new Final<>(lattice.top);
+                        return new Final<Id, Val>(lattice.top);
                     } else {
                         delta.add(component1);
                     }
                 }
             }
             if (delta.isEmpty()) {
-                return new Final<>(pending.infinum);
+                return new Final<Id, Val>(pending.infinum);
             }
             else {
-                return new Pending<>(pending.infinum, delta);
+                return new Pending<Id, Val>(pending.infinum, delta);
             }
         }
         else {
             Val infinum = lattice.join(pending.infinum, value);
             if (infinum == lattice.top) {
-                return new Final<>(lattice.top);
+                return new Final<Id, Val>(lattice.top);
             }
-            HashSet<Component<Id>> delta = new HashSet<>();
+            HashSet<Component<Id>> delta = new HashSet<Component<Id>>();
             for (Component<Id> component : pending.delta) {
                 Component<Id> component1 = component.removeAndTouch(id);
                 if (!component1.isEmpty()) {
@@ -305,10 +305,10 @@ final class Solver<Id, Val extends Enum<Val>> {
                 }
             }
             if (delta.isEmpty()) {
-                return new Final<>(infinum);
+                return new Final<Id, Val>(infinum);
             }
             else {
-                return new Pending<>(infinum, delta);
+                return new Pending<Id, Val>(infinum, delta);
             }
         }
     }

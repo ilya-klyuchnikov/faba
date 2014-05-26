@@ -167,9 +167,9 @@ abstract class Analysis<Res> {
     final DFSTree dfsTree;
     final Res myIdentity;
 
-    final Deque<PendingAction<Res>> pending = new LinkedList<>();
-    final Map<Integer, List<State>> computed = new HashMap<>();
-    final Map<Integer, Res> results = new HashMap<>();
+    final Deque<PendingAction<Res>> pending = new LinkedList<PendingAction<Res>>();
+    final Map<Integer, List<State>> computed = new HashMap<Integer, List<State>>();
+    final Map<Integer, Res> results = new HashMap<Integer, Res>();
     final Key aKey;
 
     Res earlyResult = null;
@@ -232,7 +232,7 @@ abstract class Analysis<Res> {
                     results.put(state.index, result);
                     List<State> thisComputed = computed.get(insnIndex);
                     if (thisComputed == null) {
-                        thisComputed = new ArrayList<>();
+                        thisComputed = new ArrayList<State>();
                         computed.put(insnIndex, thisComputed);
                     }
                     thisComputed.add(state);
@@ -257,7 +257,7 @@ abstract class Analysis<Res> {
                     results.put(state.index, myIdentity);
                     List<State> thisComputed = computed.get(insnIndex);
                     if (thisComputed == null) {
-                        thisComputed = new ArrayList<>();
+                        thisComputed = new ArrayList<State>();
                         computed.put(insnIndex, thisComputed);
                     }
                     thisComputed.add(state);
@@ -291,7 +291,7 @@ abstract class Analysis<Res> {
     }
 
     final Frame<BasicValue> createStartFrame() {
-        Frame<BasicValue> frame = new Frame<>(methodNode.maxLocals, methodNode.maxStack);
+        Frame<BasicValue> frame = new Frame<BasicValue>(methodNode.maxLocals, methodNode.maxStack);
         Type returnType = Type.getReturnType(methodNode.desc);
         BasicValue returnValue = Type.VOID_TYPE.equals(returnType) ? null : new BasicValue(returnType);
         frame.setReturn(returnValue);

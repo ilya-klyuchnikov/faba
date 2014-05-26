@@ -30,7 +30,7 @@ abstract class Parameters {
         Set<Set<Key>> sop = new HashSet<Set<Key>>();
         for (Set<Key> prod1 : sop1) {
             for (Set<Key> prod2 : sop2) {
-                Set<Key> prod = new HashSet<>();
+                Set<Key> prod = new HashSet<Key>();
                 prod.addAll(prod1);
                 prod.addAll(prod2);
                 sop.add(prod);
@@ -132,18 +132,18 @@ class NonNullInAnalysis extends Analysis<PResult> {
     Equation<Key, Value> mkEquation(PResult result) {
         Objects.requireNonNull(result);
         if (Identity == result || Return == result) {
-            return new Equation<>(parameter, new Final<Key, Value>(Value.Top));
+            return new Equation<Key, Value>(parameter, new Final<Key, Value>(Value.Top));
         }
         else if (NPE == result) {
-            return new Equation<>(parameter, new Final<Key, Value>(Value.NotNull));
+            return new Equation<Key, Value>(parameter, new Final<Key, Value>(Value.NotNull));
         }
         else {
             ConditionalNPE condNpe = (ConditionalNPE) result;
-            Set<Component<Key>> components = new HashSet<>();
+            Set<Component<Key>> components = new HashSet<Component<Key>>();
             for (Set<Key> prod : condNpe.sop) {
-                components.add(new Component<>(false, prod));
+                components.add(new Component<Key>(false, prod));
             }
-            return new Equation<>(parameter, new Pending<>(Value.NotNull, components));
+            return new Equation<Key, Value>(parameter, new Pending<Key, Value>(Value.NotNull, components));
         }
     }
 
@@ -234,12 +234,12 @@ class NonNullInAnalysis extends Analysis<PResult> {
 
         // general case
         List<Integer> nextInsnIndices = controlFlow.transitions[insnIndex];
-        List<State> nextStates = new ArrayList<>();
-        List<Integer> subIndices = new ArrayList<>();
+        List<State> nextStates = new ArrayList<State>();
+        List<Integer> subIndices = new ArrayList<Integer>();
         for (int nextInsnIndex : nextInsnIndices) {
             Frame<BasicValue> nextFrame1 = nextFrame;
             if (controlFlow.errorTransitions.contains(new Edge(insnIndex, nextInsnIndex))) {
-                nextFrame1 = new Frame<>(frame);
+                nextFrame1 = new Frame<BasicValue>(frame);
                 nextFrame1.clearStack();
                 nextFrame1.push(new BasicValue(Type.getType("java/lang/Throwable")));
             }
@@ -263,7 +263,7 @@ class NonNullInAnalysis extends Analysis<PResult> {
                 subResult = Identity;
                 break;
             default:
-                nextFrame = new Frame<>(frame);
+                nextFrame = new Frame<BasicValue>(frame);
                 interpreter.reset();
                 nextFrame.execute(insnNode, interpreter);
                 subResult = interpreter.getSubResult();

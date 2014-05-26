@@ -12,8 +12,8 @@ import java.util.Map;
 
 public class JavaProcessor implements Processor {
     final static ELattice<Value> valueLattice = new ELattice<Value>(Value.Bot, Value.Top);
-    final Solver<Key, Value> solver = new Solver<>(valueLattice);
-    final Map<Method, MethodExtra> extras = new HashMap<>();
+    final Solver<Key, Value> solver = new Solver<Key, Value>(valueLattice);
+    final Map<Method, MethodExtra> extras = new HashMap<Method, MethodExtra>();
 
     @Override
     public void processClass(final ClassReader classReader) {
@@ -49,7 +49,7 @@ public class JavaProcessor implements Processor {
             DFSTree dfs = cfg.buildDFSTree(graph.transitions);
             boolean reducible = dfs.back.isEmpty() || cfg.reducible(graph, dfs);
             if (reducible) {
-                List<Equation<Key, Value>> toAdd = new LinkedList<>();
+                List<Equation<Key, Value>> toAdd = new LinkedList<Equation<Key, Value>>();
                 try {
                     for (int i = 0; i < argumentTypes.length; i++) {
                         Type argType = argumentTypes[i];

@@ -50,8 +50,8 @@ final class cfg {
         int entered = 0;
         int completed = 0;
 
-        Deque<Action> stack = new LinkedList<>();
-        Set<Integer> loopEnters = new HashSet<>();
+        Deque<Action> stack = new LinkedList<Action>();
+        Set<Integer> loopEnters = new HashSet<Integer>();
 
         // enter 0
         entered ++;
@@ -108,8 +108,8 @@ final class cfg {
         HashSet<Integer>[] nonCycles = new HashSet[size];
         int[] collapsedTo = new int[size];
         for (int i = 0; i < size; i++) {
-            cycles[i] = new HashSet<>();
-            nonCycles[i] = new HashSet<>();
+            cycles[i] = new HashSet<Integer>();
+            nonCycles[i] = new HashSet<Integer>();
             collapsedTo[i] = i;
         }
 
@@ -127,8 +127,8 @@ final class cfg {
         }
 
         for (int w = size - 1; w >= 0 ; w--) {
-            HashSet<Integer> p = new HashSet<>(cycles[w]);
-            Queue<Integer> queue = new LinkedList<>(cycles[w]);
+            HashSet<Integer> p = new HashSet<Integer>(cycles[w]);
+            Queue<Integer> queue = new LinkedList<Integer>(cycles[w]);
 
             while (!queue.isEmpty()) {
                 int x = queue.remove();
@@ -227,9 +227,9 @@ final class ControlFlowBuilder extends Analyzer<BasicValue> {
         this.methodNode = methodNode;
         transitions = new LinkedList[methodNode.instructions.size()];
         for (int i = 0; i < transitions.length; i++) {
-            transitions[i] = new LinkedList<>();
+            transitions[i] = new LinkedList<Integer>();
         }
-        errorTransitions = new HashSet<>();
+        errorTransitions = new HashSet<Edge>();
     }
 
     final ControlFlowGraph buildCFG() throws AnalyzerException {

@@ -29,13 +29,16 @@ final class JarFileSource implements Source {
             while (entries.hasMoreElements()) {
                 JarEntry entry = entries.nextElement();
                 if (entry.getName().endsWith(".class")) {
-                    try (InputStream is = jarFile.getInputStream(entry)) {
+                    InputStream is = jarFile.getInputStream(entry);
+                    try {
                         processor.processClass(new ClassReader(is));
+                    } finally {
+                        is.close();
                     }
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            // TODO
         }
     }
 }
