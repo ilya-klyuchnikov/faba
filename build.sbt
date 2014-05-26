@@ -15,3 +15,5 @@ scalacOptions += "-feature"
 javacOptions ++= Seq("-source", "1.6")
 
 fork := true
+
+//javaOptions in run += "-Xmx128M"
