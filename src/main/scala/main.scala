@@ -88,12 +88,13 @@ object Main extends Processor {
       if (reducible) {
         for (i <- argumentTypes.indices) {
           val argType = argumentTypes(i)
-          val sort = argType.getSort
-          if (sort == Type.OBJECT || sort == Type.ARRAY) {
+          val argSort = argType.getSort
+          val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
+          if (isReferenceArg) {
             paramsTime += time(solver.addEquation(new NotNullInAnalysis(RichControlFlow(graph, dfs), In(i)).analyze()))
           }
           if (isReferenceResult || isBooleanResult) {
-            if (sort == Type.OBJECT || sort == Type.ARRAY) {
+            if (isReferenceArg) {
               nullTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.Null)).analyze()))
               notNullTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.NotNull)).analyze()))
             }
@@ -118,13 +119,17 @@ object Main extends Processor {
         val argType: Type = argumentTypes(i)
         val sort = argType.getSort
         if (sort == Type.OBJECT || sort == Type.ARRAY) {
-          solver.addEquation(Equation(Key(method, InOut(i, Values.Null)), Final(Values.Top)))
-          solver.addEquation(Equation(Key(method, InOut(i, Values.NotNull)), Final(Values.Top)))
+          if (isReferenceResult || isBooleanResult) {
+            solver.addEquation(Equation(Key(method, InOut(i, Values.Null)), Final(Values.Top)))
+            solver.addEquation(Equation(Key(method, InOut(i, Values.NotNull)), Final(Values.Top)))
+          }
           solver.addEquation(Equation(Key(method, In(i)), Final(Values.Top)))
         }
         if (argType == Type.BOOLEAN_TYPE) {
-          solver.addEquation(Equation(Key(method, InOut(i, Values.False)), Final(Values.Top)))
-          solver.addEquation(Equation(Key(method, InOut(i, Values.True)), Final(Values.Top)))
+          if (isReferenceResult || isBooleanResult) {
+            solver.addEquation(Equation(Key(method, InOut(i, Values.False)), Final(Values.Top)))
+            solver.addEquation(Equation(Key(method, InOut(i, Values.True)), Final(Values.Top)))
+          }
         }
       }
       if (isReferenceResult) {
@@ -134,7 +139,8 @@ object Main extends Processor {
   }
 
   def printToFile(f: File)(op: PrintWriter => Unit) {
-    f.getParentFile.mkdirs()
+    if (f.getParentFile != null)
+      f.getParentFile.mkdirs()
     val p = new PrintWriter(f)
     try { op(p) } finally { p.close() }
   }
@@ -162,6 +168,12 @@ object Main extends Processor {
         out.println(pp.format(<root>{xmlAnnotations}</root>))
       }
 
+    }
+
+    printToFile(new File(outDir + ".txt")) { out =>
+      for {(k, v) <- solutions} {
+        out.println(XmlUtils.annotationKey(k.method, extras(k.method)) + " " + k.direction + " -> " + v)
+      }
     }
 
     val writingEnd = System.currentTimeMillis()
