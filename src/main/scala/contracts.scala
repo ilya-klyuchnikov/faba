@@ -74,6 +74,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             earlyResult = Some(Final(Values.Top))
         }
       case ATHROW =>
+        // TODO - may be bottom
         earlyResult = Some(Final(Values.Top))
       case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
         val nextInsnIndex = direction match {
@@ -154,8 +155,9 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
       nextFrame
   }
 
-  def generalize(configuration: Conf): Conf = {
-    val frame = configuration.frame
+  // in-place generalization
+  def generalize(conf: Conf): Conf = {
+    val frame = conf.frame
     for (i <- 0 until frame.getLocals) frame.getLocal(i) match {
       case CallResultValue(tp, _) =>
         frame.setLocal(i, new BasicValue(tp))
@@ -187,7 +189,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
       case _ =>
         frame.push(v)
     }
-    configuration
+    conf
   }
 }
 
@@ -252,13 +254,13 @@ case class InOutInterpreter(direction: Direction) extends BasicInterpreter {
               if (isRefRetType)
                 keys = keys + Key(method, Out)
               if (keys.nonEmpty)
-                return CallResultValue(Type.getReturnType(mNode.desc), keys)
+                return CallResultValue(retType, keys)
             case _ =>
               if (isRefRetType)
-                return CallResultValue(Type.getReturnType(mNode.desc), Set(Key(method, Out)))
+                return CallResultValue(retType, Set(Key(method, Out)))
           }
         super.naryOperation(insn, values)
-      case MULTIANEWARRAY | INVOKEDYNAMIC =>
+      case MULTIANEWARRAY =>
         NotNullValue(super.naryOperation(insn, values).getType)
       case _ =>
         super.naryOperation(insn, values)
