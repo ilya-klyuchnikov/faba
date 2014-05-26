@@ -16,7 +16,7 @@ class AbstractValues {
             super(tp);
         }
     }
-    static final BasicValue instanceOfCheckValue = new BasicValue(Type.INT_TYPE) {
+    static final BasicValue InstanceOfCheckValue = new BasicValue(Type.INT_TYPE) {
         @Override
         public boolean equals(Object value) {
             return this == value;
@@ -79,8 +79,8 @@ class AbstractValues {
         if (prev instanceof ParamValue) {
             return curr instanceof ParamValue;
         }
-        if (instanceOfCheckValue == prev) {
-            return instanceOfCheckValue == curr;
+        if (InstanceOfCheckValue == prev) {
+            return InstanceOfCheckValue == curr;
         }
         if (TrueValue == prev) {
             return TrueValue == curr;
@@ -170,6 +170,7 @@ abstract class Analysis<Res> {
     final Deque<PendingAction<Res>> pending = new LinkedList<>();
     final Map<Integer, List<State>> computed = new HashMap<>();
     final Map<Integer, Res> results = new HashMap<>();
+    final Key aKey;
 
     Res earlyResult = null;
 
@@ -186,7 +187,7 @@ abstract class Analysis<Res> {
         methodNode = controlFlow.methodNode;
         method = new Method(controlFlow.className, methodNode.name, methodNode.desc);
         dfsTree = richControlFlow.dfsTree;
-        Key aKey = new Key(method, direction);
+        aKey = new Key(method, direction);
         myIdentity = identity();
     }
 
@@ -324,6 +325,15 @@ abstract class Analysis<Res> {
 
     final BasicValue popValue(Frame<BasicValue> frame) {
         return frame.getStack(frame.getStackSize() - 1);
+    }
+
+    final  <A> List<A> append(List<A> xs, A x) {
+        ArrayList<A> result = new ArrayList<A>();
+        if (xs != null) {
+            result.addAll(xs);
+        }
+        result.add(x);
+        return result;
     }
 }
 

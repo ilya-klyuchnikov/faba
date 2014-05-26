@@ -83,9 +83,52 @@ final class Component<Id> {
         result = 31 * result + ids.hashCode();
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Component{" +
+                "touched=" + touched +
+                ", ids=" + ids +
+                '}';
+    }
 }
 
-interface Result<Id, T> {}
+interface Result<Id, T> {
+    static class ResultUtil<Id, T extends Enum<T>> {
+        private final ELattice<T> lattice;
+        final T top;
+        ResultUtil(ELattice<T> lattice) {
+            this.lattice = lattice;
+            top = lattice.top;
+        }
+
+        Result<Id, T> join(Result<Id, T> r1, Result<Id, T> r2) {
+            if (r1 instanceof Final && ((Final) r1).value == top) {
+                return r1;
+            }
+            if (r2 instanceof Final && ((Final) r2).value == top) {
+                return r2;
+            }
+            if (r1 instanceof Final && r2 instanceof Final) {
+                return new Final<>(lattice.join(((Final<?, T>) r1).value, ((Final<?, T>) r2).value));
+            }
+            if (r1 instanceof Final && r2 instanceof Pending) {
+                Pending<Id, T> pending = (Pending<Id, T>) r2;
+                return new Pending<>(lattice.join(((Final<Id, T>) r1).value, pending.infinum), pending.delta);
+            }
+            if (r1 instanceof Pending && r2 instanceof Final) {
+                Pending<Id, T> pending = (Pending<Id, T>) r1;
+                return new Pending<>(lattice.join(((Final<Id, T>) r2).value, pending.infinum), pending.delta);
+            }
+            Pending<Id, T> pending1 = (Pending<Id, T>) r1;
+            Pending<Id, T> pending2 = (Pending<Id, T>) r2;
+            Set<Component<Id>> delta = new HashSet<Component<Id>>();
+            delta.addAll(pending1.delta);
+            delta.addAll(pending2.delta);
+            return new Pending<>(lattice.join(pending1.infinum, pending2.infinum), delta);
+        }
+    }
+}
 final class Final<Id, T> implements Result<Id, T> {
     final T value;
     Final(T value) {
@@ -118,6 +161,14 @@ final class Pending<Id, T> implements Result<Id, T> {
         this.infinum = infinum;
         this.delta = delta;
     }
+
+    @Override
+    public String toString() {
+        return "Pending{" +
+                "infinum=" + infinum +
+                ", delta=" + delta +
+                '}';
+    }
 }
 
 final class Equation<Id, T> {
@@ -127,6 +178,14 @@ final class Equation<Id, T> {
     Equation(Id id, Result<Id, T> rhs) {
         this.id = id;
         this.rhs = rhs;
+    }
+
+    @Override
+    public String toString() {
+        return "Equation{" +
+                "id=" + id +
+                ", rhs=" + rhs +
+                '}';
     }
 }
 

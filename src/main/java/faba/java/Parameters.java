@@ -12,8 +12,8 @@ import org.objectweb.asm.tree.analysis.Frame;
 
 import java.util.*;
 
+import static faba.java.AbstractValues.InstanceOfCheckValue;
 import static faba.java.AbstractValues.ParamValue;
-import static faba.java.AbstractValues.instanceOfCheckValue;
 import static faba.java.Parameters.*;
 import static org.objectweb.asm.Opcodes.*;
 
@@ -216,7 +216,7 @@ class NonNullInAnalysis extends Analysis<PResult> {
             return;
         }
 
-        if (opcode == IFEQ && popValue(frame) == instanceOfCheckValue) {
+        if (opcode == IFEQ && popValue(frame) == InstanceOfCheckValue) {
             int nextInsnIndex = methodNode.instructions.indexOf(((JumpInsnNode)insnNode).label);
             State nextState = new State(++id, new Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult);
             pending.push(new MakeResult<PResult>(state, subResult, Collections.singletonList(nextState.index)));
@@ -224,7 +224,7 @@ class NonNullInAnalysis extends Analysis<PResult> {
             return;
         }
 
-        if (opcode == IFNE && popValue(frame) == instanceOfCheckValue) {
+        if (opcode == IFNE && popValue(frame) == InstanceOfCheckValue) {
             int nextInsnIndex = insnIndex + 1;
             State nextState = new State(++id, new Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult);
             pending.push(new MakeResult<PResult>(state, subResult, Collections.singletonList(nextState.index)));
@@ -253,16 +253,6 @@ class NonNullInAnalysis extends Analysis<PResult> {
         }
 
     }
-
-    private <A> List<A> append(List<A> xs, A x) {
-        ArrayList<A> result = new ArrayList<A>();
-        if (xs != null) {
-            result.addAll(xs);
-        }
-        result.add(x);
-        return result;
-    }
-
 
     private void execute(Frame<BasicValue> frame, AbstractInsnNode insnNode) throws AnalyzerException {
         switch (insnNode.getType()) {
@@ -307,7 +297,7 @@ class NonNullInInterpreter extends BasicInterpreter {
                 break;
             case INSTANCEOF:
                 if (value instanceof ParamValue) {
-                    return instanceOfCheckValue;
+                    return InstanceOfCheckValue;
                 }
                 break;
             default:

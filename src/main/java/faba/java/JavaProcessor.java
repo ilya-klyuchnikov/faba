@@ -55,10 +55,23 @@ public class JavaProcessor implements Processor {
                         Type argType = argumentTypes[i];
                         int argSort = argType.getSort();
                         boolean isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY;
+                        boolean isBooleanArg = Type.BOOLEAN_TYPE.equals(argType);
                         if (isReferenceArg) {
-                            Equation<Key, Value> equation = new NonNullInAnalysis(new RichControlFlow(graph, dfs), new In(i)).analyze();
-                            toAdd.add(equation);
+                            toAdd.add(new NonNullInAnalysis(new RichControlFlow(graph, dfs), new In(i)).analyze());
                         }
+                        if (isReferenceResult || isBooleanResult) {
+                            if (isReferenceArg) {
+                                toAdd.add(new InOutAnalysis(new RichControlFlow(graph, dfs), new InOut(i, Value.Null)).analyze());
+                                toAdd.add(new InOutAnalysis(new RichControlFlow(graph, dfs), new InOut(i, Value.NotNull)).analyze());
+                            }
+                            if (isBooleanArg) {
+                                toAdd.add(new InOutAnalysis(new RichControlFlow(graph, dfs), new InOut(i, Value.False)).analyze());
+                                toAdd.add(new InOutAnalysis(new RichControlFlow(graph, dfs), new InOut(i, Value.True)).analyze());
+                            }
+                        }
+                    }
+                    if (isReferenceResult) {
+                        toAdd.add(new InOutAnalysis(new RichControlFlow(graph, dfs), new Out()).analyze());
                     }
                     added = true;
                     for (Equation<Key, Value> equation : toAdd) {
@@ -84,11 +97,11 @@ public class JavaProcessor implements Processor {
                 boolean isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY;
 
                 if (isReferenceArg) {
+                    solver.addEquation(new Equation<Key, Value>(new Key(method, new In(i)), new Final<Key, Value>(Value.Top)));
                     if (isReferenceResult || isBooleanResult) {
                         solver.addEquation(new Equation<Key, Value>(new Key(method, new InOut(i, Value.Null)), new Final<Key, Value>(Value.Top)));
                         solver.addEquation(new Equation<Key, Value>(new Key(method, new InOut(i, Value.NotNull)), new Final<Key, Value>(Value.Top)));
                     }
-                    solver.addEquation(new Equation<Key, Value>(new Key(method, new In(i)), new Final<Key, Value>(Value.Top)));
                 }
                 if (Type.BOOLEAN_TYPE.equals(argType)) {
                     if (isReferenceResult || isBooleanResult) {

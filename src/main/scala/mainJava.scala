@@ -35,17 +35,21 @@ class Main extends JavaProcessor {
 
     val solvingEnd: Long = System.currentTimeMillis
 
+    var inferred = 0
+
     printToFile(new File(outDir + ".txt")) { out =>
       for {d <- solutions.entrySet().iterator()} {
         if (d.getValue != Value.Top && d.getValue != Value.Bot) {
           val key: Key = d.getKey
-          out.println(Util.annotationKey(key.method, extras.get(key.method), key.direction));
+          out.println(Util.annotationKey(key.method, extras.get(key.method)) + " " + key.direction + " -> " + d.getValue)
+          inferred += 1
         }
       }
     }
 
     println(s"indexing took ${(indexEnd - indexStart) / 1000.0} sec")
     println(s"solving took ${(solvingEnd - indexEnd) / 1000.0} sec")
+    println(s"inferred ${inferred} annotations")
 
   }
 }

@@ -81,11 +81,11 @@ final class In implements Direction {
 
 final class InOut implements Direction {
     final int paramIndex;
-    final Value value;
+    final Value inValue;
 
-    InOut(int paramIndex, Value value) {
+    InOut(int paramIndex, Value inValue) {
         this.paramIndex = paramIndex;
-        this.value = value;
+        this.inValue = inValue;
     }
 
     @Override
@@ -96,7 +96,7 @@ final class InOut implements Direction {
         InOut inOut = (InOut) o;
 
         if (paramIndex != inOut.paramIndex) return false;
-        if (value != inOut.value) return false;
+        if (inValue != inOut.inValue) return false;
 
         return true;
     }
@@ -104,15 +104,23 @@ final class InOut implements Direction {
     @Override
     public int hashCode() {
         int result = paramIndex;
-        result = 31 * result + value.hashCode();
+        result = 31 * result + inValue.hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "InOut(" +
+                paramIndex +
+                ", " + inValue +
+                ')';
     }
 }
 
 final class Out implements Direction {
     @Override
     public String toString() {
-        return "Out()";
+        return "Out";
     }
 
     @Override
