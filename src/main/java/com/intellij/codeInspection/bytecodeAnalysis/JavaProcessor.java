@@ -5,15 +5,12 @@ import org.objectweb.asm.*;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.analysis.AnalyzerException;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 public class JavaProcessor implements Processor {
     final static ELattice<Value> valueLattice = new ELattice<Value>(Value.Bot, Value.Top);
     final Solver<Key, Value> solver = new Solver<Key, Value>(valueLattice);
-    final Map<Method, MethodExtra> extras = new HashMap<Method, MethodExtra>();
 
     @Override
     public void processClass(final ClassReader classReader) {
@@ -34,7 +31,6 @@ public class JavaProcessor implements Processor {
 
     void processMethod(String className, MethodNode methodNode) {
         Method method = new Method(className, methodNode.name, methodNode.desc);
-        extras.put(method, new MethodExtra(methodNode.signature, methodNode.access));
 
         ControlFlowGraph graph = cfg.buildControlFlowGraph(className, methodNode);
         boolean added = false;

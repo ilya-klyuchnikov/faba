@@ -16,7 +16,6 @@ object Main extends Processor {
   import faba.parameters._
 
   val solver = new Solver[Key, Values.Value]()
-  var extras = Map[Method, MethodExtra]()
 
   var paramsTime: Long = 0
   var outTime: Long = 0
@@ -70,7 +69,6 @@ object Main extends Processor {
 
   def processMethod(className: String, methodNode: MethodNode) {
     val method = Method(className, methodNode.name, methodNode.desc)
-    extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
 
     val graph = buildCFG(className, methodNode)
 
@@ -163,7 +161,7 @@ object Main extends Processor {
       solutions.groupBy(_._1.method.internalPackageName)
 
     for ((pkg, solution) <- byPackage) {
-      val xmlAnnotations = XmlUtils.toXmlAnnotations(solution, extras)
+      val xmlAnnotations = XmlUtils.toXmlAnnotations(solution)
       printToFile(new File(s"${outDir}${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
         out.println(pp.format(<root>{xmlAnnotations}</root>))
       }
@@ -172,7 +170,7 @@ object Main extends Processor {
 
     printToFile(new File(outDir + ".txt")) { out =>
       for {(k, v) <- solutions} {
-        out.println(XmlUtils.annotationKey(k.method, extras(k.method)) + " " + k.direction + " -> " + v)
+        out.println(XmlUtils.annotationKey(k.method) + " " + k.direction + " -> " + v)
       }
     }
 
