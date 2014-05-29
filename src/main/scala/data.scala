@@ -42,6 +42,8 @@ object `package` {
 
 object XmlUtils {
 
+  val REGEX_PATTERN = "(?<=[^\\$\\.])\\${1}(?=[^\\$])".r // disallow .$ or $$
+
   def toXmlAnnotations(solutions: Iterable[(Key, Value)]): List[Elem] = {
     var annotations = Map[String, List[Elem]]()
     val inOuts = mutable.HashMap[Method, List[(InOut, Value)]]()
@@ -91,29 +93,44 @@ object XmlUtils {
     case _ => sys.error(s"unexpected $v")
   }
 
+  // the main logic to interact with IDEA
   def annotationKey(method: Method): String =
     if (method.methodName == "<init>")
-      s"${canonical(method.internalClassName)} ${simpleName(method.internalClassName)}${parameters(method)}"
+      s"${internalName2Idea(method.internalClassName)} ${simpleName(method.internalClassName)}${parameters(method)}"
     else
-      s"${canonical(method.internalClassName)} ${returnType(method)} ${method.methodName}${parameters(method)}"
-
+      s"${internalName2Idea(method.internalClassName)} ${returnType(method)} ${method.methodName}${parameters(method)}"
 
   private def returnType(method: Method): String =
-    canonical(Type.getReturnType(method.methodDesc).getClassName)
-
-  def canonical(name: String): String =
-    name.replace('/', '.').replace('$', '.')
+    binaryName2Idea(Type.getReturnType(method.methodDesc).getClassName)
 
   private def simpleName(internalName: String): String = {
-    val cn = canonical(internalName)
-    cn.lastIndexOf('.') match {
-      case -1 => cn
-      case i => cn.substring(i + 1)
+    val ideaName = internalName2Idea(internalName)
+    ideaName.lastIndexOf('.') match {
+      case -1 => ideaName
+      case i => ideaName.substring(i + 1)
     }
   }
 
   private def parameters(method: Method): String =
-    Type.getArgumentTypes(method.methodDesc).map(t => canonical(t.getClassName)).mkString("(", ", ",")")
+    Type.getArgumentTypes(method.methodDesc).map(t => binaryName2Idea(t.getClassName)).mkString("(", ", ",")")
 
+  // class FQN as it rendered by IDEA in external annotations
+  private def internalName2Idea(internalName: String): String = {
+    val binaryName = Type.getObjectType(internalName).getClassName
+    if (binaryName.indexOf('$') >= 0) {
+      REGEX_PATTERN.replaceAllIn(binaryName, "\\.")
+    } else {
+      binaryName
+    }
+  }
+
+  // class FQN as it rendered by IDEA in external annotations
+  private def binaryName2Idea(binaryName: String): String = {
+    if (binaryName.indexOf('$') >= 0) {
+      REGEX_PATTERN.replaceAllIn(binaryName, "\\.")
+    } else {
+      binaryName
+    }
+  }
 }
 
