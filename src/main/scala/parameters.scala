@@ -56,7 +56,7 @@ object Result {
     case (Return, _) => r2
     case (_, Return) => r1
     case (NPE, _) => NPE
-    case (_, NPE) => r2
+    case (_, NPE) => NPE
     case (ConditionalNPE(e1), ConditionalNPE(e2)) => ConditionalNPE(e1 meet e2)
   }
 }
