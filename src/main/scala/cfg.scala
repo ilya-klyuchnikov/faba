@@ -1,14 +1,40 @@
 package faba.cfg
 
+import org.objectweb.asm.Opcodes._
+import org.objectweb.asm.tree.{AbstractInsnNode, MethodNode}
+import org.objectweb.asm.tree.analysis._
+
+import scala.collection.JavaConversions._
 import scala.collection.immutable.HashSet
 import scala.collection.mutable
-
-import org.objectweb.asm.tree.MethodNode
-import org.objectweb.asm.tree.analysis.{BasicInterpreter, Analyzer}
 
 object `package` {
   def buildControlFlowGraph(className: String, methodNode: MethodNode): ControlFlowGraph =
     ControlFlowBuilder(className, methodNode).buildCFG()
+
+  /**
+   * a set (safe upper bound) of instructions where the result was born
+   */
+  def resultOrigins(className: String, methodNode: MethodNode): Set[Int] = {
+    val frames = new Analyzer(OriginInterpreter).analyze(className, methodNode)
+    val insns = methodNode.instructions
+    var result = Set[Int]()
+    for (i <- 0 until frames.length) {
+      val insnNode = insns.get(i)
+      insnNode.getOpcode match {
+        case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN =>
+          for (sourceInsn <- frames(i).pop().insns)
+            result = result + insns.indexOf(sourceInsn)
+        case _ =>
+      }
+    }
+    result
+  }
+
+  object OriginInterpreter extends SourceInterpreter {
+    override def copyOperation(insn: AbstractInsnNode, value: SourceValue) =
+      value
+  }
 
   // Graphs: Theory and Algorithms. by K. Thulasiraman , M. N. S. Swamy (1992)
   // 11.7.2 DFS of a directed graph
