@@ -125,12 +125,16 @@ private case class ControlFlowBuilder(className: String,
   }
 
   override protected def newControlFlowEdge(insn: Int, successor: Int) {
-    transitions(insn) = successor :: transitions(insn)
+    if (!transitions(insn).contains(successor)) {
+      transitions(insn) = successor :: transitions(insn)
+    }
   }
 
   override protected def newControlFlowExceptionEdge(insn: Int, successor: Int): Boolean = {
-    transitions(insn) = successor :: transitions(insn)
-    errorTransitions = errorTransitions + (insn -> successor)
+    if (!transitions(insn).contains(successor)) {
+      transitions(insn) = successor :: transitions(insn)
+      errorTransitions = errorTransitions + (insn -> successor)
+    }
     true
   }
 }
