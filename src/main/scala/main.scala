@@ -24,6 +24,7 @@ object Main extends Processor {
   var nullTime: Long = 0
   var notNullTime: Long = 0
   var cfgTime: Long = 0
+  var resultOriginsTime: Long = 0
   var reducibleTime: Long = 0
   var dfsTime: Long = 0
 
@@ -53,6 +54,13 @@ object Main extends Processor {
     result
   }
 
+  def buildResultOrigins(className: String, methodNode: MethodNode) = {
+    val start = System.currentTimeMillis()
+    val result = cfg.resultOrigins(className, methodNode)
+    resultOriginsTime += System.currentTimeMillis() - start
+    result
+  }
+
   def isReducible(graph: ControlFlowGraph, dfs: DFSTree): Boolean = {
     val start = System.currentTimeMillis()
     val result = cfg.reducible(graph, dfs)
@@ -68,10 +76,8 @@ object Main extends Processor {
   }
 
   def processMethod(className: String, methodNode: MethodNode) {
-    val method = Method(className, methodNode.name, methodNode.desc)
 
     val graph = buildCFG(className, methodNode)
-
     var added = false
     val argumentTypes = Type.getArgumentTypes(methodNode.desc)
     val resultType = Type.getReturnType(methodNode.desc)
@@ -84,6 +90,7 @@ object Main extends Processor {
       val dfs = buildDFSTree(graph.transitions)
       val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
       if (reducible) {
+        val resultOrigins = buildResultOrigins(className, methodNode)
         for (i <- argumentTypes.indices) {
           val argType = argumentTypes(i)
           val argSort = argType.getSort
@@ -93,17 +100,17 @@ object Main extends Processor {
           }
           if (isReferenceResult || isBooleanResult) {
             if (isReferenceArg) {
-              nullTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.Null)).analyze()))
-              notNullTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.NotNull)).analyze()))
+              nullTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.Null), resultOrigins).analyze()))
+              notNullTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.NotNull), resultOrigins).analyze()))
             }
             if (argType == Type.BOOLEAN_TYPE) {
-              falseTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.False)).analyze()))
-              trueTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.True)).analyze()))
+              falseTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.False), resultOrigins).analyze()))
+              trueTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.True), resultOrigins).analyze()))
             }
           }
         }
         if (isReferenceResult) {
-          outTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), Out).analyze()))
+          outTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), Out, resultOrigins).analyze()))
         }
         added = true
       } else {
@@ -189,6 +196,7 @@ object Main extends Processor {
     println(s"null        ${nullTime / 1000.0} sec")
     println(s"!null       ${notNullTime / 1000.0} sec")
     println(s"cfg         ${cfgTime / 1000.0} sec")
+    println(s"origins     ${resultOriginsTime / 1000.0} sec")
     println(s"dfs         ${dfsTime / 1000.0} sec")
     println(s"reducible   ${reducibleTime / 1000.0} sec")
   }
