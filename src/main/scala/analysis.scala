@@ -3,11 +3,12 @@ package faba.analysis
 import scala.collection.mutable
 import scala.collection.immutable.IntMap
 
+import org.objectweb.asm.tree.analysis.{BasicValue, Frame}
+import org.objectweb.asm.{Opcodes, Type}
+
 import faba.cfg._
 import faba.data._
 import faba.engine._
-import org.objectweb.asm.tree.analysis.{BasicValue, Frame}
-import org.objectweb.asm.{Opcodes, Type}
 
 case class ParamValue(tp: Type) extends BasicValue(tp)
 case class InstanceOfCheckValue() extends BasicValue(Type.INT_TYPE)
@@ -105,7 +106,7 @@ abstract class Analysis[Res] {
     val args = Type.getArgumentTypes(methodNode.desc)
     var local = 0
     if ((methodNode.access & Opcodes.ACC_STATIC) == 0) {
-      val basicValue = new BasicValue(Type.getObjectType(controlFlow.className))
+      val basicValue = new NotNullValue(Type.getObjectType(controlFlow.className))
       frame.setLocal(local, basicValue)
       local += 1
     }
