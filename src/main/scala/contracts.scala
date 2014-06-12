@@ -74,8 +74,8 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             earlyResult = Some(Final(Values.Top))
         }
       case ATHROW =>
-        // TODO - may be bottom
-        earlyResult = Some(Final(Values.Top))
+        results = results + (stateIndex -> Final(Values.Bot))
+        computed = computed.updated(insnIndex, state :: computed(insnIndex))
       case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
         val nextInsnIndex = direction match {
           case InOut(_, Values.Null) =>
