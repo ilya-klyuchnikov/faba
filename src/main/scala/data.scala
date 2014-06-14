@@ -27,7 +27,7 @@ case class Key(method: Method, direction: Direction) {
   override def toString = direction match {
     case Out => s"$method"
     case In(index) => s"$method #$index"
-    case InOut(index, _) => s"$method #$index"
+    case InOut(index, v) => s"$method #$index #$v"
   }
 }
 
@@ -109,7 +109,7 @@ object Utils {
       val contractValues = inOuts.map { case (InOut(i, inValue), outValue) =>
         (0 until arity).map { j =>
           if (i == j) contractValueString(inValue) else "_" }.mkString("", ",", s"->${contractValueString(outValue)}")
-      }.sorted.mkString("\"", ";", "\"")
+      }.sorted.mkString(";")
       contracts = contracts + (key -> contractValues)
     }
     Annotations(notNulls, contracts)

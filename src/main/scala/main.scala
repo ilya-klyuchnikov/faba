@@ -8,7 +8,7 @@ import faba.data._
 import faba.source._
 import scala.xml.PrettyPrinter
 
-trait MainProcessor extends FabaProcessor {
+class MainProcessor extends FabaProcessor {
 
   var paramsTime: Long = 0
   var outTime: Long = 0
@@ -140,6 +140,12 @@ trait MainProcessor extends FabaProcessor {
     println(s"origins     ${resultOriginsTime / 1000.0} sec")
     println(s"dfs         ${dfsTime / 1000.0} sec")
     println(s"reducible   ${reducibleTime / 1000.0} sec")
+  }
+
+  def process(source: Source): Annotations = {
+    source.process(this)
+    val solutions = solver.solve().filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
+    Utils.toAnnotations(solutions)
   }
 }
 
