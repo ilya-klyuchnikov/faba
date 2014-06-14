@@ -16,7 +16,7 @@ object `package` {
    * a set (safe upper bound) of instructions where the result was born
    */
   def resultOrigins(className: String, methodNode: MethodNode): Set[Int] = {
-    val frames = new Analyzer(OriginInterpreter).analyze(className, methodNode)
+    val frames = new Analyzer(MinimalOriginInterpreter).analyze(className, methodNode)
     val insns = methodNode.instructions
     var result = Set[Int]()
     for (i <- 0 until frames.length) {
@@ -29,11 +29,6 @@ object `package` {
       }
     }
     result
-  }
-
-  object OriginInterpreter extends SourceInterpreter {
-    override def copyOperation(insn: AbstractInsnNode, value: SourceValue) =
-      value
   }
 
   // Graphs: Theory and Algorithms. by K. Thulasiraman , M. N. S. Swamy (1992)
@@ -128,6 +123,47 @@ object `package` {
 
     true
   }
+}
+
+object MinimalOriginInterpreter extends SourceInterpreter {
+  val sourceVal1 = new SourceValue(1)
+  val sourceVal2 = new SourceValue(2)
+
+  override def newOperation(insn: AbstractInsnNode): SourceValue = {
+    val result = super.newOperation(insn)
+    insn.getOpcode match {
+      case ICONST_0 | ICONST_1 | ACONST_NULL | LDC | NEW =>
+        result
+      case _ =>
+        new SourceValue(result.size)
+    }
+  }
+
+  override def unaryOperation(insn: AbstractInsnNode, value: SourceValue) = {
+    val result = super.unaryOperation(insn, value)
+    insn.getOpcode match {
+      case CHECKCAST | NEWARRAY | ANEWARRAY =>
+        result
+      case _ =>
+        new SourceValue(result.size)
+    }
+  }
+
+  override def binaryOperation(insn: AbstractInsnNode, value1: SourceValue, value2: SourceValue) =
+    insn.getOpcode match {
+      case LALOAD | DALOAD | LADD | DADD | LSUB | DSUB | LMUL | DMUL |
+           LDIV | DDIV | LREM | LSHL | LSHR | LUSHR | LAND | LOR | LXOR =>
+        sourceVal2
+      case _ =>
+        sourceVal1
+    }
+
+  override def ternaryOperation(insn: AbstractInsnNode, value1: SourceValue, value2: SourceValue, value3: SourceValue) =
+    sourceVal1
+
+
+  override def copyOperation(insn: AbstractInsnNode, value: SourceValue) =
+    value
 }
 
 case class ControlFlowGraph(className: String,
