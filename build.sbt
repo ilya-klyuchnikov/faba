@@ -10,6 +10,8 @@ libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "1.0.1"
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.1.6" % "test"
 
+libraryDependencies += "xmlunit" % "xmlunit" % "1.5" % "test"
+
 scalacOptions += "-feature"
 
 javacOptions ++= Seq("-source", "1.6")
