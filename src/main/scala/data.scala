@@ -40,7 +40,9 @@ object `package` {
   type Value = Values.Value
 }
 
-object XmlUtils {
+case class Annotations(notNulls: Set[Key], contracts: Map[Key, String])
+
+object Utils {
 
   val REGEX_PATTERN = "(?<=[^\\$\\.])\\${1}(?=[^\\$])".r // disallow .$ or $$
 
@@ -52,7 +54,7 @@ object XmlUtils {
         case In(paramIndex) if value == Values.NotNull =>
           val method = key.method
           annotations = annotations.updated(
-            s"${annotationKey(method)} ${paramIndex}",
+            s"${annotationKey(method)} $paramIndex",
             List(<annotation name='org.jetbrains.annotations.NotNull'/>)
           )
         case Out if value == Values.NotNull =>
@@ -73,7 +75,7 @@ object XmlUtils {
       val contractValues = inOuts.map { case (InOut(i, inValue), outValue) =>
         (0 until arity).map { j =>
           if (i == j) contractValueString(inValue) else "_" }.mkString("", ",", s"->${contractValueString(outValue)}")
-      }.mkString("\"", ";", "\"")
+      }.sorted.mkString("\"", ";", "\"")
       val contractAnnotation =
         <annotation name='org.jetbrains.annotations.Contract'>
           <val val={contractValues}/>
@@ -83,6 +85,34 @@ object XmlUtils {
     annotations.map {
       case (k, v) => <item name={k}>{v}</item>
     }.toList.sortBy(s => (s \\ "@name").toString())
+  }
+
+  def toAnnotations(solutions: Iterable[(Key, Value)]): Annotations = {
+    val inOuts = mutable.HashMap[Method, List[(InOut, Value)]]()
+    var notNulls = Set[Key]()
+    var contracts = Map[Key, String]()
+    for ((key, value) <- solutions) {
+      key.direction match {
+        case In(paramIndex) if value == Values.NotNull =>
+          notNulls = notNulls + key
+        case Out if value == Values.NotNull =>
+          notNulls = notNulls + key
+        case inOut:InOut =>
+          inOuts(key.method) = (inOut, value) :: inOuts.getOrElse(key.method, Nil)
+        case _ =>
+
+      }
+    }
+    for ((method, inOuts) <- inOuts) {
+      val key = Key(method, Out)
+      val arity = Type.getArgumentTypes(method.methodDesc).size
+      val contractValues = inOuts.map { case (InOut(i, inValue), outValue) =>
+        (0 until arity).map { j =>
+          if (i == j) contractValueString(inValue) else "_" }.mkString("", ",", s"->${contractValueString(outValue)}")
+      }.sorted.mkString("\"", ";", "\"")
+      contracts = contracts + (key -> contractValues)
+    }
+    Annotations(notNulls, contracts)
   }
 
   def contractValueString(v: Value): String = v match {
@@ -114,7 +144,6 @@ object XmlUtils {
   private def parameters(method: Method): String =
     Type.getArgumentTypes(method.methodDesc).map(t => binaryName2Idea(t.getClassName)).mkString("(", ", ",")")
 
-  // class FQN as it rendered by IDEA in external annotations
   private def internalName2Idea(internalName: String): String = {
     val binaryName = Type.getObjectType(internalName).getClassName
     if (binaryName.indexOf('$') >= 0) {
