@@ -3,10 +3,18 @@ package faba.test
 import java.io.File
 import javax.xml.parsers.DocumentBuilderFactory
 
+import faba.Main
 import org.custommonkey.xmlunit.Diff
 import org.scalatest.FunSuite
 
 class IntegrationSuite extends FunSuite {
+
+  test("jdk7-rt.jar") {
+    Main.main(
+      Array("/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/jre/lib/rt.jar", "test-results/jdk7-rt.jar")
+    )
+    compareOutputs(new File("results/jdk7-rt.jar"), new File("test-results/jdk7-rt.jar"))
+  }
 
   def compareOutputs(dir1: File, dir2: File) {
     val paths = annotationXmlPaths(dir1).toSet.toList.sorted
