@@ -1,21 +1,14 @@
 package faba
 
-import org.objectweb.asm.{MethodVisitor, Opcodes, ClassVisitor, ClassReader, Type}
 import org.objectweb.asm.tree.MethodNode
 import _root_.java.io.{PrintWriter, File}
 
 import faba.cfg._
 import faba.data._
-import faba.engine._
 import faba.source._
 import scala.xml.PrettyPrinter
 
-object Main extends Processor {
-
-  import faba.contracts._
-  import faba.parameters._
-
-  val solver = new Solver[Key, Values.Value]()
+class MainProcessor extends FabaProcessor {
 
   var paramsTime: Long = 0
   var outTime: Long = 0
@@ -24,116 +17,78 @@ object Main extends Processor {
   var nullTime: Long = 0
   var notNullTime: Long = 0
   var cfgTime: Long = 0
+  var resultOriginsTime: Long = 0
   var reducibleTime: Long = 0
   var dfsTime: Long = 0
 
-  override def processClass(classReader: ClassReader): Unit =
-    classReader.accept(new ClassVisitor(Opcodes.ASM5) {
-      override def visitMethod(access: Int, name: String, desc: String, signature: String, exceptions: Array[String]) = {
-        val node = new MethodNode(Opcodes.ASM5, access, name, desc, signature, exceptions)
-        new MethodVisitor(Opcodes.ASM5, node) {
-          override def visitEnd(): Unit = {
-            super.visitEnd()
-            processMethod(classReader.getClassName, node)
-          }
-        }
-      }
-    }, 0)
-
-  def time(f: => Unit): Long = {
+  override def buildCFG(className: String, methodNode: MethodNode) = {
     val start = System.currentTimeMillis()
-    f
-    System.currentTimeMillis() - start
-  }
-
-  def buildCFG(className: String, methodNode: MethodNode) = {
-    val start = System.currentTimeMillis()
-    val result = cfg.buildControlFlowGraph(className, methodNode)
+    val result = super.buildCFG(className, methodNode)
     cfgTime += System.currentTimeMillis() - start
     result
   }
 
-  def isReducible(graph: ControlFlowGraph, dfs: DFSTree): Boolean = {
+  override def buildResultOrigins(className: String, methodNode: MethodNode) = {
     val start = System.currentTimeMillis()
-    val result = cfg.reducible(graph, dfs)
+    val result = super.buildResultOrigins(className, methodNode)
+    resultOriginsTime += System.currentTimeMillis() - start
+    result
+  }
+
+  override def isReducible(graph: ControlFlowGraph, dfs: DFSTree): Boolean = {
+    val start = System.currentTimeMillis()
+    val result = super.isReducible(graph, dfs)
     reducibleTime += System.currentTimeMillis() - start
     result
   }
 
-  def buildDFSTree(transitions: Array[List[Int]]): DFSTree = {
+  override def buildDFSTree(transitions: Array[List[Int]]): DFSTree = {
     val start = System.currentTimeMillis()
-    val result = cfg.buildDFSTree(transitions)
+    val result = super.buildDFSTree(transitions)
     dfsTime += System.currentTimeMillis() - start
     result
   }
 
-  def processMethod(className: String, methodNode: MethodNode) {
-    val method = Method(className, methodNode.name, methodNode.desc)
+  override def notNullParamEquation(richControlFlow: RichControlFlow, i: Int) = {
+    val start = System.currentTimeMillis()
+    val result = super.notNullParamEquation(richControlFlow, i)
+    paramsTime += System.currentTimeMillis() - start
+    result
+  }
 
-    val graph = buildCFG(className, methodNode)
+  override def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int) = {
+    val start = System.currentTimeMillis()
+    val result = super.notNullContractEquation(richControlFlow, resultOrigins, i)
+    notNullTime += System.currentTimeMillis() - start
+    result
+  }
 
-    var added = false
-    val argumentTypes = Type.getArgumentTypes(methodNode.desc)
-    val resultType = Type.getReturnType(methodNode.desc)
-    val resultSort = resultType.getSort
+  override def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int) = {
+    val start = System.currentTimeMillis()
+    val result = super.nullContractEquation(richControlFlow, resultOrigins, i)
+    nullTime += System.currentTimeMillis() - start
+    result
+  }
 
-    val isReferenceResult = resultSort == Type.OBJECT || resultSort == Type.ARRAY
-    val isBooleanResult = Type.BOOLEAN_TYPE == resultType
+  override def trueContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int) = {
+    val start = System.currentTimeMillis()
+    val result = super.trueContractEquation(richControlFlow, resultOrigins, i)
+    trueTime += System.currentTimeMillis() - start
+    result
+  }
 
-    if (graph.transitions.nonEmpty)  {
-      val dfs = buildDFSTree(graph.transitions)
-      val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
-      if (reducible) {
-        for (i <- argumentTypes.indices) {
-          val argType = argumentTypes(i)
-          val argSort = argType.getSort
-          val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
-          if (isReferenceArg) {
-            paramsTime += time(solver.addEquation(new NotNullInAnalysis(RichControlFlow(graph, dfs), In(i)).analyze()))
-          }
-          if (isReferenceResult || isBooleanResult) {
-            if (isReferenceArg) {
-              nullTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.Null)).analyze()))
-              notNullTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.NotNull)).analyze()))
-            }
-            if (argType == Type.BOOLEAN_TYPE) {
-              falseTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.False)).analyze()))
-              trueTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), InOut(i, Values.True)).analyze()))
-            }
-          }
-        }
-        if (isReferenceResult) {
-          outTime += time(solver.addEquation(new InOutAnalysis(RichControlFlow(graph, dfs), Out).analyze()))
-        }
-        added = true
-      } else {
-        println(s"Warning: CFG for $className ${methodNode.name}${methodNode.desc} is not reducible. Skipped")
-      }
-    }
+  override def falseContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int) = {
+    val start = System.currentTimeMillis()
+    val result = super.falseContractEquation(richControlFlow, resultOrigins, i)
+    falseTime += System.currentTimeMillis() - start
+    result
+  }
 
-    if (!added) {
-      val method = Method(className, methodNode.name, methodNode.desc)
-      for (i <- argumentTypes.indices) {
-        val argType: Type = argumentTypes(i)
-        val sort = argType.getSort
-        if (sort == Type.OBJECT || sort == Type.ARRAY) {
-          if (isReferenceResult || isBooleanResult) {
-            solver.addEquation(Equation(Key(method, InOut(i, Values.Null)), Final(Values.Top)))
-            solver.addEquation(Equation(Key(method, InOut(i, Values.NotNull)), Final(Values.Top)))
-          }
-          solver.addEquation(Equation(Key(method, In(i)), Final(Values.Top)))
-        }
-        if (argType == Type.BOOLEAN_TYPE) {
-          if (isReferenceResult || isBooleanResult) {
-            solver.addEquation(Equation(Key(method, InOut(i, Values.False)), Final(Values.Top)))
-            solver.addEquation(Equation(Key(method, InOut(i, Values.True)), Final(Values.Top)))
-          }
-        }
-      }
-      if (isReferenceResult) {
-        solver.addEquation(Equation(Key(method, Out), Final(Values.Top)))
-      }
-    }
+  override def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int]) = {
+    val start = System.currentTimeMillis()
+    val result = super.outContractEquation(richControlFlow, resultOrigins)
+    outTime += System.currentTimeMillis() - start
+    result
   }
 
   def printToFile(f: File)(op: PrintWriter => Unit) {
@@ -161,16 +116,9 @@ object Main extends Processor {
       solutions.groupBy(_._1.method.internalPackageName)
 
     for ((pkg, solution) <- byPackage) {
-      val xmlAnnotations = XmlUtils.toXmlAnnotations(solution)
+      val xmlAnnotations = Utils.toXmlAnnotations(solution)
       printToFile(new File(s"${outDir}${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
         out.println(pp.format(<root>{xmlAnnotations}</root>))
-      }
-
-    }
-
-    printToFile(new File(outDir + ".txt")) { out =>
-      for {(k, v) <- solutions} {
-        out.println(XmlUtils.annotationKey(k.method) + " " + k.direction + " -> " + v)
       }
     }
 
@@ -189,10 +137,19 @@ object Main extends Processor {
     println(s"null        ${nullTime / 1000.0} sec")
     println(s"!null       ${notNullTime / 1000.0} sec")
     println(s"cfg         ${cfgTime / 1000.0} sec")
+    println(s"origins     ${resultOriginsTime / 1000.0} sec")
     println(s"dfs         ${dfsTime / 1000.0} sec")
     println(s"reducible   ${reducibleTime / 1000.0} sec")
   }
 
+  def process(source: Source): Annotations = {
+    source.process(this)
+    val solutions = solver.solve().filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
+    Utils.toAnnotations(solutions)
+  }
+}
+
+object Main extends MainProcessor {
   def main(args: Array[String]) {
     if (args.length != 2) {
       println(s"Usage: faba.Main inputJar outputDir")
@@ -200,5 +157,15 @@ object Main extends Processor {
       process(JarFileSource(new File(args(0))), args(1))
     }
   }
+}
 
+object MainParams extends MainProcessor {
+  override val processContracts = false
+  def main(args: Array[String]) {
+    if (args.length != 2) {
+      println(s"Usage: faba.MainParams inputJar outputDir")
+    } else {
+      process(JarFileSource(new File(args(0))), args(1))
+    }
+  }
 }

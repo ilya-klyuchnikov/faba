@@ -213,7 +213,7 @@ object Interpreter extends BasicInterpreter {
       _subResult = NPE
     }
     opCode match {
-      case INVOKESTATIC | INVOKESPECIAL =>
+      case INVOKESTATIC | INVOKESPECIAL /*| INVOKEVIRTUAL | INVOKEINTERFACE*/ =>
         val mNode = insn.asInstanceOf[MethodInsnNode]
         for (i <- shift until values.size()) {
           if (values.get(i).isInstanceOf[ParamValue]) {

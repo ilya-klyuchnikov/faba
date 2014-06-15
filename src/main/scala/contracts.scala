@@ -1,5 +1,7 @@
 package faba.contracts
 
+import scala.annotation.switch
+
 import org.objectweb.asm.{Handle, Type}
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.tree.analysis.{BasicValue, BasicInterpreter, Frame}
@@ -10,12 +12,12 @@ import faba.cfg._
 import faba.data._
 import faba.engine._
 
-class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction) extends Analysis[Result[Key, Value]] {
+class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Set[Int]) extends Analysis[Result[Key, Value]] {
   type MyResult = Result[Key, Value]
 
   override val identity = Final(Values.Bot)
 
-  private val interpreter = InOutInterpreter(direction)
+  private val interpreter = InOutInterpreter(direction, methodNode.instructions, resultOrigins)
   private val optIn: Option[Value] = direction match {
     case InOut(_, in) => Some(in)
     case _ => None
@@ -25,7 +27,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     subResults.reduce(_ join _)
 
   override def mkEquation(result: MyResult): Equation[Key, Value] =
-      Equation(aKey, result)
+    Equation(aKey, result)
 
   override def isEarlyResult(res: MyResult): Boolean = res match {
     case Final(Values.Top)      => true
@@ -74,8 +76,8 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             earlyResult = Some(Final(Values.Top))
         }
       case ATHROW =>
-        // TODO - may be bottom
-        earlyResult = Some(Final(Values.Top))
+        results = results + (stateIndex -> Final(Values.Bot))
+        computed = computed.updated(insnIndex, state :: computed(insnIndex))
       case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
         val nextInsnIndex = direction match {
           case InOut(_, Values.Null) =>
@@ -193,21 +195,27 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
   }
 }
 
-case class InOutInterpreter(direction: Direction) extends BasicInterpreter {
+case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins: Set[Int]) extends BasicInterpreter {
 
-  override def newOperation(insn: AbstractInsnNode): BasicValue =
+  @inline
+  def isResultOrigin(insn: AbstractInsnNode) =
+    resultOrigins == null || resultOrigins(insns.indexOf(insn))
+
+  @switch
+  override def newOperation(insn: AbstractInsnNode): BasicValue = {
+    val propagate_? = isResultOrigin(insn)
     insn.getOpcode match {
-      case ICONST_0 =>
+      case ICONST_0 if propagate_? =>
         FalseValue()
-      case ICONST_1 =>
+      case ICONST_1 if propagate_? =>
         TrueValue()
-      case ACONST_NULL =>
+      case ACONST_NULL if propagate_? =>
         NullValue()
-      case LDC =>
+      case LDC if propagate_? =>
         insn.asInstanceOf[LdcInsnNode].cst match {
           case tp: Type if tp.getSort == Type.OBJECT || tp.getSort == Type.ARRAY =>
             NotNullValue(Type.getObjectType("java/lang/Class"))
-          case tp: Type if tp.getSort == Type.METHOD  =>
+          case tp: Type if tp.getSort == Type.METHOD =>
             NotNullValue(Type.getObjectType("java/lang/invoke/MethodType"))
           case s: String =>
             NotNullValue(Type.getObjectType("java/lang/String"))
@@ -216,34 +224,41 @@ case class InOutInterpreter(direction: Direction) extends BasicInterpreter {
           case _ =>
             super.newOperation(insn)
         }
-      case NEW =>
+      case NEW if propagate_? =>
         NotNullValue(Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc))
       case _ =>
         super.newOperation(insn)
     }
+  }
 
-  override def unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue =
+  @switch
+  override def unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue = {
+    val propagate_? = isResultOrigin(insn)
     insn.getOpcode match {
       case CHECKCAST if value.isInstanceOf[ParamValue] =>
         new ParamValue(Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc))
       case INSTANCEOF if value.isInstanceOf[ParamValue] =>
         InstanceOfCheckValue()
-      case NEWARRAY | ANEWARRAY =>
+      case NEWARRAY | ANEWARRAY if propagate_? =>
         NotNullValue(super.unaryOperation(insn, value).getType)
       case _ =>
         super.unaryOperation(insn, value)
     }
+  }
 
+  @switch
   override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
+    val propagate_? = isResultOrigin(insn)
     val opCode = insn.getOpcode
     val shift = if (opCode == INVOKESTATIC) 0 else 1
     opCode match {
-      case INVOKESTATIC | INVOKESPECIAL =>
+      case INVOKESTATIC | INVOKESPECIAL /*| INVOKEVIRTUAL | INVOKEINTERFACE */ if propagate_? =>
         val mNode = insn.asInstanceOf[MethodInsnNode]
         val method = Method(mNode.owner, mNode.name, mNode.desc)
         val retType = Type.getReturnType(mNode.desc)
         val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
-        if (Type.VOID_TYPE != retType)
+        val isBooleanRetType = retType == Type.BOOLEAN_TYPE
+        if (isRefRetType || isBooleanRetType)
           direction match {
             case InOut(_, inValue) =>
               var keys = Set[Key]()
@@ -260,7 +275,7 @@ case class InOutInterpreter(direction: Direction) extends BasicInterpreter {
                 return CallResultValue(retType, Set(Key(method, Out)))
           }
         super.naryOperation(insn, values)
-      case MULTIANEWARRAY =>
+      case MULTIANEWARRAY if propagate_? =>
         NotNullValue(super.naryOperation(insn, values).getType)
       case _ =>
         super.naryOperation(insn, values)

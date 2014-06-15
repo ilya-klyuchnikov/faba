@@ -1,14 +1,35 @@
 package faba.cfg
 
+import org.objectweb.asm.Opcodes._
+import org.objectweb.asm.tree.{AbstractInsnNode, MethodNode}
+import org.objectweb.asm.tree.analysis._
+
+import scala.collection.JavaConversions._
 import scala.collection.immutable.HashSet
 import scala.collection.mutable
-
-import org.objectweb.asm.tree.MethodNode
-import org.objectweb.asm.tree.analysis.{BasicInterpreter, Analyzer}
 
 object `package` {
   def buildControlFlowGraph(className: String, methodNode: MethodNode): ControlFlowGraph =
     ControlFlowBuilder(className, methodNode).buildCFG()
+
+  /**
+   * a set (safe upper bound) of instructions where the result was born
+   */
+  def resultOrigins(className: String, methodNode: MethodNode): Set[Int] = {
+    val frames = new Analyzer(MinimalOriginInterpreter).analyze(className, methodNode)
+    val insns = methodNode.instructions
+    var result = Set[Int]()
+    for (i <- 0 until frames.length) {
+      val insnNode = insns.get(i)
+      insnNode.getOpcode match {
+        case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN =>
+          for (sourceInsn <- frames(i).pop().insns)
+            result = result + insns.indexOf(sourceInsn)
+        case _ =>
+      }
+    }
+    result
+  }
 
   // Graphs: Theory and Algorithms. by K. Thulasiraman , M. N. S. Swamy (1992)
   // 11.7.2 DFS of a directed graph
@@ -104,6 +125,47 @@ object `package` {
   }
 }
 
+object MinimalOriginInterpreter extends SourceInterpreter {
+  val sourceVal1 = new SourceValue(1)
+  val sourceVal2 = new SourceValue(2)
+
+  override def newOperation(insn: AbstractInsnNode): SourceValue = {
+    val result = super.newOperation(insn)
+    insn.getOpcode match {
+      case ICONST_0 | ICONST_1 | ACONST_NULL | LDC | NEW =>
+        result
+      case _ =>
+        new SourceValue(result.size)
+    }
+  }
+
+  override def unaryOperation(insn: AbstractInsnNode, value: SourceValue) = {
+    val result = super.unaryOperation(insn, value)
+    insn.getOpcode match {
+      case CHECKCAST | NEWARRAY | ANEWARRAY =>
+        result
+      case _ =>
+        new SourceValue(result.size)
+    }
+  }
+
+  override def binaryOperation(insn: AbstractInsnNode, value1: SourceValue, value2: SourceValue) =
+    insn.getOpcode match {
+      case LALOAD | DALOAD | LADD | DADD | LSUB | DSUB | LMUL | DMUL |
+           LDIV | DDIV | LREM | LSHL | LSHR | LUSHR | LAND | LOR | LXOR =>
+        sourceVal2
+      case _ =>
+        sourceVal1
+    }
+
+  override def ternaryOperation(insn: AbstractInsnNode, value1: SourceValue, value2: SourceValue, value3: SourceValue) =
+    sourceVal1
+
+
+  override def copyOperation(insn: AbstractInsnNode, value: SourceValue) =
+    value
+}
+
 case class ControlFlowGraph(className: String,
                             methodNode: MethodNode,
                             transitions: Array[List[Int]],
@@ -125,12 +187,16 @@ private case class ControlFlowBuilder(className: String,
   }
 
   override protected def newControlFlowEdge(insn: Int, successor: Int) {
-    transitions(insn) = successor :: transitions(insn)
+    if (!transitions(insn).contains(successor)) {
+      transitions(insn) = successor :: transitions(insn)
+    }
   }
 
   override protected def newControlFlowExceptionEdge(insn: Int, successor: Int): Boolean = {
-    transitions(insn) = successor :: transitions(insn)
-    errorTransitions = errorTransitions + (insn -> successor)
+    if (!transitions(insn).contains(successor)) {
+      transitions(insn) = successor :: transitions(insn)
+      errorTransitions = errorTransitions + (insn -> successor)
+    }
     true
   }
 }
