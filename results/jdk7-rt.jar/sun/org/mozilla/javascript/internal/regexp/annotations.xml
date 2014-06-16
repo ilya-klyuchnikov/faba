@@ -8,17 +8,37 @@
   <item name="sun.org.mozilla.javascript.internal.regexp.NativeRegExp boolean calculateBitmapSize(sun.org.mozilla.javascript.internal.regexp.CompilerState, sun.org.mozilla.javascript.internal.regexp.RENode, char[], int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.regexp.NativeRegExp boolean calculateBitmapSize(sun.org.mozilla.javascript.internal.regexp.CompilerState, sun.org.mozilla.javascript.internal.regexp.RENode, char[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null,_,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.regexp.NativeRegExp boolean classMatcher(sun.org.mozilla.javascript.internal.regexp.REGlobalData, sun.org.mozilla.javascript.internal.regexp.RECharSet, char) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.regexp.NativeRegExp boolean executeREBytecode(sun.org.mozilla.javascript.internal.regexp.REGlobalData, char[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.regexp.NativeRegExp boolean executeREBytecode(sun.org.mozilla.javascript.internal.regexp.REGlobalData, char[], int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.regexp.NativeRegExp boolean flatNIMatcher(sun.org.mozilla.javascript.internal.regexp.REGlobalData, int, int, char[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.regexp.NativeRegExp boolean flatNIMatcher(sun.org.mozilla.javascript.internal.regexp.REGlobalData, int, int, char[], int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.regexp.NativeRegExp boolean flatNMatcher(sun.org.mozilla.javascript.internal.regexp.REGlobalData, int, int, char[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.regexp.NativeRegExp boolean flatNMatcher(sun.org.mozilla.javascript.internal.regexp.REGlobalData, int, int, char[], int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,null,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.regexp.NativeRegExp boolean matchRegExp(sun.org.mozilla.javascript.internal.regexp.REGlobalData, sun.org.mozilla.javascript.internal.regexp.RECompiled, char[], int, int, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -26,11 +46,21 @@
   <item name="sun.org.mozilla.javascript.internal.regexp.NativeRegExp boolean matchRegExp(sun.org.mozilla.javascript.internal.regexp.REGlobalData, sun.org.mozilla.javascript.internal.regexp.RECompiled, char[], int, int, boolean) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.regexp.NativeRegExp boolean matchRegExp(sun.org.mozilla.javascript.internal.regexp.REGlobalData, sun.org.mozilla.javascript.internal.regexp.RECompiled, char[], int, int, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null,_,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.regexp.NativeRegExp boolean parseAlternative(sun.org.mozilla.javascript.internal.regexp.CompilerState) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.regexp.NativeRegExp boolean parseDisjunction(sun.org.mozilla.javascript.internal.regexp.CompilerState) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.regexp.NativeRegExp boolean parseDisjunction(sun.org.mozilla.javascript.internal.regexp.CompilerState)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.regexp.NativeRegExp boolean parseTerm(sun.org.mozilla.javascript.internal.regexp.CompilerState) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -100,7 +130,7 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.regexp.NativeRegExp sun.org.mozilla.javascript.internal.Scriptable compile(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable, java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,_,null-&gt;!null;_,null,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,null,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -240,6 +270,11 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.regexp.RegExpImpl sun.org.mozilla.javascript.internal.regexp.SubString interpretDollar(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.regexp.RegExpImpl, java.lang.String, int, int[]) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.regexp.RegExpImpl sun.org.mozilla.javascript.internal.regexp.SubString interpretDollar(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.regexp.RegExpImpl, java.lang.String, int, int[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,_,null-&gt;null;_,null,_,_,_-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.regexp.RegExpImpl void do_replace(sun.org.mozilla.javascript.internal.regexp.GlobData, sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.regexp.RegExpImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

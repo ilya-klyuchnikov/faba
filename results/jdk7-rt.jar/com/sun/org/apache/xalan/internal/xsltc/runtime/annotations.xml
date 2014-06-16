@@ -4,7 +4,7 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet com.sun.org.apache.xalan.internal.xsltc.dom.DOMAdapter makeDOMAdapter(com.sun.org.apache.xalan.internal.xsltc.DOM)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -54,16 +54,26 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary boolean booleanF(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary boolean booleanF(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary boolean compare(com.sun.org.apache.xml.internal.dtm.DTMAxisIterator, com.sun.org.apache.xml.internal.dtm.DTMAxisIterator, int, com.sun.org.apache.xalan.internal.xsltc.DOM) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary boolean compare(com.sun.org.apache.xml.internal.dtm.DTMAxisIterator, double, int, com.sun.org.apache.xalan.internal.xsltc.DOM)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,null-&gt;false;null,_,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary boolean compare(com.sun.org.apache.xml.internal.dtm.DTMAxisIterator, java.lang.String, int, com.sun.org.apache.xalan.internal.xsltc.DOM) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary boolean compare(int, com.sun.org.apache.xml.internal.dtm.DTMAxisIterator, int, com.sun.org.apache.xalan.internal.xsltc.DOM)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,null-&gt;false;_,null,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary boolean compareStrings(java.lang.String, java.lang.String, int, com.sun.org.apache.xalan.internal.xsltc.DOM)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary boolean hasSimpleType(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -73,13 +83,13 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary boolean referenceToBoolean(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary boolean referenceToBoolean(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary boolean testLanguage(java.lang.String, com.sun.org.apache.xalan.internal.xsltc.DOM, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary boolean testLanguage(java.lang.String, com.sun.org.apache.xalan.internal.xsltc.DOM, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary com.sun.org.apache.xalan.internal.xsltc.DOM referenceToResultTree(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -91,12 +101,22 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary com.sun.org.apache.xml.internal.dtm.DTMAxisIterator getSingleNode(com.sun.org.apache.xml.internal.dtm.DTMAxisIterator)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary com.sun.org.apache.xml.internal.dtm.DTMAxisIterator node2Iterator(org.w3c.dom.Node, com.sun.org.apache.xalan.internal.xsltc.Translet, com.sun.org.apache.xalan.internal.xsltc.DOM)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;null;_,null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary com.sun.org.apache.xml.internal.dtm.DTMAxisIterator nodeList2Iterator(org.w3c.dom.NodeList, com.sun.org.apache.xalan.internal.xsltc.Translet, com.sun.org.apache.xalan.internal.xsltc.DOM) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary com.sun.org.apache.xml.internal.dtm.DTMAxisIterator nodeList2Iterator(org.w3c.dom.NodeList, com.sun.org.apache.xalan.internal.xsltc.Translet, com.sun.org.apache.xalan.internal.xsltc.DOM)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;null;_,null,_-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary com.sun.org.apache.xml.internal.dtm.DTMAxisIterator nodeList2IteratorUsingHandleFromNode(org.w3c.dom.NodeList, com.sun.org.apache.xalan.internal.xsltc.Translet, com.sun.org.apache.xalan.internal.xsltc.DOM) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -104,18 +124,8 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary com.sun.org.apache.xml.internal.dtm.DTMAxisIterator nodesetF(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary com.sun.org.apache.xml.internal.dtm.DTMAxisIterator nodesetF(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary com.sun.org.apache.xml.internal.dtm.DTMAxisIterator referenceToNodeSet(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary com.sun.org.apache.xml.internal.dtm.DTMAxisIterator referenceToNodeSet(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary double numberF(int, com.sun.org.apache.xalan.internal.xsltc.DOM) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -160,7 +170,7 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary java.lang.String mapQNameToJavaName(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -172,7 +182,7 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary java.lang.String namespace_uriF(com.sun.org.apache.xml.internal.dtm.DTMAxisIterator, com.sun.org.apache.xalan.internal.xsltc.DOM)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -181,7 +191,7 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary java.lang.String namespace_uriF(int, com.sun.org.apache.xalan.internal.xsltc.DOM)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
+      <val val="&quot;_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -190,7 +200,7 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary java.lang.String normalize_spaceF(int, com.sun.org.apache.xalan.internal.xsltc.DOM)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
+      <val val="&quot;_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -199,7 +209,7 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary java.lang.String normalize_spaceF(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -211,11 +221,6 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary java.lang.String referenceToString(java.lang.Object, com.sun.org.apache.xalan.internal.xsltc.DOM) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary java.lang.String referenceToString(java.lang.Object, com.sun.org.apache.xalan.internal.xsltc.DOM)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
-    </annotation>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary java.lang.String replace(java.lang.String, char, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -230,7 +235,7 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary java.lang.String replace(java.lang.String, java.lang.String, java.lang.String[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,_,null-&gt;!null;_,null,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -256,6 +261,16 @@
       <val val="&quot;null,_,_-&gt;!null&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary java.lang.String substringF(java.lang.String, double)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary java.lang.String substringF(java.lang.String, double, double)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary java.lang.String substring_afterF(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -264,7 +279,7 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary java.lang.String substring_afterF(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -276,7 +291,7 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary java.lang.String substring_beforeF(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -285,7 +300,7 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary java.lang.String system_propertyF(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -300,7 +315,7 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary java.lang.String translateF(java.lang.String, java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,_,null-&gt;!null;_,null,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -310,18 +325,8 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary org.w3c.dom.Node referenceToNode(java.lang.Object, com.sun.org.apache.xalan.internal.xsltc.DOM) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary org.w3c.dom.Node referenceToNode(java.lang.Object, com.sun.org.apache.xalan.internal.xsltc.DOM)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary org.w3c.dom.NodeList referenceToNodeList(java.lang.Object, com.sun.org.apache.xalan.internal.xsltc.DOM) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary org.w3c.dom.NodeList referenceToNodeList(java.lang.Object, com.sun.org.apache.xalan.internal.xsltc.DOM)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
-    </annotation>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary void checkAttribQName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

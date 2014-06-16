@@ -19,11 +19,6 @@
   <item name="javax.management.AttributeChangeNotificationFilter boolean isNotificationEnabled(javax.management.Notification) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.management.AttributeChangeNotificationFilter boolean isNotificationEnabled(javax.management.Notification)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.management.AttributeChangeNotificationFilter void enableAttribute(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -354,8 +349,18 @@
   <item name="javax.management.MBeanServerInvocationHandler boolean isLocal(java.lang.Object, java.lang.reflect.Method) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.MBeanServerInvocationHandler boolean isLocal(java.lang.Object, java.lang.reflect.Method)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="javax.management.MBeanServerInvocationHandler boolean shouldDoLocally(java.lang.Object, java.lang.reflect.Method) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.MBeanServerInvocationHandler com.sun.jmx.mbeanserver.MXBeanProxy findMXBeanProxy(java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="javax.management.MBeanServerInvocationHandler java.lang.Object doLocally(java.lang.Object, java.lang.reflect.Method, java.lang.Object[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -549,7 +554,7 @@
   </item>
   <item name="javax.management.ObjectName int[] parseValue(char[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -570,7 +575,7 @@
   </item>
   <item name="javax.management.ObjectName java.lang.String quote(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -582,7 +587,7 @@
   </item>
   <item name="javax.management.ObjectName java.lang.String unquote(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -656,7 +661,7 @@
   </item>
   <item name="javax.management.ObjectName.Property java.lang.String getKeyString(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -665,7 +670,7 @@
   </item>
   <item name="javax.management.ObjectName.Property java.lang.String getValueString(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -709,7 +714,7 @@
   </item>
   <item name="javax.management.Query javax.management.QueryExp anySubString(javax.management.AttributeValueExp, javax.management.StringValueExp)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -730,7 +735,7 @@
   </item>
   <item name="javax.management.Query javax.management.QueryExp finalSubString(javax.management.AttributeValueExp, javax.management.StringValueExp)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -757,7 +762,7 @@
   </item>
   <item name="javax.management.Query javax.management.QueryExp initialSubString(javax.management.AttributeValueExp, javax.management.StringValueExp)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -966,7 +971,7 @@
   </item>
   <item name="javax.management.StandardMBean javax.management.openmbean.OpenMBeanParameterInfo[] paramsToOpenParams(javax.management.MBeanParameterInfo[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="javax.management.StandardMBean void postRegister(java.lang.Boolean) 0">

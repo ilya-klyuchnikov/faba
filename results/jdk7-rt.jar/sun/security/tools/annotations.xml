@@ -17,6 +17,11 @@
   <item name="sun.security.tools.KeyTool boolean buildChain(java.security.cert.X509Certificate, java.util.Vector, java.util.Hashtable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.tools.KeyTool boolean buildChain(java.security.cert.X509Certificate, java.util.Vector, java.util.Hashtable)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.security.tools.KeyTool boolean isSelfSigned(java.security.cert.X509Certificate) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -25,6 +30,11 @@
   </item>
   <item name="sun.security.tools.KeyTool boolean signedBy(java.security.cert.X509Certificate, java.security.cert.X509Certificate) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.tools.KeyTool char[] getPass(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.security.tools.KeyTool char[] getPassWithModifier(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -45,7 +55,7 @@
   </item>
   <item name="sun.security.tools.KeyTool java.lang.String getCertFingerPrint(java.lang.String, java.security.cert.Certificate)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -63,7 +73,7 @@
   </item>
   <item name="sun.security.tools.KeyTool java.lang.String toHexString(byte[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -78,6 +88,11 @@
   </item>
   <item name="sun.security.tools.KeyTool java.security.cert.Certificate getTrustedSigner(java.security.cert.Certificate, java.security.KeyStore) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.tools.KeyTool java.security.cert.Certificate getTrustedSigner(java.security.cert.Certificate, java.security.KeyStore)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.security.tools.KeyTool java.security.cert.Certificate[] establishCertChain(java.security.cert.Certificate, java.security.cert.Certificate) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -102,7 +117,7 @@
   </item>
   <item name="sun.security.tools.KeyTool sun.security.tools.Pair recoverEntry(java.security.KeyStore, java.lang.String, char[], char[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;!null;_,!null,_,_-&gt;!null;_,_,!null,_-&gt;!null;_,_,_,!null-&gt;!null;_,_,_,null-&gt;!null;_,_,null,_-&gt;!null;_,null,_,_-&gt;!null;null,_,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_,_-&gt;!null;_,!null,_,_-&gt;!null;_,_,!null,_-&gt;!null;_,_,_,!null-&gt;!null;_,_,_,null-&gt;!null;_,_,null,_-&gt;!null;_,null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>

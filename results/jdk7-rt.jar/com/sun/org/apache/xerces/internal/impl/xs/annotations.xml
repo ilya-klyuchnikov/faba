@@ -7,7 +7,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.SchemaGrammar com.sun.org.apache.xerces.internal.impl.xs.XSComplexTypeDecl[] resize(com.sun.org.apache.xerces.internal.impl.xs.XSComplexTypeDecl[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -16,7 +16,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.SchemaGrammar com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl[] resize(com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -25,7 +25,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.SchemaGrammar com.sun.org.apache.xerces.internal.impl.xs.XSGroupDecl[] resize(com.sun.org.apache.xerces.internal.impl.xs.XSGroupDecl[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -34,7 +34,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.SchemaGrammar com.sun.org.apache.xerces.internal.impl.xs.util.SimpleLocator[] resize(com.sun.org.apache.xerces.internal.impl.xs.util.SimpleLocator[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -134,6 +134,11 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xs.SchemaNamespaceSupport SchemaNamespaceSupport(com.sun.org.apache.xerces.internal.impl.xs.SchemaNamespaceSupport) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.SubstitutionGroupHandler boolean getDBMethods(com.sun.org.apache.xerces.internal.xs.XSTypeDefinition, com.sun.org.apache.xerces.internal.xs.XSTypeDefinition, com.sun.org.apache.xerces.internal.impl.xs.SubstitutionGroupHandler.OneSubGroup)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.SubstitutionGroupHandler boolean inSubstitutionGroup(com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl, com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -151,7 +156,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaLoader boolean tokenizeSchemaLocationStr(java.lang.String, java.util.Map)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;true&quot;"/>
+      <val val="&quot;_,null-&gt;false;null,_-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaLoader com.sun.org.apache.xerces.internal.impl.xs.SchemaGrammar loadSchema(com.sun.org.apache.xerces.internal.impl.xs.XSDDescription, com.sun.org.apache.xerces.internal.xni.parser.XMLInputSource, java.util.Map) 0">
@@ -165,7 +170,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaLoader com.sun.org.apache.xerces.internal.xni.parser.XMLInputSource dom2xmlInputSource(org.w3c.dom.ls.LSInput)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -180,7 +185,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaLoader com.sun.org.apache.xerces.internal.xni.parser.XMLInputSource saxToXMLInputSource(org.xml.sax.InputSource)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -239,15 +244,25 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator com.sun.org.apache.xerces.internal.xni.Augmentations handleStartElement(com.sun.org.apache.xerces.internal.xni.QName, com.sun.org.apache.xerces.internal.xni.XMLAttributes, com.sun.org.apache.xerces.internal.xni.Augmentations) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator com.sun.org.apache.xerces.internal.xni.XMLString handleCharacters(com.sun.org.apache.xerces.internal.xni.XMLString)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator int access$000(com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator java.lang.Object elementLocallyValidType(com.sun.org.apache.xerces.internal.xni.QName, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator java.lang.String expectedStr(java.util.Vector) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator java.lang.String expectedStr(java.util.Vector)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -303,9 +318,14 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator.ValueStoreBase java.lang.String toString(java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator.ValueStoreBase java.lang.String toString(java.util.Vector, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator.ValueStoreBase void append(com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator.ValueStoreBase) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -327,7 +347,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XSAttributeGroupDecl com.sun.org.apache.xerces.internal.impl.xs.XSAttributeUseImpl[] resize(com.sun.org.apache.xerces.internal.impl.xs.XSAttributeUseImpl[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -359,7 +379,12 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XSComplexTypeDecl boolean isDerivedByRestriction(java.lang.String, java.lang.String, int, com.sun.org.apache.xerces.internal.xs.XSTypeDefinition)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,null-&gt;false&quot;"/>
+      <val val="&quot;_,_,_,null-&gt;false;null,_,_,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.XSComplexTypeDecl com.sun.org.apache.xerces.internal.impl.xs.models.XSCMValidator getContentModel(com.sun.org.apache.xerces.internal.impl.xs.models.CMBuilder)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XSComplexTypeDecl java.lang.String toString()">
@@ -368,17 +393,37 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XSComplexTypeDecl void appendTypeInfo(java.lang.StringBuilder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.XSConstraints boolean checkComplexDerivation(com.sun.org.apache.xerces.internal.impl.xs.XSComplexTypeDecl, com.sun.org.apache.xerces.internal.xs.XSTypeDefinition, short)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.XSConstraints boolean checkSimpleDerivation(com.sun.org.apache.xerces.internal.impl.dv.XSSimpleType, com.sun.org.apache.xerces.internal.impl.dv.XSSimpleType, short)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XSConstraints boolean overlapUPA(com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl, com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl, com.sun.org.apache.xerces.internal.impl.xs.SubstitutionGroupHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XSConstraints boolean overlapUPA(com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl, com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl, com.sun.org.apache.xerces.internal.impl.xs.SubstitutionGroupHandler) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.XSConstraints boolean overlapUPA(com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl, com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl, com.sun.org.apache.xerces.internal.impl.xs.SubstitutionGroupHandler)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XSConstraints boolean overlapUPA(com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl, com.sun.org.apache.xerces.internal.impl.xs.XSWildcardDecl, com.sun.org.apache.xerces.internal.impl.xs.SubstitutionGroupHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XSConstraints boolean overlapUPA(com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl, com.sun.org.apache.xerces.internal.impl.xs.XSWildcardDecl, com.sun.org.apache.xerces.internal.impl.xs.SubstitutionGroupHandler) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.XSConstraints boolean overlapUPA(com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl, com.sun.org.apache.xerces.internal.impl.xs.XSWildcardDecl, com.sun.org.apache.xerces.internal.impl.xs.SubstitutionGroupHandler)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;true&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XSConstraints boolean overlapUPA(com.sun.org.apache.xerces.internal.impl.xs.XSWildcardDecl, com.sun.org.apache.xerces.internal.impl.xs.XSWildcardDecl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -495,7 +540,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XSDeclarationPool com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl[][] resize(com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl[][], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -504,7 +549,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XSDeclarationPool com.sun.org.apache.xerces.internal.impl.xs.XSAttributeDecl[][] resize(com.sun.org.apache.xerces.internal.impl.xs.XSAttributeDecl[][], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -513,7 +558,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XSDeclarationPool com.sun.org.apache.xerces.internal.impl.xs.XSAttributeUseImpl[][] resize(com.sun.org.apache.xerces.internal.impl.xs.XSAttributeUseImpl[][], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -522,7 +567,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XSDeclarationPool com.sun.org.apache.xerces.internal.impl.xs.XSComplexTypeDecl[][] resize(com.sun.org.apache.xerces.internal.impl.xs.XSComplexTypeDecl[][], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -531,7 +576,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XSDeclarationPool com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl[][] resize(com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl[][], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -540,7 +585,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XSDeclarationPool com.sun.org.apache.xerces.internal.impl.xs.XSModelGroupImpl[][] resize(com.sun.org.apache.xerces.internal.impl.xs.XSModelGroupImpl[][], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -549,7 +594,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XSDeclarationPool com.sun.org.apache.xerces.internal.impl.xs.XSParticleDecl[][] resize(com.sun.org.apache.xerces.internal.impl.xs.XSParticleDecl[][], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -558,7 +603,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl com.sun.org.apache.xerces.internal.impl.xs.identity.IdentityConstraint[] resize(com.sun.org.apache.xerces.internal.impl.xs.identity.IdentityConstraint[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -710,7 +755,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XSWildcardDecl java.lang.String[] intersect2sets(java.lang.String[], java.lang.String[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -722,7 +767,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.XSWildcardDecl java.lang.String[] union2sets(java.lang.String[], java.lang.String[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>

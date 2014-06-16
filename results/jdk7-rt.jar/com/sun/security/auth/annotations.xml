@@ -88,6 +88,11 @@
   <item name="com.sun.security.auth.PolicyFile java.lang.String[][] getPrincipalInfo(com.sun.security.auth.PolicyParser.PrincipalEntry, java.security.CodeSource) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.security.auth.PolicyFile java.lang.String[][] getPrincipalInfo(com.sun.security.auth.PolicyParser.PrincipalEntry, java.security.CodeSource)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.security.auth.PolicyFile java.security.CodeSource canonicalizeCodebase(java.security.CodeSource, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -109,7 +114,7 @@
   </item>
   <item name="com.sun.security.auth.PolicyFile java.security.Permissions getPermissions(java.security.Permissions, java.security.CodeSource)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.security.auth.PolicyFile java.security.cert.Certificate[] getCertificates(java.security.KeyStore, java.lang.String) 1">
@@ -123,6 +128,11 @@
   </item>
   <item name="com.sun.security.auth.PolicyFile.PolicyEntry java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.security.auth.PolicyParser boolean peek(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.security.auth.PolicyParser com.sun.security.auth.PolicyParser.PermissionEntry parsePermissionEntry()">
     <annotation name="org.jetbrains.annotations.NotNull"/>

@@ -74,6 +74,11 @@
   <item name="com.sun.org.apache.xml.internal.utils.DOMHelper java.lang.String getNamespaceForPrefix(java.lang.String, org.w3c.dom.Element) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xml.internal.utils.DOMHelper java.lang.String getNamespaceForPrefix(java.lang.String, org.w3c.dom.Element)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.DOMHelper java.lang.String getNamespaceOfNode(org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -91,7 +96,7 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.DOMHelper java.lang.String getUniqueID(org.w3c.dom.Node)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -159,7 +164,7 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.FastStringBuffer java.lang.StringBuffer getString(java.lang.StringBuffer, int, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;!null;null,_,_,_-&gt;null&quot;"/>
+      <val val="&quot;!null,_,_,_-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.FastStringBuffer void sendSAXComment(org.xml.sax.ext.LexicalHandler, int, int) 0">
@@ -235,6 +240,11 @@
   <item name="com.sun.org.apache.xml.internal.utils.PrefixResolverDefault java.lang.String getNamespaceForPrefix(java.lang.String, org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xml.internal.utils.PrefixResolverDefault java.lang.String getNamespaceForPrefix(java.lang.String, org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.QName QName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -296,7 +306,7 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.QName java.lang.String getPrefixFromXMLNSDecl(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -305,7 +315,7 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.QName java.lang.String getPrefixPart(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -327,10 +337,25 @@
   <item name="com.sun.org.apache.xml.internal.utils.StringComparable int compareTo(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xml.internal.utils.StringComparable int[] getFirstCaseDiff(java.lang.String, java.lang.String, java.util.Locale)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_-&gt;null;null,_,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.StylesheetPIHandler void processingInstruction(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.SystemIDResolver boolean isAbsolutePath(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.utils.SystemIDResolver boolean isAbsoluteURI(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.utils.SystemIDResolver boolean isWindowsAbsolutePath(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
@@ -345,7 +370,7 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.SystemIDResolver java.lang.String getAbsoluteURI(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.SystemIDResolver java.lang.String getAbsoluteURIFromRelative(java.lang.String)">
@@ -459,6 +484,11 @@
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode boolean isDefaultNamespace(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.utils.UnImplNode boolean isEqualNode(org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode boolean isSupported(java.lang.String, java.lang.String)">
@@ -761,7 +791,7 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.XMLStringFactoryDefault com.sun.org.apache.xml.internal.utils.XMLString newstr(com.sun.org.apache.xml.internal.utils.FastStringBuffer, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>

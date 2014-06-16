@@ -19,7 +19,7 @@
   </item>
   <item name="sun.awt.image.BufImgSurfaceData sun.java2d.SurfaceData createDataBC(java.awt.image.BufferedImage, sun.java2d.loops.SurfaceType, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,null,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -28,7 +28,7 @@
   </item>
   <item name="sun.awt.image.BufImgSurfaceData sun.java2d.SurfaceData createDataBP(java.awt.image.BufferedImage, sun.java2d.loops.SurfaceType)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -37,7 +37,7 @@
   </item>
   <item name="sun.awt.image.BufImgSurfaceData sun.java2d.SurfaceData createDataIC(java.awt.image.BufferedImage, sun.java2d.loops.SurfaceType)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -46,7 +46,7 @@
   </item>
   <item name="sun.awt.image.BufImgSurfaceData sun.java2d.SurfaceData createDataSC(java.awt.image.BufferedImage, sun.java2d.loops.SurfaceType, java.awt.image.IndexColorModel)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,_,null-&gt;!null;_,null,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,_,null-&gt;!null;_,null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -239,6 +239,11 @@
   <item name="sun.awt.image.ByteInterleavedRaster ByteInterleavedRaster(java.awt.image.SampleModel, java.awt.image.DataBuffer, java.awt.Rectangle, java.awt.Point, sun.awt.image.ByteInterleavedRaster) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.image.ByteInterleavedRaster boolean isInterleaved(java.awt.image.ComponentSampleModel)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.awt.image.ByteInterleavedRaster byte[] getByteData(int, int, int, int, byte[])">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,_,_,_,!null-&gt;!null&quot;"/>
@@ -351,7 +356,7 @@
   </item>
   <item name="sun.awt.image.GifImageDecoder byte[] grow_colormap(byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -372,6 +377,26 @@
   <item name="sun.awt.image.ImageConsumerQueue sun.awt.image.ImageConsumerQueue removeConsumer(sun.awt.image.ImageConsumerQueue, java.awt.image.ImageConsumer, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null,_,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.awt.image.ImageRepresentation boolean drawToBufImage(java.awt.Graphics, sun.awt.image.ToolkitImage, int, int, int, int, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_,_,_,_,_,_,_,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.awt.image.ImageRepresentation boolean drawToBufImage(java.awt.Graphics, sun.awt.image.ToolkitImage, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_,_,_,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.awt.image.ImageRepresentation boolean drawToBufImage(java.awt.Graphics, sun.awt.image.ToolkitImage, int, int, java.awt.Color, java.awt.image.ImageObserver)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.awt.image.ImageRepresentation boolean drawToBufImage(java.awt.Graphics, sun.awt.image.ToolkitImage, java.awt.geom.AffineTransform, java.awt.image.ImageObserver)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.image.ImageRepresentation java.awt.image.BufferedImage createImage(java.awt.image.ColorModel, java.awt.image.WritableRaster, boolean, java.util.Hashtable) 0">
@@ -401,6 +426,16 @@
       <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.image.ImagingLib java.awt.image.BufferedImage filter(java.awt.image.BufferedImageOp, java.awt.image.BufferedImage, java.awt.image.BufferedImage)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.awt.image.ImagingLib java.awt.image.WritableRaster filter(java.awt.image.RasterOp, java.awt.image.Raster, java.awt.image.WritableRaster)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.awt.image.InputStreamImageSource sun.awt.image.ImageDecoder decoderForType(java.io.InputStream, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -823,7 +858,7 @@
   </item>
   <item name="sun.awt.image.WritableRasterNative sun.awt.image.WritableRasterNative createNativeRaster(java.awt.image.ColorModel, sun.java2d.SurfaceData, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;!null;_,!null,_,_-&gt;!null;_,null,_,_-&gt;!null;null,_,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_,_-&gt;!null;_,!null,_,_-&gt;!null;_,null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>

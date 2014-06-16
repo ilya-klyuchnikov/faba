@@ -68,6 +68,11 @@
   <item name="sun.awt.X11.FileDialogFilter boolean accept(java.io.File, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.X11.FileDialogFilter boolean accept(java.io.File, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.awt.X11.FileDialogFilter boolean matches(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -212,11 +217,16 @@
   </item>
   <item name="sun.awt.X11.MotifDnDDropTargetProtocol boolean processDragMotion(sun.awt.X11.XClientMessageEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;true;null-&gt;true&quot;"/>
+      <val val="&quot;!null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.X11.MotifDnDDropTargetProtocol boolean processDropStart(sun.awt.X11.XClientMessageEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.MotifDnDDropTargetProtocol boolean processTopLevelEnter(sun.awt.X11.XClientMessageEvent)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="sun.awt.X11.MotifDnDDropTargetProtocol boolean processTopLevelLeave(sun.awt.X11.XClientMessageEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -348,7 +358,7 @@
   </item>
   <item name="sun.awt.X11.XAWTFormatter java.lang.String format(java.util.logging.LogRecord)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -404,7 +414,7 @@
   </item>
   <item name="sun.awt.X11.XAtom sun.awt.X11.XAtomList getAtomListPropertyList(sun.awt.X11.XBaseWindow)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -506,7 +516,7 @@
   </item>
   <item name="sun.awt.X11.XBaseMenuWindow java.awt.Rectangle fitWindowToScreen(java.awt.Dimension, java.awt.Dimension)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -559,7 +569,7 @@
   </item>
   <item name="sun.awt.X11.XBaseWindow java.awt.Rectangle toGlobal(java.awt.Rectangle)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -924,7 +934,7 @@
   </item>
   <item name="sun.awt.X11.XComponentPeer int[] getRGBvals(java.awt.Color)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1068,7 +1078,7 @@
   </item>
   <item name="sun.awt.X11.XContentWindow sun.awt.X11.XContentWindow createContent(sun.awt.X11.XDecoratedPeer)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1165,6 +1175,11 @@
   <item name="sun.awt.X11.XCustomCursor java.awt.Dimension getBestCursorSize(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.X11.XDataTransferer boolean isMimeFormat(long, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.awt.X11.XDataTransferer java.io.ByteArrayOutputStream convertFileListToBytes(java.util.ArrayList) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1204,7 +1219,7 @@
   </item>
   <item name="sun.awt.X11.XDecoratedPeer java.awt.Insets copy(java.awt.Insets)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1216,7 +1231,7 @@
   </item>
   <item name="sun.awt.X11.XDecoratedPeer java.awt.Insets difference(java.awt.Insets, java.awt.Insets)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1318,7 +1333,7 @@
   </item>
   <item name="sun.awt.X11.XDnDDragSourceProtocol boolean processXdndFinished(sun.awt.X11.XClientMessageEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;true;null-&gt;true&quot;"/>
+      <val val="&quot;!null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.X11.XDnDDragSourceProtocol boolean processXdndStatus(sun.awt.X11.XClientMessageEvent) 0">
@@ -1326,7 +1341,7 @@
   </item>
   <item name="sun.awt.X11.XDnDDragSourceProtocol boolean processXdndStatus(sun.awt.X11.XClientMessageEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;true;null-&gt;true&quot;"/>
+      <val val="&quot;!null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.X11.XDnDDragSourceProtocol java.lang.String getProtocolName()">
@@ -1355,6 +1370,11 @@
   </item>
   <item name="sun.awt.X11.XDnDDropTargetProtocol boolean processXdndDrop(sun.awt.X11.XClientMessageEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XDnDDropTargetProtocol boolean processXdndEnter(sun.awt.X11.XClientMessageEvent)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="sun.awt.X11.XDnDDropTargetProtocol boolean processXdndLeave(sun.awt.X11.XClientMessageEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1399,6 +1419,11 @@
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="sun.awt.X11.XDragSourceContextPeer boolean processProxyModeEvent(sun.awt.X11.XEvent)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.awt.X11.XDragSourceContextPeer void processDrop(sun.awt.X11.XButtonEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1435,8 +1460,18 @@
   <item name="sun.awt.X11.XDropTargetEventProcessor boolean doProcessEvent(sun.awt.X11.XEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.X11.XDropTargetEventProcessor boolean processEvent(sun.awt.X11.XEvent)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.awt.X11.XDropTargetProtocol XDropTargetProtocol(sun.awt.X11.XDropTargetProtocolListener) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XDropTargetProtocol boolean forwardClientMessageToToplevel(long, sun.awt.X11.XClientMessageEvent)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="sun.awt.X11.XDropTargetProtocol boolean processClientMessage(sun.awt.X11.XClientMessageEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1572,7 +1607,7 @@
   </item>
   <item name="sun.awt.X11.XEmbedHelper java.lang.String XEmbedMessageToString(sun.awt.X11.XClientMessageEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2268,6 +2303,11 @@
   <item name="sun.awt.X11.XListPeer XListPeer(java.awt.List) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.X11.XListPeer boolean prePostMouseEvent(java.awt.event.MouseEvent)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.awt.X11.XListPeer java.awt.Dimension minimumSize(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2336,7 +2376,7 @@
   </item>
   <item name="sun.awt.X11.XMSelection boolean processClientMessage(sun.awt.X11.XEvent, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;false;null,_-&gt;false&quot;"/>
+      <val val="&quot;!null,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.X11.XMSelection boolean processRootEvent(sun.awt.X11.XEvent, int) 0">
@@ -2344,7 +2384,7 @@
   </item>
   <item name="sun.awt.X11.XMSelection boolean processRootEvent(sun.awt.X11.XEvent, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;false;null,_-&gt;false&quot;"/>
+      <val val="&quot;!null,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.X11.XMSelection void dispatchSelectionEvent(sun.awt.X11.XEvent, int) 0">
@@ -2457,6 +2497,16 @@
   </item>
   <item name="sun.awt.X11.XMouseInfoPeer boolean isWindowUnderMouse(java.awt.Window) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XNETProtocol boolean isWMName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.awt.X11.XNETProtocol boolean isWMStateNetHidden(sun.awt.X11.XWindowPeer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="sun.awt.X11.XNETProtocol int getState(sun.awt.X11.XWindowPeer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2672,7 +2722,7 @@
   </item>
   <item name="sun.awt.X11.XRobotPeer int[] getRGBPixels(java.awt.Rectangle)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2909,7 +2959,7 @@
   </item>
   <item name="sun.awt.X11.XTextAreaPeer.BevelBorder java.awt.Insets getBorderInsets(java.awt.Component, java.awt.Insets)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
+      <val val="&quot;_,!null-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.X11.XTextAreaPeer.BevelBorder void paintBorder(java.awt.Component, java.awt.Graphics, int, int, int, int) 1">
@@ -2929,7 +2979,7 @@
   </item>
   <item name="sun.awt.X11.XTextAreaPeer.JavaMouseEventHandler java.awt.Point toLocalSpace(java.awt.Component, java.awt.Point)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2941,7 +2991,7 @@
   </item>
   <item name="sun.awt.X11.XTextAreaPeer.JavaMouseEventHandler java.awt.Point toViewportChildLocalSpace(javax.swing.JViewport, java.awt.Point)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2956,7 +3006,7 @@
   </item>
   <item name="sun.awt.X11.XTextAreaPeer.JavaMouseEventHandler java.awt.event.MouseEvent newMouseEvent(java.awt.Component, java.awt.Point, java.awt.event.MouseEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,_,null-&gt;!null;_,null,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3097,6 +3147,11 @@
   <item name="sun.awt.X11.XToolkit boolean access$602(boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;false-&gt;false;true-&gt;true&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.awt.X11.XToolkit boolean getLastCursorPos(java.awt.Point)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.X11.XToolkit boolean isLeftMouseButton(java.awt.event.MouseEvent) 0">
@@ -3272,7 +3327,7 @@
   </item>
   <item name="sun.awt.X11.XToolkit java.awt.peer.RobotPeer createRobot(java.awt.Robot, java.awt.GraphicsDevice)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3466,8 +3521,18 @@
       <val val="&quot;false-&gt;false;true-&gt;true&quot;"/>
     </annotation>
   </item>
+  <item name="sun.awt.X11.XWM boolean isNetWMName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.awt.X11.XWM boolean isStateChange(sun.awt.X11.XDecoratedPeer, sun.awt.X11.XPropertyEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XWM boolean isStateChange(sun.awt.X11.XDecoratedPeer, sun.awt.X11.XPropertyEvent)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="sun.awt.X11.XWM boolean needRemap(sun.awt.X11.XDecoratedPeer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3486,7 +3551,7 @@
   </item>
   <item name="sun.awt.X11.XWM java.awt.Insets normalize(java.awt.Insets)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.X11.XWM java.lang.String toString()">
