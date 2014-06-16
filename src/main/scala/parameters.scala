@@ -55,13 +55,13 @@ object Result {
 
   def meet(r1: Result, r2: Result): Result = (r1, r2) match {
     case (Identity, _) => r2
-    case (_, Identity) => r1
     case (Return, _) => r2
     case (_, Return) => r1
     case (NPE, _) => NPE
     case (_, NPE) => NPE
     case (Error, _) => Error
     case (_, Error) => Error
+    case (_, Identity) => Identity
     case (ConditionalNPE(e1), ConditionalNPE(e2)) => ConditionalNPE(e1 meet e2)
   }
 }
