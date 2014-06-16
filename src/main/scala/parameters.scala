@@ -29,6 +29,7 @@ object `package` {
 
 sealed trait Result
 case object Identity extends Result
+case object Error extends Result
 case object Return extends Result
 case object NPE extends Result
 case class ConditionalNPE(sop: SoP) extends Result
@@ -40,6 +41,8 @@ object ConditionalNPE {
 object Result {
 
   def join(r1: Result, r2: Result): Result = (r1, r2) match {
+    case (Error, _) => r2
+    case (_, Error) => r1
     case (Identity, _) => r2
     case (_, Identity) => r1
     case (Return, _) => Return
@@ -52,28 +55,29 @@ object Result {
 
   def meet(r1: Result, r2: Result): Result = (r1, r2) match {
     case (Identity, _) => r2
-    case (_, Identity) => r1
     case (Return, _) => r2
     case (_, Return) => r1
     case (NPE, _) => NPE
     case (_, NPE) => NPE
+    case (Error, _) => Error
+    case (_, Error) => Error
+    case (_, Identity) => Identity
     case (ConditionalNPE(e1), ConditionalNPE(e2)) => ConditionalNPE(e1 meet e2)
   }
 }
 
-class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction) extends Analysis[Result] {
+class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result] {
 
   override val identity: Result = Identity
-  private val parameter = Key(method, direction)
 
   override def combineResults(delta: Result, subResults: List[Result]): Result =
     Result.meet(delta, subResults.reduce(Result.join))
 
   override def mkEquation(result: Result): Equation[Key, Value] = result match {
-    case Identity | Return => Equation(parameter, Final(Values.Top))
-    case NPE => Equation(parameter, Final(Values.NotNull))
+    case Identity | Return | Error => Equation(aKey, Final(Values.Top))
+    case NPE => Equation(aKey, Final(Values.NotNull))
     case ConditionalNPE(cnf) =>
-      Equation(parameter, Pending(Values.NotNull, cnf.map(p => Component(false, p))))
+      Equation(aKey, Pending(Values.NotNull, cnf.map(p => Component(false, p))))
   }
 
   override def isEarlyResult(res: Result): Boolean =
@@ -109,7 +113,8 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
         results = results + (stateIndex -> NPE)
         computed = computed.updated(insnIndex, state :: computed(insnIndex))
       case ATHROW =>
-        results = results + (stateIndex -> Identity)
+        // this is the subtle point! -- previous states interfers with it!!
+        results = results + (stateIndex -> Error)
         computed = computed.updated(insnIndex, state :: computed(insnIndex))
       case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
         val nextInsnIndex = insnIndex + 1
@@ -213,12 +218,13 @@ object Interpreter extends BasicInterpreter {
       _subResult = NPE
     }
     opCode match {
-      case INVOKESTATIC | INVOKESPECIAL /*| INVOKEVIRTUAL | INVOKEINTERFACE*/ =>
+      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE =>
+        val stable = opCode == INVOKESTATIC || opCode == INVOKESPECIAL
         val mNode = insn.asInstanceOf[MethodInsnNode]
         for (i <- shift until values.size()) {
           if (values.get(i).isInstanceOf[ParamValue]) {
             val method = Method(mNode.owner, mNode.name, mNode.desc)
-            _subResult = Result.meet(_subResult, ConditionalNPE(Key(method, In(i - shift))))
+            _subResult = Result.meet(_subResult, ConditionalNPE(Key(method, In(i - shift), stable)))
           }
         }
       case _ =>

@@ -49,44 +49,44 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def notNullParamEquation(richControlFlow: RichControlFlow, i: Int) = {
+  override def notNullParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean) = {
     val start = System.currentTimeMillis()
-    val result = super.notNullParamEquation(richControlFlow, i)
+    val result = super.notNullParamEquation(richControlFlow, i, stable)
     paramsTime += System.currentTimeMillis() - start
     result
   }
 
-  override def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int) = {
+  override def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
     val start = System.currentTimeMillis()
-    val result = super.notNullContractEquation(richControlFlow, resultOrigins, i)
+    val result = super.notNullContractEquation(richControlFlow, resultOrigins, i, stable)
     notNullTime += System.currentTimeMillis() - start
     result
   }
 
-  override def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int) = {
+  override def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
     val start = System.currentTimeMillis()
-    val result = super.nullContractEquation(richControlFlow, resultOrigins, i)
+    val result = super.nullContractEquation(richControlFlow, resultOrigins, i, stable)
     nullTime += System.currentTimeMillis() - start
     result
   }
 
-  override def trueContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int) = {
+  override def trueContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
     val start = System.currentTimeMillis()
-    val result = super.trueContractEquation(richControlFlow, resultOrigins, i)
+    val result = super.trueContractEquation(richControlFlow, resultOrigins, i, stable)
     trueTime += System.currentTimeMillis() - start
     result
   }
 
-  override def falseContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int) = {
+  override def falseContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
     val start = System.currentTimeMillis()
-    val result = super.falseContractEquation(richControlFlow, resultOrigins, i)
+    val result = super.falseContractEquation(richControlFlow, resultOrigins, i, stable)
     falseTime += System.currentTimeMillis() - start
     result
   }
 
-  override def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int]) = {
+  override def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], stable: Boolean) = {
     val start = System.currentTimeMillis()
-    val result = super.outContractEquation(richControlFlow, resultOrigins)
+    val result = super.outContractEquation(richControlFlow, resultOrigins, stable)
     outTime += System.currentTimeMillis() - start
     result
   }
@@ -108,7 +108,7 @@ class MainProcessor extends FabaProcessor {
 
     println("solving ...")
     val solutions: Map[Key, Values.Value] =
-      solver.solve().filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
+      (paramsSolver.solve() ++ contractsSolver.solve()).filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
     val solvingEnd = System.currentTimeMillis()
     println("saving to file ...")
 
@@ -144,7 +144,8 @@ class MainProcessor extends FabaProcessor {
 
   def process(source: Source): Annotations = {
     source.process(this)
-    val solutions = solver.solve().filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
+    val solutions: Map[Key, Values.Value] =
+      (paramsSolver.solve() ++ contractsSolver.solve()).filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
     Utils.toAnnotations(solutions)
   }
 }

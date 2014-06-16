@@ -10,6 +10,7 @@ import faba.MainProcessor
 import faba.data._
 import faba.source.ClassSource
 
+// TODO - it is for stable keys only for now
 class InferenceSuite extends FunSuite with Matchers {
 
   test("ParametersData.class") {
@@ -23,12 +24,12 @@ class InferenceSuite extends FunSuite with Matchers {
       for {(anns, i) <- jMethod.getParameterAnnotations.zipWithIndex} {
         val notNull = anns.exists(_.annotationType == classOf[ExpectNotNull])
         assert(
-          annotations.notNulls.contains(Key(method, In(i))) == notNull,
+          annotations.notNulls.contains(Key(method, In(i), true)) == notNull,
           s"'$jClass $jMethod #$i'"
         )
       }
-      annotations.notNulls(Key(method, Out)) should equal (jMethod.getAnnotation(classOf[ExpectNotNull]) != null)
-      annotations.contracts.get(Key(method, Out)) should equal (Option(jMethod.getAnnotation(classOf[ExpectContract])).map(_.value))
+      annotations.notNulls(Key(method, Out, true)) should equal (jMethod.getAnnotation(classOf[ExpectNotNull]) != null)
+      annotations.contracts.get(Key(method, Out, true)) should equal (Option(jMethod.getAnnotation(classOf[ExpectContract])).map(_.value))
     }
 
 

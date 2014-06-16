@@ -12,8 +12,9 @@ import faba.cfg._
 import faba.data._
 import faba.engine._
 
-class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Set[Int]) extends Analysis[Result[Key, Value]] {
+class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Set[Int], val stable: Boolean) extends Analysis[Result[Key, Value]] {
   type MyResult = Result[Key, Value]
+  implicit val contractsLattice = ELattice(Values.Bot, Values.Top)
 
   override val identity = Final(Values.Bot)
 
@@ -50,6 +51,11 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     val nextHistory = if (loopEnter) conf :: history else history
     val nextFrame = execute(frame, insnNode)
 
+    if (interpreter.dereferenced) {
+      results = results + (stateIndex -> Final(Values.Bot))
+      computed = computed.updated(insnIndex, state :: computed(insnIndex))
+      return
+    }
     insnNode.getOpcode match {
       case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
         popValue(frame) match {
@@ -152,6 +158,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
       frame
     case _ =>
+      interpreter.dereferenced = false
       val nextFrame = new Frame(frame)
       nextFrame.execute(insnNode, interpreter)
       nextFrame
@@ -197,6 +204,12 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
 
 case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins: Set[Int]) extends BasicInterpreter {
 
+  var dereferenced = false
+  val nullAnalysis = direction match {
+    case InOut(_, Values.Null) => true
+    case _ => false
+  }
+
   @inline
   def isResultOrigin(insn: AbstractInsnNode) =
     resultOrigins == null || resultOrigins(insns.indexOf(insn))
@@ -235,6 +248,9 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
   override def unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue = {
     val propagate_? = isResultOrigin(insn)
     insn.getOpcode match {
+      case GETFIELD | ARRAYLENGTH | MONITORENTER if nullAnalysis && value.isInstanceOf[ParamValue] =>
+        dereferenced = true
+        super.unaryOperation(insn, value)
       case CHECKCAST if value.isInstanceOf[ParamValue] =>
         new ParamValue(Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc))
       case INSTANCEOF if value.isInstanceOf[ParamValue] =>
@@ -246,13 +262,38 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
     }
   }
 
+  override def binaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue): BasicValue = {
+    insn.getOpcode match {
+      case IALOAD | LALOAD | FALOAD | DALOAD | AALOAD | BALOAD | CALOAD | SALOAD | PUTFIELD
+        if nullAnalysis && v1.isInstanceOf[ParamValue] =>
+          dereferenced = true
+      case _ =>
+    }
+    super.binaryOperation(insn, v1, v2)
+  }
+
+  override def ternaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue, v3: BasicValue): BasicValue = {
+    insn.getOpcode match {
+      case IASTORE | LASTORE | FASTORE | DASTORE | AASTORE | BASTORE | CASTORE | SASTORE
+        if nullAnalysis && v1.isInstanceOf[ParamValue] =>
+        dereferenced = true
+      case _ =>
+    }
+    super.ternaryOperation(insn, v1, v2, v3)
+  }
+
   @switch
   override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
     val propagate_? = isResultOrigin(insn)
     val opCode = insn.getOpcode
     val shift = if (opCode == INVOKESTATIC) 0 else 1
+    if ((opCode == INVOKESPECIAL || opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) && nullAnalysis && values.get(0).isInstanceOf[ParamValue]) {
+      dereferenced = true
+      return super.naryOperation(insn, values)
+    }
     opCode match {
-      case INVOKESTATIC | INVOKESPECIAL /*| INVOKEVIRTUAL | INVOKEINTERFACE */ if propagate_? =>
+      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE  if propagate_? =>
+        val stable = opCode == INVOKESTATIC || opCode == INVOKESPECIAL
         val mNode = insn.asInstanceOf[MethodInsnNode]
         val method = Method(mNode.owner, mNode.name, mNode.desc)
         val retType = Type.getReturnType(mNode.desc)
@@ -264,15 +305,15 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
               var keys = Set[Key]()
               for (i <- shift until values.size()) {
                 if (values.get(i).isInstanceOf[ParamValue])
-                  keys = keys + Key(method, InOut(i - shift, inValue))
+                  keys = keys + Key(method, InOut(i - shift, inValue), stable)
               }
               if (isRefRetType)
-                keys = keys + Key(method, Out)
+                keys = keys + Key(method, Out, stable)
               if (keys.nonEmpty)
                 return CallResultValue(retType, keys)
             case _ =>
               if (isRefRetType)
-                return CallResultValue(retType, Set(Key(method, Out)))
+                return CallResultValue(retType, Set(Key(method, Out, stable)))
           }
         super.naryOperation(insn, values)
       case MULTIANEWARRAY if propagate_? =>

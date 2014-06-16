@@ -63,7 +63,7 @@
   </item>
   <item name="com.sun.xml.internal.ws.addressing.EndpointReferenceUtil javax.xml.ws.wsaddressing.W3CEndpointReference toW3CEpr(com.sun.xml.internal.ws.developer.MemberSubmissionEndpointReference)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -103,10 +103,19 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.addressing.WSEPRExtension javax.xml.stream.XMLStreamReader readAsXMLStreamReader()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.ws.addressing.WsaActionUtil java.lang.String getDefaultFaultAction(com.sun.xml.internal.ws.api.model.JavaMethod, com.sun.xml.internal.ws.api.model.CheckedException) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.addressing.WsaActionUtil java.lang.String getDefaultFaultAction(com.sun.xml.internal.ws.api.model.JavaMethod, com.sun.xml.internal.ws.api.model.CheckedException) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.addressing.WsaActionUtil java.lang.String getDefaultFaultAction(com.sun.xml.internal.ws.api.model.JavaMethod, com.sun.xml.internal.ws.api.model.CheckedException)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.addressing.WsaActionUtil java.lang.String getDelimiter(java.lang.String)">
@@ -137,6 +146,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.addressing.WsaClientTube com.sun.xml.internal.ws.api.pipe.NextAction processResponse(com.sun.xml.internal.ws.api.message.Packet) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.addressing.WsaPropertyBag com.sun.xml.internal.ws.api.addressing.WSEndpointReference getEPR(javax.xml.namespace.QName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.addressing.WsaServerTube WsaServerTube(com.sun.xml.internal.ws.addressing.WsaServerTube, com.sun.xml.internal.ws.api.pipe.TubeCloner) 0">
@@ -188,11 +200,21 @@
   </item>
   <item name="com.sun.xml.internal.ws.addressing.WsaTube boolean isInCurrentRole(com.sun.xml.internal.ws.api.message.Header, com.sun.xml.internal.ws.api.WSBinding)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;true&quot;"/>
+      <val val="&quot;_,null-&gt;true;null,_-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.addressing.WsaTube com.sun.xml.internal.ws.addressing.WsaTubeHelper getTubeHelper()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.addressing.WsaTube com.sun.xml.internal.ws.api.message.Packet validateInboundHeaders(com.sun.xml.internal.ws.api.message.Packet)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.addressing.WsaTube com.sun.xml.internal.ws.api.model.wsdl.WSDLBoundOperation getWSDLBoundOperation(com.sun.xml.internal.ws.api.message.Packet)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.addressing.WsaTube void checkCardinality(com.sun.xml.internal.ws.api.message.Packet) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -203,8 +225,18 @@
   <item name="com.sun.xml.internal.ws.addressing.WsaTubeHelper WsaTubeHelper(com.sun.xml.internal.ws.api.WSBinding, com.sun.xml.internal.ws.api.model.SEIModel, com.sun.xml.internal.ws.api.model.wsdl.WSDLPort) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.addressing.WsaTubeHelper boolean isInputActionDefault(com.sun.xml.internal.ws.api.message.Packet)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.addressing.WsaTubeHelper java.lang.String getEffectiveInputAction(com.sun.xml.internal.ws.api.message.Packet) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.addressing.WsaTubeHelper java.lang.String getFaultActionFromSEIModel(com.sun.xml.internal.ws.api.message.Packet, com.sun.xml.internal.ws.api.message.Packet)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;null;null,_-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.addressing.WsaTubeHelper java.lang.String getOutputAction(com.sun.xml.internal.ws.api.message.Packet) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

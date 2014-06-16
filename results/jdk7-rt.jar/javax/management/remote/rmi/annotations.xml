@@ -20,6 +20,9 @@
   <item name="javax.management.remote.rmi.NoCallStackClassLoader byte[] stringToBytes(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.remote.rmi.NoCallStackClassLoader java.lang.Class findClass(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.management.remote.rmi.RMIConnectionImpl RMIConnectionImpl(javax.management.remote.rmi.RMIServerImpl, java.lang.String, java.lang.ClassLoader, javax.security.auth.Subject, java.util.Map) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -54,12 +57,12 @@
   </item>
   <item name="javax.management.remote.rmi.RMIConnectionImpl java.lang.Object unwrap(java.rmi.MarshalledObject, java.lang.ClassLoader, java.lang.Class)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_-&gt;null&quot;"/>
+      <val val="&quot;_,_,null-&gt;null;null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="javax.management.remote.rmi.RMIConnectionImpl java.lang.Object unwrap(java.rmi.MarshalledObject, java.lang.ClassLoader, java.lang.ClassLoader, java.lang.Class)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_-&gt;null&quot;"/>
+      <val val="&quot;_,_,_,null-&gt;null;null,_,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="javax.management.remote.rmi.RMIConnectionImpl java.lang.Object[] nullIsEmpty(java.lang.Object[])">
@@ -72,10 +75,8 @@
       <val val="&quot;null-&gt;!null&quot;"/>
     </annotation>
   </item>
-  <item name="javax.management.remote.rmi.RMIConnectionImpl java.lang.String strings(java.lang.String[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
+  <item name="javax.management.remote.rmi.RMIConnectionImpl java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.remote.rmi.RMIConnectionImpl java.lang.String[] nullIsEmpty(java.lang.String[])">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -87,7 +88,7 @@
   </item>
   <item name="javax.management.remote.rmi.RMIConnectionImpl java.security.AccessControlContext withPermissions(java.security.Permission[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -136,6 +137,9 @@
   <item name="javax.management.remote.rmi.RMIConnectionImpl.6 java.lang.ClassLoader run()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.remote.rmi.RMIConnectionImpl.6 java.lang.Object run()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.management.remote.rmi.RMIConnector boolean access$1200(javax.management.remote.rmi.RMIConnector) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -165,16 +169,6 @@
   <item name="javax.management.remote.rmi.RMIConnector java.lang.Integer[] access$1500(javax.management.remote.rmi.RMIConnector, javax.management.ObjectName[], java.rmi.MarshalledObject[], javax.security.auth.Subject[], boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.management.remote.rmi.RMIConnector java.lang.String access$500(java.lang.Object[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
-  </item>
-  <item name="javax.management.remote.rmi.RMIConnector java.lang.String access$600(java.lang.String[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.management.remote.rmi.RMIConnector java.lang.String access$900(javax.management.remote.rmi.RMIConnector) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -191,10 +185,8 @@
       <val val="&quot;null-&gt;!null&quot;"/>
     </annotation>
   </item>
-  <item name="javax.management.remote.rmi.RMIConnector java.lang.String strings(java.lang.String[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
+  <item name="javax.management.remote.rmi.RMIConnector java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.remote.rmi.RMIConnector java.util.Map access$1800(javax.management.remote.rmi.RMIConnector) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -313,6 +305,24 @@
   <item name="javax.management.remote.rmi.RMIConnectorServer java.lang.String byteArrayToBase64(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.remote.rmi.RMIConnectorServer java.lang.String byteArrayToBase64(byte[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.remote.rmi.RMIConnectorServer java.lang.String encodeJRMPStub(javax.management.remote.rmi.RMIServer, java.util.Map)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.remote.rmi.RMIConnectorServer java.lang.String encodeStub(javax.management.remote.rmi.RMIServer, java.util.Map)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.management.remote.rmi.RMIConnectorServer java.util.Map getAttributes()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -336,7 +346,7 @@
   </item>
   <item name="javax.management.remote.rmi.RMIConnectorServer javax.management.remote.rmi.RMIServerImpl newJRMPServer(java.util.Map, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -376,6 +386,15 @@
   <item name="javax.management.remote.rmi.RMIJRMPServerImpl javax.management.remote.rmi.RMIConnection makeClient(java.lang.String, javax.security.auth.Subject)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.remote.rmi.RMIServerImpl java.lang.String getVersion()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.remote.rmi.RMIServerImpl java.lang.String makeConnectionId(java.lang.String, javax.security.auth.Subject)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>

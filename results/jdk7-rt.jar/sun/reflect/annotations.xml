@@ -23,6 +23,9 @@
   <item name="sun.reflect.ClassDefiner.1 java.lang.ClassLoader run()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.reflect.ClassDefiner.1 java.lang.Object run()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.reflect.ClassFileAssembler void append(sun.reflect.ByteVector) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -47,6 +50,15 @@
   <item name="sun.reflect.ClassFileAssembler void opc_ifnull(sun.reflect.Label) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.reflect.MethodAccessorGenerator java.lang.String buildInternalSignature()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.reflect.MethodAccessorGenerator java.lang.String generateName(boolean, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,false-&gt;!null;_,true-&gt;!null;false,_-&gt;!null;true,_-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.reflect.MethodAccessorGenerator sun.reflect.ConstructorAccessor generateConstructor(java.lang.Class, java.lang.Class[], java.lang.Class[], int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -68,6 +80,11 @@
   <item name="sun.reflect.Reflection boolean isSameClassPackage(java.lang.Class, java.lang.Class) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.reflect.Reflection boolean isSameClassPackage(java.lang.ClassLoader, java.lang.String, java.lang.ClassLoader, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,null-&gt;false;_,null,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.reflect.Reflection boolean isSubclassOf(java.lang.Class, java.lang.Class)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null,_-&gt;false&quot;"/>
@@ -78,7 +95,7 @@
   </item>
   <item name="sun.reflect.Reflection java.util.Map registerFilter(java.util.Map, java.lang.Class, java.lang.String[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,_,null-&gt;!null;_,null,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,_,null-&gt;!null;_,null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -109,8 +126,11 @@
   </item>
   <item name="sun.reflect.ReflectionFactory sun.reflect.FieldAccessor newFieldAccessor(java.lang.reflect.Field, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,false-&gt;!null;_,true-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,false-&gt;!null;_,true-&gt;!null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.reflect.SignatureIterator java.lang.String returnType()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.reflect.UTF8 byte[] encode(java.lang.String) 0">
@@ -160,7 +180,7 @@
   </item>
   <item name="sun.reflect.UnsafeFieldAccessorFactory sun.reflect.FieldAccessor newFieldAccessor(java.lang.reflect.Field, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,false-&gt;!null;_,true-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,false-&gt;!null;_,true-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -173,7 +193,16 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.reflect.UnsafeFieldAccessorImpl java.lang.String getQualifiedFieldName()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.reflect.UnsafeFieldAccessorImpl java.lang.String getSetMessage(java.lang.String, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.reflect.UnsafeFieldAccessorImpl java.lang.String getSetMessage(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;null,_-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.reflect.UnsafeFieldAccessorImpl void ensureObj(java.lang.Object) 0">

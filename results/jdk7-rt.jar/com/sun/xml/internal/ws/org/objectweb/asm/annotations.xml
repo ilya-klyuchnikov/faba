@@ -25,7 +25,7 @@
   </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.Attribute com.sun.xml.internal.ws.org.objectweb.asm.Attribute read(com.sun.xml.internal.ws.org.objectweb.asm.ClassReader, int, int, char[], int, com.sun.xml.internal.ws.org.objectweb.asm.Label[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_,_,_-&gt;!null;_,_,_,!null,_,_-&gt;!null;_,_,_,_,_,!null-&gt;!null;_,_,_,_,_,null-&gt;!null;_,_,_,null,_,_-&gt;!null;null,_,_,_,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_,_,_,_-&gt;!null;_,_,_,!null,_,_-&gt;!null;_,_,_,_,_,!null-&gt;!null;_,_,_,_,_,null-&gt;!null;_,_,_,null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -88,7 +88,7 @@
   </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.ClassReader java.lang.String readUTF(int, int, char[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null-&gt;!null;_,_,null-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -125,7 +125,19 @@
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.ClassWriter com.sun.xml.internal.ws.org.objectweb.asm.Item get(com.sun.xml.internal.ws.org.objectweb.asm.Item) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.ClassWriter com.sun.xml.internal.ws.org.objectweb.asm.Item newClassItem(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.ClassWriter com.sun.xml.internal.ws.org.objectweb.asm.Item newConstItem(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.ClassWriter com.sun.xml.internal.ws.org.objectweb.asm.Item newFieldItem(java.lang.String, java.lang.String, java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.ClassWriter com.sun.xml.internal.ws.org.objectweb.asm.Item newMethodItem(java.lang.String, java.lang.String, java.lang.String, boolean) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.ClassWriter com.sun.xml.internal.ws.org.objectweb.asm.Item newString(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.ClassWriter com.sun.xml.internal.ws.org.objectweb.asm.MethodVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])">
@@ -134,7 +146,16 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.ClassWriter int addType(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.ClassWriter int addUninitializedType(java.lang.String, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.ClassWriter int newNameType(java.lang.String, java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.ClassWriter int newUTF8(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.ClassWriter java.lang.String getCommonSuperClass(java.lang.String, java.lang.String) 0">
@@ -189,6 +210,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.Item void set(int, java.lang.String, java.lang.String, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.Label java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.Label void put(com.sun.xml.internal.ws.org.objectweb.asm.MethodWriter, com.sun.xml.internal.ws.org.objectweb.asm.ByteVector, int, boolean) 1">
@@ -277,7 +301,7 @@
   </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.Type com.sun.xml.internal.ws.org.objectweb.asm.Type getObjectType(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -305,7 +329,22 @@
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.Type java.lang.String getConstructorDescriptor(java.lang.reflect.Constructor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.Type java.lang.String getConstructorDescriptor(java.lang.reflect.Constructor)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.Type java.lang.String getDescriptor()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.Type java.lang.String getDescriptor(java.lang.Class) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.Type java.lang.String getDescriptor(java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.Type java.lang.String getInternalName()">
@@ -320,7 +359,19 @@
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.Type java.lang.String getMethodDescriptor(com.sun.xml.internal.ws.org.objectweb.asm.Type, com.sun.xml.internal.ws.org.objectweb.asm.Type[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.Type java.lang.String getMethodDescriptor(com.sun.xml.internal.ws.org.objectweb.asm.Type, com.sun.xml.internal.ws.org.objectweb.asm.Type[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.Type java.lang.String getMethodDescriptor(java.lang.reflect.Method) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.Type java.lang.String getMethodDescriptor(java.lang.reflect.Method)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.Type void getDescriptor(java.lang.StringBuffer) 0">

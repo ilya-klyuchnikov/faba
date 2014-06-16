@@ -23,6 +23,9 @@
   <item name="sun.security.acl.AclImpl boolean removeEntry(java.security.Principal, java.security.acl.AclEntry) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.acl.AclImpl java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.acl.AclImpl java.util.Enumeration entries()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -44,6 +47,16 @@
   <item name="sun.security.acl.AllPermissionsImpl boolean equals(java.security.acl.Permission)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;true;null-&gt;true&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.security.acl.GroupImpl boolean addMember(java.security.Principal)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.security.acl.GroupImpl boolean isMemberRecurse(java.security.Principal, java.util.Vector)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.security.acl.OwnerImpl boolean addOwner(java.security.Principal, java.security.Principal)">

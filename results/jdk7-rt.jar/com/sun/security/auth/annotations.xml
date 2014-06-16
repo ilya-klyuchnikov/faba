@@ -88,6 +88,11 @@
   <item name="com.sun.security.auth.PolicyFile java.lang.String[][] getPrincipalInfo(com.sun.security.auth.PolicyParser.PrincipalEntry, java.security.CodeSource) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.security.auth.PolicyFile java.lang.String[][] getPrincipalInfo(com.sun.security.auth.PolicyParser.PrincipalEntry, java.security.CodeSource)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.security.auth.PolicyFile java.security.CodeSource canonicalizeCodebase(java.security.CodeSource, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -109,7 +114,7 @@
   </item>
   <item name="com.sun.security.auth.PolicyFile java.security.Permissions getPermissions(java.security.Permissions, java.security.CodeSource)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.security.auth.PolicyFile java.security.cert.Certificate[] getCertificates(java.security.KeyStore, java.lang.String) 1">
@@ -121,13 +126,24 @@
   <item name="com.sun.security.auth.PolicyFile void access$000(com.sun.security.auth.PolicyFile) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.security.auth.PolicyFile.PolicyEntry java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.security.auth.PolicyParser boolean peek(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.security.auth.PolicyParser com.sun.security.auth.PolicyParser.PermissionEntry parsePermissionEntry()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.security.auth.PolicyParser java.lang.String expand(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
+  </item>
+  <item name="com.sun.security.auth.PolicyParser java.lang.String match(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.security.auth.PolicyParser void main(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -153,6 +169,9 @@
   <item name="com.sun.security.auth.PolicyParser.PrincipalEntry PrincipalEntry(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.security.auth.PolicyPermissions java.util.Enumeration elements()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.security.auth.SolarisNumericGroupPrincipal SolarisNumericGroupPrincipal(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -160,6 +179,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
+  </item>
+  <item name="com.sun.security.auth.SolarisNumericGroupPrincipal java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.security.auth.SolarisNumericUserPrincipal SolarisNumericUserPrincipal(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -169,6 +191,9 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.security.auth.SolarisNumericUserPrincipal java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.security.auth.SolarisPrincipal SolarisPrincipal(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -177,12 +202,18 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.security.auth.SolarisPrincipal java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.security.auth.SubjectCodeSource boolean implies(java.security.CodeSource)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.security.auth.SubjectCodeSource boolean subjectListImpliesPrincipalEntry(java.util.LinkedList, com.sun.security.auth.PolicyParser.PrincipalEntry) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.security.auth.SubjectCodeSource.3 java.lang.String run()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.security.auth.UnixNumericGroupPrincipal UnixNumericGroupPrincipal(java.lang.String, boolean) 0">

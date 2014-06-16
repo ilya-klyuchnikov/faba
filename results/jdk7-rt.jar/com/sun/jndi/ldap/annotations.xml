@@ -5,6 +5,12 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.BerDecoder java.lang.String parseString(boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;false-&gt;!null;true-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.BerDecoder java.lang.String parseStringWithTag(int, boolean, int[])">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,_,!null-&gt;!null;_,_,null-&gt;!null;_,false,_-&gt;!null;_,true,_-&gt;!null&quot;"/>
@@ -28,12 +34,34 @@
   <item name="com.sun.jndi.ldap.ClientId boolean equalsSockFactory(com.sun.jndi.ldap.ClientId) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.ClientId java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.ClientId java.lang.String toStringControls(javax.naming.ldap.Control[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.Connection com.sun.jndi.ldap.BerDecoder readReply(com.sun.jndi.ldap.LdapRequest) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.Connection com.sun.jndi.ldap.LdapRequest writeRequest(com.sun.jndi.ldap.BerEncoder, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.Connection com.sun.jndi.ldap.LdapRequest writeRequest(com.sun.jndi.ldap.BerEncoder, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.Connection com.sun.jndi.ldap.LdapRequest writeRequest(com.sun.jndi.ldap.BerEncoder, int, boolean) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.Connection com.sun.jndi.ldap.LdapRequest writeRequest(com.sun.jndi.ldap.BerEncoder, int, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_-&gt;!null;_,_,false-&gt;!null;_,_,true-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.Connection com.sun.jndi.ldap.LdapRequest writeRequest(com.sun.jndi.ldap.BerEncoder, int, boolean, int) 0">
@@ -41,7 +69,7 @@
   </item>
   <item name="com.sun.jndi.ldap.Connection com.sun.jndi.ldap.LdapRequest writeRequest(com.sun.jndi.ldap.BerEncoder, int, boolean, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;!null;_,_,false,_-&gt;!null;_,_,true,_-&gt;!null;null,_,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_,_-&gt;!null;_,_,false,_-&gt;!null;_,_,true,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -59,12 +87,15 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.jndi.ldap.DigestClientId java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.EventSupport void queueEvent(java.util.EventObject, java.util.Vector) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.Filter byte[] unescapeFilterValue(byte[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -76,7 +107,7 @@
   </item>
   <item name="com.sun.jndi.ldap.Filter int[] findRightParen(byte[], int[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,null,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -129,7 +160,7 @@
   </item>
   <item name="com.sun.jndi.ldap.LdapBindingEnumeration javax.naming.NameClassPair createItem(java.lang.String, javax.naming.directory.Attributes, java.util.Vector)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,_,null-&gt;!null;_,null,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,_,null-&gt;!null;null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -178,16 +209,11 @@
   </item>
   <item name="com.sun.jndi.ldap.LdapClient com.sun.jndi.ldap.LdapResult getSearchReply(com.sun.jndi.ldap.LdapRequest, int, com.sun.jndi.ldap.LdapResult, java.util.Hashtable)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_-&gt;!null;_,_,null,_-&gt;null&quot;"/>
+      <val val="&quot;_,_,!null,_-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.jndi.ldap.LdapClient com.sun.jndi.ldap.LdapResult getSearchReply(int, com.sun.jndi.ldap.LdapResult, java.util.Hashtable) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="com.sun.jndi.ldap.LdapClient com.sun.jndi.ldap.LdapResult getSearchReply(int, com.sun.jndi.ldap.LdapResult, java.util.Hashtable)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_-&gt;null&quot;"/>
-    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.LdapClient com.sun.jndi.ldap.LdapResult ldapBind(java.lang.String, byte[], javax.naming.ldap.Control[], java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -204,6 +230,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null,_,_,_-&gt;!null&quot;"/>
     </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapClient com.sun.jndi.ldap.LdapResult processReply(com.sun.jndi.ldap.LdapRequest, com.sun.jndi.ldap.LdapResult, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapClient com.sun.jndi.ldap.LdapResult processReply(com.sun.jndi.ldap.LdapRequest, com.sun.jndi.ldap.LdapResult, int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -222,6 +251,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapClient int parseAttributeValue(com.sun.jndi.ldap.BerDecoder, javax.naming.directory.Attribute, boolean) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapClient java.lang.String getErrorMessage(int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapClient java.util.Vector parseControls(com.sun.jndi.ldap.BerDecoder) 0">
@@ -254,6 +289,9 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapClientFactory java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.LdapCtx LdapCtx(com.sun.jndi.ldap.LdapCtx, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -263,19 +301,40 @@
   <item name="com.sun.jndi.ldap.LdapCtx boolean filterToAssertion(java.lang.String, java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapCtx boolean filterToAssertion(java.lang.String, java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.LdapCtx boolean searchToCompare(java.lang.String, javax.naming.directory.SearchControls, java.lang.String[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapCtx com.sun.jndi.ldap.LdapResult compare(javax.naming.Name, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapCtx com.sun.jndi.ldap.LdapResult compare(javax.naming.Name, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;!null;_,null,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.LdapCtx com.sun.jndi.ldap.LdapResult doSearch(javax.naming.Name, java.lang.String, javax.naming.directory.SearchControls, boolean, boolean) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapCtx com.sun.jndi.ldap.LdapResult doSearch(javax.naming.Name, java.lang.String, javax.naming.directory.SearchControls, boolean, boolean) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapCtx com.sun.jndi.ldap.LdapResult doSearch(javax.naming.Name, java.lang.String, javax.naming.directory.SearchControls, boolean, boolean) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapCtx com.sun.jndi.ldap.LdapResult doSearch(javax.naming.Name, java.lang.String, javax.naming.directory.SearchControls, boolean, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,_,false-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.LdapCtx com.sun.jndi.ldap.LdapResult doSearchOnce(javax.naming.Name, java.lang.String, javax.naming.directory.SearchControls, boolean) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapCtx com.sun.jndi.ldap.LdapResult doSearchOnce(javax.naming.Name, java.lang.String, javax.naming.directory.SearchControls, boolean) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapCtx com.sun.jndi.ldap.LdapResult doSearchOnce(javax.naming.Name, java.lang.String, javax.naming.directory.SearchControls, boolean) 2">
@@ -284,11 +343,22 @@
   <item name="com.sun.jndi.ldap.LdapCtx com.sun.jndi.ldap.LdapResult getSearchReply(com.sun.jndi.ldap.LdapClient, com.sun.jndi.ldap.LdapResult) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapCtx com.sun.jndi.ldap.LdapResult getSearchReply(com.sun.jndi.ldap.LdapClient, com.sun.jndi.ldap.LdapResult) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.LdapCtx int findControl(javax.naming.ldap.Control[], javax.naming.ldap.Control) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapCtx java.lang.Object c_lookup(javax.naming.Name, com.sun.jndi.toolkit.ctx.Continuation) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapCtx java.lang.Object c_lookupLink(javax.naming.Name, com.sun.jndi.toolkit.ctx.Continuation) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapCtx java.lang.Object removeFromEnvironment(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.LdapCtx java.lang.String fullyQualifiedName(javax.naming.Name) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -298,10 +368,13 @@
   </item>
   <item name="com.sun.jndi.ldap.LdapCtx java.util.Vector appendVector(java.util.Vector, java.util.Vector)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.jndi.ldap.LdapCtx java.util.Vector extractURLs(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapCtx javax.naming.Context c_createSubcontext(javax.naming.Name, com.sun.jndi.toolkit.ctx.Continuation) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapCtx javax.naming.Name composeName(javax.naming.Name, javax.naming.Name) 0">
@@ -322,11 +395,28 @@
   <item name="com.sun.jndi.ldap.LdapCtx javax.naming.NamingEnumeration c_search(javax.naming.Name, java.lang.String, java.lang.Object[], javax.naming.directory.SearchControls, com.sun.jndi.toolkit.ctx.Continuation) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapCtx javax.naming.NamingEnumeration c_search(javax.naming.Name, java.lang.String, java.lang.Object[], javax.naming.directory.SearchControls, com.sun.jndi.toolkit.ctx.Continuation) 4">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapCtx javax.naming.NamingEnumeration c_search(javax.naming.Name, java.lang.String, javax.naming.directory.SearchControls, com.sun.jndi.toolkit.ctx.Continuation) 3">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapCtx javax.naming.NamingEnumeration c_search(javax.naming.Name, javax.naming.directory.Attributes, com.sun.jndi.toolkit.ctx.Continuation) 2">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapCtx javax.naming.NamingEnumeration c_search(javax.naming.Name, javax.naming.directory.Attributes, java.lang.String[], com.sun.jndi.toolkit.ctx.Continuation) 3">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.LdapCtx javax.naming.NamingEnumeration searchAux(javax.naming.Name, java.lang.String, javax.naming.directory.SearchControls, boolean, boolean, com.sun.jndi.toolkit.ctx.Continuation) 5">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapCtx javax.naming.directory.Attributes addRdnAttributes(java.lang.String, javax.naming.directory.Attributes, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapCtx javax.naming.directory.Attributes addRdnAttributes(java.lang.String, javax.naming.directory.Attributes, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.LdapCtx javax.naming.directory.Attributes c_getAttributes(javax.naming.Name, java.lang.String[], com.sun.jndi.toolkit.ctx.Continuation) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -396,10 +486,16 @@
   <item name="com.sun.jndi.ldap.LdapCtx void addNamingListener(javax.naming.Name, java.lang.String, java.lang.Object[], javax.naming.directory.SearchControls, javax.naming.event.NamingListener) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapCtx void addNamingListener(javax.naming.Name, java.lang.String, java.lang.Object[], javax.naming.directory.SearchControls, javax.naming.event.NamingListener) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.LdapCtx void addNamingListener(javax.naming.Name, java.lang.String, javax.naming.directory.SearchControls, javax.naming.event.NamingListener) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapCtx void adjustDeleteStatus(java.lang.String, com.sun.jndi.ldap.LdapResult) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapCtx void c_bind(javax.naming.Name, java.lang.Object, com.sun.jndi.toolkit.ctx.Continuation) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapCtx void c_bind(javax.naming.Name, java.lang.Object, javax.naming.directory.Attributes, com.sun.jndi.toolkit.ctx.Continuation) 3">
@@ -414,6 +510,9 @@
   <item name="com.sun.jndi.ldap.LdapCtx void c_modifyAttributes(javax.naming.Name, javax.naming.directory.ModificationItem[], com.sun.jndi.toolkit.ctx.Continuation) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapCtx void c_rebind(javax.naming.Name, java.lang.Object, com.sun.jndi.toolkit.ctx.Continuation) 2">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.LdapCtx void c_rebind(javax.naming.Name, java.lang.Object, javax.naming.directory.Attributes, com.sun.jndi.toolkit.ctx.Continuation) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -421,6 +520,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapCtx void c_unbind(javax.naming.Name, com.sun.jndi.toolkit.ctx.Continuation) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapCtx void processReturnCode(com.sun.jndi.ldap.LdapResult) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapCtx void processReturnCode(com.sun.jndi.ldap.LdapResult, javax.naming.Name) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapCtx void processReturnCode(com.sun.jndi.ldap.LdapResult, javax.naming.Name) 1">
@@ -484,11 +589,6 @@
   <item name="com.sun.jndi.ldap.LdapName java.lang.String escapeAttributeValue(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.jndi.ldap.LdapName java.lang.String escapeAttributeValue(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.jndi.ldap.LdapName java.util.Enumeration getAll()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -501,7 +601,19 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapName javax.naming.Name add(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapName javax.naming.Name add(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.LdapName javax.naming.Name addAll(int, javax.naming.Name) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapName javax.naming.Name addAll(javax.naming.Name) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapName javax.naming.Name getPrefix(int)">
@@ -567,17 +679,15 @@
   </item>
   <item name="com.sun.jndi.ldap.LdapName.TypeAndValue java.lang.String escapeStringValue(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapName.TypeAndValue java.lang.String escapeValue(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.jndi.ldap.LdapName.TypeAndValue java.lang.String escapeValue(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
+  <item name="com.sun.jndi.ldap.LdapName.TypeAndValue java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapNameParser javax.naming.Name parse(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -599,7 +709,7 @@
   </item>
   <item name="com.sun.jndi.ldap.LdapNamingEnumeration javax.naming.NameClassPair createItem(java.lang.String, javax.naming.directory.Attributes, java.util.Vector)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,_,null-&gt;!null;_,null,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,_,null-&gt;!null;null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -693,11 +803,25 @@
   <item name="com.sun.jndi.ldap.LdapReferralContext void unbind(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapReferralException javax.naming.Context getReferralContext()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapReferralException javax.naming.Context getReferralContext(java.util.Hashtable)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.LdapReferralException javax.naming.Context getReferralContext(java.util.Hashtable, javax.naming.ldap.Control[])">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapRequest boolean addReplyBer(com.sun.jndi.ldap.BerDecoder)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.LdapSchemaCtx com.sun.jndi.ldap.LdapSchemaCtx setup(int, java.lang.String, javax.naming.directory.Attributes) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -723,10 +847,22 @@
   <item name="com.sun.jndi.ldap.LdapSchemaCtx javax.naming.directory.DirContext doCreateSubcontext(javax.naming.Name, javax.naming.directory.Attributes) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaCtx void addServerSchema(javax.naming.directory.Attributes) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaCtx void deleteServerSchema(javax.naming.directory.Attributes) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.LdapSchemaCtx void doBind(javax.naming.Name, java.lang.Object, javax.naming.directory.Attributes, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapSchemaCtx void doRebind(javax.naming.Name, java.lang.Object, javax.naming.directory.Attributes, boolean) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaCtx void modifyServerSchema(javax.naming.directory.Attributes, javax.naming.directory.Attributes) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaCtx void modifyServerSchema(javax.naming.directory.Attributes, javax.naming.directory.Attributes) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapSchemaCtx.SchemaInfo SchemaInfo(java.lang.String, com.sun.jndi.ldap.LdapCtx, com.sun.jndi.ldap.LdapSchemaParser) 1">
@@ -743,41 +879,107 @@
   </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.Object[] desc2Def(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String attrDef2AttrDesc(javax.naming.directory.Attributes) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String attrDef2AttrDesc(javax.naming.directory.Attributes)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String classDef2ObjectDesc(javax.naming.directory.Attributes) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String classDef2ObjectDesc(javax.naming.directory.Attributes)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String matchRuleDef2MatchRuleDesc(javax.naming.directory.Attributes) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String matchRuleDef2MatchRuleDesc(javax.naming.directory.Attributes)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String syntaxDef2SyntaxDesc(javax.naming.directory.Attributes) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String syntaxDef2SyntaxDesc(javax.naming.directory.Attributes)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String writeBoolean(javax.naming.directory.Attribute) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String writeBoolean(javax.naming.directory.Attribute)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String writeNumericOID(javax.naming.directory.Attribute) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String writeNumericOID(javax.naming.directory.Attribute)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String writeOIDs(javax.naming.directory.Attribute) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String writeOIDs(javax.naming.directory.Attribute)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String writeQDString(javax.naming.directory.Attribute) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String writeQDString(javax.naming.directory.Attribute)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String writeQDStrings(javax.naming.directory.Attribute) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String writeQDStrings(javax.naming.directory.Attribute)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String writeQDescrs(javax.naming.directory.Attribute) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String writeQDescrs(javax.naming.directory.Attribute)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String writeWOID(javax.naming.directory.Attribute) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String writeWOID(javax.naming.directory.Attribute)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String[] readOIDs(java.lang.String, int[]) 0">
@@ -794,7 +996,7 @@
   </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String[] readQDString(java.lang.String, int[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -825,6 +1027,11 @@
   <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String[] readTag(java.lang.String, java.lang.String, int[]) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String[] readTag(java.lang.String, java.lang.String, int[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String[] readWOID(java.lang.String, int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -833,7 +1040,7 @@
   </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.String[] readWOID(java.lang.String, int[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -851,7 +1058,7 @@
   </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser javax.naming.directory.Attribute readNumericOID(java.lang.String, int[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -936,9 +1143,12 @@
   <item name="com.sun.jndi.ldap.LdapSearchEnumeration com.sun.jndi.ldap.LdapNamingEnumeration getReferredResults(com.sun.jndi.ldap.LdapReferralContext) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapSearchEnumeration javax.naming.NameClassPair createItem(java.lang.String, javax.naming.directory.Attributes, java.util.Vector) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.LdapSearchEnumeration javax.naming.NameClassPair createItem(java.lang.String, javax.naming.directory.Attributes, java.util.Vector)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,_,null-&gt;!null;_,null,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,_,null-&gt;!null;null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -948,12 +1158,18 @@
   <item name="com.sun.jndi.ldap.LdapURL boolean hasQueryComponents(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapURL java.lang.String toUrlString(java.lang.String, int, java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_,_-&gt;!null;_,_,!null,_-&gt;!null;_,_,_,false-&gt;!null;_,_,_,true-&gt;!null;_,_,null,_-&gt;!null;null,_,_,_-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.LdapURL java.lang.String[] fromList(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapURL java.lang.String[] fromList(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1005,6 +1221,9 @@
   <item name="com.sun.jndi.ldap.Obj.LoaderInputStream java.lang.Class resolveProxyClass(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.PersistentSearchControl byte[] setEncodedValue()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.ldap.ServiceLocator java.lang.String mapDnToDomainName(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
@@ -1031,6 +1250,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.SimpleClientId java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.VersionHelper java.net.URL[] getUrlArray(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

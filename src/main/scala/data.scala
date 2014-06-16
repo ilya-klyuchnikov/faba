@@ -1,6 +1,6 @@
 package faba.data
 
-import faba.engine.ELattice
+import faba.engine.{StableAwareId, ELattice}
 import scala.xml.Elem
 
 import org.objectweb.asm.Type
@@ -23,12 +23,18 @@ case class In(paramIndex: Int) extends Direction
 case class InOut(paramIndex: Int, in: Value) extends Direction
 case object Out extends Direction
 
-case class Key(method: Method, direction: Direction) {
+case class Key(method: Method, direction: Direction, stable: Boolean) extends StableAwareId[Key] {
   override def toString = direction match {
     case Out => s"$method"
     case In(index) => s"$method #$index"
     case InOut(index, v) => s"$method #$index #$v"
   }
+
+  override def mkUnstable =
+    if (!stable) this else Key(method, direction, false)
+
+  override def mkStable =
+    if (stable) this else Key(method, direction, true)
 }
 
 object Values extends Enumeration {
@@ -36,7 +42,6 @@ object Values extends Enumeration {
 }
 
 object `package` {
-  implicit val lattice = ELattice(Values)
   type Value = Values.Value
 }
 
@@ -104,7 +109,7 @@ object Utils {
       }
     }
     for ((method, inOuts) <- inOuts) {
-      val key = Key(method, Out)
+      val key = Key(method, Out, true)
       val arity = Type.getArgumentTypes(method.methodDesc).size
       val contractValues = inOuts.map { case (InOut(i, inValue), outValue) =>
         (0 until arity).map { j =>

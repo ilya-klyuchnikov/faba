@@ -34,6 +34,12 @@
   <item name="sun.security.krb5.Config int parseIntValue(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.Config java.lang.String findMacosConfigFile()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.Config java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.krb5.Config java.lang.String trimmed(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -59,6 +65,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.krb5.Credentials Credentials(byte[], java.lang.String, java.lang.String, byte[], int, boolean[], java.util.Date, java.util.Date, java.util.Date, java.util.Date, java.net.InetAddress[]) 3">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.Credentials java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.krb5.Credentials sun.security.krb5.Credentials acquireServiceCreds(java.lang.String, sun.security.krb5.Credentials) 0">
@@ -181,7 +190,7 @@
   </item>
   <item name="sun.security.krb5.KdcComm byte[] send(byte[], java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_-&gt;null&quot;"/>
+      <val val="&quot;_,null,_-&gt;null;null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="sun.security.krb5.KdcComm.KdcAccessibility java.lang.String[] access$100(java.lang.String) 0">
@@ -325,10 +334,19 @@
   <item name="sun.security.krb5.KrbException KrbException(sun.security.krb5.internal.KRBError, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.KrbException java.lang.String getMessage()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.KrbException java.lang.String krbErrorMessage()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.krb5.KrbException java.lang.String returnCodeSymbol()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.krb5.KrbException java.lang.String returnCodeSymbol(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.KrbException java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.krb5.KrbKdcRep void check(sun.security.krb5.internal.KDCReq, sun.security.krb5.internal.KDCRep) 0">
@@ -403,7 +421,7 @@
   <item name="sun.security.krb5.KrbTgsReq sun.security.krb5.internal.TGSReq createRequest(sun.security.krb5.internal.KDCOptions, sun.security.krb5.internal.Ticket, sun.security.krb5.EncryptionKey, sun.security.krb5.internal.KerberosTime, sun.security.krb5.PrincipalName, sun.security.krb5.Realm, sun.security.krb5.PrincipalName, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.KerberosTime, int[], sun.security.krb5.internal.HostAddresses, sun.security.krb5.internal.AuthorizationData, sun.security.krb5.internal.Ticket[], sun.security.krb5.EncryptionKey)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val 
-      val="&quot;!null,_,_,_,_,_,_,_,_,_,_,_,_,_,_-&gt;!null;_,!null,_,_,_,_,_,_,_,_,_,_,_,_,_-&gt;!null;_,_,!null,_,_,_,_,_,_,_,_,_,_,_,_-&gt;!null;_,_,_,!null,_,_,_,_,_,_,_,_,_,_,_-&gt;!null;_,_,_,_,!null,_,_,_,_,_,_,_,_,_,_-&gt;!null;_,_,_,_,_,!null,_,_,_,_,_,_,_,_,_-&gt;!null;_,_,_,_,_,_,!null,_,_,_,_,_,_,_,_-&gt;!null;_,_,_,_,_,_,_,!null,_,_,_,_,_,_,_-&gt;!null;_,_,_,_,_,_,_,_,!null,_,_,_,_,_,_-&gt;!null;_,_,_,_,_,_,_,_,_,!null,_,_,_,_,_-&gt;!null;_,_,_,_,_,_,_,_,_,_,!null,_,_,_,_-&gt;!null;_,_,_,_,_,_,_,_,_,_,_,!null,_,_,_-&gt;!null;_,_,_,_,_,_,_,_,_,_,_,_,!null,_,_-&gt;!null;_,_,_,_,_,_,_,_,_,_,_,_,_,!null,_-&gt;!null;_,_,_,_,_,_,_,_,_,_,_,_,_,_,!null-&gt;!null;_,_,_,_,_,_,_,_,_,_,_,_,_,_,null-&gt;!null;_,_,_,_,_,_,_,_,_,_,_,_,_,null,_-&gt;!null;_,_,_,_,_,_,_,_,_,_,_,_,null,_,_-&gt;!null;_,_,_,_,_,_,_,_,_,_,_,null,_,_,_-&gt;!null;_,_,_,_,_,_,_,_,_,_,null,_,_,_,_-&gt;!null;_,_,_,_,_,_,_,_,_,null,_,_,_,_,_-&gt;!null;_,_,_,_,_,_,_,_,null,_,_,_,_,_,_-&gt;!null;_,_,_,_,_,_,_,null,_,_,_,_,_,_,_-&gt;!null;_,_,_,_,_,_,null,_,_,_,_,_,_,_,_-&gt;!null;_,_,_,_,_,null,_,_,_,_,_,_,_,_,_-&gt;!null;_,_,_,_,null,_,_,_,_,_,_,_,_,_,_-&gt;!null;_,_,_,null,_,_,_,_,_,_,_,_,_,_,_-&gt;!null;_,_,null,_,_,_,_,_,_,_,_,_,_,_,_-&gt;!null;_,null,_,_,_,_,_,_,_,_,_,_,_,_,_-&gt;!null;null,_,_,_,_,_,_,_,_,_,_,_,_,_,_-&gt;!null&quot;">
+      val="&quot;!null,_,_,_,_,_,_,_,_,_,_,_,_,_,_-&gt;!null;_,!null,_,_,_,_,_,_,_,_,_,_,_,_,_-&gt;!null;_,_,!null,_,_,_,_,_,_,_,_,_,_,_,_-&gt;!null;_,_,_,!null,_,_,_,_,_,_,_,_,_,_,_-&gt;!null;_,_,_,_,!null,_,_,_,_,_,_,_,_,_,_-&gt;!null;_,_,_,_,_,!null,_,_,_,_,_,_,_,_,_-&gt;!null;_,_,_,_,_,_,!null,_,_,_,_,_,_,_,_-&gt;!null;_,_,_,_,_,_,_,!null,_,_,_,_,_,_,_-&gt;!null;_,_,_,_,_,_,_,_,!null,_,_,_,_,_,_-&gt;!null;_,_,_,_,_,_,_,_,_,!null,_,_,_,_,_-&gt;!null;_,_,_,_,_,_,_,_,_,_,!null,_,_,_,_-&gt;!null;_,_,_,_,_,_,_,_,_,_,_,!null,_,_,_-&gt;!null;_,_,_,_,_,_,_,_,_,_,_,_,!null,_,_-&gt;!null;_,_,_,_,_,_,_,_,_,_,_,_,_,!null,_-&gt;!null;_,_,_,_,_,_,_,_,_,_,_,_,_,_,!null-&gt;!null;_,_,_,_,_,_,_,_,_,_,_,_,_,_,null-&gt;!null;_,_,_,_,_,_,_,_,_,_,_,_,_,null,_-&gt;!null;_,_,_,_,_,_,_,_,_,_,_,_,null,_,_-&gt;!null;_,_,_,_,_,_,_,_,_,_,_,null,_,_,_-&gt;!null;_,_,_,_,_,_,_,_,_,_,null,_,_,_,_-&gt;!null;_,_,_,_,_,_,_,_,_,null,_,_,_,_,_-&gt;!null;_,_,_,_,_,_,_,_,null,_,_,_,_,_,_-&gt;!null;_,_,_,_,_,_,_,null,_,_,_,_,_,_,_-&gt;!null;_,_,_,_,_,null,_,_,_,_,_,_,_,_,_-&gt;!null;_,_,_,_,null,_,_,_,_,_,_,_,_,_,_-&gt;!null;_,_,_,null,_,_,_,_,_,_,_,_,_,_,_-&gt;!null;_,_,null,_,_,_,_,_,_,_,_,_,_,_,_-&gt;!null;_,null,_,_,_,_,_,_,_,_,_,_,_,_,_-&gt;!null;null,_,_,_,_,_,_,_,_,_,_,_,_,_,_-&gt;!null&quot;">
 </val>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -437,7 +455,21 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="sun.security.krb5.PrincipalName boolean equals(sun.security.krb5.PrincipalName)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.security.krb5.PrincipalName boolean match(sun.security.krb5.PrincipalName) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.PrincipalName java.lang.String getNameString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.PrincipalName java.lang.String getPrincipalNameAsString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.PrincipalName java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.krb5.PrincipalName java.lang.String[] parseName(java.lang.String) 0">
@@ -445,7 +477,7 @@
   </item>
   <item name="sun.security.krb5.PrincipalName java.lang.String[] parseName(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -487,6 +519,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.krb5.Realm java.lang.String substring(java.lang.String, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.Realm java.lang.String substring(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.krb5.Realm java.lang.String[] doInitialParse(java.lang.String, java.lang.String) 0">

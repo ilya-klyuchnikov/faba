@@ -32,6 +32,7 @@ abstract class Analysis[Res] {
 
   val richControlFlow: RichControlFlow
   val direction: Direction
+  val stable: Boolean
   def identity: Res
   def processState(state: State): Unit
   def isEarlyResult(res: Res): Boolean
@@ -42,7 +43,7 @@ abstract class Analysis[Res] {
   val methodNode = controlFlow.methodNode
   val method = Method(controlFlow.className, methodNode.name, methodNode.desc)
   val dfsTree = richControlFlow.dfsTree
-  val aKey = Key(method, direction)
+  val aKey = Key(method, direction, stable)
 
   final def createStartState(): State = State(0, Conf(0, createStartFrame()), Nil, false, false)
   final def confInstance(curr: Conf, prev: Conf): Boolean = Utils.isInstance(curr, prev)

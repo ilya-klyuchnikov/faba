@@ -7,7 +7,7 @@
   </item>
   <item name="sun.nio.fs.AbstractAclFileAttributeView java.util.Map readAttributes(java.lang.String[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -46,7 +46,7 @@
   </item>
   <item name="sun.nio.fs.AbstractFileSystemProvider java.lang.String[] split(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -140,10 +140,28 @@
   <item name="sun.nio.fs.Globs java.lang.String toRegexPattern(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.fs.Globs java.lang.String toRegexPattern(java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;_,false-&gt;!null;_,true-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.nio.fs.Globs java.lang.String toUnixRegexPattern(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.fs.Globs java.lang.String toUnixRegexPattern(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.nio.fs.Globs java.lang.String toWindowsRegexPattern(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.fs.Globs java.lang.String toWindowsRegexPattern(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.fs.MacOSXFileSystem MacOSXFileSystem(sun.nio.fs.UnixFileSystemProvider, java.lang.String) 1">
@@ -226,6 +244,9 @@
   <item name="sun.nio.fs.PollingWatchService.PollingWatchKey PollingWatchKey(sun.nio.fs.PollingWatchService, java.nio.file.Path, sun.nio.fs.PollingWatchService, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.fs.Reflect java.lang.reflect.Field lookupField(java.lang.String, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.nio.fs.UnixChannelFactory java.io.FileDescriptor open(int, sun.nio.fs.UnixPath, java.lang.String, sun.nio.fs.UnixChannelFactory.Flags, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -234,7 +255,7 @@
   </item>
   <item name="sun.nio.fs.UnixChannelFactory java.io.FileDescriptor open(int, sun.nio.fs.UnixPath, java.lang.String, sun.nio.fs.UnixChannelFactory.Flags, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null,_,_,_-&gt;!null;_,_,!null,_,_-&gt;!null;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;!null;_,_,null,_,_-&gt;!null;_,null,_,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,!null,_,_,_-&gt;!null;_,_,!null,_,_-&gt;!null;_,_,_,!null,_-&gt;!null;_,_,null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -264,7 +285,7 @@
   </item>
   <item name="sun.nio.fs.UnixChannelFactory java.nio.channels.FileChannel newFileChannel(int, sun.nio.fs.UnixPath, java.lang.String, java.util.Set, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null,_,_,_-&gt;!null;_,_,!null,_,_-&gt;!null;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;!null;_,_,null,_,_-&gt;!null;_,null,_,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,!null,_,_,_-&gt;!null;_,_,!null,_,_-&gt;!null;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;!null;_,_,null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -276,7 +297,7 @@
   </item>
   <item name="sun.nio.fs.UnixChannelFactory java.nio.channels.FileChannel newFileChannel(sun.nio.fs.UnixPath, java.util.Set, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,null,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -324,7 +345,7 @@
   </item>
   <item name="sun.nio.fs.UnixException java.io.IOException asIOException(sun.nio.fs.UnixPath)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -420,7 +441,7 @@
   </item>
   <item name="sun.nio.fs.UnixFileAttributes sun.nio.fs.UnixFileAttributes get(int, sun.nio.fs.UnixPath, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null,_-&gt;!null;_,_,false-&gt;!null;_,_,true-&gt;!null;_,null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,!null,_-&gt;!null;_,_,false-&gt;!null;_,_,true-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -444,6 +465,9 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.fs.UnixFileKey java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.nio.fs.UnixFileModeAttribute int toUnixMode(int, java.nio.file.attribute.FileAttribute[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -460,6 +484,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.fs.UnixFileStore java.lang.Object getAttribute(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.fs.UnixFileStore java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.fs.UnixFileStore java.nio.file.attribute.FileStoreAttributeView getFileStoreAttributeView(java.lang.Class) 0">
@@ -498,7 +525,7 @@
   </item>
   <item name="sun.nio.fs.UnixFileSystem java.nio.file.Path getPath(java.lang.String, java.lang.String[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -507,7 +534,7 @@
   </item>
   <item name="sun.nio.fs.UnixFileSystem java.nio.file.PathMatcher getPathMatcher(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -589,9 +616,6 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.fs.UnixFileSystemProvider java.nio.file.FileSystem getFileSystem(java.net.URI) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="sun.nio.fs.UnixFileSystemProvider java.nio.file.FileSystem newFileSystem(java.net.URI, java.util.Map) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.fs.UnixFileSystemProvider java.nio.file.Path getPath(java.net.URI) 0">
@@ -795,6 +819,11 @@
   <item name="sun.nio.fs.UnixPath boolean endsWith(java.nio.file.Path) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.fs.UnixPath boolean endsWith(java.nio.file.Path)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.nio.fs.UnixPath boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
@@ -802,6 +831,11 @@
   </item>
   <item name="sun.nio.fs.UnixPath boolean startsWith(java.nio.file.Path) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.fs.UnixPath boolean startsWith(java.nio.file.Path)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="sun.nio.fs.UnixPath byte[] encode(sun.nio.fs.UnixFileSystem, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -811,7 +845,7 @@
   </item>
   <item name="sun.nio.fs.UnixPath byte[] encode(sun.nio.fs.UnixFileSystem, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -824,8 +858,18 @@
   <item name="sun.nio.fs.UnixPath int compareTo(java.nio.file.Path) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.fs.UnixPath java.lang.String normalize(java.lang.String, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_-&gt;!null;null,_,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.nio.fs.UnixPath java.lang.String normalizeAndCheck(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.fs.UnixPath java.lang.String normalizeAndCheck(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.nio.fs.UnixPath java.net.URI toUri()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -952,7 +996,7 @@
   </item>
   <item name="sun.nio.fs.UnixUriUtils java.net.URI toUri(sun.nio.fs.UnixPath)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>

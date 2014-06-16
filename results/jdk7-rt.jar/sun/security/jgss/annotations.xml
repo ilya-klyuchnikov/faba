@@ -17,6 +17,15 @@
   <item name="sun.security.jgss.GSSCredentialImpl java.lang.String getElementStr(org.ietf.jgss.Oid, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.GSSCredentialImpl java.lang.String getElementStr(org.ietf.jgss.Oid, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.GSSCredentialImpl java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.jgss.GSSCredentialImpl void init(sun.security.jgss.GSSManagerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -35,6 +44,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.jgss.GSSHeader int putLength(int, java.io.OutputStream) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.GSSHeader java.lang.String getHexBytes(byte[], int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.jgss.GSSManagerImpl org.ietf.jgss.GSSContext createContext(byte[])">
@@ -115,6 +130,9 @@
   <item name="sun.security.jgss.GSSManagerImpl sun.security.jgss.spi.GSSContextSpi getMechanismContext(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.GSSManagerImpl void addProviderAtFront(java.security.Provider, org.ietf.jgss.Oid) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.jgss.GSSNameImpl GSSNameImpl(sun.security.jgss.GSSManagerImpl, java.lang.Object, org.ietf.jgss.Oid) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -173,6 +191,24 @@
   <item name="sun.security.jgss.GSSToken java.lang.String getHexBytes(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.GSSToken java.lang.String getHexBytes(byte[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.GSSToken java.lang.String getHexBytes(byte[], int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.GSSToken java.lang.String getHexBytes(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.jgss.GSSToken void readFully(java.io.InputStream, byte[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -190,6 +226,11 @@
   </item>
   <item name="sun.security.jgss.GSSToken void writeLittleEndian(int, byte[], int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.GSSUtil java.lang.String getMechStr(org.ietf.jgss.Oid)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.security.jgss.GSSUtil java.util.Vector searchSubject(sun.security.jgss.spi.GSSNameSpi, org.ietf.jgss.Oid, boolean, java.lang.Class) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -220,7 +261,7 @@
   </item>
   <item name="sun.security.jgss.ProviderList org.ietf.jgss.GSSException createGSSException(java.security.Provider, java.lang.String, java.lang.String, java.lang.Exception)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;!null;_,!null,_,_-&gt;!null;_,_,!null,_-&gt;!null;_,_,_,!null-&gt;!null;_,_,_,null-&gt;!null;_,_,null,_-&gt;!null;_,null,_,_-&gt;!null;null,_,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_,_-&gt;!null;_,!null,_,_-&gt;!null;_,_,!null,_-&gt;!null;_,_,_,!null-&gt;!null;_,_,_,null-&gt;!null;_,_,null,_-&gt;!null;_,null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -229,7 +270,7 @@
   </item>
   <item name="sun.security.jgss.ProviderList org.ietf.jgss.Oid getOidFromMechFactoryProperty(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -247,7 +288,16 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="sun.security.jgss.ProviderList.PreferencesEntry java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.TokenTracker java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.jgss.TokenTracker void getProps(int, org.ietf.jgss.MessageProp) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.TokenTracker.Entry java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
 </root>

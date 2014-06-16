@@ -25,7 +25,7 @@
   </item>
   <item name="com.sun.jndi.dns.DnsClient com.sun.jndi.dns.Packet makeQueryPacket(com.sun.jndi.dns.DnsName, int, int, int, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_,_-&gt;!null;_,_,_,_,false-&gt;!null;_,_,_,_,true-&gt;!null;null,_,_,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_,_,_-&gt;!null;_,_,_,_,false-&gt;!null;_,_,_,_,true-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -72,7 +72,7 @@
   </item>
   <item name="com.sun.jndi.dns.DnsContext com.sun.jndi.dns.CT fromAttrId(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -114,6 +114,12 @@
   <item name="com.sun.jndi.dns.DnsContext javax.naming.Context c_createSubcontext(javax.naming.Name, com.sun.jndi.toolkit.ctx.Continuation) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.dns.DnsContext javax.naming.Name composeName(javax.naming.Name, javax.naming.Name) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.DnsContext javax.naming.Name composeName(javax.naming.Name, javax.naming.Name) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.dns.DnsContext javax.naming.NameParser c_getNameParser(javax.naming.Name, com.sun.jndi.toolkit.ctx.Continuation) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -122,7 +128,7 @@
   </item>
   <item name="com.sun.jndi.dns.DnsContext javax.naming.NamingEnumeration c_list(javax.naming.Name, com.sun.jndi.toolkit.ctx.Continuation)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -131,7 +137,7 @@
   </item>
   <item name="com.sun.jndi.dns.DnsContext javax.naming.NamingEnumeration c_listBindings(javax.naming.Name, com.sun.jndi.toolkit.ctx.Continuation)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -177,6 +183,11 @@
   <item name="com.sun.jndi.dns.DnsContext void c_unbind(javax.naming.Name, com.sun.jndi.toolkit.ctx.Continuation) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.dns.DnsContextFactory boolean platformServersUsed(com.sun.jndi.dns.DnsUrl[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.dns.DnsContextFactory com.sun.jndi.dns.DnsContext getContext(java.lang.String, com.sun.jndi.dns.DnsUrl[], java.util.Hashtable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -208,6 +219,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.DnsContextFactory java.lang.String constructProviderUrl(java.lang.String, java.lang.String[]) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.DnsContextFactory java.lang.String constructProviderUrl(java.lang.String, java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.DnsContextFactory java.lang.String getInitCtxUrl(java.util.Hashtable) 0">
@@ -277,7 +294,16 @@
   <item name="com.sun.jndi.dns.DnsName java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.dns.DnsName java.lang.String getKey(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.dns.DnsName java.lang.String keyForLabel(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.DnsName java.lang.String keyForLabel(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.DnsName java.util.Enumeration getAll()">
@@ -288,11 +314,23 @@
   </item>
   <item name="com.sun.jndi.dns.DnsName javax.naming.Name add(int, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
+      <val val="&quot;_,!null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.DnsName javax.naming.Name add(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.DnsName javax.naming.Name add(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.DnsName javax.naming.Name addAll(int, javax.naming.Name) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.DnsName javax.naming.Name addAll(javax.naming.Name) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.DnsName javax.naming.Name getPrefix(int)">
@@ -330,7 +368,7 @@
   </item>
   <item name="com.sun.jndi.dns.DnsUrl com.sun.jndi.dns.DnsUrl[] fromList(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -377,6 +415,36 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.ResourceRecord int nameToValue(java.lang.String, java.lang.String[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.ResourceRecord java.lang.Object decodeRdata(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.ResourceRecord java.lang.String decodeA(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.ResourceRecord java.lang.String decodeAAAA(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.ResourceRecord java.lang.String decodeHinfo(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.ResourceRecord java.lang.String decodeMx(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.ResourceRecord java.lang.String decodeNaptr(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.ResourceRecord java.lang.String decodeSoa(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.ResourceRecord java.lang.String decodeSrv(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.ResourceRecord java.lang.String decodeTxt(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.ResourceRecord java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.ResourceRecords void add(byte[], int, com.sun.jndi.dns.Header) 2">

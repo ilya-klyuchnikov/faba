@@ -219,6 +219,15 @@
   <item name="sun.java2d.loops.FontInfo java.lang.String mtx(double[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.loops.FontInfo java.lang.String mtx(double[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.loops.FontInfo java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.java2d.loops.GeneralRenderer boolean adjustLine(int[], int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -227,7 +236,7 @@
   </item>
   <item name="sun.java2d.loops.GeneralRenderer int[] doDrawLine(sun.java2d.SurfaceData, sun.java2d.loops.PixelWriter, int[], sun.java2d.pipe.Region, int, int, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_,_,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_,_,_,_-&gt;!null;_,null,_,_,_,_,_,_-&gt;!null;null,_,_,_,_,_,_,_-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="sun.java2d.loops.GeneralRenderer sun.java2d.loops.PixelWriter createSolidPixelWriter(sun.java2d.SunGraphics2D, sun.java2d.SurfaceData) 0">
@@ -238,7 +247,7 @@
   </item>
   <item name="sun.java2d.loops.GeneralRenderer sun.java2d.loops.PixelWriter createSolidPixelWriter(sun.java2d.SunGraphics2D, sun.java2d.SurfaceData)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -250,7 +259,7 @@
   </item>
   <item name="sun.java2d.loops.GeneralRenderer sun.java2d.loops.PixelWriter createXorPixelWriter(sun.java2d.SunGraphics2D, sun.java2d.SurfaceData)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -348,6 +357,11 @@
   <item name="sun.java2d.loops.GraphicsPrimitiveProxy java.lang.String getPackageName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.loops.GraphicsPrimitiveProxy java.lang.String getPackageName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.java2d.loops.MaskBlit sun.java2d.loops.GraphicsPrimitive makePrimitive(sun.java2d.loops.SurfaceType, sun.java2d.loops.CompositeType, sun.java2d.loops.SurfaceType)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,_,null-&gt;!null;_,null,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
@@ -404,7 +418,7 @@
   </item>
   <item name="sun.java2d.loops.ProcessPath boolean doProcessPath(sun.java2d.loops.ProcessPath.ProcessHandler, java.awt.geom.Path2D.Float, float, float)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;true;_,!null,_,_-&gt;true;_,null,_,_-&gt;true;null,_,_,_-&gt;true&quot;"/>
+      <val val="&quot;!null,_,_,_-&gt;true;_,!null,_,_-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.java2d.loops.ProcessPath boolean drawPath(sun.java2d.loops.ProcessPath.DrawHandler, java.awt.geom.Path2D.Float, int, int) 1">
@@ -412,7 +426,7 @@
   </item>
   <item name="sun.java2d.loops.ProcessPath boolean drawPath(sun.java2d.loops.ProcessPath.DrawHandler, java.awt.geom.Path2D.Float, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null,_,_-&gt;true;_,null,_,_-&gt;true&quot;"/>
+      <val val="&quot;_,!null,_,_-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.java2d.loops.ProcessPath boolean drawPath(sun.java2d.loops.ProcessPath.DrawHandler, sun.java2d.loops.ProcessPath.EndSubPathHandler, java.awt.geom.Path2D.Float, int, int) 2">
@@ -420,11 +434,16 @@
   </item>
   <item name="sun.java2d.loops.ProcessPath boolean drawPath(sun.java2d.loops.ProcessPath.DrawHandler, sun.java2d.loops.ProcessPath.EndSubPathHandler, java.awt.geom.Path2D.Float, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;true;_,_,null,_,_-&gt;true&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.java2d.loops.ProcessPath boolean fillPath(sun.java2d.loops.ProcessPath.DrawHandler, java.awt.geom.Path2D.Float, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.loops.ProcessPath boolean fillPath(sun.java2d.loops.ProcessPath.DrawHandler, java.awt.geom.Path2D.Float, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="sun.java2d.loops.ProcessPath int CLIPCLAMP(float, float, float[], int, int, int, int, int, int) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
