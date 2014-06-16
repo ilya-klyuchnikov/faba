@@ -30,7 +30,7 @@ object `package` {
       case (Final(v1), Final(v2)) =>
         Final(v1 join v2)
       case (Final(v1), Pending(v2, comps2)) =>
-         Pending(v1 join v2, comps2)
+        Pending(v1 join v2, comps2)
       case (Pending(v1, comps1), Final(v2)) =>
         Pending(v1 join v2, comps1)
       case (Pending(v1, comps1), Pending(v2, comps2)) =>
@@ -82,11 +82,7 @@ trait Lattice[T] extends PartialOrdering[T] {
     tryCompare(x, y).getOrElse(1) <= 0
 }
 
-case class ELattice[E<:Enumeration](enum: E) extends Lattice[E#Value] {
-  type Val = E#Value
-  val bot: Val = enum.values.firstKey
-  val top: Val = enum.values.lastKey
-}
+case class ELattice[E](bot: E, top: E) extends Lattice[E]
 
 case class Component[Id](touched: Boolean, ids: Set[Id]) {
   def remove(id: Id) =
@@ -110,24 +106,30 @@ sealed trait Result[+Id, Val]
 case class Final[Val](value: Val) extends Result[Nothing, Val]
 case class Pending[Id, Val](infinum: Val, delta: SoP[Id]) extends Result[Id, Val]
 
-case class Equation[Id, Val:Lattice](id: Id, rhs: Result[Id, Val])
+case class Equation[Id, Val](id: Id, rhs: Result[Id, Val])
 
-final class Solver[Id, Val:Lattice] {
-  type Solution = (Id, Val)
-  val top = implicitly[Lattice[Val]].top
-  val bot = implicitly[Lattice[Val]].bot
+trait StableAwareId[K] {
+  val stable: Boolean
+  def mkUnstable: K
+  def mkStable: K
+}
 
-  private val dependencies = mutable.HashMap[Id, Set[Id]]()
-  private val pending = mutable.HashMap[Id, Pending[Id, Val]]()
+final class Solver[K <: StableAwareId[K], V](implicit lattice: Lattice[V]) {
+  type Solution = (K, V)
+  val top = lattice.top
+  val bot = lattice.bot
+
+  private val dependencies = mutable.HashMap[K, Set[K]]()
+  private val pending = mutable.HashMap[K, Pending[K, V]]()
   private val moving = mutable.Queue[Solution]()
-  private var solved = Map[Id, Val]()
+  private var solved = Map[K, V]()
 
-  def this(equations: List[Equation[Id, Val]]) {
+  def this(equations: List[Equation[K, V]])(implicit lattice: Lattice[V]) {
     this()
     equations.foreach(addEquation)
   }
 
-  def addEquation(equation: Equation[Id, Val]): Unit =
+  def addEquation(equation: Equation[K, V]): Unit =
     equation.rhs match {
       case Final(value) =>
         moving enqueue (equation.id -> value)
@@ -140,15 +142,21 @@ final class Solver[Id, Val:Lattice] {
         pending(equation.id) = p
     }
 
-  def solve(): Map[Id, Val] = {
+  def solve(): Map[K, V] = {
     while (moving.nonEmpty) {
       val (ident, value) = moving.dequeue()
       solved = solved + (ident -> value)
+
+      // intricate logic here!
+      val toPropagate: List[K] =
+        if (ident.stable) List(ident, ident.mkUnstable) else List(ident.mkStable)
+
       for {
-        dIds <- dependencies.remove(ident)
+        pId <- toPropagate
+        dIds <- dependencies.remove(pId)
         dId <- dIds
         pend <- pending.remove(dId)
-      } substitute(pend, ident, value) match {
+      } substitute(pend, pId, value) match {
         case Final(v) => moving enqueue (dId -> v)
         case p@Pending(_, _) => pending(dId) = p
       }
@@ -160,7 +168,7 @@ final class Solver[Id, Val:Lattice] {
     solved
   }
 
-  private def substitute(pending: Pending[Id, Val], id: Id, value: Val): Result[Id, Val] =
+  private def substitute(pending: Pending[K, V], id: K, value: V): Result[K, V] =
     value match {
       case `bot` =>
         val delta = pending.delta.filterNot(_.ids(id))

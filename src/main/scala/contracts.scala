@@ -12,8 +12,9 @@ import faba.cfg._
 import faba.data._
 import faba.engine._
 
-class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Set[Int]) extends Analysis[Result[Key, Value]] {
+class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Set[Int], val stable: Boolean) extends Analysis[Result[Key, Value]] {
   type MyResult = Result[Key, Value]
+  implicit val contractsLattice = ELattice(Values.Bot, Values.Top)
 
   override val identity = Final(Values.Bot)
 
@@ -252,7 +253,8 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
     val opCode = insn.getOpcode
     val shift = if (opCode == INVOKESTATIC) 0 else 1
     opCode match {
-      case INVOKESTATIC | INVOKESPECIAL /*| INVOKEVIRTUAL | INVOKEINTERFACE */ if propagate_? =>
+      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE  if propagate_? =>
+        val stable = opCode == INVOKESTATIC || opCode == INVOKESPECIAL
         val mNode = insn.asInstanceOf[MethodInsnNode]
         val method = Method(mNode.owner, mNode.name, mNode.desc)
         val retType = Type.getReturnType(mNode.desc)
@@ -264,15 +266,15 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
               var keys = Set[Key]()
               for (i <- shift until values.size()) {
                 if (values.get(i).isInstanceOf[ParamValue])
-                  keys = keys + Key(method, InOut(i - shift, inValue))
+                  keys = keys + Key(method, InOut(i - shift, inValue), stable)
               }
               if (isRefRetType)
-                keys = keys + Key(method, Out)
+                keys = keys + Key(method, Out, stable)
               if (keys.nonEmpty)
                 return CallResultValue(retType, keys)
             case _ =>
               if (isRefRetType)
-                return CallResultValue(retType, Set(Key(method, Out)))
+                return CallResultValue(retType, Set(Key(method, Out, stable)))
           }
         super.naryOperation(insn, values)
       case MULTIANEWARRAY if propagate_? =>

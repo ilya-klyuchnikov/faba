@@ -55,11 +55,21 @@ class engineSpec extends FunSuite with TableDrivenPropertyChecks {
 
   }
 
-  type Id = Symbol
+  case class Wrapper(s: Symbol) extends StableAwareId[Wrapper] {
+    override val stable: Boolean = true
+    override def mkStable: Wrapper = this
+    override def mkUnstable: Wrapper = this
+  }
 
+  type Id = Wrapper
+  implicit val lattice = ELattice(Values.Bot, Values.Top)
   val valuesUtils = Utils[Id, Values.Value]()
   import Values._
   import valuesUtils._
+
+  implicit class SymbolOps(s: Symbol) {
+    def i = Wrapper(s)
+  }
 
   test("Modeling @NotNull parameters equations") {
 
@@ -67,18 +77,18 @@ class engineSpec extends FunSuite with TableDrivenPropertyChecks {
       Table(
         "Equations",
         List(
-          'a := NotNull,
-          'b := I('a)
+          'a.i := NotNull,
+          'b.i := I('a.i)
         ),
         List(
-          'a := NotNull,
-          'b := Top,
-          'c := I('a) U I('b)
+          'a.i := NotNull,
+          'b.i := Top,
+          'c.i := I('a.i) U I('b.i)
         ),
         List(
-          'a := NotNull,
-          'b := Top,
-          'c := I('a) U I('a, 'b)
+          'a.i := NotNull,
+          'b.i := Top,
+          'c.i := I('a.i) U I('a.i, 'b.i)
         )
       )
 
@@ -98,23 +108,23 @@ class engineSpec extends FunSuite with TableDrivenPropertyChecks {
         "Equations",
 
         List(
-          'a := True,
-          'b := I('a)
+          'a.i := True,
+          'b.i := I('a.i)
         ),
         List(
-          'a := True,
-          'b := False,
-          'c := I('a) U I('b)
+          'a.i := True,
+          'b.i := False,
+          'c.i := I('a.i) U I('b.i)
         ),
         List(
-          'a := True,
-          'b := Top,
-          'c := I('a) U I('a, 'b)
+          'a.i := True,
+          'b.i := Top,
+          'c.i := I('a.i) U I('a.i, 'b.i)
         ),
         List(
-          'a := Top,
-          'b := True,
-          'c := I('a) U I('a, 'b)
+          'a.i := Top,
+          'b.i := True,
+          'c.i := I('a.i) U I('a.i, 'b.i)
         )
       )
 
