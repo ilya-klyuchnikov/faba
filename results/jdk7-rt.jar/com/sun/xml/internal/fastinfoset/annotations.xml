@@ -8,16 +8,34 @@
   <item name="com.sun.xml.internal.fastinfoset.Decoder boolean isFastInfosetDocument(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.Decoder com.sun.xml.internal.fastinfoset.QualifiedName decodeLiteralQualifiedName(int, com.sun.xml.internal.fastinfoset.QualifiedName)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.Decoder java.lang.String createQualifiedNameString(char[], java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Decoder java.lang.String createQualifiedNameString(char[], java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.Decoder java.lang.String createQualifiedNameString(char[], java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Decoder java.lang.String decodeCharacterEncodingScheme()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.Decoder java.lang.String decodeIdentifyingNonEmptyStringOnFirstBit(com.sun.xml.internal.fastinfoset.util.StringArray) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Decoder java.lang.String decodeNonEmptyOctetStringOnSecondBitAsUtf8String()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Decoder java.lang.String decodeRAOctetsAsString(char[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Decoder java.lang.String decodeRAOctetsAsString(char[])">
@@ -100,7 +118,16 @@
   <item name="com.sun.xml.internal.fastinfoset.Encoder java.lang.String getPrefixFromQualifiedName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder java.lang.String getPrefixFromQualifiedName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeAIIObjectAlgorithmData(int, java.lang.Object, com.sun.xml.internal.org.jvnet.fastinfoset.EncodingAlgorithm) 2">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeAttributeQualifiedNameOnSecondBit(java.lang.String, java.lang.String, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeCIIObjectAlgorithmData(int, java.lang.Object, com.sun.xml.internal.org.jvnet.fastinfoset.EncodingAlgorithm) 2">
@@ -109,10 +136,19 @@
   <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeCharacterAsUtf8FourByte(int, char[], int, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeElementQualifiedNameOnThirdBit(java.lang.String, java.lang.String, java.lang.String) 2">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeIdentifyingNonEmptyStringOnFirstBit(java.lang.String, com.sun.xml.internal.fastinfoset.util.StringIntMap) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeIdentifyingNonEmptyStringOnFirstBit(java.lang.String, com.sun.xml.internal.fastinfoset.util.StringIntMap) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeLiteralElementQualifiedNameOnThirdBit(java.lang.String, java.lang.String, java.lang.String, com.sun.xml.internal.fastinfoset.util.LocalNameQualifiedNamesMap.Entry) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeLiteralElementQualifiedNameOnThirdBit(java.lang.String, java.lang.String, java.lang.String, com.sun.xml.internal.fastinfoset.util.LocalNameQualifiedNamesMap.Entry) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeLiteralElementQualifiedNameOnThirdBit(java.lang.String, java.lang.String, java.lang.String, com.sun.xml.internal.fastinfoset.util.LocalNameQualifiedNamesMap.Entry) 3">
@@ -124,16 +160,31 @@
   <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeNamespaceAttribute(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeNonEmptyCharacterStringOnFifthBit(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeNonEmptyNBitCharacterStringOnSeventhBit(java.lang.String, char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeNonEmptyOctetStringOnSecondBit(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeNonEmptyUTF8StringAsOctetString(int, char[], int, int, int[]) 4">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeNonEmptyUTF8StringAsOctetString(int, java.lang.String, int[]) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeNonEmptyUTF8StringAsOctetString(int, java.lang.String, int[]) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeNonZeroInteger(int, int, int[]) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeNonZeroOctetStringLength(int, int, int[]) 2">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeProcessingInstruction(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeProcessingInstruction(java.lang.String, java.lang.String) 1">
@@ -189,5 +240,10 @@
       <val val="&quot;!null,_,_,_,_,_,_,_-&gt;!null;_,!null,_,_,_,_,_,_-&gt;!null;_,_,!null,_,_,_,_,_-&gt;!null;_,_,_,!null,_,_,_,_-&gt;!null;_,_,_,null,_,_,_,_-&gt;!null;_,_,null,_,_,_,_,_-&gt;!null;_,null,_,_,_,_,_,_-&gt;!null;null,_,_,_,_,_,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.QualifiedName java.lang.String createQNameString(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null-&gt;!null&quot;"/>
+    </annotation>
   </item>
 </root>

@@ -179,6 +179,12 @@
   <item name="java.beans.EventSetDescriptor java.lang.String getListenerClassName(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.beans.EventSetDescriptor java.lang.String getListenerClassName(java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.beans.EventSetDescriptor java.lang.reflect.Method getMethod(java.beans.MethodDescriptor)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
@@ -191,8 +197,12 @@
   </item>
   <item name="java.beans.Expression java.lang.String instanceName(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.Expression java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.FeatureDescriptor FeatureDescriptor(java.beans.FeatureDescriptor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -207,6 +217,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.FeatureDescriptor java.lang.Class[] getParameterTypes(java.lang.Class, java.lang.reflect.Method) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.FeatureDescriptor java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.FeatureDescriptor java.lang.ref.Reference getSoftReference(java.lang.Object)">
@@ -325,6 +338,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.Introspector java.lang.String makeQualifiedMethodName(java.lang.String, java.lang.String[]) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.Introspector java.lang.String makeQualifiedMethodName(java.lang.String, java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.Introspector java.lang.reflect.Method findMethod(java.lang.Class, java.lang.String, int)">
@@ -978,7 +997,7 @@
   </item>
   <item name="java.beans.NameGenerator java.lang.String capitalize(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="java.beans.NameGenerator java.lang.String instanceName(java.lang.Object)">
@@ -987,6 +1006,12 @@
     </annotation>
   </item>
   <item name="java.beans.NameGenerator java.lang.String unqualifiedClassName(java.lang.Class) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.NameGenerator java.lang.String unqualifiedClassName(java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.ObjectInputStreamWithLoader ObjectInputStreamWithLoader(java.io.InputStream, java.lang.ClassLoader) 1">
@@ -1015,6 +1040,9 @@
   <item name="java.beans.PropertyChangeEvent PropertyChangeEvent(java.lang.Object, java.lang.String, java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.beans.PropertyChangeEvent java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.beans.PropertyChangeSupport PropertyChangeSupport(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1033,6 +1061,17 @@
     </annotation>
   </item>
   <item name="java.beans.PropertyChangeSupport.PropertyChangeListenerMap java.beans.PropertyChangeListener newProxy(java.lang.String, java.beans.PropertyChangeListener)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.PropertyChangeSupport.PropertyChangeListenerMap java.util.EventListener extract(java.util.EventListener)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="java.beans.PropertyChangeSupport.PropertyChangeListenerMap java.util.EventListener newProxy(java.lang.String, java.util.EventListener)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
@@ -1081,8 +1120,12 @@
   </item>
   <item name="java.beans.Statement java.lang.String instanceName(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.Statement java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.Statement java.lang.reflect.Method getMethod(java.lang.Class, java.lang.String, java.lang.Class[])">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1107,6 +1150,17 @@
     </annotation>
   </item>
   <item name="java.beans.VetoableChangeSupport.VetoableChangeListenerMap java.beans.VetoableChangeListener newProxy(java.lang.String, java.beans.VetoableChangeListener)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.VetoableChangeSupport.VetoableChangeListenerMap java.util.EventListener extract(java.util.EventListener)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="java.beans.VetoableChangeSupport.VetoableChangeListenerMap java.util.EventListener newProxy(java.lang.String, java.util.EventListener)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
@@ -1164,7 +1218,22 @@
   <item name="java.beans.XMLEncoder XMLEncoder(java.io.OutputStream, java.lang.String, boolean, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.beans.XMLEncoder java.lang.String createString(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.beans.XMLEncoder java.lang.String createString(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.XMLEncoder java.lang.String createString(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.XMLEncoder java.lang.String quote(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.XMLEncoder void mark(java.beans.Statement) 0">

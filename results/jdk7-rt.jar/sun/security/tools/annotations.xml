@@ -26,6 +26,11 @@
   <item name="sun.security.tools.KeyTool boolean signedBy(java.security.cert.X509Certificate, java.security.cert.X509Certificate) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.tools.KeyTool char[] getPassWithModifier(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.security.tools.KeyTool int oneOf(java.lang.String, java.lang.String[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -38,6 +43,12 @@
   <item name="sun.security.tools.KeyTool java.lang.String getCertFingerPrint(java.lang.String, java.security.cert.Certificate) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.tools.KeyTool java.lang.String getCertFingerPrint(java.lang.String, java.security.cert.Certificate)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.tools.KeyTool java.lang.String getCompatibleSigAlgName(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
@@ -48,6 +59,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.tools.KeyTool java.lang.String toHexString(byte[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.tools.KeyTool java.lang.String toHexString(byte[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.tools.KeyTool java.lang.String verifyCRL(java.security.KeyStore, java.security.cert.CRL) 0">
@@ -71,13 +88,25 @@
   <item name="sun.security.tools.KeyTool java.security.cert.Certificate[] validateReply(java.lang.String, java.security.cert.Certificate, java.security.cert.Certificate[]) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.tools.KeyTool java.util.Date getStartDate(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.tools.KeyTool sun.security.tools.Pair recoverEntry(java.security.KeyStore, java.lang.String, char[], char[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.tools.KeyTool sun.security.tools.Pair recoverEntry(java.security.KeyStore, java.lang.String, char[], char[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.tools.KeyTool sun.security.tools.Pair recoverEntry(java.security.KeyStore, java.lang.String, char[], char[])">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_,_,_-&gt;!null;_,!null,_,_-&gt;!null;_,_,!null,_-&gt;!null;_,_,_,!null-&gt;!null;_,_,_,null-&gt;!null;_,_,null,_-&gt;!null;_,null,_,_-&gt;!null;null,_,_,_-&gt;!null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.tools.KeyTool sun.security.tools.Pair recoverKey(java.lang.String, char[], char[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.tools.KeyTool sun.security.tools.Pair recoverKey(java.lang.String, char[], char[])">
@@ -122,10 +151,16 @@
   <item name="sun.security.tools.KeyTool void byte2hex(byte, java.lang.StringBuffer) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.tools.KeyTool void doCloneEntry(java.lang.String, java.lang.String, boolean) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.tools.KeyTool void doExportCert(java.lang.String, java.io.PrintStream) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.tools.KeyTool void doGenCRL(java.io.PrintStream) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.tools.KeyTool void doGenCert(java.lang.String, java.lang.String, java.io.InputStream, java.io.PrintStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.tools.KeyTool void doGenCert(java.lang.String, java.lang.String, java.io.InputStream, java.io.PrintStream) 2">
@@ -144,6 +179,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.tools.KeyTool void doPrintEntries(java.io.PrintStream) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.tools.KeyTool void doPrintEntry(java.lang.String, java.io.PrintStream, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.tools.KeyTool void doPrintEntry(java.lang.String, java.io.PrintStream, boolean) 1">
@@ -190,10 +228,19 @@
       <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
     </annotation>
   </item>
+  <item name="sun.security.tools.KeyTool.Command java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.tools.KeyTool.Option java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.tools.Pair boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
+  </item>
+  <item name="sun.security.tools.Pair java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.tools.Pair sun.security.tools.Pair of(java.lang.Object, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">

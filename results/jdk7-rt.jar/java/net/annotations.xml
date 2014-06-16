@@ -66,6 +66,30 @@
   <item name="java.net.CookiePolicy.3 boolean shouldAccept(java.net.URI, java.net.HttpCookie) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.DatagramPacket DatagramPacket(byte[], int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.DatagramPacket DatagramPacket(byte[], int, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.DatagramPacket DatagramPacket(byte[], int, int, java.net.InetAddress, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.DatagramPacket DatagramPacket(byte[], int, int, java.net.SocketAddress) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.DatagramPacket DatagramPacket(byte[], int, int, java.net.SocketAddress) 3">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.DatagramPacket DatagramPacket(byte[], int, java.net.InetAddress, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.DatagramPacket DatagramPacket(byte[], int, java.net.SocketAddress) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.DatagramPacket DatagramPacket(byte[], int, java.net.SocketAddress) 2">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.net.DatagramPacket java.net.SocketAddress getSocketAddress()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -129,8 +153,17 @@
   </item>
   <item name="java.net.HttpCookie java.lang.String stripOffSurroundingQuote(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
+  </item>
+  <item name="java.net.HttpCookie java.lang.String toNetscapeHeaderString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.HttpCookie java.lang.String toRFC2965HeaderString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.HttpCookie java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.HttpCookie java.net.HttpCookie parseInternal(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -210,20 +243,55 @@
   <item name="java.net.IDN java.lang.String toASCII(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.IDN java.lang.String toASCII(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.net.IDN java.lang.String toASCII(java.lang.String, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.IDN java.lang.String toASCII(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.IDN java.lang.String toASCIIInternal(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.IDN java.lang.String toASCIIInternal(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.net.IDN java.lang.String toUnicode(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.IDN java.lang.String toUnicode(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.IDN java.lang.String toUnicode(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.IDN java.lang.String toUnicode(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.net.IDN java.lang.String toUnicodeInternal(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.IDN java.lang.String toUnicodeInternal(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="java.net.IDN java.lang.StringBuffer toASCIILower(java.lang.StringBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -273,7 +341,16 @@
   <item name="java.net.Inet4Address java.lang.Object writeReplace()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.Inet4Address java.lang.String getHostAddress()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.net.Inet4Address java.lang.String numericToTextFormat(byte[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.Inet4Address java.lang.String numericToTextFormat(byte[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.Inet4AddressImpl boolean isReachable(java.net.InetAddress, int, java.net.NetworkInterface, int) 0">
@@ -314,6 +391,12 @@
   <item name="java.net.Inet6Address int deriveNumericScope(byte[], java.net.NetworkInterface) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.Inet6Address java.lang.String numericToTextFormat(byte[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.net.Inet6Address java.net.Inet6Address getByAddress(java.lang.String, byte[], int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -352,6 +435,9 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="java.net.Inet6Address.Inet6AddressHolder java.lang.String getHostAddress()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.net.Inet6Address.Inet6AddressHolder void setAddr(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -364,6 +450,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.InetAddress java.lang.Object readResolve()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.InetAddress java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.InetAddress java.net.InetAddress getByAddress(byte[]) 0">
@@ -474,6 +563,9 @@
   <item name="java.net.InetSocketAddress.InetSocketAddressHolder java.lang.String access$700(java.net.InetSocketAddress.InetSocketAddressHolder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.InetSocketAddress.InetSocketAddressHolder java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.net.InetSocketAddress.InetSocketAddressHolder java.net.InetAddress access$200(java.net.InetSocketAddress.InetSocketAddressHolder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -484,6 +576,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
+  </item>
+  <item name="java.net.InterfaceAddress java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.JarURLConnection JarURLConnection(java.net.URL) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -516,6 +611,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
+  </item>
+  <item name="java.net.NetworkInterface java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.NetworkInterface java.net.InetAddress[] access$000(java.net.NetworkInterface) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -552,7 +650,13 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="java.net.Proxy java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.net.ServerSocket ServerSocket(java.net.SocketImpl) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.ServerSocket java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.ServerSocket java.net.Socket accept()">
@@ -570,7 +674,13 @@
   <item name="java.net.Socket Socket(java.net.SocketAddress, java.net.SocketAddress, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.Socket java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.net.Socket void connect(java.net.SocketAddress, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.SocketImpl java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.SocketInputStream SocketInputStream(java.net.AbstractPlainSocketImpl) 0">
@@ -623,8 +733,16 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.SocketPermission java.lang.String getActions(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.net.SocketPermission java.lang.String getHost(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.SocketPermission java.lang.String getHost(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="java.net.SocketPermission java.security.PermissionCollection newPermissionCollection()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -724,6 +842,9 @@
   <item name="java.net.URI int access$2502(java.net.URI, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.URI int compareTo(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.net.URI int compareTo(java.net.URI) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -810,11 +931,16 @@
   </item>
   <item name="java.net.URI java.lang.String decode(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="java.net.URI java.lang.String encode(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.URI java.lang.String encode(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="java.net.URI java.lang.String normalize(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -827,10 +953,21 @@
   <item name="java.net.URI java.lang.String quote(java.lang.String, long, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.URI java.lang.String quote(java.lang.String, long, long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.net.URI java.lang.String resolvePath(java.lang.String, java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URI java.lang.String resolvePath(java.lang.String, java.lang.String, boolean) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.URI java.lang.String toString(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int, java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_,_,_,_,_,_,_-&gt;!null;_,!null,_,_,_,_,_,_,_-&gt;!null;_,_,!null,_,_,_,_,_,_-&gt;!null;_,_,_,!null,_,_,_,_,_-&gt;!null;_,_,_,_,!null,_,_,_,_-&gt;!null;_,_,_,_,_,_,!null,_,_-&gt;!null;_,_,_,_,_,_,_,!null,_-&gt;!null;_,_,_,_,_,_,_,_,!null-&gt;!null;_,_,_,_,_,_,_,_,null-&gt;!null;_,_,_,_,_,_,_,null,_-&gt;!null;_,_,_,_,_,_,null,_,_-&gt;!null;_,_,_,_,null,_,_,_,_-&gt;!null;_,_,_,null,_,_,_,_,_-&gt;!null;_,_,null,_,_,_,_,_,_-&gt;!null;_,null,_,_,_,_,_,_,_-&gt;!null;null,_,_,_,_,_,_,_,_-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URI java.net.URI create(java.lang.String)">
@@ -911,10 +1048,7 @@
   <item name="java.net.URI.Parser boolean at(int, int, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.net.URI.Parser void fail(java.lang.String) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="java.net.URI.Parser void fail(java.lang.String, int) 0">
+  <item name="java.net.URI.Parser java.lang.String substring(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URISyntaxException URISyntaxException(java.lang.String, java.lang.String) 0">
@@ -927,6 +1061,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URISyntaxException URISyntaxException(java.lang.String, java.lang.String, int) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.URISyntaxException java.lang.String getMessage()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URL URL(java.lang.String) 0">
@@ -1045,7 +1182,13 @@
   <item name="java.net.URLClassLoader sun.misc.URLClassPath access$000(java.net.URLClassLoader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.URLClassLoader.5 java.lang.Object run()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.net.URLClassLoader.5 java.net.URLClassLoader run()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.URLClassLoader.6 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URLClassLoader.6 java.net.URLClassLoader run()">
@@ -1058,6 +1201,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URLConnection int readBytes(int[], int, java.io.InputStream) 2">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.URLConnection java.lang.String getContentHandlerPkgPrefixes()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URLConnection java.lang.String getDefaultRequestProperty(java.lang.String)">
@@ -1075,8 +1221,11 @@
   </item>
   <item name="java.net.URLConnection java.lang.String stripOffParameters(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
+  </item>
+  <item name="java.net.URLConnection java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URLConnection java.lang.String typeToPackageName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1105,11 +1254,21 @@
   <item name="java.net.URLDecoder java.lang.String decode(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.URLDecoder java.lang.String decode(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.net.URLEncoder java.lang.String encode(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URLEncoder java.lang.String encode(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.URLEncoder java.lang.String encode(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="java.net.URLStreamHandler boolean equals(java.net.URL, java.net.URL) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1127,6 +1286,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URLStreamHandler java.lang.String toExternalForm(java.net.URL) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.URLStreamHandler java.lang.String toExternalForm(java.net.URL)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URLStreamHandler java.net.InetAddress getHostAddress(java.net.URL) 0">

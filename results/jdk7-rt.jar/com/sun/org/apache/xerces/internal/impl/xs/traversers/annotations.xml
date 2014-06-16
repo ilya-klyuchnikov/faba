@@ -35,6 +35,9 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.StAXSchemaParser void fillQName(com.sun.org.apache.xerces.internal.xni.QName, java.lang.String, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.StAXSchemaParser void fillQName(com.sun.org.apache.xerces.internal.xni.QName, javax.xml.namespace.QName) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.StAXSchemaParser void fillQName(com.sun.org.apache.xerces.internal.xni.QName, javax.xml.namespace.QName) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -58,6 +61,11 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSAttributeChecker java.lang.Object[] checkAttributes(org.w3c.dom.Element, boolean, com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDocumentInfo, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null,_,_,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSAttributeChecker java.lang.String normalize(java.lang.String, short)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSAttributeChecker void resolveNamespace(org.w3c.dom.Element, org.w3c.dom.Attr[], com.sun.org.apache.xerces.internal.impl.xs.SchemaNamespaceSupport) 1">
@@ -118,8 +126,19 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDAbstractTraverser java.lang.String escapeAttValue(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDAbstractTraverser java.lang.String escapeAttValue(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDAbstractTraverser java.lang.String processAttValue(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDAbstractTraverser java.lang.String processAttValue(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDAbstractTraverser org.w3c.dom.Element traverseAttrsAndAttrGrps(org.w3c.dom.Element, com.sun.org.apache.xerces.internal.impl.xs.XSAttributeGroupDecl, com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDocumentInfo, com.sun.org.apache.xerces.internal.impl.xs.SchemaGrammar, com.sun.org.apache.xerces.internal.impl.xs.XSComplexTypeDecl)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -175,6 +194,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDComplexTypeTraverser java.lang.String genAnonTypeName(org.w3c.dom.Element) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDComplexTypeTraverser java.lang.String genAnonTypeName(org.w3c.dom.Element)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDComplexTypeTraverser void mergeAttributes(com.sun.org.apache.xerces.internal.impl.xs.XSAttributeGroupDecl, com.sun.org.apache.xerces.internal.impl.xs.XSAttributeGroupDecl, java.lang.String, boolean, org.w3c.dom.Element) 0">
@@ -303,6 +328,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDHandler java.lang.String findQName(java.lang.String, com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDocumentInfo) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDHandler java.lang.String findQName(java.lang.String, com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDocumentInfo)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDHandler java.lang.String null2EmptyString(java.lang.String)">
@@ -554,6 +585,12 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDSimpleTypeTraverser java.lang.String genAnonTypeName(org.w3c.dom.Element) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDSimpleTypeTraverser java.lang.String genAnonTypeName(org.w3c.dom.Element)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDUniqueOrKeyTraverser void traverse(org.w3c.dom.Element, com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl, com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDocumentInfo, com.sun.org.apache.xerces.internal.impl.xs.SchemaGrammar) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -570,6 +607,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDocumentInfo XSDocumentInfo(org.w3c.dom.Element, com.sun.org.apache.xerces.internal.impl.xs.traversers.XSAttributeChecker, com.sun.org.apache.xerces.internal.util.SymbolTable) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDocumentInfo java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.traversers.XSDocumentInfo void addAnnotation(com.sun.org.apache.xerces.internal.impl.xs.traversers.XSAnnotationInfo) 0">

@@ -1,8 +1,17 @@
 <root>
+  <item name="java.text.Annotation java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.text.AttributeEntry boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
+  </item>
+  <item name="java.text.AttributeEntry java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.AttributedCharacterIterator.Attribute java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.AttributedString AttributedString(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -91,6 +100,9 @@
   <item name="java.text.BreakIterator int getInt(byte[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.BreakIterator java.util.Locale[] getAvailableLocales()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.text.BreakIterator long getLong(byte[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -104,6 +116,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.BreakIterator.BreakIteratorGetter java.text.BreakIterator getObject(java.text.spi.BreakIteratorProvider, java.util.Locale, java.lang.String, java.lang.Object[]) 3">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.CalendarBuilder java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.CalendarBuilder java.text.CalendarBuilder addYear(int)">
@@ -149,7 +164,16 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.ChoiceFormat java.lang.String toPattern()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.text.ChoiceFormat java.lang.StringBuffer format(double, java.lang.StringBuffer, java.text.FieldPosition) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.ChoiceFormat java.lang.StringBuffer format(double, java.lang.StringBuffer, java.text.FieldPosition)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,_,null-&gt;!null;_,null,_-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.ChoiceFormat java.lang.String[] doubleArraySize(java.lang.String[]) 0">
@@ -191,19 +215,40 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.CollationElementIterator void setText(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.CollationElementIterator void setText(java.text.CharacterIterator) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.text.CollationKey CollationKey(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.Collator java.util.Locale[] getAvailableLocales()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.Collator.CollatorGetter java.text.Collator getObject(java.text.spi.CollatorProvider, java.util.Locale, java.lang.String, java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.DateFormat java.lang.String format(java.util.Date)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.text.DateFormat java.lang.StringBuffer format(java.lang.Object, java.lang.StringBuffer, java.text.FieldPosition) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.DateFormat java.util.Locale[] getAvailableLocales()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.DateFormat.DateFormatGetter java.text.DateFormat getObject(java.text.spi.DateFormatProvider, java.util.Locale, java.lang.String, java.lang.Object[]) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.DateFormatSymbols java.lang.String[] toOneBasedArray(java.lang.String[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.DateFormatSymbols java.util.Locale[] getAvailableLocales()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.DateFormatSymbols void copyMembers(java.text.DateFormatSymbols, java.text.DateFormatSymbols) 0">
@@ -278,6 +323,24 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.DecimalFormat java.lang.String expandAffix(java.lang.String, java.lang.StringBuffer) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.DecimalFormat java.lang.String expandAffix(java.lang.String, java.lang.StringBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.DecimalFormat java.lang.String toLocalizedPattern()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.DecimalFormat java.lang.String toPattern()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.DecimalFormat java.lang.String toPattern(boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;false-&gt;!null;true-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.DecimalFormat java.lang.StringBuffer format(double, java.lang.StringBuffer, java.text.FieldPosition) 1">
@@ -432,6 +495,9 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="java.text.DecimalFormatSymbols java.util.Locale[] getAvailableLocales()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.text.DecimalFormatSymbols void initialize(java.util.Locale) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -456,6 +522,9 @@
   <item name="java.text.DigitList int parseInt(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.DigitList java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.text.DigitList void set(boolean, java.lang.String, int, boolean) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -476,7 +545,16 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="java.text.FieldPosition java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.text.FieldPosition java.text.Format.FieldDelegate getFieldDelegate()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.Format java.lang.String format(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.Format java.text.AttributedCharacterIterator createAttributedCharacterIterator(java.lang.String) 0">
@@ -489,6 +567,24 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.Format java.text.AttributedCharacterIterator createAttributedCharacterIterator(java.text.AttributedCharacterIterator[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.MergeCollation java.lang.String emitPattern()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.MergeCollation java.lang.String emitPattern(boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;false-&gt;!null;true-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.MergeCollation java.lang.String getPattern()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.MergeCollation java.lang.String getPattern(boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;false-&gt;!null;true-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.MergeCollation void fixEntry(java.text.PatternEntry) 0">
@@ -504,6 +600,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null,_-&gt;!null&quot;"/>
     </annotation>
+  </item>
+  <item name="java.text.MessageFormat java.lang.String toPattern()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.MessageFormat java.lang.StringBuffer format(java.lang.Object, java.lang.StringBuffer, java.text.FieldPosition) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -567,7 +666,16 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="java.text.NumberFormat java.lang.String format(double)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.NumberFormat java.lang.String format(long)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.text.NumberFormat java.lang.StringBuffer format(java.lang.Object, java.lang.StringBuffer, java.text.FieldPosition) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.NumberFormat java.util.Locale[] getAvailableLocales()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.NumberFormat void readObject(java.io.ObjectInputStream) 0">
@@ -584,6 +692,9 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="java.text.ParsePosition java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.text.PatternEntry PatternEntry(int, java.lang.StringBuffer, java.lang.StringBuffer) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -594,6 +705,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
+  </item>
+  <item name="java.text.PatternEntry java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.PatternEntry void addToBuffer(java.lang.StringBuffer, boolean, boolean, java.text.PatternEntry) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -608,6 +722,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.PatternEntry void appendQuotedExtension(java.lang.StringBuffer) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.RBCollationTables RBCollationTables(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.RBCollationTables boolean access$102(java.text.RBCollationTables, boolean) 0">
@@ -702,6 +819,9 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.RuleBasedBreakIterator java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.text.RuleBasedBreakIterator void checkOffset(int, java.text.CharacterIterator) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -717,7 +837,16 @@
   <item name="java.text.RuleBasedCollationKey RuleBasedCollationKey(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.RuleBasedCollationKey int compareTo(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.text.RuleBasedCollationKey int compareTo(java.text.CollationKey) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.RuleBasedCollator RuleBasedCollator(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.RuleBasedCollator RuleBasedCollator(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.RuleBasedCollator RuleBasedCollator(java.text.RuleBasedCollator) 0">
@@ -796,7 +925,19 @@
   <item name="java.text.SimpleDateFormat int subParse(java.lang.String, int, int, int, boolean, boolean[], java.text.ParsePosition, boolean, java.text.CalendarBuilder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.SimpleDateFormat java.lang.String toLocalizedPattern()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.text.SimpleDateFormat java.lang.String translatePattern(java.lang.String, java.lang.String, java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.SimpleDateFormat java.lang.String translatePattern(java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,_,null-&gt;!null;_,null,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.SimpleDateFormat java.lang.StringBuffer format(java.util.Date, java.lang.StringBuffer, java.text.FieldPosition) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.SimpleDateFormat java.lang.StringBuffer format(java.util.Date, java.lang.StringBuffer, java.text.FieldPosition) 2">
@@ -806,6 +947,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,!null,_-&gt;!null;_,null,_-&gt;null&quot;"/>
     </annotation>
+  </item>
+  <item name="java.text.SimpleDateFormat java.lang.StringBuffer format(java.util.Date, java.lang.StringBuffer, java.text.Format.FieldDelegate) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.SimpleDateFormat java.lang.StringBuffer format(java.util.Date, java.lang.StringBuffer, java.text.Format.FieldDelegate)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -828,6 +972,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.SimpleDateFormat void encode(int, int, java.lang.StringBuilder) 2">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.SimpleDateFormat void parseAmbiguousDatesAsAfter(java.util.Date) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.SimpleDateFormat void readObject(java.io.ObjectInputStream) 0">
