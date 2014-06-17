@@ -183,9 +183,6 @@
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Class asDecl(java.lang.reflect.Type) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Class erasure(java.lang.reflect.Type) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Class getDeclaringClassForField(java.lang.reflect.Field) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -201,6 +198,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Class&lt;T&gt; erasure(java.lang.reflect.Type) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Object asDecl(java.lang.Class)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -331,7 +331,7 @@
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.reflect.Field[] getEnumConstants(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.reflect.Type createParameterizedType(java.lang.Class, java.lang.reflect.Type[])">
+  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.reflect.Type createParameterizedType(java.lang.Class, java.lang.reflect.Type...)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
@@ -368,15 +368,6 @@
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.reflect.Type[] getMethodParameters(java.lang.reflect.Method) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.util.Collection getDeclaredFields(java.lang.Class) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.util.Collection getDeclaredFields(java.lang.Class)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.util.Collection getDeclaredFields(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -386,19 +377,28 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.util.Collection getDeclaredMethods(java.lang.Class) 0">
+  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.util.Collection getDeclaredMethods(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.util.Collection getDeclaredMethods(java.lang.Class)">
+  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.util.Collection getDeclaredMethods(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.util.Collection getDeclaredMethods(java.lang.Object) 0">
+  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.util.Collection&lt;? extends java.lang.reflect.Field&gt; getDeclaredFields(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.util.Collection getDeclaredMethods(java.lang.Object)">
+  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.util.Collection&lt;? extends java.lang.reflect.Field&gt; getDeclaredFields(java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.util.Collection&lt;? extends java.lang.reflect.Method&gt; getDeclaredMethods(java.lang.Class) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.util.Collection&lt;? extends java.lang.reflect.Method&gt; getDeclaredMethods(java.lang.Class)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
@@ -552,7 +552,7 @@
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator.BinderArg BinderArg(java.lang.reflect.GenericDeclaration, java.lang.reflect.Type[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.xml.internal.bind.v2.model.nav.TypeVisitor java.lang.Object visit(java.lang.reflect.Type, java.lang.Object) 0">
+  <item name="com.sun.xml.internal.bind.v2.model.nav.TypeVisitor T visit(java.lang.reflect.Type, P) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.WildcardTypeImpl boolean equals(java.lang.Object)">

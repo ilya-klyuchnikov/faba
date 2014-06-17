@@ -224,6 +224,14 @@
   <item name="java.lang.Character void toSurrogates(int, char[], int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.Class A getAnnotation(java.lang.Class&lt;A&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.Class T cast(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.lang.Class boolean access$202(boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;false-&gt;false;true-&gt;true&quot;"/>
@@ -234,16 +242,7 @@
       <val val="&quot;false-&gt;false;true-&gt;true&quot;"/>
     </annotation>
   </item>
-  <item name="java.lang.Class boolean isAnnotationPresent(java.lang.Class) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="java.lang.Class java.lang.Class asSubclass(java.lang.Class) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="java.lang.Class java.lang.Class asSubclass(java.lang.Class)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+  <item name="java.lang.Class boolean isAnnotationPresent(java.lang.Class&lt;? extends java.lang.annotation.Annotation&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.Class java.lang.Class toClass(java.lang.reflect.Type)">
@@ -251,10 +250,14 @@
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
   </item>
-  <item name="java.lang.Class java.lang.Object cast(java.lang.Object)">
+  <item name="java.lang.Class java.lang.Class&lt;? extends U&gt; asSubclass(java.lang.Class&lt;U&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.Class java.lang.Class&lt;? extends U&gt; asSubclass(java.lang.Class&lt;U&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.Class java.lang.String argumentTypesToString(java.lang.Class[])">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -271,9 +274,6 @@
     </annotation>
   </item>
   <item name="java.lang.Class java.lang.String toString()">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="java.lang.Class java.lang.annotation.Annotation getAnnotation(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.Class java.lang.reflect.Constructor[] copyConstructors(java.lang.reflect.Constructor[]) 0">
@@ -297,10 +297,10 @@
   <item name="java.lang.Class java.lang.reflect.Field[] copyFields(java.lang.reflect.Field[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.lang.Class java.lang.reflect.Method getDeclaredMethod(java.lang.String, java.lang.Class[]) 0">
+  <item name="java.lang.Class java.lang.reflect.Method getDeclaredMethod(java.lang.String, java.lang.Class...) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.lang.Class java.lang.reflect.Method getMethod(java.lang.String, java.lang.Class[]) 0">
+  <item name="java.lang.Class java.lang.reflect.Method getMethod(java.lang.String, java.lang.Class...) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.Class java.lang.reflect.Method getMethod0(java.lang.String, java.lang.Class[]) 0">
@@ -390,13 +390,13 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.lang.Enum int compareTo(java.lang.Enum) 0">
+  <item name="java.lang.Enum T valueOf(java.lang.Class&lt;T&gt;, java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.Enum int compareTo(E) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.Enum int compareTo(java.lang.Object) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="java.lang.Enum java.lang.Enum valueOf(java.lang.Class, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.Float boolean equals(java.lang.Object)">
@@ -1595,7 +1595,7 @@
   <item name="java.lang.ThreadLocal java.lang.ThreadLocal.ThreadLocalMap getMap(java.lang.Thread) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.lang.ThreadLocal void createMap(java.lang.Thread, java.lang.Object) 0">
+  <item name="java.lang.ThreadLocal void createMap(java.lang.Thread, T) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.ThreadLocal.ThreadLocalMap ThreadLocalMap(java.lang.ThreadLocal, java.lang.Object) 0">
@@ -1645,10 +1645,10 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.lang.Throwable void printEnclosedStackTrace(java.lang.Throwable.PrintStreamOrWriter, java.lang.StackTraceElement[], java.lang.String, java.lang.String, java.util.Set) 0">
+  <item name="java.lang.Throwable void printEnclosedStackTrace(java.lang.Throwable.PrintStreamOrWriter, java.lang.StackTraceElement[], java.lang.String, java.lang.String, java.util.Set&lt;java.lang.Throwable&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.lang.Throwable void printEnclosedStackTrace(java.lang.Throwable.PrintStreamOrWriter, java.lang.StackTraceElement[], java.lang.String, java.lang.String, java.util.Set) 4">
+  <item name="java.lang.Throwable void printEnclosedStackTrace(java.lang.Throwable.PrintStreamOrWriter, java.lang.StackTraceElement[], java.lang.String, java.lang.String, java.util.Set&lt;java.lang.Throwable&gt;) 4">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.Throwable void printStackTrace(java.lang.Throwable.PrintStreamOrWriter) 0">

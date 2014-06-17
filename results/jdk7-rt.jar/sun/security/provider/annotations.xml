@@ -85,6 +85,15 @@
   <item name="sun.security.provider.DSA.SHA1withDSA void engineUpdate(java.nio.ByteBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.provider.DSAKeyFactory T engineGetKeySpec(java.security.Key, java.lang.Class&lt;T&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.provider.DSAKeyFactory T engineGetKeySpec(java.security.Key, java.lang.Class&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.DSAKeyFactory java.security.Key engineTranslateKey(java.security.Key) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -103,15 +112,6 @@
   <item name="sun.security.provider.DSAKeyFactory java.security.PublicKey engineGeneratePublic(java.security.spec.KeySpec)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="sun.security.provider.DSAKeyFactory java.security.spec.KeySpec engineGetKeySpec(java.security.Key, java.lang.Class) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="sun.security.provider.DSAKeyFactory java.security.spec.KeySpec engineGetKeySpec(java.security.Key, java.lang.Class)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -154,13 +154,13 @@
   <item name="sun.security.provider.DSAParameterGenerator void xor(byte[], byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.security.provider.DSAParameters java.lang.String engineToString()">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="sun.security.provider.DSAParameters java.security.spec.AlgorithmParameterSpec engineGetParameterSpec(java.lang.Class)">
+  <item name="sun.security.provider.DSAParameters T engineGetParameterSpec(java.lang.Class&lt;T&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.provider.DSAParameters java.lang.String engineToString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.DSAParameters void engineInit(byte[]) 0">
@@ -373,7 +373,7 @@
       <val val="&quot;!null,_-&gt;false;_,!null-&gt;false;_,null-&gt;false;null,_-&gt;false&quot;"/>
     </annotation>
   </item>
-  <item name="sun.security.provider.PolicyFile boolean replacePrincipals(java.util.List, java.security.KeyStore)">
+  <item name="sun.security.provider.PolicyFile boolean replacePrincipals(java.util.List&lt;sun.security.provider.PolicyParser.PrincipalEntry&gt;, java.security.KeyStore)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,null-&gt;true;null,_-&gt;true&quot;"/>
     </annotation>
@@ -605,7 +605,7 @@
   <item name="sun.security.provider.SeedGenerator.URLSeedGenerator void getSeedBytes(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.security.provider.SunEntries void putEntries(java.util.Map) 0">
+  <item name="sun.security.provider.SunEntries void putEntries(java.util.Map&lt;java.lang.Object,java.lang.Object&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.X509Factory byte[] readOneBlock(java.io.InputStream) 0">
@@ -641,10 +641,10 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.security.provider.X509Factory java.security.cert.CertPath engineGenerateCertPath(java.util.List) 0">
+  <item name="sun.security.provider.X509Factory java.security.cert.CertPath engineGenerateCertPath(java.util.List&lt;? extends java.security.cert.Certificate&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.security.provider.X509Factory java.security.cert.CertPath engineGenerateCertPath(java.util.List)">
+  <item name="sun.security.provider.X509Factory java.security.cert.CertPath engineGenerateCertPath(java.util.List&lt;? extends java.security.cert.Certificate&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
     </annotation>
@@ -653,16 +653,16 @@
   <item name="sun.security.provider.X509Factory java.security.cert.Certificate engineGenerateCertificate(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.security.provider.X509Factory java.util.Collection engineGenerateCRLs(java.io.InputStream) 0">
+  <item name="sun.security.provider.X509Factory java.util.Collection&lt;? extends java.security.cert.CRL&gt; engineGenerateCRLs(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.security.provider.X509Factory java.util.Collection engineGenerateCertificates(java.io.InputStream) 0">
+  <item name="sun.security.provider.X509Factory java.util.Collection&lt;? extends java.security.cert.CRL&gt; parseX509orPKCS7CRL(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.security.provider.X509Factory java.util.Collection parseX509orPKCS7CRL(java.io.InputStream) 0">
+  <item name="sun.security.provider.X509Factory java.util.Collection&lt;? extends java.security.cert.Certificate&gt; engineGenerateCertificates(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.security.provider.X509Factory java.util.Collection parseX509orPKCS7Cert(java.io.InputStream) 0">
+  <item name="sun.security.provider.X509Factory java.util.Collection&lt;? extends java.security.cert.Certificate&gt; parseX509orPKCS7Cert(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.X509Factory sun.security.x509.X509CRLImpl intern(java.security.cert.X509CRL)">
