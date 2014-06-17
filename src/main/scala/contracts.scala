@@ -52,8 +52,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     val nextFrame = execute(frame, insnNode)
 
     if (interpreter.dereferenced) {
-      results = results + (stateIndex -> Final(Values.Bot))
-      computed = computed.updated(insnIndex, state :: computed(insnIndex))
+      earlyResult = Some(Final(Values.Bot))
       return
     }
     insnNode.getOpcode match {

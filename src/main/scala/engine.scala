@@ -147,16 +147,19 @@ final class Solver[K <: StableAwareId[K], V](implicit lattice: Lattice[V]) {
       val (ident, value) = moving.dequeue()
       solved = solved + (ident -> value)
 
-      // intricate logic here!
-      val toPropagate: List[K] =
-        if (ident.stable) List(ident, ident.mkUnstable) else List(ident.mkStable)
+      // intricate logic here (null -> ... inference is a bit strange for now - optimistic assumption)
+      val toPropagate: List[(K, V)] =
+        if (ident.stable)
+          List((ident, value), (ident.mkUnstable, value))
+        else
+          List((ident.mkStable, value), (ident, top))
 
       for {
-        pId <- toPropagate
+        (pId, pValue) <- toPropagate
         dIds <- dependencies.remove(pId)
         dId <- dIds
         pend <- pending.remove(dId)
-      } substitute(pend, pId, value) match {
+      } substitute(pend, pId, pValue) match {
         case Final(v) => moving enqueue (dId -> v)
         case p@Pending(_, _) => pending(dId) = p
       }
