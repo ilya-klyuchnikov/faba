@@ -432,11 +432,6 @@
   <item name="java.lang.invoke.InvokeGeneric boolean returnConversionNeeded(java.lang.invoke.MethodType, java.lang.invoke.MethodHandle) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.lang.invoke.InvokeGeneric boolean returnConversionNeeded(java.lang.invoke.MethodType, java.lang.invoke.MethodHandle)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.lang.invoke.InvokeGeneric java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -646,11 +641,6 @@
   <item name="java.lang.invoke.LambdaForm boolean arityCheck(java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;true&quot;"/>
-    </annotation>
-  </item>
-  <item name="java.lang.invoke.LambdaForm boolean checkInt(java.lang.Class, java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="java.lang.invoke.LambdaForm boolean checkRef(java.lang.Class, java.lang.Object)">
@@ -1012,6 +1002,11 @@
   </item>
   <item name="java.lang.invoke.MemberName java.lang.ReflectiveOperationException makeAccessException()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.MemberName java.lang.String getName(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="java.lang.invoke.MemberName java.lang.String message()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1436,26 +1431,11 @@
   <item name="java.lang.invoke.MethodHandleProxies java.lang.Object access$100(java.lang.Object, java.lang.reflect.Method, java.lang.Object[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.lang.invoke.MethodHandleProxies java.lang.Object access$100(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_-&gt;null&quot;"/>
-    </annotation>
-  </item>
   <item name="java.lang.invoke.MethodHandleProxies java.lang.Object asInterfaceInstance(java.lang.Class, java.lang.invoke.MethodHandle) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.MethodHandleProxies java.lang.Object callObjectMethod(java.lang.Object, java.lang.reflect.Method, java.lang.Object[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="java.lang.invoke.MethodHandleProxies java.lang.Object callObjectMethod(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_-&gt;null&quot;"/>
-    </annotation>
-  </item>
-  <item name="java.lang.invoke.MethodHandleProxies java.lang.invoke.MethodHandle maybeBindCaller(java.lang.invoke.MethodHandle, java.lang.Class)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
-    </annotation>
   </item>
   <item name="java.lang.invoke.MethodHandleProxies java.lang.invoke.MethodHandle wrapperInstanceTarget(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1518,7 +1498,7 @@
   </item>
   <item name="java.lang.invoke.MethodHandleStatics java.lang.String addTypeString(java.lang.Object, java.lang.invoke.MethodHandle)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null&quot;"/>
+      <val val="&quot;_,!null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="java.lang.invoke.MethodHandleStatics java.lang.String getNameString(java.lang.invoke.MethodHandle)">
@@ -1872,11 +1852,6 @@
   <item name="java.lang.invoke.MethodType MethodType(java.lang.Class, java.lang.Class[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.lang.invoke.MethodType boolean canConvert(java.lang.Class, java.lang.Class)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;true;null,_-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="java.lang.invoke.MethodType boolean equals(java.lang.invoke.MethodType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2014,11 +1989,6 @@
   </item>
   <item name="java.lang.invoke.MethodTypeForm MethodTypeForm(java.lang.invoke.MethodType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="java.lang.invoke.MethodTypeForm java.lang.Class canonicalize(java.lang.Class, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
-    </annotation>
   </item>
   <item name="java.lang.invoke.MethodTypeForm java.lang.Class[] canonicalizes(java.lang.Class[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
