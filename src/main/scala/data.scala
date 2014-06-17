@@ -1,9 +1,10 @@
 package faba.data
 
-import faba.engine.{StableAwareId, ELattice}
+import faba.engine.StableAwareId
+import org.objectweb.asm.signature.{SignatureVisitor, SignatureReader}
 import scala.xml.Elem
 
-import org.objectweb.asm.Type
+import org.objectweb.asm.{Opcodes, Type}
 import scala.collection.mutable
 import scala.collection.immutable.Iterable
 
@@ -49,49 +50,6 @@ case class Annotations(notNulls: Set[Key], contracts: Map[Key, String])
 
 object Utils {
 
-  val REGEX_PATTERN = "(?<=[^\\$\\.])\\${1}(?=[^\\$])".r // disallow .$ or $$
-
-  def toXmlAnnotations(solutions: Iterable[(Key, Value)]): List[Elem] = {
-    var annotations = Map[String, List[Elem]]()
-    val inOuts = mutable.HashMap[Method, List[(InOut, Value)]]()
-    for ((key, value) <- solutions) {
-      key.direction match {
-        case In(paramIndex) if value == Values.NotNull =>
-          val method = key.method
-          annotations = annotations.updated(
-            s"${annotationKey(method)} $paramIndex",
-            List(<annotation name='org.jetbrains.annotations.NotNull'/>)
-          )
-        case Out if value == Values.NotNull =>
-          val method = key.method
-          annotations = annotations.updated(
-            annotationKey(method),
-            List(<annotation name='org.jetbrains.annotations.NotNull'/>)
-          )
-        case inOut:InOut =>
-          inOuts(key.method) = (inOut, value) :: inOuts.getOrElse(key.method, Nil)
-        case _ =>
-
-      }
-    }
-    for ((method, inOuts) <- inOuts) {
-      val key = annotationKey(method)
-      val arity = Type.getArgumentTypes(method.methodDesc).size
-      val contractValues = inOuts.map { case (InOut(i, inValue), outValue) =>
-        (0 until arity).map { j =>
-          if (i == j) contractValueString(inValue) else "_" }.mkString("", ",", s"->${contractValueString(outValue)}")
-      }.sorted.mkString("\"", ";", "\"")
-      val contractAnnotation =
-        <annotation name='org.jetbrains.annotations.Contract'>
-          <val val={contractValues}/>
-        </annotation>
-      annotations = annotations.updated(key, contractAnnotation :: annotations.getOrElse(key, Nil))
-    }
-    annotations.map {
-      case (k, v) => <item name={k}>{v}</item>
-    }.toList.sortBy(s => (s \\ "@name").toString())
-  }
-
   def toAnnotations(solutions: Iterable[(Key, Value)]): Annotations = {
     val inOuts = mutable.HashMap[Method, List[(InOut, Value)]]()
     var notNulls = Set[Key]()
@@ -128,15 +86,74 @@ object Utils {
     case _ => sys.error(s"unexpected $v")
   }
 
-  // the main logic to interact with IDEA
-  def annotationKey(method: Method): String =
-    if (method.methodName == "<init>")
-      s"${internalName2Idea(method.internalClassName)} ${simpleName(method.internalClassName)}${parameters(method)}"
-    else
-      s"${internalName2Idea(method.internalClassName)} ${returnType(method)} ${method.methodName}${parameters(method)}"
+}
 
-  private def returnType(method: Method): String =
-    binaryName2Idea(Type.getReturnType(method.methodDesc).getClassName)
+case class MethodExtra(signature: Option[String], access: Int)
+
+object XmlUtils {
+
+  val REGEX_PATTERN = "(?<=[^\\$\\.])\\${1}(?=[^\\$])".r // disallow .$ or $$
+
+  def toXmlAnnotations(solutions: Iterable[(Key, Value)], extras: Map[Method, MethodExtra]): List[Elem] = {
+    var annotations = Map[String, List[Elem]]()
+    val inOuts = mutable.HashMap[Method, List[(InOut, Value)]]()
+    for ((key, value) <- solutions) {
+      key.direction match {
+        case In(paramIndex) if value == Values.NotNull =>
+          val method = key.method
+          annotations = annotations.updated(
+            s"${annotationKey(method, extras(method))} $paramIndex",
+            List(<annotation name='org.jetbrains.annotations.NotNull'/>)
+          )
+        case Out if value == Values.NotNull =>
+          val method = key.method
+          annotations = annotations.updated(
+            annotationKey(method, extras(method)),
+            List(<annotation name='org.jetbrains.annotations.NotNull'/>)
+          )
+        case inOut:InOut =>
+          inOuts(key.method) = (inOut, value) :: inOuts.getOrElse(key.method, Nil)
+        case _ =>
+
+      }
+    }
+    for ((method, inOuts) <- inOuts) {
+      val key = annotationKey(method, extras(method))
+      val arity = Type.getArgumentTypes(method.methodDesc).size
+      val contractValues = inOuts.map { case (InOut(i, inValue), outValue) =>
+        (0 until arity).map { j =>
+          if (i == j) Utils.contractValueString(inValue) else "_" }.mkString("", ",", s"->${Utils.contractValueString(outValue)}")
+      }.sorted.mkString("\"", ";", "\"")
+      val contractAnnotation =
+        <annotation name='org.jetbrains.annotations.Contract'>
+          <val val={contractValues}/>
+        </annotation>
+      annotations = annotations.updated(key, contractAnnotation :: annotations.getOrElse(key, Nil))
+    }
+    annotations.map {
+      case (k, v) => <item name={k}>{v}</item>
+    }.toList.sortBy(s => (s \\ "@name").toString())
+  }
+
+  // the main logic to interact with IDEA
+  def annotationKey(method: Method, extra: MethodExtra): String =
+    if (method.methodName == "<init>")
+      s"${internalName2Idea(method.internalClassName)} ${simpleName(method.internalClassName)}${parameters(method, extra)}"
+    else
+      s"${internalName2Idea(method.internalClassName)} ${returnType(method, extra)} ${method.methodName}${parameters(method, extra)}"
+
+  private def returnType(method: Method, extra: MethodExtra): String =
+    extra.signature match {
+      case Some(sig) =>
+        val sb = new StringBuilder()
+        new SignatureReader(sig).accept(new SignatureVisitor(Opcodes.ASM5) {
+          override def visitReturnType(): SignatureVisitor =
+            new GenericTypeRenderer(sb)
+        })
+        sb.toString()
+      case None =>
+        binaryName2Idea(Type.getReturnType(method.methodDesc).getClassName)
+    }
 
   private def simpleName(internalName: String): String = {
     val ideaName = internalName2Idea(internalName)
@@ -146,8 +163,18 @@ object Utils {
     }
   }
 
-  private def parameters(method: Method): String =
-    Type.getArgumentTypes(method.methodDesc).map(t => binaryName2Idea(t.getClassName)).mkString("(", ", ",")")
+  private def parameters(method: Method, extra: MethodExtra): String = {
+    val result = extra.signature match {
+      case Some(sig) =>
+        val renderer = new GenericMethodParametersRenderer()
+        new SignatureReader(sig).accept(renderer)
+        renderer.parameters()
+      case None =>
+        Type.getArgumentTypes(method.methodDesc).map(t => binaryName2Idea(t.getClassName)).mkString("(", ", ", ")")
+    }
+    if ((extra.access & Opcodes.ACC_VARARGS) != 0) result.replace("[])", "...)")
+    else result
+  }
 
   private def internalName2Idea(internalName: String): String = {
     val binaryName = Type.getObjectType(internalName).getClassName
@@ -166,5 +193,88 @@ object Utils {
       binaryName
     }
   }
-}
 
+  class GenericMethodParametersRenderer extends SignatureVisitor(Opcodes.ASM5) {
+    private val sb = new StringBuilder("(")
+    private var first = true
+
+    def parameters(): String = sb.append(')').toString
+
+    override def visitParameterType(): SignatureVisitor = {
+      if (first) first = false // "(" is already appended
+      else sb.append(", ")
+      new GenericTypeRenderer(sb)
+    }
+  }
+
+  class GenericTypeRenderer(val sb: StringBuilder) extends SignatureVisitor(Opcodes.ASM5) {
+    private var angleBracketOpen = false
+
+    private def openAngleBracketIfNeeded(): Boolean =
+      if (!angleBracketOpen) {
+        angleBracketOpen = true
+        sb.append("<")
+        true
+      }
+      else false
+
+    private def closeAngleBracketIfNeeded() {
+      if (angleBracketOpen) {
+        angleBracketOpen = false
+        sb.append(">")
+      }
+    }
+
+    private def beforeTypeArgument() {
+      val first = openAngleBracketIfNeeded()
+      if (!first) sb.append(",")
+    }
+
+    protected def endType() = ()
+
+    override def visitBaseType(descriptor: Char) {
+      sb.append(Type.getType(descriptor.toString).getClassName)
+      endType()
+    }
+
+    override def visitTypeVariable(name: String) {
+      sb.append(name)
+      endType()
+    }
+
+    override def visitArrayType(): SignatureVisitor =
+      new GenericTypeRenderer(sb) {
+        override def endType() =
+          sb.append("[]")
+      }
+
+    override def visitClassType(name: String) =
+      sb.append(internalName2Idea(name))
+
+    override def visitInnerClassType(name: String) {
+      closeAngleBracketIfNeeded()
+      sb.append(".").append(internalName2Idea(name))
+    }
+
+    override def visitTypeArgument() {
+      beforeTypeArgument()
+      sb.append("?")
+    }
+
+    override def visitTypeArgument(wildcard: Char): SignatureVisitor = {
+      beforeTypeArgument()
+      wildcard match {
+        case SignatureVisitor.EXTENDS => sb.append("? extends ")
+        case SignatureVisitor.SUPER => sb.append("? super ")
+        case SignatureVisitor.INSTANCEOF =>
+        case _ => sys.error(s"Unknown wildcard: $wildcard")
+      }
+      new GenericTypeRenderer(sb)
+    }
+
+    override def visitEnd() {
+      closeAngleBracketIfNeeded()
+      endType()
+    }
+  }
+}

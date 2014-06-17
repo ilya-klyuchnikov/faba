@@ -57,6 +57,7 @@ trait FabaProcessor extends Processor {
   val paramsSolver = new Solver[Key, Values.Value]()(ELattice(Values.NotNull, Values.Top))
   val contractsSolver = new Solver[Key, Values.Value]()(ELattice(Values.Bot, Values.Top))
   val processContracts = true
+  var extras = Map[Method, MethodExtra]()
 
   override def processClass(classReader: ClassReader): Unit =
     classReader.accept(new ClassVisitor(Opcodes.ASM5) {
@@ -79,6 +80,8 @@ trait FabaProcessor extends Processor {
     }, 0)
 
   def processMethod(className: String, methodNode: MethodNode, stableClass: Boolean) {
+    val method = Method(className, methodNode.name, methodNode.desc)
+    extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
     val access = methodNode.access
     val stable =
       stableClass ||
@@ -95,7 +98,6 @@ trait FabaProcessor extends Processor {
 
     val isReferenceResult = resultSort == Type.OBJECT || resultSort == Type.ARRAY
     val isBooleanResult = Type.BOOLEAN_TYPE == resultType
-    val method = Method(className, methodNode.name, methodNode.desc)
 
     if (graph.transitions.nonEmpty)  {
       val dfs = buildDFSTree(graph.transitions)

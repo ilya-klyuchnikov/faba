@@ -116,7 +116,7 @@ class MainProcessor extends FabaProcessor {
       solutions.groupBy(_._1.method.internalPackageName)
 
     for ((pkg, solution) <- byPackage) {
-      val xmlAnnotations = Utils.toXmlAnnotations(solution)
+      val xmlAnnotations = XmlUtils.toXmlAnnotations(solution, extras)
       printToFile(new File(s"${outDir}${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
         out.println(pp.format(<root>{xmlAnnotations}</root>))
       }
