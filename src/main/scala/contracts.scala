@@ -31,9 +31,9 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     Equation(aKey, result)
 
   override def isEarlyResult(res: MyResult): Boolean = res match {
-    case Final(Values.Top)      => true
-    case Pending(Values.Top, _) => true
-    case _                      => false
+    case Final(Values.Top)         => true
+    case Pending(Values.Top, _, _) => true
+    case _                         => false
   }
 
   var id = 0
@@ -75,7 +75,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             results = results + (stateIndex -> Final(in))
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
           case CallResultValue(_, keys) =>
-            results = results + (stateIndex -> Pending[Key, Value](Values.Bot, Set(Component(false, keys))))
+            results = results + (stateIndex -> Pending[Key, Value](Values.Bot, false, Set(Component(false, keys))))
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
           case _ =>
             earlyResult = Some(Final(Values.Top))

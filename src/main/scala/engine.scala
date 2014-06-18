@@ -29,12 +29,12 @@ object `package` {
         Final(`top`)
       case (Final(v1), Final(v2)) =>
         Final(v1 join v2)
-      case (Final(v1), Pending(v2, comps2)) =>
-        Pending(v1 join v2, comps2)
-      case (Pending(v1, comps1), Final(v2)) =>
-        Pending(v1 join v2, comps1)
-      case (Pending(v1, comps1), Pending(v2, comps2)) =>
-        Pending(v1 join v2, comps1 union comps2)
+      case (Final(v1), Pending(v2, _, comps2)) =>
+        Pending(v1 join v2, true, comps2)
+      case (Pending(v1, _, comps1), Final(v2)) =>
+        Pending(v1 join v2, true, comps1)
+      case (Pending(v1, rigid1, comps1), Pending(v2, rigid2, comps2)) =>
+        Pending(v1 join v2, rigid1 || rigid2, comps1 union comps2)
     }
   }
 }
@@ -84,6 +84,7 @@ trait Lattice[T] extends PartialOrdering[T] {
 
 case class ELattice[E](bot: E, top: E) extends Lattice[E]
 
+// touched means that not top, not bot was removed from the component
 case class Component[Id](touched: Boolean, ids: Set[Id]) {
   def remove(id: Id) =
     Component(touched, ids - id)
@@ -104,7 +105,7 @@ case class Component[Id](touched: Boolean, ids: Set[Id]) {
 
 sealed trait Result[+Id, Val]
 case class Final[Val](value: Val) extends Result[Nothing, Val]
-case class Pending[Id, Val](infinum: Val, delta: SoP[Id]) extends Result[Id, Val]
+case class Pending[Id, Val](infinum: Val, rigid: Boolean, delta: SoP[Id]) extends Result[Id, Val]
 
 case class Equation[Id, Val](id: Id, rhs: Result[Id, Val])
 
@@ -133,9 +134,9 @@ final class Solver[K <: StableAwareId[K], V](implicit lattice: Lattice[V]) {
     equation.rhs match {
       case Final(value) =>
         moving enqueue (equation.id -> value)
-      case Pending(`top`, _) =>
+      case Pending(`top`, _, _) =>
         moving enqueue (equation.id -> top)
-      case p@Pending(_, sop) =>
+      case p@Pending(_, _, sop) =>
         for (trigger <- sop.map(_.ids).flatten) {
           dependencies(trigger) = dependencies.getOrElse(trigger, Set()) + equation.id
         }
@@ -161,7 +162,7 @@ final class Solver[K <: StableAwareId[K], V](implicit lattice: Lattice[V]) {
         pend <- pending.remove(dId)
       } substitute(pend, pId, pValue) match {
         case Final(v) => moving enqueue (dId -> v)
-        case p@Pending(_, _) => pending(dId) = p
+        case p@Pending(_, _, _) => pending(dId) = p
       }
     }
 
@@ -175,21 +176,26 @@ final class Solver[K <: StableAwareId[K], V](implicit lattice: Lattice[V]) {
     value match {
       case `bot` =>
         val delta = pending.delta.filterNot(_.ids(id))
-        if (delta.isEmpty) Final(pending.infinum)
-        else Pending(pending.infinum, delta)
+        if (delta.isEmpty) {
+          if (pending.rigid) Final(pending.infinum) else Final(bot)
+        }
+        else Pending(pending.infinum, pending.rigid, delta)
       case `top` =>
         val delta = pending.delta.map(_.remove(id)).filterNot(_.isEmpty_!)
+        val removed = delta.size < pending.delta.size
         if (delta.exists(_.isEmpty)) Final(`top`)
         else if (delta.isEmpty) Final(pending.infinum)
-        else Pending(pending.infinum, delta)
+        else Pending(pending.infinum, pending.rigid || removed, delta)
       case _ =>
         pending.infinum | value match {
           case `top` =>
             Final(`top`)
           case infinum =>
             val delta = pending.delta.map(_.remove_!(id)).filterNot(_.isEmpty)
+            val removed = delta.size < pending.delta.size
+            // true infinum if was removed (delta' != delta)
             if (delta.isEmpty) Final(infinum)
-            else Pending(infinum, delta)
+            else Pending(infinum, pending.rigid || removed,  delta)
         }
     }
 }
