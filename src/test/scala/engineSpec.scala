@@ -15,7 +15,7 @@ class engineSpec extends FunSuite with TableDrivenPropertyChecks {
     def substitute(rhs: Result[Id, Val], solution: Map[Id, Val]): Val = rhs match {
       case Final(value) =>
         value
-      case Pending(partial, sop) =>
+      case Pending(sop) =>
         sop.map(_.ids.map(solution).reduce(_ & _)).reduce(_ | _)
     }
 
@@ -28,9 +28,9 @@ class engineSpec extends FunSuite with TableDrivenPropertyChecks {
       def :=(v: Val): Equation[Id, Val] =
         Equation(i, Final(v))
       def :=(s: Set[Set[Id]]): Equation[Id, Val] =
-        Equation(i, Pending(bot, s.map(Component(false, _))))
+        Equation(i, Pending(s.map(Component(top, _))))
       def :=(s: Set[Id])(implicit x: String = null): Equation[Id, Val] =
-        Equation(i, Pending(bot, Set(Component(false, s))))
+        Equation(i, Pending(Set(Component(top, s))))
     }
 
     implicit class IdSetOps(s: Set[Id]) {
@@ -49,8 +49,8 @@ class engineSpec extends FunSuite with TableDrivenPropertyChecks {
     def pretty(eq: Equation[Id, Val]): String = eq.rhs match {
       case Final(v) =>
         s"${eq.id} := $v;"
-      case Pending(v, sop) =>
-        s"${eq.id} := $v | ${sop.map(_.ids.mkString("(", " & ", ")")).mkString(" | ")};"
+      case Pending(sop) =>
+        s"${eq.id} := ${sop.map(_.ids.mkString("(", " & ", ")")).mkString(" | ")};"
     }
 
   }

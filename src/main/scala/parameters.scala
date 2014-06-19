@@ -77,7 +77,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     case Identity | Return | Error => Equation(aKey, Final(Values.Top))
     case NPE => Equation(aKey, Final(Values.NotNull))
     case ConditionalNPE(cnf) =>
-      Equation(aKey, Pending(Values.NotNull, false, cnf.map(p => Component(false, p))))
+      Equation(aKey, Pending(cnf.map(p => Component(Values.Top, p))))
   }
 
   override def isEarlyResult(res: Result): Boolean =
