@@ -83,7 +83,8 @@ object Utils {
     case Values.Null => "null"
     case Values.True => "true"
     case Values.False => "false"
-    case _ => sys.error(s"unexpected $v")
+    case Values.Bot => "bot"
+    case Values.Top => "top"
   }
 
 }
@@ -110,6 +111,12 @@ object XmlUtils {
           annotations = annotations.updated(
             annotationKey(method, extras(method)),
             List(<annotation name='org.jetbrains.annotations.NotNull'/>)
+          )
+        case Out =>
+          val method = key.method
+          annotations = annotations.updated(
+            annotationKey(method, extras(method)),
+            List(<annotation name={value.toString.toLowerCase}/>)
           )
         case inOut:InOut =>
           inOuts(key.method) = (inOut, value) :: inOuts.getOrElse(key.method, Nil)

@@ -107,17 +107,30 @@ class MainProcessor extends FabaProcessor {
     val indexEnd = System.currentTimeMillis()
 
     println("solving ...")
-    val solutions: Map[Key, Values.Value] =
-      (paramsSolver.solve() ++ contractsSolver.solve()).filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
+    val debugSolutions: Map[Key, Values.Value] =
+      (paramsSolver.solve()).filterNot(p => p._2 == Values.Top) ++ contractsSolver.solve()
     val solvingEnd = System.currentTimeMillis()
     println("saving to file ...")
 
     val byPackage: Map[String, Map[Key, Values.Value]] =
-      solutions.groupBy(_._1.method.internalPackageName)
+      debugSolutions.groupBy(_._1.method.internalPackageName)
 
     for ((pkg, solution) <- byPackage) {
       val xmlAnnotations = XmlUtils.toXmlAnnotations(solution, extras)
-      printToFile(new File(s"${outDir}${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
+      printToFile(new File(s"$outDir-debug${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
+        out.println(pp.format(<root>{xmlAnnotations}</root>))
+      }
+    }
+
+    val prodSolutions: Map[Key, Values.Value] =
+      debugSolutions.filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
+
+    val byPackageProd: Map[String, Map[Key, Values.Value]] =
+      prodSolutions.groupBy(_._1.method.internalPackageName)
+
+    for ((pkg, solution) <- byPackageProd) {
+      val xmlAnnotations = XmlUtils.toXmlAnnotations(solution, extras)
+      printToFile(new File(s"$outDir-prod${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
         out.println(pp.format(<root>{xmlAnnotations}</root>))
       }
     }
@@ -128,7 +141,8 @@ class MainProcessor extends FabaProcessor {
     println(s"indexing took ${(indexEnd - indexStart) / 1000.0} sec")
     println(s"solving took ${(solvingEnd - indexEnd) / 1000.0} sec")
     println(s"saving took ${(writingEnd - solvingEnd) / 1000.0} sec")
-    println(s"${solutions.size} contracts")
+    println(s"${debugSolutions.size} all contracts")
+    println(s"${prodSolutions.size} prod contracts")
     println("INDEXING TIME")
     println(s"params      ${paramsTime / 1000.0} sec")
     println(s"results     ${outTime / 1000.0} sec")
