@@ -40,7 +40,7 @@ object `package` {
 }
 
 // complete finite lattice
-trait Lattice[T] extends PartialOrdering[T] {
+trait Lattice[T] {
   val top: T
   val bot: T
 
@@ -64,22 +64,8 @@ trait Lattice[T] extends PartialOrdering[T] {
       case _ => if (equiv(x, y)) x else bot
     }
 
-  final override def equiv(x: T, y: T): Boolean =
+  final def equiv(x: T, y: T): Boolean =
     x == y
-
-  final override def tryCompare(x: T, y: T): Option[Int] =
-    (x, y) match {
-      case (`bot`, `bot`) => Some(0)
-      case (_, `bot`) => Some(1)
-      case (`bot`, _) => Some(-1)
-      case (`top`, `top`) => Some(0)
-      case (_, `top`) => Some(-1)
-      case (`top`, _) => Some(1)
-      case (_, _) => if (equiv(x, y)) Some(0) else None
-    }
-
-  final override def lteq(x: T, y: T): Boolean =
-    tryCompare(x, y).getOrElse(1) <= 0
 }
 
 case class ELattice[E](bot: E, top: E) extends Lattice[E]
@@ -117,11 +103,15 @@ final class Solver[K <: StableAwareId[K], V](implicit lattice: Lattice[V]) {
     equation.rhs match {
       case Final(value) =>
         moving enqueue (equation.id -> value)
-      case p@Pending(comps) =>
-        for (trigger <- comps.map(_.ids).flatten) {
-          dependencies(trigger) = dependencies.getOrElse(trigger, Set()) + equation.id
-        }
-        pending(equation.id) = p
+      case Pending(sum) => normalize(sum) match {
+        case Final(value) =>
+          moving enqueue (equation.id -> value)
+        case p@Pending(comps) =>
+          for (trigger <- comps.map(_.ids).flatten) {
+            dependencies(trigger) = dependencies.getOrElse(trigger, Set()) + equation.id
+          }
+          pending(equation.id) = p
+      }
     }
 
   def solve(): Map[K, V] = {
@@ -147,28 +137,31 @@ final class Solver[K <: StableAwareId[K], V](implicit lattice: Lattice[V]) {
       }
     }
 
+    /*
     for ((id, _) <- pending)
       solved = solved + (id -> top)
+    */
     pending.clear()
     solved
   }
 
   private def substitute(pending: Pending[K, V], id: K, value: V): Result[K, V] = {
+
     val sum = pending.delta.map { prod =>
       if (prod.ids(id)) Component(value & prod.v, prod.ids - id) else prod
     }
-    // can calculate now?
+    normalize(sum)
+  }
+
+  private def normalize(sum: SoP[K, V]): Result[K, V] = {
     var acc = bot
-    for (Component(v, prod) <- sum) {
-      v match {
-        case `bot` =>
-        case `top` if prod.isEmpty =>
-          return Final(`top`)
-        case _ =>
-          if (prod.isEmpty) acc |= v else return Pending(sum)
-      }
-    }
-    Final(acc)
+    var computableNow = true
+    for (Component(v, prod) <- sum )
+      if (prod.isEmpty || v == bot) acc = acc | v
+      else computableNow = false
+
+    if (acc == top || computableNow) Final(acc)
+    else Pending(sum)
   }
 
 }

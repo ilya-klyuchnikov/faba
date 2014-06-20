@@ -30,10 +30,11 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
   override def mkEquation(result: MyResult): Equation[Key, Value] =
     Equation(aKey, result)
 
-  override def isEarlyResult(res: MyResult): Boolean = res match {
+  // we cannot say it top, since there may be unprocessed dereferences in the tree
+  override def isEarlyResult(res: MyResult): Boolean = false/*res match {
     case Final(Values.Top) => true
     case _                 => false
-  }
+  }*/
 
   var id = 0
 
@@ -77,7 +78,9 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             results = results + (stateIndex -> Pending[Key, Value](Set(Component(Values.Top, keys))))
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
           case _ =>
-            earlyResult = Some(Final(Values.Top))
+            // we cannot say it top, since there may be unprocessed dereferences in the tree
+            results = results + (stateIndex -> Final(Values.Top))
+            computed = computed.updated(insnIndex, state :: computed(insnIndex))
         }
       case ATHROW =>
         results = results + (stateIndex -> Final(Values.Bot))

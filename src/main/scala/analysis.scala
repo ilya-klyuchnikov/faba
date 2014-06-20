@@ -47,13 +47,12 @@ abstract class Analysis[Res] {
 
   final def createStartState(): State = State(0, Conf(0, createStartFrame()), Nil, false, false)
   final def confInstance(curr: Conf, prev: Conf): Boolean = Utils.isInstance(curr, prev)
-  // this is for sharing
-  final def stateInstance(curr: State, prev: State): Boolean = {
+
+  final def stateEquiv(curr: State, prev: State): Boolean =
     curr.taken == prev.taken &&
-      Utils.isInstance(curr.conf, prev.conf) &&
+      Utils.equiv(curr.conf, prev.conf) &&
       curr.history.size == prev.history.size &&
-      (curr.history, prev.history).zipped.forall(Utils.isInstance)
-  }
+      (curr.history, prev.history).zipped.forall(Utils.equiv)
 
   val pending = mutable.Stack[PendingAction]()
   // the key is insnIndex
@@ -87,7 +86,7 @@ abstract class Analysis[Res] {
         if (fold) {
           results = results + (state.index -> identity)
           computed = computed.updated(insnIndex, state :: computed(insnIndex))
-        } else computed(insnIndex).find(prevState => stateInstance(state, prevState)) match {
+        } else computed(insnIndex).find(prevState => stateEquiv(state, prevState)) match {
           case Some(ps) =>
             results = results + (state.index -> results(ps.index))
           case None =>
@@ -183,5 +182,36 @@ object Utils {
     }
     case _: BasicValue => true
   }
+
+  def equiv(curr: Conf, prev: Conf): Boolean = {
+    if (curr.insnIndex != prev.insnIndex) {
+      return false
+    }
+    val currFr = curr.frame
+    val prevFr = prev.frame
+    for (i <- 0 until currFr.getLocals if !equiv(currFr.getLocal(i), prevFr.getLocal(i)))
+      return false
+    for (i <- 0 until currFr.getStackSize if !equiv(currFr.getStack(i), prevFr.getStack(i)))
+      return false
+    true
+  }
+
+  def equiv(curr: BasicValue, prev: BasicValue): Boolean = {
+    val result = equiv0(curr, prev)
+    val result2 = equiv0(prev, curr)
+    require(result == result2, s"$result != $result2 || $curr (${curr.getClass}}), $prev (${prev.getClass}})")
+    result
+  }
+
+  def equiv0(curr: BasicValue, prev: BasicValue): Boolean =
+    if (curr.getClass == prev.getClass) {
+      (curr, prev) match {
+        case (CallResultValue(_, k1), CallResultValue(_, k2)) =>
+          k1 == k2
+        case _ =>
+          true
+      }
+    }
+    else false
 
 }
