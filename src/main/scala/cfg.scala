@@ -21,11 +21,15 @@ object `package` {
     var result = Set[Int]()
     for (i <- 0 until frames.length) {
       val insnNode = insns.get(i)
-      insnNode.getOpcode match {
-        case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN =>
-          for (sourceInsn <- frames(i).pop().insns)
-            result = result + insns.indexOf(sourceInsn)
-        case _ =>
+      val frame = frames(i)
+      // there may be dead instructions in bytecode
+      if (frame != null) {
+        insnNode.getOpcode match {
+          case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN =>
+            for (sourceInsn <- frame.pop().insns)
+              result = result + insns.indexOf(sourceInsn)
+          case _ =>
+        }
       }
     }
     result
