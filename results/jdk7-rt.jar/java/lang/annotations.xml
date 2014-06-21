@@ -386,9 +386,14 @@
   <item name="java.lang.ClassLoader boolean compareCerts(java.security.cert.Certificate[], java.security.cert.Certificate[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.ClassLoader boolean loadLibrary1(java.lang.Class, java.io.File)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.lang.ClassLoader boolean needsClassLoaderPermissionCheck(java.lang.ClassLoader, java.lang.ClassLoader)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;false&quot;"/>
+      <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="java.lang.ClassLoader java.lang.Class&lt;?&gt; defineClass(java.lang.String, java.nio.ByteBuffer, java.security.ProtectionDomain) 1">
@@ -511,6 +516,11 @@
   <item name="java.lang.ClassValue.ClassValueMap java.lang.ClassValue.Entry&lt;T&gt; finishEntry(java.lang.ClassValue&lt;T&gt;, java.lang.ClassValue.Entry&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.ClassValue.ClassValueMap java.lang.ClassValue.Entry&lt;T&gt; finishEntry(java.lang.ClassValue&lt;T&gt;, java.lang.ClassValue.Entry&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.lang.ClassValue.ClassValueMap java.lang.ClassValue.Entry&lt;T&gt; overwrittenEntry(java.lang.ClassValue.Entry&lt;T&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
@@ -555,8 +565,23 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.ConditionalSpecialCasing boolean isAfterI(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="java.lang.ConditionalSpecialCasing boolean isAfterSoftDotted(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.lang.ConditionalSpecialCasing boolean isBeforeDot(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.ConditionalSpecialCasing boolean isFinalCased(java.lang.String, int, java.util.Locale)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="java.lang.ConditionalSpecialCasing boolean isMoreAbove(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -564,8 +589,18 @@
   <item name="java.lang.ConditionalSpecialCasing char[] lookUpTable(java.lang.String, int, java.util.Locale, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.ConditionalSpecialCasing char[] lookUpTable(java.lang.String, int, java.util.Locale, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.lang.ConditionalSpecialCasing char[] toLowerCaseCharArray(java.lang.String, int, java.util.Locale) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.ConditionalSpecialCasing char[] toLowerCaseCharArray(java.lang.String, int, java.util.Locale)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="java.lang.ConditionalSpecialCasing char[] toUpperCaseCharArray(java.lang.String, int, java.util.Locale) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

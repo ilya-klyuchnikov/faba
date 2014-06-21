@@ -75,6 +75,11 @@
   <item name="javax.management.BinaryOpValueExp java.lang.String opString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.BinaryOpValueExp java.lang.String parens(javax.management.ValueExp, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="javax.management.BinaryOpValueExp java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -323,6 +328,11 @@
   <item name="javax.management.MBeanServerDelegate void sendNotification(javax.management.Notification) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.MBeanServerFactory java.lang.String mBeanServerId(javax.management.MBeanServer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="javax.management.MBeanServerFactory java.util.ArrayList&lt;javax.management.MBeanServer&gt; findMBeanServer(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;!null&quot;"/>
@@ -357,6 +367,11 @@
   </item>
   <item name="javax.management.MBeanServerInvocationHandler boolean isLocal(java.lang.Object, java.lang.reflect.Method) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.MBeanServerInvocationHandler boolean isLocal(java.lang.Object, java.lang.reflect.Method)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;true&quot;"/>
+    </annotation>
   </item>
   <item name="javax.management.MBeanServerInvocationHandler boolean shouldDoLocally(java.lang.Object, java.lang.reflect.Method) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -863,6 +878,11 @@
   </item>
   <item name="javax.management.StandardEmitterMBean StandardEmitterMBean(java.lang.Class&lt;?&gt;, javax.management.NotificationEmitter) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.StandardMBean boolean overrides(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;, java.lang.String, java.lang.Class&lt;?&gt;...)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="javax.management.StandardMBean java.lang.String getDescription(javax.management.MBeanConstructorInfo, javax.management.MBeanParameterInfo, int)">
     <annotation name="org.jetbrains.annotations.Contract">

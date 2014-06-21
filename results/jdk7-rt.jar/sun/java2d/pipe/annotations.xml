@@ -308,6 +308,11 @@
   <item name="sun.java2d.pipe.DrawImage boolean copyImage(sun.java2d.SunGraphics2D, java.awt.Image, int, int, int, int, int, int, java.awt.Color) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.pipe.DrawImage boolean copyImage(sun.java2d.SunGraphics2D, java.awt.Image, int, int, int, int, int, int, java.awt.Color)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_,_,_,_,_,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.java2d.pipe.DrawImage boolean copyImage(sun.java2d.SunGraphics2D, java.awt.Image, int, int, java.awt.Color) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -328,9 +333,14 @@
   <item name="sun.java2d.pipe.DrawImage boolean renderImageCopy(sun.java2d.SunGraphics2D, java.awt.Image, java.awt.Color, int, int, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.pipe.DrawImage boolean renderImageScale(sun.java2d.SunGraphics2D, java.awt.Image, java.awt.Color, int, int, int, int, int, double, double, double, double)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_,_,_,_,_,_,_,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.java2d.pipe.DrawImage boolean scaleImage(sun.java2d.SunGraphics2D, java.awt.Image, int, int, int, int, int, int, int, int, java.awt.Color)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_,_,_,_,_,_,_,_-&gt;true;_,!null,_,_,_,_,_,_,_,_,_-&gt;true;_,_,_,_,_,_,_,_,_,_,!null-&gt;true;_,_,_,_,_,_,_,_,_,_,null-&gt;true&quot;"/>
+      <val val="&quot;!null,_,_,_,_,_,_,_,_,_,_-&gt;true;_,!null,_,_,_,_,_,_,_,_,_-&gt;true;_,_,_,_,_,_,_,_,_,_,!null-&gt;true;_,_,_,_,_,_,_,_,_,_,null-&gt;true;_,null,_,_,_,_,_,_,_,_,_-&gt;true;null,_,_,_,_,_,_,_,_,_,_-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.java2d.pipe.DrawImage boolean scaleImage(sun.java2d.SunGraphics2D, java.awt.Image, int, int, int, int, java.awt.Color) 0">
@@ -541,6 +551,16 @@
   <item name="sun.java2d.pipe.PixelToParallelogramConverter void fillRectangle(sun.java2d.SunGraphics2D, double, double, double, double) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.pipe.PixelToShapeConverter java.awt.Shape makePoly(int[], int[], int, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_,_-&gt;!null;null,_,_,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.java2d.pipe.Region boolean encompasses(sun.java2d.pipe.Region)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.java2d.pipe.Region boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
@@ -560,7 +580,7 @@
   </item>
   <item name="sun.java2d.pipe.Region sun.java2d.pipe.Region getBoundsIntersection(sun.java2d.pipe.Region)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="sun.java2d.pipe.Region sun.java2d.pipe.Region getBoundsIntersectionXYXY(int, int, int, int)">
@@ -615,7 +635,7 @@
   </item>
   <item name="sun.java2d.pipe.Region sun.java2d.pipe.Region getIntersection(sun.java2d.pipe.Region)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="sun.java2d.pipe.Region sun.java2d.pipe.Region getIntersectionXYXY(int, int, int, int)">
@@ -634,7 +654,7 @@
   </item>
   <item name="sun.java2d.pipe.Region sun.java2d.pipe.SpanIterator filter(sun.java2d.pipe.SpanIterator)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="sun.java2d.pipe.Region sun.java2d.pipe.SpanIterator getSpanIterator()">
@@ -673,8 +693,23 @@
   <item name="sun.java2d.pipe.RegionClipSpanIterator RegionClipSpanIterator(sun.java2d.pipe.Region, sun.java2d.pipe.SpanIterator) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.pipe.RegionClipSpanIterator boolean nextSpan(int[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.java2d.pipe.RegionClipSpanIterator void getPathBox(int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.pipe.RegionIterator boolean nextXBand(int[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.java2d.pipe.RegionIterator boolean nextYRange(int[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="sun.java2d.pipe.RegionIterator sun.java2d.pipe.RegionIterator createCopy()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -815,6 +850,31 @@
   </item>
   <item name="sun.java2d.pipe.TextRenderer void drawGlyphList(sun.java2d.SunGraphics2D, sun.font.GlyphList) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.pipe.ValidatePipe boolean copyImage(sun.java2d.SunGraphics2D, java.awt.Image, int, int, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_,_,_,_,_,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.java2d.pipe.ValidatePipe boolean copyImage(sun.java2d.SunGraphics2D, java.awt.Image, int, int, java.awt.Color, java.awt.image.ImageObserver)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.java2d.pipe.ValidatePipe boolean scaleImage(sun.java2d.SunGraphics2D, java.awt.Image, int, int, int, int, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_,_,_,_,_,_,_,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.java2d.pipe.ValidatePipe boolean scaleImage(sun.java2d.SunGraphics2D, java.awt.Image, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_,_,_,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.java2d.pipe.ValidatePipe boolean transformImage(sun.java2d.SunGraphics2D, java.awt.Image, java.awt.geom.AffineTransform, java.awt.image.ImageObserver)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="sun.java2d.pipe.ValidatePipe boolean validate(sun.java2d.SunGraphics2D) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

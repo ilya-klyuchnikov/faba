@@ -1685,6 +1685,11 @@
   <item name="sun.security.x509.X500Name X500Name(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.X500Name boolean escaped(int, int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.security.x509.X500Name java.lang.String generateRFC2253DN(java.util.Map&lt;java.lang.String,java.lang.String&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
@@ -1736,6 +1741,11 @@
   </item>
   <item name="sun.security.x509.X509CRLEntryImpl java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.X509CRLEntryImpl java.security.cert.CRLReason getRevocationReason(java.security.cert.X509CRLEntry)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.security.x509.X509CRLEntryImpl java.util.Date getRevocationDate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1833,6 +1843,11 @@
   <item name="sun.security.x509.X509CertImpl boolean isSelfSigned(java.security.cert.X509Certificate, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.X509CertImpl boolean isSelfSigned(java.security.cert.X509Certificate, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.security.x509.X509CertImpl byte[] getEncodedInternal(java.security.cert.Certificate) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1894,6 +1909,16 @@
   </item>
   <item name="sun.security.x509.X509CertImpl sun.security.util.DerValue readRFC1421Cert(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.X509CertImpl sun.security.x509.Extension getExtension(sun.security.util.ObjectIdentifier)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.security.x509.X509CertImpl sun.security.x509.Extension getUnparseableExtension(sun.security.util.ObjectIdentifier)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.security.x509.X509CertImpl sun.security.x509.X509CertImpl toImpl(java.security.cert.X509Certificate)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1994,6 +2019,11 @@
   </item>
   <item name="sun.security.x509.X509Key java.security.PublicKey buildX509Key(sun.security.x509.AlgorithmId, sun.security.util.BitArray) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.X509Key java.security.PublicKey buildX509Key(sun.security.x509.AlgorithmId, sun.security.util.BitArray)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.security.x509.X509Key java.security.PublicKey parse(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

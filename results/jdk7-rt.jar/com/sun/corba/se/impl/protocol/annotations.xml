@@ -67,6 +67,11 @@
   <item name="com.sun.corba.se.impl.protocol.CorbaClientRequestDispatcherImpl com.sun.corba.se.pept.encoding.InputObject processResponse(com.sun.corba.se.spi.orb.ORB, com.sun.corba.se.spi.protocol.CorbaMessageMediator, com.sun.corba.se.pept.encoding.InputObject) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.protocol.CorbaClientRequestDispatcherImpl com.sun.corba.se.pept.encoding.InputObject processResponse(com.sun.corba.se.spi.orb.ORB, com.sun.corba.se.spi.protocol.CorbaMessageMediator, com.sun.corba.se.pept.encoding.InputObject)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaClientRequestDispatcherImpl com.sun.corba.se.pept.encoding.OutputObject beginRequest(java.lang.Object, java.lang.String, boolean, com.sun.corba.se.pept.transport.ContactInfo) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -334,7 +339,7 @@
   </item>
   <item name="com.sun.corba.se.impl.protocol.LocalClientRequestDispatcherBase boolean checkForCompatibleServant(org.omg.CORBA.portable.ServantObject, java.lang.Class)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;false&quot;"/>
+      <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.protocol.LocalClientRequestDispatcherBase boolean is_local(org.omg.CORBA.Object)">

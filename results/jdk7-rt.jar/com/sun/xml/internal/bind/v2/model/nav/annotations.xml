@@ -15,6 +15,16 @@
   <item name="com.sun.xml.internal.bind.v2.model.nav.ParameterizedTypeImpl java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator boolean hasDefaultConstructor(java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator boolean hasDefaultConstructor(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator boolean isAbstract(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -183,11 +193,21 @@
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Class asDecl(java.lang.reflect.Type) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Class findClass(java.lang.String, java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Class getDeclaringClassForField(java.lang.reflect.Field) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Class getDeclaringClassForMethod(java.lang.reflect.Method) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Class getSuperClass(java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Class ref(java.lang.Class)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -213,6 +233,11 @@
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Object erasure(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Object findClass(java.lang.String, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Object getBaseClass(java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -221,7 +246,7 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Object getDeclaredField(java.lang.Object, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null&quot;"/>
+      <val val="&quot;_,null-&gt;null;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Object getDeclaringClassForField(java.lang.Object) 0">
@@ -235,11 +260,16 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Object getPrimitive(java.lang.Class)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Object getReturnType(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Object getSuperClass(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.Object getTypeArgument(java.lang.Object, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -325,7 +355,7 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.reflect.Field getDeclaredField(java.lang.Class, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null&quot;"/>
+      <val val="&quot;_,null-&gt;null;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.reflect.Field[] getEnumConstants(java.lang.Class) 0">
@@ -353,7 +383,7 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.reflect.Type getPrimitive(java.lang.Class)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator java.lang.reflect.Type getReturnType(java.lang.reflect.Method) 0">

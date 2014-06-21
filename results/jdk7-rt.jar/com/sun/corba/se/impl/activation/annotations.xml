@@ -21,7 +21,7 @@
   </item>
   <item name="com.sun.corba.se.impl.activation.ListActiveServers boolean processCommand(java.lang.String[], org.omg.CORBA.ORB, java.io.PrintStream)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;false;_,!null,_-&gt;false;_,_,!null-&gt;false;null,_,_-&gt;false&quot;"/>
+      <val val="&quot;!null,_,_-&gt;false;_,!null,_-&gt;false;_,_,!null-&gt;false;_,_,null-&gt;false;_,null,_-&gt;false;null,_,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.activation.ListActiveServers java.lang.String getCommandName()">
@@ -32,7 +32,7 @@
   </item>
   <item name="com.sun.corba.se.impl.activation.ListAliases boolean processCommand(java.lang.String[], org.omg.CORBA.ORB, java.io.PrintStream)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;false;_,!null,_-&gt;false;_,_,!null-&gt;false;null,_,_-&gt;false&quot;"/>
+      <val val="&quot;!null,_,_-&gt;false;_,!null,_-&gt;false;_,_,!null-&gt;false;_,_,null-&gt;false;_,null,_-&gt;false;null,_,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.activation.ListAliases java.lang.String getCommandName()">
@@ -40,6 +40,11 @@
   </item>
   <item name="com.sun.corba.se.impl.activation.ListAliases void printCommandHelp(java.io.PrintStream, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.activation.ListORBs boolean processCommand(java.lang.String[], org.omg.CORBA.ORB, java.io.PrintStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.activation.ListORBs java.lang.String getCommandName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -65,11 +70,21 @@
   <item name="com.sun.corba.se.impl.activation.ListServers void sortServers(int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.activation.LocateServer boolean processCommand(java.lang.String[], org.omg.CORBA.ORB, java.io.PrintStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.activation.LocateServer java.lang.String getCommandName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.activation.LocateServer void printCommandHelp(java.io.PrintStream, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.activation.LocateServerForORB boolean processCommand(java.lang.String[], org.omg.CORBA.ORB, java.io.PrintStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.activation.LocateServerForORB java.lang.String getCommandName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -145,9 +160,14 @@
   <item name="com.sun.corba.se.impl.activation.ServerMain java.lang.String printResult(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.activation.ServerMain java.lang.reflect.Method getMainMethod(java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.activation.ServerMain java.lang.reflect.Method getNamedMethod(java.lang.Class, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null&quot;"/>
+      <val val="&quot;_,null-&gt;null;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.activation.ServerMain void writeLogMessage(java.io.PrintStream, java.lang.String) 0">
@@ -158,12 +178,12 @@
   </item>
   <item name="com.sun.corba.se.impl.activation.ServerManagerImpl com.sun.corba.se.spi.activation.LocatorPackage.ServerLocation locateServer(com.sun.corba.se.impl.activation.ServerTableEntry, java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,false-&gt;!null&quot;"/>
+      <val val="&quot;_,_,false-&gt;!null;null,_,_-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.activation.ServerManagerImpl com.sun.corba.se.spi.activation.LocatorPackage.ServerLocationPerORB locateServerForORB(com.sun.corba.se.impl.activation.ServerTableEntry, java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,false-&gt;!null&quot;"/>
+      <val val="&quot;_,_,false-&gt;!null;null,_,_-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.activation.ServerManagerImpl int getServerPortForType(com.sun.corba.se.spi.activation.LocatorPackage.ServerLocationPerORB, java.lang.String) 0">
@@ -187,11 +207,21 @@
   <item name="com.sun.corba.se.impl.activation.ServerTool int getServerIdForAlias(org.omg.CORBA.ORB, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.activation.ServerTool java.lang.String[] readCommand(java.io.BufferedReader)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.activation.ServerTool void executeCommand(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.activation.ServerTool void run(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.activation.ShutdownServer boolean processCommand(java.lang.String[], org.omg.CORBA.ORB, java.io.PrintStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.activation.ShutdownServer java.lang.String getCommandName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -199,11 +229,21 @@
   <item name="com.sun.corba.se.impl.activation.ShutdownServer void printCommandHelp(java.io.PrintStream, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.activation.StartServer boolean processCommand(java.lang.String[], org.omg.CORBA.ORB, java.io.PrintStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.activation.StartServer java.lang.String getCommandName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.activation.StartServer void printCommandHelp(java.io.PrintStream, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.activation.UnRegisterServer boolean processCommand(java.lang.String[], org.omg.CORBA.ORB, java.io.PrintStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.activation.UnRegisterServer java.lang.String getCommandName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>

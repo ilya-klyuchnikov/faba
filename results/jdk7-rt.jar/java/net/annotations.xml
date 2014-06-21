@@ -306,7 +306,7 @@
   </item>
   <item name="java.net.InMemoryCookieStore java.net.URI getEffectiveURI(java.net.URI)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="java.net.InMemoryCookieStore java.util.List&lt;java.net.HttpCookie&gt; get(java.net.URI) 0">
@@ -393,7 +393,7 @@
   </item>
   <item name="java.net.Inet6Address java.lang.String numericToTextFormat(byte[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -440,6 +440,11 @@
   </item>
   <item name="java.net.Inet6Address.Inet6AddressHolder void setAddr(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.Inet6AddressImpl boolean isReachable(java.net.InetAddress, int, java.net.NetworkInterface, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="java.net.InetAddress boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -712,6 +717,11 @@
   <item name="java.net.SocketPermission boolean authorized(java.lang.String, byte[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.SocketPermission boolean authorizedIPv4(java.lang.String, byte[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.net.SocketPermission boolean compareHostnames(java.net.SocketPermission) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -952,7 +962,7 @@
   </item>
   <item name="java.net.URI java.lang.String normalize(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="java.net.URI java.lang.String quote(java.lang.String, long, long) 0">

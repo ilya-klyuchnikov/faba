@@ -2,6 +2,11 @@
   <item name="sun.management.snmp.jvminstr.JVM_MANAGEMENT_MIB_IMPL com.sun.jmx.snmp.SnmpOid access$100(sun.management.snmp.jvminstr.JVM_MANAGEMENT_MIB_IMPL, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.management.snmp.jvminstr.JVM_MANAGEMENT_MIB_IMPL com.sun.jmx.snmp.SnmpOid getJvmMemPoolEntryIndex(sun.management.snmp.util.SnmpTableHandler, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.management.snmp.jvminstr.JVM_MANAGEMENT_MIB_IMPL java.lang.Object createJvmClassLoadingMBean(java.lang.String, java.lang.String, javax.management.ObjectName, javax.management.MBeanServer)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_,_,_-&gt;!null;_,!null,_,_-&gt;!null;_,_,!null,_-&gt;!null;_,_,_,!null-&gt;!null;_,_,_,null-&gt;!null;_,_,null,_-&gt;!null;_,null,_,_-&gt;!null;null,_,_,_-&gt;!null&quot;"/>
@@ -424,7 +429,7 @@
   </item>
   <item name="sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl.ThreadStateMap java.lang.Byte[] getState(java.lang.management.ThreadInfo)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -457,6 +462,11 @@
   </item>
   <item name="sun.management.snmp.jvminstr.JvmThreadInstanceTableMetaImpl long makeId(com.sun.jmx.snmp.SnmpOid) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.management.snmp.jvminstr.JvmThreadInstanceTableMetaImpl sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl getJvmThreadInstance(java.lang.Object, com.sun.jmx.snmp.SnmpOid)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmThreadInstanceTableMetaImpl.JvmThreadInstanceTableCache sun.management.snmp.util.SnmpCachedData updateCachedDatas(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">

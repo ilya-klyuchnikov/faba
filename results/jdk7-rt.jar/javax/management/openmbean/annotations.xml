@@ -74,6 +74,16 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.openmbean.ArrayType java.lang.String getPrimitiveTypeKey(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="javax.management.openmbean.ArrayType java.lang.String getPrimitiveTypeName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="javax.management.openmbean.ArrayType javax.management.openmbean.ArrayType&lt;E[]&gt; getArrayType(javax.management.openmbean.OpenType&lt;E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -98,6 +108,11 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.openmbean.ArrayType javax.management.openmbean.SimpleType&lt;?&gt; getPrimitiveOpenType(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="javax.management.openmbean.CompositeDataInvocationHandler CompositeDataInvocationHandler(javax.management.openmbean.CompositeData) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -106,7 +121,7 @@
   </item>
   <item name="javax.management.openmbean.CompositeDataInvocationHandler boolean equals(java.lang.Object, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false&quot;"/>
+      <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="javax.management.openmbean.CompositeDataInvocationHandler java.lang.Object invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[]) 1">
@@ -223,11 +238,6 @@
   <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport T convertFrom(java.lang.Object, javax.management.openmbean.OpenType&lt;T&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport T convertFrom(java.lang.Object, javax.management.openmbean.OpenType&lt;T&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport T convertFromString(java.lang.String, javax.management.openmbean.OpenType&lt;T&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -239,6 +249,16 @@
   </item>
   <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport T valueFrom(javax.management.Descriptor, java.lang.String, javax.management.openmbean.OpenType&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport T valueFrom(javax.management.Descriptor, java.lang.String, javax.management.openmbean.OpenType&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport boolean equal(javax.management.openmbean.OpenMBeanParameterInfo, javax.management.openmbean.OpenMBeanParameterInfo)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -271,6 +291,16 @@
   </item>
   <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport java.util.Set&lt;T&gt; valuesFrom(javax.management.Descriptor, java.lang.String, javax.management.openmbean.OpenType&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport javax.management.Descriptor makeDescriptor(javax.management.openmbean.OpenType&lt;T&gt;, T, T[], java.lang.Comparable&lt;T&gt;, java.lang.Comparable&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
+  <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport javax.management.Descriptor makeDescriptor(javax.management.openmbean.OpenType&lt;T&gt;, T, java.util.Set&lt;T&gt;, java.lang.Comparable&lt;T&gt;, java.lang.Comparable&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_,_-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport void check(javax.management.openmbean.OpenMBeanParameterInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

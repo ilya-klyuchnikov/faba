@@ -118,6 +118,11 @@
   <item name="java.text.BreakIterator.BreakIteratorGetter java.text.BreakIterator getObject(java.text.spi.BreakIteratorProvider, java.util.Locale, java.lang.String, java.lang.Object...) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.BreakIterator.BreakIteratorGetter java.text.BreakIterator getObject(java.text.spi.BreakIteratorProvider, java.util.Locale, java.lang.String, java.lang.Object...)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.text.CalendarBuilder java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -160,7 +165,7 @@
   </item>
   <item name="java.text.ChoiceFormat java.lang.Number parse(java.lang.String, java.text.ParsePosition)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -230,6 +235,11 @@
   <item name="java.text.Collator.CollatorGetter java.text.Collator getObject(java.text.spi.CollatorProvider, java.util.Locale, java.lang.String, java.lang.Object...) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.Collator.CollatorGetter java.text.Collator getObject(java.text.spi.CollatorProvider, java.util.Locale, java.lang.String, java.lang.Object...)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.text.DateFormat java.lang.String format(java.util.Date)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
@@ -244,6 +254,11 @@
   </item>
   <item name="java.text.DateFormat.DateFormatGetter java.text.DateFormat getObject(java.text.spi.DateFormatProvider, java.util.Locale, java.lang.String, java.lang.Object...) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.DateFormat.DateFormatGetter java.text.DateFormat getObject(java.text.spi.DateFormatProvider, java.util.Locale, java.lang.String, java.lang.Object...)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="java.text.DateFormatSymbols java.lang.String[] toOneBasedArray(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -312,6 +327,11 @@
   </item>
   <item name="java.text.DecimalFormat boolean subparse(java.lang.String, java.text.ParsePosition, java.lang.String, java.lang.String, java.text.DigitList, boolean, boolean[]) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.DecimalFormat boolean subparse(java.lang.String, java.text.ParsePosition, java.lang.String, java.lang.String, java.text.DigitList, boolean, boolean[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,_,_,_,null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="java.text.DecimalFormat java.lang.Number parse(java.lang.String, java.text.ParsePosition) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -598,7 +618,7 @@
   </item>
   <item name="java.text.MessageFormat java.lang.Object[] parse(java.lang.String, java.text.ParsePosition)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="java.text.MessageFormat java.lang.String toPattern()">
@@ -686,6 +706,11 @@
   </item>
   <item name="java.text.NumberFormat.NumberFormatGetter java.text.NumberFormat getObject(java.text.spi.NumberFormatProvider, java.util.Locale, java.lang.String, java.lang.Object...) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.NumberFormat.NumberFormatGetter java.text.NumberFormat getObject(java.text.spi.NumberFormatProvider, java.util.Locale, java.lang.String, java.lang.Object...)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="java.text.ParsePosition boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -904,6 +929,11 @@
   <item name="java.text.SimpleDateFormat SimpleDateFormat(java.lang.String, java.util.Locale) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.SimpleDateFormat boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.text.SimpleDateFormat boolean matchDSTString(java.lang.String, int, int, int, java.lang.String[][]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -933,7 +963,7 @@
   </item>
   <item name="java.text.SimpleDateFormat java.lang.String translatePattern(java.lang.String, java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,_,null-&gt;!null;_,null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -945,7 +975,7 @@
   </item>
   <item name="java.text.SimpleDateFormat java.lang.StringBuffer format(java.util.Date, java.lang.StringBuffer, java.text.FieldPosition)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,!null,_-&gt;!null;_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="java.text.SimpleDateFormat java.lang.StringBuffer format(java.util.Date, java.lang.StringBuffer, java.text.Format.FieldDelegate) 0">
@@ -953,7 +983,7 @@
   </item>
   <item name="java.text.SimpleDateFormat java.lang.StringBuffer format(java.util.Date, java.lang.StringBuffer, java.text.Format.FieldDelegate)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,!null,_-&gt;!null;_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="java.text.SimpleDateFormat java.text.AttributedCharacterIterator formatToCharacterIterator(java.lang.Object) 0">

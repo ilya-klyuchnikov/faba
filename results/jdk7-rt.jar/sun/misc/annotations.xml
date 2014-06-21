@@ -91,7 +91,7 @@
   </item>
   <item name="sun.misc.Cleaner sun.misc.Cleaner add(sun.misc.Cleaner)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="sun.misc.Cleaner sun.misc.Cleaner create(java.lang.Object, java.lang.Runnable)">
@@ -104,6 +104,11 @@
   </item>
   <item name="sun.misc.ExtensionDependency boolean checkExtensionAgainst(java.lang.String, java.util.jar.Attributes, java.io.File) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.misc.ExtensionDependency boolean checkExtensions(java.util.jar.JarFile)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="sun.misc.ExtensionDependency boolean installExtension(sun.misc.ExtensionInfo, sun.misc.ExtensionInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -149,6 +154,11 @@
   </item>
   <item name="sun.misc.FDBigInt FDBigInt(sun.misc.FDBigInt) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.misc.FDBigInt boolean dataInRangeIsZero(int, int, sun.misc.FDBigInt)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;true&quot;"/>
+    </annotation>
   </item>
   <item name="sun.misc.FDBigInt int cmp(sun.misc.FDBigInt) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -210,6 +220,11 @@
   <item name="sun.misc.FloatingDecimal sun.misc.FDBigInt doubleToBigInt(double)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.misc.FloatingDecimal sun.misc.FDBigInt multPow52(sun.misc.FDBigInt, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.misc.FloatingDecimal sun.misc.FloatingDecimal parseHexString(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
@@ -236,6 +251,11 @@
   </item>
   <item name="sun.misc.FormattedFloatingDecimal sun.misc.FDBigInt doubleToBigInt(double)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.misc.FormattedFloatingDecimal sun.misc.FDBigInt multPow52(sun.misc.FDBigInt, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.misc.FormattedFloatingDecimal.1 java.lang.Object initialValue()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -293,6 +313,16 @@
   </item>
   <item name="sun.misc.JarFilter boolean accept(java.io.File, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.misc.JarIndex sun.misc.JarIndex getJarIndex(java.util.jar.JarFile)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.misc.JarIndex sun.misc.JarIndex getJarIndex(java.util.jar.JarFile, sun.misc.MetaIndex)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.misc.JarIndex void add(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -423,7 +453,7 @@
   </item>
   <item name="sun.misc.MessageUtils java.lang.String subst(java.lang.String, java.lang.String[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -457,6 +487,11 @@
   <item name="sun.misc.MetaIndex MetaIndex(java.util.List&lt;java.lang.String&gt;, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.misc.MetaIndex boolean mayContain(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.misc.NativeSignalHandler void handle(sun.misc.Signal) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -468,6 +503,11 @@
   </item>
   <item name="sun.misc.PathPermissions java.util.Enumeration&lt;java.security.Permission&gt; elements()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.misc.Perf byte[] getBytes(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.misc.Perf java.nio.ByteBuffer attach(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -872,6 +912,11 @@
   <item name="sun.misc.Sort void swap(java.lang.Object[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.misc.TimerThread boolean dequeue(sun.misc.Timer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.misc.TimerThread void enqueue(sun.misc.Timer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -940,6 +985,11 @@
   <item name="sun.misc.URLClassPath.FileLoader FileLoader(java.net.URL) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.misc.URLClassPath.FileLoader sun.misc.Resource getResource(java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.misc.URLClassPath.FileLoader.1 java.io.InputStream getInputStream()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -983,7 +1033,7 @@
   </item>
   <item name="sun.misc.URLClassPath.JarLoader java.util.jar.JarFile checkJar(java.util.jar.JarFile)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="sun.misc.URLClassPath.JarLoader java.util.jar.JarFile getJarFile(java.net.URL) 0">
@@ -1002,6 +1052,11 @@
   </item>
   <item name="sun.misc.URLClassPath.JarLoader sun.misc.MetaIndex access$800(sun.misc.URLClassPath.JarLoader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.misc.URLClassPath.JarLoader sun.misc.Resource getResource(java.lang.String, boolean, java.util.Set&lt;java.lang.String&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.misc.URLClassPath.JarLoader.3 sun.misc.URLClassPath.JarLoader run()">
     <annotation name="org.jetbrains.annotations.NotNull"/>

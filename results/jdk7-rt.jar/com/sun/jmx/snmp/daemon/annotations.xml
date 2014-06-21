@@ -209,6 +209,11 @@
   <item name="com.sun.jmx.snmp.daemon.SnmpMibTree.TreeNode com.sun.jmx.snmp.daemon.SnmpMibTree.TreeNode retrieveMatchingBranch(long[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpMibTree.TreeNode com.sun.jmx.snmp.daemon.SnmpMibTree.TreeNode retrieveMatchingBranch(long[], int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpMibTree.TreeNode void access$200(com.sun.jmx.snmp.daemon.SnmpMibTree.TreeNode, long[], int, com.sun.jmx.snmp.agent.SnmpMibAgent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -333,6 +338,11 @@
       <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler java.net.DatagramPacket makeResponsePacket(java.net.DatagramPacket)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler void splitRequest(com.sun.jmx.snmp.SnmpPduRequest) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -374,7 +384,7 @@
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpSubBulkRequestHandler com.sun.jmx.snmp.SnmpVarBind findVarBind(com.sun.jmx.snmp.SnmpVarBind, com.sun.jmx.snmp.SnmpVarBind)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
+      <val val="&quot;_,null-&gt;null;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpSubBulkRequestHandler void init(com.sun.jmx.snmp.daemon.SnmpAdaptorServer, com.sun.jmx.snmp.SnmpPdu, int, int, int) 1">

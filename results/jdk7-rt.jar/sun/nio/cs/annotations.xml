@@ -20,6 +20,16 @@
   <item name="sun.nio.cs.CharsetMapping boolean isCompositeBase(sun.nio.cs.CharsetMapping.Entry) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.cs.CharsetMapping boolean readNBytes(java.io.InputStream, byte[], int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.cs.CharsetMapping char[] decodeComposite(sun.nio.cs.CharsetMapping.Entry, char[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.nio.cs.CharsetMapping char[] decodeSurrogate(int, char[])">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,null-&gt;null&quot;"/>
@@ -33,6 +43,11 @@
   </item>
   <item name="sun.nio.cs.CharsetMapping int findComp(sun.nio.cs.CharsetMapping.Entry[], sun.nio.cs.CharsetMapping.Entry) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.cs.CharsetMapping sun.nio.cs.CharsetMapping load(java.io.InputStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.nio.cs.CharsetMapping.2 int compare(java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -626,6 +641,11 @@
   <item name="sun.nio.cs.StreamDecoder int read(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.cs.StreamDecoder java.nio.channels.FileChannel getChannel(java.io.FileInputStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.nio.cs.StreamDecoder sun.nio.cs.StreamDecoder forDecoder(java.nio.channels.ReadableByteChannel, java.nio.charset.CharsetDecoder, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -736,7 +756,7 @@
   </item>
   <item name="sun.nio.cs.ThreadLocalCoders.1 boolean hasName(java.lang.Object, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false&quot;"/>
+      <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="sun.nio.cs.ThreadLocalCoders.1 java.lang.Object create(java.lang.Object)">
@@ -746,7 +766,7 @@
   </item>
   <item name="sun.nio.cs.ThreadLocalCoders.2 boolean hasName(java.lang.Object, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false&quot;"/>
+      <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="sun.nio.cs.ThreadLocalCoders.2 java.lang.Object create(java.lang.Object)">

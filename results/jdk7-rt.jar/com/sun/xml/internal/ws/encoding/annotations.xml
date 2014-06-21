@@ -17,7 +17,7 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.HeaderTokenizer java.lang.String filterToken(java.lang.String, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -86,6 +86,16 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.MtomCodec com.sun.xml.internal.ws.api.pipe.ContentType encode(com.sun.xml.internal.ws.api.message.Packet, java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.MtomCodec com.sun.xml.internal.ws.api.pipe.ContentType getContentType(com.sun.xml.internal.ws.api.message.Packet)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.MtomCodec com.sun.xml.internal.ws.api.pipe.ContentType getStaticContentType(com.sun.xml.internal.ws.api.message.Packet)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.MtomCodec com.sun.xml.internal.ws.encoding.MtomCodec copy()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -241,7 +251,7 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.SOAPBindingCodec.AcceptContentType com.sun.xml.internal.ws.encoding.SOAPBindingCodec.AcceptContentType set(com.sun.xml.internal.ws.api.message.Packet, com.sun.xml.internal.ws.api.pipe.ContentType)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -293,6 +303,11 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.StreamSOAPCodec boolean isContentTypeSupported(java.lang.String, java.util.List&lt;java.lang.String&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.StreamSOAPCodec boolean isContentTypeSupported(java.lang.String, java.util.List&lt;java.lang.String&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.StreamSOAPCodec com.sun.xml.internal.stream.buffer.MutableXMLStreamBuffer createXMLStreamBuffer()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -435,7 +450,7 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.XMLHTTPBindingCodec com.sun.xml.internal.ws.api.pipe.ContentType encode(com.sun.xml.internal.ws.encoding.xml.XMLMessage.MessageDataSource, java.io.OutputStream)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -450,7 +465,7 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.XMLHTTPBindingCodec javax.activation.DataSource transformDataSource(javax.activation.DataSource, boolean, boolean, com.sun.xml.internal.ws.api.WSBinding)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_,_-&gt;!null;null,_,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.XMLHTTPBindingCodec void decode(java.io.InputStream, java.lang.String, com.sun.xml.internal.ws.api.message.Packet) 2">

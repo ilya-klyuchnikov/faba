@@ -286,6 +286,11 @@
   <item name="com.sun.xml.internal.bind.v2.model.impl.MapPropertyInfoImpl java.util.Collection&lt;? extends com.sun.xml.internal.bind.v2.model.core.TypeInfo&lt;T,C&gt;&gt; ref()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.model.impl.ModelBuilder C loadObjectFactory(com.sun.xml.internal.bind.v2.model.impl.ClassInfoImpl&lt;T,C,F,M&gt;, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.model.impl.ModelBuilder ModelBuilder(com.sun.xml.internal.bind.v2.model.annotation.AnnotationReader&lt;T,C,F,M&gt;, com.sun.xml.internal.bind.v2.model.nav.Navigator&lt;T,C,F,M&gt;, java.util.Map&lt;C,C&gt;, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -336,7 +341,7 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.impl.PropertyInfoImpl boolean isApplicable(javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter, T)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;false&quot;"/>
+      <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.impl.PropertyInfoImpl int compareTo(com.sun.xml.internal.bind.v2.model.impl.PropertyInfoImpl) 0">
@@ -392,6 +397,11 @@
   <item name="com.sun.xml.internal.bind.v2.model.impl.ReferencePropertyInfoImpl boolean addGenericElement(javax.xml.bind.annotation.XmlElementRef, com.sun.xml.internal.bind.v2.model.impl.ReferencePropertyInfoImpl&lt;T,C,F,M&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;true;_,!null-&gt;true&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.model.impl.ReferencePropertyInfoImpl boolean isRequired(javax.xml.bind.annotation.XmlElementRef)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.impl.ReferencePropertyInfoImpl java.lang.String getEffectiveNamespaceFor(javax.xml.bind.annotation.XmlElementRef) 0">
@@ -547,14 +557,39 @@
   <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.12 12(java.lang.Class, javax.xml.namespace.QName...) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.12 java.lang.CharSequence print(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.12 java.lang.Object parse(java.lang.CharSequence)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.12 java.lang.String format(java.lang.String, javax.xml.datatype.XMLGregorianCalendar) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.12 java.lang.String format(java.lang.String, javax.xml.datatype.XMLGregorianCalendar)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.12 java.lang.String print(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.12 java.lang.String print(javax.xml.datatype.XMLGregorianCalendar)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.12 javax.xml.datatype.XMLGregorianCalendar parse(java.lang.CharSequence)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.12 javax.xml.namespace.QName getTypeName(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -932,11 +967,21 @@
   <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.23 java.lang.CharSequence print(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.23 java.lang.Object parse(java.lang.CharSequence)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.23 java.lang.String print(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.23 java.lang.String print(javax.xml.namespace.QName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.23 javax.xml.namespace.QName parse(java.lang.CharSequence)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.23 void declareNamespace(java.lang.Object, com.sun.xml.internal.bind.v2.runtime.XMLSerializer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -956,11 +1001,21 @@
   <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.24 java.lang.CharSequence print(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.24 java.lang.Object parse(java.lang.CharSequence)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.24 java.lang.String print(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.24 java.lang.String print(java.net.URI) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.24 java.net.URI parse(java.lang.CharSequence)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.25 25(java.lang.Class, javax.xml.namespace.QName...) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1113,11 +1168,21 @@
   <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.7 java.lang.CharSequence print(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.7 java.lang.Object parse(java.lang.CharSequence)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.7 java.lang.String print(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.7 java.lang.String print(java.net.URI) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.7 java.net.URI parse(java.lang.CharSequence)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.impl.RuntimeBuiltinLeafInfoImpl.8 8(java.lang.Class, javax.xml.namespace.QName...) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1455,6 +1520,11 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.impl.Util javax.xml.namespace.QName calcSchemaType(com.sun.xml.internal.bind.v2.model.annotation.AnnotationReader&lt;T,C,F,M&gt;, com.sun.xml.internal.bind.v2.model.annotation.AnnotationSource, C, T, com.sun.xml.internal.bind.v2.model.annotation.Locatable) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.model.impl.Util javax.xml.namespace.QName calcSchemaType(com.sun.xml.internal.bind.v2.model.annotation.AnnotationReader&lt;T,C,F,M&gt;, com.sun.xml.internal.bind.v2.model.annotation.AnnotationSource, C, T, com.sun.xml.internal.bind.v2.model.annotation.Locatable)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_,_-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.impl.ValuePropertyInfoImpl ValuePropertyInfoImpl(com.sun.xml.internal.bind.v2.model.impl.ClassInfoImpl&lt;TypeT,ClassDeclT,FieldT,MethodT&gt;, com.sun.xml.internal.bind.v2.model.impl.PropertySeed&lt;TypeT,ClassDeclT,FieldT,MethodT&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

@@ -80,9 +80,19 @@
   <item name="sun.reflect.Reflection boolean isSameClassPackage(java.lang.Class, java.lang.Class) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.reflect.Reflection boolean isSameClassPackage(java.lang.ClassLoader, java.lang.String, java.lang.ClassLoader, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,null-&gt;false;_,null,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.reflect.Reflection boolean isSubclassOf(java.lang.Class, java.lang.Class)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.reflect.Reflection java.lang.reflect.Member[] filter(java.lang.reflect.Member[], java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="sun.reflect.Reflection java.util.Map&lt;java.lang.Class,java.lang.String[]&gt; registerFilter(java.util.Map&lt;java.lang.Class,java.lang.String[]&gt;, java.lang.Class, java.lang.String...) 0">
@@ -124,6 +134,11 @@
       <val val="&quot;!null,_-&gt;!null;_,false-&gt;!null;_,true-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.reflect.ReflectionFactory sun.reflect.MethodAccessor newMethodAccessor(java.lang.reflect.Method)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.reflect.SignatureIterator java.lang.String returnType()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -196,7 +211,7 @@
   </item>
   <item name="sun.reflect.UnsafeFieldAccessorImpl java.lang.String getSetMessage(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>

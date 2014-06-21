@@ -2,6 +2,11 @@
   <item name="sun.invoke.util.BytecodeDescriptor java.lang.Class&lt;?&gt; parseSig(java.lang.String, int[], int, java.lang.ClassLoader) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.invoke.util.BytecodeDescriptor java.lang.Class&lt;?&gt; parseSig(java.lang.String, int[], int, java.lang.ClassLoader)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.invoke.util.BytecodeDescriptor java.lang.String unparse(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -36,6 +41,11 @@
       <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.invoke.util.BytecodeDescriptor java.util.List&lt;java.lang.Class&lt;?&gt;&gt; parseMethod(java.lang.String, int, int, java.lang.ClassLoader)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.invoke.util.BytecodeDescriptor java.util.List&lt;java.lang.Class&lt;?&gt;&gt; parseMethod(java.lang.String, java.lang.ClassLoader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -99,7 +109,7 @@
   </item>
   <item name="sun.invoke.util.BytecodeName java.lang.String toSourceName(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="sun.invoke.util.BytecodeName java.lang.String unparseBytecodeName(java.lang.Object[]) 0">
@@ -125,7 +135,7 @@
   </item>
   <item name="sun.invoke.util.ValueConversions boolean assertCorrectArity(java.lang.invoke.MethodHandle, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;true&quot;"/>
+      <val val="&quot;!null,_-&gt;true;null,_-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.invoke.util.ValueConversions boolean identity(boolean)">
@@ -437,8 +447,28 @@
   <item name="sun.invoke.util.VerifyAccess boolean classLoaderIsAncestor(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.invoke.util.VerifyAccess boolean isClassAccessible(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.invoke.util.VerifyAccess boolean isPublicSuperClass(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.invoke.util.VerifyAccess boolean isRelatedClass(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;true;null,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.invoke.util.VerifyAccess boolean isSamePackage(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;true;null,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.invoke.util.VerifyAccess boolean isTypeVisible(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;true;null,_-&gt;true&quot;"/>
+    </annotation>
   </item>
   <item name="sun.invoke.util.VerifyAccess boolean isTypeVisible(java.lang.invoke.MethodType, java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -459,6 +489,16 @@
       <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.invoke.util.VerifyType boolean isNullConversion(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;true;null,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.invoke.util.VerifyType boolean isNullConversion(java.lang.invoke.MethodType, java.lang.invoke.MethodType)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;true;null,_-&gt;true&quot;"/>
+    </annotation>
   </item>
   <item name="sun.invoke.util.VerifyType boolean isNullReferenceConversion(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -498,17 +538,12 @@
   <item name="sun.invoke.util.Wrapper java.lang.Class&lt;T&gt; asPrimitiveType(java.lang.Class&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.invoke.util.Wrapper java.lang.Class&lt;T&gt; asPrimitiveType(java.lang.Class&lt;T&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.invoke.util.Wrapper java.lang.Class&lt;T&gt; asWrapperType(java.lang.Class&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.invoke.util.Wrapper java.lang.Class&lt;T&gt; forceType(java.lang.Class&lt;?&gt;, java.lang.Class&lt;T&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="sun.invoke.util.Wrapper java.lang.ClassCastException newClassCastException(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;)">

@@ -51,9 +51,24 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.media.sound.AbstractMixer boolean isLineSupported(javax.sound.sampled.Line.Info)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.media.sound.AbstractMixer boolean isSourceLine(javax.sound.sampled.Line.Info)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.AbstractMixer boolean isSynchronizationSupported(javax.sound.sampled.Line[], boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;false;_,false-&gt;false;_,true-&gt;false;null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.media.sound.AbstractMixer boolean isTargetLine(javax.sound.sampled.Line.Info)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AbstractMixer javax.sound.sampled.Line.Info getLineInfo(javax.sound.sampled.Line.Info)">
@@ -190,6 +205,11 @@
   <item name="com.sun.media.sound.AlawCodec javax.sound.sampled.AudioFormat[] getTargetFormats(javax.sound.sampled.AudioFormat.Encoding, javax.sound.sampled.AudioFormat) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.media.sound.AlawCodec javax.sound.sampled.AudioFormat[] getTargetFormats(javax.sound.sampled.AudioFormat.Encoding, javax.sound.sampled.AudioFormat)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.AlawCodec javax.sound.sampled.AudioInputStream getAudioInputStream(javax.sound.sampled.AudioFormat, javax.sound.sampled.AudioInputStream) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -319,8 +339,18 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.media.sound.AudioFileSoundbankReader javax.sound.midi.Soundbank getSoundbank(java.io.File)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.AudioFileSoundbankReader javax.sound.midi.Soundbank getSoundbank(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.media.sound.AudioFileSoundbankReader javax.sound.midi.Soundbank getSoundbank(javax.sound.sampled.AudioInputStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter byte[] toByteArray(float[], byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -333,82 +363,82 @@
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion16SB byte[] toByteArray(float[], int, int, byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion16SB float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion16SL byte[] toByteArray(float[], int, int, byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion16SL float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion16UB byte[] toByteArray(float[], int, int, byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion16UB float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion16UL byte[] toByteArray(float[], int, int, byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion16UL float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion24SB byte[] toByteArray(float[], int, int, byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion24SB float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion24SL byte[] toByteArray(float[], int, int, byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion24SL float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion24UB byte[] toByteArray(float[], int, int, byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion24UB float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion24UL byte[] toByteArray(float[], int, int, byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion24UL float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion32B byte[] toByteArray(float[], int, int, byte[], int)">
@@ -433,82 +463,82 @@
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion32SB byte[] toByteArray(float[], int, int, byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion32SB float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion32SL byte[] toByteArray(float[], int, int, byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion32SL float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion32UB byte[] toByteArray(float[], int, int, byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion32UB float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion32UL byte[] toByteArray(float[], int, int, byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion32UL float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion32xSB byte[] toByteArray(float[], int, int, byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion32xSB float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion32xSL byte[] toByteArray(float[], int, int, byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion32xSL float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion32xUB byte[] toByteArray(float[], int, int, byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion32xUB float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion32xUL byte[] toByteArray(float[], int, int, byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion32xUL float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion64B byte[] toByteArray(float[], int, int, byte[], int)">
@@ -518,7 +548,7 @@
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion64B float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion64L byte[] toByteArray(float[], int, int, byte[], int)">
@@ -528,27 +558,27 @@
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion64L float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion8S byte[] toByteArray(float[], int, int, byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion8S float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion8U byte[] toByteArray(float[], int, int, byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,!null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,_,!null,_-&gt;!null;_,_,_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatConversion8U float[] toFloatArray(byte[], int, float[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null,_,_-&gt;!null;_,_,null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatConverter.AudioFloatLSBFilter AudioFloatLSBFilter(com.sun.media.sound.AudioFloatConverter, javax.sound.sampled.AudioFormat) 1">
@@ -560,8 +590,18 @@
   <item name="com.sun.media.sound.AudioFloatFormatConverter boolean isConversionSupported(javax.sound.sampled.AudioFormat, javax.sound.sampled.AudioFormat) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.media.sound.AudioFloatFormatConverter boolean isConversionSupported(javax.sound.sampled.AudioFormat, javax.sound.sampled.AudioFormat)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.AudioFloatFormatConverter boolean isConversionSupported(javax.sound.sampled.AudioFormat.Encoding, javax.sound.sampled.AudioFormat) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.media.sound.AudioFloatFormatConverter boolean isConversionSupported(javax.sound.sampled.AudioFormat.Encoding, javax.sound.sampled.AudioFormat)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatFormatConverter javax.sound.sampled.AudioFormat.Encoding[] getSourceEncodings()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -580,6 +620,11 @@
   </item>
   <item name="com.sun.media.sound.AudioFloatFormatConverter javax.sound.sampled.AudioFormat[] getTargetFormats(javax.sound.sampled.AudioFormat.Encoding, javax.sound.sampled.AudioFormat) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.media.sound.AudioFloatFormatConverter javax.sound.sampled.AudioFormat[] getTargetFormats(javax.sound.sampled.AudioFormat.Encoding, javax.sound.sampled.AudioFormat)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.media.sound.AudioFloatFormatConverter javax.sound.sampled.AudioInputStream getAudioInputStream(javax.sound.sampled.AudioFormat, com.sun.media.sound.AudioFloatInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -648,7 +693,7 @@
   </item>
   <item name="com.sun.media.sound.AudioFloatInputStream com.sun.media.sound.AudioFloatInputStream getInputStream(javax.sound.sampled.AudioFormat, byte[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;!null;_,!null,_,_-&gt;!null;_,null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_,_-&gt;!null;_,!null,_,_-&gt;!null;_,null,_,_-&gt;!null;null,_,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1352,12 +1397,22 @@
   <item name="com.sun.media.sound.FastSysexMessage void setMessage(byte[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.media.sound.JARSoundbankReader boolean isZIP(java.net.URL)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.JARSoundbankReader javax.sound.midi.Soundbank getSoundbank(java.io.File) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.media.sound.JARSoundbankReader javax.sound.midi.Soundbank getSoundbank(java.io.InputStream)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.media.sound.JDK13Services java.lang.String getDefaultProvider(java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.media.sound.JSSecurityManager java.lang.Thread createThread(java.lang.Runnable, java.lang.String, boolean, int, boolean)">
@@ -2387,8 +2442,18 @@
   <item name="com.sun.media.sound.SoftSynthesizer boolean loadInstrument(javax.sound.midi.Instrument) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.media.sound.SoftSynthesizer boolean loadInstruments(java.util.List&lt;com.sun.media.sound.ModelInstrument&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.SoftSynthesizer boolean loadInstruments(javax.sound.midi.Soundbank, javax.sound.midi.Patch[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.media.sound.SoftSynthesizer boolean loadSamples(java.util.List&lt;com.sun.media.sound.ModelInstrument&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;true&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.media.sound.SoftSynthesizer boolean remapInstrument(javax.sound.midi.Instrument, javax.sound.midi.Instrument) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2655,6 +2720,11 @@
   </item>
   <item name="com.sun.media.sound.UlawCodec javax.sound.sampled.AudioFormat[] getOutputFormats(javax.sound.sampled.AudioFormat) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.media.sound.UlawCodec javax.sound.sampled.AudioFormat[] getTargetFormats(javax.sound.sampled.AudioFormat.Encoding, javax.sound.sampled.AudioFormat)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.media.sound.UlawCodec javax.sound.sampled.AudioInputStream getAudioInputStream(javax.sound.sampled.AudioFormat, javax.sound.sampled.AudioInputStream) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>

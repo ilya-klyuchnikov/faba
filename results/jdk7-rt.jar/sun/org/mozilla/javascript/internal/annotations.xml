@@ -391,7 +391,7 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.Decompiler java.lang.String decompile(java.lang.String, int, sun.org.mozilla.javascript.internal.UintMap)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,_,!null-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,_,!null-&gt;!null;_,_,null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -521,7 +521,7 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.IRFactory sun.org.mozilla.javascript.internal.Node createFor(sun.org.mozilla.javascript.internal.ast.Scope, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_,_-&gt;!null;_,_,_,null,_-&gt;!null;_,_,null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_,_,_-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.IRFactory sun.org.mozilla.javascript.internal.Node createForIn(int, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node, boolean) 2">
@@ -1164,7 +1164,7 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.Interpreter sun.org.mozilla.javascript.internal.Interpreter.CallFrame initFrameForNoSuchMethod(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Interpreter.CallFrame, int, java.lang.Object[], double[], int, int, sun.org.mozilla.javascript.internal.Scriptable, sun.org.mozilla.javascript.internal.Scriptable, sun.org.mozilla.javascript.internal.ScriptRuntime.NoSuchMethodShim, sun.org.mozilla.javascript.internal.InterpretedFunction)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_,_,_,_,_,_,_,_-&gt;!null;_,!null,_,_,_,_,_,_,_,_,_-&gt;!null;_,_,_,!null,_,_,_,_,_,_,_-&gt;!null;_,_,_,_,!null,_,_,_,_,_,_-&gt;!null;_,_,_,_,_,_,_,!null,_,_,_-&gt;!null;_,_,_,_,_,_,_,_,!null,_,_-&gt;!null;_,_,_,_,_,_,_,_,_,!null,_-&gt;!null;_,_,_,_,_,_,_,_,_,_,!null-&gt;!null;_,_,_,_,_,_,_,_,_,_,null-&gt;!null;_,_,_,_,_,_,_,_,null,_,_-&gt;!null;_,_,_,_,_,_,_,null,_,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_,_,_,_,_,_,_,_,_-&gt;!null;_,!null,_,_,_,_,_,_,_,_,_-&gt;!null;_,_,_,!null,_,_,_,_,_,_,_-&gt;!null;_,_,_,_,!null,_,_,_,_,_,_-&gt;!null;_,_,_,_,_,_,_,!null,_,_,_-&gt;!null;_,_,_,_,_,_,_,_,!null,_,_-&gt;!null;_,_,_,_,_,_,_,_,_,!null,_-&gt;!null;_,_,_,_,_,_,_,_,_,_,!null-&gt;!null;_,_,_,_,_,_,_,_,_,_,null-&gt;!null;_,_,_,_,_,_,_,_,null,_,_-&gt;!null;_,_,_,_,_,_,_,null,_,_,_-&gt;!null;_,_,_,_,null,_,_,_,_,_,_-&gt;!null;_,_,_,null,_,_,_,_,_,_,_-&gt;!null;_,null,_,_,_,_,_,_,_,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1249,6 +1249,11 @@
   <item name="sun.org.mozilla.javascript.internal.JavaMembers sun.org.mozilla.javascript.internal.MemberBox extractGetMethod(sun.org.mozilla.javascript.internal.MemberBox[], boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.JavaMembers sun.org.mozilla.javascript.internal.MemberBox extractSetMethod(java.lang.Class&lt;?&gt;, sun.org.mozilla.javascript.internal.MemberBox[], boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.JavaMembers sun.org.mozilla.javascript.internal.MemberBox extractSetMethod(sun.org.mozilla.javascript.internal.MemberBox[], boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1278,12 +1283,22 @@
   <item name="sun.org.mozilla.javascript.internal.Kit byte[] readStream(java.io.InputStream, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.Kit java.lang.Class&lt;?&gt; classOrNull(java.lang.ClassLoader, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.Kit java.lang.Object addListener(java.lang.Object, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Kit java.lang.Object addListener(java.lang.Object, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Kit java.lang.Object getListener(java.lang.Object, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Kit java.lang.Object initHash(java.util.Map&lt;java.lang.Object,java.lang.Object&gt;, java.lang.Object, java.lang.Object) 0">
@@ -1300,6 +1315,11 @@
       <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Kit java.lang.Object newInstanceOrNull(java.lang.Class&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Kit java.lang.Object removeListener(java.lang.Object, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1404,7 +1424,7 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeArray java.lang.Object jsConstructor(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable, java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,null,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1608,7 +1628,7 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeDate java.lang.String date_format(sun.org.mozilla.javascript.internal.Context, double, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1810,6 +1830,11 @@
   <item name="sun.org.mozilla.javascript.internal.NativeJSON java.lang.Object execIdCall(sun.org.mozilla.javascript.internal.IdFunctionObject, sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable, sun.org.mozilla.javascript.internal.Scriptable, java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeJSON java.lang.Object execIdCall(sun.org.mozilla.javascript.internal.IdFunctionObject, sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable, sun.org.mozilla.javascript.internal.Scriptable, java.lang.Object[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,_,null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.NativeJSON java.lang.Object parse(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable, java.lang.String, sun.org.mozilla.javascript.internal.Callable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1854,7 +1879,7 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeJSON java.lang.String jo(sun.org.mozilla.javascript.internal.Scriptable, sun.org.mozilla.javascript.internal.NativeJSON.StringifyState)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2185,7 +2210,7 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeString java.lang.String js_concat(java.lang.String, java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeString java.lang.String js_slice(java.lang.String, java.lang.Object[]) 1">
@@ -2193,7 +2218,7 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeString java.lang.String js_slice(java.lang.String, java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeString java.lang.String js_substr(java.lang.String, java.lang.Object[]) 1">
@@ -2201,7 +2226,7 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeString java.lang.String js_substr(java.lang.String, java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeString java.lang.String js_substring(sun.org.mozilla.javascript.internal.Context, java.lang.String, java.lang.Object[]) 1">
@@ -2212,7 +2237,7 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeString java.lang.String js_substring(sun.org.mozilla.javascript.internal.Context, java.lang.String, java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2553,7 +2578,7 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.Parser sun.org.mozilla.javascript.internal.ast.AstNode propertyAccess(int, sun.org.mozilla.javascript.internal.ast.AstNode)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null&quot;"/>
+      <val val="&quot;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2620,7 +2645,7 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.Parser sun.org.mozilla.javascript.internal.ast.ObjectProperty plainProperty(sun.org.mozilla.javascript.internal.ast.AstNode, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2748,6 +2773,11 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime boolean isVisible(sun.org.mozilla.javascript.internal.Context, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ScriptRuntime boolean isVisible(sun.org.mozilla.javascript.internal.Context, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;true&quot;"/>
+    </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime boolean jsDelegatesTo(sun.org.mozilla.javascript.internal.Scriptable, sun.org.mozilla.javascript.internal.Scriptable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3020,7 +3050,7 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime java.lang.String defaultObjectToSource(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable, sun.org.mozilla.javascript.internal.Scriptable, java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;!null;_,!null,_,_-&gt;!null;_,_,!null,_-&gt;!null;_,_,_,!null-&gt;!null;_,_,_,null-&gt;!null;_,null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_,_-&gt;!null;_,!null,_,_-&gt;!null;_,_,!null,_-&gt;!null;_,_,_,!null-&gt;!null;_,_,_,null-&gt;!null;_,_,null,_-&gt;!null;_,null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3225,6 +3255,11 @@
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime sun.org.mozilla.javascript.internal.Scriptable bind(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ScriptRuntime sun.org.mozilla.javascript.internal.Scriptable checkDynamicScope(sun.org.mozilla.javascript.internal.Scriptable, sun.org.mozilla.javascript.internal.Scriptable)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime sun.org.mozilla.javascript.internal.Scriptable createFunctionActivation(sun.org.mozilla.javascript.internal.NativeFunction, sun.org.mozilla.javascript.internal.Scriptable, java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3260,7 +3295,7 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime sun.org.mozilla.javascript.internal.Scriptable newCatchScope(java.lang.Throwable, sun.org.mozilla.javascript.internal.Scriptable, java.lang.String, sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_,_-&gt;!null;_,!null,_,_,_-&gt;!null;_,_,!null,_,_-&gt;!null;_,_,_,!null,_-&gt;!null;_,_,_,_,!null-&gt;!null;_,_,_,_,null-&gt;!null;_,_,null,_,_-&gt;!null;_,null,_,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_,_,_-&gt;!null;_,!null,_,_,_-&gt;!null;_,_,!null,_,_-&gt;!null;_,_,_,!null,_-&gt;!null;_,_,_,_,!null-&gt;!null;_,_,_,_,null-&gt;!null;_,_,_,null,_-&gt;!null;_,_,null,_,_-&gt;!null;_,null,_,_,_-&gt;!null;null,_,_,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3488,6 +3523,11 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptableObject java.lang.reflect.Method findSetterMethod(java.lang.reflect.Method[], java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ScriptableObject sun.org.mozilla.javascript.internal.BaseFunction buildClassCtor(sun.org.mozilla.javascript.internal.Scriptable, java.lang.Class&lt;T&gt;, boolean, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_,_-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptableObject sun.org.mozilla.javascript.internal.Scriptable ensureScriptable(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

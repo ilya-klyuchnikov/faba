@@ -63,6 +63,11 @@
   <item name="sun.util.locale.InternalLocaleBuilder int checkVariants(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.util.locale.InternalLocaleBuilder java.lang.String removePrivateuseVariant(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.util.locale.InternalLocaleBuilder sun.util.locale.InternalLocaleBuilder addUnicodeLocaleAttribute(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -86,6 +91,21 @@
       <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.util.locale.InternalLocaleBuilder sun.util.locale.InternalLocaleBuilder setExtension(char, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.util.locale.InternalLocaleBuilder sun.util.locale.InternalLocaleBuilder setExtensions(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.util.locale.InternalLocaleBuilder sun.util.locale.InternalLocaleBuilder setExtensions(java.util.List&lt;java.lang.String&gt;, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.util.locale.InternalLocaleBuilder sun.util.locale.InternalLocaleBuilder setLanguage(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -121,7 +141,7 @@
   </item>
   <item name="sun.util.locale.InternalLocaleBuilder sun.util.locale.InternalLocaleBuilder setVariant(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -164,23 +184,58 @@
   <item name="sun.util.locale.LanguageTag boolean parseExtensions(sun.util.locale.StringTokenIterator, sun.util.locale.ParseStatus) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.util.locale.LanguageTag boolean parseExtensions(sun.util.locale.StringTokenIterator, sun.util.locale.ParseStatus)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.util.locale.LanguageTag boolean parseExtlangs(sun.util.locale.StringTokenIterator, sun.util.locale.ParseStatus) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.util.locale.LanguageTag boolean parseExtlangs(sun.util.locale.StringTokenIterator, sun.util.locale.ParseStatus)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="sun.util.locale.LanguageTag boolean parseLanguage(sun.util.locale.StringTokenIterator, sun.util.locale.ParseStatus) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.util.locale.LanguageTag boolean parseLanguage(sun.util.locale.StringTokenIterator, sun.util.locale.ParseStatus)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.util.locale.LanguageTag boolean parsePrivateuse(sun.util.locale.StringTokenIterator, sun.util.locale.ParseStatus) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.util.locale.LanguageTag boolean parsePrivateuse(sun.util.locale.StringTokenIterator, sun.util.locale.ParseStatus)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="sun.util.locale.LanguageTag boolean parseRegion(sun.util.locale.StringTokenIterator, sun.util.locale.ParseStatus) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.util.locale.LanguageTag boolean parseRegion(sun.util.locale.StringTokenIterator, sun.util.locale.ParseStatus)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.util.locale.LanguageTag boolean parseScript(sun.util.locale.StringTokenIterator, sun.util.locale.ParseStatus) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.util.locale.LanguageTag boolean parseScript(sun.util.locale.StringTokenIterator, sun.util.locale.ParseStatus)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.util.locale.LanguageTag boolean parseVariants(sun.util.locale.StringTokenIterator, sun.util.locale.ParseStatus) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.util.locale.LanguageTag boolean parseVariants(sun.util.locale.StringTokenIterator, sun.util.locale.ParseStatus)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="sun.util.locale.LanguageTag java.lang.String canonicalizeExtension(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -298,6 +353,11 @@
   <item name="sun.util.locale.LocaleObjectCache K normalizeKey(K)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.util.locale.LocaleUtils boolean caseIgnoreMatch(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;true;null,_-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.util.locale.LocaleUtils boolean isAlphaNumericString(java.lang.String) 0">

@@ -37,6 +37,11 @@
   <item name="sun.security.krb5.Config java.lang.String findMacosConfigFile()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.Config java.lang.String getDefault(java.lang.String, java.util.Hashtable)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.security.krb5.Config java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -154,7 +159,7 @@
   </item>
   <item name="sun.security.krb5.EncryptionKey sun.security.krb5.EncryptionKey acquireSecretKey(sun.security.krb5.PrincipalName, char[], int, sun.security.krb5.internal.PAData.SaltAndParams)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;!null;_,!null,_,_-&gt;!null;_,_,_,!null-&gt;!null;_,_,_,null-&gt;!null;_,null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_,_-&gt;!null;_,!null,_,_-&gt;!null;_,_,_,!null-&gt;!null;_,_,_,null-&gt;!null;_,null,_,_-&gt;!null;null,_,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -190,7 +195,7 @@
   </item>
   <item name="sun.security.krb5.KdcComm byte[] send(byte[], java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_-&gt;null&quot;"/>
+      <val val="&quot;_,null,_-&gt;null;null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="sun.security.krb5.KdcComm.KdcAccessibility java.lang.String[] access$100(java.lang.String) 0">
@@ -453,6 +458,11 @@
   <item name="sun.security.krb5.PrincipalName boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.security.krb5.PrincipalName boolean equalsWithoutRealm(sun.security.krb5.PrincipalName)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.security.krb5.PrincipalName boolean match(sun.security.krb5.PrincipalName) 0">

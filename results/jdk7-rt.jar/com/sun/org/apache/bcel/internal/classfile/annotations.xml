@@ -49,13 +49,13 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.CodeException java.lang.String toString(com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.CodeException java.lang.String toString(com.sun.org.apache.bcel.internal.classfile.ConstantPool, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,false-&gt;!null;_,true-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,false-&gt;!null;_,true-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -521,6 +521,16 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass boolean implementationOf(com.sun.org.apache.bcel.internal.classfile.JavaClass) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass boolean instanceOf(com.sun.org.apache.bcel.internal.classfile.JavaClass)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;true&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass com.sun.org.apache.bcel.internal.classfile.Method getMethod(java.lang.reflect.Method)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass java.lang.String indent(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -819,7 +829,7 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Utility java.lang.String codeToString(com.sun.org.apache.bcel.internal.util.ByteSequence, com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -828,7 +838,7 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Utility java.lang.String codeToString(com.sun.org.apache.bcel.internal.util.ByteSequence, com.sun.org.apache.bcel.internal.classfile.ConstantPool, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,false-&gt;!null;_,_,true-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,false-&gt;!null;_,_,true-&gt;!null;_,null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -948,7 +958,7 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Utility java.lang.String replace(java.lang.String, java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Utility java.lang.String signatureToString(java.lang.String) 0">

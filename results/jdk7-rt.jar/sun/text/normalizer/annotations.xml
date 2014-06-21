@@ -76,19 +76,19 @@
   </item>
   <item name="sun.text.normalizer.NormalizerBase java.lang.String compose(java.lang.String, boolean, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,false,_-&gt;!null;_,true,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,false,_-&gt;!null;_,true,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.text.normalizer.NormalizerBase java.lang.String decompose(java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,false-&gt;!null;_,true-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,false-&gt;!null;_,true-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.text.normalizer.NormalizerBase java.lang.String decompose(java.lang.String, boolean, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,false,_-&gt;!null;_,true,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,false,_-&gt;!null;_,true,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -153,7 +153,7 @@
   </item>
   <item name="sun.text.normalizer.NormalizerBase.NFCMode java.lang.String normalize(java.lang.String, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -165,7 +165,7 @@
   </item>
   <item name="sun.text.normalizer.NormalizerBase.NFDMode java.lang.String normalize(java.lang.String, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -177,7 +177,7 @@
   </item>
   <item name="sun.text.normalizer.NormalizerBase.NFKCMode java.lang.String normalize(java.lang.String, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -189,7 +189,7 @@
   </item>
   <item name="sun.text.normalizer.NormalizerBase.NFKDMode java.lang.String normalize(java.lang.String, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -219,6 +219,11 @@
   </item>
   <item name="sun.text.normalizer.NormalizerImpl boolean composeHangul(char, char, long, char[], int[], int, boolean, char[], int, sun.text.normalizer.UnicodeSet) 4">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.text.normalizer.NormalizerImpl boolean composeHangul(char, char, long, char[], int[], int, boolean, char[], int, sun.text.normalizer.UnicodeSet)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,_,_,_,_,null,_,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="sun.text.normalizer.NormalizerImpl boolean nx_contains(sun.text.normalizer.UnicodeSet, char, char)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -453,7 +458,7 @@
   </item>
   <item name="sun.text.normalizer.UnicodeSet sun.text.normalizer.UnicodeSet applyPattern(java.lang.String, java.text.ParsePosition, sun.text.normalizer.SymbolTable, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;!null;_,!null,_,_-&gt;!null;_,_,!null,_-&gt;!null;_,_,null,_-&gt;!null;_,null,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_,_-&gt;!null;_,!null,_,_-&gt;!null;_,_,!null,_-&gt;!null;_,_,null,_-&gt;!null;_,null,_,_-&gt;!null;null,_,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -532,6 +537,16 @@
   <item name="sun.text.normalizer.UnicodeSet void syntaxError(sun.text.normalizer.RuleCharacterIterator, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.text.normalizer.Utility boolean arrayRegionMatches(char[], int, char[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null,_,_-&gt;true;null,_,_,_,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.text.normalizer.Utility boolean escapeUnprintable(java.lang.StringBuffer, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.text.normalizer.Utility int skipWhitespace(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -558,7 +573,7 @@
   </item>
   <item name="sun.text.normalizer.Utility java.lang.StringBuffer appendNumber(java.lang.StringBuffer, int, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_,_-&gt;!null;null,_,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="sun.text.normalizer.Utility java.lang.StringBuffer hex(int, int, java.lang.StringBuffer) 2">
@@ -566,7 +581,7 @@
   </item>
   <item name="sun.text.normalizer.Utility java.lang.StringBuffer hex(int, int, java.lang.StringBuffer)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null-&gt;!null&quot;"/>
+      <val val="&quot;_,_,!null-&gt;!null;_,_,null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="sun.text.normalizer.Utility void recursiveAppendNumber(java.lang.StringBuffer, int, int, int) 0">

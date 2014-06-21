@@ -112,7 +112,7 @@
   </item>
   <item name="sun.net.www.protocol.http.DigestAuthentication java.lang.String encode(java.lang.String, char[], java.security.MessageDigest)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;_,_,!null-&gt;!null;_,null,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -160,6 +160,16 @@
   </item>
   <item name="sun.net.www.protocol.http.HttpURLConnection boolean isExternalMessageHeaderAllowed(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.www.protocol.http.HttpURLConnection boolean isRestrictedHeader(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.net.www.protocol.http.HttpURLConnection java.io.IOException getChainedException(java.io.IOException)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.net.www.protocol.http.HttpURLConnection java.io.InputStream openConnectionCheckRedirects(java.net.URLConnection) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -215,6 +225,11 @@
   <item name="sun.net.www.protocol.http.HttpURLConnection.ErrorStream int read(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.www.protocol.http.HttpURLConnection.ErrorStream java.io.InputStream getErrorStream(java.io.InputStream, long, sun.net.www.http.HttpClient)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.net.www.protocol.http.HttpURLConnection.HttpInputStream int read(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -231,5 +246,10 @@
   </item>
   <item name="sun.net.www.protocol.http.NegotiateAuthentication boolean isSupported(sun.net.www.protocol.http.HttpCallerInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.www.protocol.http.NegotiateAuthentication boolean setHeaders(sun.net.www.protocol.http.HttpURLConnection, sun.net.www.HeaderParser, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;false;null,_,_-&gt;false&quot;"/>
+    </annotation>
   </item>
 </root>

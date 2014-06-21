@@ -14,6 +14,11 @@
   <item name="com.sun.org.apache.xerces.internal.impl.XML11DTDScannerImpl XML11DTDScannerImpl(com.sun.org.apache.xerces.internal.util.SymbolTable, com.sun.org.apache.xerces.internal.impl.XMLErrorReporter, com.sun.org.apache.xerces.internal.impl.XMLEntityManager) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XML11DTDScannerImpl boolean scanPubidLiteral(com.sun.org.apache.xerces.internal.xni.XMLString)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XML11DTDScannerImpl boolean versionSupported(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -31,6 +36,16 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XML11DocumentScannerImpl boolean scanAttributeValue(com.sun.org.apache.xerces.internal.xni.XMLString, com.sun.org.apache.xerces.internal.xni.XMLString, java.lang.String, boolean, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XML11DocumentScannerImpl boolean scanAttributeValue(com.sun.org.apache.xerces.internal.xni.XMLString, com.sun.org.apache.xerces.internal.xni.XMLString, java.lang.String, boolean, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XML11DocumentScannerImpl boolean scanPubidLiteral(com.sun.org.apache.xerces.internal.xni.XMLString)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XML11DocumentScannerImpl boolean versionSupported(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -55,6 +70,11 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XML11EntityScanner boolean scanData(java.lang.String, com.sun.org.apache.xerces.internal.util.XMLStringBuffer) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XML11EntityScanner boolean scanQName(com.sun.org.apache.xerces.internal.xni.QName)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XML11EntityScanner boolean skipString(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -123,7 +143,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl boolean scanCDATASection(com.sun.org.apache.xerces.internal.util.XMLStringBuffer, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;true;_,false-&gt;true;_,true-&gt;true&quot;"/>
+      <val val="&quot;!null,_-&gt;true;_,false-&gt;true;_,true-&gt;true;null,_-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl boolean skipQElement(java.lang.String) 0">
@@ -170,6 +190,16 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.Element Element(com.sun.org.apache.xerces.internal.xni.QName, com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.Element) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.ElementStack boolean matchElement(com.sun.org.apache.xerces.internal.xni.QName)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.ElementStack2 boolean matchElement(com.sun.org.apache.xerces.internal.xni.QName)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.Driver createContentDriver()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -279,6 +309,11 @@
   <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityScanner boolean scanData(java.lang.String, com.sun.org.apache.xerces.internal.util.XMLStringBuffer) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityScanner boolean scanQName(com.sun.org.apache.xerces.internal.xni.QName)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityScanner boolean skipString(char[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -299,7 +334,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityScanner java.lang.Object[] getEncodingName(byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -350,6 +385,16 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLNamespaceBinder void setProperty(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLScanner boolean scanPubidLiteral(com.sun.org.apache.xerces.internal.xni.XMLString)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLScanner boolean scanSurrogates(com.sun.org.apache.xerces.internal.util.XMLStringBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLScanner boolean versionSupported(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

@@ -20,6 +20,11 @@
   <item name="sun.awt.datatransfer.ClipboardTransferable ClipboardTransferable(sun.awt.datatransfer.SunClipboard) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.datatransfer.ClipboardTransferable boolean fetchOneFlavor(sun.awt.datatransfer.SunClipboard, java.awt.datatransfer.DataFlavor, java.lang.Long, java.util.HashMap)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,null-&gt;false;_,_,null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.awt.datatransfer.DataTransferer boolean access$100(java.io.File)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
@@ -39,6 +44,11 @@
   <item name="sun.awt.datatransfer.DataTransferer boolean isFileInWebstartedCache(java.io.File)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.awt.datatransfer.DataTransferer boolean isFlavorCharsetTextType(java.awt.datatransfer.DataFlavor)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.datatransfer.DataTransferer boolean isFlavorNoncharsetTextType(java.awt.datatransfer.DataFlavor) 0">
@@ -61,6 +71,11 @@
   </item>
   <item name="sun.awt.datatransfer.DataTransferer byte[] translateTransferable(java.awt.datatransfer.Transferable, java.awt.datatransfer.DataFlavor, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.datatransfer.DataTransferer byte[] translateTransferable(java.awt.datatransfer.Transferable, java.awt.datatransfer.DataFlavor, long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.awt.datatransfer.DataTransferer byte[] translateTransferableString(java.lang.String, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -148,6 +163,11 @@
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="sun.awt.datatransfer.DataTransferer java.lang.String getTextCharset(java.awt.datatransfer.DataFlavor)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.awt.datatransfer.DataTransferer java.lang.String translateBytesOrStreamToString(java.io.InputStream, byte[], long, java.awt.datatransfer.Transferable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -189,7 +209,7 @@
   </item>
   <item name="sun.awt.datatransfer.DataTransferer java.util.SortedMap getFormatsForFlavors(java.awt.datatransfer.DataFlavor[], java.awt.datatransfer.FlavorTable)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>

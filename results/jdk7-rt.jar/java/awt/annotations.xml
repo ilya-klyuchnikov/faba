@@ -535,6 +535,11 @@
       <val val="&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="java.awt.Component java.awt.Component findUnderMouseInWindow(java.awt.PointerInfo)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.Component java.awt.Component getComponentAt(java.awt.Point) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -805,11 +810,16 @@
   </item>
   <item name="java.awt.Container boolean isRemoveNotifyNeeded(java.awt.Component, java.awt.Container, java.awt.Container)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_-&gt;false&quot;"/>
+      <val val="&quot;_,_,null-&gt;false;_,null,_-&gt;false;null,_,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="java.awt.Container boolean removeDelicately(java.awt.Component, java.awt.Container, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.Container boolean removeDelicately(java.awt.Component, java.awt.Container, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="java.awt.Container java.awt.Component add(java.awt.Component)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -831,11 +841,6 @@
   </item>
   <item name="java.awt.Container java.awt.Component getComponentAt(java.awt.Point) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="java.awt.Container java.awt.Component getMouseEventTarget(int, int, boolean, java.awt.Container.EventTargetFilter, boolean)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,null,_-&gt;null&quot;"/>
-    </annotation>
   </item>
   <item name="java.awt.Container java.lang.String paramString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1072,6 +1077,11 @@
   </item>
   <item name="java.awt.Desktop void print(java.io.File) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.Dialog boolean shouldBlock(java.awt.Window)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="java.awt.Dialog java.lang.String constructComponentName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1693,6 +1703,11 @@
   <item name="java.awt.GridBagLayout boolean calculateBaseline(java.awt.Component, java.awt.GridBagConstraints, java.awt.Dimension) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.GridBagLayout boolean calculateBaseline(java.awt.Component, java.awt.GridBagConstraints, java.awt.Dimension)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;false;null,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.GridBagLayout double[][] getLayoutWeights()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1831,6 +1846,16 @@
   </item>
   <item name="java.awt.JobAttributes void setSides(java.awt.JobAttributes.SidesType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.KeyboardFocusManager boolean isAutoFocusTransferEnabledFor(java.awt.Component)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="java.awt.KeyboardFocusManager java.awt.AWTEvent retargetFocusEvent(java.awt.AWTEvent)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="java.awt.KeyboardFocusManager java.awt.Component getHeavyweight(java.awt.Component)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2593,7 +2618,7 @@
   </item>
   <item name="java.awt.Rectangle java.awt.Rectangle union(java.awt.Rectangle)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3036,6 +3061,11 @@
   </item>
   <item name="java.awt.Window boolean eventEnabled(java.awt.AWTEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.Window boolean postEvent(java.awt.Event)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="java.awt.Window double access$802(java.awt.Window, double) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
