@@ -95,7 +95,7 @@ object XmlUtils {
 
   val REGEX_PATTERN = "(?<=[^\\$\\.])\\${1}(?=[^\\$])".r // disallow .$ or $$
 
-  def toXmlAnnotations(solutions: Iterable[(Key, Value)], extras: Map[Method, MethodExtra]): List[Elem] = {
+  def toXmlAnnotations(solutions: Iterable[(Key, Value)], extras: Map[Method, MethodExtra], debug: Boolean = false): List[Elem] = {
     var annotations = Map[String, List[Elem]]()
     val inOuts = mutable.HashMap[Method, List[(InOut, Value)]]()
     for ((key, value) <- solutions) {
@@ -106,13 +106,13 @@ object XmlUtils {
             s"${annotationKey(method, extras(method))} $paramIndex",
             List(<annotation name='org.jetbrains.annotations.NotNull'/>)
           )
-        case Out if value == Values.NotNull =>
+        case Out if value == Values.NotNull && !debug =>
           val method = key.method
           annotations = annotations.updated(
             annotationKey(method, extras(method)),
             List(<annotation name='org.jetbrains.annotations.NotNull'/>)
           )
-        case Out =>
+        case Out if debug =>
           val method = key.method
           annotations = annotations.updated(
             annotationKey(method, extras(method)),
