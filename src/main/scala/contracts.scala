@@ -30,11 +30,10 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
   override def mkEquation(result: MyResult): Equation[Key, Value] =
     Equation(aKey, result)
 
-  // we cannot say it top, since there may be unprocessed dereferences in the tree
-  override def isEarlyResult(res: MyResult): Boolean = false/*res match {
+  override def isEarlyResult(res: MyResult): Boolean = res match {
     case Final(Values.Top) => true
     case _                 => false
-  }*/
+  }
 
   var id = 0
 
@@ -52,7 +51,8 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     val nextFrame = execute(frame, insnNode)
 
     if (interpreter.dereferenced) {
-      earlyResult = Some(Final(Values.Bot))
+      results = results + (stateIndex -> Final(Values.Bot))
+      computed = computed.updated(insnIndex, state :: computed(insnIndex))
       return
     }
     insnNode.getOpcode match {
@@ -78,9 +78,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             results = results + (stateIndex -> Pending[Key, Value](Set(Component(Values.Top, keys))))
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
           case _ =>
-            // we cannot say it top, since there may be unprocessed dereferences in the tree
-            results = results + (stateIndex -> Final(Values.Top))
-            computed = computed.updated(insnIndex, state :: computed(insnIndex))
+            earlyResult = Some(Final(Values.Top))
         }
       case ATHROW =>
         results = results + (stateIndex -> Final(Values.Bot))
