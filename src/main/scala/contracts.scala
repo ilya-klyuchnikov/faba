@@ -157,6 +157,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
 
   private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
+      interpreter.dereferenced = false
       frame
     case _ =>
       interpreter.dereferenced = false
