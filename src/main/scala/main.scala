@@ -116,7 +116,7 @@ class MainProcessor extends FabaProcessor {
       debugSolutions.groupBy(_._1.method.internalPackageName)
 
     for ((pkg, solution) <- byPackage) {
-      val xmlAnnotations = XmlUtils.toXmlAnnotations(solution, extras)
+      val xmlAnnotations = XmlUtils.toXmlAnnotations(solution, extras, debug = true)
       printToFile(new File(s"$outDir-debug${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
         out.println(pp.format(<root>{xmlAnnotations}</root>))
       }
@@ -129,7 +129,7 @@ class MainProcessor extends FabaProcessor {
       prodSolutions.groupBy(_._1.method.internalPackageName)
 
     for ((pkg, solution) <- byPackageProd) {
-      val xmlAnnotations = XmlUtils.toXmlAnnotations(solution, extras)
+      val xmlAnnotations = XmlUtils.toXmlAnnotations(solution, extras, debug = false)
       printToFile(new File(s"$outDir-prod${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
         out.println(pp.format(<root>{xmlAnnotations}</root>))
       }
