@@ -6,6 +6,7 @@ import _root_.java.io.{PrintWriter, File}
 import faba.cfg._
 import faba.data._
 import faba.source._
+import faba.analysis._
 import scala.xml.PrettyPrinter
 
 class MainProcessor extends FabaProcessor {
@@ -112,6 +113,7 @@ class MainProcessor extends FabaProcessor {
     val solvingEnd = System.currentTimeMillis()
     println("saving to file ...")
 
+    /*
     val byPackage: Map[String, Map[Key, Values.Value]] =
       debugSolutions.groupBy(_._1.method.internalPackageName)
 
@@ -120,7 +122,7 @@ class MainProcessor extends FabaProcessor {
       printToFile(new File(s"$outDir-debug${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
         out.println(pp.format(<root>{xmlAnnotations}</root>))
       }
-    }
+    }*/
 
     val prodSolutions: Map[Key, Values.Value] =
       debugSolutions.filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
@@ -130,7 +132,7 @@ class MainProcessor extends FabaProcessor {
 
     for ((pkg, solution) <- byPackageProd) {
       val xmlAnnotations = XmlUtils.toXmlAnnotations(solution, extras, debug = false)
-      printToFile(new File(s"$outDir-prod${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
+      printToFile(new File(s"$outDir${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
         out.println(pp.format(<root>{xmlAnnotations}</root>))
       }
     }
@@ -143,6 +145,11 @@ class MainProcessor extends FabaProcessor {
     println(s"saving took ${(writingEnd - solvingEnd) / 1000.0} sec")
     println(s"${debugSolutions.size} all contracts")
     println(s"${prodSolutions.size} prod contracts")
+    println(s"${Counter.shared} shared confs")
+    println(s"${Counter.nonShared} non-shared confs")
+    println(s"${Counter.effectivelyShared} eff shared")
+    println(s"${Counter.processed} processed confs")
+    println(s"${Counter.nonLocalDriving} non-local processed")
     println("INDEXING TIME")
     println(s"params      ${paramsTime / 1000.0} sec")
     println(s"results     ${outTime / 1000.0} sec")
@@ -154,13 +161,14 @@ class MainProcessor extends FabaProcessor {
     println(s"origins     ${resultOriginsTime / 1000.0} sec")
     println(s"dfs         ${dfsTime / 1000.0} sec")
     println(s"reducible   ${reducibleTime / 1000.0} sec")
+
   }
 
   def process(source: Source): Annotations = {
     source.process(this)
     val solutions: Map[Key, Values.Value] =
       (paramsSolver.solve() ++ contractsSolver.solve()).filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
-    Utils.toAnnotations(solutions)
+    data.Utils.toAnnotations(solutions)
   }
 }
 

@@ -98,16 +98,26 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     val hasCompanions = state.hasCompanions
     val notEmptySubResult = subResult != Identity
 
+    val shared = richControlFlow.isSharedInstruction(insnIndex)
+
+    Counter.processed += 1
+    if (!shared)
+      Counter.nonShared += 1
+    else
+      Counter.shared += 1
+
     if (subResult == NPE) {
       results = results + (stateIndex -> NPE)
-      computed = computed.updated(insnIndex, state :: computed(insnIndex))
+      if (shared)
+        computed = computed.updated(insnIndex, state :: computed(insnIndex))
     } else insnNode.getOpcode match {
       case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
         if (!hasCompanions) {
           earlyResult = Some(Return)
         } else {
           results = results + (stateIndex -> Return)
-          computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          if (shared)
+            computed = computed.updated(insnIndex, state :: computed(insnIndex))
         }
       case ATHROW if taken =>
         results = results + (stateIndex -> NPE)
@@ -115,7 +125,8 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
       case ATHROW =>
         // this is the subtle point! -- previous states interfers with it!!
         results = results + (stateIndex -> Error)
-        computed = computed.updated(insnIndex, state :: computed(insnIndex))
+        if (shared)
+          computed = computed.updated(insnIndex, state :: computed(insnIndex))
       case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
         val nextInsnIndex = insnIndex + 1
         val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
@@ -149,6 +160,10 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
               nextFrame
             }
             State({id += 1; id}, Conf(nextInsnIndex, nextFrame1), nextHistory, taken, hasCompanions || notEmptySubResult)
+        }
+        if (nextStates.size > 1) {
+          // cannot be without push/pop
+          Counter.nonLocalDriving += 1
         }
         pending.push(MakeResult(state, subResult, nextStates.map(_.index)))
         pending.pushAll(nextStates.map(s => ProceedState(s)))

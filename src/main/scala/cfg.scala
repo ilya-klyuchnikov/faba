@@ -22,7 +22,7 @@ object `package` {
     for (i <- 0 until frames.length) {
       val insnNode = insns.get(i)
       val frame = frames(i)
-      // there may be dead instructions in bytecode
+      // there may be dead instructions in b
       if (frame != null) {
         insnNode.getOpcode match {
           case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN =>
@@ -173,27 +173,38 @@ object MinimalOriginInterpreter extends SourceInterpreter {
 case class ControlFlowGraph(className: String,
                             methodNode: MethodNode,
                             transitions: Array[List[Int]],
+                            bTransitions: Array[List[Int]],
                             errorTransitions: Set[(Int, Int)])
 
 case class RichControlFlow(controlFlow: ControlFlowGraph,
-                           dfsTree: DFSTree)
+                           dfsTree: DFSTree) {
+
+  val multiEntranceInsnIndices =
+    (0 until controlFlow.transitions.length).filter(i => controlFlow.bTransitions(i).size > 1).toSet
+
+  def isSharedInstruction(insnIndex: Int) =
+    multiEntranceInsnIndices.exists(p => dfsTree.isDescendant(insnIndex, p))
+}
 
 private case class ControlFlowBuilder(className: String,
                                       methodNode: MethodNode) extends Analyzer(new BasicInterpreter()) {
   val transitions =
+    Array.tabulate[List[Int]](methodNode.instructions.size){i => Nil}
+  val btransitions =
     Array.tabulate[List[Int]](methodNode.instructions.size){i => Nil}
   var errorTransitions =
     Set[(Int, Int)]()
 
   def buildCFG(): ControlFlowGraph = {
     analyze(className, methodNode)
-    ControlFlowGraph(className, methodNode, transitions, errorTransitions)
+    ControlFlowGraph(className, methodNode, transitions, btransitions, errorTransitions)
   }
 
   override protected def newControlFlowEdge(insn: Int, successor: Int) {
     if (!transitions(insn).contains(successor)) {
       transitions(insn) = successor :: transitions(insn)
     }
+    btransitions(successor) = insn :: btransitions(successor)
   }
 
   override protected def newControlFlowExceptionEdge(insn: Int, successor: Int): Boolean = {
@@ -201,6 +212,7 @@ private case class ControlFlowBuilder(className: String,
       transitions(insn) = successor :: transitions(insn)
       errorTransitions = errorTransitions + (insn -> successor)
     }
+    btransitions(successor) = insn :: btransitions(successor)
     true
   }
 }

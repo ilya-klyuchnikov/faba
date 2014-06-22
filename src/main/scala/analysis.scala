@@ -22,6 +22,15 @@ case class Conf(insnIndex: Int, frame: Frame[BasicValue])
 
 case class State(index: Int, conf: Conf, history: List[Conf], taken: Boolean, hasCompanions: Boolean) {
   val insnIndex: Int = conf.insnIndex
+  override def toString = insnIndex.toString
+}
+
+object Counter {
+  var processed: Long = 0
+  var nonLocalDriving: Long = 0
+  var nonShared: Long = 0
+  var shared: Long = 0
+  var effectivelyShared: Long = 0
 }
 
 abstract class Analysis[Res] {
@@ -77,6 +86,7 @@ abstract class Analysis[Res] {
         }
       case ProceedState(state) =>
         val insnIndex = state.insnIndex
+        val shared = richControlFlow.isSharedInstruction(insnIndex)
         val conf = state.conf
         val history = state.history
 
@@ -85,9 +95,12 @@ abstract class Analysis[Res] {
 
         if (fold) {
           results = results + (state.index -> identity)
-          computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          if (shared)
+            computed = computed.updated(insnIndex, state :: computed(insnIndex))
         } else computed(insnIndex).find(prevState => stateEquiv(state, prevState)) match {
           case Some(ps) =>
+            Counter.effectivelyShared += 1
+            val insnNode = methodNode.instructions.get(insnIndex)
             results = results + (state.index -> results(ps.index))
           case None =>
             processState(state)
