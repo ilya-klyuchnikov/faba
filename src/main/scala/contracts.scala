@@ -47,7 +47,6 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
       // sharing
       computed(state.conf.insnIndex).find(prevState => stateEquiv(state, prevState)) match {
         case Some(ps) =>
-          Counter.effectivelyShared += 1
           results = results + (state.index -> results(ps.index))
           if (states.nonEmpty) pending.push(MakeResult(states, identity, List(ps.index)))
           return
@@ -77,13 +76,6 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
       val nextHistory = if (loopEnter) conf :: history else history
       val nextFrame = execute(frame, insnNode)
       val shared = richControlFlow.isSharedInstruction(insnIndex)
-
-
-      Counter.processed += 1
-      if (!shared)
-        Counter.nonShared += 1
-      else
-        Counter.shared += 1
 
       if (interpreter.dereferenced) {
         results = results + (stateIndex -> Final(Values.Bot))
@@ -221,10 +213,6 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
               State({
                 id += 1; id
               }, Conf(nextInsnIndex, nextFrame1), nextHistory, taken, false)
-          }
-          if (nextStates.size > 1) {
-            // cannot be without push/pop
-            Counter.nonLocalDriving += 1
           }
           states = state :: states
           if (nextStates.size == 1) {

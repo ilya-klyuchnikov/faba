@@ -107,7 +107,6 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     while (true) {
       computed(state.conf.insnIndex).find(prevState => stateEquiv(state, prevState)) match {
         case Some(ps) =>
-          Counter.effectivelyShared += 1
           results = results + (state.index -> results(ps.index))
           if (states.nonEmpty)
             pending.push(MakeResult(states, subResult, List(ps.index)))
@@ -122,11 +121,6 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
       val history = state.history
 
       val shared = richControlFlow.isSharedInstruction(insnIndex)
-      Counter.processed += 1
-      if (!shared)
-        Counter.nonShared += 1
-      else
-        Counter.shared += 1
 
       val fold = dfsTree.loopEnters(insnIndex) && history.exists(prevConf => confInstance(conf, prevConf))
 
@@ -221,10 +215,6 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
                 nextFrame
               }
               State({id += 1; id}, Conf(nextInsnIndex, nextFrame1), nextHistory, taken, hasCompanions || notEmptySubResult)
-          }
-          if (nextStates.size > 1) {
-            // cannot be without push/pop
-            Counter.nonLocalDriving += 1
           }
           states = state :: states
           if (nextStates.size == 1 && noSwitch) {

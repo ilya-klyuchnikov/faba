@@ -25,14 +25,6 @@ case class State(index: Int, conf: Conf, history: List[Conf], taken: Boolean, ha
   override def toString = insnIndex.toString
 }
 
-object Counter {
-  var processed: Long = 0
-  var nonLocalDriving: Long = 0
-  var nonShared: Long = 0
-  var shared: Long = 0
-  var effectivelyShared: Long = 0
-}
-
 abstract class Analysis[Res] {
 
   sealed trait PendingAction

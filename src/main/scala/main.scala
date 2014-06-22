@@ -109,7 +109,7 @@ class MainProcessor extends FabaProcessor {
 
     println("solving ...")
     val debugSolutions: Map[Key, Values.Value] =
-      (paramsSolver.solve()).filterNot(p => p._2 == Values.Top) ++ contractsSolver.solve()
+      paramsSolver.solve().filterNot(p => p._2 == Values.Top) ++ contractsSolver.solve()
     val solvingEnd = System.currentTimeMillis()
     println("saving to file ...")
 
@@ -145,11 +145,6 @@ class MainProcessor extends FabaProcessor {
     println(s"saving took ${(writingEnd - solvingEnd) / 1000.0} sec")
     println(s"${debugSolutions.size} all contracts")
     println(s"${prodSolutions.size} prod contracts")
-    println(s"${Counter.shared} shared confs")
-    println(s"${Counter.nonShared} non-shared confs")
-    println(s"${Counter.effectivelyShared} eff shared")
-    println(s"${Counter.processed} processed confs")
-    println(s"${Counter.nonLocalDriving} non-local processed")
     println("INDEXING TIME")
     println(s"params      ${paramsTime / 1000.0} sec")
     println(s"results     ${outTime / 1000.0} sec")
