@@ -37,154 +37,202 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
 
   var id = 0
 
-  override def processState(state: State): Unit = {
-    val stateIndex = state.index
-    val preConf = state.conf
-    val insnIndex = preConf.insnIndex
-    val loopEnter = dfsTree.loopEnters(insnIndex)
-    val conf = if (loopEnter) generalize(preConf) else preConf
-    val history = state.history
-    val taken = state.taken
-    val frame = conf.frame
-    val insnNode = methodNode.instructions.get(insnIndex)
-    val nextHistory = if (loopEnter) conf :: history else history
-    val nextFrame = execute(frame, insnNode)
-    val shared = richControlFlow.isSharedInstruction(insnIndex)
-
+  override def processState(fState: State): Unit = {
     // exploiting sharing
-    computed(insnIndex).find(prevState => stateEquiv(state, prevState)) match {
-      case Some(ps) =>
-        Counter.effectivelyShared += 1
-        results = results + (state.index -> results(ps.index))
-        return
-      case None =>
-    }
 
-    Counter.processed += 1
-    if (!shared)
-      Counter.nonShared += 1
-    else
-      Counter.shared += 1
+    var state = fState
+    //val states: List[State] = Nil
 
-    if (interpreter.dereferenced) {
-      results = results + (stateIndex -> Final(Values.Bot))
-      if (shared)
+    while (true) {
+
+      computed(state.conf.insnIndex).find(prevState => stateEquiv(state, prevState)) match {
+        case Some(ps) =>
+          Counter.effectivelyShared += 1
+          results = results + (state.index -> results(ps.index))
+          return
+        case None =>
+      }
+
+      val stateIndex = state.index
+      val preConf = state.conf
+      val insnIndex = preConf.insnIndex
+      val loopEnter = dfsTree.loopEnters(insnIndex)
+      val history = state.history
+
+      val fold = loopEnter && history.exists(prevConf => confInstance(preConf, prevConf))
+
+      if (fold) {
+        results = results + (state.index -> identity)
         computed = computed.updated(insnIndex, state :: computed(insnIndex))
-      return
-    }
-    insnNode.getOpcode match {
-      case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
-        popValue(frame) match {
-          case FalseValue() =>
-            results = results + (stateIndex -> Final(Values.False))
-            if (shared)
-              computed = computed.updated(insnIndex, state :: computed(insnIndex))
-          case TrueValue() =>
-            results = results + (stateIndex -> Final(Values.True))
-            if (shared)
-              computed = computed.updated(insnIndex, state :: computed(insnIndex))
-          case NullValue() =>
-            results = results + (stateIndex -> Final(Values.Null))
-            if (shared)
-              computed = computed.updated(insnIndex, state :: computed(insnIndex))
-          case NotNullValue(_) =>
-            results = results + (stateIndex -> Final(Values.NotNull))
-            if (shared)
-              computed = computed.updated(insnIndex, state :: computed(insnIndex))
-          case ParamValue(_) =>
-            val InOut(_, in) = direction
-            results = results + (stateIndex -> Final(in))
-            if (shared)
-              computed = computed.updated(insnIndex, state :: computed(insnIndex))
-          case CallResultValue(_, keys) =>
-            results = results + (stateIndex -> Pending[Key, Value](Set(Component(Values.Top, keys))))
-            if (shared)
-              computed = computed.updated(insnIndex, state :: computed(insnIndex))
-          case _ =>
-            earlyResult = Some(Final(Values.Top))
-        }
-      case ATHROW =>
+        return
+      }
+
+      val conf = if (loopEnter) generalize(preConf) else preConf
+
+      val taken = state.taken
+      val frame = conf.frame
+      val insnNode = methodNode.instructions.get(insnIndex)
+      val nextHistory = if (loopEnter) conf :: history else history
+      val nextFrame = execute(frame, insnNode)
+      val shared = richControlFlow.isSharedInstruction(insnIndex)
+
+
+      Counter.processed += 1
+      if (!shared)
+        Counter.nonShared += 1
+      else
+        Counter.shared += 1
+
+      if (interpreter.dereferenced) {
         results = results + (stateIndex -> Final(Values.Bot))
         if (shared)
           computed = computed.updated(insnIndex, state :: computed(insnIndex))
-      case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
-        val nextInsnIndex = (direction: @unchecked) match {
-          case InOut(_, Values.Null) =>
-            insnIndex + 1
-          case InOut(_, Values.NotNull) =>
+        //if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
+        return
+      }
+
+      insnNode.getOpcode match {
+        case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
+          popValue(frame) match {
+            case FalseValue() =>
+              results = results + (stateIndex -> Final(Values.False))
+              if (shared)
+                computed = computed.updated(insnIndex, state :: computed(insnIndex))
+              //if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
+              return
+            case TrueValue() =>
+              results = results + (stateIndex -> Final(Values.True))
+              if (shared)
+                computed = computed.updated(insnIndex, state :: computed(insnIndex))
+              //if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
+              return
+            case NullValue() =>
+              results = results + (stateIndex -> Final(Values.Null))
+              if (shared)
+                computed = computed.updated(insnIndex, state :: computed(insnIndex))
+              //if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
+              return
+            case NotNullValue(_) =>
+              results = results + (stateIndex -> Final(Values.NotNull))
+              if (shared)
+                computed = computed.updated(insnIndex, state :: computed(insnIndex))
+              //if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
+              return
+            case ParamValue(_) =>
+              val InOut(_, in) = direction
+              results = results + (stateIndex -> Final(in))
+              if (shared)
+                computed = computed.updated(insnIndex, state :: computed(insnIndex))
+              //if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
+              return
+            case CallResultValue(_, keys) =>
+              results = results + (stateIndex -> Pending[Key, Value](Set(Component(Values.Top, keys))))
+              if (shared)
+                computed = computed.updated(insnIndex, state :: computed(insnIndex))
+              //if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
+              return
+            case _ =>
+              earlyResult = Some(Final(Values.Top))
+              //if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
+              return
+          }
+        case ATHROW =>
+          results = results + (stateIndex -> Final(Values.Bot))
+          if (shared)
+            computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          //if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
+          return
+        case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
+          val nextInsnIndex = (direction: @unchecked) match {
+            case InOut(_, Values.Null) =>
+              insnIndex + 1
+            case InOut(_, Values.NotNull) =>
+              methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+          }
+          val nextState = State({
+            id += 1; id
+          }, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          pending.push(MakeResult(List(state), identity, List(nextState.index)))
+          state = nextState
+        case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
+          val nextInsnIndex = (direction: @unchecked) match {
+            case InOut(_, Values.Null) =>
+              methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+            case InOut(_, Values.NotNull) =>
+              insnIndex + 1
+          }
+          val nextState = State({
+            id += 1; id
+          }, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          pending.push(MakeResult(List(state), identity, List(nextState.index)))
+          state = nextState
+        case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
+          val nextInsnIndex =
             methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-        }
-        require(controlFlow.transitions(insnIndex).contains(nextInsnIndex))
-        val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-        pending.push(MakeResult(List(state), identity, List(nextState.index)))
-        pending.push(ProceedState(nextState))
-      case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
-        val nextInsnIndex = (direction: @unchecked) match {
-          case InOut(_, Values.Null) =>
-            methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          case InOut(_, Values.NotNull) =>
-            insnIndex + 1
-        }
-        require(controlFlow.transitions(insnIndex).contains(nextInsnIndex))
-        val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-        pending.push(MakeResult(List(state), identity, List(nextState.index)))
-        pending.push(ProceedState(nextState))
-      case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
-        val nextInsnIndex =
-          methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-        require(controlFlow.transitions(insnIndex).contains(nextInsnIndex))
-        val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-        pending.push(MakeResult(List(state), identity, List(nextState.index)))
-        pending.push(ProceedState(nextState))
-      case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
-        val nextInsnIndex = insnIndex + 1
-        require(controlFlow.transitions(insnIndex).contains(nextInsnIndex))
-        val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-        pending.push(MakeResult(List(state), identity, List(nextState.index)))
-        pending.push(ProceedState(nextState))
-      case IFEQ if popValue(frame).isInstanceOf[ParamValue] =>
-        val nextInsnIndex = (direction: @unchecked) match {
-          case InOut(_, Values.False) =>
-            methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          case InOut(_, Values.True) =>
-            insnIndex + 1
-        }
-        require(controlFlow.transitions(insnIndex).contains(nextInsnIndex))
-        val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-        pending.push(MakeResult(List(state), identity, List(nextState.index)))
-        pending.push(ProceedState(nextState))
-      case IFNE if popValue(frame).isInstanceOf[ParamValue] =>
-        val nextInsnIndex = (direction: @unchecked) match {
-          case InOut(_, Values.False) =>
-            insnIndex + 1
-          case InOut(_, Values.True) =>
-            methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-        }
-        require(controlFlow.transitions(insnIndex).contains(nextInsnIndex))
-        val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-        pending.push(MakeResult(List(state), identity, List(nextState.index)))
-        pending.push(ProceedState(nextState))
-      case _ =>
-        val nextInsnIndices = controlFlow.transitions(insnIndex)
-        val nextStates = nextInsnIndices.map {
-          nextInsnIndex =>
-            require(controlFlow.transitions(insnIndex).contains(nextInsnIndex))
-            val nextFrame1 = if (controlFlow.errorTransitions(insnIndex -> nextInsnIndex)) {
-              val handler = new Frame(frame)
-              handler.clearStack()
-              handler.push(new BasicValue(Type.getType("java/lang/Throwable")))
-              handler
-            } else {
-              nextFrame
-            }
-            State({id += 1; id}, Conf(nextInsnIndex, nextFrame1), nextHistory, taken, false)
-        }
-        pending.push(MakeResult(List(state), identity, nextStates.map(_.index)))
-        if (nextStates.size > 1) {
-          // cannot be without push/pop
-          Counter.nonLocalDriving += 1
-        }
-        pending.pushAll(nextStates.map(s => ProceedState(s)))
+          val nextState = State({
+            id += 1; id
+          }, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          pending.push(MakeResult(List(state), identity, List(nextState.index)))
+          state = nextState
+        case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
+          val nextInsnIndex = insnIndex + 1
+          val nextState = State({
+            id += 1; id
+          }, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          pending.push(MakeResult(List(state), identity, List(nextState.index)))
+          state = nextState
+        case IFEQ if popValue(frame).isInstanceOf[ParamValue] =>
+          val nextInsnIndex = (direction: @unchecked) match {
+            case InOut(_, Values.False) =>
+              methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+            case InOut(_, Values.True) =>
+              insnIndex + 1
+          }
+          val nextState = State({
+            id += 1; id
+          }, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          pending.push(MakeResult(List(state), identity, List(nextState.index)))
+          state = nextState
+        case IFNE if popValue(frame).isInstanceOf[ParamValue] =>
+          val nextInsnIndex = (direction: @unchecked) match {
+            case InOut(_, Values.False) =>
+              insnIndex + 1
+            case InOut(_, Values.True) =>
+              methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+          }
+          val nextState = State({
+            id += 1; id
+          }, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          pending.push(MakeResult(List(state), identity, List(nextState.index)))
+          state = nextState
+        case _ =>
+          val nextInsnIndices = controlFlow.transitions(insnIndex)
+          val nextStates = nextInsnIndices.map {
+            nextInsnIndex =>
+              val nextFrame1 = if (controlFlow.errorTransitions(insnIndex -> nextInsnIndex)) {
+                val handler = new Frame(frame)
+                handler.clearStack()
+                handler.push(new BasicValue(Type.getType("java/lang/Throwable")))
+                handler
+              } else {
+                nextFrame
+              }
+              State({
+                id += 1; id
+              }, Conf(nextInsnIndex, nextFrame1), nextHistory, taken, false)
+          }
+          pending.push(MakeResult(List(state), identity, nextStates.map(_.index)))
+          if (nextStates.size > 1) {
+            // cannot be without push/pop
+            Counter.nonLocalDriving += 1
+          }
+          if (nextStates.size == 1) {
+            state = nextStates.head
+          } else {
+            pending.pushAll(nextStates.map(s => ProceedState(s)))
+            return
+          }
+      }
     }
   }
 
