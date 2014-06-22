@@ -41,7 +41,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     // exploiting sharing
 
     var state = fState
-    //val states: List[State] = Nil
+    var states: List[State] = Nil
 
     while (true) {
 
@@ -49,6 +49,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
         case Some(ps) =>
           Counter.effectivelyShared += 1
           results = results + (state.index -> results(ps.index))
+          if (states.nonEmpty) pending.push(MakeResult(states, identity, List(ps.index)))
           return
         case None =>
       }
@@ -64,6 +65,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
       if (fold) {
         results = results + (state.index -> identity)
         computed = computed.updated(insnIndex, state :: computed(insnIndex))
+        if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
         return
       }
 
@@ -87,7 +89,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
         results = results + (stateIndex -> Final(Values.Bot))
         if (shared)
           computed = computed.updated(insnIndex, state :: computed(insnIndex))
-        //if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
+        if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
         return
       }
 
@@ -98,49 +100,48 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
               results = results + (stateIndex -> Final(Values.False))
               if (shared)
                 computed = computed.updated(insnIndex, state :: computed(insnIndex))
-              //if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
+              if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
               return
             case TrueValue() =>
               results = results + (stateIndex -> Final(Values.True))
               if (shared)
                 computed = computed.updated(insnIndex, state :: computed(insnIndex))
-              //if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
+              if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
               return
             case NullValue() =>
               results = results + (stateIndex -> Final(Values.Null))
               if (shared)
                 computed = computed.updated(insnIndex, state :: computed(insnIndex))
-              //if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
+              if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
               return
             case NotNullValue(_) =>
               results = results + (stateIndex -> Final(Values.NotNull))
               if (shared)
                 computed = computed.updated(insnIndex, state :: computed(insnIndex))
-              //if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
+              if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
               return
             case ParamValue(_) =>
               val InOut(_, in) = direction
               results = results + (stateIndex -> Final(in))
               if (shared)
                 computed = computed.updated(insnIndex, state :: computed(insnIndex))
-              //if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
+              if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
               return
             case CallResultValue(_, keys) =>
               results = results + (stateIndex -> Pending[Key, Value](Set(Component(Values.Top, keys))))
               if (shared)
                 computed = computed.updated(insnIndex, state :: computed(insnIndex))
-              //if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
+              if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
               return
             case _ =>
               earlyResult = Some(Final(Values.Top))
-              //if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
               return
           }
         case ATHROW =>
           results = results + (stateIndex -> Final(Values.Bot))
           if (shared)
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
-          //if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
+          if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
           return
         case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = (direction: @unchecked) match {
@@ -152,7 +153,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           val nextState = State({
             id += 1; id
           }, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-          pending.push(MakeResult(List(state), identity, List(nextState.index)))
+          states = state :: states
           state = nextState
         case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = (direction: @unchecked) match {
@@ -164,7 +165,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           val nextState = State({
             id += 1; id
           }, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-          pending.push(MakeResult(List(state), identity, List(nextState.index)))
+          states = state :: states
           state = nextState
         case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
           val nextInsnIndex =
@@ -172,7 +173,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           val nextState = State({
             id += 1; id
           }, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-          pending.push(MakeResult(List(state), identity, List(nextState.index)))
+          states = state :: states
           state = nextState
         case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
           val nextInsnIndex = insnIndex + 1
@@ -191,7 +192,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           val nextState = State({
             id += 1; id
           }, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-          pending.push(MakeResult(List(state), identity, List(nextState.index)))
+          states = state :: states
           state = nextState
         case IFNE if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = (direction: @unchecked) match {
@@ -203,7 +204,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           val nextState = State({
             id += 1; id
           }, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-          pending.push(MakeResult(List(state), identity, List(nextState.index)))
+          states = state :: states
           state = nextState
         case _ =>
           val nextInsnIndices = controlFlow.transitions(insnIndex)
@@ -221,14 +222,15 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
                 id += 1; id
               }, Conf(nextInsnIndex, nextFrame1), nextHistory, taken, false)
           }
-          pending.push(MakeResult(List(state), identity, nextStates.map(_.index)))
           if (nextStates.size > 1) {
             // cannot be without push/pop
             Counter.nonLocalDriving += 1
           }
+          states = state :: states
           if (nextStates.size == 1) {
             state = nextStates.head
           } else {
+            pending.push(MakeResult(states, identity, nextStates.map(_.index)))
             pending.pushAll(nextStates.map(s => ProceedState(s)))
             return
           }

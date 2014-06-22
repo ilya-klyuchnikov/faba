@@ -88,20 +88,7 @@ abstract class Analysis[Res] {
           }
         }
       case ProceedState(state) =>
-        val insnIndex = state.insnIndex
-        val shared = richControlFlow.isSharedInstruction(insnIndex)
-        val conf = state.conf
-        val history = state.history
-
-        val loopEnter = dfsTree.loopEnters(insnIndex)
-        val fold = loopEnter && history.exists(prevConf => confInstance(conf, prevConf))
-
-        if (fold) {
-          results = results + (state.index -> identity)
-          if (shared) computed = computed.updated(insnIndex, state :: computed(insnIndex))
-        } else {
-           processState(state)
-        }
+        processState(state)
     }
 
     mkEquation(earlyResult.getOrElse(results(0)))

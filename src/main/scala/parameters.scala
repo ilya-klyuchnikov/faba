@@ -115,6 +115,14 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     else
       Counter.shared += 1
 
+    val fold = dfsTree.loopEnters(insnIndex) && history.exists(prevConf => confInstance(conf, prevConf))
+
+    if (fold) {
+      results = results + (state.index -> identity)
+      computed = computed.updated(insnIndex, state :: computed(insnIndex))
+      return
+    }
+
     if (subResult == NPE) {
       results = results + (stateIndex -> NPE)
       if (shared)
