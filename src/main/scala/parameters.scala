@@ -98,8 +98,17 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     val hasCompanions = state.hasCompanions
     val notEmptySubResult = subResult != Identity
 
-    val shared = richControlFlow.isSharedInstruction(insnIndex)
+    // exploiting sharing
+    computed(insnIndex).find(prevState => stateEquiv(state, prevState)) match {
+      case Some(ps) =>
+        Counter.effectivelyShared += 1
+        results = results + (state.index -> results(ps.index))
+        return
+      case None =>
 
+    }
+
+    val shared = richControlFlow.isSharedInstruction(insnIndex)
     Counter.processed += 1
     if (!shared)
       Counter.nonShared += 1
@@ -130,22 +139,22 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
       case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
         val nextInsnIndex = insnIndex + 1
         val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
-        pending.push(MakeResult(state, subResult, List(nextState.index)))
+        pending.push(MakeResult(List(state), subResult, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
         val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
         val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
-        pending.push(MakeResult(state, subResult, List(nextState.index)))
+        pending.push(MakeResult(List(state), subResult, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
         val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
         val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
-        pending.push(MakeResult(state, subResult, List(nextState.index)))
+        pending.push(MakeResult(List(state), subResult, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
         val nextInsnIndex = insnIndex + 1
         val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
-        pending.push(MakeResult(state, subResult, List(nextState.index)))
+        pending.push(MakeResult(List(state), subResult, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case _ =>
         val nextInsnIndices = controlFlow.transitions(insnIndex)
@@ -165,7 +174,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
           // cannot be without push/pop
           Counter.nonLocalDriving += 1
         }
-        pending.push(MakeResult(state, subResult, nextStates.map(_.index)))
+        pending.push(MakeResult(List(state), subResult, nextStates.map(_.index)))
         pending.pushAll(nextStates.map(s => ProceedState(s)))
     }
   }

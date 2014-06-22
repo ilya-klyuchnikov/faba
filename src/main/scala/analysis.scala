@@ -37,7 +37,7 @@ abstract class Analysis[Res] {
 
   sealed trait PendingAction
   case class ProceedState(state: State) extends PendingAction
-  case class MakeResult(state: State, subResult: Res, indices: List[Int]) extends PendingAction
+  case class MakeResult(states: List[State], subResult: Res, indices: List[Int]) extends PendingAction
 
   val richControlFlow: RichControlFlow
   val direction: Direction
@@ -75,14 +75,17 @@ abstract class Analysis[Res] {
     pending.push(ProceedState(createStartState()))
 
     while (pending.nonEmpty && earlyResult.isEmpty) pending.pop() match {
-      case MakeResult(state, delta, subIndices) =>
+      case MakeResult(states, delta, subIndices) =>
         val result = combineResults(delta, subIndices.map(results))
         if (isEarlyResult(result)) {
           earlyResult = Some(result)
         } else {
-          val insnIndex = state.insnIndex
-          results = results + (state.index -> result)
-          computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          // updating all results
+          for (state <- states) {
+            val insnIndex = state.insnIndex
+            results = results + (state.index -> result)
+            computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          }
         }
       case ProceedState(state) =>
         val insnIndex = state.insnIndex
@@ -95,15 +98,9 @@ abstract class Analysis[Res] {
 
         if (fold) {
           results = results + (state.index -> identity)
-          if (shared)
-            computed = computed.updated(insnIndex, state :: computed(insnIndex))
-        } else computed(insnIndex).find(prevState => stateEquiv(state, prevState)) match {
-          case Some(ps) =>
-            Counter.effectivelyShared += 1
-            val insnNode = methodNode.instructions.get(insnIndex)
-            results = results + (state.index -> results(ps.index))
-          case None =>
-            processState(state)
+          if (shared) computed = computed.updated(insnIndex, state :: computed(insnIndex))
+        } else {
+           processState(state)
         }
     }
 

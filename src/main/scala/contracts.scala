@@ -49,8 +49,16 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     val insnNode = methodNode.instructions.get(insnIndex)
     val nextHistory = if (loopEnter) conf :: history else history
     val nextFrame = execute(frame, insnNode)
-
     val shared = richControlFlow.isSharedInstruction(insnIndex)
+
+    // exploiting sharing
+    computed(insnIndex).find(prevState => stateEquiv(state, prevState)) match {
+      case Some(ps) =>
+        Counter.effectivelyShared += 1
+        results = results + (state.index -> results(ps.index))
+        return
+      case None =>
+    }
 
     Counter.processed += 1
     if (!shared)
@@ -100,7 +108,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
         if (shared)
           computed = computed.updated(insnIndex, state :: computed(insnIndex))
       case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
-        val nextInsnIndex = direction match {
+        val nextInsnIndex = (direction: @unchecked) match {
           case InOut(_, Values.Null) =>
             insnIndex + 1
           case InOut(_, Values.NotNull) =>
@@ -108,10 +116,10 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
         }
         require(controlFlow.transitions(insnIndex).contains(nextInsnIndex))
         val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-        pending.push(MakeResult(state, identity, List(nextState.index)))
+        pending.push(MakeResult(List(state), identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
-        val nextInsnIndex = direction match {
+        val nextInsnIndex = (direction: @unchecked) match {
           case InOut(_, Values.Null) =>
             methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           case InOut(_, Values.NotNull) =>
@@ -119,23 +127,23 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
         }
         require(controlFlow.transitions(insnIndex).contains(nextInsnIndex))
         val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-        pending.push(MakeResult(state, identity, List(nextState.index)))
+        pending.push(MakeResult(List(state), identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
         val nextInsnIndex =
           methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
         require(controlFlow.transitions(insnIndex).contains(nextInsnIndex))
         val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-        pending.push(MakeResult(state, identity, List(nextState.index)))
+        pending.push(MakeResult(List(state), identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
         val nextInsnIndex = insnIndex + 1
         require(controlFlow.transitions(insnIndex).contains(nextInsnIndex))
         val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-        pending.push(MakeResult(state, identity, List(nextState.index)))
+        pending.push(MakeResult(List(state), identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFEQ if popValue(frame).isInstanceOf[ParamValue] =>
-        val nextInsnIndex = direction match {
+        val nextInsnIndex = (direction: @unchecked) match {
           case InOut(_, Values.False) =>
             methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           case InOut(_, Values.True) =>
@@ -143,10 +151,10 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
         }
         require(controlFlow.transitions(insnIndex).contains(nextInsnIndex))
         val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-        pending.push(MakeResult(state, identity, List(nextState.index)))
+        pending.push(MakeResult(List(state), identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case IFNE if popValue(frame).isInstanceOf[ParamValue] =>
-        val nextInsnIndex = direction match {
+        val nextInsnIndex = (direction: @unchecked) match {
           case InOut(_, Values.False) =>
             insnIndex + 1
           case InOut(_, Values.True) =>
@@ -154,7 +162,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
         }
         require(controlFlow.transitions(insnIndex).contains(nextInsnIndex))
         val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-        pending.push(MakeResult(state, identity, List(nextState.index)))
+        pending.push(MakeResult(List(state), identity, List(nextState.index)))
         pending.push(ProceedState(nextState))
       case _ =>
         val nextInsnIndices = controlFlow.transitions(insnIndex)
@@ -171,7 +179,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             }
             State({id += 1; id}, Conf(nextInsnIndex, nextFrame1), nextHistory, taken, false)
         }
-        pending.push(MakeResult(state, identity, nextStates.map(_.index)))
+        pending.push(MakeResult(List(state), identity, nextStates.map(_.index)))
         if (nextStates.size > 1) {
           // cannot be without push/pop
           Counter.nonLocalDriving += 1
