@@ -38,13 +38,13 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
   var id = 0
 
   override def processState(fState: State): Unit = {
-    // exploiting sharing
+
 
     var state = fState
     var states: List[State] = Nil
 
     while (true) {
-
+      // sharing
       computed(state.conf.insnIndex).find(prevState => stateEquiv(state, prevState)) match {
         case Some(ps) =>
           Counter.effectivelyShared += 1
@@ -63,7 +63,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
       val fold = loopEnter && history.exists(prevConf => confInstance(preConf, prevConf))
 
       if (fold) {
-        results = results + (state.index -> identity)
+        results = results + (stateIndex -> identity)
         computed = computed.updated(insnIndex, state :: computed(insnIndex))
         if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
         return
