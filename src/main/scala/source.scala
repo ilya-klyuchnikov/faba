@@ -77,7 +77,7 @@ trait FabaProcessor extends Processor {
           }
         }
       }
-    }, 0)
+    }, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES)
 
   def processMethod(className: String, methodNode: MethodNode, stableClass: Boolean) {
     val method = Method(className, methodNode.name, methodNode.desc)
@@ -103,7 +103,7 @@ trait FabaProcessor extends Processor {
       val dfs = buildDFSTree(graph.transitions)
       val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
       if (reducible) {
-        val resultOrigins: Set[Int] = buildResultOrigins(className, methodNode)
+        lazy val resultOrigins: Set[Int] = buildResultOrigins(className, methodNode)
         for (i <- argumentTypes.indices) {
           val argType = argumentTypes(i)
           val argSort = argType.getSort
@@ -125,8 +125,6 @@ trait FabaProcessor extends Processor {
           contractsSolver.addEquation(outContractEquation(RichControlFlow(graph, dfs), resultOrigins, stable))
         }
         added = true
-      } else {
-        println(s"Warning: CFG for $className ${methodNode.name}${methodNode.desc} is not reducible. Skipped")
       }
     }
 
