@@ -197,7 +197,7 @@ private case class ControlFlowBuilder(className: String,
 
   def buildCFG(): ControlFlowGraph = {
     analyze(className, methodNode)
-    ControlFlowGraph(className, methodNode, transitions, btransitions, errorTransitions)
+    ControlFlowGraph(className, methodNode, transitions.map(_.reverse), btransitions, errorTransitions)
   }
 
   override protected def newControlFlowEdge(insn: Int, successor: Int) {
