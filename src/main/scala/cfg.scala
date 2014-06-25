@@ -7,6 +7,7 @@ import org.objectweb.asm.tree.analysis._
 import scala.collection.JavaConversions._
 import scala.collection.immutable.HashSet
 import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
 
 object `package` {
   def buildControlFlowGraph(className: String, methodNode: MethodNode): ControlFlowGraph =
@@ -189,30 +190,30 @@ case class RichControlFlow(controlFlow: ControlFlowGraph,
 private case class ControlFlowBuilder(className: String,
                                       methodNode: MethodNode) extends Analyzer(new BasicInterpreter()) {
   val transitions =
-    Array.tabulate[List[Int]](methodNode.instructions.size){i => Nil}
+    Array.tabulate[ListBuffer[Int]](methodNode.instructions.size){i => new ListBuffer()}
   val btransitions =
-    Array.tabulate[List[Int]](methodNode.instructions.size){i => Nil}
+    Array.tabulate[ListBuffer[Int]](methodNode.instructions.size){i => new ListBuffer()}
   var errorTransitions =
     Set[(Int, Int)]()
 
   def buildCFG(): ControlFlowGraph = {
     analyze(className, methodNode)
-    ControlFlowGraph(className, methodNode, transitions.map(_.reverse), btransitions, errorTransitions)
+    ControlFlowGraph(className, methodNode, transitions.map(_.toList), btransitions.map(_.toList), errorTransitions)
   }
 
   override protected def newControlFlowEdge(insn: Int, successor: Int) {
     if (!transitions(insn).contains(successor)) {
-      transitions(insn) = successor :: transitions(insn)
+      transitions(insn) += successor
     }
-    btransitions(successor) = insn :: btransitions(successor)
+    btransitions(successor) += insn
   }
 
   override protected def newControlFlowExceptionEdge(insn: Int, successor: Int): Boolean = {
     if (!transitions(insn).contains(successor)) {
-      transitions(insn) = successor :: transitions(insn)
+      transitions(insn) += successor
       errorTransitions = errorTransitions + (insn -> successor)
     }
-    btransitions(successor) = insn :: btransitions(successor)
+    btransitions(successor) += insn
     true
   }
 }
