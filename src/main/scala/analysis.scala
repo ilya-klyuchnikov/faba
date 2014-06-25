@@ -185,14 +185,7 @@ object Utils {
     true
   }
 
-  def equiv(curr: BasicValue, prev: BasicValue): Boolean = {
-    val result = equiv0(curr, prev)
-    val result2 = equiv0(prev, curr)
-    require(result == result2, s"$result != $result2 || $curr (${curr.getClass}}), $prev (${prev.getClass}})")
-    result
-  }
-
-  def equiv0(curr: BasicValue, prev: BasicValue): Boolean =
+  def equiv(curr: BasicValue, prev: BasicValue): Boolean =
     if (curr.getClass == prev.getClass) {
       (curr, prev) match {
         case (CallResultValue(_, k1), CallResultValue(_, k2)) =>
