@@ -135,7 +135,9 @@ object XmlUtils {
         <annotation name='org.jetbrains.annotations.Contract'>
           <val val={contractValues}/>
         </annotation>
-      annotations = annotations.updated(key, contractAnnotation :: annotations.getOrElse(key, Nil))
+      if (annotations.get(key).isEmpty) {
+        annotations = annotations.updated(key, contractAnnotation :: annotations.getOrElse(key, Nil))
+      }
     }
     annotations.map {
       case (k, v) => <item name={k}>{v}</item>
