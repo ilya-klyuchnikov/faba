@@ -6,7 +6,6 @@ import _root_.java.io.{PrintWriter, File}
 import faba.cfg._
 import faba.data._
 import faba.source._
-import faba.analysis._
 import scala.xml.PrettyPrinter
 
 class MainProcessor extends FabaProcessor {
@@ -21,6 +20,7 @@ class MainProcessor extends FabaProcessor {
   var resultOriginsTime: Long = 0
   var reducibleTime: Long = 0
   var dfsTime: Long = 0
+  var leakingParametersTime: Long = 0
 
   override def buildCFG(className: String, methodNode: MethodNode) = {
     val start = System.currentTimeMillis()
@@ -92,6 +92,13 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
+  override def leakingParameters(className: String, methodNode: MethodNode): Set[Int] = {
+    val start = System.currentTimeMillis()
+    val result = super.leakingParameters(className, methodNode)
+    leakingParametersTime += System.currentTimeMillis() - start
+    result
+  }
+
   def printToFile(f: File)(op: PrintWriter => Unit) {
     if (f.getParentFile != null)
       f.getParentFile.mkdirs()
@@ -146,16 +153,17 @@ class MainProcessor extends FabaProcessor {
     println(s"${debugSolutions.size} all contracts")
     println(s"${prodSolutions.size} prod contracts")
     println("INDEXING TIME")
-    println(s"params      ${paramsTime / 1000.0} sec")
-    println(s"results     ${outTime / 1000.0} sec")
-    println(s"false       ${falseTime / 1000.0} sec")
-    println(s"true        ${trueTime / 1000.0} sec")
-    println(s"null        ${nullTime / 1000.0} sec")
-    println(s"!null       ${notNullTime / 1000.0} sec")
-    println(s"cfg         ${cfgTime / 1000.0} sec")
-    println(s"origins     ${resultOriginsTime / 1000.0} sec")
-    println(s"dfs         ${dfsTime / 1000.0} sec")
-    println(s"reducible   ${reducibleTime / 1000.0} sec")
+    println(s"params        ${paramsTime / 1000.0} sec")
+    println(s"results       ${outTime / 1000.0} sec")
+    println(s"false         ${falseTime / 1000.0} sec")
+    println(s"true          ${trueTime / 1000.0} sec")
+    println(s"null          ${nullTime / 1000.0} sec")
+    println(s"!null         ${notNullTime / 1000.0} sec")
+    println(s"cfg           ${cfgTime / 1000.0} sec")
+    println(s"origins       ${resultOriginsTime / 1000.0} sec")
+    println(s"dfs           ${dfsTime / 1000.0} sec")
+    println(s"reducible     ${reducibleTime / 1000.0} sec")
+    println(s"leakingParams ${leakingParametersTime / 1000.0} sec")
 
   }
 

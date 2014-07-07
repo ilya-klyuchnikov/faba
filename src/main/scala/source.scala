@@ -103,27 +103,43 @@ trait FabaProcessor extends Processor {
       val dfs = buildDFSTree(graph.transitions)
       val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
       if (reducible) {
+        lazy val leaking = leakingParameters(className, methodNode)
         lazy val resultOrigins: Set[Int] = buildResultOrigins(className, methodNode)
+        lazy val resultEquation: Equation[Key, Value] = outContractEquation(RichControlFlow(graph, dfs), resultOrigins, stable)
+        if (processContracts && isReferenceResult) {
+          contractsSolver.addEquation(resultEquation)
+        }
         for (i <- argumentTypes.indices) {
           val argType = argumentTypes(i)
           val argSort = argType.getSort
           val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
           val booleanArg = argType == Type.BOOLEAN_TYPE
           if (isReferenceArg) {
-            paramsSolver.addEquation(notNullParamEquation(RichControlFlow(graph, dfs), i, stable))
+            if (leaking(i))
+              paramsSolver.addEquation(notNullParamEquation(RichControlFlow(graph, dfs), i, stable))
+            else
+              paramsSolver.addEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
           }
           if (processContracts && isReferenceArg && (isReferenceResult || isBooleanResult)) {
-            contractsSolver.addEquation(nullContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
-            contractsSolver.addEquation(notNullContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
+            if (leaking(i)) {
+              contractsSolver.addEquation(nullContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
+              contractsSolver.addEquation(notNullContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
+            } else {
+              contractsSolver.addEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
+              contractsSolver.addEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
+            }
           }
           if (processContracts && booleanArg && (isReferenceResult || isBooleanResult)) {
-            contractsSolver.addEquation(falseContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
-            contractsSolver.addEquation(trueContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
+            if (leaking(i)) {
+              contractsSolver.addEquation(falseContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
+              contractsSolver.addEquation(trueContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
+            } else {
+              contractsSolver.addEquation(Equation(Key(method, InOut(i, Values.True), stable), resultEquation.rhs))
+              contractsSolver.addEquation(Equation(Key(method, InOut(i, Values.False), stable), resultEquation.rhs))
+            }
           }
         }
-        if (processContracts && isReferenceResult) {
-          contractsSolver.addEquation(outContractEquation(RichControlFlow(graph, dfs), resultOrigins, stable))
-        }
+
         added = true
       }
     }
@@ -181,4 +197,7 @@ trait FabaProcessor extends Processor {
 
   def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], stable: Boolean) =
     new InOutAnalysis(richControlFlow, Out, resultOrigins, stable).analyze()
+
+  def leakingParameters(className: String, methodNode: MethodNode): Set[Int] =
+    cfg.leakingParameters(className, methodNode)
 }
