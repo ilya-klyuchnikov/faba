@@ -204,7 +204,7 @@ case class RichControlFlow(controlFlow: ControlFlowGraph,
 }
 
 private case class ControlFlowBuilder(className: String,
-                                      methodNode: MethodNode) extends Analyzer(new BasicInterpreter()) {
+                                      methodNode: MethodNode) extends CfgAnalyzer() {
   val transitions =
     Array.tabulate[ListBuffer[Int]](methodNode.instructions.size){i => new ListBuffer()}
   val btransitions =
