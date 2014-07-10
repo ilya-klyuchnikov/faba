@@ -23,79 +23,79 @@ class MainProcessor extends FabaProcessor {
   var leakingParametersTime: Long = 0
 
   override def buildCFG(className: String, methodNode: MethodNode) = {
-    val start = System.currentTimeMillis()
+    val start = System.nanoTime()
     val result = super.buildCFG(className, methodNode)
-    cfgTime += System.currentTimeMillis() - start
+    cfgTime += System.nanoTime() - start
     result
   }
 
   override def buildResultOrigins(className: String, methodNode: MethodNode) = {
-    val start = System.currentTimeMillis()
+    val start = System.nanoTime()
     val result = super.buildResultOrigins(className, methodNode)
-    resultOriginsTime += System.currentTimeMillis() - start
+    resultOriginsTime += System.nanoTime() - start
     result
   }
 
   override def isReducible(graph: ControlFlowGraph, dfs: DFSTree): Boolean = {
-    val start = System.currentTimeMillis()
+    val start = System.nanoTime()
     val result = super.isReducible(graph, dfs)
-    reducibleTime += System.currentTimeMillis() - start
+    reducibleTime += System.nanoTime() - start
     result
   }
 
   override def buildDFSTree(transitions: Array[List[Int]]): DFSTree = {
-    val start = System.currentTimeMillis()
+    val start = System.nanoTime()
     val result = super.buildDFSTree(transitions)
-    dfsTime += System.currentTimeMillis() - start
+    dfsTime += System.nanoTime() - start
     result
   }
 
   override def notNullParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean) = {
-    val start = System.currentTimeMillis()
+    val start = System.nanoTime()
     val result = super.notNullParamEquation(richControlFlow, i, stable)
-    paramsTime += System.currentTimeMillis() - start
+    paramsTime += System.nanoTime() - start
     result
   }
 
   override def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
-    val start = System.currentTimeMillis()
+    val start = System.nanoTime()
     val result = super.notNullContractEquation(richControlFlow, resultOrigins, i, stable)
-    notNullTime += System.currentTimeMillis() - start
+    notNullTime += System.nanoTime() - start
     result
   }
 
   override def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
-    val start = System.currentTimeMillis()
+    val start = System.nanoTime()
     val result = super.nullContractEquation(richControlFlow, resultOrigins, i, stable)
-    nullTime += System.currentTimeMillis() - start
+    nullTime += System.nanoTime() - start
     result
   }
 
   override def trueContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
-    val start = System.currentTimeMillis()
+    val start = System.nanoTime()
     val result = super.trueContractEquation(richControlFlow, resultOrigins, i, stable)
-    trueTime += System.currentTimeMillis() - start
+    trueTime += System.nanoTime() - start
     result
   }
 
   override def falseContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
-    val start = System.currentTimeMillis()
+    val start = System.nanoTime()
     val result = super.falseContractEquation(richControlFlow, resultOrigins, i, stable)
-    falseTime += System.currentTimeMillis() - start
+    falseTime += System.nanoTime() - start
     result
   }
 
   override def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], stable: Boolean) = {
-    val start = System.currentTimeMillis()
+    val start = System.nanoTime()
     val result = super.outContractEquation(richControlFlow, resultOrigins, stable)
-    outTime += System.currentTimeMillis() - start
+    outTime += System.nanoTime() - start
     result
   }
 
   override def leakingParameters(className: String, methodNode: MethodNode): Set[Int] = {
-    val start = System.currentTimeMillis()
+    val start = System.nanoTime()
     val result = super.leakingParameters(className, methodNode)
-    leakingParametersTime += System.currentTimeMillis() - start
+    leakingParametersTime += System.nanoTime() - start
     result
   }
 
@@ -153,18 +153,17 @@ class MainProcessor extends FabaProcessor {
     println(s"${debugSolutions.size} all contracts")
     println(s"${prodSolutions.size} prod contracts")
     println("INDEXING TIME")
-    println(s"params        ${paramsTime / 1000.0} sec")
-    println(s"results       ${outTime / 1000.0} sec")
-    println(s"false         ${falseTime / 1000.0} sec")
-    println(s"true          ${trueTime / 1000.0} sec")
-    println(s"null          ${nullTime / 1000.0} sec")
-    println(s"!null         ${notNullTime / 1000.0} sec")
-    println(s"cfg           ${cfgTime / 1000.0} sec")
-    println(s"origins       ${resultOriginsTime / 1000.0} sec")
-    println(s"dfs           ${dfsTime / 1000.0} sec")
-    println(s"reducible     ${reducibleTime / 1000.0} sec")
-    println(s"leakingParams ${leakingParametersTime / 1000.0} sec")
-
+    println(s"params        ${paramsTime / 1000000} msec")
+    println(s"results       ${outTime    / 1000000} msec")
+    println(s"false         ${falseTime / 1000000} msec")
+    println(s"true          ${trueTime / 1000000} msec")
+    println(s"null          ${nullTime / 1000000} msec")
+    println(s"!null         ${notNullTime / 1000000} msec")
+    println(s"cfg           ${cfgTime / 1000000} msec")
+    println(s"origins       ${resultOriginsTime / 1000000} msec")
+    println(s"dfs           ${dfsTime / 1000000} msec")
+    println(s"reducible     ${reducibleTime / 1000000} msec")
+    println(s"leakingParams ${leakingParametersTime / 1000000} msec")
   }
 
   def process(source: Source): Annotations = {
