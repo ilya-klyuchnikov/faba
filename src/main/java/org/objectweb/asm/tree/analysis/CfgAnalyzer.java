@@ -19,11 +19,7 @@ public class CfgAnalyzer implements Opcodes {
     private int[] queue;
     private int top;
 
-    public void analyze(final String owner, final MethodNode m)
-            throws AnalyzerException {
-        if ((m.access & (ACC_ABSTRACT | ACC_NATIVE)) != 0) {
-            return;
-        }
+    public void analyze(final MethodNode m) throws AnalyzerException {
         n = m.instructions.size();
         insns = m.instructions;
         handlers = (List<TryCatchBlockNode>[]) new List<?>[n];

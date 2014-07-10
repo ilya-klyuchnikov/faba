@@ -14,9 +14,6 @@ object `package` {
   def buildControlFlowGraph(className: String, methodNode: MethodNode): ControlFlowGraph =
     ControlFlowBuilder(className, methodNode).buildCFG()
 
-  /**
-   * a set (safe upper bound) of instructions where the result was born
-   */
   def resultOrigins(className: String, methodNode: MethodNode): Set[Int] = {
     val frames = new Analyzer(MinimalOriginInterpreter).analyze(className, methodNode)
     val insns = methodNode.instructions
@@ -203,8 +200,7 @@ case class RichControlFlow(controlFlow: ControlFlowGraph,
     multiEntranceInsnIndices.exists(p => dfsTree.isDescendant(insnIndex, p))
 }
 
-private case class ControlFlowBuilder(className: String,
-                                      methodNode: MethodNode) extends CfgAnalyzer() {
+private case class ControlFlowBuilder(className: String, methodNode: MethodNode) extends CfgAnalyzer() {
   val transitions =
     Array.tabulate[ListBuffer[Int]](methodNode.instructions.size){i => new ListBuffer()}
   val btransitions =
@@ -213,7 +209,7 @@ private case class ControlFlowBuilder(className: String,
     Set[(Int, Int)]()
 
   def buildCFG(): ControlFlowGraph = {
-    analyze(className, methodNode)
+    if ((methodNode.access & (ACC_ABSTRACT | ACC_NATIVE)) == 0) analyze(methodNode)
     ControlFlowGraph(className, methodNode, transitions.map(_.toList), btransitions.map(_.toList), errorTransitions)
   }
 
