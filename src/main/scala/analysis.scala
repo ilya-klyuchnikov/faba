@@ -33,9 +33,7 @@ case class Conf(insnIndex: Int, frame: Frame[BasicValue]) {
   override def hashCode() = _hashCode
 }
 
-case class State(index: Int, conf: Conf, history: List[Conf], taken: Boolean, hasCompanions: Boolean) {
-  val insnIndex: Int = conf.insnIndex
-}
+case class State(index: Int, conf: Conf, history: List[Conf], taken: Boolean, hasCompanions: Boolean)
 
 abstract class Analysis[Res] {
 
@@ -86,7 +84,7 @@ abstract class Analysis[Res] {
         } else {
           // updating all results
           for (state <- states) {
-            val insnIndex = state.insnIndex
+            val insnIndex = state.conf.insnIndex
             results = results + (state.index -> result)
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
           }
