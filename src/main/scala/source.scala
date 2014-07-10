@@ -80,6 +80,17 @@ trait FabaProcessor extends Processor {
     }, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES)
 
   def processMethod(className: String, methodNode: MethodNode, stableClass: Boolean) {
+    val argumentTypes = Type.getArgumentTypes(methodNode.desc)
+    val resultType = Type.getReturnType(methodNode.desc)
+    val resultSort = resultType.getSort
+
+    val isReferenceResult = resultSort == Type.OBJECT || resultSort == Type.ARRAY
+    val isBooleanResult = Type.BOOLEAN_TYPE == resultType
+
+    if (argumentTypes.length == 0 && !(isReferenceResult || isBooleanResult)) {
+      return
+    }
+
     val method = Method(className, methodNode.name, methodNode.desc)
     extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
     val access = methodNode.access
@@ -92,13 +103,6 @@ trait FabaProcessor extends Processor {
 
     val graph = buildCFG(className, methodNode)
     var added = false
-    val argumentTypes = Type.getArgumentTypes(methodNode.desc)
-    val resultType = Type.getReturnType(methodNode.desc)
-    val resultSort = resultType.getSort
-
-    val isReferenceResult = resultSort == Type.OBJECT || resultSort == Type.ARRAY
-    val isBooleanResult = Type.BOOLEAN_TYPE == resultType
-
     if (graph.transitions.nonEmpty)  {
       val dfs = buildDFSTree(graph.transitions)
       val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
