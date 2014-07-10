@@ -12,17 +12,29 @@ import faba.engine._
 
 case class ParamValue(tp: Type) extends BasicValue(tp)
 case class InstanceOfCheckValue() extends BasicValue(Type.INT_TYPE)
+
 case class TrueValue() extends BasicValue(Type.INT_TYPE)
 case class FalseValue() extends BasicValue(Type.INT_TYPE)
 case class NullValue() extends BasicValue(Type.getObjectType("null"))
 case class NotNullValue(tp: Type) extends BasicValue(tp)
 case class CallResultValue(tp: Type, inters: Set[Key]) extends BasicValue(tp)
 
-case class Conf(insnIndex: Int, frame: Frame[BasicValue])
+case class Conf(insnIndex: Int, frame: Frame[BasicValue]) {
+  val _hashCode = {
+    var result = 0
+    for (i <- 0 until frame.getLocals) {
+      result = result * 31 + frame.getLocal(i).getClass.hashCode()
+    }
+    for (i <- 0 until frame.getStackSize) {
+      result = result * 31 + frame.getStack(i).getClass.hashCode()
+    }
+    result
+  }
+  override def hashCode() = _hashCode
+}
 
 case class State(index: Int, conf: Conf, history: List[Conf], taken: Boolean, hasCompanions: Boolean) {
   val insnIndex: Int = conf.insnIndex
-  override def toString = insnIndex.toString
 }
 
 abstract class Analysis[Res] {
@@ -50,10 +62,10 @@ abstract class Analysis[Res] {
   final def confInstance(curr: Conf, prev: Conf): Boolean = Utils.isInstance(curr, prev)
 
   final def stateEquiv(curr: State, prev: State): Boolean =
-    curr.taken == prev.taken &&
+    curr.taken == prev.taken && curr.conf.hashCode() == prev.conf.hashCode() &&
       Utils.equiv(curr.conf, prev.conf) &&
       curr.history.size == prev.history.size &&
-      (curr.history, prev.history).zipped.forall(Utils.equiv)
+      (curr.history, prev.history).zipped.forall((c1, c2) => c1.hashCode() == c2.hashCode() && Utils.equiv(c1, c2))
 
   val pending = mutable.Stack[PendingAction]()
   // the key is insnIndex
@@ -173,14 +185,11 @@ object Utils {
   }
 
   def equiv(curr: Conf, prev: Conf): Boolean = {
-    if (curr.insnIndex != prev.insnIndex) {
-      return false
-    }
     val currFr = curr.frame
     val prevFr = prev.frame
-    for (i <- 0 until currFr.getLocals if !equiv(currFr.getLocal(i), prevFr.getLocal(i)))
+    for (i <- (currFr.getStackSize - 1) to 0 by -1 if !equiv(currFr.getStack(i), prevFr.getStack(i)))
       return false
-    for (i <- 0 until currFr.getStackSize if !equiv(currFr.getStack(i), prevFr.getStack(i)))
+    for (i <- (currFr.getLocals - 1) to 0 by -1 if !equiv(currFr.getLocal(i), prevFr.getLocal(i)))
       return false
     true
   }

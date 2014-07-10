@@ -239,7 +239,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
 
   // in-place generalization
   def generalize(conf: Conf): Conf = {
-    val frame = conf.frame
+    val frame = new Frame(conf.frame)
     for (i <- 0 until frame.getLocals) frame.getLocal(i) match {
       case CallResultValue(tp, _) =>
         frame.setLocal(i, new BasicValue(tp))
@@ -271,7 +271,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
       case _ =>
         frame.push(v)
     }
-    conf
+    Conf(conf.insnIndex, frame)
   }
 }
 
