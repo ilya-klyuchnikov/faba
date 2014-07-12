@@ -1,5 +1,6 @@
 package faba
 
+import faba.engine.{Equation, ELattice, Solver}
 import org.objectweb.asm.tree.MethodNode
 import _root_.java.io.{PrintWriter, File}
 
@@ -9,6 +10,9 @@ import faba.source._
 import scala.xml.PrettyPrinter
 
 class MainProcessor extends FabaProcessor {
+
+  val paramsSolver = new Solver[Key, Values.Value]()(ELattice(Values.NotNull, Values.Top))
+  val contractsSolver = new Solver[Key, Values.Value]()(ELattice(Values.Bot, Values.Top))
 
   var paramsTime: Long = 0
   var outTime: Long = 0
@@ -98,6 +102,19 @@ class MainProcessor extends FabaProcessor {
     leakingParametersTime += System.nanoTime() - start
     result
   }
+
+  override def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit =
+    paramsSolver.addEquation(eq)
+  override def handleNotNullContractEquation(eq: Equation[Key, Value]): Unit =
+    contractsSolver.addEquation(eq)
+  override def handleNullContractEquation(eq: Equation[Key, Value]): Unit =
+    contractsSolver.addEquation(eq)
+  override def handleTrueContractEquation(eq: Equation[Key, Value]): Unit =
+    contractsSolver.addEquation(eq)
+  override def handleFalseContractEquation(eq: Equation[Key, Value]): Unit =
+    contractsSolver.addEquation(eq)
+  override def handleOutContractEquation(eq: Equation[Key, Value]): Unit =
+    contractsSolver.addEquation(eq)
 
   def printToFile(f: File)(op: PrintWriter => Unit) {
     if (f.getParentFile != null)
