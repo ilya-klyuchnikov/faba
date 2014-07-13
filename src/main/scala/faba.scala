@@ -21,6 +21,10 @@ trait FabaProcessor extends Processor {
   val processContracts = true
   var extras = Map[Method, MethodExtra]()
 
+  def handleHierarchy(access: Int, thisName: String, superName: String) {
+
+  }
+
   override def processClass(classReader: ClassReader): Unit =
     classReader.accept(new ClassVisitor(ASM5) {
       var stableClass = false
@@ -28,6 +32,7 @@ trait FabaProcessor extends Processor {
         // or there are no subclasses??
         stableClass = (access & ACC_FINAL) != 0
         super.visit(version, access, name, signature, superName, interfaces)
+        handleHierarchy(access, classReader.getClassName, superName)
       }
 
       override def visitMethod(access: Int, name: String, desc: String, signature: String, exceptions: Array[String]) = {
