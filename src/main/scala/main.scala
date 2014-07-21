@@ -11,7 +11,7 @@ import scala.xml.PrettyPrinter
 
 class MainProcessor extends FabaProcessor {
 
-  val paramsSolver = new Solver[Key, Values.Value]()(ELattice(Values.NotNull, Values.Top))
+  val notNullParamsSolver = new Solver[Key, Values.Value]()(ELattice(Values.NotNull, Values.Top))
   val contractsSolver = new Solver[Key, Values.Value]()(ELattice(Values.Bot, Values.Top))
 
   var paramsTime: Long = 0
@@ -104,7 +104,7 @@ class MainProcessor extends FabaProcessor {
   }
 
   override def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit =
-    paramsSolver.addEquation(eq)
+    notNullParamsSolver.addEquation(eq)
   override def handleNotNullContractEquation(eq: Equation[Key, Value]): Unit =
     contractsSolver.addEquation(eq)
   override def handleNullContractEquation(eq: Equation[Key, Value]): Unit =
@@ -133,7 +133,7 @@ class MainProcessor extends FabaProcessor {
 
     println("solving ...")
     val debugSolutions: Map[Key, Values.Value] =
-      paramsSolver.solve().filterNot(p => p._2 == Values.Top) ++ contractsSolver.solve()
+      notNullParamsSolver.solve().filterNot(p => p._2 == Values.Top) ++ contractsSolver.solve()
     val solvingEnd = System.currentTimeMillis()
     println("saving to file ...")
 
@@ -186,7 +186,7 @@ class MainProcessor extends FabaProcessor {
   def process(source: Source): Annotations = {
     source.process(this)
     val solutions: Map[Key, Values.Value] =
-      (paramsSolver.solve() ++ contractsSolver.solve()).filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
+      (notNullParamsSolver.solve() ++ contractsSolver.solve()).filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
     data.Utils.toAnnotations(solutions)
   }
 }
