@@ -489,4 +489,14 @@ object NullableInterpreter extends Interpreter {
     }
     super.binaryOperation(insn, v1, v2)
   }
+
+  override def ternaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue, v3: BasicValue): BasicValue = {
+    insn.getOpcode match {
+      case AASTORE
+        if v1.isInstanceOf[ParamValue] || v3.isInstanceOf[ParamValue] =>
+        _subResult = NPE
+      case _ =>
+    }
+    super.ternaryOperation(insn, v1, v2, v3)
+  }
 }

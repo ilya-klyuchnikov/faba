@@ -391,4 +391,14 @@ class NullableLeakingParametersCollector(m: MethodNode) extends LeakingParameter
     }
     super.binaryOperation(insn, v1, v2)
   }
+
+  override def ternaryOperation(insn: AbstractInsnNode, v1: ParamsValue, v2: ParamsValue, v3: ParamsValue): ParamsValue = {
+    insn.getOpcode match {
+      case AASTORE =>
+        leaking = leaking ++ v1.params ++ v3.params
+      case _ =>
+    }
+    super.ternaryOperation(insn, v1, v2, v3)
+  }
+
 }
