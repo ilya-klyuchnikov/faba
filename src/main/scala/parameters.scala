@@ -325,6 +325,10 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
 
       insnNode.getOpcode match {
         case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
+          if (insnNode.getOpcode == ARETURN && popValue(frame).isInstanceOf[ParamValue]) {
+            earlyResult = Some(NPE)
+            return
+          }
           results = results + (stateIndex -> Return)
           if (shared)
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
