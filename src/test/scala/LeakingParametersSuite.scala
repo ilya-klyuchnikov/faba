@@ -31,7 +31,7 @@ class LeakingParametersSuite extends FunSuite with Matchers {
           new MethodVisitor(Opcodes.ASM5, node) {
             override def visitEnd(): Unit = {
               super.visitEnd()
-              val leaked = cfg.leakingParameters(classReader.getClassName, node)
+              val (leaked, _) = cfg.leakingParameters(classReader.getClassName, node)
               info(s"$method $leaked")
               map = map + (method -> leaked)
             }
