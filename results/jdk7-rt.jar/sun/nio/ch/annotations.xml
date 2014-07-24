@@ -65,6 +65,9 @@
   <item name="sun.nio.ch.AsynchronousServerSocketChannelImpl void accept(A, java.nio.channels.CompletionHandler&lt;java.nio.channels.AsynchronousSocketChannel,? super A&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.AsynchronousServerSocketChannelImpl void onCancel(sun.nio.ch.PendingFuture&lt;?,?&gt;) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.AsynchronousServerSocketChannelImpl.DefaultOptionsHolder java.util.Set&lt;java.net.SocketOption&lt;?&gt;&gt; defaultOptions()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -152,11 +155,20 @@
   <item name="sun.nio.ch.BsdAsynchronousChannelProvider java.nio.channels.AsynchronousChannelGroup openAsynchronousChannelGroup(java.util.concurrent.ExecutorService, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.BsdAsynchronousChannelProvider java.nio.channels.AsynchronousServerSocketChannel openAsynchronousServerSocketChannel(java.nio.channels.AsynchronousChannelGroup) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.BsdAsynchronousChannelProvider java.nio.channels.AsynchronousServerSocketChannel openAsynchronousServerSocketChannel(java.nio.channels.AsynchronousChannelGroup)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.BsdAsynchronousChannelProvider java.nio.channels.AsynchronousSocketChannel openAsynchronousSocketChannel(java.nio.channels.AsynchronousChannelGroup) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.BsdAsynchronousChannelProvider java.nio.channels.AsynchronousSocketChannel openAsynchronousSocketChannel(java.nio.channels.AsynchronousChannelGroup)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.BsdAsynchronousChannelProvider sun.nio.ch.Port toPort(java.nio.channels.AsynchronousChannelGroup) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.BsdAsynchronousChannelProvider sun.nio.ch.Port toPort(java.nio.channels.AsynchronousChannelGroup)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -182,6 +194,9 @@
   </item>
   <item name="sun.nio.ch.CompletedFuture sun.nio.ch.CompletedFuture&lt;V&gt; withResult(V)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.CompletedFuture sun.nio.ch.CompletedFuture&lt;V&gt; withResult(V, java.lang.Throwable) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.CompletedFuture sun.nio.ch.CompletedFuture&lt;V&gt; withResult(V, java.lang.Throwable)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -282,11 +297,53 @@
   <item name="sun.nio.ch.DatagramSocketAdaptor java.net.DatagramSocket create(sun.nio.ch.DatagramChannelImpl)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.DatagramSocketAdaptor void bind(java.net.SocketAddress) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.DatagramSocketAdaptor void connect(java.net.InetAddress, int) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.DatagramSocketAdaptor void connect(java.net.SocketAddress) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.DatagramSocketAdaptor void connectInternal(java.net.SocketAddress) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.DatagramSocketAdaptor.1 int peek(java.net.InetAddress) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.DatagramSocketAdaptor.1 int peekData(java.net.DatagramPacket) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.DatagramSocketAdaptor.1 void bind(int, java.net.InetAddress) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.DatagramSocketAdaptor.1 void join(java.net.InetAddress) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.DatagramSocketAdaptor.1 void joinGroup(java.net.SocketAddress, java.net.NetworkInterface) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.DatagramSocketAdaptor.1 void joinGroup(java.net.SocketAddress, java.net.NetworkInterface) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.DatagramSocketAdaptor.1 void leave(java.net.InetAddress) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.DatagramSocketAdaptor.1 void leaveGroup(java.net.SocketAddress, java.net.NetworkInterface) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.DatagramSocketAdaptor.1 void leaveGroup(java.net.SocketAddress, java.net.NetworkInterface) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.DatagramSocketAdaptor.1 void receive(java.net.DatagramPacket) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.DatagramSocketAdaptor.1 void send(java.net.DatagramPacket) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.DatagramSocketAdaptor.1 void setOption(int, java.lang.Object) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.DefaultAsynchronousChannelProvider java.nio.channels.spi.AsynchronousChannelProvider create()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -324,6 +381,9 @@
   <item name="sun.nio.ch.EPollPort void access$900(sun.nio.ch.EPollPort) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.EPollPort.EventHandlerTask EventHandlerTask(sun.nio.ch.EPollPort, sun.nio.ch.EPollPort.1) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.ExtendedSocketOption.1 java.lang.Class&lt;java.lang.Boolean&gt; type()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -338,6 +398,9 @@
   </item>
   <item name="sun.nio.ch.FileChannelImpl int write(java.nio.ByteBuffer, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.FileChannelImpl java.nio.MappedByteBuffer map(java.nio.channels.FileChannel.MapMode, long, long) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.FileChannelImpl java.nio.channels.FileChannel open(java.io.FileDescriptor, java.lang.String, boolean, boolean, boolean, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -356,6 +419,9 @@
   </item>
   <item name="sun.nio.ch.FileChannelImpl long transferTo(long, long, java.nio.channels.WritableByteChannel) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.FileChannelImpl long transferToTrustedChannel(long, long, java.nio.channels.WritableByteChannel) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.FileChannelImpl long write(java.nio.ByteBuffer[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -378,8 +444,17 @@
   <item name="sun.nio.ch.FileChannelImpl.SimpleFileLockTable void add(java.nio.channels.FileLock) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.FileChannelImpl.Unmapper Unmapper(long, long, int, java.io.FileDescriptor, sun.nio.ch.FileChannelImpl.1) 4">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.FileDispatcherImpl java.io.FileDescriptor duplicateForMapping(java.io.FileDescriptor) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.FileDispatcherImpl java.io.FileDescriptor duplicateForMapping(java.io.FileDescriptor)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.FileKey boolean equals(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.FileKey sun.nio.ch.FileKey create(java.io.FileDescriptor)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -407,6 +482,9 @@
   </item>
   <item name="sun.nio.ch.IOUtil long write(java.io.FileDescriptor, java.nio.ByteBuffer[], sun.nio.ch.NativeDispatcher) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.InheritedChannel void checkAccess(java.nio.channels.Channel) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.InheritedChannel.InheritedDatagramChannelImpl boolean translateAndUpdateReadyOps(int, sun.nio.ch.SelectionKeyImpl) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -540,6 +618,12 @@
   <item name="sun.nio.ch.InheritedChannel.InheritedSocketChannelImpl void translateAndSetInterestOps(int, sun.nio.ch.SelectionKeyImpl) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.Invoker boolean mayInvokeDirect(sun.nio.ch.Invoker.GroupAndInvokeCount, sun.nio.ch.AsynchronousChannelGroupImpl) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.Invoker boolean mayInvokeDirect(sun.nio.ch.Invoker.GroupAndInvokeCount, sun.nio.ch.AsynchronousChannelGroupImpl) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.Invoker boolean mayInvokeDirect(sun.nio.ch.Invoker.GroupAndInvokeCount, sun.nio.ch.AsynchronousChannelGroupImpl)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null,_-&gt;false&quot;"/>
@@ -553,6 +637,9 @@
   </item>
   <item name="sun.nio.ch.Invoker void invokeDirect(sun.nio.ch.Invoker.GroupAndInvokeCount, java.nio.channels.CompletionHandler&lt;V,? super A&gt;, A, V, java.lang.Throwable) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.Invoker void invokeDirect(sun.nio.ch.Invoker.GroupAndInvokeCount, java.nio.channels.CompletionHandler&lt;V,? super A&gt;, A, V, java.lang.Throwable) 4">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.Invoker void invokeIndirectly(java.nio.channels.AsynchronousChannel, java.nio.channels.CompletionHandler&lt;V,? super A&gt;, A, V, java.lang.Throwable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -568,6 +655,9 @@
   </item>
   <item name="sun.nio.ch.Invoker void invokeUnchecked(java.nio.channels.CompletionHandler&lt;V,? super A&gt;, A, V, java.lang.Throwable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.Invoker void invokeUnchecked(java.nio.channels.CompletionHandler&lt;V,? super A&gt;, A, V, java.lang.Throwable) 3">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.Invoker void invokeUnchecked(sun.nio.ch.PendingFuture&lt;V,A&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -608,6 +698,9 @@
   <item name="sun.nio.ch.KQueuePort void access$900(sun.nio.ch.KQueuePort) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.KQueuePort.EventHandlerTask EventHandlerTask(sun.nio.ch.KQueuePort, sun.nio.ch.KQueuePort.1) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.KQueueSelectorImpl java.nio.channels.Selector wakeup()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -635,16 +728,28 @@
   <item name="sun.nio.ch.LinuxAsynchronousChannelProvider java.nio.channels.AsynchronousChannelGroup openAsynchronousChannelGroup(java.util.concurrent.ExecutorService, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.LinuxAsynchronousChannelProvider java.nio.channels.AsynchronousServerSocketChannel openAsynchronousServerSocketChannel(java.nio.channels.AsynchronousChannelGroup) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.LinuxAsynchronousChannelProvider java.nio.channels.AsynchronousServerSocketChannel openAsynchronousServerSocketChannel(java.nio.channels.AsynchronousChannelGroup)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.LinuxAsynchronousChannelProvider java.nio.channels.AsynchronousSocketChannel openAsynchronousSocketChannel(java.nio.channels.AsynchronousChannelGroup) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.LinuxAsynchronousChannelProvider java.nio.channels.AsynchronousSocketChannel openAsynchronousSocketChannel(java.nio.channels.AsynchronousChannelGroup)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.LinuxAsynchronousChannelProvider sun.nio.ch.Port toPort(java.nio.channels.AsynchronousChannelGroup) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.LinuxAsynchronousChannelProvider sun.nio.ch.Port toPort(java.nio.channels.AsynchronousChannelGroup)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
+  </item>
+  <item name="sun.nio.ch.MembershipKeyImpl MembershipKeyImpl(java.nio.channels.MulticastChannel, java.net.InetAddress, java.net.NetworkInterface, java.net.InetAddress, sun.nio.ch.MembershipKeyImpl.1) 4">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.MembershipKeyImpl java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -655,11 +760,23 @@
   <item name="sun.nio.ch.MembershipKeyImpl java.nio.channels.MembershipKey unblock(java.net.InetAddress)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.MembershipRegistry java.nio.channels.MembershipKey checkMembership(java.net.InetAddress, java.net.NetworkInterface, java.net.InetAddress) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.MembershipRegistry void add(sun.nio.ch.MembershipKeyImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.MembershipRegistry void remove(sun.nio.ch.MembershipKeyImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.NativeDispatcher int pread(java.io.FileDescriptor, long, int, long) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.NativeDispatcher int pwrite(java.io.FileDescriptor, long, int, long) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.NativeDispatcher void preClose(java.io.FileDescriptor) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.NativeObject sun.nio.ch.NativeObject getObject(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -673,6 +790,9 @@
   <item name="sun.nio.ch.Net byte[] inet6AsByteArray(java.net.InetAddress) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.Net int connect(java.net.ProtocolFamily, java.io.FileDescriptor, java.net.InetAddress, int) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.Net int inet4AsInt(java.net.InetAddress) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -681,6 +801,9 @@
   </item>
   <item name="sun.nio.ch.Net java.io.FileDescriptor socket(boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.Net java.io.FileDescriptor socket(java.net.ProtocolFamily, boolean) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.Net java.io.FileDescriptor socket(java.net.ProtocolFamily, boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -724,6 +847,9 @@
   <item name="sun.nio.ch.Net java.net.InetSocketAddress remoteAddress(java.io.FileDescriptor)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.Net void bind(java.net.ProtocolFamily, java.io.FileDescriptor, java.net.InetAddress, int) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.Net void setSocketOption(java.io.FileDescriptor, java.net.ProtocolFamily, java.net.SocketOption&lt;?&gt;, java.lang.Object) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -741,6 +867,9 @@
   </item>
   <item name="sun.nio.ch.Net.1 java.lang.String name()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.PendingFuture void setResult(V, java.lang.Throwable) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.PollArrayWrapper void addEntry(sun.nio.ch.SelChImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -778,11 +907,17 @@
   <item name="sun.nio.ch.Reflect java.lang.Object invokeIO(java.lang.reflect.Method, java.lang.Object, java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.Reflect java.lang.reflect.Constructor lookupConstructor(java.lang.String, java.lang.Class[]) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.Reflect java.lang.reflect.Field lookupField(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.Reflect java.lang.reflect.Method lookupMethod(java.lang.String, java.lang.String, java.lang.Class...) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.Reflect java.lang.reflect.Method lookupMethod(java.lang.String, java.lang.String, java.lang.Class...) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.Reflect void set(java.lang.Object, java.lang.reflect.Field, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -808,6 +943,9 @@
   <item name="sun.nio.ch.SelectorImpl java.nio.channels.SelectionKey register(java.nio.channels.spi.AbstractSelectableChannel, int, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.SelectorImpl void putEventOps(sun.nio.ch.SelectionKeyImpl, int) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.SelectorProviderImpl java.nio.channels.DatagramChannel openDatagramChannel()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -828,6 +966,9 @@
   </item>
   <item name="sun.nio.ch.ServerSocketAdaptor java.net.ServerSocket create(sun.nio.ch.ServerSocketChannelImpl)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.ServerSocketAdaptor void bind(java.net.SocketAddress, int) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.ServerSocketChannelImpl T getOption(java.net.SocketOption&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -864,6 +1005,15 @@
   </item>
   <item name="sun.nio.ch.SharedFileLockTable void removeKeyIfEmpty(sun.nio.ch.FileKey, java.util.List&lt;sun.nio.ch.SharedFileLockTable.FileLockReference&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.SharedFileLockTable void replace(java.nio.channels.FileLock, java.nio.channels.FileLock) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.SharedFileLockTable.FileLockReference FileLockReference(java.nio.channels.FileLock, java.lang.ref.ReferenceQueue&lt;java.nio.channels.FileLock&gt;, sun.nio.ch.FileKey) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.SimpleAsynchronousFileChannelImpl java.nio.channels.AsynchronousFileChannel open(java.io.FileDescriptor, boolean, boolean, sun.nio.ch.ThreadPool) 3">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.SimpleAsynchronousFileChannelImpl java.nio.channels.AsynchronousFileChannel open(java.io.FileDescriptor, boolean, boolean, sun.nio.ch.ThreadPool)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -934,6 +1084,9 @@
   <item name="sun.nio.ch.SocketAdaptor.SocketInputStream SocketInputStream(sun.nio.ch.SocketAdaptor, sun.nio.ch.SocketAdaptor.1) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.SocketAdaptor.SocketInputStream SocketInputStream(sun.nio.ch.SocketAdaptor, sun.nio.ch.SocketAdaptor.1) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.SocketChannelImpl T getOption(java.net.SocketOption&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -985,6 +1138,9 @@
   <item name="sun.nio.ch.SocketOptionRegistry.LazyInitialization java.util.Map&lt;sun.nio.ch.SocketOptionRegistry.RegistryKey,sun.nio.ch.OptionKey&gt; options()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.SocketOptionRegistry.RegistryKey boolean equals(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.SocketOptionRegistry.RegistryKey boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
@@ -996,11 +1152,20 @@
   <item name="sun.nio.ch.SolarisAsynchronousChannelProvider java.nio.channels.AsynchronousChannelGroup openAsynchronousChannelGroup(java.util.concurrent.ExecutorService, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.SolarisAsynchronousChannelProvider java.nio.channels.AsynchronousServerSocketChannel openAsynchronousServerSocketChannel(java.nio.channels.AsynchronousChannelGroup) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.SolarisAsynchronousChannelProvider java.nio.channels.AsynchronousServerSocketChannel openAsynchronousServerSocketChannel(java.nio.channels.AsynchronousChannelGroup)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.SolarisAsynchronousChannelProvider java.nio.channels.AsynchronousSocketChannel openAsynchronousSocketChannel(java.nio.channels.AsynchronousChannelGroup) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.SolarisAsynchronousChannelProvider java.nio.channels.AsynchronousSocketChannel openAsynchronousSocketChannel(java.nio.channels.AsynchronousChannelGroup)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.SolarisAsynchronousChannelProvider sun.nio.ch.SolarisEventPort toEventPort(java.nio.channels.AsynchronousChannelGroup) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.SolarisAsynchronousChannelProvider sun.nio.ch.SolarisEventPort toEventPort(java.nio.channels.AsynchronousChannelGroup)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1018,6 +1183,9 @@
   </item>
   <item name="sun.nio.ch.SolarisEventPort void access$300(sun.nio.ch.SolarisEventPort) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.SolarisEventPort.EventHandlerTask EventHandlerTask(sun.nio.ch.SolarisEventPort, sun.nio.ch.SolarisEventPort.1) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.SourceChannelImpl boolean translateAndUpdateReadyOps(int, sun.nio.ch.SelectionKeyImpl) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1130,6 +1298,9 @@
   <item name="sun.nio.ch.UnixAsynchronousSocketChannelImpl void onCancel(sun.nio.ch.PendingFuture&lt;?,?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.Util boolean atBugLevel(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.nio.ch.Util java.lang.reflect.Constructor access$302(java.lang.reflect.Constructor)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
@@ -1160,5 +1331,17 @@
   </item>
   <item name="sun.nio.ch.Util.1 sun.nio.ch.Util.BufferCache initialValue()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.Util.2 boolean add(E) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.Util.2 boolean addAll(java.util.Collection&lt;? extends E&gt;) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.Util.SelectorWrapper SelectorWrapper(java.nio.channels.Selector, sun.nio.ch.Util.1) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.Util.SelectorWrapper.Closer Closer(java.nio.channels.Selector, sun.nio.ch.Util.1) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
 </root>

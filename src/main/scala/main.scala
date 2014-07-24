@@ -11,10 +11,12 @@ import scala.xml.PrettyPrinter
 
 class MainProcessor extends FabaProcessor {
 
-  val paramsSolver = new Solver[Key, Values.Value]()(ELattice(Values.NotNull, Values.Top))
+  val notNullParamsSolver = new Solver[Key, Values.Value]()(ELattice(Values.NotNull, Values.Top))
+  val nullableParamsSolver = new Solver[Key, Values.Value]()(ELattice(Values.Null, Values.Top))
   val contractsSolver = new Solver[Key, Values.Value]()(ELattice(Values.Bot, Values.Top))
 
-  var paramsTime: Long = 0
+  var notNullParamsTime: Long = 0
+  var nullableParamsTime: Long = 0
   var outTime: Long = 0
   var falseTime: Long = 0
   var trueTime: Long = 0
@@ -25,6 +27,7 @@ class MainProcessor extends FabaProcessor {
   var reducibleTime: Long = 0
   var dfsTime: Long = 0
   var leakingParametersTime: Long = 0
+  val processNullableParameters = true
 
   override def buildCFG(className: String, methodNode: MethodNode) = {
     val start = System.nanoTime()
@@ -57,7 +60,14 @@ class MainProcessor extends FabaProcessor {
   override def notNullParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean) = {
     val start = System.nanoTime()
     val result = super.notNullParamEquation(richControlFlow, i, stable)
-    paramsTime += System.nanoTime() - start
+    notNullParamsTime += System.nanoTime() - start
+    result
+  }
+
+  override def nullableParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean) = {
+    val start = System.nanoTime()
+    val result = super.nullableParamEquation(richControlFlow, i, stable)
+    nullableParamsTime += System.nanoTime() - start
     result
   }
 
@@ -96,7 +106,7 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def leakingParameters(className: String, methodNode: MethodNode): Set[Int] = {
+  override def leakingParameters(className: String, methodNode: MethodNode): (Set[Int], Set[Int]) = {
     val start = System.nanoTime()
     val result = super.leakingParameters(className, methodNode)
     leakingParametersTime += System.nanoTime() - start
@@ -104,7 +114,11 @@ class MainProcessor extends FabaProcessor {
   }
 
   override def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit =
-    paramsSolver.addEquation(eq)
+    notNullParamsSolver.addEquation(eq)
+  override def handleNullableParamEquation(eq: Equation[Key, Value]): Unit = {
+    if (processNullableParameters)
+      nullableParamsSolver.addEquation(eq)
+  }
   override def handleNotNullContractEquation(eq: Equation[Key, Value]): Unit =
     contractsSolver.addEquation(eq)
   override def handleNullContractEquation(eq: Equation[Key, Value]): Unit =
@@ -132,8 +146,15 @@ class MainProcessor extends FabaProcessor {
     val indexEnd = System.currentTimeMillis()
 
     println("solving ...")
+    val notNullParams = notNullParamsSolver.solve().filterNot(p => p._2 == Values.Top)
+    val nullableParams = nullableParamsSolver.solve().filterNot(p => p._2 == Values.Top)
+    val contracts = contractsSolver.solve()
+
+    val dupKeys = notNullParams.keys.toSet intersect nullableParams.keys.toSet
+    for (k <- dupKeys) println(s"$k both @Nullable and @NotNull")
+
     val debugSolutions: Map[Key, Values.Value] =
-      paramsSolver.solve().filterNot(p => p._2 == Values.Top) ++ contractsSolver.solve()
+      notNullParams ++ nullableParams ++ contracts
     val solvingEnd = System.currentTimeMillis()
     println("saving to file ...")
 
@@ -170,23 +191,24 @@ class MainProcessor extends FabaProcessor {
     println(s"${debugSolutions.size} all contracts")
     println(s"${prodSolutions.size} prod contracts")
     println("INDEXING TIME")
-    println(s"params        ${paramsTime / 1000000} msec")
-    println(s"results       ${outTime    / 1000000} msec")
-    println(s"false         ${falseTime / 1000000} msec")
-    println(s"true          ${trueTime / 1000000} msec")
-    println(s"null          ${nullTime / 1000000} msec")
-    println(s"!null         ${notNullTime / 1000000} msec")
-    println(s"cfg           ${cfgTime / 1000000} msec")
-    println(s"origins       ${resultOriginsTime / 1000000} msec")
-    println(s"dfs           ${dfsTime / 1000000} msec")
-    println(s"reducible     ${reducibleTime / 1000000} msec")
-    println(s"leakingParams ${leakingParametersTime / 1000000} msec")
+    println(s"notNullParams  ${notNullParamsTime / 1000000} msec")
+    println(s"nullableParams ${nullableParamsTime / 1000000} msec")
+    println(s"results        ${outTime    / 1000000} msec")
+    println(s"false          ${falseTime / 1000000} msec")
+    println(s"true           ${trueTime / 1000000} msec")
+    println(s"null           ${nullTime / 1000000} msec")
+    println(s"!null          ${notNullTime / 1000000} msec")
+    println(s"cfg            ${cfgTime / 1000000} msec")
+    println(s"origins        ${resultOriginsTime / 1000000} msec")
+    println(s"dfs            ${dfsTime / 1000000} msec")
+    println(s"reducible      ${reducibleTime / 1000000} msec")
+    println(s"leakingParams  ${leakingParametersTime / 1000000} msec")
   }
 
   def process(source: Source): Annotations = {
     source.process(this)
     val solutions: Map[Key, Values.Value] =
-      (paramsSolver.solve() ++ contractsSolver.solve()).filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
+      (notNullParamsSolver.solve() ++ contractsSolver.solve()).filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
     data.Utils.toAnnotations(solutions)
   }
 }
