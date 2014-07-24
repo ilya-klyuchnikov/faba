@@ -53,6 +53,18 @@ object Result {
     case (ConditionalNPE(e1), ConditionalNPE(e2)) => ConditionalNPE(e1 join e2)
   }
 
+  def combineNullable(r1: Result, r2: Result): Result = (r1, r2) match {
+    case (Error, _) => r2
+    case (_, Error) => r1
+    case (Identity, _) => r2
+    case (_, Identity) => r1
+    case (Return, _) => r2
+    case (_, Return) => r1
+    case (NPE, _) => NPE
+    case (_, NPE) => NPE
+    case (ConditionalNPE(e1), ConditionalNPE(e2)) => ConditionalNPE(e1 join e2)
+  }
+
   def meet(r1: Result, r2: Result): Result = (r1, r2) match {
     case (Identity, _) => r2
     case (Return, _) => r2
@@ -236,9 +248,9 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
       (frame, Identity)
     case _ =>
       val nextFrame = new Frame(frame)
-      Interpreter.reset()
-      nextFrame.execute(insnNode, Interpreter)
-      (nextFrame, Interpreter.getSubResult)
+      NonNullInterpreter.reset()
+      nextFrame.execute(insnNode, NonNullInterpreter)
+      (nextFrame, NonNullInterpreter.getSubResult)
   }
 
 }
@@ -249,11 +261,11 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
   override val identity: Result = Identity
 
   override def combineResults(delta: Result, subResults: List[Result]): Result =
-    Result.meet(delta, subResults.reduce(Result.join))
+    Result.combineNullable(delta, subResults.reduce(Result.combineNullable))
 
   override def mkEquation(result: Result): Equation[Key, Value] = result match {
-    case Identity | Return | Error => Equation(aKey, Final(Values.Top))
-    case NPE => Equation(aKey, Final(Values.NotNull))
+    case NPE => Equation(aKey, Final(Values.Top))
+    case Identity | Return | Error => Equation(aKey, Final(Values.Null))
     case ConditionalNPE(cnf) =>
       Equation(aKey, Pending(cnf.map(p => Component(Values.Top, p))))
   }
@@ -300,44 +312,28 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
       val frame = conf.frame
       val insnNode = methodNode.instructions.get(insnIndex)
       val nextHistory = if (dfsTree.loopEnters(insnIndex)) conf :: history else history
-      val hasCompanions = state.hasCompanions
       val (nextFrame, localSubResult) = execute(frame, insnNode)
-      val notEmptySubResult = localSubResult != Identity
-
-      // local "summing"
-      val subResult2 = Result.subMeet(subResult, localSubResult)
-      val noSwitch = subResult == subResult2
-      subResult = subResult2
 
       if (localSubResult == NPE) {
-        results = results + (stateIndex -> NPE)
-        if (shared)
-          computed = computed.updated(insnIndex, state :: computed(insnIndex))
-        if (states.nonEmpty)
-          pending.push(MakeResult(states, subResult, List(stateIndex)))
+        earlyResult = Some(NPE)
         return
       }
 
+      val subResult2 = Result.combineNullable(subResult, localSubResult)
+      val noSwitch = subResult == subResult2
+      subResult = subResult2
+
       insnNode.getOpcode match {
         case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
-          if (!hasCompanions) {
-            earlyResult = Some(Return)
-            return
-          } else {
-            results = results + (stateIndex -> Return)
-            if (shared)
-              computed = computed.updated(insnIndex, state :: computed(insnIndex))
-            // important to put subResult
-            if (states.nonEmpty)
-              pending.push(MakeResult(states, subResult, List(stateIndex)))
-            return
-          }
-        case ATHROW if taken =>
-          results = results + (stateIndex -> NPE)
+          results = results + (stateIndex -> Return)
           if (shared)
             computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          // important to put subResult
           if (states.nonEmpty)
             pending.push(MakeResult(states, subResult, List(stateIndex)))
+          return
+        case ATHROW if taken =>
+          earlyResult = Some(NPE)
           return
         case ATHROW =>
           results = results + (stateIndex -> Error)
@@ -348,22 +344,22 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
           return
         case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = insnIndex + 1
-          val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
+          val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
           states = state :: states
           state = nextState
         case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
+          val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
           states = state :: states
           state = nextState
         case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
+          val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
           states = state :: states
           state = nextState
         case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
           val nextInsnIndex = insnIndex + 1
-          val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
+          val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
           states = state :: states
           state = nextState
         case _ =>
@@ -378,7 +374,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
               } else {
                 nextFrame
               }
-              State({id += 1; id}, Conf(nextInsnIndex, nextFrame1), nextHistory, taken, hasCompanions || notEmptySubResult)
+              State({id += 1; id}, Conf(nextInsnIndex, nextFrame1), nextHistory, taken, false)
           }
           states = state :: states
           if (nextStates.size == 1 && noSwitch) {
@@ -397,18 +393,20 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
       (frame, Identity)
     case _ =>
       val nextFrame = new Frame(frame)
-      Interpreter.reset()
-      nextFrame.execute(insnNode, Interpreter)
-      (nextFrame, Interpreter.getSubResult)
+      NullableInterpreter.reset()
+      nextFrame.execute(insnNode, NullableInterpreter)
+      (nextFrame, NullableInterpreter.getSubResult)
   }
 
 }
 
-object Interpreter extends BasicInterpreter {
+abstract class Interpreter extends BasicInterpreter {
   private var _subResult: Result = Identity
   def reset(): Unit = {
     _subResult = Identity
   }
+
+  def combine(res1: Result, res2: Result): Result
 
   def getSubResult: Result =
     _subResult
@@ -461,11 +459,19 @@ object Interpreter extends BasicInterpreter {
         for (i <- shift until values.size()) {
           if (values.get(i).isInstanceOf[ParamValue]) {
             val method = Method(mNode.owner, mNode.name, mNode.desc)
-            _subResult = Result.meet(_subResult, ConditionalNPE(Key(method, In(i - shift), stable)))
+            _subResult = combine(_subResult, ConditionalNPE(Key(method, In(i - shift), stable)))
           }
         }
       case _ =>
     }
     super.naryOperation(insn, values)
   }
+}
+
+object NonNullInterpreter extends Interpreter {
+  override def combine(res1: Result, res2: Result): Result = Result.meet(res1, res2)
+}
+
+object NullableInterpreter extends Interpreter {
+  override def combine(res1: Result, res2: Result): Result = Result.join(res1, res2)
 }

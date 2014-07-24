@@ -82,10 +82,14 @@ trait FabaProcessor extends Processor {
           val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
           val booleanArg = argType == Type.BOOLEAN_TYPE
           if (isReferenceArg) {
-            if (leaking(i))
+            if (leaking(i)) {
               handleNotNullParamEquation(notNullParamEquation(RichControlFlow(graph, dfs), i, stable))
-            else
+              handleNullableParamEquation(nullableParamEquation(RichControlFlow(graph, dfs), i, stable))
+            }
+            else {
               handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
+              handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Null)))
+            }
           }
           if (processContracts && isReferenceArg && (isReferenceResult || isBooleanResult)) {
             if (leaking(i)) {
@@ -150,6 +154,9 @@ trait FabaProcessor extends Processor {
   def notNullParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean): Equation[Key, Value] =
     new NotNullInAnalysis(richControlFlow, In(i), stable).analyze()
 
+  def nullableParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean): Equation[Key, Value] =
+    new NullableInAnalysis(richControlFlow, In(i), stable).analyze()
+
   def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean): Equation[Key, Value] =
     new InOutAnalysis(richControlFlow, InOut(i, Values.NotNull), resultOrigins, stable).analyze()
 
@@ -166,6 +173,7 @@ trait FabaProcessor extends Processor {
     new InOutAnalysis(richControlFlow, Out, resultOrigins, stable).analyze()
 
   def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit = ()
+  def handleNullableParamEquation(eq: Equation[Key, Value]): Unit = ()
   def handleNotNullContractEquation(eq: Equation[Key, Value]): Unit = ()
   def handleNullContractEquation(eq: Equation[Key, Value]): Unit = ()
   def handleTrueContractEquation(eq: Equation[Key, Value]): Unit = ()

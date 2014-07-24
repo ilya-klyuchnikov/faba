@@ -33,6 +33,7 @@ object `package` {
     result
   }
 
+  // todo - it is unsound for @Nullable parameters analysis (write to field should be detected as well)
   def leakingParameters(className: String, methodNode: MethodNode): Set[Int] = {
     val frames = new Analyzer(new ParametersUsage(methodNode)).analyze(className, methodNode)
     val insns = methodNode.instructions

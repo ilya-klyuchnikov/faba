@@ -102,9 +102,19 @@ object XmlUtils {
       key.direction match {
         case In(paramIndex) if value == Values.NotNull =>
           val method = key.method
+          val aKey = s"${annotationKey(method, extras(method))} $paramIndex"
+          val anns = annotations.getOrElse(aKey, Nil)
           annotations = annotations.updated(
-            s"${annotationKey(method, extras(method))} $paramIndex",
-            List(<annotation name='org.jetbrains.annotations.NotNull'/>)
+            aKey,
+            (<annotation name='org.jetbrains.annotations.NotNull'/> :: anns).sortBy(_.toString())
+          )
+        case In(paramIndex) if value == Values.Null =>
+          val method = key.method
+          val aKey = s"${annotationKey(method, extras(method))} $paramIndex"
+          val anns = annotations.getOrElse(aKey, Nil)
+          annotations = annotations.updated(
+            aKey,
+            (<annotation name='org.jetbrains.annotations.Nullable'/> :: anns).sortBy(_.toString())
           )
         case Out if value == Values.NotNull && !debug =>
           val method = key.method
@@ -174,11 +184,12 @@ object XmlUtils {
 
   private def parameters(method: Method, extra: MethodExtra): String = {
     val result = extra.signature match {
-      case Some(sig) =>
+      // RetentionPolicy enum has wrong signature - workaround for it
+      case Some(sig) if !sig.startsWith("()") =>
         val renderer = new GenericMethodParametersRenderer()
         new SignatureReader(sig).accept(renderer)
         renderer.parameters()
-      case None =>
+      case _ =>
         Type.getArgumentTypes(method.methodDesc).map(t => binaryName2Idea(t.getClassName)).mkString("(", ", ", ")")
     }
     if ((extra.access & Opcodes.ACC_VARARGS) != 0) result.replace("[])", "...)")
