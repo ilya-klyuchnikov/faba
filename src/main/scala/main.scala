@@ -27,6 +27,7 @@ class MainProcessor extends FabaProcessor {
   var reducibleTime: Long = 0
   var dfsTime: Long = 0
   var leakingParametersTime: Long = 0
+  val processNullableParameters = true
 
   override def buildCFG(className: String, methodNode: MethodNode) = {
     val start = System.nanoTime()
@@ -114,8 +115,10 @@ class MainProcessor extends FabaProcessor {
 
   override def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit =
     notNullParamsSolver.addEquation(eq)
-  override def handleNullableParamEquation(eq: Equation[Key, Value]): Unit =
-    nullableParamsSolver.addEquation(eq)
+  override def handleNullableParamEquation(eq: Equation[Key, Value]): Unit = {
+    if (processNullableParameters)
+      nullableParamsSolver.addEquation(eq)
+  }
   override def handleNotNullContractEquation(eq: Equation[Key, Value]): Unit =
     contractsSolver.addEquation(eq)
   override def handleNullContractEquation(eq: Equation[Key, Value]): Unit =

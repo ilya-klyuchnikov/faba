@@ -1,6 +1,6 @@
 package faba.examples
 
-import faba.Main
+import faba.MainProcessor
 import faba.source.{JarFileSource, MixedSource}
 import java.io.File
 
@@ -9,5 +9,7 @@ object IdeaTestAnnotations extends App {
     List("data/mockjdk7-rt.jar","data/velocity.jar")
 
   val sources = paths.map(p => JarFileSource(new File(p)))
-  Main.process(MixedSource(sources), "results/IDEA")
+  new MainProcessor {
+    override val processNullableParameters = false
+  }.process(MixedSource(sources), "results/IDEA")
 }
