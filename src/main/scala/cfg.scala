@@ -33,21 +33,23 @@ object `package` {
     result
   }
 
-  // todo - it is unsound for @Nullable parameters analysis (write to field should be detected as well)
-  def leakingParameters(className: String, methodNode: MethodNode): Set[Int] = {
+  // the second element is a nullable leaking parameters
+  def leakingParameters(className: String, methodNode: MethodNode): (Set[Int], Set[Int]) = {
     val frames = new Analyzer(new ParametersUsage(methodNode)).analyze(className, methodNode)
     val insns = methodNode.instructions
     val collector = new LeakingParametersCollector(methodNode)
+    val nullableCollector = new NullableLeakingParametersCollector(methodNode)
     for (i <- 0 until frames.length) {
       val insnNode = insns.get(i)
       val frame = frames(i)
       if (frame != null) insnNode.getType match {
         case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
         case _ =>
-          frame.execute(insnNode, collector)
+          new Frame(frame).execute(insnNode, collector)
+          new Frame(frame).execute(insnNode, nullableCollector)
       }
     }
-    collector.leaking
+    (collector.leaking, nullableCollector.leaking)
   }
 
   // Graphs: Theory and Algorithms. by K. Thulasiraman , M. N. S. Swamy (1992)
@@ -378,4 +380,15 @@ class LeakingParametersCollector(m: MethodNode) extends ParametersUsage(m) {
     super.naryOperation(insn, values)
   }
 
+}
+
+class NullableLeakingParametersCollector(m: MethodNode) extends LeakingParametersCollector(m) {
+  override def binaryOperation(insn: AbstractInsnNode, v1: ParamsValue, v2: ParamsValue): ParamsValue = {
+    insn.getOpcode match {
+      case PUTFIELD =>
+        leaking = leaking ++ v1.params ++ v2.params
+      case _ =>
+    }
+    super.binaryOperation(insn, v1, v2)
+  }
 }

@@ -405,7 +405,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
 }
 
 abstract class Interpreter extends BasicInterpreter {
-  private var _subResult: Result = Identity
+  protected var _subResult: Result = Identity
   def reset(): Unit = {
     _subResult = Identity
   }
@@ -478,4 +478,15 @@ object NonNullInterpreter extends Interpreter {
 
 object NullableInterpreter extends Interpreter {
   override def combine(res1: Result, res2: Result): Result = Result.join(res1, res2)
+
+  override def binaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue): BasicValue = {
+    insn.getOpcode match {
+      case PUTFIELD
+        if v1.isInstanceOf[ParamValue] || v2.isInstanceOf[ParamValue] =>
+        _subResult = NPE
+      case _ =>
+
+    }
+    super.binaryOperation(insn, v1, v2)
+  }
 }

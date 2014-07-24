@@ -70,7 +70,7 @@ trait FabaProcessor extends Processor {
       val dfs = buildDFSTree(graph.transitions)
       val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
       if (reducible) {
-        lazy val leaking = leakingParameters(className, methodNode)
+        lazy val (leaking, nullableLeaking) = leakingParameters(className, methodNode)
         lazy val resultOrigins: Set[Int] = buildResultOrigins(className, methodNode)
         lazy val resultEquation: Equation[Key, Value] = outContractEquation(RichControlFlow(graph, dfs), resultOrigins, stable)
         if (processContracts && isReferenceResult) {
@@ -82,14 +82,16 @@ trait FabaProcessor extends Processor {
           val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
           val booleanArg = argType == Type.BOOLEAN_TYPE
           if (isReferenceArg) {
-            if (leaking(i)) {
+            if (leaking(i))
               handleNotNullParamEquation(notNullParamEquation(RichControlFlow(graph, dfs), i, stable))
-              handleNullableParamEquation(nullableParamEquation(RichControlFlow(graph, dfs), i, stable))
-            }
-            else {
+            else
               handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
+
+            if (nullableLeaking(i))
+              handleNullableParamEquation(nullableParamEquation(RichControlFlow(graph, dfs), i, stable))
+            else
               handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Null)))
-            }
+
           }
           if (processContracts && isReferenceArg && (isReferenceResult || isBooleanResult)) {
             if (leaking(i)) {
@@ -180,6 +182,6 @@ trait FabaProcessor extends Processor {
   def handleFalseContractEquation(eq: Equation[Key, Value]): Unit = ()
   def handleOutContractEquation(eq: Equation[Key, Value]): Unit = ()
 
-  def leakingParameters(className: String, methodNode: MethodNode): Set[Int] =
+  def leakingParameters(className: String, methodNode: MethodNode): (Set[Int], Set[Int]) =
     cfg.leakingParameters(className, methodNode)
 }
