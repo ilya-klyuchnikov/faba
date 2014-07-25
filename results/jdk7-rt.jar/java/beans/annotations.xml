@@ -111,6 +111,9 @@
   <item name="java.beans.DefaultPersistenceDelegate java.lang.reflect.Method findMethod(java.lang.Class, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.beans.DefaultPersistenceDelegate java.lang.reflect.Method findMethod(java.lang.Class, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.beans.DefaultPersistenceDelegate void doProperty(java.lang.Class, java.beans.PropertyDescriptor, java.lang.Object, java.lang.Object, java.beans.Encoder) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -299,7 +302,7 @@
   </item>
   <item name="java.beans.EventSetDescriptor java.lang.reflect.Method getMethod(java.lang.Class, java.lang.String, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_-&gt;null;null,_,_-&gt;null&quot;"/>
+      <val val="&quot;_,!null,_-&gt;!null;_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="java.beans.EventSetDescriptor void setAddListenerMethod(java.lang.reflect.Method) 0">
@@ -462,18 +465,23 @@
   <item name="java.beans.Introspector boolean throwsException(java.lang.reflect.Method, java.lang.Class) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.beans.Introspector java.beans.BeanDescriptor getTargetBeanDescriptor()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.beans.Introspector java.beans.BeanInfo getBeanInfo()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.beans.Introspector java.beans.BeanInfo getBeanInfo(java.lang.Class&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.Introspector java.beans.BeanInfo getBeanInfo(java.lang.Class&lt;?&gt;, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.beans.Introspector java.beans.BeanInfo getBeanInfo(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.Introspector java.beans.BeanInfo getBeanInfo(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.Introspector java.beans.PropertyDescriptor mergePropertyDescriptor(java.beans.IndexedPropertyDescriptor, java.beans.IndexedPropertyDescriptor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -547,6 +555,11 @@
   <item name="java.beans.Introspector java.lang.reflect.Method internalFindMethod(java.lang.Class, java.lang.String, int, java.lang.Class[]) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.beans.Introspector java.lang.reflect.Method[] getPublicDeclaredMethods(java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.beans.Introspector void addEvent(java.beans.EventSetDescriptor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -578,6 +591,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.MetaData java.lang.String[] getConstructorProperties(java.lang.Class) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.MetaData.1 java.lang.Object run()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.MetaData.1 java.lang.reflect.Field run()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.MetaData.ArrayPersistenceDelegate boolean mutatesTo(java.lang.Object, java.lang.Object) 1">
@@ -1298,9 +1317,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.beans.NameGenerator java.lang.String instanceName(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.NameGenerator java.lang.String unqualifiedClassName(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1454,6 +1471,11 @@
   <item name="java.beans.PropertyDescriptor void setWriteMethod(java.lang.reflect.Method) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.beans.PropertyEditorManager java.beans.PropertyEditor findEditor(java.lang.Class&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.beans.PropertyEditorManager void registerEditor(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1491,6 +1513,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,null,_-&gt;null&quot;"/>
     </annotation>
+  </item>
+  <item name="java.beans.ThreadGroupContext java.beans.ThreadGroupContext getContext()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.VetoableChangeSupport VetoableChangeSupport(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1608,6 +1633,9 @@
   <item name="java.beans.XMLEncoder XMLEncoder(java.io.OutputStream, java.lang.String, boolean, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.beans.XMLEncoder java.beans.XMLEncoder.ValueData getValueData(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.beans.XMLEncoder java.lang.Class primitiveTypeFor(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1624,6 +1652,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.beans.XMLEncoder java.lang.String quote(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.XMLEncoder java.util.List&lt;java.beans.Statement&gt; statementList(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.XMLEncoder void mark(java.beans.Statement) 0">

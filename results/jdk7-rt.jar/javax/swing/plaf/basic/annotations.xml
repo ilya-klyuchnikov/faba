@@ -263,6 +263,9 @@
   <item name="javax.swing.plaf.basic.BasicButtonUI javax.swing.plaf.ComponentUI createUI(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.swing.plaf.basic.BasicButtonUI javax.swing.plaf.ComponentUI createUI(javax.swing.JComponent)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.plaf.basic.BasicButtonUI javax.swing.plaf.basic.BasicButtonListener createButtonListener(javax.swing.AbstractButton) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -355,6 +358,9 @@
   </item>
   <item name="javax.swing.plaf.basic.BasicCheckBoxUI javax.swing.plaf.ComponentUI createUI(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.swing.plaf.basic.BasicCheckBoxUI javax.swing.plaf.ComponentUI createUI(javax.swing.JComponent)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.plaf.basic.BasicColorChooserUI javax.swing.colorchooser.AbstractColorChooserPanel[] createDefaultChoosers()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -484,6 +490,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.plaf.basic.BasicComboBoxUI javax.swing.ListCellRenderer createRenderer()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.plaf.basic.BasicComboBoxUI javax.swing.ListCellRenderer getDefaultListCellRenderer()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.plaf.basic.BasicComboBoxUI javax.swing.plaf.ComponentUI createUI(javax.swing.JComponent) 0">
@@ -1122,6 +1131,11 @@
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="javax.swing.plaf.basic.BasicFileChooserUI.BasicFileView java.lang.String getTypeDescription(java.io.File)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="javax.swing.plaf.basic.BasicFileChooserUI.BasicFileView void cacheIcon(java.io.File, javax.swing.Icon) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1355,9 +1369,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.plaf.basic.BasicInternalFrameTitlePane java.lang.String getTitle(java.lang.String, java.awt.FontMetrics, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.plaf.basic.BasicInternalFrameTitlePane javax.swing.ActionMap createActionMap()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2495,6 +2507,9 @@
   <item name="javax.swing.plaf.basic.BasicPopupMenuUI boolean isPopupTrigger(java.awt.event.MouseEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.swing.plaf.basic.BasicPopupMenuUI javax.swing.ActionMap getActionMap()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.plaf.basic.BasicPopupMenuUI javax.swing.InputMap getInputMap(javax.swing.JPopupMenu, javax.swing.JComponent)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null,_-&gt;null&quot;"/>
@@ -2502,7 +2517,7 @@
   </item>
   <item name="javax.swing.plaf.basic.BasicPopupMenuUI javax.swing.MenuElement findEnabledChild(javax.swing.MenuElement[], int, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_-&gt;null&quot;"/>
+      <val val="&quot;null,_,_-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="javax.swing.plaf.basic.BasicPopupMenuUI javax.swing.MenuElement findEnabledChild(javax.swing.MenuElement[], javax.swing.MenuElement, boolean) 0">
@@ -2654,6 +2669,12 @@
   <item name="javax.swing.plaf.basic.BasicProgressBarUI java.awt.Dimension getMinimumSize(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.swing.plaf.basic.BasicProgressBarUI java.awt.Dimension getPreferredInnerHorizontal()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.plaf.basic.BasicProgressBarUI java.awt.Dimension getPreferredInnerVertical()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.plaf.basic.BasicProgressBarUI java.awt.Dimension getPreferredSize(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2764,6 +2785,9 @@
   </item>
   <item name="javax.swing.plaf.basic.BasicRadioButtonUI javax.swing.plaf.ComponentUI createUI(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.swing.plaf.basic.BasicRadioButtonUI javax.swing.plaf.ComponentUI createUI(javax.swing.JComponent)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.plaf.basic.BasicRadioButtonUI void paint(java.awt.Graphics, javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3179,16 +3203,28 @@
   <item name="javax.swing.plaf.basic.BasicSliderUI int access$302(javax.swing.plaf.basic.BasicSliderUI, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.swing.plaf.basic.BasicSliderUI java.awt.Dimension getMinimumHorizontalSize()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.plaf.basic.BasicSliderUI java.awt.Dimension getMinimumSize(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.plaf.basic.BasicSliderUI java.awt.Dimension getMinimumSize(javax.swing.JComponent)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.swing.plaf.basic.BasicSliderUI java.awt.Dimension getMinimumVerticalSize()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.plaf.basic.BasicSliderUI java.awt.Dimension getPreferredHorizontalSize()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.plaf.basic.BasicSliderUI java.awt.Dimension getPreferredSize(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.plaf.basic.BasicSliderUI java.awt.Dimension getPreferredSize(javax.swing.JComponent)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.plaf.basic.BasicSliderUI java.awt.Dimension getPreferredVerticalSize()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.plaf.basic.BasicSliderUI java.awt.Dimension getThumbSize()">
@@ -4652,6 +4688,9 @@
   <item name="javax.swing.plaf.basic.BasicTextUI javax.swing.InputMap getInputMap()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.swing.plaf.basic.BasicTextUI javax.swing.plaf.basic.BasicTextUI.DragListener getDragListener()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.plaf.basic.BasicTextUI javax.swing.text.Caret createCaret()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -4670,6 +4709,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.plaf.basic.BasicTextUI javax.swing.text.Highlighter createHighlighter()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.plaf.basic.BasicTextUI javax.swing.text.Keymap createKeymap()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.plaf.basic.BasicTextUI javax.swing.text.View create(javax.swing.text.Element) 0">
@@ -4846,6 +4888,9 @@
   </item>
   <item name="javax.swing.plaf.basic.BasicToggleButtonUI javax.swing.plaf.ComponentUI createUI(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.swing.plaf.basic.BasicToggleButtonUI javax.swing.plaf.ComponentUI createUI(javax.swing.JComponent)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.plaf.basic.BasicToggleButtonUI void paint(java.awt.Graphics, javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -5215,6 +5260,9 @@
   <item name="javax.swing.plaf.basic.BasicTreeUI java.awt.Dimension getPreferredSize(javax.swing.JComponent, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.swing.plaf.basic.BasicTreeUI java.awt.Dimension getPreferredSize(javax.swing.JComponent, boolean)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.plaf.basic.BasicTreeUI java.awt.Rectangle access$1700(javax.swing.plaf.basic.BasicTreeUI, java.awt.Rectangle) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -5232,6 +5280,11 @@
   <item name="javax.swing.plaf.basic.BasicTreeUI java.awt.Rectangle getPathBounds(javax.swing.JTree, javax.swing.tree.TreePath)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="javax.swing.plaf.basic.BasicTreeUI java.awt.Rectangle getPathBounds(javax.swing.tree.TreePath, java.awt.Insets, java.awt.Rectangle)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="javax.swing.plaf.basic.BasicTreeUI java.awt.Rectangle getRepaintPathBounds(java.awt.Rectangle)">
@@ -5709,6 +5762,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
+  </item>
+  <item name="javax.swing.plaf.basic.DragRecognitionSupport javax.swing.plaf.basic.DragRecognitionSupport getDragRecognitionSupport()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.plaf.basic.LazyActionMap javax.swing.ActionMap getActionMap(java.lang.Class, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.plaf.basic.LazyActionMap void installLazyActionMap(javax.swing.JComponent, java.lang.Class, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

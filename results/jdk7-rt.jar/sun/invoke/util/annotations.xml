@@ -117,7 +117,7 @@
   </item>
   <item name="sun.invoke.util.ValueConversions T castReference(java.lang.Class&lt;? extends T&gt;, U)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
+      <val val="&quot;_,!null-&gt;!null;_,null-&gt;null;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="sun.invoke.util.ValueConversions T identity(T)">
@@ -315,6 +315,15 @@
   <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodHandle box(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodHandle box(java.lang.Class&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodHandle box(sun.invoke.util.Wrapper)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodHandle box(sun.invoke.util.Wrapper, boolean)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodHandle buildArrayProducer(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -333,7 +342,13 @@
   <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodHandle convertPrimitive(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodHandle convertPrimitive(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodHandle convertPrimitive(sun.invoke.util.Wrapper, sun.invoke.util.Wrapper) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodHandle convertPrimitive(sun.invoke.util.Wrapper, sun.invoke.util.Wrapper)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodHandle findCollector(java.lang.String, int, java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;...) 3">
@@ -342,14 +357,35 @@
   <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodHandle identity(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodHandle identity(sun.invoke.util.Wrapper)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodHandle unbox(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodHandle unbox(sun.invoke.util.Wrapper, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodHandle unboxCast(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodHandle unboxCast(sun.invoke.util.Wrapper)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodHandle varargsArray(java.lang.Class&lt;?&gt;, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodHandle varargsList(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodHandle zeroConstantFunction(sun.invoke.util.Wrapper)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.invoke.util.ValueConversions java.lang.invoke.MethodType boxType(sun.invoke.util.Wrapper) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -563,13 +599,22 @@
   <item name="sun.invoke.util.Wrapper sun.invoke.util.Wrapper findWrapperType(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.invoke.util.Wrapper sun.invoke.util.Wrapper forBasicType(char)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.invoke.util.Wrapper sun.invoke.util.Wrapper forBasicType(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.invoke.util.Wrapper sun.invoke.util.Wrapper forPrimitiveType(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.invoke.util.Wrapper sun.invoke.util.Wrapper forPrimitiveType(java.lang.Class&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.invoke.util.Wrapper sun.invoke.util.Wrapper forWrapperType(java.lang.Class&lt;?&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.invoke.util.Wrapper sun.invoke.util.Wrapper forWrapperType(java.lang.Class&lt;?&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.invoke.util.Wrapper void copyArrayBoxing(java.lang.Object, int, java.lang.Object[], int, int) 0">

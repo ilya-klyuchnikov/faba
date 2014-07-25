@@ -56,9 +56,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.DOMUtil java.lang.String fixNull(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.DOMUtil java.util.List&lt;org.w3c.dom.Element&gt; getChildElements(org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -151,6 +149,11 @@
   <item name="com.sun.xml.internal.ws.util.NamespaceSupport.Context Context(com.sun.xml.internal.ws.util.NamespaceSupport.Context, com.sun.xml.internal.ws.util.NamespaceSupport.Context) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.util.NamespaceSupport.Context java.lang.String[] processName(java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.util.NamespaceSupport.Context void declarePrefix(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -158,6 +161,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.NamespaceSupport.Context void setParent(com.sun.xml.internal.ws.util.NamespaceSupport.Context) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.Pool java.util.concurrent.ConcurrentLinkedQueue&lt;T&gt; getQueue()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.QNameMap V get(java.lang.String, java.lang.String) 1">
@@ -181,8 +187,18 @@
   <item name="com.sun.xml.internal.ws.util.QNameMap com.sun.xml.internal.ws.util.QNameMap.Entry access$400(com.sun.xml.internal.ws.util.QNameMap, java.lang.String, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.util.QNameMap com.sun.xml.internal.ws.util.QNameMap.Entry access$400(com.sun.xml.internal.ws.util.QNameMap, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;null;_,null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.util.QNameMap com.sun.xml.internal.ws.util.QNameMap.Entry&lt;V&gt; getEntry(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.QNameMap com.sun.xml.internal.ws.util.QNameMap.Entry&lt;V&gt; getEntry(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;null;null,_-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.util.QNameMap int hash(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -197,6 +213,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.QNameMap java.util.Iterator&lt;com.sun.xml.internal.ws.util.QNameMap.Entry&lt;V&gt;&gt; newEntryIterator()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.QNameMap java.util.Set&lt;com.sun.xml.internal.ws.util.QNameMap.Entry&lt;V&gt;&gt; entrySet()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.QNameMap void put(java.lang.String, java.lang.String, V) 1">
@@ -369,9 +388,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.Version java.lang.String fixNull(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.VersionUtil boolean isValidVersion(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
