@@ -1,7 +1,8 @@
 package faba
 
+import faba.analysis.LimitReachedException
 import faba.contracts.InOutAnalysis
-import faba.engine.{Equation, ELattice, Solver}
+import faba.engine.{Final, Equation, ELattice, Solver}
 import faba.parameters.{NotNullInAnalysis, NullableInAnalysis}
 import org.objectweb.asm.tree.MethodNode
 import _root_.java.io.{PrintWriter, File}
@@ -42,6 +43,8 @@ class MainProcessor extends FabaProcessor {
   var contractTicks =
     List[Debug]()
 
+  var limitReached = 0
+
   override def buildCFG(className: String, methodNode: MethodNode) = {
     val start = System.nanoTime()
     val result = super.buildCFG(className, methodNode)
@@ -73,7 +76,13 @@ class MainProcessor extends FabaProcessor {
   override def notNullParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean) = {
     val start = System.nanoTime()
     val analyser = new NotNullInAnalysis(richControlFlow, In(i), stable)
-    val result = analyser.analyze()
+    val result = try {
+      analyser.analyze()
+    } catch {
+      case LimitReachedException =>
+        limitReached += 1
+        Equation(analyser.aKey, Final(Values.Top))
+    }
     val time = System.nanoTime() - start
     notNullParameterTicks ::= Debug(result.id, analyser.lastId(), time)
     notNullParamsTime += time
@@ -83,7 +92,13 @@ class MainProcessor extends FabaProcessor {
   override def nullableParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean) = {
     val start = System.nanoTime()
     val analyser = new NullableInAnalysis(richControlFlow, In(i), stable)
-    val result = analyser.analyze()
+    val result = try {
+      analyser.analyze()
+    } catch {
+      case LimitReachedException =>
+        limitReached += 1
+        Equation(analyser.aKey, Final(Values.Top))
+    }
     val time = System.nanoTime() - start
     nullableParameterTicks ::= Debug(result.id, analyser.lastId(), time)
     nullableParamsTime += time
@@ -93,7 +108,13 @@ class MainProcessor extends FabaProcessor {
   override def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
     val start = System.nanoTime()
     val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.NotNull), resultOrigins, stable)
-    val result = analyser.analyze()
+    val result = try {
+      analyser.analyze()
+    } catch {
+      case LimitReachedException =>
+        limitReached += 1
+        Equation(analyser.aKey, Final(Values.Top))
+    }
     val time = System.nanoTime() - start
     contractTicks ::= Debug(result.id, analyser.lastId(), time)
     notNullTime += time
@@ -103,7 +124,13 @@ class MainProcessor extends FabaProcessor {
   override def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
     val start = System.nanoTime()
     val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.Null), resultOrigins, stable)
-    val result = analyser.analyze()
+    val result = try {
+      analyser.analyze()
+    } catch {
+      case LimitReachedException =>
+        limitReached += 1
+        Equation(analyser.aKey, Final(Values.Top))
+    }
     val time = System.nanoTime() - start
     contractTicks ::= Debug(result.id, analyser.lastId(), time)
     nullTime += time
@@ -113,7 +140,13 @@ class MainProcessor extends FabaProcessor {
   override def trueContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
     val start = System.nanoTime()
     val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.True), resultOrigins, stable)
-    val result = analyser.analyze()
+    val result = try {
+      analyser.analyze()
+    } catch {
+      case LimitReachedException =>
+        limitReached += 1
+        Equation(analyser.aKey, Final(Values.Top))
+    }
     val time = System.nanoTime() - start
     contractTicks ::= Debug(result.id, analyser.lastId(), time)
     trueTime += time
@@ -123,7 +156,13 @@ class MainProcessor extends FabaProcessor {
   override def falseContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
     val start = System.nanoTime()
     val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.False), resultOrigins, stable)
-    val result = analyser.analyze()
+    val result = try {
+      analyser.analyze()
+    } catch {
+      case LimitReachedException =>
+        limitReached += 1
+        Equation(analyser.aKey, Final(Values.Top))
+    }
     val time = System.nanoTime() - start
     contractTicks ::= Debug(result.id, analyser.lastId(), time)
     falseTime += time
@@ -133,7 +172,13 @@ class MainProcessor extends FabaProcessor {
   override def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], stable: Boolean) = {
     val start = System.nanoTime()
     val analyser = new InOutAnalysis(richControlFlow, Out, resultOrigins, stable)
-    val result = analyser.analyze()
+    val result = try {
+      analyser.analyze()
+    } catch {
+      case LimitReachedException =>
+        limitReached += 1
+        Equation(analyser.aKey, Final(Values.Top))
+    }
     val time = System.nanoTime() - start
     notNullResultTicks ::= Debug(result.id, analyser.lastId(), time)
     outTime += time
@@ -237,6 +282,7 @@ class MainProcessor extends FabaProcessor {
     println(s"dfs            ${dfsTime / 1000000} msec")
     println(s"reducible      ${reducibleTime / 1000000} msec")
     println(s"leakingParams  ${leakingParametersTime / 1000000} msec")
+    println(s"limitReached   $limitReached")
 
     printTicks("@Nullable parameters", nullableParameterTicks)
     printTicks("@NotNull parameters", notNullParameterTicks)

@@ -81,6 +81,9 @@ case class Conf(insnIndex: Int, frame: SmartFrame[BasicValue]) {
 }
 
 case class State(index: Int, conf: Conf, history: List[Conf], taken: Boolean, hasCompanions: Boolean)
+object LimitReachedException extends Exception("Limit reached exception") {
+  val limit = 30000
+}
 
 abstract class Analysis[Res] {
 
@@ -123,6 +126,9 @@ abstract class Analysis[Res] {
   private var id = 0
   @inline
   final def mkId(): Int = {
+    if (id > LimitReachedException.limit) {
+      throw LimitReachedException
+    }
     id += 1; id
   }
 
