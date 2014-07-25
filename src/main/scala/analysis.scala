@@ -120,6 +120,14 @@ abstract class Analysis[Res] {
 
   var earlyResult: Option[Res] = None
 
+  private var id = 0
+  @inline
+  final def mkId(): Int = {
+    id += 1; id
+  }
+
+  final def lastId(): Int = id
+
   final def analyze(): Equation[Key, Value] = {
     pending.push(ProceedState(createStartState()))
 
