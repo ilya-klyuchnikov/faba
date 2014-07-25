@@ -16,6 +16,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
   type MyResult = Result[Key, Value]
   implicit val contractsLattice = ELattice(Values.Bot, Values.Top)
 
+  val propagateNullityTest_? = true
   override val identity = Final(Values.Bot)
 
   private val interpreter = InOutInterpreter(direction, methodNode.instructions, resultOrigins)
@@ -184,7 +185,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
           states = state :: states
           state = nextState
-        case IFNULL if /*direction == Out &&*/ frame.mapping.head != -1  =>
+        case IFNULL if propagateNullityTest_? && /*direction == Out &&*/ frame.mapping.head != -1  =>
           val nullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           val notNullInsn = insnIndex + 1
 
@@ -202,7 +203,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           pending.pushAll(nextStates.map(s => ProceedState(s)))
           return
 
-        case IFNONNULL if /*direction == Out &&*/ frame.mapping.head != -1  =>
+        case IFNONNULL if propagateNullityTest_? && /*direction == Out &&*/ frame.mapping.head != -1  =>
           val notNullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           val nullInsn = insnIndex + 1
 

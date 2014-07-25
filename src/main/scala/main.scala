@@ -1,6 +1,8 @@
 package faba
 
+import faba.contracts.InOutAnalysis
 import faba.engine.{Equation, ELattice, Solver}
+import faba.parameters.{NotNullInAnalysis, NullableInAnalysis}
 import org.objectweb.asm.tree.MethodNode
 import _root_.java.io.{PrintWriter, File}
 
@@ -8,6 +10,8 @@ import faba.cfg._
 import faba.data._
 import faba.source._
 import scala.xml.PrettyPrinter
+
+case class Debug(key: Key, ticks: Int, time: Long)
 
 class MainProcessor extends FabaProcessor {
 
@@ -28,6 +32,15 @@ class MainProcessor extends FabaProcessor {
   var dfsTime: Long = 0
   var leakingParametersTime: Long = 0
   val processNullableParameters = true
+
+  var notNullParameterTicks =
+    List[Debug]()
+  var nullableParameterTicks =
+    List[Debug]()
+  var notNullResultTicks =
+    List[Debug]()
+  var contractTicks =
+    List[Debug]()
 
   override def buildCFG(className: String, methodNode: MethodNode) = {
     val start = System.nanoTime()
@@ -59,50 +72,71 @@ class MainProcessor extends FabaProcessor {
 
   override def notNullParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean) = {
     val start = System.nanoTime()
-    val result = super.notNullParamEquation(richControlFlow, i, stable)
-    notNullParamsTime += System.nanoTime() - start
+    val analyser = new NotNullInAnalysis(richControlFlow, In(i), stable)
+    val result = analyser.analyze()
+    val time = System.nanoTime() - start
+    notNullParameterTicks ::= Debug(result.id, analyser.lastId(), time)
+    notNullParamsTime += time
     result
   }
 
   override def nullableParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean) = {
     val start = System.nanoTime()
-    val result = super.nullableParamEquation(richControlFlow, i, stable)
-    nullableParamsTime += System.nanoTime() - start
+    val analyser = new NullableInAnalysis(richControlFlow, In(i), stable)
+    val result = analyser.analyze()
+    val time = System.nanoTime() - start
+    nullableParameterTicks ::= Debug(result.id, analyser.lastId(), time)
+    nullableParamsTime += time
     result
   }
 
   override def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
     val start = System.nanoTime()
-    val result = super.notNullContractEquation(richControlFlow, resultOrigins, i, stable)
-    notNullTime += System.nanoTime() - start
+    val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.NotNull), resultOrigins, stable)
+    val result = analyser.analyze()
+    val time = System.nanoTime() - start
+    contractTicks ::= Debug(result.id, analyser.lastId(), time)
+    notNullTime += time
     result
   }
 
   override def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
     val start = System.nanoTime()
-    val result = super.nullContractEquation(richControlFlow, resultOrigins, i, stable)
-    nullTime += System.nanoTime() - start
+    val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.Null), resultOrigins, stable)
+    val result = analyser.analyze()
+    val time = System.nanoTime() - start
+    contractTicks ::= Debug(result.id, analyser.lastId(), time)
+    nullTime += time
     result
   }
 
   override def trueContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
     val start = System.nanoTime()
-    val result = super.trueContractEquation(richControlFlow, resultOrigins, i, stable)
-    trueTime += System.nanoTime() - start
+    val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.True), resultOrigins, stable)
+    val result = analyser.analyze()
+    val time = System.nanoTime() - start
+    contractTicks ::= Debug(result.id, analyser.lastId(), time)
+    trueTime += time
     result
   }
 
   override def falseContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
     val start = System.nanoTime()
-    val result = super.falseContractEquation(richControlFlow, resultOrigins, i, stable)
-    falseTime += System.nanoTime() - start
+    val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.False), resultOrigins, stable)
+    val result = analyser.analyze()
+    val time = System.nanoTime() - start
+    contractTicks ::= Debug(result.id, analyser.lastId(), time)
+    falseTime += time
     result
   }
 
   override def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], stable: Boolean) = {
     val start = System.nanoTime()
-    val result = super.outContractEquation(richControlFlow, resultOrigins, stable)
-    outTime += System.nanoTime() - start
+    val analyser = new InOutAnalysis(richControlFlow, Out, resultOrigins, stable)
+    val result = analyser.analyze()
+    val time = System.nanoTime() - start
+    notNullResultTicks ::= Debug(result.id, analyser.lastId(), time)
+    outTime += time
     result
   }
 
@@ -203,6 +237,28 @@ class MainProcessor extends FabaProcessor {
     println(s"dfs            ${dfsTime / 1000000} msec")
     println(s"reducible      ${reducibleTime / 1000000} msec")
     println(s"leakingParams  ${leakingParametersTime / 1000000} msec")
+
+    printTicks("@Nullable parameters", nullableParameterTicks)
+    printTicks("@NotNull parameters", notNullParameterTicks)
+    printTicks("@NotNull results", notNullResultTicks)
+    printTicks("@Contract", contractTicks)
+  }
+
+  def printTicks(name: String, ticks: List[Debug]) {
+    println(s"======== $name ========")
+    val totalTicks = ticks.map(_.ticks).sum
+    val totalTime = ticks.map(_.time).sum
+    val avgTicks = totalTicks / ticks.size
+    val avgTime = totalTime / ticks.size
+    println(s"total ticks: $totalTicks")
+    println(s"avg ticks:   $avgTicks")
+    println(s"total time:  ${totalTime / 1000000} msec")
+    println(s"avg time:    ${avgTime/1000000.0} msec")
+    for (info <- ticks.sortBy(_.ticks).reverse.take(20)) {
+      println(info.key)
+      println(s"    ${info.ticks} ticks")
+      println(s"    ${info.time/1000000} msec")
+    }
   }
 
   def process(source: Source): Annotations = {
