@@ -219,7 +219,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
           val nextStates = nextInsnIndices.map {
             nextInsnIndex =>
               val nextFrame1 = if (controlFlow.errorTransitions(insnIndex -> nextInsnIndex)) {
-                val handler = new Frame(frame)
+                val handler = new SmartFrame(frame)
                 handler.clearStack()
                 handler.push(new BasicValue(Type.getType("java/lang/Throwable")))
                 handler
@@ -243,11 +243,11 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     }
   }
 
-  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
+  private def execute(frame: SmartFrame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
       (frame, Identity)
     case _ =>
-      val nextFrame = new Frame(frame)
+      val nextFrame = new SmartFrame(frame)
       NonNullInterpreter.reset()
       nextFrame.execute(insnNode, NonNullInterpreter)
       (nextFrame, NonNullInterpreter.getSubResult)
@@ -371,7 +371,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
           val nextStates = nextInsnIndices.map {
             nextInsnIndex =>
               val nextFrame1 = if (controlFlow.errorTransitions(insnIndex -> nextInsnIndex)) {
-                val handler = new Frame(frame)
+                val handler = new SmartFrame(frame)
                 handler.clearStack()
                 handler.push(new BasicValue(Type.getType("java/lang/Throwable")))
                 handler
@@ -392,11 +392,11 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
     }
   }
 
-  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
+  private def execute(frame: SmartFrame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
       (frame, Identity)
     case _ =>
-      val nextFrame = new Frame(frame)
+      val nextFrame = new SmartFrame(frame)
       NullableInterpreter.reset()
       nextFrame.execute(insnNode, NullableInterpreter)
       (nextFrame, NullableInterpreter.getSubResult)

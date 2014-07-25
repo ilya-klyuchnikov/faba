@@ -198,12 +198,47 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           }, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
           states = state :: states
           state = nextState
+        case IFNULL if /*direction == Out &&*/ frame.mapping.head != -1  =>
+          val nullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+          val notNullInsn = insnIndex + 1
+
+          val nullFrame = new SmartFrame(nextFrame)
+          nullFrame.setLocal(frame.mapping.head, NullValue())
+
+          val notNullFrame = new SmartFrame(nextFrame)
+          notNullFrame.setLocal(frame.mapping.head, NotNullValue(nextFrame.getLocal(frame.mapping.head).getType))
+
+          val nullState = State({id += 1; id}, Conf(nullInsn, nullFrame), nextHistory, taken, false)
+          val notNullState = State({id += 1; id}, Conf(notNullInsn, notNullFrame), nextHistory, taken, false)
+          val nextStates = List(nullState, notNullState)
+          states = state :: states
+          pending.push(MakeResult(states, identity, nextStates.map(_.index)))
+          pending.pushAll(nextStates.map(s => ProceedState(s)))
+          return
+
+        case IFNONNULL if /*direction == Out &&*/ frame.mapping.head != -1  =>
+          val notNullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+          val nullInsn = insnIndex + 1
+
+          val nullFrame = new SmartFrame(nextFrame)
+          nullFrame.setLocal(frame.mapping.head, NullValue())
+
+          val notNullFrame = new SmartFrame(nextFrame)
+          notNullFrame.setLocal(frame.mapping.head, NotNullValue(nextFrame.getLocal(frame.mapping.head).getType))
+
+          val nullState = State({id += 1; id}, Conf(nullInsn, nullFrame), nextHistory, taken, false)
+          val notNullState = State({id += 1; id}, Conf(notNullInsn, notNullFrame), nextHistory, taken, false)
+          val nextStates = List(nullState, notNullState)
+          states = state :: states
+          pending.push(MakeResult(states, identity, nextStates.map(_.index)))
+          pending.pushAll(nextStates.map(s => ProceedState(s)))
+          return
         case _ =>
           val nextInsnIndices = controlFlow.transitions(insnIndex)
           val nextStates = nextInsnIndices.map {
             nextInsnIndex =>
               val nextFrame1 = if (controlFlow.errorTransitions(insnIndex -> nextInsnIndex)) {
-                val handler = new Frame(frame)
+                val handler = new SmartFrame(frame)
                 handler.clearStack()
                 handler.push(new BasicValue(Type.getType("java/lang/Throwable")))
                 handler
@@ -226,20 +261,20 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     }
   }
 
-  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
+  private def execute(frame: SmartFrame[BasicValue], insnNode: AbstractInsnNode): SmartFrame[BasicValue] = insnNode.getType match {
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
       interpreter.dereferenced = false
       frame
     case _ =>
       interpreter.dereferenced = false
-      val nextFrame = new Frame(frame)
+      val nextFrame = new SmartFrame(frame)
       nextFrame.execute(insnNode, interpreter)
       nextFrame
   }
 
   // in-place generalization
   def generalize(conf: Conf): Conf = {
-    val frame = new Frame(conf.frame)
+    val frame = new SmartFrame(conf.frame)
     for (i <- 0 until frame.getLocals) frame.getLocal(i) match {
       case CallResultValue(tp, _) =>
         frame.setLocal(i, new BasicValue(tp))

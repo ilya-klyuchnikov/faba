@@ -3,8 +3,9 @@ package faba.analysis
 import scala.collection.mutable
 import scala.collection.immutable.IntMap
 
-import org.objectweb.asm.tree.analysis.{BasicValue, Frame}
 import org.objectweb.asm.{Opcodes, Type}
+import org.objectweb.asm.tree.{VarInsnNode, AbstractInsnNode}
+import org.objectweb.asm.tree.analysis.{Interpreter, BasicValue, Frame}
 
 import faba.cfg._
 import faba.data._
@@ -19,7 +20,53 @@ case class NullValue() extends BasicValue(Type.getObjectType("null"))
 case class NotNullValue(tp: Type) extends BasicValue(tp)
 case class CallResultValue(tp: Type, inters: Set[Key]) extends BasicValue(tp)
 
-case class Conf(insnIndex: Int, frame: Frame[BasicValue]) {
+// frame to track locals -> stack correspondence
+class SmartFrame[V <: org.objectweb.asm.tree.analysis.Value](locals: Int, stack: Int) extends Frame[V](locals, stack) {
+  var mapping: List[Int] = Nil
+
+  def this(f: SmartFrame[V]) {
+    this(f.getLocals, f.getMaxStackSize)
+    init(f)
+    mapping = f.mapping
+  }
+
+  override def execute(insn: AbstractInsnNode, interpreter: Interpreter[V]): Unit = {
+    insn.getOpcode match {
+      case Opcodes.ALOAD =>
+        val local = insn.asInstanceOf[VarInsnNode].`var`
+        push(interpreter.copyOperation(insn, getLocal(local)), local)
+      case _ =>
+        super.execute(insn, interpreter)
+    }
+  }
+
+  override def push(value: V): Unit = {
+    super.push(value)
+    mapping = -1 :: mapping
+  }
+
+  override def pop(): V = {
+    mapping = mapping.tail
+    super.pop()
+  }
+
+  def push(value: V, local: Int): Unit = {
+    super.push(value)
+    mapping = local :: mapping
+  }
+
+  override def clearStack(): Unit = {
+    super.clearStack()
+    mapping = Nil
+  }
+
+  override def setLocal(i: Int, value: V): Unit = {
+    mapping = mapping.map(j => if (j == i) -1 else j)
+    super.setLocal(i, value)
+  }
+}
+
+case class Conf(insnIndex: Int, frame: SmartFrame[BasicValue]) {
   val _hashCode = {
     var result = 0
     for (i <- 0 until frame.getLocals) {
@@ -96,8 +143,8 @@ abstract class Analysis[Res] {
     mkEquation(earlyResult.getOrElse(results(0)))
   }
 
-  final def createStartFrame(): Frame[BasicValue] = {
-    val frame = new Frame[BasicValue](methodNode.maxLocals, methodNode.maxStack)
+  final def createStartFrame(): SmartFrame[BasicValue] = {
+    val frame = new SmartFrame[BasicValue](methodNode.maxLocals, methodNode.maxStack)
     val returnType = Type.getReturnType(methodNode.desc)
     val returnValue = if (returnType == Type.VOID_TYPE) null else new BasicValue(returnType)
     frame.setReturn(returnValue)
@@ -185,6 +232,8 @@ object Utils {
   def equiv(curr: Conf, prev: Conf): Boolean = {
     val currFr = curr.frame
     val prevFr = prev.frame
+    if (currFr.mapping != prevFr.mapping)
+      return false
     for (i <- (currFr.getStackSize - 1) to 0 by -1 if !equiv(currFr.getStack(i), prevFr.getStack(i)))
       return false
     for (i <- (currFr.getLocals - 1) to 0 by -1 if !equiv(currFr.getLocal(i), prevFr.getLocal(i)))
