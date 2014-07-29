@@ -11,11 +11,10 @@ import faba.engine._
 import faba.source.{MixedSource, JarFileSource, Source}
 import org.objectweb.asm.Opcodes
 
-import scala.collection.JavaConversions._
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
-object Statistics extends FabaProcessor {
+object DependencyStatistics extends FabaProcessor {
   var eqs = 0
 
   private val dependencies =
@@ -181,6 +180,71 @@ object Statistics extends FabaProcessor {
     calculateDependencyStatistics()
     calculateAllWithHierarchy()
     calculateNotNullsWithHierarchy()
+  }
+
+  def main(args: Array[String]) {
+    if (args(0) == "--dirs") {
+      val sources = ListBuffer[Source]()
+      for (d <- args.tail)
+        Files.walkFileTree(FileSystems.getDefault.getPath(d), new SimpleFileVisitor[Path] {
+          override def visitFile(file: Path, attrs: BasicFileAttributes): FileVisitResult = {
+            if (file.toString.endsWith(".jar")) {
+              println(s"adding $file")
+              sources += JarFileSource(file.toFile)
+            }
+            super.visitFile(file, attrs)
+          }
+        })
+      process(MixedSource(sources.toList))
+    }
+    else {
+      process(JarFileSource(new File(args(0))))
+    }
+  }
+}
+
+object EquationSizeStatistics extends FabaProcessor {
+  private val sizes = new Array[Int](31)
+  private var eqs = 0
+
+  def handleEquation(eq: Equation[Key, Value]) {
+    val key = eq.id
+    eq.rhs match {
+      case Pending(sop) =>
+        val size = sop.map(_.ids.size).sum
+        if (size >= 30)
+          sizes(30) += 1
+        else
+          sizes(size) += 1
+        eqs += 1
+      case Final(_) =>
+        eqs += 1
+    }
+  }
+
+  override def handleNotNullParamEquation(eq: Equation[Key, Value]) =
+    handleEquation(eq)
+
+  override def handleNotNullContractEquation(eq: Equation[Key, Value]) =
+    handleEquation(eq)
+
+  override def handleNullContractEquation(eq: Equation[Key, Value]) =
+    handleEquation(eq)
+
+  override def handleTrueContractEquation(eq: Equation[Key, Value]) =
+    handleEquation(eq)
+
+  override def handleFalseContractEquation(eq: Equation[Key, Value]) =
+    handleEquation(eq)
+
+  override def handleOutContractEquation(eq: Equation[Key, Value]) =
+    handleEquation(eq)
+
+  def process(source: Source) {
+    println(s"${new Date()} indexing...")
+    source.process(this)
+    println(s"${new Date()} calculating statistics...")
+    println(sizes.mkString(", "))
   }
 
   def main(args: Array[String]) {
