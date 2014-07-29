@@ -220,6 +220,33 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           pending.push(MakeResult(states, identity, nextStates.map(_.index)))
           pending.pushAll(nextStates.map(s => ProceedState(s)))
           return
+        case INVOKEINTERFACE | INVOKESPECIAL | INVOKEVIRTUAL | GETFIELD | PUTFIELD |
+             IALOAD | LALOAD | FALOAD | DALOAD | AALOAD | BALOAD | CALOAD | SALOAD |
+             IASTORE | LASTORE | FASTORE | DASTORE | AASTORE | BASTORE | CASTORE | SASTORE | ARRAYLENGTH
+            if propagateNullityTest_? && frame.mapping.last != -1 =>
+          val nextInsnIndices = controlFlow.transitions(insnIndex)
+          val nextStates = nextInsnIndices.map {
+            nextInsnIndex =>
+              val nextFrame1 = if (controlFlow.errorTransitions(insnIndex -> nextInsnIndex)) {
+                val handler = new SmartFrame(frame)
+                handler.clearStack()
+                handler.push(new BasicValue(Type.getType("java/lang/Throwable")))
+                handler
+              } else {
+                val notNullFrame = new SmartFrame(nextFrame)
+                notNullFrame.setLocal(frame.mapping.last, NotNullValue(nextFrame.getLocal(frame.mapping.last).getType))
+                notNullFrame
+              }
+              State(mkId(), Conf(nextInsnIndex, nextFrame1), nextHistory, taken, false)
+          }
+          states = state :: states
+          if (nextStates.size == 1) {
+            state = nextStates.head
+          } else {
+            pending.push(MakeResult(states, identity, nextStates.map(_.index)))
+            pending.pushAll(nextStates.map(s => ProceedState(s)))
+            return
+          }
         case _ =>
           val nextInsnIndices = controlFlow.transitions(insnIndex)
           val nextStates = nextInsnIndices.map {
