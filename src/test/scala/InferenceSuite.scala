@@ -13,7 +13,7 @@ import faba.source.ClassSource
 // TODO - it is for stable keys only for now
 class InferenceSuite extends FunSuite with Matchers {
 
-  test("ParametersData.class") {
+  test("Data01.class") {
     checkInference(classOf[Data01])
   }
 
