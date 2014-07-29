@@ -32,7 +32,11 @@ case object Identity extends Result
 case object Error extends Result
 case object Return extends Result
 case object NPE extends Result
-case class ConditionalNPE(sop: SoP) extends Result
+case class ConditionalNPE(sop: SoP) extends Result {
+  if (sop.map(_.size).sum > 30) {
+    throw LimitReachedException
+  }
+}
 
 object ConditionalNPE {
   def apply(passing: Key): ConditionalNPE = ConditionalNPE(Set(Set(passing)))
