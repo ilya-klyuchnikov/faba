@@ -6,10 +6,12 @@ import java.nio.file.attribute.BasicFileAttributes
 import java.util.Date
 
 import faba.FabaProcessor
+import faba.cfg.{ControlFlowGraph, MinimalOriginInterpreter}
 import faba.data._
 import faba.engine._
 import faba.source.{MixedSource, JarFileSource, Source}
 import org.objectweb.asm.Opcodes
+import org.objectweb.asm.tree.MethodNode
 
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
@@ -206,6 +208,7 @@ object DependencyStatistics extends FabaProcessor {
 object EquationSizeStatistics extends FabaProcessor {
   private val sizes = new Array[Int](31)
   private var eqs = 0
+  val complexities = new Array[Int](1000)
 
   def handleEquation(eq: Equation[Key, Value]) {
     val key = eq.id
@@ -220,6 +223,17 @@ object EquationSizeStatistics extends FabaProcessor {
       case Final(_) =>
         eqs += 1
     }
+  }
+
+  override def buildCFG(className: String, methodNode: MethodNode) = {
+    val result: ControlFlowGraph = super.buildCFG(className, methodNode)
+    val complexity = result.transitions.count(_.size > 1)
+    if (complexity >= complexities.length) {
+      complexities(complexities.length - 1) += 1
+    } else {
+      complexities(complexity) += 1
+    }
+    result
   }
 
   override def handleNotNullParamEquation(eq: Equation[Key, Value]) =
@@ -244,7 +258,14 @@ object EquationSizeStatistics extends FabaProcessor {
     println(s"${new Date()} indexing...")
     source.process(this)
     println(s"${new Date()} calculating statistics...")
+    println("equation size")
     println(sizes.mkString(", "))
+    println("maxMerge distribution")
+    println(MinimalOriginInterpreter.maxMerges.mkString(", "))
+    println("merge distribution")
+    println(MinimalOriginInterpreter.merges.mkString(", "))
+    println("complexities")
+    println(complexities.mkString(", "))
   }
 
   def main(args: Array[String]) {
