@@ -321,6 +321,9 @@
   <item name="sun.awt.X11.MotifDnDDropTargetProtocol int getMessageType(sun.awt.X11.XClientMessageEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.X11.MotifDnDDropTargetProtocol java.lang.Object getData(long, long)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.awt.X11.MotifDnDDropTargetProtocol java.lang.String getProtocolName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -541,6 +544,12 @@
   <item name="sun.awt.X11.XAtom long toData(sun.awt.X11.XAtom[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.X11.XAtom sun.awt.X11.XAtom get(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XAtom sun.awt.X11.XAtom get(long)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.awt.X11.XAtom sun.awt.X11.XAtomList getAtomListPropertyList(long)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -693,10 +702,22 @@
   <item name="sun.awt.X11.XBaseWindow java.awt.Dimension getSize()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.X11.XBaseWindow java.awt.Point toGlobal(int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.awt.X11.XBaseWindow java.awt.Point toGlobal(java.awt.Point) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.X11.XBaseWindow java.awt.Point toGlobal(java.awt.Point)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XBaseWindow java.awt.Point toLocal(int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.awt.X11.XBaseWindow java.awt.Point toLocal(java.awt.Point) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XBaseWindow java.awt.Point toLocal(java.awt.Point)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.X11.XBaseWindow java.awt.Rectangle getBounds()">
@@ -1095,8 +1116,14 @@
   <item name="sun.awt.X11.XClientMessageEvent sun.awt.X11.XEvent clone()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.X11.XClipboard byte[] getClipboardData(long)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.awt.X11.XClipboard java.awt.datatransfer.Transferable getContents(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.awt.X11.XClipboard long[] getClipboardFormats()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.X11.XClipboard void access$300(sun.awt.X11.XClipboard) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1628,6 +1655,9 @@
   <item name="sun.awt.X11.XDnDDropTargetProtocol int getMessageType(sun.awt.X11.XClientMessageEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.X11.XDnDDropTargetProtocol java.lang.Object getData(long, long)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.awt.X11.XDnDDropTargetProtocol java.lang.String getProtocolName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1695,6 +1725,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.X11.XDropTargetContextPeer sun.awt.X11.XDropTargetContextPeer getPeer(sun.awt.AppContext) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XDropTargetContextPeer sun.awt.X11.XDropTargetContextPeer getPeer(sun.awt.AppContext)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.X11.XDropTargetContextPeer void processDropMessage(sun.awt.dnd.SunDropTargetEvent) 0">
@@ -2193,9 +2226,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11.XFileDialogPeer java.lang.String getFileName(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.X11.XFileDialogPeer java.lang.String[] getDirList(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2861,6 +2892,9 @@
   <item name="sun.awt.X11.XMenuBarPeer void print(java.awt.Graphics) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.awt.X11.XMenuItemPeer java.lang.String getTargetLabel()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.awt.X11.XMenuItemPeer void setFont(java.awt.Font) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -3280,7 +3314,16 @@
   <item name="sun.awt.X11.XSelection XSelection(sun.awt.X11.XAtom) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.X11.XSelection byte[] getData(long, long)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.awt.X11.XSelection long[] getFormats(sun.awt.X11.WindowPropertyGetter) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XSelection long[] getFormats(sun.awt.X11.WindowPropertyGetter)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XSelection long[] getTargets(long)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.X11.XSelection sun.awt.X11.WindowPropertyGetter access$202(sun.awt.X11.WindowPropertyGetter)">
@@ -3884,11 +3927,6 @@
   <item name="sun.awt.X11.XToolkit java.lang.Object targetToPeer(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.awt.X11.XToolkit java.lang.Object targetToPeer(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.awt.X11.XToolkit java.lang.String getCorrectXIDString(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
@@ -4096,6 +4134,9 @@
     </annotation>
   </item>
   <item name="sun.awt.X11.XWM java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XWM java.util.Collection&lt;T&gt; getProtocols(java.lang.Class&lt;T&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.X11.XWM void removeSizeHints(sun.awt.X11.XDecoratedPeer, long) 0">
@@ -4325,6 +4366,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.X11.XWindowPeer java.awt.Insets getInsets()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XWindowPeer java.lang.String getWMName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.X11.XWindowPeer java.util.List&lt;sun.awt.IconInfo&gt; normalizeIconImages(java.util.List&lt;sun.awt.IconInfo&gt;) 0">

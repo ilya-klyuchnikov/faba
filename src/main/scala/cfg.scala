@@ -15,7 +15,20 @@ object `package` {
     ControlFlowBuilder(className, methodNode).buildCFG()
 
   def resultOrigins(className: String, methodNode: MethodNode): Set[Int] = {
-    val frames = new Analyzer(MinimalOriginInterpreter).analyze(className, methodNode)
+    val interpreter = new MinimalOriginInterpreter
+    val analyzer = new Analyzer(interpreter)
+    val start = System.currentTimeMillis()
+    val frames = analyzer.analyze(className, methodNode)
+    val time = System.currentTimeMillis() - start
+    val maxMerge = interpreter.maxMerge
+    MinimalOriginInterpreter.updateMaxMerges(maxMerge)
+    val mergeCount = interpreter.mergeCount
+    MinimalOriginInterpreter.updateMerges(mergeCount)
+
+    if (mergeCount > 100000) {
+      System.err.println(s"$className ${methodNode.name} ${methodNode.desc} $maxMerge $time msec")
+      System.err.println(s"${methodNode.instructions.size()} $mergeCount")
+    }
     val insns = methodNode.instructions
     var result = Set[Int]()
     for (i <- 0 until frames.length) {
@@ -146,9 +159,33 @@ object `package` {
   }
 }
 
-object MinimalOriginInterpreter extends SourceInterpreter {
+object MinimalOriginInterpreter {
+  val maxMerges = new Array[Int](1000)
+  val merges = new Array[Int](1000)
+
+  def updateMaxMerges(maxMerge: Int) {
+    if (maxMerge >= maxMerges.length) {
+      maxMerges(maxMerges.length - 1) += 1
+    } else {
+      maxMerges(maxMerge) += 1
+    }
+  }
+
+  def updateMerges(mergeCount: Int) {
+    val count = mergeCount / 1000
+    if (count >= merges.length) {
+      merges(merges.length - 1) += 1
+    } else {
+      merges(count) += 1
+    }
+  }
+}
+
+class MinimalOriginInterpreter extends SourceInterpreter {
   val sourceVal1 = new SourceValue(1)
   val sourceVal2 = new SourceValue(2)
+  var maxMerge = 0
+  var mergeCount = 0
 
   override def newOperation(insn: AbstractInsnNode): SourceValue = {
     val result = super.newOperation(insn)
@@ -185,6 +222,15 @@ object MinimalOriginInterpreter extends SourceInterpreter {
 
   override def copyOperation(insn: AbstractInsnNode, value: SourceValue) =
     value
+
+  override def merge(d: SourceValue, w: SourceValue): SourceValue = {
+    val res = super.merge(d, w)
+    maxMerge = math.max(maxMerge, res.insns.size())
+    val size = res.insns.size()
+    if (size > 2)
+      mergeCount += size
+    res
+  }
 }
 
 case class ControlFlowGraph(className: String,

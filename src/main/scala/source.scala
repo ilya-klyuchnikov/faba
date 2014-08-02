@@ -27,17 +27,32 @@ case class JarFileSource(file: File) extends Source {
         val is = jarFile.getInputStream(entry)
         try {
           processor.processClass(new ClassReader(is))
+        } catch {
+          case e: Throwable =>
+            println(s"error in $file / ${entry.getName}")
+            e.printStackTrace()
         } finally {
           is.close()
         }
       }
     }
   }
+
+  override def toString: String = file.toString
 }
 
 case class MixedSource(sources: List[Source]) extends Source {
   override def process(processor: Processor): Unit =
-    sources.foreach(_.process(processor))
+    for (source <- sources) {
+      println(s"processing $source")
+      try {
+        source.process(processor)
+      } catch {
+        case e: Throwable =>
+          println(s"error in $source")
+          e.printStackTrace()
+      }
+    }
 }
 
 trait Processor {

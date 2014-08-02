@@ -58,9 +58,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.image.BandCombineOp java.awt.geom.Point2D getPoint2D(java.awt.geom.Point2D, java.awt.geom.Point2D)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.image.BandCombineOp java.awt.geom.Rectangle2D getBounds2D(java.awt.image.Raster) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -258,9 +256,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.image.ColorConvertOp java.awt.geom.Point2D getPoint2D(java.awt.geom.Point2D, java.awt.geom.Point2D)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.image.ColorConvertOp java.awt.geom.Rectangle2D getBounds2D(java.awt.image.BufferedImage) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -293,6 +289,11 @@
   </item>
   <item name="java.awt.image.ColorConvertOp java.awt.image.BufferedImage filter(java.awt.image.BufferedImage, java.awt.image.BufferedImage) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.image.ColorConvertOp java.awt.image.BufferedImage filter(java.awt.image.BufferedImage, java.awt.image.BufferedImage)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="java.awt.image.ColorConvertOp java.awt.image.BufferedImage nonICCBIFilter(java.awt.image.BufferedImage, java.awt.color.ColorSpace, java.awt.image.BufferedImage, java.awt.color.ColorSpace) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -371,6 +372,11 @@
   <item name="java.awt.image.ColorModel boolean isLinearRGBspace(java.awt.color.ColorSpace) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.awt.image.ColorModel byte[] getLinearGray16ToOtherGray8LUT(java.awt.color.ICC_ColorSpace)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.image.ColorModel float[] getNormalizedComponents(int[], int, float[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -440,6 +446,11 @@
   <item name="java.awt.image.ColorModel java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.image.ColorModel short[] getLinearGray16ToOtherGray16LUT(java.awt.color.ICC_ColorSpace)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.image.ComponentColorModel ComponentColorModel(java.awt.color.ColorSpace, boolean, boolean, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -493,21 +504,22 @@
   <item name="java.awt.image.ComponentColorModel int[] bitsArrayHelper(int[], int, java.awt.color.ColorSpace, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.awt.image.ComponentColorModel int[] bitsArrayHelper(int[], int, java.awt.color.ColorSpace, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.image.ComponentColorModel int[] getComponents(int, int[], int) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.image.ComponentColorModel int[] getComponents(int, int[], int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null,_-&gt;!null;_,null,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.image.ComponentColorModel int[] getComponents(java.lang.Object, int[], int) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.image.ComponentColorModel int[] getComponents(java.lang.Object, int[], int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null,_-&gt;!null;_,null,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.image.ComponentColorModel int[] getUnnormalizedComponents(float[], int, int[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -636,9 +648,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.image.ConvolveOp java.awt.geom.Point2D getPoint2D(java.awt.geom.Point2D, java.awt.geom.Point2D)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.image.ConvolveOp java.awt.geom.Rectangle2D getBounds2D(java.awt.image.BufferedImage) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -862,9 +872,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.image.IndexColorModel int[] getComponents(int, int[], int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null,_-&gt;!null;_,null,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.image.IndexColorModel int[] getComponents(java.lang.Object, int[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -885,9 +893,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.image.IndexColorModel java.lang.Object getDataElements(int, java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.image.IndexColorModel java.lang.Object getDataElements(int[], int, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -896,9 +902,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.image.IndexColorModel java.lang.Object installpixel(java.lang.Object, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.image.IndexColorModel java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -916,9 +920,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.image.Kernel float[] getKernelData(float[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.image.LookupOp java.awt.geom.Point2D getPoint2D(java.awt.geom.Point2D, java.awt.geom.Point2D) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -927,9 +929,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.image.LookupOp java.awt.geom.Point2D getPoint2D(java.awt.geom.Point2D, java.awt.geom.Point2D)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.image.LookupOp java.awt.geom.Rectangle2D getBounds2D(java.awt.image.BufferedImage) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1005,9 +1005,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.image.MultiPixelPackedSampleModel int[] getPixel(int, int, int[], java.awt.image.DataBuffer)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_-&gt;!null;_,_,null,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.image.MultiPixelPackedSampleModel int[] getSampleSize()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1294,9 +1292,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.image.RescaleOp java.awt.geom.Point2D getPoint2D(java.awt.geom.Point2D, java.awt.geom.Point2D)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.image.RescaleOp java.awt.geom.Rectangle2D getBounds2D(java.awt.image.BufferedImage) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
