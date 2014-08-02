@@ -294,8 +294,8 @@ class MainProcessor extends FabaProcessor {
     println(s"======== $name ========")
     val totalTicks = ticks.map(_.ticks).sum
     val totalTime = ticks.map(_.time).sum
-    val avgTicks = totalTicks / ticks.size
-    val avgTime = totalTime / ticks.size
+    val avgTicks = if (ticks.size > 0) totalTicks / ticks.size else 0
+    val avgTime = if (ticks.size > 0) totalTime / ticks.size else 0
     println(s"total ticks: $totalTicks")
     println(s"avg ticks:   $avgTicks")
     println(s"total time:  ${totalTime / 1000000} msec")
