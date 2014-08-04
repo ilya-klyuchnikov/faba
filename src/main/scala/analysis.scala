@@ -67,7 +67,7 @@ abstract class Analysis[Res] {
 
   val pending = mutable.Stack[PendingAction]()
   // the key is insnIndex
-  var computed = IntMap[List[State]]().withDefaultValue(Nil)
+  var computed = Array.tabulate[List[State]](methodNode.instructions.size()){i => Nil}
   // the key is stateIndex
   var results = IntMap[Res]()
 
@@ -86,15 +86,17 @@ abstract class Analysis[Res] {
           for (state <- states) {
             val insnIndex = state.conf.insnIndex
             results = results + (state.index -> result)
-            computed = computed.updated(insnIndex, state :: computed(insnIndex))
+            computed(insnIndex) = state :: computed(insnIndex)
           }
         }
       case ProceedState(state) =>
         processState(state)
     }
 
-    mkEquation(earlyResult.getOrElse(results(0)))
+    mkEquation(earlyResult.getOrElse(getInternalResult.getOrElse(results(0))))
   }
+
+  def getInternalResult: Option[Res] = None
 
   final def createStartFrame(): Frame[BasicValue] = {
     val frame = new Frame[BasicValue](methodNode.maxLocals, methodNode.maxStack)

@@ -137,7 +137,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
 
       if (fold) {
         results = results + (stateIndex -> identity)
-        computed = computed.updated(insnIndex, state :: computed(insnIndex))
+        computed(insnIndex) = state :: computed(insnIndex)
         if (states.nonEmpty)
           pending.push(MakeResult(states, subResult, List(stateIndex)))
         return
@@ -160,7 +160,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
         // npe was detected
         npe = true
         results = results + (stateIndex -> NPE)
-        computed = computed.updated(insnIndex, state :: computed(insnIndex))
+        computed(insnIndex) = state :: computed(insnIndex)
         pending.push(MakeResult(states, subResult, List(stateIndex)))
         return
       }
@@ -172,7 +172,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
             return
           } else {
             results = results + (stateIndex -> Return)
-            computed = computed.updated(insnIndex, state :: computed(insnIndex))
+            computed(insnIndex) = state :: computed(insnIndex)
             // important to put subResult
             if (states.nonEmpty)
               pending.push(MakeResult(states, subResult, List(stateIndex)))
@@ -180,13 +180,13 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
           }
         case ATHROW if taken =>
           results = results + (stateIndex -> NPE)
-          computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          computed(insnIndex) = state :: computed(insnIndex)
           if (states.nonEmpty)
             pending.push(MakeResult(states, subResult, List(stateIndex)))
           return
         case ATHROW =>
           results = results + (stateIndex -> Error)
-          computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          computed(insnIndex) = state :: computed(insnIndex)
           if (states.nonEmpty)
             pending.push(MakeResult(states, subResult, List(stateIndex)))
           return
@@ -257,29 +257,28 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
     Result.combineNullable(delta, subResults.reduce(Result.combineNullable))
 
   override def mkEquation(result: Result): Equation[Key, Value] = result match {
-    case NPE => Equation(aKey, Final(Values.Top))
-    case Identity | Return | Error => Equation(aKey, Final(Values.Null))
-    case ConditionalNPE(cnf) =>
-      Equation(aKey, Pending(cnf.map(p => Component(Values.Top, p))))
-  }
+      case NPE => Equation(aKey, Final(Values.Top))
+      case Identity | Return | Error => Equation(aKey, Final(Values.Null))
+      case ConditionalNPE(cnf) =>
+        Equation(aKey, Pending(cnf.map(p => Component(Values.Top, p))))
+    }
 
   override def isEarlyResult(res: Result): Boolean =
     false
 
   var id = 0
 
+  private var myResult = identity
+
+  override def getInternalResult: Option[Result] = Some(myResult)
+
   override def processState(fState: State): Unit = {
 
     var state = fState
-    var states: List[State] = Nil
-    var subResult = identity
 
     while (true) {
       computed(state.conf.insnIndex).find(prevState => stateEquiv(state, prevState)) match {
         case Some(ps) =>
-          results = results + (state.index -> results(ps.index))
-          if (states.nonEmpty)
-            pending.push(MakeResult(states, subResult, List(ps.index)))
           return
         case None =>
       }
@@ -292,11 +291,9 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
       val isLoopEnter = dfsTree.loopEnters(insnIndex)
       val fold = isLoopEnter && history.exists(prevConf => confInstance(conf, prevConf))
 
+      computed(insnIndex) = state :: computed(insnIndex)
+
       if (fold) {
-        results = results + (stateIndex -> identity)
-        computed = computed.updated(insnIndex, state :: computed(insnIndex))
-        if (states.nonEmpty)
-          pending.push(MakeResult(states, subResult, List(stateIndex)))
         return
       }
 
@@ -311,9 +308,8 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
         return
       }
 
-      val subResult2 = Result.combineNullable(subResult, localSubResult)
-      val noSwitch = subResult == subResult2
-      subResult = subResult2
+      if (localSubResult.isInstanceOf[ConditionalNPE])
+        myResult = Result.combineNullable(myResult, localSubResult)
 
       insnNode.getOpcode match {
         case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
@@ -321,41 +317,24 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
             earlyResult = Some(NPE)
             return
           }
-          results = results + (stateIndex -> Return)
-          computed = computed.updated(insnIndex, state :: computed(insnIndex))
-          // important to put subResult
-          if (states.nonEmpty)
-            pending.push(MakeResult(states, subResult, List(stateIndex)))
           return
         case ATHROW if taken =>
           earlyResult = Some(NPE)
           return
         case ATHROW =>
-          results = results + (stateIndex -> Error)
-          computed = computed.updated(insnIndex, state :: computed(insnIndex))
-          if (states.nonEmpty)
-            pending.push(MakeResult(states, subResult, List(stateIndex)))
           return
         case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = insnIndex + 1
-          val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-          states = state :: states
-          state = nextState
+          state = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
         case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-          states = state :: states
-          state = nextState
+          state = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
         case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-          states = state :: states
-          state = nextState
+          state = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
         case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
           val nextInsnIndex = insnIndex + 1
-          val nextState = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-          states = state :: states
-          state = nextState
+          state = State({id += 1; id}, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
         case _ =>
           val nextInsnIndices = controlFlow.transitions(insnIndex)
           val nextStates = nextInsnIndices.map {
@@ -370,11 +349,9 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
               }
               State({id += 1; id}, Conf(nextInsnIndex, nextFrame1), nextHistory, taken, false)
           }
-          states = state :: states
-          if (nextStates.size == 1 && noSwitch) {
+          if (nextStates.size == 1) {
             state = nextStates.head
           } else {
-            pending.push(MakeResult(states, subResult, nextStates.map(_.index)))
             pending.pushAll(nextStates.map(s => ProceedState(s)))
             return
           }
