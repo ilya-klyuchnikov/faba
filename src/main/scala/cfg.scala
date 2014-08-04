@@ -155,6 +155,10 @@ object Utils {
     val sort = tp.getSort
     sort == Type.OBJECT || sort == Type.ARRAY
   }
+
+  def isBooleanType(tp: Type): Boolean = {
+    Type.BOOLEAN_TYPE == tp
+  }
 }
 
 // really this is just for booleans
@@ -260,7 +264,6 @@ object ReferenceOriginInterpreter extends SourceInterpreter {
       case INVOKEINTERFACE =>
         val mNode = insn.asInstanceOf[MethodInsnNode]
         val retType = Type.getReturnType(mNode.desc)
-        val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
         if (retType.getSize == 1) sourceVal1 else sourceVal2
       case MULTIANEWARRAY =>
         new SourceValue(1, insn)
@@ -358,9 +361,14 @@ class ParametersUsage(m: MethodNode) extends Interpreter[ParamsValue](ASM5) {
     called += 1
     // hack for analyzer
     if (range.contains(called)) {
-      if (tp eq Type.VOID_TYPE) null
-      else if (tp.getSize == 1) ParamsValue(Set(called - shift), 1)
-      else ParamsValue(Set(called - shift), 2)
+      if (tp eq Type.VOID_TYPE) return null
+      if (Utils.isReferenceType(tp) || Utils.isBooleanType(tp)) {
+        if (tp.getSize == 1) ParamsValue(Set(called - shift), 1)
+        else ParamsValue(Set(called - shift), 2)
+      } else {
+        // we are not interested in such parameters
+        if (tp.getSize == 1) val1 else val2
+      }
     } else {
       if (tp eq Type.VOID_TYPE) null
       else if (tp.getSize == 1) val1

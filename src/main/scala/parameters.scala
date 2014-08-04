@@ -448,6 +448,10 @@ abstract class Interpreter extends BasicInterpreter {
     }
     super.ternaryOperation(insn, v1, v2, v3)
   }
+}
+
+object NonNullInterpreter extends Interpreter {
+  override def combine(res1: Result, res2: Result): Result = Result.meet(res1, res2)
 
   override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
     val opCode = insn.getOpcode
@@ -457,7 +461,7 @@ abstract class Interpreter extends BasicInterpreter {
       _subResult = NPE
     }
     opCode match {
-      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE =>
+      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL =>
         val stable = opCode == INVOKESTATIC || opCode == INVOKESPECIAL
         val mNode = insn.asInstanceOf[MethodInsnNode]
         for (i <- shift until values.size()) {
@@ -470,10 +474,7 @@ abstract class Interpreter extends BasicInterpreter {
     }
     super.naryOperation(insn, values)
   }
-}
 
-object NonNullInterpreter extends Interpreter {
-  override def combine(res1: Result, res2: Result): Result = Result.meet(res1, res2)
 }
 
 object NullableInterpreter extends Interpreter {
@@ -499,4 +500,28 @@ object NullableInterpreter extends Interpreter {
     }
     super.ternaryOperation(insn, v1, v2, v3)
   }
+
+  override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
+    val opCode = insn.getOpcode
+    val static = opCode == INVOKESTATIC
+    val shift = if (static) 0 else 1
+    if ((opCode == INVOKESPECIAL || opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) && values.get(0).isInstanceOf[ParamValue]) {
+      _subResult = NPE
+    }
+    opCode match {
+      // TODO - if is passed into INVOKEINTERFACE - we cannot say that it is @Nullable = top
+      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE =>
+        val stable = opCode == INVOKESTATIC || opCode == INVOKESPECIAL
+        val mNode = insn.asInstanceOf[MethodInsnNode]
+        for (i <- shift until values.size()) {
+          if (values.get(i).isInstanceOf[ParamValue]) {
+            val method = Method(mNode.owner, mNode.name, mNode.desc)
+            _subResult = combine(_subResult, ConditionalNPE(Key(method, In(i - shift), stable)))
+          }
+        }
+      case _ =>
+    }
+    super.naryOperation(insn, values)
+  }
+
 }
