@@ -20,7 +20,7 @@ case class NotNullValue(tp: Type) extends BasicValue(tp)
 case class CallResultValue(tp: Type, inters: Set[Key]) extends BasicValue(tp)
 
 case class Conf(insnIndex: Int, frame: Frame[BasicValue]) {
-  val _hashCode = {
+  lazy val _hashCode = {
     var result = 0
     for (i <- 0 until frame.getLocals) {
       result = result * 31 + frame.getLocal(i).getClass.hashCode()
