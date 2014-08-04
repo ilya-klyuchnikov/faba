@@ -188,13 +188,17 @@ object MinimalOriginInterpreter extends SourceInterpreter {
   final override def naryOperation(insn: AbstractInsnNode, values: util.List[_ <: SourceValue]): SourceValue = {
     val opCode = insn.getOpcode
     opCode match {
-      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE =>
+      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL =>
         val mNode = insn.asInstanceOf[MethodInsnNode]
         val retType = Type.getReturnType(mNode.desc)
         if (retType == Type.BOOLEAN_TYPE)
           new SourceValue(1, insn)
         else
           if (retType.getSize == 1) sourceVal1 else sourceVal2
+      case INVOKEINTERFACE =>
+        val mNode = insn.asInstanceOf[MethodInsnNode]
+        val retType = Type.getReturnType(mNode.desc)
+        if (retType.getSize == 1) sourceVal1 else sourceVal2
       case MULTIANEWARRAY =>
         sourceVal1
       case _ =>
@@ -245,7 +249,7 @@ object ReferenceOriginInterpreter extends SourceInterpreter {
   final override def naryOperation(insn: AbstractInsnNode, values: util.List[_ <: SourceValue]): SourceValue = {
     val opCode = insn.getOpcode
     opCode match {
-      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE =>
+      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL =>
         val mNode = insn.asInstanceOf[MethodInsnNode]
         val retType = Type.getReturnType(mNode.desc)
         val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
@@ -253,6 +257,11 @@ object ReferenceOriginInterpreter extends SourceInterpreter {
           new SourceValue(1, insn)
         else
           if (retType.getSize == 1) sourceVal1 else sourceVal2
+      case INVOKEINTERFACE =>
+        val mNode = insn.asInstanceOf[MethodInsnNode]
+        val retType = Type.getReturnType(mNode.desc)
+        val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
+        if (retType.getSize == 1) sourceVal1 else sourceVal2
       case MULTIANEWARRAY =>
         new SourceValue(1, insn)
       case _ =>
