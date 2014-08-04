@@ -303,9 +303,9 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
       val frame = conf.frame
       val insnNode = methodNode.instructions.get(insnIndex)
       val nextHistory = if (dfsTree.loopEnters(insnIndex)) conf :: history else history
-      val (nextFrame, localSubResult) = execute(frame, insnNode)
+      val (nextFrame, localSubResult, top) = execute(frame, insnNode)
 
-      if (localSubResult == NPE) {
+      if (localSubResult == NPE || top) {
         earlyResult = Some(NPE)
         return
       }
@@ -383,12 +383,12 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
 
   private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
-      (frame, Identity)
+      (frame, Identity, false)
     case _ =>
       val nextFrame = new Frame(frame)
       NullableInterpreter.reset()
       nextFrame.execute(insnNode, NullableInterpreter)
-      (nextFrame, NullableInterpreter.getSubResult)
+      (nextFrame, NullableInterpreter.getSubResult, NullableInterpreter.top)
   }
 
 }
@@ -467,6 +467,13 @@ object NonNullInterpreter extends Interpreter {
 }
 
 object NullableInterpreter extends Interpreter {
+  var top = false
+
+  override def reset() {
+    _subResult = Identity
+    top = false
+  }
+
   override def combine(res1: Result, res2: Result): Result = Result.join(res1, res2)
 
   override def binaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue): BasicValue = {
@@ -506,6 +513,10 @@ object NullableInterpreter extends Interpreter {
           if (values.get(i).isInstanceOf[ParamValue]) {
             val method = Method(mNode.owner, mNode.name, mNode.desc)
             _subResult = combine(_subResult, ConditionalNPE(Key(method, In(i - shift), stable)))
+            if (opCode == INVOKEINTERFACE) {
+              // if param was passed to completely unknown method, then top
+              top = true
+            }
           }
         }
       case _ =>
