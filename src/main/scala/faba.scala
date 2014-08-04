@@ -59,61 +59,73 @@ trait FabaProcessor extends Processor {
     }
 
     val method = Method(className, methodNode.name, methodNode.desc)
+    val insns = methodNode.instructions
+
+    var jsrUsed = false
+    for (i <- 0 until insns.size()) {
+      val insn = insns.get(i)
+      if (insn != null && (insn.getOpcode == Opcodes.JSR || insn.getOpcode == Opcodes.RET)) {
+        jsrUsed = true
+      }
+    }
     extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
+
     val acc = methodNode.access
     val stable = stableClass || (methodNode.name == "<init>") ||
       (acc & ACC_FINAL) != 0 || (acc & ACC_PRIVATE) != 0 || (acc & ACC_STATIC) != 0
-
-    val graph = buildCFG(className, methodNode)
     var added = false
-    if (graph.transitions.nonEmpty)  {
-      val dfs = buildDFSTree(graph.transitions)
-      val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
-      if (reducible) {
-        lazy val (leaking, nullableLeaking) = leakingParameters(className, methodNode)
-        lazy val resultOrigins: Set[Int] = buildResultOrigins(className, methodNode)
-        lazy val resultEquation: Equation[Key, Value] = outContractEquation(RichControlFlow(graph, dfs), resultOrigins, stable)
-        if (processContracts && isReferenceResult) {
-          handleOutContractEquation(resultEquation)
-        }
-        for (i <- argumentTypes.indices) {
-          val argType = argumentTypes(i)
-          val argSort = argType.getSort
-          val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
-          val booleanArg = argType == Type.BOOLEAN_TYPE
-          if (isReferenceArg) {
-            if (leaking(i))
-              handleNotNullParamEquation(notNullParamEquation(RichControlFlow(graph, dfs), i, stable))
-            else
-              handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
 
-            if (nullableLeaking(i))
-              handleNullableParamEquation(nullableParamEquation(RichControlFlow(graph, dfs), i, stable))
-            else
-              handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Null)))
-
+    if (!jsrUsed) {
+      val graph = buildCFG(className, methodNode)
+      if (graph.transitions.nonEmpty) {
+        val dfs = buildDFSTree(graph.transitions)
+        val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
+        if (reducible) {
+          lazy val (leaking, nullableLeaking) = leakingParameters(className, methodNode)
+          lazy val resultOrigins: Set[Int] = buildResultOrigins(className, methodNode)
+          lazy val resultEquation: Equation[Key, Value] = outContractEquation(RichControlFlow(graph, dfs), resultOrigins, stable)
+          if (processContracts && isReferenceResult) {
+            handleOutContractEquation(resultEquation)
           }
-          if (processContracts && isReferenceArg && (isReferenceResult || isBooleanResult)) {
-            if (leaking(i)) {
-              handleNullContractEquation(nullContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
-              handleNotNullContractEquation(notNullContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
-            } else {
-              handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
-              handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
+          for (i <- argumentTypes.indices) {
+            val argType = argumentTypes(i)
+            val argSort = argType.getSort
+            val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
+            val booleanArg = argType == Type.BOOLEAN_TYPE
+            if (isReferenceArg) {
+              if (leaking(i))
+                handleNotNullParamEquation(notNullParamEquation(RichControlFlow(graph, dfs), i, stable))
+              else
+                handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
+
+              if (nullableLeaking(i))
+                handleNullableParamEquation(nullableParamEquation(RichControlFlow(graph, dfs), i, stable))
+              else
+                handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Null)))
+
+            }
+            if (processContracts && isReferenceArg && (isReferenceResult || isBooleanResult)) {
+              if (leaking(i)) {
+                handleNullContractEquation(nullContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
+                handleNotNullContractEquation(notNullContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
+              } else {
+                handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
+                handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
+              }
+            }
+            if (processContracts && booleanArg && (isReferenceResult || isBooleanResult)) {
+              if (leaking(i)) {
+                handleFalseContractEquation(falseContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
+                handleTrueContractEquation(trueContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
+              } else {
+                handleTrueContractEquation(Equation(Key(method, InOut(i, Values.True), stable), resultEquation.rhs))
+                handleFalseContractEquation(Equation(Key(method, InOut(i, Values.False), stable), resultEquation.rhs))
+              }
             }
           }
-          if (processContracts && booleanArg && (isReferenceResult || isBooleanResult)) {
-            if (leaking(i)) {
-              handleFalseContractEquation(falseContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
-              handleTrueContractEquation(trueContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
-            } else {
-              handleTrueContractEquation(Equation(Key(method, InOut(i, Values.True), stable), resultEquation.rhs))
-              handleFalseContractEquation(Equation(Key(method, InOut(i, Values.False), stable), resultEquation.rhs))
-            }
-          }
-        }
 
-        added = true
+          added = true
+        }
       }
     }
 

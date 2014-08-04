@@ -223,13 +223,12 @@ private case class ControlFlowBuilder(className: String, methodNode: MethodNode)
     btransitions(successor) += insn
   }
 
-  override protected def newControlFlowExceptionEdge(insn: Int, successor: Int): Boolean = {
+  override protected def newControlFlowExceptionEdge(insn: Int, successor: Int) {
     if (!transitions(insn).contains(successor)) {
       transitions(insn) += successor
       errorTransitions = errorTransitions + (insn -> successor)
     }
     btransitions(successor) += insn
-    true
   }
 }
 
