@@ -84,7 +84,8 @@ trait StableAwareId[K] {
   def mkStable: K
 }
 
-final class Solver[K <: StableAwareId[K], V](implicit lattice: Lattice[V]) {
+final class Solver[K <: StableAwareId[K], V](val doNothing: Boolean)(implicit lattice: Lattice[V]) {
+
   type Solution = (K, V)
   val top = lattice.top
   val bot = lattice.bot
@@ -95,11 +96,13 @@ final class Solver[K <: StableAwareId[K], V](implicit lattice: Lattice[V]) {
   private var solved = Map[K, V]()
 
   def this(equations: List[Equation[K, V]])(implicit lattice: Lattice[V]) {
-    this()
+    this(false)
     equations.foreach(addEquation)
   }
 
   def addEquation(equation: Equation[K, V]): Unit =
+    if (doNothing) return
+    else
     equation.rhs match {
       case Final(value) =>
         moving enqueue (equation.id -> value)

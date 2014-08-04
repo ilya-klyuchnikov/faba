@@ -15,9 +15,10 @@ import scala.collection.mutable.ListBuffer
 
 class MainProcessor extends FabaProcessor {
 
-  val notNullParamsSolver = new Solver[Key, Values.Value]()(ELattice(Values.NotNull, Values.Top))
-  val nullableParamsSolver = new Solver[Key, Values.Value]()(ELattice(Values.Null, Values.Top))
-  val contractsSolver = new Solver[Key, Values.Value]()(ELattice(Values.Bot, Values.Top))
+  val doNothing = true
+  val notNullParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.NotNull, Values.Top))
+  val nullableParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Null, Values.Top))
+  val contractsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Bot, Values.Top))
 
   var notNullParamsTime: Long = 0
   var nullableParamsTime: Long = 0
