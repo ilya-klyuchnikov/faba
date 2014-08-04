@@ -132,8 +132,6 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
       val insnIndex = conf.insnIndex
       val history = state.history
 
-      val shared = richControlFlow.isSharedInstruction(insnIndex)
-
       val fold = dfsTree.loopEnters(insnIndex) && history.exists(prevConf => confInstance(conf, prevConf))
 
       if (fold) {
@@ -159,10 +157,8 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
 
       if (localSubResult == NPE) {
         results = results + (stateIndex -> NPE)
-        if (shared)
-          computed = computed.updated(insnIndex, state :: computed(insnIndex))
-        if (states.nonEmpty)
-          pending.push(MakeResult(states, subResult, List(stateIndex)))
+        computed = computed.updated(insnIndex, state :: computed(insnIndex))
+        pending.push(MakeResult(states, subResult, List(stateIndex)))
         return
       }
 
@@ -173,8 +169,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
             return
           } else {
             results = results + (stateIndex -> Return)
-            if (shared)
-              computed = computed.updated(insnIndex, state :: computed(insnIndex))
+            computed = computed.updated(insnIndex, state :: computed(insnIndex))
             // important to put subResult
             if (states.nonEmpty)
               pending.push(MakeResult(states, subResult, List(stateIndex)))
@@ -182,15 +177,13 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
           }
         case ATHROW if taken =>
           results = results + (stateIndex -> NPE)
-          if (shared)
-            computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          computed = computed.updated(insnIndex, state :: computed(insnIndex))
           if (states.nonEmpty)
             pending.push(MakeResult(states, subResult, List(stateIndex)))
           return
         case ATHROW =>
           results = results + (stateIndex -> Error)
-          if (shared)
-            computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          computed = computed.updated(insnIndex, state :: computed(insnIndex))
           if (states.nonEmpty)
             pending.push(MakeResult(states, subResult, List(stateIndex)))
           return
@@ -296,8 +289,6 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
       val insnIndex = conf.insnIndex
       val history = state.history
 
-      val shared = richControlFlow.isSharedInstruction(insnIndex)
-
       val fold = dfsTree.loopEnters(insnIndex) && history.exists(prevConf => confInstance(conf, prevConf))
 
       if (fold) {
@@ -330,8 +321,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
             return
           }
           results = results + (stateIndex -> Return)
-          if (shared)
-            computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          computed = computed.updated(insnIndex, state :: computed(insnIndex))
           // important to put subResult
           if (states.nonEmpty)
             pending.push(MakeResult(states, subResult, List(stateIndex)))
@@ -341,8 +331,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
           return
         case ATHROW =>
           results = results + (stateIndex -> Error)
-          if (shared)
-            computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          computed = computed.updated(insnIndex, state :: computed(insnIndex))
           if (states.nonEmpty)
             pending.push(MakeResult(states, subResult, List(stateIndex)))
           return

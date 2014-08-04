@@ -75,12 +75,10 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
       val insnNode = methodNode.instructions.get(insnIndex)
       val nextHistory = if (loopEnter) conf :: history else history
       val nextFrame = execute(frame, insnNode)
-      val shared = richControlFlow.isSharedInstruction(insnIndex)
 
       if (interpreter.dereferenced) {
         results = results + (stateIndex -> Final(Values.Bot))
-        if (shared)
-          computed = computed.updated(insnIndex, state :: computed(insnIndex))
+        computed = computed.updated(insnIndex, state :: computed(insnIndex))
         if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
         return
       }
@@ -90,39 +88,33 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           popValue(frame) match {
             case FalseValue() =>
               results = results + (stateIndex -> Final(Values.False))
-              if (shared)
-                computed = computed.updated(insnIndex, state :: computed(insnIndex))
+              computed = computed.updated(insnIndex, state :: computed(insnIndex))
               if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
               return
             case TrueValue() =>
               results = results + (stateIndex -> Final(Values.True))
-              if (shared)
-                computed = computed.updated(insnIndex, state :: computed(insnIndex))
+              computed = computed.updated(insnIndex, state :: computed(insnIndex))
               if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
               return
             case NullValue() =>
               results = results + (stateIndex -> Final(Values.Null))
-              if (shared)
-                computed = computed.updated(insnIndex, state :: computed(insnIndex))
+              computed = computed.updated(insnIndex, state :: computed(insnIndex))
               if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
               return
             case NotNullValue(_) =>
               results = results + (stateIndex -> Final(Values.NotNull))
-              if (shared)
-                computed = computed.updated(insnIndex, state :: computed(insnIndex))
+              computed = computed.updated(insnIndex, state :: computed(insnIndex))
               if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
               return
             case ParamValue(_) =>
               val InOut(_, in) = direction
               results = results + (stateIndex -> Final(in))
-              if (shared)
-                computed = computed.updated(insnIndex, state :: computed(insnIndex))
+              computed = computed.updated(insnIndex, state :: computed(insnIndex))
               if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
               return
             case CallResultValue(_, keys) =>
               results = results + (stateIndex -> Pending[Key, Value](Set(Component(Values.Top, keys))))
-              if (shared)
-                computed = computed.updated(insnIndex, state :: computed(insnIndex))
+              computed = computed.updated(insnIndex, state :: computed(insnIndex))
               if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
               return
             case _ =>
@@ -131,8 +123,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           }
         case ATHROW =>
           results = results + (stateIndex -> Final(Values.Bot))
-          if (shared)
-            computed = computed.updated(insnIndex, state :: computed(insnIndex))
+          computed = computed.updated(insnIndex, state :: computed(insnIndex))
           if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
           return
         case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>

@@ -285,37 +285,25 @@ object ReferenceOriginInterpreter extends SourceInterpreter {
 case class ControlFlowGraph(className: String,
                             methodNode: MethodNode,
                             transitions: Array[List[Int]],
-                            bTransitions: Array[List[Int]],
                             errorTransitions: Set[(Int, Int)])
 
-case class RichControlFlow(controlFlow: ControlFlowGraph,
-                           dfsTree: DFSTree) {
-
-  val multiEntranceInsnIndices =
-    (0 until controlFlow.transitions.length).filter(i => controlFlow.bTransitions(i).size > 1).toSet
-
-  def isSharedInstruction(insnIndex: Int) =
-    multiEntranceInsnIndices.exists(p => dfsTree.isDescendant(insnIndex, p))
-}
+case class RichControlFlow(controlFlow: ControlFlowGraph, dfsTree: DFSTree)
 
 private case class ControlFlowBuilder(className: String, methodNode: MethodNode) extends CfgAnalyzer() {
   val transitions =
-    Array.tabulate[ListBuffer[Int]](methodNode.instructions.size){i => new ListBuffer()}
-  val btransitions =
     Array.tabulate[ListBuffer[Int]](methodNode.instructions.size){i => new ListBuffer()}
   var errorTransitions =
     Set[(Int, Int)]()
 
   def buildCFG(): ControlFlowGraph = {
     if ((methodNode.access & (ACC_ABSTRACT | ACC_NATIVE)) == 0) analyze(methodNode)
-    ControlFlowGraph(className, methodNode, transitions.map(_.toList), btransitions.map(_.toList), errorTransitions)
+    ControlFlowGraph(className, methodNode, transitions.map(_.toList), errorTransitions)
   }
 
   override protected def newControlFlowEdge(insn: Int, successor: Int) {
     if (!transitions(insn).contains(successor)) {
       transitions(insn) += successor
     }
-    btransitions(successor) += insn
   }
 
   override protected def newControlFlowExceptionEdge(insn: Int, successor: Int) {
@@ -323,7 +311,6 @@ private case class ControlFlowBuilder(className: String, methodNode: MethodNode)
       transitions(insn) += successor
       errorTransitions = errorTransitions + (insn -> successor)
     }
-    btransitions(successor) += insn
   }
 }
 
