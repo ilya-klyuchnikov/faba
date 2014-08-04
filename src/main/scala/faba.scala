@@ -92,9 +92,18 @@ trait FabaProcessor extends Processor {
             val argSort = argType.getSort
             val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
             val booleanArg = argType == Type.BOOLEAN_TYPE
+            var notNullParam = false
             if (isReferenceArg) {
-              if (leaking(i))
-                handleNotNullParamEquation(notNullParamEquation(RichControlFlow(graph, dfs), i, stable))
+              if (leaking(i)) {
+                val notNullPEquation = notNullParamEquation(RichControlFlow(graph, dfs), i, stable)
+                notNullPEquation.rhs match {
+                  case Final(Values.NotNull) =>
+                    notNullParam = true
+                  case _ =>
+                    false
+                }
+                handleNotNullParamEquation(notNullPEquation)
+              }
               else
                 handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
 
@@ -106,7 +115,11 @@ trait FabaProcessor extends Processor {
             }
             if (processContracts && isReferenceArg && (isReferenceResult || isBooleanResult)) {
               if (leaking(i)) {
-                handleNullContractEquation(nullContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
+                if (!notNullParam) {
+                  handleNullContractEquation(nullContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
+                } else {
+                  handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Bot)))
+                }
                 handleNotNullContractEquation(notNullContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
               } else {
                 handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
