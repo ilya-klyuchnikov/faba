@@ -75,35 +75,35 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
+  override def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean) = {
     val start = System.nanoTime()
     val result = super.notNullContractEquation(richControlFlow, resultOrigins, i, stable)
     notNullTime += System.nanoTime() - start
     result
   }
 
-  override def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
+  override def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean) = {
     val start = System.nanoTime()
     val result = super.nullContractEquation(richControlFlow, resultOrigins, i, stable)
     nullTime += System.nanoTime() - start
     result
   }
 
-  override def trueContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
+  override def trueContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean) = {
     val start = System.nanoTime()
     val result = super.trueContractEquation(richControlFlow, resultOrigins, i, stable)
     trueTime += System.nanoTime() - start
     result
   }
 
-  override def falseContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean) = {
+  override def falseContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean) = {
     val start = System.nanoTime()
     val result = super.falseContractEquation(richControlFlow, resultOrigins, i, stable)
     falseTime += System.nanoTime() - start
     result
   }
 
-  override def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], stable: Boolean) = {
+  override def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], stable: Boolean) = {
     val start = System.nanoTime()
     val result = super.outContractEquation(richControlFlow, resultOrigins, stable)
     outTime += System.nanoTime() - start

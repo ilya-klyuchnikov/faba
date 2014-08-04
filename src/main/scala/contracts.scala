@@ -12,7 +12,7 @@ import faba.cfg._
 import faba.data._
 import faba.engine._
 
-class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Set[Int], val stable: Boolean) extends Analysis[Result[Key, Value]] {
+class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Array[Boolean], val stable: Boolean) extends Analysis[Result[Key, Value]] {
   type MyResult = Result[Key, Value]
   implicit val contractsLattice = ELattice(Values.Bot, Values.Top)
 
@@ -275,7 +275,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
   }
 }
 
-case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins: Set[Int]) extends BasicInterpreter {
+case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins: Array[Boolean]) extends BasicInterpreter {
 
   var dereferenced = false
   val nullAnalysis = direction match {

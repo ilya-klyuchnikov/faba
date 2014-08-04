@@ -14,10 +14,10 @@ object `package` {
   def buildControlFlowGraph(className: String, methodNode: MethodNode): ControlFlowGraph =
     ControlFlowBuilder(className, methodNode).buildCFG()
 
-  def resultOrigins(className: String, methodNode: MethodNode): Set[Int] = {
+  def resultOrigins(className: String, methodNode: MethodNode): Array[Boolean] = {
     val frames = new LiteAnalyzer(MinimalOriginInterpreter).analyze(className, methodNode)
     val insns = methodNode.instructions
-    var result = Set[Int]()
+    val result = new Array[Boolean](insns.size())
     for (i <- 0 until frames.length) {
       val insnNode = insns.get(i)
       val frame = frames(i)
@@ -25,7 +25,7 @@ object `package` {
         insnNode.getOpcode match {
           case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN =>
             for (sourceInsn <- frame.pop().insns)
-              result = result + insns.indexOf(sourceInsn)
+              result(insns.indexOf(sourceInsn)) = true
           case _ =>
         }
       }

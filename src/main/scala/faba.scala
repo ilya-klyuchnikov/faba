@@ -82,7 +82,7 @@ trait FabaProcessor extends Processor {
         val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
         if (reducible) {
           lazy val (leaking, nullableLeaking) = leakingParameters(className, methodNode)
-          lazy val resultOrigins: Set[Int] = buildResultOrigins(className, methodNode)
+          lazy val resultOrigins = buildResultOrigins(className, methodNode)
           lazy val resultEquation: Equation[Key, Value] = outContractEquation(RichControlFlow(graph, dfs), resultOrigins, stable)
           if (processContracts && isReferenceResult) {
             handleOutContractEquation(resultEquation)
@@ -169,7 +169,7 @@ trait FabaProcessor extends Processor {
   def buildCFG(className: String, methodNode: MethodNode): ControlFlowGraph =
     cfg.buildControlFlowGraph(className, methodNode)
 
-  def buildResultOrigins(className: String, methodNode: MethodNode): Set[Int] =
+  def buildResultOrigins(className: String, methodNode: MethodNode): Array[Boolean] =
     cfg.resultOrigins(className, methodNode)
 
   def buildDFSTree(transitions: Array[List[Int]]): DFSTree =
@@ -184,19 +184,19 @@ trait FabaProcessor extends Processor {
   def nullableParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean): Equation[Key, Value] =
     new NullableInAnalysis(richControlFlow, In(i), stable).analyze()
 
-  def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean): Equation[Key, Value] =
+  def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean): Equation[Key, Value] =
     new InOutAnalysis(richControlFlow, InOut(i, Values.NotNull), resultOrigins, stable).analyze()
 
-  def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean): Equation[Key, Value] =
+  def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean): Equation[Key, Value] =
     new InOutAnalysis(richControlFlow, InOut(i, Values.Null), resultOrigins, stable).analyze()
 
-  def trueContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean): Equation[Key, Value] =
+  def trueContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean): Equation[Key, Value] =
     new InOutAnalysis(richControlFlow, InOut(i, Values.True), resultOrigins, stable).analyze()
 
-  def falseContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], i: Int, stable: Boolean): Equation[Key, Value] =
+  def falseContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean): Equation[Key, Value] =
     new InOutAnalysis(richControlFlow, InOut(i, Values.False), resultOrigins, stable).analyze()
 
-  def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Set[Int], stable: Boolean): Equation[Key, Value] =
+  def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], stable: Boolean): Equation[Key, Value] =
     new InOutAnalysis(richControlFlow, Out, resultOrigins, stable).analyze()
 
   def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit = ()
