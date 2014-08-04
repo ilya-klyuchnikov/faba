@@ -38,11 +38,14 @@ object `package` {
   }
 
   // the second element is a nullable leaking parameters
-  def leakingParameters(className: String, methodNode: MethodNode): (Set[Int], Set[Int]) = {
+  def leakingParameters(className: String, methodNode: MethodNode): (Array[Boolean], Array[Boolean]) = {
     val frames = new LiteAnalyzer(new ParametersUsage(methodNode)).analyze(className, methodNode)
+    val arity = Type.getArgumentTypes(methodNode.desc).length
+    val leaking1 = new Array[Boolean](arity)
+    val leaking2 = new Array[Boolean](arity)
     val insns = methodNode.instructions
-    val collector = new LeakingParametersCollector(methodNode)
-    val nullableCollector = new NullableLeakingParametersCollector(methodNode)
+    val collector = new LeakingParametersCollector(methodNode, leaking1)
+    val nullableCollector = new NullableLeakingParametersCollector(methodNode, leaking2)
     for (i <- 0 until frames.length) {
       val insnNode = insns.get(i)
       val frame = frames(i)
@@ -53,7 +56,7 @@ object `package` {
           new Frame(frame).execute(insnNode, nullableCollector)
       }
     }
-    (collector.leaking, nullableCollector.leaking)
+    (leaking1, leaking2)
   }
 
   // Graphs: Theory and Algorithms. by K. Thulasiraman , M. N. S. Swamy (1992)
@@ -426,14 +429,15 @@ class ParametersUsage(m: MethodNode) extends Interpreter[ParamsValue](ASM5) {
   }
 }
 
-class LeakingParametersCollector(m: MethodNode) extends ParametersUsage(m) {
-  var leaking = Set[Int]()
+class LeakingParametersCollector(m: MethodNode, val leaking: Array[Boolean]) extends ParametersUsage(m) {
 
   override def unaryOperation(insn: AbstractInsnNode, v: ParamsValue): ParamsValue = {
     insn.getOpcode match {
       case GETFIELD | ARRAYLENGTH | MONITORENTER | INSTANCEOF | IRETURN | ARETURN |
            IFNONNULL | IFNULL | IFEQ | IFNE =>
-        leaking = leaking ++ v.params
+        for (i <- v.params) {
+          leaking(i) = true
+        }
       case _ =>
     }
     super.unaryOperation(insn, v)
@@ -442,7 +446,9 @@ class LeakingParametersCollector(m: MethodNode) extends ParametersUsage(m) {
   override def binaryOperation(insn: AbstractInsnNode, v1: ParamsValue, v2: ParamsValue): ParamsValue = {
     insn.getOpcode match {
       case IALOAD | LALOAD | FALOAD | DALOAD | AALOAD | BALOAD | CALOAD | SALOAD | PUTFIELD =>
-        leaking = leaking ++ v1.params
+        for (i <- v1.params) {
+          leaking(i) = true
+        }
       case _ =>
     }
     super.binaryOperation(insn, v1, v2)
@@ -451,7 +457,9 @@ class LeakingParametersCollector(m: MethodNode) extends ParametersUsage(m) {
   override def ternaryOperation(insn: AbstractInsnNode, v1: ParamsValue, v2: ParamsValue, v3: ParamsValue): ParamsValue = {
     insn.getOpcode match {
       case IASTORE | LASTORE | FASTORE | DASTORE | AASTORE | BASTORE | CASTORE | SASTORE =>
-        leaking = leaking ++ v1.params
+        for (i <- v1.params) {
+          leaking(i) = true
+        }
       case _ =>
     }
     super.ternaryOperation(insn, v1, v2, v3)
@@ -460,7 +468,9 @@ class LeakingParametersCollector(m: MethodNode) extends ParametersUsage(m) {
   override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: ParamsValue]): ParamsValue = {
     insn.getOpcode match {
       case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE =>
-        values.foreach { v => leaking = leaking ++ v.params }
+        for (v <- values; i <- v.params) {
+          leaking(i) = true
+        }
       case _ =>
     }
     super.naryOperation(insn, values)
@@ -468,11 +478,16 @@ class LeakingParametersCollector(m: MethodNode) extends ParametersUsage(m) {
 
 }
 
-class NullableLeakingParametersCollector(m: MethodNode) extends LeakingParametersCollector(m) {
+class NullableLeakingParametersCollector(m: MethodNode, leaking: Array[Boolean]) extends LeakingParametersCollector(m, leaking) {
   override def binaryOperation(insn: AbstractInsnNode, v1: ParamsValue, v2: ParamsValue): ParamsValue = {
     insn.getOpcode match {
       case PUTFIELD =>
-        leaking = leaking ++ v1.params ++ v2.params
+        for (i <- v1.params) {
+          leaking(i) = true
+        }
+        for (i <- v2.params) {
+          leaking(i) = true
+        }
       case _ =>
     }
     super.binaryOperation(insn, v1, v2)
@@ -481,7 +496,12 @@ class NullableLeakingParametersCollector(m: MethodNode) extends LeakingParameter
   override def ternaryOperation(insn: AbstractInsnNode, v1: ParamsValue, v2: ParamsValue, v3: ParamsValue): ParamsValue = {
     insn.getOpcode match {
       case AASTORE =>
-        leaking = leaking ++ v1.params ++ v3.params
+        for (i <- v1.params) {
+          leaking(i) = true
+        }
+        for (i <- v3.params) {
+          leaking(i) = true
+        }
       case _ =>
     }
     super.ternaryOperation(insn, v1, v2, v3)

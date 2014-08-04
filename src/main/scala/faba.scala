@@ -83,7 +83,8 @@ trait FabaProcessor extends Processor {
         if (reducible) {
           lazy val (leaking, nullableLeaking) = leakingParameters(className, methodNode)
           lazy val resultOrigins = buildResultOrigins(className, methodNode)
-          lazy val resultEquation: Equation[Key, Value] = outContractEquation(RichControlFlow(graph, dfs), resultOrigins, stable)
+          val richControlFlow = RichControlFlow(graph, dfs)
+          lazy val resultEquation: Equation[Key, Value] = outContractEquation(richControlFlow, resultOrigins, stable)
           if (processContracts && isReferenceResult) {
             handleOutContractEquation(resultEquation)
           }
@@ -95,7 +96,7 @@ trait FabaProcessor extends Processor {
             var notNullParam = false
             if (isReferenceArg) {
               if (leaking(i)) {
-                val notNullPEquation = notNullParamEquation(RichControlFlow(graph, dfs), i, stable)
+                val notNullPEquation = notNullParamEquation(richControlFlow, i, stable)
                 notNullPEquation.rhs match {
                   case Final(Values.NotNull) =>
                     notNullParam = true
@@ -108,7 +109,7 @@ trait FabaProcessor extends Processor {
                 handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
 
               if (nullableLeaking(i))
-                handleNullableParamEquation(nullableParamEquation(RichControlFlow(graph, dfs), i, stable))
+                handleNullableParamEquation(nullableParamEquation(richControlFlow, i, stable))
               else
                 handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Null)))
 
@@ -116,11 +117,11 @@ trait FabaProcessor extends Processor {
             if (processContracts && isReferenceArg && (isReferenceResult || isBooleanResult)) {
               if (leaking(i)) {
                 if (!notNullParam) {
-                  handleNullContractEquation(nullContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
+                  handleNullContractEquation(nullContractEquation(richControlFlow, resultOrigins, i, stable))
                 } else {
                   handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Bot)))
                 }
-                handleNotNullContractEquation(notNullContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
+                handleNotNullContractEquation(notNullContractEquation(richControlFlow, resultOrigins, i, stable))
               } else {
                 handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
                 handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
@@ -128,8 +129,8 @@ trait FabaProcessor extends Processor {
             }
             if (processContracts && booleanArg && (isReferenceResult || isBooleanResult)) {
               if (leaking(i)) {
-                handleFalseContractEquation(falseContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
-                handleTrueContractEquation(trueContractEquation(RichControlFlow(graph, dfs), resultOrigins, i, stable))
+                handleFalseContractEquation(falseContractEquation(richControlFlow, resultOrigins, i, stable))
+                handleTrueContractEquation(trueContractEquation(richControlFlow, resultOrigins, i, stable))
               } else {
                 handleTrueContractEquation(Equation(Key(method, InOut(i, Values.True), stable), resultEquation.rhs))
                 handleFalseContractEquation(Equation(Key(method, InOut(i, Values.False), stable), resultEquation.rhs))
@@ -207,6 +208,6 @@ trait FabaProcessor extends Processor {
   def handleFalseContractEquation(eq: Equation[Key, Value]): Unit = ()
   def handleOutContractEquation(eq: Equation[Key, Value]): Unit = ()
 
-  def leakingParameters(className: String, methodNode: MethodNode): (Set[Int], Set[Int]) =
+  def leakingParameters(className: String, methodNode: MethodNode): (Array[Boolean], Array[Boolean]) =
     cfg.leakingParameters(className, methodNode)
 }

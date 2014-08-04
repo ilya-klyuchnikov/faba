@@ -15,7 +15,7 @@ class LeakingParametersSuite extends FunSuite with Matchers {
   }
 
   def checkLeakingParameters(classes: Class[_]*) {
-    var map = Map[Method, Set[Int]]()
+    var map = Map[Method, Array[Boolean]]()
 
     // collecting leakedParameters
     for (jClass <- classes) {
@@ -46,7 +46,7 @@ class LeakingParametersSuite extends FunSuite with Matchers {
       for {(anns, i) <- jMethod.getParameterAnnotations.zipWithIndex} {
         val isLeaked = anns.exists(_.annotationType == classOf[ExpectLeaking])
         assert(
-          map(method).contains(i) == isLeaked,
+          map(method)(i) == isLeaked,
           s"'$jClass $jMethod #$i'"
         )
       }

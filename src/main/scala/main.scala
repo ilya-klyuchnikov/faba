@@ -110,7 +110,7 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def leakingParameters(className: String, methodNode: MethodNode): (Set[Int], Set[Int]) = {
+  override def leakingParameters(className: String, methodNode: MethodNode) = {
     val start = System.nanoTime()
     val result = super.leakingParameters(className, methodNode)
     leakingParametersTime += System.nanoTime() - start
