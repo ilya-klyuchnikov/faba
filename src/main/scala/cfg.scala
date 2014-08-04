@@ -68,7 +68,7 @@ object `package` {
     case class MarkScanned(node: Int) extends Action
     case class ExamineEdge(from: Int, to: Int) extends Action
 
-    var tree, forward, back, cross = HashSet[Edge]()
+    var nonBack, back = HashSet[Edge]()
     // marked = entered
     val marked = new Array[Boolean](transitions.length)
     val scanned = new Array[Boolean](transitions.length)
@@ -78,7 +78,7 @@ object `package` {
     var entered = 0
     var completed = 0
     val stack = scala.collection.mutable.Stack[Action]()
-    var loopEnters = HashSet[Int]()
+    val loopEnters = new Array[Boolean](transitions.length)
 
     @inline
     def enter(n: Int): Unit = {
@@ -92,6 +92,8 @@ object `package` {
     // entering
     enter(0)
 
+    // back maybe only to one instruction
+    // tree
     while (stack.nonEmpty) {
       val action = stack.pop()
       action match {
@@ -102,19 +104,19 @@ object `package` {
         case ExamineEdge(from, to) =>
           if (!marked(to)) {
             enter(to)
-            tree = tree + (from -> to)
+            nonBack = nonBack + (from -> to)
           } else if (preOrder(to) > preOrder(from)) {
-            forward = forward + (from -> to)
+            nonBack = nonBack + (from -> to)
           } else if (preOrder(to) < preOrder(from) && !scanned(to)) {
             back = back + (from -> to)
-            loopEnters = loopEnters + to
+            loopEnters(to) = true
           } else {
-            cross = cross + (from -> to)
+            nonBack = nonBack + (from -> to)
           }
       }
     }
 
-    DFSTree(preOrder, postOrder, tree, forward, back, cross, loopEnters)
+    DFSTree(preOrder, postOrder, nonBack, back, loopEnters)
   }
 
   // Tarjan. Testing flow graph reducibility.
@@ -127,9 +129,7 @@ object `package` {
     val collapsedTo = Array.tabulate[Int](size)(i => i)
 
     for ((from, to) <- dfs.back) cycles2Node(to).add(from)
-    for ((from, to) <- dfs.tree) nonCycles2Node(to).add(from)
-    for ((from, to) <- dfs.forward) nonCycles2Node(to).add(from)
-    for ((from, to) <- dfs.cross) nonCycles2Node(to).add(from)
+    for ((from, to) <- dfs.nonBack) nonCycles2Node(to).add(from)
 
     for (w <- (size - 1) to 0 by -1) {
       val seq: Seq[Int] = cycles2Node(w).toSeq
@@ -288,19 +288,22 @@ object ReferenceOriginInterpreter extends SourceInterpreter {
 case class ControlFlowGraph(className: String,
                             methodNode: MethodNode,
                             transitions: Array[List[Int]],
-                            errorTransitions: Set[(Int, Int)])
+                            errorTransitions: Set[(Int, Int)],
+                            errors: Array[Boolean])
 
 case class RichControlFlow(controlFlow: ControlFlowGraph, dfsTree: DFSTree)
 
 private case class ControlFlowBuilder(className: String, methodNode: MethodNode) extends CfgAnalyzer() {
   val transitions =
     Array.tabulate[ListBuffer[Int]](methodNode.instructions.size){i => new ListBuffer()}
+  val errors =
+    new Array[Boolean](methodNode.instructions.size())
   var errorTransitions =
     Set[(Int, Int)]()
 
   def buildCFG(): ControlFlowGraph = {
     if ((methodNode.access & (ACC_ABSTRACT | ACC_NATIVE)) == 0) analyze(methodNode)
-    ControlFlowGraph(className, methodNode, transitions.map(_.toList), errorTransitions)
+    ControlFlowGraph(className, methodNode, transitions.map(_.toList), errorTransitions, errors)
   }
 
   override protected def newControlFlowEdge(insn: Int, successor: Int) {
@@ -313,6 +316,7 @@ private case class ControlFlowBuilder(className: String, methodNode: MethodNode)
     if (!transitions(insn).contains(successor)) {
       transitions(insn) += successor
       errorTransitions = errorTransitions + (insn -> successor)
+      errors(successor) = true
     }
   }
 }
@@ -320,11 +324,9 @@ private case class ControlFlowBuilder(className: String, methodNode: MethodNode)
 
 case class DFSTree(preOrder: Array[Int],
                    postOrder: Array[Int],
-                   tree: Set[(Int, Int)],
-                   forward: Set[(Int, Int)],
+                   nonBack: Set[(Int, Int)],
                    back: Set[(Int, Int)],
-                   cross: Set[(Int, Int)],
-                   loopEnters: Set[Int]) {
+                   loopEnters: Array[Boolean]) {
 
   def isDescendant(child: Int, parent: Int): Boolean =
     preOrder(parent) <= preOrder(child) && postOrder(child) <= postOrder(parent)

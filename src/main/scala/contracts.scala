@@ -193,7 +193,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           val nextInsnIndices = controlFlow.transitions(insnIndex)
           val nextStates = nextInsnIndices.map {
             nextInsnIndex =>
-              val nextFrame1 = if (controlFlow.errorTransitions(insnIndex -> nextInsnIndex)) {
+              val nextFrame1 = if (controlFlow.errors(nextInsnIndex) && controlFlow.errorTransitions(insnIndex -> nextInsnIndex)) {
                 val handler = new Frame(frame)
                 handler.clearStack()
                 handler.push(new BasicValue(Type.getType("java/lang/Throwable")))

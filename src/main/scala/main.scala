@@ -15,7 +15,7 @@ import scala.collection.mutable.ListBuffer
 
 class MainProcessor extends FabaProcessor {
 
-  val doNothing = true
+  val doNothing = false
   val notNullParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.NotNull, Values.Top))
   val nullableParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Null, Values.Top))
   val contractsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Bot, Values.Top))
@@ -212,6 +212,7 @@ class MainProcessor extends FabaProcessor {
 object Main extends MainProcessor {
 
   def main(args: Array[String]) {
+    //Thread.sleep(15000)
     if (args(0) == "--dirs") {
       val sources = ListBuffer[Source]()
       for (d <- args.tail)

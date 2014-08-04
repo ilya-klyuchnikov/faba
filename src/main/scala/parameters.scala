@@ -211,7 +211,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
           val nextInsnIndices = controlFlow.transitions(insnIndex)
           val nextStates = nextInsnIndices.map {
             nextInsnIndex =>
-              val nextFrame1 = if (controlFlow.errorTransitions(insnIndex -> nextInsnIndex)) {
+              val nextFrame1 = if (controlFlow.errors(nextInsnIndex) && controlFlow.errorTransitions(insnIndex -> nextInsnIndex)) {
                 val handler = new Frame(frame)
                 handler.clearStack()
                 handler.push(new BasicValue(Type.getType("java/lang/Throwable")))
@@ -224,9 +224,6 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
           states = state :: states
           if (nextStates.size == 1 && noSwitch) {
             state = nextStates.head
-            //pending.push(MakeResult(states, subResult, List(state.index)))
-            //pending.push(ProceedState(state))
-            //return
           } else {
             pending.push(MakeResult(states, subResult, nextStates.map(_.index)))
             pending.pushAll(nextStates.map(s => ProceedState(s)))
@@ -289,7 +286,8 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
       val insnIndex = conf.insnIndex
       val history = state.history
 
-      val fold = dfsTree.loopEnters(insnIndex) && history.exists(prevConf => confInstance(conf, prevConf))
+      val isLoopEnter = dfsTree.loopEnters(insnIndex)
+      val fold = isLoopEnter && history.exists(prevConf => confInstance(conf, prevConf))
 
       if (fold) {
         results = results + (stateIndex -> identity)
@@ -302,7 +300,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
       val taken = state.taken
       val frame = conf.frame
       val insnNode = methodNode.instructions.get(insnIndex)
-      val nextHistory = if (dfsTree.loopEnters(insnIndex)) conf :: history else history
+      val nextHistory = if (isLoopEnter) conf :: history else history
       val (nextFrame, localSubResult, top) = execute(frame, insnNode)
 
       if (localSubResult == NPE || top) {
@@ -359,7 +357,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
           val nextInsnIndices = controlFlow.transitions(insnIndex)
           val nextStates = nextInsnIndices.map {
             nextInsnIndex =>
-              val nextFrame1 = if (controlFlow.errorTransitions(insnIndex -> nextInsnIndex)) {
+              val nextFrame1 = if (controlFlow.errors(nextInsnIndex) && controlFlow.errorTransitions(insnIndex -> nextInsnIndex)) {
                 val handler = new Frame(frame)
                 handler.clearStack()
                 handler.push(new BasicValue(Type.getType("java/lang/Throwable")))
