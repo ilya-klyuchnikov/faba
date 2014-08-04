@@ -96,12 +96,12 @@ trait FabaProcessor extends Processor {
             var notNullParam = false
             if (isReferenceArg) {
               if (leaking(i)) {
-                val notNullPEquation = notNullParamEquation(richControlFlow, i, stable)
+                val (notNullPEquation, npe) = notNullParamEquation(richControlFlow, i, stable)
                 notNullPEquation.rhs match {
                   case Final(Values.NotNull) =>
                     notNullParam = true
                   case _ =>
-                    false
+                    npe
                 }
                 handleNotNullParamEquation(notNullPEquation)
               }
@@ -179,8 +179,11 @@ trait FabaProcessor extends Processor {
   def isReducible(graph: ControlFlowGraph, dfs: DFSTree): Boolean =
     cfg.reducible(graph, dfs)
 
-  def notNullParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean): Equation[Key, Value] =
-    new NotNullInAnalysis(richControlFlow, In(i), stable).analyze()
+  def notNullParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean): (Equation[Key, Value], Boolean) = {
+    val analyser = new NotNullInAnalysis(richControlFlow, In(i), stable)
+    val eq = analyser.analyze()
+    (eq, analyser.npe)
+  }
 
   def nullableParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean): Equation[Key, Value] =
     new NullableInAnalysis(richControlFlow, In(i), stable).analyze()

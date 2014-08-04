@@ -109,6 +109,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     false
 
   var id = 0
+  var npe = false
 
   override def processState(fState: State): Unit = {
 
@@ -156,6 +157,8 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
       subResult = subResult2
 
       if (localSubResult == NPE) {
+        // npe was detected
+        npe = true
         results = results + (stateIndex -> NPE)
         computed = computed.updated(insnIndex, state :: computed(insnIndex))
         pending.push(MakeResult(states, subResult, List(stateIndex)))
