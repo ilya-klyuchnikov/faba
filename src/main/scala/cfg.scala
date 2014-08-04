@@ -1,5 +1,7 @@
 package faba.cfg
 
+import java.util
+
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree._
@@ -15,7 +17,9 @@ object `package` {
     ControlFlowBuilder(className, methodNode).buildCFG()
 
   def resultOrigins(className: String, methodNode: MethodNode): Array[Boolean] = {
-    val frames = new LiteAnalyzer(MinimalOriginInterpreter).analyze(className, methodNode)
+    val returnType = Type.getReturnType(methodNode.desc)
+    val interpreter = if (Utils.isReferenceType(returnType)) ReferenceOriginInterpreter else MinimalOriginInterpreter
+    val frames = new LiteAnalyzer(interpreter).analyze(className, methodNode)
     val insns = methodNode.instructions
     val result = new Array[Boolean](insns.size())
     for (i <- 0 until frames.length) {
@@ -146,6 +150,14 @@ object `package` {
   }
 }
 
+object Utils {
+  def isReferenceType(tp: Type): Boolean = {
+    val sort = tp.getSort
+    sort == Type.OBJECT || sort == Type.ARRAY
+  }
+}
+
+// really this is just for booleans
 object MinimalOriginInterpreter extends SourceInterpreter {
   val sourceVal1 = new SourceValue(1)
   val sourceVal2 = new SourceValue(2)
@@ -153,7 +165,57 @@ object MinimalOriginInterpreter extends SourceInterpreter {
   override def newOperation(insn: AbstractInsnNode): SourceValue = {
     val result = super.newOperation(insn)
     insn.getOpcode match {
-      case ICONST_0 | ICONST_1 | ACONST_NULL | LDC | NEW =>
+      // see the type of result
+      case ICONST_0 | ICONST_1 =>
+        result
+      case _ =>
+        new SourceValue(result.size)
+    }
+  }
+
+  override def binaryOperation(insn: AbstractInsnNode, value1: SourceValue, value2: SourceValue) =
+    insn.getOpcode match {
+      case LALOAD | DALOAD | LADD | DADD | LSUB | DSUB | LMUL | DMUL |
+           LDIV | DDIV | LREM | LSHL | LSHR | LUSHR | LAND | LOR | LXOR =>
+        sourceVal2
+      case _ =>
+        sourceVal1
+    }
+
+  override def ternaryOperation(insn: AbstractInsnNode, value1: SourceValue, value2: SourceValue, value3: SourceValue) =
+    sourceVal1
+
+  final override def naryOperation(insn: AbstractInsnNode, values: util.List[_ <: SourceValue]): SourceValue = {
+    val opCode = insn.getOpcode
+    opCode match {
+      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE =>
+        val mNode = insn.asInstanceOf[MethodInsnNode]
+        val retType = Type.getReturnType(mNode.desc)
+        if (retType == Type.BOOLEAN_TYPE)
+          new SourceValue(1, insn)
+        else
+          if (retType.getSize == 1) sourceVal1 else sourceVal2
+      case MULTIANEWARRAY =>
+        sourceVal1
+      case _ =>
+        val mNode = insn.asInstanceOf[InvokeDynamicInsnNode]
+        val retType = Type.getReturnType(mNode.desc)
+        if (retType.getSize == 1) sourceVal1 else sourceVal2
+    }
+  }
+
+  override def copyOperation(insn: AbstractInsnNode, value: SourceValue) =
+    value
+}
+
+object ReferenceOriginInterpreter extends SourceInterpreter {
+  val sourceVal1 = new SourceValue(1)
+  val sourceVal2 = new SourceValue(2)
+
+  override def newOperation(insn: AbstractInsnNode): SourceValue = {
+    val result = super.newOperation(insn)
+    insn.getOpcode match {
+      case ACONST_NULL | LDC | NEW =>
         result
       case _ =>
         new SourceValue(result.size)
@@ -178,6 +240,27 @@ object MinimalOriginInterpreter extends SourceInterpreter {
       case _ =>
         sourceVal1
     }
+
+
+  final override def naryOperation(insn: AbstractInsnNode, values: util.List[_ <: SourceValue]): SourceValue = {
+    val opCode = insn.getOpcode
+    opCode match {
+      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE =>
+        val mNode = insn.asInstanceOf[MethodInsnNode]
+        val retType = Type.getReturnType(mNode.desc)
+        val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
+        if (isRefRetType)
+          new SourceValue(1, insn)
+        else
+          if (retType.getSize == 1) sourceVal1 else sourceVal2
+      case MULTIANEWARRAY =>
+        new SourceValue(1, insn)
+      case _ =>
+        val mNode = insn.asInstanceOf[InvokeDynamicInsnNode]
+        val retType = Type.getReturnType(mNode.desc)
+        if (retType.getSize == 1) sourceVal1 else sourceVal2
+    }
+  }
 
   override def ternaryOperation(insn: AbstractInsnNode, value1: SourceValue, value2: SourceValue, value3: SourceValue) =
     sourceVal1
