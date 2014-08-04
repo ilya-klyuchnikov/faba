@@ -17,6 +17,9 @@ public class CfgAnalyzer implements Opcodes {
 
     public void analyze(final MethodNode m) throws AnalyzerException {
         int n = m.instructions.size();
+        if (n == 0) {
+            return;
+        }
         insns = m.instructions;
         List<TryCatchBlockNode>[] handlers = (List<TryCatchBlockNode>[]) new List<?>[n];
         queued = new boolean[n];
