@@ -15,7 +15,7 @@ object `package` {
     ControlFlowBuilder(className, methodNode).buildCFG()
 
   def resultOrigins(className: String, methodNode: MethodNode): Set[Int] = {
-    val frames = new Analyzer(MinimalOriginInterpreter).analyze(className, methodNode)
+    val frames = new LiteAnalyzer(MinimalOriginInterpreter).analyze(className, methodNode)
     val insns = methodNode.instructions
     var result = Set[Int]()
     for (i <- 0 until frames.length) {
@@ -35,7 +35,7 @@ object `package` {
 
   // the second element is a nullable leaking parameters
   def leakingParameters(className: String, methodNode: MethodNode): (Set[Int], Set[Int]) = {
-    val frames = new Analyzer(new ParametersUsage(methodNode)).analyze(className, methodNode)
+    val frames = new LiteAnalyzer(new ParametersUsage(methodNode)).analyze(className, methodNode)
     val insns = methodNode.instructions
     val collector = new LeakingParametersCollector(methodNode)
     val nullableCollector = new NullableLeakingParametersCollector(methodNode)

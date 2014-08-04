@@ -1,5 +1,8 @@
 package faba
 
+import java.nio.file.attribute.BasicFileAttributes
+import java.nio.file._
+
 import faba.engine.{Equation, ELattice, Solver}
 import org.objectweb.asm.tree.MethodNode
 import _root_.java.io.{PrintWriter, File}
@@ -8,6 +11,7 @@ import faba.cfg._
 import faba.data._
 import faba.source._
 import scala.xml.PrettyPrinter
+import scala.collection.mutable.ListBuffer
 
 class MainProcessor extends FabaProcessor {
 
@@ -146,50 +150,41 @@ class MainProcessor extends FabaProcessor {
     val indexEnd = System.currentTimeMillis()
 
     println("solving ...")
-    val notNullParams = notNullParamsSolver.solve().filterNot(p => p._2 == Values.Top)
-    val nullableParams = nullableParamsSolver.solve().filterNot(p => p._2 == Values.Top)
-    val contracts = contractsSolver.solve()
+    if (outDir != null) {
+      val notNullParams = notNullParamsSolver.solve().filterNot(p => p._2 == Values.Top)
+      val nullableParams = nullableParamsSolver.solve().filterNot(p => p._2 == Values.Top)
+      val contracts = contractsSolver.solve()
 
-    val dupKeys = notNullParams.keys.toSet intersect nullableParams.keys.toSet
-    for (k <- dupKeys) println(s"$k both @Nullable and @NotNull")
+      val dupKeys = notNullParams.keys.toSet intersect nullableParams.keys.toSet
+      for (k <- dupKeys) println(s"$k both @Nullable and @NotNull")
 
-    val debugSolutions: Map[Key, Values.Value] =
-      notNullParams ++ nullableParams ++ contracts
-    val solvingEnd = System.currentTimeMillis()
-    println("saving to file ...")
+      val debugSolutions: Map[Key, Values.Value] =
+        notNullParams ++ nullableParams ++ contracts
+      val solvingEnd = System.currentTimeMillis()
+      println("saving to file ...")
 
-    /*
-    val byPackage: Map[String, Map[Key, Values.Value]] =
-      debugSolutions.groupBy(_._1.method.internalPackageName)
+      val prodSolutions: Map[Key, Values.Value] =
+        debugSolutions.filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
 
-    for ((pkg, solution) <- byPackage) {
-      val xmlAnnotations = XmlUtils.toXmlAnnotations(solution, extras, debug = true)
-      printToFile(new File(s"$outDir-debug${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
-        out.println(pp.format(<root>{xmlAnnotations}</root>))
+      val byPackageProd: Map[String, Map[Key, Values.Value]] =
+        prodSolutions.groupBy(_._1.method.internalPackageName)
+
+      for ((pkg, solution) <- byPackageProd) {
+        val xmlAnnotations = XmlUtils.toXmlAnnotations(solution, extras, debug = false)
+        printToFile(new File(s"$outDir${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
+          out.println(pp.format(<root>{xmlAnnotations}</root>))
+        }
       }
-    }*/
+      val writingEnd = System.currentTimeMillis()
 
-    val prodSolutions: Map[Key, Values.Value] =
-      debugSolutions.filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
-
-    val byPackageProd: Map[String, Map[Key, Values.Value]] =
-      prodSolutions.groupBy(_._1.method.internalPackageName)
-
-    for ((pkg, solution) <- byPackageProd) {
-      val xmlAnnotations = XmlUtils.toXmlAnnotations(solution, extras, debug = false)
-      printToFile(new File(s"$outDir${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
-        out.println(pp.format(<root>{xmlAnnotations}</root>))
-      }
+      println(s"solving took ${(solvingEnd - indexEnd) / 1000.0} sec")
+      println(s"saving took ${(writingEnd - solvingEnd) / 1000.0} sec")
+      println(s"${debugSolutions.size} all contracts")
+      println(s"${prodSolutions.size} prod contracts")
     }
-
-    val writingEnd = System.currentTimeMillis()
 
     println("====")
     println(s"indexing took ${(indexEnd - indexStart) / 1000.0} sec")
-    println(s"solving took ${(solvingEnd - indexEnd) / 1000.0} sec")
-    println(s"saving took ${(writingEnd - solvingEnd) / 1000.0} sec")
-    println(s"${debugSolutions.size} all contracts")
-    println(s"${prodSolutions.size} prod contracts")
     println("INDEXING TIME")
     println(s"notNullParams  ${notNullParamsTime / 1000000} msec")
     println(s"nullableParams ${nullableParamsTime / 1000000} msec")
@@ -214,10 +209,23 @@ class MainProcessor extends FabaProcessor {
 }
 
 object Main extends MainProcessor {
+
   def main(args: Array[String]) {
-    if (args.length != 2) {
-      println(s"Usage: faba.Main inputJar outputDir")
-    } else {
+    if (args(0) == "--dirs") {
+      val sources = ListBuffer[Source]()
+      for (d <- args.tail)
+        Files.walkFileTree(FileSystems.getDefault.getPath(d), new SimpleFileVisitor[Path] {
+          override def visitFile(file: Path, attrs: BasicFileAttributes): FileVisitResult = {
+            if (file.toString.endsWith(".jar")) {
+              println(s"adding $file")
+              sources += JarFileSource(file.toFile)
+            }
+            super.visitFile(file, attrs)
+          }
+        })
+      process(MixedSource(sources.toList), null)
+    }
+    else {
       process(JarFileSource(new File(args(0))), args(1))
     }
   }
