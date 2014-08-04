@@ -33,11 +33,16 @@ case class JarFileSource(file: File) extends Source {
       }
     }
   }
+
+  override def toString = file.toString
 }
 
 case class MixedSource(sources: List[Source]) extends Source {
   override def process(processor: Processor): Unit =
-    sources.foreach(_.process(processor))
+    sources.foreach { s =>
+      println(s"processing $s")
+      s.process(processor)
+    }
 }
 
 trait Processor {
