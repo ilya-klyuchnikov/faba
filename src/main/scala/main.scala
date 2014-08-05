@@ -10,6 +10,7 @@ import _root_.java.io.{PrintWriter, File}
 import faba.cfg._
 import faba.data._
 import faba.source._
+import faba.parameters.ParametersAnalysis
 import scala.xml.PrettyPrinter
 import scala.collection.mutable.ListBuffer
 
@@ -199,6 +200,8 @@ class MainProcessor extends FabaProcessor {
     println(s"dfs            ${dfsTime / 1000000} msec")
     println(s"reducible      ${reducibleTime / 1000000} msec")
     println(s"leakingParams  ${leakingParametersTime / 1000000} msec")
+    println(s"${ParametersAnalysis.notNullExecute} @NotNull executes")
+    println(s"${ParametersAnalysis.nullableExecute} @Nullable executes")
   }
 
   def process(source: Source): Annotations = {

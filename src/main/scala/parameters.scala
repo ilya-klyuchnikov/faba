@@ -95,6 +95,8 @@ object ParametersAnalysis {
   import Analysis._
   val myArray = new Array[Result](LimitReachedException.limit)
   val myPending = new Array[PendingAction[Result]](LimitReachedException.limit)
+  var nullableExecute: Long = 0
+  var notNullExecute: Long = 0
 }
 
 class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result] {
@@ -248,6 +250,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
       (frame, Identity)
     case _ =>
+      ParametersAnalysis.notNullExecute += 1
       val nextFrame = new Frame(frame)
       NonNullInterpreter.reset()
       nextFrame.execute(insnNode, NonNullInterpreter)
@@ -373,6 +376,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
       (frame, Identity, false)
     case _ =>
+      ParametersAnalysis.nullableExecute += 1
       val nextFrame = new Frame(frame)
       NullableInterpreter.reset()
       nextFrame.execute(insnNode, NullableInterpreter)
