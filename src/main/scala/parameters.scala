@@ -382,9 +382,12 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
 }
 
 abstract class Interpreter extends BasicInterpreter {
+  var top = false
+  val nullable: Boolean
   protected var _subResult: Result = Identity
-  def reset(): Unit = {
+  final def reset(): Unit = {
     _subResult = Identity
+    top = false
   }
 
   def combine(res1: Result, res2: Result): Result
@@ -392,7 +395,7 @@ abstract class Interpreter extends BasicInterpreter {
   def getSubResult: Result =
     _subResult
 
-  override def unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue = {
+  final override def unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue = {
     insn.getOpcode match {
       case GETFIELD | ARRAYLENGTH | MONITORENTER if value.isInstanceOf[ParamValue] =>
         _subResult = NPE
@@ -405,87 +408,32 @@ abstract class Interpreter extends BasicInterpreter {
     super.unaryOperation(insn, value)
   }
 
-  override def binaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue): BasicValue = {
-    insn.getOpcode match {
-      case IALOAD | LALOAD | FALOAD | DALOAD | AALOAD | BALOAD | CALOAD | SALOAD | PUTFIELD
-        if v1.isInstanceOf[ParamValue] =>
-        _subResult = NPE
-      case _ =>
-
-    }
-    super.binaryOperation(insn, v1, v2)
-  }
-
-  override def ternaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue, v3: BasicValue): BasicValue = {
-    insn.getOpcode match {
-      case IASTORE | LASTORE | FASTORE | DASTORE | AASTORE | BASTORE | CASTORE | SASTORE
-        if v1.isInstanceOf[ParamValue] =>
-        _subResult = NPE
-      case _ =>
-    }
-    super.ternaryOperation(insn, v1, v2, v3)
-  }
-}
-
-object NonNullInterpreter extends Interpreter {
-  override def combine(res1: Result, res2: Result): Result = Result.meet(res1, res2)
-
-  override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
-    val opCode = insn.getOpcode
-    val static = opCode == INVOKESTATIC
-    val shift = if (static) 0 else 1
-    if ((opCode == INVOKESPECIAL || opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) && values.get(0).isInstanceOf[ParamValue]) {
-      _subResult = NPE
-    }
-    opCode match {
-      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL =>
-        val stable = opCode == INVOKESTATIC || opCode == INVOKESPECIAL
-        val mNode = insn.asInstanceOf[MethodInsnNode]
-        for (i <- shift until values.size()) {
-          if (values.get(i).isInstanceOf[ParamValue]) {
-            val method = Method(mNode.owner, mNode.name, mNode.desc)
-            _subResult = combine(_subResult, ConditionalNPE(Key(method, In(i - shift), stable)))
-          }
-        }
-      case _ =>
-    }
-    super.naryOperation(insn, values)
-  }
-
-}
-
-object NullableInterpreter extends Interpreter {
-  var top = false
-
-  override def reset() {
-    _subResult = Identity
-    top = false
-  }
-
-  override def combine(res1: Result, res2: Result): Result = Result.join(res1, res2)
-
-  override def binaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue): BasicValue = {
+  final override def binaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue): BasicValue = {
     insn.getOpcode match {
       case PUTFIELD
-        if v1.isInstanceOf[ParamValue] || v2.isInstanceOf[ParamValue] =>
+        if v1.isInstanceOf[ParamValue] || (nullable && v2.isInstanceOf[ParamValue]) =>
+        _subResult = NPE
+      case IALOAD | LALOAD | FALOAD | DALOAD | AALOAD | BALOAD | CALOAD | SALOAD if v1.isInstanceOf[ParamValue] =>
         _subResult = NPE
       case _ =>
-
     }
     super.binaryOperation(insn, v1, v2)
   }
 
-  override def ternaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue, v3: BasicValue): BasicValue = {
+  final override def ternaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue, v3: BasicValue): BasicValue = {
     insn.getOpcode match {
+      case IASTORE | LASTORE | FASTORE | DASTORE | BASTORE | CASTORE | SASTORE
+        if v1.isInstanceOf[ParamValue] =>
+        _subResult = NPE
       case AASTORE
-        if v1.isInstanceOf[ParamValue] || v3.isInstanceOf[ParamValue] =>
+        if v1.isInstanceOf[ParamValue] || (nullable && v3.isInstanceOf[ParamValue]) =>
         _subResult = NPE
       case _ =>
     }
     super.ternaryOperation(insn, v1, v2, v3)
   }
 
-  override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
+  final override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
     val opCode = insn.getOpcode
     val static = opCode == INVOKESTATIC
     val shift = if (static) 0 else 1
@@ -493,17 +441,20 @@ object NullableInterpreter extends Interpreter {
       _subResult = NPE
     }
     opCode match {
-      // TODO - if is passed into INVOKEINTERFACE - we cannot say that it is @Nullable = top
       case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE =>
         val stable = opCode == INVOKESTATIC || opCode == INVOKESPECIAL
         val mNode = insn.asInstanceOf[MethodInsnNode]
         for (i <- shift until values.size()) {
           if (values.get(i).isInstanceOf[ParamValue]) {
-            val method = Method(mNode.owner, mNode.name, mNode.desc)
-            _subResult = combine(_subResult, ConditionalNPE(Key(method, In(i - shift), stable)))
             if (opCode == INVOKEINTERFACE) {
-              // if param was passed to completely unknown method, then top
-              top = true
+              if (nullable && opCode == INVOKEINTERFACE) {
+                top = true
+                return super.naryOperation(insn, values)
+              }
+              // we do not put invoke interface into equations
+            } else {
+              val method = Method(mNode.owner, mNode.name, mNode.desc)
+              _subResult = combine(_subResult, ConditionalNPE(Key(method, In(i - shift), stable)))
             }
           }
         }
@@ -511,5 +462,15 @@ object NullableInterpreter extends Interpreter {
     }
     super.naryOperation(insn, values)
   }
+}
 
+object NonNullInterpreter extends Interpreter {
+  override val nullable = false
+  override def combine(res1: Result, res2: Result): Result = Result.meet(res1, res2)
+
+}
+
+object NullableInterpreter extends Interpreter {
+  override val nullable = true
+  override def combine(res1: Result, res2: Result): Result = Result.join(res1, res2)
 }
