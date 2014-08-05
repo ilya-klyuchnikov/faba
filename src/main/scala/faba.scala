@@ -21,6 +21,16 @@ trait FabaProcessor extends Processor {
 
   val processContracts = true
   var extras = Map[Method, MethodExtra]()
+  var complexTime: Long = 0
+  var nonCycleTime: Long = 0
+  var cycleTime: Long = 0
+  var nonCycleMethods: Long = 0
+  var cycleMethods: Long = 0
+  var simpleTime: Long = 0
+  var simpleTime1: Long = 0
+  var simpleTime2: Long = 0
+  var simpleTime3: Long = 0
+  var simpleTime4: Long = 0
 
   def handleHierarchy(access: Int, thisName: String, superName: String) {
 
@@ -79,7 +89,13 @@ trait FabaProcessor extends Processor {
     if (!jsrUsed) {
       val graph = buildCFG(className, methodNode)
       if (graph.transitions.nonEmpty) {
+        val complex = graph.transitions.exists(_.size > 1)
+        val start = System.nanoTime()
         val dfs = buildDFSTree(graph.transitions)
+        var branches = 0
+
+        branches = graph.transitions.map(s => math.max(0, s.size - 1)).sum
+
         val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
         if (reducible) {
           lazy val (leaking, nullableLeaking) = leakingParameters(className, methodNode)
@@ -140,6 +156,29 @@ trait FabaProcessor extends Processor {
           }
 
           added = true
+
+
+        }
+        val time = System.nanoTime() - start
+        if (complex)
+          complexTime += time
+        else
+          simpleTime += time
+
+        if (dfs.back.isEmpty) {
+          branches match {
+            case 1 => simpleTime1 += time
+            case 2 => simpleTime2 += time
+            case 3 => simpleTime3 += time
+            case 4 => simpleTime4 += time
+            case _ =>
+          }
+          nonCycleMethods += 1
+          nonCycleTime += time
+        }
+        else {
+          cycleMethods += 1
+          cycleTime += time
         }
       }
     }
