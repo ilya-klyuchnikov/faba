@@ -1,5 +1,6 @@
 package faba
 
+import faba.analysis.LimitReachedException
 import org.objectweb.asm._
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.Opcodes._
@@ -182,26 +183,74 @@ trait FabaProcessor extends Processor {
   def notNullParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean): (Equation[Key, Value], Boolean) = {
     val analyser = new NotNullInAnalysis(richControlFlow, In(i), stable)
     val eq = analyser.analyze()
-    (eq, analyser.npe)
+    try {
+      val eq = analyser.analyze()
+      (eq, analyser.npe)
+    } catch {
+      case LimitReachedException =>
+        (Equation(analyser.aKey, Final(Values.Top)), analyser.npe)
+    }
   }
 
-  def nullableParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean): Equation[Key, Value] =
-    new NullableInAnalysis(richControlFlow, In(i), stable).analyze()
+  def nullableParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean): Equation[Key, Value] = {
+    val analyser = new NullableInAnalysis(richControlFlow, In(i), stable)
+    try {
+      analyser.analyze()
+    } catch {
+      case LimitReachedException =>
+        Equation(analyser.aKey, Final(Values.Top))
+    }
+  }
 
-  def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean): Equation[Key, Value] =
-    new InOutAnalysis(richControlFlow, InOut(i, Values.NotNull), resultOrigins, stable).analyze()
+  def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean): Equation[Key, Value] = {
+    val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.NotNull), resultOrigins, stable)
+    try {
+      analyser.analyze()
+    } catch {
+      case LimitReachedException =>
+        Equation(analyser.aKey, Final(Values.Top))
+    }
+  }
 
-  def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean): Equation[Key, Value] =
-    new InOutAnalysis(richControlFlow, InOut(i, Values.Null), resultOrigins, stable).analyze()
+  def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean): Equation[Key, Value] = {
+    val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.Null), resultOrigins, stable)
+    try {
+      analyser.analyze()
+    } catch {
+      case LimitReachedException =>
+        Equation(analyser.aKey, Final(Values.Top))
+    }
+  }
 
-  def trueContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean): Equation[Key, Value] =
-    new InOutAnalysis(richControlFlow, InOut(i, Values.True), resultOrigins, stable).analyze()
+  def trueContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean): Equation[Key, Value] = {
+    val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.True), resultOrigins, stable)
+    try {
+      analyser.analyze()
+    } catch {
+      case LimitReachedException =>
+        Equation(analyser.aKey, Final(Values.Top))
+    }
+  }
 
-  def falseContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean): Equation[Key, Value] =
-    new InOutAnalysis(richControlFlow, InOut(i, Values.False), resultOrigins, stable).analyze()
+  def falseContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean): Equation[Key, Value] = {
+    val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.False), resultOrigins, stable)
+    try {
+      analyser.analyze()
+    } catch {
+      case LimitReachedException =>
+        Equation(analyser.aKey, Final(Values.Top))
+    }
+  }
 
-  def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], stable: Boolean): Equation[Key, Value] =
-    new InOutAnalysis(richControlFlow, Out, resultOrigins, stable).analyze()
+  def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], stable: Boolean): Equation[Key, Value] = {
+    val analyser = new InOutAnalysis(richControlFlow, Out, resultOrigins, stable)
+    try {
+      analyser.analyze()
+    } catch {
+      case LimitReachedException =>
+        Equation(analyser.aKey, Final(Values.Top))
+    }
+  }
 
   def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit = ()
   def handleNullableParamEquation(eq: Equation[Key, Value]): Unit = ()

@@ -35,6 +35,10 @@ case class Conf(insnIndex: Int, frame: Frame[BasicValue]) {
 
 case class State(index: Int, conf: Conf, history: List[Conf], taken: Boolean, hasCompanions: Boolean)
 
+object LimitReachedException extends Exception("Limit reached exception") {
+  val limit = 30000
+}
+
 abstract class Analysis[Res] {
 
   sealed trait PendingAction
@@ -75,7 +79,12 @@ abstract class Analysis[Res] {
 
   private var id = 0
   @inline
-  final def mkId(): Int = {id += 1; id}
+  final def mkId(): Int = {
+    id += 1
+    if (id > LimitReachedException.limit)
+      throw LimitReachedException
+    id
+  }
   final def lastId(): Int = id
 
   final def analyze(): Equation[Key, Value] = {
