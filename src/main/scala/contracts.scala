@@ -35,10 +35,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     case _                 => false
   }
 
-  var id = 0
-
   override def processState(fState: State): Unit = {
-
 
     var state = fState
     var states: List[State] = Nil
@@ -133,9 +130,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             case InOut(_, Values.NotNull) =>
               methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           }
-          val nextState = State({
-            id += 1; id
-          }, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
           states = state :: states
           state = nextState
         case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
@@ -145,24 +140,18 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             case InOut(_, Values.NotNull) =>
               insnIndex + 1
           }
-          val nextState = State({
-            id += 1; id
-          }, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
           states = state :: states
           state = nextState
         case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
           val nextInsnIndex =
             methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          val nextState = State({
-            id += 1; id
-          }, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
           states = state :: states
           state = nextState
         case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
           val nextInsnIndex = insnIndex + 1
-          val nextState = State({
-            id += 1; id
-          }, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
           pending.push(MakeResult(List(state), identity, List(nextState.index)))
           state = nextState
         case IFEQ if popValue(frame).isInstanceOf[ParamValue] =>
@@ -172,9 +161,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             case InOut(_, Values.True) =>
               insnIndex + 1
           }
-          val nextState = State({
-            id += 1; id
-          }, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
           states = state :: states
           state = nextState
         case IFNE if popValue(frame).isInstanceOf[ParamValue] =>
@@ -184,9 +171,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             case InOut(_, Values.True) =>
               methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           }
-          val nextState = State({
-            id += 1; id
-          }, Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
           states = state :: states
           state = nextState
         case _ =>
@@ -201,9 +186,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
               } else {
                 nextFrame
               }
-              State({
-                id += 1; id
-              }, Conf(nextInsnIndex, nextFrame1), nextHistory, taken, false)
+              State(mkId(), Conf(nextInsnIndex, nextFrame1), nextHistory, taken, false)
           }
           states = state :: states
           if (nextStates.size == 1) {
