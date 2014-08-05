@@ -91,9 +91,14 @@ object Result {
   }
 }
 
+object ParametersAnalysis {
+  val myArray = new Array[Result](LimitReachedException.limit)
+}
+
 class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result] {
 
   override val identity: Result = Identity
+  override val results = ParametersAnalysis.myArray
 
   override def combineResults(delta: Result, subResults: List[Result]): Result =
     Result.meet(delta, subResults.reduce(Result.join))
@@ -119,7 +124,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     while (true) {
       computed(state.conf.insnIndex).find(prevState => stateEquiv(state, prevState)) match {
         case Some(ps) =>
-          results = results + (state.index -> results(ps.index))
+          results(state.index) = results(ps.index)
           if (states.nonEmpty)
             pending.push(MakeResult(states, subResult, List(ps.index)))
           return
@@ -135,7 +140,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
       val fold = dfsTree.loopEnters(insnIndex) && history.exists(prevConf => confInstance(conf, prevConf))
 
       if (fold) {
-        results = results + (stateIndex -> identity)
+        results(stateIndex) = identity
         computed(insnIndex) = state :: computed(insnIndex)
         if (states.nonEmpty)
           pending.push(MakeResult(states, subResult, List(stateIndex)))
@@ -158,7 +163,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
       if (localSubResult == NPE) {
         // npe was detected
         npe = true
-        results = results + (stateIndex -> NPE)
+        results(stateIndex) = NPE
         computed(insnIndex) = state :: computed(insnIndex)
         pending.push(MakeResult(states, subResult, List(stateIndex)))
         return
@@ -170,7 +175,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
             earlyResult = Some(Return)
             return
           } else {
-            results = results + (stateIndex -> Return)
+            results(stateIndex) = Return
             computed(insnIndex) = state :: computed(insnIndex)
             // important to put subResult
             if (states.nonEmpty)
@@ -178,13 +183,13 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
             return
           }
         case ATHROW if taken =>
-          results = results + (stateIndex -> NPE)
+          results(stateIndex) = NPE
           computed(insnIndex) = state :: computed(insnIndex)
           if (states.nonEmpty)
             pending.push(MakeResult(states, subResult, List(stateIndex)))
           return
         case ATHROW =>
-          results = results + (stateIndex -> Error)
+          results(stateIndex) = Error
           computed(insnIndex) = state :: computed(insnIndex)
           if (states.nonEmpty)
             pending.push(MakeResult(states, subResult, List(stateIndex)))
@@ -251,6 +256,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
 class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result] {
 
   override val identity: Result = Identity
+  override val results = ParametersAnalysis.myArray
 
   override def combineResults(delta: Result, subResults: List[Result]): Result =
     Result.combineNullable(delta, subResults.reduce(Result.combineNullable))

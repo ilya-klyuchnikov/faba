@@ -36,7 +36,7 @@ case class Conf(insnIndex: Int, frame: Frame[BasicValue]) {
 case class State(index: Int, conf: Conf, history: List[Conf], taken: Boolean, hasCompanions: Boolean)
 
 object LimitReachedException extends Exception("Limit reached exception") {
-  val limit = 30000
+  val limit = 1 << 15
 }
 
 abstract class Analysis[Res] {
@@ -73,7 +73,7 @@ abstract class Analysis[Res] {
   // the key is insnIndex
   var computed = Array.tabulate[List[State]](methodNode.instructions.size()){i => Nil}
   // the key is stateIndex
-  var results = IntMap[Res]()
+  val results: Array[Res]
 
   var earlyResult: Option[Res] = None
 
@@ -99,7 +99,7 @@ abstract class Analysis[Res] {
           // updating all results
           for (state <- states) {
             val insnIndex = state.conf.insnIndex
-            results = results + (state.index -> result)
+            results(state.index) = result
             computed(insnIndex) = state :: computed(insnIndex)
           }
         }

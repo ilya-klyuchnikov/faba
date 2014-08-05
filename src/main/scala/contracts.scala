@@ -12,7 +12,12 @@ import faba.cfg._
 import faba.data._
 import faba.engine._
 
+object InOutAnalysis {
+  val myArray = new Array[Result[Key, Value]](LimitReachedException.limit)
+}
+
 class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Array[Boolean], val stable: Boolean) extends Analysis[Result[Key, Value]] {
+  override val results: Array[Result[Key, Value]] = InOutAnalysis.myArray
   type MyResult = Result[Key, Value]
   implicit val contractsLattice = ELattice(Values.Bot, Values.Top)
 
@@ -44,7 +49,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
       // sharing
       computed(state.conf.insnIndex).find(prevState => stateEquiv(state, prevState)) match {
         case Some(ps) =>
-          results = results + (state.index -> results(ps.index))
+          results(state.index) = results(ps.index)
           if (states.nonEmpty) pending.push(MakeResult(states, identity, List(ps.index)))
           return
         case None =>
@@ -59,7 +64,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
       val fold = loopEnter && history.exists(prevConf => confInstance(preConf, prevConf))
 
       if (fold) {
-        results = results + (stateIndex -> identity)
+        results(stateIndex) = identity
         computed(insnIndex) = state :: computed(insnIndex)
         if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
         return
@@ -74,7 +79,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
       val nextFrame = execute(frame, insnNode)
 
       if (interpreter.dereferenced) {
-        results = results + (stateIndex -> Final(Values.Bot))
+        results(stateIndex) = Final(Values.Bot)
         computed(insnIndex) = state :: computed(insnIndex)
         if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
         return
@@ -84,33 +89,33 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
         case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
           popValue(frame) match {
             case FalseValue() =>
-              results = results + (stateIndex -> Final(Values.False))
+              results(stateIndex) = Final(Values.False)
               computed(insnIndex) = state :: computed(insnIndex)
               if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
               return
             case TrueValue() =>
-              results = results + (stateIndex -> Final(Values.True))
+              results(stateIndex) = Final(Values.True)
               computed(insnIndex) = state :: computed(insnIndex)
               if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
               return
             case NullValue() =>
-              results = results + (stateIndex -> Final(Values.Null))
+              results(stateIndex) = Final(Values.Null)
               computed(insnIndex) = state :: computed(insnIndex)
               if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
               return
             case NotNullValue(_) =>
-              results = results + (stateIndex -> Final(Values.NotNull))
+              results(stateIndex) = Final(Values.NotNull)
               computed(insnIndex) = state :: computed(insnIndex)
               if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
               return
             case ParamValue(_) =>
               val InOut(_, in) = direction
-              results = results + (stateIndex -> Final(in))
+              results(stateIndex) = Final(in)
               computed(insnIndex) = state :: computed(insnIndex)
               if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
               return
             case CallResultValue(_, keys) =>
-              results = results + (stateIndex -> Pending[Key, Value](Set(Component(Values.Top, keys))))
+              results(stateIndex) = Pending[Key, Value](Set(Component(Values.Top, keys)))
               computed(insnIndex) = state :: computed(insnIndex)
               if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
               return
@@ -119,7 +124,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
               return
           }
         case ATHROW =>
-          results = results + (stateIndex -> Final(Values.Bot))
+          results(stateIndex) = Final(Values.Bot)
           computed(insnIndex) = state :: computed(insnIndex)
           if (states.nonEmpty) pending.push(MakeResult(states, identity, List(stateIndex)))
           return
@@ -257,13 +262,9 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
     case _ => false
   }
 
-  @inline
-  def isResultOrigin(insn: AbstractInsnNode) =
-    resultOrigins == null || resultOrigins(insns.indexOf(insn))
-
   @switch
   override def newOperation(insn: AbstractInsnNode): BasicValue = {
-    val propagate_? = isResultOrigin(insn)
+    val propagate_? = resultOrigins == null || resultOrigins(insns.indexOf(insn))
     insn.getOpcode match {
       case ICONST_0 if propagate_? =>
         FalseValue()
@@ -293,7 +294,7 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
 
   @switch
   override def unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue = {
-    val propagate_? = isResultOrigin(insn)
+    val propagate_? = resultOrigins == null || resultOrigins(insns.indexOf(insn))
     insn.getOpcode match {
       case GETFIELD | ARRAYLENGTH | MONITORENTER if nullAnalysis && value.isInstanceOf[ParamValue] =>
         dereferenced = true
@@ -331,7 +332,7 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
 
   @switch
   override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
-    val propagate_? = isResultOrigin(insn)
+    val propagate_? = resultOrigins == null || resultOrigins(insns.indexOf(insn))
     val opCode = insn.getOpcode
     val shift = if (opCode == INVOKESTATIC) 0 else 1
     if ((opCode == INVOKESPECIAL || opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) && nullAnalysis && values.get(0).isInstanceOf[ParamValue]) {
