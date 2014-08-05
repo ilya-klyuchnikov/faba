@@ -1,8 +1,5 @@
 package faba.analysis
 
-import scala.collection.mutable
-import scala.collection.immutable.IntMap
-
 import org.objectweb.asm.tree.analysis.{BasicValue, Frame}
 import org.objectweb.asm.{Opcodes, Type}
 
@@ -39,11 +36,14 @@ object LimitReachedException extends Exception("Limit reached exception") {
   val limit = 1 << 15
 }
 
-abstract class Analysis[Res] {
+object Analysis {
+  sealed trait PendingAction[+Res]
+  case class ProceedState(state: State) extends PendingAction[Nothing]
+  case class MakeResult[Res](states: List[State], subResult: Res, indices: List[Int]) extends PendingAction[Res]
+}
 
-  sealed trait PendingAction
-  case class ProceedState(state: State) extends PendingAction
-  case class MakeResult(states: List[State], subResult: Res, indices: List[Int]) extends PendingAction
+abstract class Analysis[Res] {
+  import Analysis._
 
   val richControlFlow: RichControlFlow
   val direction: Direction
@@ -69,12 +69,11 @@ abstract class Analysis[Res] {
       curr.history.size == prev.history.size &&
       (curr.history, prev.history).zipped.forall((c1, c2) => c1.hashCode() == c2.hashCode() && Utils.equiv(c1, c2))
 
-  val pending = mutable.Stack[PendingAction]()
   // the key is insnIndex
   var computed = Array.tabulate[List[State]](methodNode.instructions.size()){i => Nil}
   // the key is stateIndex
   val results: Array[Res]
-
+  val pending: Array[PendingAction[Res]]
   var earlyResult: Option[Res] = None
 
   private var id = 0
@@ -87,10 +86,24 @@ abstract class Analysis[Res] {
   }
   final def lastId(): Int = id
 
-  final def analyze(): Equation[Key, Value] = {
-    pending.push(ProceedState(createStartState()))
+  private var pendingTop: Int = 0
 
-    while (pending.nonEmpty && earlyResult.isEmpty) pending.pop() match {
+  @inline
+  final def pendingPush(action: PendingAction[Res]) {
+    pending(pendingTop) = action
+    pendingTop += 1
+  }
+
+  @inline
+  final def pendingPop(): PendingAction[Res] = {
+    pendingTop -= 1
+    pending(pendingTop)
+  }
+
+  final def analyze(): Equation[Key, Value] = {
+    pendingPush(ProceedState(createStartState()))
+
+    while (pendingTop > 0 && earlyResult.isEmpty) pendingPop() match {
       case MakeResult(states, delta, subIndices) =>
         val result = combineResults(delta, subIndices.map(results))
         if (isEarlyResult(result)) {

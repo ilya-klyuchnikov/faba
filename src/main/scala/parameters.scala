@@ -92,13 +92,17 @@ object Result {
 }
 
 object ParametersAnalysis {
+  import Analysis._
   val myArray = new Array[Result](LimitReachedException.limit)
+  val myPending = new Array[PendingAction[Result]](LimitReachedException.limit)
 }
 
 class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result] {
+  import Analysis._
 
   override val identity: Result = Identity
   override val results = ParametersAnalysis.myArray
+  override val pending = ParametersAnalysis.myPending
 
   override def combineResults(delta: Result, subResults: List[Result]): Result =
     Result.meet(delta, subResults.reduce(Result.join))
@@ -126,7 +130,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
         case Some(ps) =>
           results(state.index) = results(ps.index)
           if (states.nonEmpty)
-            pending.push(MakeResult(states, subResult, List(ps.index)))
+            pendingPush(MakeResult(states, subResult, List(ps.index)))
           return
         case None =>
       }
@@ -143,7 +147,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
         results(stateIndex) = identity
         computed(insnIndex) = state :: computed(insnIndex)
         if (states.nonEmpty)
-          pending.push(MakeResult(states, subResult, List(stateIndex)))
+          pendingPush(MakeResult(states, subResult, List(stateIndex)))
         return
       }
 
@@ -165,7 +169,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
         npe = true
         results(stateIndex) = NPE
         computed(insnIndex) = state :: computed(insnIndex)
-        pending.push(MakeResult(states, subResult, List(stateIndex)))
+        pendingPush(MakeResult(states, subResult, List(stateIndex)))
         return
       }
 
@@ -179,20 +183,20 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
             computed(insnIndex) = state :: computed(insnIndex)
             // important to put subResult
             if (states.nonEmpty)
-              pending.push(MakeResult(states, subResult, List(stateIndex)))
+              pendingPush(MakeResult(states, subResult, List(stateIndex)))
             return
           }
         case ATHROW if taken =>
           results(stateIndex) = NPE
           computed(insnIndex) = state :: computed(insnIndex)
           if (states.nonEmpty)
-            pending.push(MakeResult(states, subResult, List(stateIndex)))
+            pendingPush(MakeResult(states, subResult, List(stateIndex)))
           return
         case ATHROW =>
           results(stateIndex) = Error
           computed(insnIndex) = state :: computed(insnIndex)
           if (states.nonEmpty)
-            pending.push(MakeResult(states, subResult, List(stateIndex)))
+            pendingPush(MakeResult(states, subResult, List(stateIndex)))
           return
         case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = insnIndex + 1
@@ -232,8 +236,8 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
           if (nextStates.size == 1 && noSwitch) {
             state = nextStates.head
           } else {
-            pending.push(MakeResult(states, subResult, nextStates.map(_.index)))
-            pending.pushAll(nextStates.map(s => ProceedState(s)))
+            pendingPush(MakeResult(states, subResult, nextStates.map(_.index)))
+            nextStates.foreach {s => pendingPush(ProceedState(s))}
             return
           }
       }
@@ -255,8 +259,11 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
 // if everything is return, then parameter is nullable
 class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result] {
 
+  import Analysis._
+
   override val identity: Result = Identity
   override val results = ParametersAnalysis.myArray
+  override val pending = ParametersAnalysis.myPending
 
   override def combineResults(delta: Result, subResults: List[Result]): Result =
     Result.combineNullable(delta, subResults.reduce(Result.combineNullable))
@@ -355,7 +362,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
           if (nextStates.size == 1) {
             state = nextStates.head
           } else {
-            pending.pushAll(nextStates.map(s => ProceedState(s)))
+            nextStates.foreach {s => pendingPush(ProceedState(s))}
             return
           }
       }
