@@ -190,6 +190,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
           }
         case ATHROW if taken =>
           results(stateIndex) = NPE
+          npe = true
           computed(insnIndex) = state :: computed(insnIndex)
           if (states.nonEmpty)
             pendingPush(MakeResult(states, subResult, List(stateIndex)))

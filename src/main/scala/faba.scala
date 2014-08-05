@@ -182,7 +182,6 @@ trait FabaProcessor extends Processor {
 
   def notNullParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean): (Equation[Key, Value], Boolean) = {
     val analyser = new NotNullInAnalysis(richControlFlow, In(i), stable)
-    val eq = analyser.analyze()
     try {
       val eq = analyser.analyze()
       (eq, analyser.npe)
