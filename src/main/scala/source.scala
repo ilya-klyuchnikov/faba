@@ -5,7 +5,7 @@ import org.objectweb.asm._
 import scala.language.existentials
 import scala.collection.JavaConverters._
 
-import java.io.File
+import java.io.{FileInputStream, File}
 import java.util.jar.JarFile
 
 sealed trait Source {
@@ -17,6 +17,18 @@ case class ClassSource(classes: Class[_]*) extends Source {
     classes.foreach { clazz =>
       processor.processClass(new ClassReader(clazz.getCanonicalName))
     }
+}
+
+case class FileSource(file: File) extends Source {
+  override def process(processor: Processor): Unit = {
+    val is = new FileInputStream(file)
+    try {
+      processor.processClass(new ClassReader(is))
+    } finally {
+      is.close()
+    }
+  }
+  override def toString = file.toString
 }
 
 case class JarFileSource(file: File) extends Source {

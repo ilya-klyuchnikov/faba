@@ -268,6 +268,10 @@ object Main extends MainProcessor {
               println(s"adding $file")
               sources += JarFileSource(file.toFile)
             }
+            if (file.toString.endsWith(".class")) {
+              println(s"adding $file")
+              sources += FileSource(file.toFile)
+            }
             super.visitFile(file, attrs)
           }
         })
