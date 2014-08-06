@@ -1,6 +1,7 @@
 package faba
 
 import faba.analysis.LimitReachedException
+import faba.combined.CombinedSingleAnalysis
 import org.objectweb.asm._
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.Opcodes._
@@ -27,10 +28,8 @@ trait FabaProcessor extends Processor {
   var nonCycleMethods: Long = 0
   var cycleMethods: Long = 0
   var simpleTime: Long = 0
-  var simpleTime1: Long = 0
-  var simpleTime2: Long = 0
-  var simpleTime3: Long = 0
-  var simpleTime4: Long = 0
+  var complexMethods: Long = 0
+  var simpleMethods: Long = 0
 
   def handleHierarchy(access: Int, thisName: String, superName: String) {
 
@@ -79,7 +78,7 @@ trait FabaProcessor extends Processor {
         jsrUsed = true
       }
     }
-    extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
+    //extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
 
     val acc = methodNode.access
     val stable = stableClass || (methodNode.name == "<init>") ||
@@ -89,96 +88,83 @@ trait FabaProcessor extends Processor {
     if (!jsrUsed) {
       val graph = buildCFG(className, methodNode)
       if (graph.transitions.nonEmpty) {
-        val complex = graph.transitions.exists(_.size > 1)
-        val start = System.nanoTime()
         val dfs = buildDFSTree(graph.transitions)
-        var branches = 0
-
-        branches = graph.transitions.map(s => math.max(0, s.size - 1)).sum
-
-        val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
-        if (reducible) {
-          lazy val (leaking, nullableLeaking) = leakingParameters(className, methodNode)
-          lazy val resultOrigins = buildResultOrigins(className, methodNode)
-          val richControlFlow = RichControlFlow(graph, dfs)
-          lazy val resultEquation: Equation[Key, Value] = outContractEquation(richControlFlow, resultOrigins, stable)
-          if (processContracts && isReferenceResult) {
-            handleOutContractEquation(resultEquation)
-          }
-          for (i <- argumentTypes.indices) {
-            val argType = argumentTypes(i)
-            val argSort = argType.getSort
-            val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
-            val booleanArg = argType == Type.BOOLEAN_TYPE
-            var notNullParam = false
-            if (isReferenceArg) {
-              if (leaking(i)) {
-                val (notNullPEquation, npe) = notNullParamEquation(richControlFlow, i, stable)
-                notNullPEquation.rhs match {
-                  case Final(Values.NotNull) =>
-                    notNullParam = true
-                  case _ =>
-                    npe
-                }
-                handleNotNullParamEquation(notNullPEquation)
-              }
-              else
-                handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
-
-              if (nullableLeaking(i))
-                handleNullableParamEquation(nullableParamEquation(richControlFlow, i, stable))
-              else
-                handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Null)))
-
+        val complex = dfs.back.nonEmpty || graph.transitions.exists(_.size > 1)
+        val start = System.nanoTime()
+        if (complex) {
+          val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
+          if (reducible) {
+            lazy val (leaking, nullableLeaking) = leakingParameters(className, methodNode)
+            lazy val resultOrigins = buildResultOrigins(className, methodNode)
+            val richControlFlow = RichControlFlow(graph, dfs)
+            lazy val resultEquation: Equation[Key, Value] = outContractEquation(richControlFlow, resultOrigins, stable)
+            if (processContracts && isReferenceResult) {
+              handleOutContractEquation(resultEquation)
             }
-            if (processContracts && isReferenceArg && (isReferenceResult || isBooleanResult)) {
-              if (leaking(i)) {
-                if (!notNullParam) {
-                  handleNullContractEquation(nullContractEquation(richControlFlow, resultOrigins, i, stable))
+            for (i <- argumentTypes.indices) {
+              val argType = argumentTypes(i)
+              val argSort = argType.getSort
+              val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
+              val booleanArg = argType == Type.BOOLEAN_TYPE
+              var notNullParam = false
+              if (isReferenceArg) {
+                if (leaking(i)) {
+                  val (notNullPEquation, npe) = notNullParamEquation(richControlFlow, i, stable)
+                  notNullPEquation.rhs match {
+                    case Final(Values.NotNull) =>
+                      notNullParam = true
+                    case _ =>
+                      npe
+                  }
+                  handleNotNullParamEquation(notNullPEquation)
+                }
+                else
+                  handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
+
+                if (nullableLeaking(i))
+                  handleNullableParamEquation(nullableParamEquation(richControlFlow, i, stable))
+                else
+                  handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Null)))
+
+              }
+              if (processContracts && isReferenceArg && (isReferenceResult || isBooleanResult)) {
+                if (leaking(i)) {
+                  if (!notNullParam) {
+                    handleNullContractEquation(nullContractEquation(richControlFlow, resultOrigins, i, stable))
+                  } else {
+                    handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Bot)))
+                  }
+                  handleNotNullContractEquation(notNullContractEquation(richControlFlow, resultOrigins, i, stable))
                 } else {
-                  handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Bot)))
+                  handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
+                  handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
                 }
-                handleNotNullContractEquation(notNullContractEquation(richControlFlow, resultOrigins, i, stable))
-              } else {
-                handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
-                handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
+              }
+              if (processContracts && booleanArg && (isReferenceResult || isBooleanResult)) {
+                if (leaking(i)) {
+                  handleFalseContractEquation(falseContractEquation(richControlFlow, resultOrigins, i, stable))
+                  handleTrueContractEquation(trueContractEquation(richControlFlow, resultOrigins, i, stable))
+                } else {
+                  handleTrueContractEquation(Equation(Key(method, InOut(i, Values.True), stable), resultEquation.rhs))
+                  handleFalseContractEquation(Equation(Key(method, InOut(i, Values.False), stable), resultEquation.rhs))
+                }
               }
             }
-            if (processContracts && booleanArg && (isReferenceResult || isBooleanResult)) {
-              if (leaking(i)) {
-                handleFalseContractEquation(falseContractEquation(richControlFlow, resultOrigins, i, stable))
-                handleTrueContractEquation(trueContractEquation(richControlFlow, resultOrigins, i, stable))
-              } else {
-                handleTrueContractEquation(Equation(Key(method, InOut(i, Values.True), stable), resultEquation.rhs))
-                handleFalseContractEquation(Equation(Key(method, InOut(i, Values.False), stable), resultEquation.rhs))
-              }
-            }
+            added = true
           }
-
+        } else {
+          val analyzer = new CombinedSingleAnalysis(graph)
+          analyzer.analyze()
           added = true
-
-
         }
         val time = System.nanoTime() - start
-        if (complex)
+        if (complex) {
+          complexMethods += 1
           complexTime += time
-        else
-          simpleTime += time
-
-        if (dfs.back.isEmpty) {
-          branches match {
-            case 1 => simpleTime1 += time
-            case 2 => simpleTime2 += time
-            case 3 => simpleTime3 += time
-            case 4 => simpleTime4 += time
-            case _ =>
-          }
-          nonCycleMethods += 1
-          nonCycleTime += time
         }
         else {
-          cycleMethods += 1
-          cycleTime += time
+          simpleMethods += 1
+          simpleTime += time
         }
       }
     }
