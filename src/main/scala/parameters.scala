@@ -33,8 +33,7 @@ case object Error extends Result
 case object Return extends Result
 case object NPE extends Result
 case class ConditionalNPE(sop: SoP) extends Result {
-  if (sop.map(_.size).sum > 30)
-    throw LimitReachedException
+  if (sop.map(_.size).sum > 30) throw new LimitReachedException
 }
 
 object ConditionalNPE {

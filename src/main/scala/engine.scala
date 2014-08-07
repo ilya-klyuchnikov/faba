@@ -77,8 +77,7 @@ case class Component[Id, V](v: V, ids: Set[Id])
 sealed trait Result[+Id, Val]
 case class Final[Val](value: Val) extends Result[Nothing, Val]
 case class Pending[Id, Val](delta: SoP[Id, Val]) extends Result[Id, Val] {
-  if (delta.map(_.ids.size).sum > 30)
-    throw LimitReachedException
+  if (delta.map(_.ids.size).sum > 30) throw new LimitReachedException
 }
 
 case class Equation[Id, Val](id: Id, rhs: Result[Id, Val])

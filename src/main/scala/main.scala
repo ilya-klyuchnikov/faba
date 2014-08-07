@@ -16,7 +16,7 @@ import scala.collection.mutable.ListBuffer
 
 class MainProcessor extends FabaProcessor {
 
-  val doNothing = false
+  val doNothing = true
   val notNullParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.NotNull, Values.Top))
   val nullableParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Null, Values.Top))
   val contractsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Bot, Values.Top))
@@ -35,25 +35,9 @@ class MainProcessor extends FabaProcessor {
   var leakingParametersTime: Long = 0
   val processNullableParameters = true
 
-  var complexMethods: Long = 0
-  var simpleMethods: Long = 0
-
-  var simpleMethods1: Long = 0
-  var simpleMethods2: Long = 0
-  var simpleMethods3: Long = 0
-  var simpleMethods4: Long = 0
-
   override def buildCFG(className: String, methodNode: MethodNode) = {
     val start = System.nanoTime()
     val result = super.buildCFG(className, methodNode)
-    if (result.transitions.nonEmpty) {
-      val complex = result.transitions.exists(_.size > 1)
-      if (complex)
-        complexMethods += 1
-      else
-        simpleMethods += 1
-
-    }
     cfgTime += System.nanoTime() - start
     result
   }
@@ -76,17 +60,6 @@ class MainProcessor extends FabaProcessor {
     val start = System.nanoTime()
     val result = super.buildDFSTree(transitions)
     dfsTime += System.nanoTime() - start
-    val withoutCycles = result.back.isEmpty
-    if (withoutCycles) {
-      val branches = transitions.map(s => math.max(0, s.size - 1)).sum
-      branches match {
-        case 1 => simpleMethods1 += 1
-        case 2 => simpleMethods2 += 1
-        case 3 => simpleMethods3 += 1
-        case 4 => simpleMethods4 += 1
-        case _ =>
-      }
-    }
     result
   }
 
@@ -228,18 +201,11 @@ class MainProcessor extends FabaProcessor {
     println(s"reducible      ${reducibleTime / 1000000} msec")
     println(s"leakingParams  ${leakingParametersTime / 1000000} msec")
     println(s"simpleTime0    ${simpleTime / 1000000} msec")
-    println(s"simpleTime1    ${simpleTime1 / 1000000} msec")
-    println(s"simpleTime2    ${simpleTime2 / 1000000} msec")
-    println(s"simpleTime3    ${simpleTime3 / 1000000} msec")
-    println(s"simpleTime4    ${simpleTime4 / 1000000} msec")
     println(s"complexTime    ${complexTime / 1000000} msec")
     println(s"${ParametersAnalysis.notNullExecute} @NotNull executes")
     println(s"${ParametersAnalysis.nullableExecute} @Nullable executes")
+    println("====")
     println(s"$simpleMethods  simple 0 methods")
-    println(s"$simpleMethods1 simple 1 methods")
-    println(s"$simpleMethods2 simple 2 methods")
-    println(s"$simpleMethods3 simple 3 methods")
-    println(s"$simpleMethods4 simple 4 methods")
     println(s"$complexMethods complex methods")
     println(s"$cycleMethods    cycle methods methods")
     println(s"$nonCycleMethods non cycle methods methods")
@@ -267,6 +233,10 @@ object Main extends MainProcessor {
             if (file.toString.endsWith(".jar")) {
               println(s"adding $file")
               sources += JarFileSource(file.toFile)
+            }
+            if (file.toString.endsWith(".class")) {
+              println(s"adding $file")
+              sources += FileSource(file.toFile)
             }
             super.visitFile(file, attrs)
           }

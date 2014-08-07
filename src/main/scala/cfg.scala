@@ -2,6 +2,7 @@ package faba.cfg
 
 import java.util
 
+import faba.analysis.LimitReachedException
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree._
@@ -13,12 +14,15 @@ import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
 object `package` {
+
+  val MERGE_LIMIT = 100000
+
   def buildControlFlowGraph(className: String, methodNode: MethodNode): ControlFlowGraph =
     ControlFlowBuilder(className, methodNode).buildCFG()
 
   def resultOrigins(className: String, methodNode: MethodNode): Array[Boolean] = {
     val returnType = Type.getReturnType(methodNode.desc)
-    val interpreter = if (Utils.isReferenceType(returnType)) ReferenceOriginInterpreter else MinimalOriginInterpreter
+    val interpreter = if (Utils.isReferenceType(returnType)) new ReferenceOriginInterpreter else new BooleanOriginInterpreter
     val frames = new LiteAnalyzer(interpreter).analyze(className, methodNode)
     val insns = methodNode.instructions
     val result = new Array[Boolean](insns.size())
@@ -164,15 +168,15 @@ object Utils {
   }
 }
 
-// really this is just for booleans
-object MinimalOriginInterpreter extends SourceInterpreter {
+class BooleanOriginInterpreter extends SourceInterpreter {
   val sourceVal1 = new SourceValue(1)
   val sourceVal2 = new SourceValue(2)
+
+  var mergeCount = 0
 
   override def newOperation(insn: AbstractInsnNode): SourceValue = {
     val result = super.newOperation(insn)
     insn.getOpcode match {
-      // see the type of result
       case ICONST_0 | ICONST_1 =>
         result
       case _ =>
@@ -217,11 +221,22 @@ object MinimalOriginInterpreter extends SourceInterpreter {
 
   override def copyOperation(insn: AbstractInsnNode, value: SourceValue) =
     value
+
+  override def merge(d: SourceValue, w: SourceValue): SourceValue = {
+    val res = super.merge(d, w)
+    val size = res.insns.size()
+    if (size > 2)
+      mergeCount += size
+    if (mergeCount > MERGE_LIMIT) throw new AnalyzerException(null, "Limit reached in result origins")
+    res
+  }
 }
 
-object ReferenceOriginInterpreter extends SourceInterpreter {
+class ReferenceOriginInterpreter extends SourceInterpreter {
   val sourceVal1 = new SourceValue(1)
   val sourceVal2 = new SourceValue(2)
+
+  var mergeCount = 0
 
   override def newOperation(insn: AbstractInsnNode): SourceValue = {
     val result = super.newOperation(insn)
@@ -259,8 +274,7 @@ object ReferenceOriginInterpreter extends SourceInterpreter {
       case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL =>
         val mNode = insn.asInstanceOf[MethodInsnNode]
         val retType = Type.getReturnType(mNode.desc)
-        val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
-        if (isRefRetType)
+        if (retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY)
           new SourceValue(1, insn)
         else
           if (retType.getSize == 1) sourceVal1 else sourceVal2
@@ -283,6 +297,15 @@ object ReferenceOriginInterpreter extends SourceInterpreter {
 
   override def copyOperation(insn: AbstractInsnNode, value: SourceValue) =
     value
+
+  override def merge(d: SourceValue, w: SourceValue): SourceValue = {
+    val res = super.merge(d, w)
+    val size = res.insns.size()
+    if (size > 2)
+      mergeCount += size
+    if (mergeCount > MERGE_LIMIT) throw new AnalyzerException(null, "Limit reached in result origins")
+    res
+  }
 }
 
 case class ControlFlowGraph(className: String,
