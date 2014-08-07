@@ -14,12 +14,15 @@ import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
 object `package` {
+
+  val MERGE_LIMIT = 100000
+
   def buildControlFlowGraph(className: String, methodNode: MethodNode): ControlFlowGraph =
     ControlFlowBuilder(className, methodNode).buildCFG()
 
   def resultOrigins(className: String, methodNode: MethodNode): Array[Boolean] = {
     val returnType = Type.getReturnType(methodNode.desc)
-    val interpreter = if (Utils.isReferenceType(returnType)) new ReferenceOriginInterpreter else new MinimalOriginInterpreter
+    val interpreter = if (Utils.isReferenceType(returnType)) new ReferenceOriginInterpreter else new BooleanOriginInterpreter
     val frames = new LiteAnalyzer(interpreter).analyze(className, methodNode)
     val insns = methodNode.instructions
     val result = new Array[Boolean](insns.size())
@@ -165,8 +168,7 @@ object Utils {
   }
 }
 
-// really this is just for booleans
-class MinimalOriginInterpreter extends SourceInterpreter {
+class BooleanOriginInterpreter extends SourceInterpreter {
   val sourceVal1 = new SourceValue(1)
   val sourceVal2 = new SourceValue(2)
 
@@ -175,7 +177,6 @@ class MinimalOriginInterpreter extends SourceInterpreter {
   override def newOperation(insn: AbstractInsnNode): SourceValue = {
     val result = super.newOperation(insn)
     insn.getOpcode match {
-      // see the type of result
       case ICONST_0 | ICONST_1 =>
         result
       case _ =>
@@ -226,7 +227,7 @@ class MinimalOriginInterpreter extends SourceInterpreter {
     val size = res.insns.size()
     if (size > 2)
       mergeCount += size
-    //if (mergeCount > 2000) throw LimitReachedException
+    if (mergeCount > MERGE_LIMIT) throw new AnalyzerException(null, "Limit reached in result origins")
     res
   }
 }
@@ -273,8 +274,7 @@ class ReferenceOriginInterpreter extends SourceInterpreter {
       case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL =>
         val mNode = insn.asInstanceOf[MethodInsnNode]
         val retType = Type.getReturnType(mNode.desc)
-        val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
-        if (isRefRetType)
+        if (retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY)
           new SourceValue(1, insn)
         else
           if (retType.getSize == 1) sourceVal1 else sourceVal2
@@ -303,7 +303,7 @@ class ReferenceOriginInterpreter extends SourceInterpreter {
     val size = res.insns.size()
     if (size > 2)
       mergeCount += size
-    //if (mergeCount > 2000) throw LimitReachedException
+    if (mergeCount > MERGE_LIMIT) throw new AnalyzerException(null, "Limit reached in result origins")
     res
   }
 }

@@ -5,6 +5,7 @@ import faba.combined.CombinedSingleAnalysis
 import org.objectweb.asm._
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.Opcodes._
+import org.objectweb.asm.tree.analysis.AnalyzerException
 
 import scala.language.existentials
 
@@ -197,7 +198,13 @@ trait FabaProcessor extends Processor {
     cfg.buildControlFlowGraph(className, methodNode)
 
   def buildResultOrigins(className: String, methodNode: MethodNode): Array[Boolean] =
-    cfg.resultOrigins(className, methodNode)
+    try {
+      cfg.resultOrigins(className, methodNode)
+    } catch {
+      case _: AnalyzerException =>
+        System.err.println(s"$className ${methodNode.name} - limit reached for result origins analysis")
+        null
+    }
 
   def buildDFSTree(transitions: Array[List[Int]]): DFSTree =
     cfg.buildDFSTree(transitions)
@@ -211,7 +218,7 @@ trait FabaProcessor extends Processor {
       val eq = analyser.analyze()
       (eq, analyser.npe)
     } catch {
-      case LimitReachedException =>
+      case _: LimitReachedException =>
         (Equation(analyser.aKey, Final(Values.Top)), analyser.npe)
     }
   }
@@ -221,7 +228,7 @@ trait FabaProcessor extends Processor {
     try {
       analyser.analyze()
     } catch {
-      case LimitReachedException =>
+      case _: LimitReachedException =>
         Equation(analyser.aKey, Final(Values.Top))
     }
   }
@@ -231,7 +238,7 @@ trait FabaProcessor extends Processor {
     try {
       analyser.analyze()
     } catch {
-      case LimitReachedException =>
+      case _: LimitReachedException =>
         Equation(analyser.aKey, Final(Values.Top))
     }
   }
@@ -241,7 +248,7 @@ trait FabaProcessor extends Processor {
     try {
       analyser.analyze()
     } catch {
-      case LimitReachedException =>
+      case _: LimitReachedException =>
         Equation(analyser.aKey, Final(Values.Top))
     }
   }
@@ -251,7 +258,7 @@ trait FabaProcessor extends Processor {
     try {
       analyser.analyze()
     } catch {
-      case LimitReachedException =>
+      case _: LimitReachedException =>
         Equation(analyser.aKey, Final(Values.Top))
     }
   }
@@ -261,7 +268,7 @@ trait FabaProcessor extends Processor {
     try {
       analyser.analyze()
     } catch {
-      case LimitReachedException =>
+      case _: LimitReachedException =>
         Equation(analyser.aKey, Final(Values.Top))
     }
   }
@@ -271,7 +278,7 @@ trait FabaProcessor extends Processor {
     try {
       analyser.analyze()
     } catch {
-      case LimitReachedException =>
+      case _: LimitReachedException =>
         Equation(analyser.aKey, Final(Values.Top))
     }
   }
