@@ -79,7 +79,7 @@ trait FabaProcessor extends Processor {
         jsrUsed = true
       }
     }
-    //extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
+    extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
 
     val acc = methodNode.access
     val stable = stableClass || (methodNode.name == "<init>") ||
@@ -154,8 +154,30 @@ trait FabaProcessor extends Processor {
             added = true
           }
         } else {
-          val analyzer = new CombinedSingleAnalysis(graph)
+          val analyzer = new CombinedSingleAnalysis(method, graph)
           analyzer.analyze()
+          // todo - boolean result as well
+          if (isReferenceResult) {
+            handleOutContractEquation(analyzer.outContractEquation(stable))
+          }
+          for (i <- argumentTypes.indices) {
+            val argType = argumentTypes(i)
+            val argSort = argType.getSort
+            val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
+            val booleanArg = argType == Type.BOOLEAN_TYPE
+            if (isReferenceArg) {
+              handleNotNullParamEquation(analyzer.notNullParamEquation(i, stable))
+              handleNullableParamEquation(analyzer.nullableParamEquation(i, stable))
+            }
+            if (isReferenceArg && (isReferenceResult || isBooleanResult)) {
+              handleNullContractEquation(analyzer.nullContractEquation(i, stable))
+              handleNotNullContractEquation(analyzer.notNullContractEquation(i, stable))
+            }
+            if (booleanArg && (isReferenceResult || isBooleanResult)) {
+              handleFalseContractEquation(analyzer.falseContractEquation(i, stable))
+              handleTrueContractEquation(analyzer.trueContractEquation(i, stable))
+            }
+          }
           added = true
         }
         val time = System.nanoTime() - start

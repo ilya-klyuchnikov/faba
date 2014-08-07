@@ -1,8 +1,9 @@
 package faba.combined
 
 import faba.analysis._
-import faba.cfg.{ControlFlowGraph, RichControlFlow}
+import faba.cfg.ControlFlowGraph
 import faba.data._
+import faba.engine._
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.tree._
 import org.objectweb.asm.{Handle, Opcodes, Type}
@@ -16,9 +17,12 @@ case class NParamValue(tp: Type, n: Int) extends BasicValue(tp)
 
 // specialized class for analyzing methods without branching
 // this is a good tutorial example
-class CombinedSingleAnalysis(val controlFlow: ControlFlowGraph) {
+class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGraph) {
+
   val methodNode = controlFlow.methodNode
   val interpreter = CombinedInterpreter(Type.getArgumentTypes(methodNode.desc).length)
+  var returnValue: BasicValue = null
+  var exception: Boolean = false
 
   final def analyze() {
     val frame = createStartFrame()
@@ -31,8 +35,14 @@ class CombinedSingleAnalysis(val controlFlow: ControlFlowGraph) {
           insnIndex = controlFlow.transitions(insnIndex).head
         case _ =>
           insnNode.getOpcode match {
-            case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN | ATHROW =>
-              // todo
+            case ATHROW =>
+              exception = true
+              return
+            case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN =>
+              returnValue = frame.pop()
+              return
+            case RETURN =>
+              // nothing to return
               return
             case _ =>
               frame.execute(insnNode, interpreter)
@@ -40,6 +50,208 @@ class CombinedSingleAnalysis(val controlFlow: ControlFlowGraph) {
           }
       }
     }
+  }
+
+  def notNullParamEquation(i: Int, b: Boolean): Equation[Key, Value] = {
+    val key = Key(method, In(i), b)
+    val result: Result[Key, Value] =
+      if (interpreter.dereferenced(i)) Final(Values.NotNull)
+      else {
+        val calls: Set[Key] = interpreter.callDerefs.getOrElse(i, Set())
+        if (calls.isEmpty)
+          Final(Values.Top)
+        else
+          Pending[Key, Value](Set(Component(Values.Top, calls)))
+      }
+    Equation(key, result)
+  }
+
+  def nullableParamEquation(i: Int, b: Boolean): Equation[Key, Value] = {
+    val key = Key(method, In(i), b)
+    val result: Result[Key, Value] =
+      if (interpreter.dereferenced(i) || interpreter.notNullable(i)) Final(Values.Top)
+      else {
+        returnValue match {
+          case NParamValue(_, `i`) =>
+            Final(Values.Top)
+          case _ =>
+            val calls: Set[Key] = interpreter.callDerefs.getOrElse(i, Set())
+            if (calls.isEmpty)
+              Final(Values.Null)
+            else
+              Pending[Key, Value](calls.map(k => Component(Values.Top, Set(k))))
+        }
+
+      }
+    Equation(key, result)
+  }
+
+  def trueContractEquation(i: Int, b: Boolean): Equation[Key, Value] = {
+    val key = Key(method, InOut(i, Values.True), b)
+    val result: Result[Key, Value] =
+      if (exception) Final(Values.Bot)
+      else {
+        returnValue match {
+          case FalseValue() =>
+            Final(Values.False)
+          case TrueValue() =>
+            Final(Values.True)
+          case NullValue() =>
+            Final(Values.Null)
+          case NotNullValue(_) =>
+            Final(Values.NotNull)
+          case NParamValue(_, `i`) =>
+            Final(Values.True)
+          case CombinedCall(retType, m, stableCall, args) =>
+            val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
+            var keys = Set[Key]()
+            for ((NParamValue(_, `i`), j) <- args.zipWithIndex) {
+              keys += Key(m, InOut(j, Values.True), stableCall)
+            }
+            if (isRefRetType) {
+              keys += Key(m, Out, stableCall)
+            }
+            if (keys.nonEmpty)
+              Pending[Key, Value](Set(Component(Values.Top, keys)))
+            else
+              Final(Values.Top)
+          case _ =>
+            Final(Values.Top)
+        }
+      }
+    Equation(key, result)
+  }
+
+  def falseContractEquation(i: Int, b: Boolean): Equation[Key, Value] = {
+    val key = Key(method, InOut(i, Values.False), b)
+    val result: Result[Key, Value] =
+      if (exception) Final(Values.Bot)
+      else {
+        returnValue match {
+          case FalseValue() =>
+            Final(Values.False)
+          case TrueValue() =>
+            Final(Values.True)
+          case NullValue() =>
+            Final(Values.Null)
+          case NotNullValue(_) =>
+            Final(Values.NotNull)
+          case NParamValue(_, `i`) =>
+            Final(Values.False)
+          case CombinedCall(retType, m, stableCall, args) =>
+            val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
+            var keys = Set[Key]()
+            for ((NParamValue(_, `i`), j) <- args.zipWithIndex) {
+              keys += Key(m, InOut(j, Values.False), stableCall)
+            }
+            if (isRefRetType) {
+              keys += Key(m, Out, stableCall)
+            }
+            if (keys.nonEmpty)
+              Pending[Key, Value](Set(Component(Values.Top, keys)))
+            else
+              Final(Values.Top)
+          case _ =>
+            Final(Values.Top)
+        }
+      }
+    Equation(key, result)
+  }
+
+  def notNullContractEquation(i: Int, b: Boolean): Equation[Key, Value] = {
+    val key = Key(method, InOut(i, Values.NotNull), b)
+    val result: Result[Key, Value] =
+      if (exception) Final(Values.Bot)
+      else {
+        returnValue match {
+          case FalseValue() =>
+            Final(Values.False)
+          case TrueValue() =>
+            Final(Values.True)
+          case NullValue() =>
+            Final(Values.Null)
+          case NotNullValue(_) =>
+            Final(Values.NotNull)
+          case NParamValue(_, `i`) =>
+            Final(Values.NotNull)
+          case CombinedCall(retType, m, stableCall, args) =>
+            val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
+            var keys = Set[Key]()
+            for ((NParamValue(_, `i`), j) <- args.zipWithIndex) {
+              keys += Key(m, InOut(j, Values.NotNull), stableCall)
+            }
+            if (isRefRetType) {
+              keys += Key(m, Out, stableCall)
+            }
+            if (keys.nonEmpty)
+              Pending[Key, Value](Set(Component(Values.Top, keys)))
+            else
+              Final(Values.Top)
+          case _ =>
+            Final(Values.Top)
+        }
+      }
+    Equation(key, result)
+  }
+
+  def nullContractEquation(i: Int, b: Boolean): Equation[Key, Value] = {
+    val key = Key(method, InOut(i, Values.Null), b)
+    val result: Result[Key, Value] =
+      if (interpreter.dereferenced(i) || exception) Final(Values.Bot)
+      else {
+        returnValue match {
+          case FalseValue() =>
+            Final(Values.False)
+          case TrueValue() =>
+            Final(Values.True)
+          case NullValue() =>
+            Final(Values.Null)
+          case NotNullValue(_) =>
+            Final(Values.NotNull)
+          case NParamValue(_, `i`) =>
+            Final(Values.Null)
+          case CombinedCall(retType, m, stableCall, args) =>
+            val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
+            var keys = Set[Key]()
+            for ((NParamValue(_, `i`), j) <- args.zipWithIndex) {
+              keys += Key(m, InOut(j, Values.Null), stableCall)
+            }
+            if (isRefRetType) {
+              keys += Key(m, Out, stableCall)
+            }
+            if (keys.nonEmpty)
+              Pending[Key, Value](Set(Component(Values.Top, keys)))
+            else
+              Final(Values.Top)
+          case _ =>
+            Final(Values.Top)
+        }
+      }
+    Equation(key, result)
+  }
+
+  def outContractEquation(b: Boolean): Equation[Key, Value] = {
+    val key = Key(method, Out, b)
+    val result: Result[Key, Value] =
+      if (exception) Final(Values.Bot)
+      else {
+        returnValue match {
+          case FalseValue() =>
+            Final(Values.False)
+          case TrueValue() =>
+            Final(Values.True)
+          case NullValue() =>
+            Final(Values.Null)
+          case NotNullValue(_) =>
+            Final(Values.NotNull)
+          case CombinedCall(_, m, stableCall, args) =>
+            val callKey = Key(m, Out, stableCall)
+            Pending[Key, Value](Set(Component(Values.Top, Set(callKey))))
+          case _ =>
+            Final(Values.Top)
+        }
+      }
+    Equation(key, result)
   }
 
   final def createStartFrame(): Frame[BasicValue] = {
