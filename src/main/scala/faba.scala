@@ -95,89 +95,11 @@ trait FabaProcessor extends Processor {
         if (complex) {
           val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
           if (reducible) {
-            lazy val (leaking, nullableLeaking) = leakingParameters(className, methodNode)
-            lazy val resultOrigins = buildResultOrigins(className, methodNode)
-            val richControlFlow = RichControlFlow(graph, dfs)
-            lazy val resultEquation: Equation[Key, Value] = outContractEquation(richControlFlow, resultOrigins, stable)
-            if (processContracts && isReferenceResult) {
-              handleOutContractEquation(resultEquation)
-            }
-            for (i <- argumentTypes.indices) {
-              val argType = argumentTypes(i)
-              val argSort = argType.getSort
-              val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
-              val booleanArg = argType == Type.BOOLEAN_TYPE
-              var notNullParam = false
-              if (isReferenceArg) {
-                if (leaking(i)) {
-                  val (notNullPEquation, npe) = notNullParamEquation(richControlFlow, i, stable)
-                  notNullPEquation.rhs match {
-                    case Final(Values.NotNull) =>
-                      notNullParam = true
-                    case _ =>
-                      npe
-                  }
-                  handleNotNullParamEquation(notNullPEquation)
-                }
-                else
-                  handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
-
-                if (nullableLeaking(i))
-                  handleNullableParamEquation(nullableParamEquation(richControlFlow, i, stable))
-                else
-                  handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Null)))
-
-              }
-              if (processContracts && isReferenceArg && (isReferenceResult || isBooleanResult)) {
-                if (leaking(i)) {
-                  if (!notNullParam) {
-                    handleNullContractEquation(nullContractEquation(richControlFlow, resultOrigins, i, stable))
-                  } else {
-                    handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Bot)))
-                  }
-                  handleNotNullContractEquation(notNullContractEquation(richControlFlow, resultOrigins, i, stable))
-                } else {
-                  handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
-                  handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
-                }
-              }
-              if (processContracts && booleanArg && (isReferenceResult || isBooleanResult)) {
-                if (leaking(i)) {
-                  handleFalseContractEquation(falseContractEquation(richControlFlow, resultOrigins, i, stable))
-                  handleTrueContractEquation(trueContractEquation(richControlFlow, resultOrigins, i, stable))
-                } else {
-                  handleTrueContractEquation(Equation(Key(method, InOut(i, Values.True), stable), resultEquation.rhs))
-                  handleFalseContractEquation(Equation(Key(method, InOut(i, Values.False), stable), resultEquation.rhs))
-                }
-              }
-            }
+            handleComplexMethod(method, className, methodNode, dfs, argumentTypes, graph, isReferenceResult, isBooleanResult, stable)
             added = true
           }
         } else {
-          val analyzer = new CombinedSingleAnalysis(method, graph)
-          analyzer.analyze()
-          // todo - boolean result as well
-          if (isReferenceResult) {
-            handleOutContractEquation(analyzer.outContractEquation(stable))
-          }
-          for (i <- argumentTypes.indices) {
-            val argType = argumentTypes(i)
-            val argSort = argType.getSort
-            val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
-            val booleanArg = argType == Type.BOOLEAN_TYPE
-            if (isReferenceArg) {
-              handleNotNullParamEquation(analyzer.notNullParamEquation(i, stable))
-              handleNullableParamEquation(analyzer.nullableParamEquation(i, stable))
-            }
-            if (isReferenceArg && (isReferenceResult || isBooleanResult)) {
-              handleNullContractEquation(analyzer.nullContractEquation(i, stable))
-              handleNotNullContractEquation(analyzer.notNullContractEquation(i, stable))
-            }
-            if (booleanArg && (isReferenceResult || isBooleanResult)) {
-              handleFalseContractEquation(analyzer.falseContractEquation(i, stable))
-              handleTrueContractEquation(analyzer.trueContractEquation(i, stable))
-            }
-          }
+          handleSimpleMethod(method, argumentTypes, graph, isReferenceResult, isBooleanResult, stable)
           added = true
         }
         val time = System.nanoTime() - start
@@ -212,6 +134,105 @@ trait FabaProcessor extends Processor {
       }
       if (processContracts && isReferenceResult) {
         handleOutContractEquation(Equation(Key(method, Out, stable), Final(Values.Top)))
+      }
+    }
+  }
+
+  def handleSimpleMethod(method: Method,
+                         argumentTypes: Array[Type],
+                         graph: ControlFlowGraph,
+                         isReferenceResult: Boolean,
+                         isBooleanResult: Boolean,
+                         stable: Boolean) {
+    val analyzer = new CombinedSingleAnalysis(method, graph)
+    analyzer.analyze()
+    // todo - boolean result as well
+    if (isReferenceResult) {
+      handleOutContractEquation(analyzer.outContractEquation(stable))
+    }
+    for (i <- argumentTypes.indices) {
+      val argType = argumentTypes(i)
+      val argSort = argType.getSort
+      val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
+      val booleanArg = argType == Type.BOOLEAN_TYPE
+      if (isReferenceArg) {
+        handleNotNullParamEquation(analyzer.notNullParamEquation(i, stable))
+        handleNullableParamEquation(analyzer.nullableParamEquation(i, stable))
+      }
+      if (isReferenceArg && (isReferenceResult || isBooleanResult)) {
+        handleNullContractEquation(analyzer.nullContractEquation(i, stable))
+        handleNotNullContractEquation(analyzer.notNullContractEquation(i, stable))
+      }
+      if (booleanArg && (isReferenceResult || isBooleanResult)) {
+        handleFalseContractEquation(analyzer.falseContractEquation(i, stable))
+        handleTrueContractEquation(analyzer.trueContractEquation(i, stable))
+      }
+    }
+  }
+
+  def handleComplexMethod(method: Method,
+                          className: String,
+                          methodNode: MethodNode,
+                          dfs: DFSTree,
+                          argumentTypes: Array[Type],
+                          graph: ControlFlowGraph,
+                          isReferenceResult: Boolean,
+                          isBooleanResult: Boolean,
+                          stable: Boolean) {
+    lazy val (leaking, nullableLeaking) = leakingParameters(className, methodNode)
+    lazy val resultOrigins = buildResultOrigins(className, methodNode)
+    val richControlFlow = RichControlFlow(graph, dfs)
+    lazy val resultEquation: Equation[Key, Value] = outContractEquation(richControlFlow, resultOrigins, stable)
+    if (processContracts && isReferenceResult) {
+      handleOutContractEquation(resultEquation)
+    }
+    for (i <- argumentTypes.indices) {
+      val argType = argumentTypes(i)
+      val argSort = argType.getSort
+      val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
+      val booleanArg = argType == Type.BOOLEAN_TYPE
+      var notNullParam = false
+      if (isReferenceArg) {
+        if (leaking(i)) {
+          val (notNullPEquation, npe) = notNullParamEquation(richControlFlow, i, stable)
+          notNullPEquation.rhs match {
+            case Final(Values.NotNull) =>
+              notNullParam = true
+            case _ =>
+              npe
+          }
+          handleNotNullParamEquation(notNullPEquation)
+        }
+        else
+          handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
+
+        if (nullableLeaking(i))
+          handleNullableParamEquation(nullableParamEquation(richControlFlow, i, stable))
+        else
+          handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Null)))
+
+      }
+      if (processContracts && isReferenceArg && (isReferenceResult || isBooleanResult)) {
+        if (leaking(i)) {
+          if (!notNullParam) {
+            handleNullContractEquation(nullContractEquation(richControlFlow, resultOrigins, i, stable))
+          } else {
+            handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Bot)))
+          }
+          handleNotNullContractEquation(notNullContractEquation(richControlFlow, resultOrigins, i, stable))
+        } else {
+          handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
+          handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
+        }
+      }
+      if (processContracts && booleanArg && (isReferenceResult || isBooleanResult)) {
+        if (leaking(i)) {
+          handleFalseContractEquation(falseContractEquation(richControlFlow, resultOrigins, i, stable))
+          handleTrueContractEquation(trueContractEquation(richControlFlow, resultOrigins, i, stable))
+        } else {
+          handleTrueContractEquation(Equation(Key(method, InOut(i, Values.True), stable), resultEquation.rhs))
+          handleFalseContractEquation(Equation(Key(method, InOut(i, Values.False), stable), resultEquation.rhs))
+        }
       }
     }
   }
