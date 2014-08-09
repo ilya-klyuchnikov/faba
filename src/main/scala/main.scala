@@ -205,10 +205,12 @@ class MainProcessor extends FabaProcessor {
     println(s"${ParametersAnalysis.notNullExecute} @NotNull executes")
     println(s"${ParametersAnalysis.nullableExecute} @Nullable executes")
     println("====")
-    println(s"$simpleMethods  simple 0 methods")
+    println(s"$simpleMethods  simple methods")
     println(s"$complexMethods complex methods")
+    println("====")
     println(s"$cycleMethods    cycle methods methods")
     println(s"$nonCycleMethods non cycle methods methods")
+    println("====")
     println(s"cycleTime        ${cycleTime / 1000000} msec")
     println(s"nonCycleTime     ${nonCycleTime / 1000000} msec")
   }

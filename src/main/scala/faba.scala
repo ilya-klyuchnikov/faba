@@ -179,6 +179,8 @@ trait FabaProcessor extends Processor {
                           isReferenceResult: Boolean,
                           isBooleanResult: Boolean,
                           stable: Boolean) {
+    val start = System.nanoTime()
+    val cycle = dfs.back.nonEmpty
     lazy val (leaking, nullableLeaking) = leakingParameters(className, methodNode)
     lazy val resultOrigins = buildResultOrigins(className, methodNode)
     val richControlFlow = RichControlFlow(graph, dfs)
@@ -234,6 +236,14 @@ trait FabaProcessor extends Processor {
           handleFalseContractEquation(Equation(Key(method, InOut(i, Values.False), stable), resultEquation.rhs))
         }
       }
+    }
+    val time = System.nanoTime() - start
+    if (cycle) {
+      cycleMethods += 1
+      cycleTime += time
+    } else {
+      nonCycleMethods += 1
+      nonCycleTime += time
     }
   }
 
