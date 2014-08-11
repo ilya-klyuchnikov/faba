@@ -52,8 +52,8 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
     }
   }
 
-  def notNullParamEquation(i: Int, b: Boolean): Equation[Key, Value] = {
-    val key = Key(method, In(i), b)
+  def notNullParamEquation(i: Int, stable: Boolean): Equation[Key, Value] = {
+    val key = Key(method, In(i), stable)
     val result: Result[Key, Value] =
       if (interpreter.dereferenced(i)) Final(Values.NotNull)
       else {
@@ -66,8 +66,8 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
     Equation(key, result)
   }
 
-  def nullableParamEquation(i: Int, b: Boolean): Equation[Key, Value] = {
-    val key = Key(method, In(i), b)
+  def nullableParamEquation(i: Int, stable: Boolean): Equation[Key, Value] = {
+    val key = Key(method, In(i), stable)
     val result: Result[Key, Value] =
       if (interpreter.dereferenced(i) || interpreter.notNullable(i)) Final(Values.Top)
       else {
@@ -86,8 +86,8 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
     Equation(key, result)
   }
 
-  def trueContractEquation(i: Int, b: Boolean): Equation[Key, Value] = {
-    val key = Key(method, InOut(i, Values.True), b)
+  def trueContractEquation(i: Int, stable: Boolean): Equation[Key, Value] = {
+    val key = Key(method, InOut(i, Values.True), stable)
     val result: Result[Key, Value] =
       if (exception) Final(Values.Bot)
       else {
@@ -122,8 +122,8 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
     Equation(key, result)
   }
 
-  def falseContractEquation(i: Int, b: Boolean): Equation[Key, Value] = {
-    val key = Key(method, InOut(i, Values.False), b)
+  def falseContractEquation(i: Int, stable: Boolean): Equation[Key, Value] = {
+    val key = Key(method, InOut(i, Values.False), stable)
     val result: Result[Key, Value] =
       if (exception) Final(Values.Bot)
       else {
@@ -158,8 +158,8 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
     Equation(key, result)
   }
 
-  def notNullContractEquation(i: Int, b: Boolean): Equation[Key, Value] = {
-    val key = Key(method, InOut(i, Values.NotNull), b)
+  def notNullContractEquation(i: Int, stable: Boolean): Equation[Key, Value] = {
+    val key = Key(method, InOut(i, Values.NotNull), stable)
     val result: Result[Key, Value] =
       if (exception) Final(Values.Bot)
       else {
@@ -194,8 +194,8 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
     Equation(key, result)
   }
 
-  def nullContractEquation(i: Int, b: Boolean): Equation[Key, Value] = {
-    val key = Key(method, InOut(i, Values.Null), b)
+  def nullContractEquation(i: Int, stable: Boolean): Equation[Key, Value] = {
+    val key = Key(method, InOut(i, Values.Null), stable)
     val result: Result[Key, Value] =
       if (interpreter.dereferenced(i) || exception) Final(Values.Bot)
       else {
@@ -230,8 +230,8 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
     Equation(key, result)
   }
 
-  def outContractEquation(b: Boolean): Equation[Key, Value] = {
-    val key = Key(method, Out, b)
+  def outContractEquation(stable: Boolean): Equation[Key, Value] = {
+    val key = Key(method, Out, stable)
     val result: Result[Key, Value] =
       if (exception) Final(Values.Bot)
       else {
@@ -293,9 +293,8 @@ case class CombinedInterpreter(arity: Int) extends BasicInterpreter {
   // dereferenced via call
   var callDerefs = Map[Int, Set[Key]]()
 
-  @switch
   override def newOperation(insn: AbstractInsnNode): BasicValue = {
-    insn.getOpcode match {
+    (insn.getOpcode: @switch) match {
       case ICONST_0 =>
         FalseValue()
       case ICONST_1 =>
@@ -322,9 +321,8 @@ case class CombinedInterpreter(arity: Int) extends BasicInterpreter {
     }
   }
 
-  @switch
   override def unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue = {
-    insn.getOpcode match {
+    (insn.getOpcode: @switch) match {
       case GETFIELD | ARRAYLENGTH | MONITORENTER =>
         if (value.isInstanceOf[NParamValue])
           dereferenced(value.asInstanceOf[NParamValue].n) = true
@@ -340,7 +338,7 @@ case class CombinedInterpreter(arity: Int) extends BasicInterpreter {
   }
 
   override def binaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue): BasicValue = {
-    insn.getOpcode match {
+    (insn.getOpcode: @switch) match {
       case PUTFIELD =>
         if (v1.isInstanceOf[NParamValue])
           dereferenced(v1.asInstanceOf[NParamValue].n) = true
@@ -354,8 +352,9 @@ case class CombinedInterpreter(arity: Int) extends BasicInterpreter {
     super.binaryOperation(insn, v1, v2)
   }
 
+  @switch
   override def ternaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue, v3: BasicValue): BasicValue = {
-    insn.getOpcode match {
+    (insn.getOpcode: @switch) match {
       case IASTORE | LASTORE | FASTORE | DASTORE | BASTORE | CASTORE | SASTORE =>
         if (v1.isInstanceOf[NParamValue])
           dereferenced(v1.asInstanceOf[NParamValue].n) = true
@@ -369,7 +368,6 @@ case class CombinedInterpreter(arity: Int) extends BasicInterpreter {
     super.ternaryOperation(insn, v1, v2, v3)
   }
 
-  @switch
   override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
     val opCode = insn.getOpcode
     val shift = if (opCode == INVOKESTATIC) 0 else 1
@@ -381,7 +379,7 @@ case class CombinedInterpreter(arity: Int) extends BasicInterpreter {
         case _ =>
       }
     }
-    opCode match {
+    (opCode: @switch) match {
       // catching implicit dereferences
       case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE =>
         val stable = opCode == INVOKESTATIC || opCode == INVOKESPECIAL
