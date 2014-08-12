@@ -52,7 +52,7 @@ case class JarFileSource(file: File) extends Source {
 case class MixedSource(sources: List[Source]) extends Source {
   override def process(processor: Processor): Unit =
     sources.foreach { s =>
-      println(s"processing $s")
+      println(s"${new java.util.Date} processing $s")
       s.process(processor)
     }
 }
