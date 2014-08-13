@@ -246,7 +246,7 @@ object Main extends MainProcessor {
       process(MixedSource(sources.toList), null)
     }
     else {
-      process(JarFileSource(new File(args(0))), args(1))
+      process(MixedSource(args.toList.init.map {f => JarFileSource(new File(f))}), args.last)
     }
   }
 }
