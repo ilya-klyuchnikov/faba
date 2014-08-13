@@ -1,22 +1,23 @@
 package faba
 
+import _root_.java.io.{PrintWriter, File}
 import java.nio.file.attribute.BasicFileAttributes
 import java.nio.file._
 
 import faba.engine.{Equation, ELattice, Solver}
 import org.objectweb.asm.tree.MethodNode
-import _root_.java.io.{PrintWriter, File}
 
 import faba.cfg._
 import faba.data._
 import faba.source._
 import faba.parameters.ParametersAnalysis
+import org.objectweb.asm.tree.analysis.Frame
 import scala.xml.PrettyPrinter
 import scala.collection.mutable.ListBuffer
 
 class MainProcessor extends FabaProcessor {
 
-  val doNothing = true
+  val doNothing = false
   val notNullParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.NotNull, Values.Top))
   val nullableParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Null, Values.Top))
   val contractsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Bot, Values.Top))
@@ -30,6 +31,7 @@ class MainProcessor extends FabaProcessor {
   var notNullTime: Long = 0
   var cfgTime: Long = 0
   var resultOriginsTime: Long = 0
+  var resultOriginsTime2: Long = 0
   var reducibleTime: Long = 0
   var dfsTime: Long = 0
   var leakingParametersTime: Long = 0
@@ -42,9 +44,9 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def buildResultOrigins(className: String, methodNode: MethodNode) = {
+  override def buildResultOrigins(className: String, methodNode: MethodNode, frames: Array[Frame[ParamsValue]], graph: ControlFlowGraph) = {
     val start = System.nanoTime()
-    val result = super.buildResultOrigins(className, methodNode)
+    val result = super.buildResultOrigins(className, methodNode, frames, graph)
     resultOriginsTime += System.nanoTime() - start
     result
   }

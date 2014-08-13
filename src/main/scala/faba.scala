@@ -3,12 +3,13 @@ package faba
 import faba.analysis.LimitReachedException
 import faba.combined.CombinedSingleAnalysis
 import org.objectweb.asm._
-import org.objectweb.asm.tree.MethodNode
+import org.objectweb.asm.tree.{InsnList, MethodNode}
 import org.objectweb.asm.Opcodes._
-import org.objectweb.asm.tree.analysis.AnalyzerException
+import org.objectweb.asm.tree.analysis.{Frame, AnalyzerException}
 
 import scala.language.existentials
 
+import faba.asm._
 import faba.cfg._
 import faba.data._
 import faba.contracts._
@@ -181,8 +182,10 @@ trait FabaProcessor extends Processor {
                           stable: Boolean) {
     val start = System.nanoTime()
     val cycle = dfs.back.nonEmpty
-    lazy val (leaking, nullableLeaking) = leakingParameters(className, methodNode)
-    lazy val resultOrigins = buildResultOrigins(className, methodNode)
+    // leaking params will be taken for
+    lazy val (leaking, nullableLeaking, frames) = leakingParameters(className, methodNode)
+
+    lazy val resultOrigins = buildResultOrigins(className, methodNode, frames, graph)
     val richControlFlow = RichControlFlow(graph, dfs)
     lazy val resultEquation: Equation[Key, Value] = outContractEquation(richControlFlow, resultOrigins, stable)
     if (processContracts && isReferenceResult) {
@@ -250,14 +253,15 @@ trait FabaProcessor extends Processor {
   def buildCFG(className: String, methodNode: MethodNode): ControlFlowGraph =
     cfg.buildControlFlowGraph(className, methodNode)
 
-  def buildResultOrigins(className: String, methodNode: MethodNode): Array[Boolean] =
-    try {
-      cfg.resultOrigins(className, methodNode)
-    } catch {
-      case _: AnalyzerException =>
-        System.err.println(s"$className ${methodNode.name} - limit reached for result origins analysis")
-        null
-    }
+  private def isReturnOpcode(opcode: Int) =
+    opcode >= Opcodes.IRETURN && opcode <= Opcodes.ARETURN
+
+  // build other result origins
+  def buildResultOrigins(className: String, methodNode: MethodNode, frames: Array[Frame[ParamsValue]], graph: ControlFlowGraph): Array[Boolean] = {
+    val insns = methodNode.instructions
+    val returnIndices = (0 until frames.length).filter { i => isReturnOpcode(insns.get(i).getOpcode)}.toList
+    OriginsAnalysis.resultOrigins(frames, insns, graph, returnIndices)
+  }
 
   def buildDFSTree(transitions: Array[List[Int]]): DFSTree =
     cfg.buildDFSTree(transitions)
@@ -344,6 +348,6 @@ trait FabaProcessor extends Processor {
   def handleFalseContractEquation(eq: Equation[Key, Value]): Unit = ()
   def handleOutContractEquation(eq: Equation[Key, Value]): Unit = ()
 
-  def leakingParameters(className: String, methodNode: MethodNode): (Array[Boolean], Array[Boolean]) =
+  def leakingParameters(className: String, methodNode: MethodNode) =
     cfg.leakingParameters(className, methodNode)
 }
