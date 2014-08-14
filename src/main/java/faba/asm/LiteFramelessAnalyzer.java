@@ -1,4 +1,4 @@
-package faba.cfg;
+package faba.asm;
 
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.analysis.AnalyzerException;
@@ -6,7 +6,7 @@ import org.objectweb.asm.tree.analysis.AnalyzerException;
 import java.util.List;
 
 /**
- * Specialized lite version of {@link faba.cfg.FramelessAnalyzer}.
+ * Specialized lite version of {@link faba.asm.FramelessAnalyzer}.
  * No processing of Subroutines. Should be used for methods without JSR/RET instructions.
  */
 public class LiteFramelessAnalyzer extends FramelessAnalyzer {

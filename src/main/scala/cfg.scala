@@ -1,6 +1,5 @@
 package faba.cfg
 
-import faba.asm.Utils
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree._
@@ -10,6 +9,8 @@ import scala.collection.JavaConversions._
 import scala.collection.immutable.HashSet
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
+
+import faba.asm._
 
 object `package` {
 
