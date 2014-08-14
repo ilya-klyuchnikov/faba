@@ -37,9 +37,9 @@ class MainProcessor extends FabaProcessor {
   var leakingParametersTime: Long = 0
   val processNullableParameters = true
 
-  override def buildCFG(className: String, methodNode: MethodNode) = {
+  override def buildCFG(className: String, methodNode: MethodNode, jsr: Boolean) = {
     val start = System.nanoTime()
-    val result = super.buildCFG(className, methodNode)
+    val result = super.buildCFG(className, methodNode, jsr)
     cfgTime += System.nanoTime() - start
     result
   }
@@ -114,9 +114,9 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def leakingParameters(className: String, methodNode: MethodNode) = {
+  override def leakingParameters(className: String, methodNode: MethodNode, jsr: Boolean) = {
     val start = System.nanoTime()
-    val result = super.leakingParameters(className, methodNode)
+    val result = super.leakingParameters(className, methodNode, jsr)
     leakingParametersTime += System.nanoTime() - start
     result
   }

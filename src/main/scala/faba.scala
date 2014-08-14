@@ -33,13 +33,12 @@ trait FabaProcessor extends Processor {
   var complexMethods: Long = 0
   var simpleMethods: Long = 0
 
-  def handleHierarchy(access: Int, thisName: String, superName: String) {
-
-  }
+  def handleHierarchy(access: Int, thisName: String, superName: String) {}
 
   override def processClass(classReader: ClassReader): Unit =
     classReader.accept(new ClassVisitor(ASM5) {
       var stableClass = false
+      var jsr = false
       override def visit(version: Int, access: Int, name: String, signature: String, superName: String, interfaces: Array[String]) {
         // or there are no subclasses??
         stableClass = (access & ACC_FINAL) != 0
@@ -52,13 +51,19 @@ trait FabaProcessor extends Processor {
         new MethodVisitor(ASM5, node) {
           override def visitEnd(): Unit = {
             super.visitEnd()
-            processMethod(classReader.getClassName, node, stableClass)
+            processMethod(classReader.getClassName, node, stableClass, jsr)
+          }
+
+          override def visitJumpInsn(opcode: Int, label: Label) {
+            if (opcode == Opcodes.JSR)
+              jsr = true
+            super.visitJumpInsn(opcode, label)
           }
         }
       }
     }, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES)
 
-  def processMethod(className: String, methodNode: MethodNode, stableClass: Boolean) {
+  def processMethod(className: String, methodNode: MethodNode, stableClass: Boolean, jsr: Boolean) {
     val argumentTypes = Type.getArgumentTypes(methodNode.desc)
     val resultType = Type.getReturnType(methodNode.desc)
     val resultSort = resultType.getSort
@@ -71,15 +76,6 @@ trait FabaProcessor extends Processor {
     }
 
     val method = Method(className, methodNode.name, methodNode.desc)
-    val insns = methodNode.instructions
-
-    var jsrUsed = false
-    for (i <- 0 until insns.size()) {
-      val insn = insns.get(i)
-      if (insn != null && (insn.getOpcode == Opcodes.JSR || insn.getOpcode == Opcodes.RET)) {
-        jsrUsed = true
-      }
-    }
     extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
 
     val acc = methodNode.access
@@ -87,33 +83,33 @@ trait FabaProcessor extends Processor {
       (acc & ACC_FINAL) != 0 || (acc & ACC_PRIVATE) != 0 || (acc & ACC_STATIC) != 0
     var added = false
 
-    if (!jsrUsed) {
-      val graph = buildCFG(className, methodNode)
-      if (graph.transitions.nonEmpty) {
-        val dfs = buildDFSTree(graph.transitions)
-        val complex = dfs.back.nonEmpty || graph.transitions.exists(_.size > 1)
-        val start = System.nanoTime()
-        if (complex) {
-          val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
-          if (reducible) {
-            handleComplexMethod(method, className, methodNode, dfs, argumentTypes, graph, isReferenceResult, isBooleanResult, stable)
-            added = true
-          }
-        } else {
-          handleSimpleMethod(method, argumentTypes, graph, isReferenceResult, isBooleanResult, stable)
+
+    val graph = buildCFG(className, methodNode, jsr)
+    if (graph.transitions.nonEmpty) {
+      val dfs = buildDFSTree(graph.transitions)
+      val complex = dfs.back.nonEmpty || graph.transitions.exists(_.size > 1)
+      val start = System.nanoTime()
+      if (complex) {
+        val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
+        if (reducible) {
+          handleComplexMethod(method, className, methodNode, dfs, argumentTypes, graph, isReferenceResult, isBooleanResult, stable, jsr)
           added = true
         }
-        val time = System.nanoTime() - start
-        if (complex) {
-          complexMethods += 1
-          complexTime += time
-        }
-        else {
-          simpleMethods += 1
-          simpleTime += time
-        }
+      } else {
+        handleSimpleMethod(method, argumentTypes, graph, isReferenceResult, isBooleanResult, stable)
+        added = true
+      }
+      val time = System.nanoTime() - start
+      if (complex) {
+        complexMethods += 1
+        complexTime += time
+      }
+      else {
+        simpleMethods += 1
+        simpleTime += time
       }
     }
+
 
     if (!added) {
       for (i <- argumentTypes.indices) {
@@ -179,11 +175,12 @@ trait FabaProcessor extends Processor {
                           graph: ControlFlowGraph,
                           isReferenceResult: Boolean,
                           isBooleanResult: Boolean,
-                          stable: Boolean) {
+                          stable: Boolean,
+                          jsr: Boolean) {
     val start = System.nanoTime()
     val cycle = dfs.back.nonEmpty
     // leaking params will be taken for
-    lazy val (leaking, nullableLeaking, frames) = leakingParameters(className, methodNode)
+    lazy val (leaking, nullableLeaking, frames) = leakingParameters(className, methodNode, jsr)
 
     lazy val resultOrigins = buildResultOrigins(className, methodNode, frames, graph)
     val richControlFlow = RichControlFlow(graph, dfs)
@@ -250,8 +247,8 @@ trait FabaProcessor extends Processor {
     }
   }
 
-  def buildCFG(className: String, methodNode: MethodNode): ControlFlowGraph =
-    cfg.buildControlFlowGraph(className, methodNode)
+  def buildCFG(className: String, methodNode: MethodNode, jsr: Boolean): ControlFlowGraph =
+    cfg.buildControlFlowGraph(className, methodNode, jsr)
 
   private def isReturnOpcode(opcode: Int) =
     opcode >= Opcodes.IRETURN && opcode <= Opcodes.ARETURN
@@ -348,6 +345,6 @@ trait FabaProcessor extends Processor {
   def handleFalseContractEquation(eq: Equation[Key, Value]): Unit = ()
   def handleOutContractEquation(eq: Equation[Key, Value]): Unit = ()
 
-  def leakingParameters(className: String, methodNode: MethodNode) =
-    cfg.leakingParameters(className, methodNode)
+  def leakingParameters(className: String, methodNode: MethodNode, jsr: Boolean) =
+    cfg.leakingParameters(className, methodNode, jsr)
 }

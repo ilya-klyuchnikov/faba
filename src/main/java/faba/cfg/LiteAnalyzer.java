@@ -8,6 +8,10 @@ import org.objectweb.asm.tree.analysis.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Specialized lite version of {@link org.objectweb.asm.tree.analysis.Analyzer}.
+ * No processing of Subroutines. May be used for methods without JSR/RET instructions.
+ */
 public class LiteAnalyzer<V extends Value> implements Opcodes {
 
     private final Interpreter<V> interpreter;

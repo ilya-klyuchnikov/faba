@@ -15,12 +15,15 @@ object `package` {
 
   val MERGE_LIMIT = 100000
 
-  def buildControlFlowGraph(className: String, methodNode: MethodNode): ControlFlowGraph =
-    ControlFlowBuilder(className, methodNode).buildCFG()
+  def buildControlFlowGraph(className: String, methodNode: MethodNode, jsr: Boolean): ControlFlowGraph =
+    if (jsr) ControlFlowBuilder(className, methodNode).buildCFG()
+    else LiteControlFlowBuilder(className, methodNode).buildCFG()
 
   // the second element is a nullable leaking parameters
-  def leakingParameters(className: String, methodNode: MethodNode): (Array[Boolean], Array[Boolean], Array[Frame[ParamsValue]]) = {
-    val frames = new LiteAnalyzer(new ParametersUsage(methodNode)).analyze(className, methodNode)
+  def leakingParameters(className: String, methodNode: MethodNode, jsr: Boolean): (Array[Boolean], Array[Boolean], Array[Frame[ParamsValue]]) = {
+    val frames =
+      if (jsr) new Analyzer(new ParametersUsage(methodNode)).analyze(className, methodNode)
+      else new LiteAnalyzer(new ParametersUsage(methodNode)).analyze(className, methodNode)
     val arity = Type.getArgumentTypes(methodNode.desc).length
     val leaking1 = new Array[Boolean](arity)
     val leaking2 = new Array[Boolean](arity)
@@ -142,7 +145,7 @@ case class ControlFlowGraph(className: String,
 
 case class RichControlFlow(controlFlow: ControlFlowGraph, dfsTree: DFSTree)
 
-private case class ControlFlowBuilder(className: String, methodNode: MethodNode) extends CfgAnalyzer() {
+private case class ControlFlowBuilder(className: String, methodNode: MethodNode) extends FramelessAnalyzer() {
   val transitions =
     Array.tabulate[ListBuffer[Int]](methodNode.instructions.size){i => new ListBuffer()}
   val errors =
@@ -161,12 +164,42 @@ private case class ControlFlowBuilder(className: String, methodNode: MethodNode)
     }
   }
 
-  override protected def newControlFlowExceptionEdge(insn: Int, successor: Int) {
+  override def newControlFlowExceptionEdge(insn: Int, successor: Int) = {
     if (!transitions(insn).contains(successor)) {
       transitions(insn) += successor
       errorTransitions = errorTransitions + (insn -> successor)
       errors(successor) = true
     }
+    true
+  }
+}
+
+private case class LiteControlFlowBuilder(className: String, methodNode: MethodNode) extends LiteFramelessAnalyzer() {
+  val transitions =
+    Array.tabulate[ListBuffer[Int]](methodNode.instructions.size){i => new ListBuffer()}
+  val errors =
+    new Array[Boolean](methodNode.instructions.size())
+  var errorTransitions =
+    Set[(Int, Int)]()
+
+  def buildCFG(): ControlFlowGraph = {
+    if ((methodNode.access & (ACC_ABSTRACT | ACC_NATIVE)) == 0) analyze(methodNode)
+    ControlFlowGraph(className, methodNode, transitions.map(_.toList), errorTransitions, errors)
+  }
+
+  override protected def newControlFlowEdge(insn: Int, successor: Int) {
+    if (!transitions(insn).contains(successor)) {
+      transitions(insn) += successor
+    }
+  }
+
+  override def newControlFlowExceptionEdge(insn: Int, successor: Int) = {
+    if (!transitions(insn).contains(successor)) {
+      transitions(insn) += successor
+      errorTransitions = errorTransitions + (insn -> successor)
+      errors(successor) = true
+    }
+    true
   }
 }
 
