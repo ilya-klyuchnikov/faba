@@ -38,7 +38,6 @@ trait FabaProcessor extends Processor {
   override def processClass(classReader: ClassReader): Unit =
     classReader.accept(new ClassVisitor(ASM5) {
       var stableClass = false
-      var jsr = false
       override def visit(version: Int, access: Int, name: String, signature: String, superName: String, interfaces: Array[String]) {
         // or there are no subclasses??
         stableClass = (access & ACC_FINAL) != 0
@@ -49,6 +48,7 @@ trait FabaProcessor extends Processor {
       override def visitMethod(access: Int, name: String, desc: String, signature: String, exceptions: Array[String]) = {
         val node = new MethodNode(ASM5, access, name, desc, signature, exceptions)
         new MethodVisitor(ASM5, node) {
+          var jsr = false
           override def visitEnd(): Unit = {
             super.visitEnd()
             processMethod(classReader.getClassName, node, stableClass, jsr)
