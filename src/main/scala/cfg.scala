@@ -1,5 +1,6 @@
 package faba.cfg
 
+import faba.asm.Utils
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree._
@@ -225,7 +226,7 @@ class ParametersUsage(m: MethodNode) extends Interpreter[ParamsValue](ASM5) {
         val cst = insn.asInstanceOf[LdcInsnNode].cst
         if (cst.isInstanceOf[Long] || cst.isInstanceOf[Double]) val2 else val1
       case GETSTATIC =>
-        if (Type.getType(insn.asInstanceOf[FieldInsnNode].desc).getSize == 1) val1 else val2
+        if (Utils.getSizeFast(insn.asInstanceOf[FieldInsnNode].desc) == 1) val1 else val2
       case _ =>
         val1
     }
@@ -244,9 +245,9 @@ class ParametersUsage(m: MethodNode) extends Interpreter[ParamsValue](ASM5) {
       case MULTIANEWARRAY =>
         val1
       case INVOKEDYNAMIC =>
-        if (Type.getReturnType(insn.asInstanceOf[InvokeDynamicInsnNode].desc).getSize == 1) val1 else val2
+        if (Utils.getReturnSizeFast(insn.asInstanceOf[InvokeDynamicInsnNode].desc) == 1) val1 else val2
       case _ =>
-        if (Type.getReturnType(insn.asInstanceOf[MethodInsnNode].desc).getSize == 1) val1 else val2
+        if (Utils.getReturnSizeFast(insn.asInstanceOf[MethodInsnNode].desc) == 1) val1 else val2
     }
 
   override def unaryOperation(insn: AbstractInsnNode, value: ParamsValue): ParamsValue =
@@ -254,9 +255,9 @@ class ParametersUsage(m: MethodNode) extends Interpreter[ParamsValue](ASM5) {
       case LNEG | DNEG | I2L | I2D | L2D | F2L | F2D | D2L =>
         val2
       case GETFIELD =>
-        if (Type.getReturnType(insn.asInstanceOf[FieldInsnNode].desc).getSize == 1) val1 else val2
+        if (Utils.getSizeFast(insn.asInstanceOf[FieldInsnNode].desc) == 1) val1 else val2
       case CHECKCAST =>
-        ParamsValue(value.params, Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc).getSize)
+        ParamsValue(value.params, 1)
       case _ =>
         val1
     }
