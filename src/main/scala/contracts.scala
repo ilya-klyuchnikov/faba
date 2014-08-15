@@ -25,6 +25,9 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
   override val pending = InOutAnalysis.myPending
   type MyResult = Result[Key, Value]
   implicit val contractsLattice = ELattice(Values.Bot, Values.Top)
+  // there is no need to generalize this (local var 0)
+  val generalizeShift =
+    if ((methodNode.access & ACC_STATIC) == 0) 1 else 0
 
   override val identity = Final(Values.Bot)
 
@@ -225,7 +228,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
   // in-place generalization
   def generalize(conf: Conf): Conf = {
     val frame = new Frame(conf.frame)
-    for (i <- 0 until frame.getLocals) frame.getLocal(i) match {
+    for (i <- generalizeShift until frame.getLocals) frame.getLocal(i) match {
       case CallResultValue(tp, _) =>
         frame.setLocal(i, new BasicValue(tp))
       case TrueValue() =>
