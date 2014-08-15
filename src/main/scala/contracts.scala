@@ -48,6 +48,16 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     case _                 => false
   }
 
+  def checkEarlyResult(): Unit = myResult match {
+    case Final(Values.Top) =>
+      earlyResult = Some(myResult)
+    case _ =>
+  }
+
+  private var myResult: MyResult = identity
+
+  override def getInternalResult: Option[MyResult] = Some(myResult)
+
   override def processState(fState: State): Unit = {
 
     var state = fState
@@ -57,8 +67,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
       // sharing
       computed(state.conf.insnIndex).find(prevState => stateEquiv(state, prevState)) match {
         case Some(ps) =>
-          results(state.index) = results(ps.index)
-          if (states.nonEmpty) pendingPush(MakeResult(states, identity, List(ps.index)))
+          // was computed before
           return
         case None =>
       }
@@ -72,9 +81,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
       val fold = loopEnter && history.exists(prevConf => confInstance(preConf, prevConf))
 
       if (fold) {
-        results(stateIndex) = identity
         computed(insnIndex) = state :: computed(insnIndex)
-        if (states.nonEmpty) pendingPush(MakeResult(states, identity, List(stateIndex)))
         return
       }
 
@@ -87,9 +94,8 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
       val nextFrame = execute(frame, insnNode)
 
       if (interpreter.dereferenced) {
-        results(stateIndex) = Final(Values.Bot)
         computed(insnIndex) = state :: computed(insnIndex)
-        if (states.nonEmpty) pendingPush(MakeResult(states, identity, List(stateIndex)))
+        // enough to break this branch
         return
       }
 
@@ -97,44 +103,27 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
         case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
           popValue(frame) match {
             case FalseValue() =>
-              results(stateIndex) = Final(Values.False)
-              computed(insnIndex) = state :: computed(insnIndex)
-              if (states.nonEmpty) pendingPush(MakeResult(states, identity, List(stateIndex)))
-              return
+              myResult = myResult join Final(Values.False)
             case TrueValue() =>
-              results(stateIndex) = Final(Values.True)
-              computed(insnIndex) = state :: computed(insnIndex)
-              if (states.nonEmpty) pendingPush(MakeResult(states, identity, List(stateIndex)))
-              return
+              myResult = myResult join Final(Values.True)
             case NullValue() =>
-              results(stateIndex) = Final(Values.Null)
-              computed(insnIndex) = state :: computed(insnIndex)
-              if (states.nonEmpty) pendingPush(MakeResult(states, identity, List(stateIndex)))
-              return
+              myResult = myResult join Final(Values.Null)
             case NotNullValue(_) =>
-              results(stateIndex) = Final(Values.NotNull)
-              computed(insnIndex) = state :: computed(insnIndex)
-              if (states.nonEmpty) pendingPush(MakeResult(states, identity, List(stateIndex)))
-              return
+              myResult = myResult join Final(Values.NotNull)
             case ParamValue(_) =>
               val InOut(_, in) = direction
-              results(stateIndex) = Final(in)
-              computed(insnIndex) = state :: computed(insnIndex)
-              if (states.nonEmpty) pendingPush(MakeResult(states, identity, List(stateIndex)))
-              return
+              myResult = myResult join Final(in)
             case CallResultValue(_, keys) =>
-              results(stateIndex) = Pending[Key, Value](Set(Component(Values.Top, keys)))
-              computed(insnIndex) = state :: computed(insnIndex)
-              if (states.nonEmpty) pendingPush(MakeResult(states, identity, List(stateIndex)))
-              return
+              myResult = myResult join Pending[Key, Value](Set(Component(Values.Top, keys)))
             case _ =>
               earlyResult = Some(Final(Values.Top))
               return
           }
-        case ATHROW =>
-          results(stateIndex) = Final(Values.Bot)
           computed(insnIndex) = state :: computed(insnIndex)
-          if (states.nonEmpty) pendingPush(MakeResult(states, identity, List(stateIndex)))
+          checkEarlyResult()
+          return
+        case ATHROW =>
+          computed(insnIndex) = state :: computed(insnIndex)
           return
         case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = (direction: @unchecked) match {
@@ -165,8 +154,6 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
         case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
           val nextInsnIndex = insnIndex + 1
           val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-          // todo: why push result here??
-          pendingPush(MakeResult(List(state), identity, List(nextState.index)))
           state = nextState
         case IFEQ if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = (direction: @unchecked) match {
@@ -189,6 +176,8 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           states = state :: states
           state = nextState
         case _ =>
+          // we touch this!
+          computed(insnIndex) = state :: computed(insnIndex)
           val nextInsnIndices = controlFlow.transitions(insnIndex)
           val nextStates = nextInsnIndices.map {
             nextInsnIndex =>
@@ -206,7 +195,6 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           if (nextStates.size == 1) {
             state = nextStates.head
           } else {
-            pendingPush(MakeResult(states, identity, nextStates.map(_.index)))
             nextStates.foreach {s => pendingPush(ProceedState(s))}
             return
           }
