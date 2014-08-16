@@ -21,7 +21,7 @@ import faba.source._
  * Default faba processor. A lot of fine-grained method to override.
  **/
 trait FabaProcessor extends Processor {
-
+  val doNothing = false
   val processContracts = true
   var extras = Map[Method, MethodExtra]()
   var complexTime: Long = 0
@@ -76,7 +76,8 @@ trait FabaProcessor extends Processor {
     }
 
     val method = Method(className, methodNode.name, methodNode.desc)
-    extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
+    if (!doNothing)
+      extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
 
     val acc = methodNode.access
     val stable = stableClass || (methodNode.name == "<init>") ||
