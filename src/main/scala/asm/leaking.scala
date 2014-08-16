@@ -18,7 +18,6 @@ object LeakingParameters {
       else new LiteAnalyzer(new ParametersUsage(methodNode)).analyze(className, methodNode)
     val insns = methodNode.instructions
     val collector = new LeakingParametersCollector(methodNode)
-    val collector2 = new NullableLeakingParametersCollector(methodNode)
     for (i <- 0 until frames.length) {
       val insnNode = insns.get(i)
       val frame = frames(i)
@@ -26,10 +25,9 @@ object LeakingParameters {
         case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
         case _ =>
           new Frame(frame).execute(insnNode, collector)
-          new Frame(frame).execute(insnNode, collector2)
       }
     }
-    LeakingParameters(frames, collector.parameters, collector2.parameters)
+    LeakingParameters(frames, collector.parameters, collector.nullableParameters)
   }
 }
 
@@ -134,7 +132,7 @@ class ParametersUsage(m: MethodNode) extends Interpreter[ParamsValue](ASM5) {
 class LeakingParametersCollector(m: MethodNode) extends ParametersUsage(m) {
   val arity = Type.getArgumentTypes(m.desc).length
   val parameters = new Array[Boolean](arity)
-  //val nullableParameters = new Array[Boolean](arity)
+  val nullableParameters = new Array[Boolean](arity)
 
   override def unaryOperation(insn: AbstractInsnNode, v: ParamsValue): ParamsValue = {
     insn.getOpcode match {
@@ -142,7 +140,7 @@ class LeakingParametersCollector(m: MethodNode) extends ParametersUsage(m) {
            IFNONNULL | IFNULL | IFEQ | IFNE =>
         for (i <- v.params) {
           parameters(i) = true
-          //nullableParameters(i) = true
+          nullableParameters(i) = true
         }
       case _ =>
     }
@@ -154,15 +152,15 @@ class LeakingParametersCollector(m: MethodNode) extends ParametersUsage(m) {
       case PUTFIELD =>
         for (i <- v1.params) {
           parameters(i) = true
-          //nullableParameters(i) = true
+          nullableParameters(i) = true
         }
         for (i <- v2.params) {
-          //nullableParameters(i) = true
+          nullableParameters(i) = true
         }
       case IALOAD | LALOAD | FALOAD | DALOAD | AALOAD | BALOAD | CALOAD | SALOAD =>
         for (i <- v1.params) {
           parameters(i) = true
-          //nullableParameters(i) = true
+          nullableParameters(i) = true
         }
       case _ =>
     }
@@ -174,15 +172,15 @@ class LeakingParametersCollector(m: MethodNode) extends ParametersUsage(m) {
       case AASTORE =>
         for (i <- v1.params) {
           parameters(i) = true
-          //nullableParameters(i) = true
+          nullableParameters(i) = true
         }
         for (i <- v3.params) {
-          //nullableParameters(i) = true
+          nullableParameters(i) = true
         }
       case IASTORE | LASTORE | FASTORE | DASTORE | BASTORE | CASTORE | SASTORE =>
         for (i <- v1.params) {
           parameters(i) = true
-          //nullableParameters(i) = true
+          nullableParameters(i) = true
         }
       case _ =>
     }
@@ -194,43 +192,11 @@ class LeakingParametersCollector(m: MethodNode) extends ParametersUsage(m) {
       case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE =>
         for (v <- values; i <- v.params) {
           parameters(i) = true
-          //nullableParameters(i) = true
+          nullableParameters(i) = true
         }
       case _ =>
     }
     super.naryOperation(insn, values)
-  }
-
-}
-
-// special handling of passing param into field and into an array
-class NullableLeakingParametersCollector(m: MethodNode) extends LeakingParametersCollector(m) {
-  override def binaryOperation(insn: AbstractInsnNode, v1: ParamsValue, v2: ParamsValue): ParamsValue = {
-    insn.getOpcode match {
-      case PUTFIELD =>
-        for (i <- v1.params) {
-          parameters(i) = true
-        }
-        for (i <- v2.params) {
-          parameters(i) = true
-        }
-      case _ =>
-    }
-    super.binaryOperation(insn, v1, v2)
-  }
-
-  override def ternaryOperation(insn: AbstractInsnNode, v1: ParamsValue, v2: ParamsValue, v3: ParamsValue): ParamsValue = {
-    insn.getOpcode match {
-      case AASTORE =>
-        for (i <- v1.params) {
-          parameters(i) = true
-        }
-        for (i <- v3.params) {
-          parameters(i) = true
-        }
-      case _ =>
-    }
-    super.ternaryOperation(insn, v1, v2, v3)
   }
 
 }
