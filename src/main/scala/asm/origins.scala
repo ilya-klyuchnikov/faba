@@ -1,6 +1,6 @@
 package faba.asm
 
-import faba.cfg.{ControlFlowGraph, ParamsValue}
+import faba.cfg.ControlFlowGraph
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.analysis.{Frame, SourceInterpreter, SourceValue}
 import org.objectweb.asm.tree.{AbstractInsnNode, InsnList}

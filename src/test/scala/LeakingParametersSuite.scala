@@ -2,8 +2,8 @@ package faba.test
 
 import annotations._
 import data.Data02
+import faba.asm.LeakingParameters
 import faba.data._
-import faba.cfg
 import org.objectweb.asm._
 import org.objectweb.asm.tree.MethodNode
 import org.scalatest.{FunSuite, Matchers}
@@ -31,7 +31,7 @@ class LeakingParametersSuite extends FunSuite with Matchers {
           new MethodVisitor(Opcodes.ASM5, node) {
             override def visitEnd(): Unit = {
               super.visitEnd()
-              val (leaked, _, _) = cfg.leakingParameters(classReader.getClassName, node, jsr = false)
+              val LeakingParameters(_, leaked, _) = LeakingParameters.build(classReader.getClassName, node, jsr = false)
               info(s"$method $leaked")
               map = map + (method -> leaked)
             }

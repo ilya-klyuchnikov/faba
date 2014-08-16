@@ -180,9 +180,9 @@ trait FabaProcessor extends Processor {
     val start = System.nanoTime()
     val cycle = dfs.back.nonEmpty
     // leaking params will be taken for
-    lazy val (leaking, nullableLeaking, frames) = leakingParameters(className, methodNode, jsr)
+    lazy val leaking = leakingParameters(className, methodNode, jsr)
 
-    lazy val resultOrigins = buildResultOrigins(className, methodNode, frames, graph)
+    lazy val resultOrigins = buildResultOrigins(className, methodNode, leaking.frames, graph)
     val richControlFlow = RichControlFlow(graph, dfs)
     lazy val resultEquation: Equation[Key, Value] = outContractEquation(richControlFlow, resultOrigins, stable)
     if (processContracts && isReferenceResult) {
@@ -195,7 +195,7 @@ trait FabaProcessor extends Processor {
       val booleanArg = argType == Type.BOOLEAN_TYPE
       var notNullParam = false
       if (isReferenceArg) {
-        if (leaking(i)) {
+        if (leaking.parameters(i)) {
           val (notNullPEquation, npe) = notNullParamEquation(richControlFlow, i, stable)
           notNullPEquation.rhs match {
             case Final(Values.NotNull) =>
@@ -208,14 +208,14 @@ trait FabaProcessor extends Processor {
         else
           handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
 
-        if (nullableLeaking(i))
+        if (leaking.nullableParameters(i))
           handleNullableParamEquation(nullableParamEquation(richControlFlow, i, stable))
         else
           handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Null)))
 
       }
       if (processContracts && isReferenceArg && (isReferenceResult || isBooleanResult)) {
-        if (leaking(i)) {
+        if (leaking.parameters(i)) {
           if (!notNullParam) {
             handleNullContractEquation(nullContractEquation(richControlFlow, resultOrigins, i, stable))
           } else {
@@ -228,7 +228,7 @@ trait FabaProcessor extends Processor {
         }
       }
       if (processContracts && booleanArg && (isReferenceResult || isBooleanResult)) {
-        if (leaking(i)) {
+        if (leaking.parameters(i)) {
           handleFalseContractEquation(falseContractEquation(richControlFlow, resultOrigins, i, stable))
           handleTrueContractEquation(trueContractEquation(richControlFlow, resultOrigins, i, stable))
         } else {
@@ -346,5 +346,5 @@ trait FabaProcessor extends Processor {
   def handleOutContractEquation(eq: Equation[Key, Value]): Unit = ()
 
   def leakingParameters(className: String, methodNode: MethodNode, jsr: Boolean) =
-    cfg.leakingParameters(className, methodNode, jsr)
+    LeakingParameters.build(className, methodNode, jsr)
 }
