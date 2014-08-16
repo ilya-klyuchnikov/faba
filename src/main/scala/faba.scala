@@ -195,22 +195,23 @@ trait FabaProcessor extends Processor {
       val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
       val booleanArg = argType == Type.BOOLEAN_TYPE
       var notNullParam = false
+      var touched = false
       if (isReferenceArg) {
         if (leaking.parameters(i)) {
           val (notNullPEquation, npe) = notNullParamEquation(richControlFlow, i, stable)
-          notNullPEquation.rhs match {
-            case Final(Values.NotNull) =>
-              notNullParam = true
-            case _ =>
-              npe
-          }
+          touched = npe
+          notNullParam = notNullPEquation.rhs == Final(Values.NotNull)
           handleNotNullParamEquation(notNullPEquation)
         }
         else
           handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
 
-        if (leaking.nullableParameters(i))
-          handleNullableParamEquation(nullableParamEquation(richControlFlow, i, stable))
+        if (leaking.nullableParameters(i)) {
+          if (notNullParam || touched) // it was dereferenced
+            handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
+          else
+            handleNullableParamEquation(nullableParamEquation(richControlFlow, i, stable))
+        }
         else
           handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Null)))
 
