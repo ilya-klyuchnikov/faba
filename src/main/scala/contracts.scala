@@ -13,16 +13,12 @@ import faba.data._
 import faba.engine._
 
 object InOutAnalysis {
-  import Analysis._
-  val myArray = new Array[Result[Key, Value]](LimitReachedException.limit)
-  val myPending = new Array[PendingAction[Result[Key, Value]]](LimitReachedException.limit)
+  val myPending = new Array[State](LimitReachedException.limit)
 }
 
 class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Array[Boolean], val stable: Boolean) extends Analysis[Result[Key, Value]] {
-  import Analysis._
 
-  override val results: Array[Result[Key, Value]] = InOutAnalysis.myArray
-  override val pending = InOutAnalysis.myPending
+  val pending = InOutAnalysis.myPending
   type MyResult = Result[Key, Value]
   implicit val contractsLattice = ELattice(Values.Bot, Values.Top)
   // there is no need to generalize this (local var 0)
@@ -56,7 +52,26 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
 
   private var myResult: MyResult = identity
 
-  override def getInternalResult: Option[MyResult] = Some(myResult)
+  private var pendingTop: Int = 0
+
+  final def pendingPush(st: State) {
+    pending(pendingTop) = st
+    pendingTop += 1
+  }
+
+  final def pendingPop(): State = {
+    pendingTop -= 1
+    pending(pendingTop)
+  }
+
+  def analyze(): Equation[Key, Value] = {
+    pendingPush(createStartState())
+
+    while (pendingTop > 0 && earlyResult.isEmpty)
+      processState(pendingPop())
+
+    mkEquation(earlyResult.getOrElse(myResult))
+  }
 
   override def processState(fState: State): Unit = {
 
@@ -195,7 +210,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           if (nextStates.size == 1) {
             state = nextStates.head
           } else {
-            nextStates.foreach {s => pendingPush(ProceedState(s))}
+            nextStates.foreach(pendingPush)
             return
           }
       }

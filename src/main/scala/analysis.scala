@@ -46,7 +46,6 @@ object Analysis {
 }
 
 abstract class Analysis[Res] {
-  import Analysis._
 
   val richControlFlow: RichControlFlow
   val direction: Direction
@@ -75,8 +74,6 @@ abstract class Analysis[Res] {
   // the key is insnIndex
   var computed = Array.tabulate[List[State]](methodNode.instructions.size()){i => Nil}
   // the key is stateIndex
-  val results: Array[Res]
-  val pending: Array[PendingAction[Res]]
   var earlyResult: Option[Res] = None
 
   private var id = 0
@@ -87,43 +84,6 @@ abstract class Analysis[Res] {
     id
   }
   final def lastId(): Int = id
-
-  private var pendingTop: Int = 0
-
-  @inline
-  final def pendingPush(action: PendingAction[Res]) {
-    pending(pendingTop) = action
-    pendingTop += 1
-  }
-
-  @inline
-  final def pendingPop(): PendingAction[Res] = {
-    pendingTop -= 1
-    pending(pendingTop)
-  }
-
-  final def analyze(): Equation[Key, Value] = {
-    pendingPush(ProceedState(createStartState()))
-
-    while (pendingTop > 0 && earlyResult.isEmpty) pendingPop() match {
-      case MakeResult(states, delta, subIndices) =>
-        val result = combineResults(delta, subIndices.map(results))
-        if (isEarlyResult(result)) {
-          earlyResult = Some(result)
-        } else {
-          // updating all results
-          for (state <- states) {
-            val insnIndex = state.conf.insnIndex
-            results(state.index) = result
-            computed(insnIndex) = state :: computed(insnIndex)
-          }
-        }
-      case ProceedState(state) =>
-        processState(state)
-    }
-
-    mkEquation(earlyResult.getOrElse(getInternalResult.getOrElse(results(0))))
-  }
 
   def getInternalResult: Option[Res] = None
 

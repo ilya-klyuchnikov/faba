@@ -105,8 +105,8 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
   import Analysis._
 
   override val identity: Result = Identity
-  override val results = ParametersAnalysis.myArray
-  override val pending = ParametersAnalysis.myPending
+  val results = ParametersAnalysis.myArray
+  val pending = ParametersAnalysis.myPending
 
   override def combineResults(delta: Result, subResults: List[Result]): Result =
     Result.meet(delta, subResults.reduce(Result.join))
@@ -122,6 +122,43 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     false
 
   var npe = false
+
+  private var pendingTop: Int = 0
+
+  @inline
+  final def pendingPush(action: PendingAction[Result]) {
+    pending(pendingTop) = action
+    pendingTop += 1
+  }
+
+  @inline
+  final def pendingPop(): PendingAction[Result] = {
+    pendingTop -= 1
+    pending(pendingTop)
+  }
+
+  def analyze(): Equation[Key, Value] = {
+    pendingPush(ProceedState(createStartState()))
+
+    while (pendingTop > 0 && earlyResult.isEmpty) pendingPop() match {
+      case MakeResult(states, delta, subIndices) =>
+        val result = combineResults(delta, subIndices.map(results))
+        if (isEarlyResult(result)) {
+          earlyResult = Some(result)
+        } else {
+          // updating all results
+          for (state <- states) {
+            val insnIndex = state.conf.insnIndex
+            results(state.index) = result
+            computed(insnIndex) = state :: computed(insnIndex)
+          }
+        }
+      case ProceedState(state) =>
+        processState(state)
+    }
+
+    mkEquation(earlyResult.getOrElse(getInternalResult.getOrElse(results(0))))
+  }
 
   override def processState(fState: State): Unit = {
 
@@ -268,8 +305,8 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
   import Analysis._
 
   override val identity: Result = Identity
-  override val results = ParametersAnalysis.myArray
-  override val pending = ParametersAnalysis.myPending
+  val results = ParametersAnalysis.myArray
+  val pending = ParametersAnalysis.myPending
 
   override def combineResults(delta: Result, subResults: List[Result]): Result =
     Result.combineNullable(delta, subResults.reduce(Result.combineNullable))
@@ -287,6 +324,43 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
   private var myResult = identity
 
   override def getInternalResult: Option[Result] = Some(myResult)
+
+  private var pendingTop: Int = 0
+
+  @inline
+  final def pendingPush(action: PendingAction[Result]) {
+    pending(pendingTop) = action
+    pendingTop += 1
+  }
+
+  @inline
+  final def pendingPop(): PendingAction[Result] = {
+    pendingTop -= 1
+    pending(pendingTop)
+  }
+
+  def analyze(): Equation[Key, Value] = {
+    pendingPush(ProceedState(createStartState()))
+
+    while (pendingTop > 0 && earlyResult.isEmpty) pendingPop() match {
+      case MakeResult(states, delta, subIndices) =>
+        val result = combineResults(delta, subIndices.map(results))
+        if (isEarlyResult(result)) {
+          earlyResult = Some(result)
+        } else {
+          // updating all results
+          for (state <- states) {
+            val insnIndex = state.conf.insnIndex
+            results(state.index) = result
+            computed(insnIndex) = state :: computed(insnIndex)
+          }
+        }
+      case ProceedState(state) =>
+        processState(state)
+    }
+
+    mkEquation(earlyResult.getOrElse(getInternalResult.getOrElse(results(0))))
+  }
 
   override def processState(fState: State): Unit = {
 
