@@ -5,7 +5,6 @@ import org.objectweb.asm.{Opcodes, Type}
 
 import faba.cfg._
 import faba.data._
-import faba.engine._
 
 case class ParamValue(tp: Type) extends BasicValue(tp)
 case class InstanceOfCheckValue() extends BasicValue(Type.INT_TYPE)
@@ -54,7 +53,6 @@ abstract class Analysis[Res] {
   def processState(state: State): Unit
   def isEarlyResult(res: Res): Boolean
   def combineResults(delta: Res, subResults: List[Res]): Res
-  def mkEquation(result: Res): Equation[Key, Value]
 
   val controlFlow = richControlFlow.controlFlow
   val methodNode = controlFlow.methodNode
@@ -73,8 +71,6 @@ abstract class Analysis[Res] {
 
   // the key is insnIndex
   var computed = Array.tabulate[List[State]](methodNode.instructions.size()){i => Nil}
-  // the key is stateIndex
-  var earlyResult: Option[Res] = None
 
   private var id = 0
   @inline
