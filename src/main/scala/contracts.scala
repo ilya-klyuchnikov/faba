@@ -12,13 +12,9 @@ import faba.cfg._
 import faba.data._
 import faba.engine._
 
-object InOutAnalysis {
-  val myPending = new Array[State](LimitReachedException.limit)
-}
-
 class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Array[Boolean], val stable: Boolean) extends Analysis[Result[Key, Value]] {
 
-  val pending = InOutAnalysis.myPending
+  val pending = Analysis.ourPending
   type MyResult = Result[Key, Value]
   implicit val contractsLattice = ELattice(Values.Bot, Values.Top)
   // there is no need to generalize this (local var 0)

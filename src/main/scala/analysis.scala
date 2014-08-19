@@ -43,6 +43,8 @@ object Analysis {
   sealed trait PendingAction[+Res]
   case class ProceedState(state: State) extends PendingAction[Nothing]
   case class MakeResult[Res](states: List[State], subResult: Res, indices: List[Int]) extends PendingAction[Res]
+
+  val ourPending = new Array[State](LimitReachedException.limit)
 }
 
 abstract class Analysis[Res] {
@@ -84,8 +86,6 @@ abstract class Analysis[Res] {
     id
   }
   final def lastId(): Int = id
-
-  def getInternalResult: Option[Res] = None
 
   final def createStartFrame(): Frame[BasicValue] = {
     val frame = new Frame[BasicValue](methodNode.maxLocals, methodNode.maxStack)

@@ -157,7 +157,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
         processState(state)
     }
 
-    mkEquation(earlyResult.getOrElse(getInternalResult.getOrElse(results(0))))
+    mkEquation(earlyResult.getOrElse(results(0)))
   }
 
   override def processState(fState: State): Unit = {
@@ -305,8 +305,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
   import Analysis._
 
   override val identity: Result = Identity
-  val results = ParametersAnalysis.myArray
-  val pending = ParametersAnalysis.myPending
+  val pending = Analysis.ourPending
 
   override def combineResults(delta: Result, subResults: List[Result]): Result =
     Result.combineNullable(delta, subResults.reduce(Result.combineNullable))
@@ -323,43 +322,27 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
 
   private var myResult = identity
 
-  override def getInternalResult: Option[Result] = Some(myResult)
-
   private var pendingTop: Int = 0
 
   @inline
-  final def pendingPush(action: PendingAction[Result]) {
-    pending(pendingTop) = action
+  final def pendingPush(state: State) {
+    pending(pendingTop) = state
     pendingTop += 1
   }
 
   @inline
-  final def pendingPop(): PendingAction[Result] = {
+  final def pendingPop(): State = {
     pendingTop -= 1
     pending(pendingTop)
   }
 
   def analyze(): Equation[Key, Value] = {
-    pendingPush(ProceedState(createStartState()))
+    pendingPush(createStartState())
 
-    while (pendingTop > 0 && earlyResult.isEmpty) pendingPop() match {
-      case MakeResult(states, delta, subIndices) =>
-        val result = combineResults(delta, subIndices.map(results))
-        if (isEarlyResult(result)) {
-          earlyResult = Some(result)
-        } else {
-          // updating all results
-          for (state <- states) {
-            val insnIndex = state.conf.insnIndex
-            results(state.index) = result
-            computed(insnIndex) = state :: computed(insnIndex)
-          }
-        }
-      case ProceedState(state) =>
-        processState(state)
-    }
+    while (pendingTop > 0 && earlyResult.isEmpty)
+      processState(pendingPop())
 
-    mkEquation(earlyResult.getOrElse(getInternalResult.getOrElse(results(0))))
+    mkEquation(earlyResult.getOrElse(myResult))
   }
 
   override def processState(fState: State): Unit = {
@@ -442,7 +425,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
           if (nextStates.size == 1) {
             state = nextStates.head
           } else {
-            nextStates.foreach {s => pendingPush(ProceedState(s))}
+            nextStates.foreach {s => pendingPush(s)}
             return
           }
       }
