@@ -25,6 +25,8 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
   val generalizeShift =
     if ((methodNode.access & ACC_STATIC) == 0) 1 else 0
 
+  // the key is stateIndex
+  var earlyResult: Option[Result[Key, Value]] = None
   override val identity = Final(Values.Bot)
 
   private val interpreter = InOutInterpreter(direction, methodNode.instructions, resultOrigins)
@@ -36,7 +38,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
   override def combineResults(delta: MyResult, subResults: List[MyResult]): MyResult =
     subResults.reduce(_ join _)
 
-  override def mkEquation(result: MyResult): Equation[Key, Value] =
+  def mkEquation(result: MyResult): Equation[Key, Value] =
     Equation(aKey, result)
 
   override def isEarlyResult(res: MyResult): Boolean = res match {

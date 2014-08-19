@@ -3,9 +3,9 @@ package faba
 import faba.analysis.LimitReachedException
 import faba.combined.CombinedSingleAnalysis
 import org.objectweb.asm._
-import org.objectweb.asm.tree.{InsnList, MethodNode}
+import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.Opcodes._
-import org.objectweb.asm.tree.analysis.{Frame, AnalyzerException}
+import org.objectweb.asm.tree.analysis.Frame
 
 import scala.language.existentials
 
@@ -195,26 +195,17 @@ trait FabaProcessor extends Processor {
       val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
       val booleanArg = argType == Type.BOOLEAN_TYPE
       var notNullParam = false
-      var touched = false
       if (isReferenceArg) {
-        if (leaking.parameters(i)) {
-          val (notNullPEquation, npe) = notNullParamEquation(richControlFlow, i, stable)
-          touched = npe
-          notNullParam = notNullPEquation.rhs == Final(Values.NotNull)
-          handleNotNullParamEquation(notNullPEquation)
-        }
-        else
-          handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
-
         if (leaking.nullableParameters(i)) {
-          if (notNullParam || touched) // it was dereferenced
-            handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
-          else
-            handleNullableParamEquation(nullableParamEquation(richControlFlow, i, stable))
+          val (notNullEquation, nullableEquation) = paramEquations(richControlFlow, i, stable)
+          notNullParam = notNullEquation.rhs == Final(Values.NotNull)
+          handleNotNullParamEquation(notNullEquation)
+          handleNullableParamEquation(nullableEquation)
         }
-        else
+        else {
+          handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
           handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Null)))
-
+        }
       }
       if (processContracts && isReferenceArg && (isReferenceResult || isBooleanResult)) {
         if (leaking.parameters(i)) {
@@ -268,24 +259,15 @@ trait FabaProcessor extends Processor {
   def isReducible(graph: ControlFlowGraph, dfs: DFSTree): Boolean =
     cfg.reducible(graph, dfs)
 
-  def notNullParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean): (Equation[Key, Value], Boolean) = {
-    val analyser = new NotNullInAnalysis(richControlFlow, In(i), stable)
-    try {
-      val eq = analyser.analyze()
-      (eq, analyser.npe)
-    } catch {
-      case _: LimitReachedException =>
-        (Equation(analyser.aKey, Final(Values.Top)), analyser.npe)
-    }
-  }
-
-  def nullableParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean): Equation[Key, Value] = {
-    val analyser = new NullableInAnalysis(richControlFlow, In(i), stable)
+  // @NotNull, @Nullable
+  def paramEquations(richControlFlow: RichControlFlow, i: Int, stable: Boolean): (Equation[Key, Value], Equation[Key, Value]) = {
+    val analyser = new NullityInAnalysis(richControlFlow, In(i), stable)
     try {
       analyser.analyze()
+      (analyser.mkNotNullEquation, analyser.mkNullableEquation)
     } catch {
       case _: LimitReachedException =>
-        Equation(analyser.aKey, Final(Values.Top))
+        (Equation(analyser.aKey, Final(Values.Top)), Equation(analyser.aKey, Final(Values.Top)))
     }
   }
 

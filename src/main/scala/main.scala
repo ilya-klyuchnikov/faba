@@ -22,8 +22,7 @@ class MainProcessor extends FabaProcessor {
   val nullableParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Null, Values.Top))
   val contractsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Bot, Values.Top))
 
-  var notNullParamsTime: Long = 0
-  var nullableParamsTime: Long = 0
+  var paramsTime: Long = 0
   var outTime: Long = 0
   var falseTime: Long = 0
   var trueTime: Long = 0
@@ -65,17 +64,10 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def notNullParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean) = {
+  override def paramEquations(richControlFlow: RichControlFlow, i: Int, stable: Boolean) = {
     val start = System.nanoTime()
-    val result = super.notNullParamEquation(richControlFlow, i, stable)
-    notNullParamsTime += System.nanoTime() - start
-    result
-  }
-
-  override def nullableParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean) = {
-    val start = System.nanoTime()
-    val result = super.nullableParamEquation(richControlFlow, i, stable)
-    nullableParamsTime += System.nanoTime() - start
+    val result = super.paramEquations(richControlFlow, i, stable)
+    paramsTime += System.nanoTime() - start
     result
   }
 
@@ -190,22 +182,19 @@ class MainProcessor extends FabaProcessor {
     println("====")
     println(s"indexing took ${(indexEnd - indexStart) / 1000.0} sec")
     println("INDEXING TIME")
-    println(s"notNullParams  ${notNullParamsTime / 1000000} msec")
-    println(s"nullableParams ${nullableParamsTime / 1000000} msec")
+    println(s"params         ${paramsTime / 1000000} msec")
     println(s"results        ${outTime    / 1000000} msec")
-    println(s"false          ${falseTime / 1000000} msec")
-    println(s"true           ${trueTime / 1000000} msec")
-    println(s"null           ${nullTime / 1000000} msec")
-    println(s"!null          ${notNullTime / 1000000} msec")
+    println(s"false ->       ${falseTime / 1000000} msec")
+    println(s"true  ->       ${trueTime / 1000000} msec")
+    println(s"null  ->       ${nullTime / 1000000} msec")
+    println(s"!null ->       ${notNullTime / 1000000} msec")
     println(s"cfg            ${cfgTime / 1000000} msec")
     println(s"origins        ${resultOriginsTime / 1000000} msec")
     println(s"dfs            ${dfsTime / 1000000} msec")
     println(s"reducible      ${reducibleTime / 1000000} msec")
     println(s"leakingParams  ${leakingParametersTime / 1000000} msec")
-    println(s"simpleTime0    ${simpleTime / 1000000} msec")
+    println(s"simpleTime     ${simpleTime / 1000000} msec")
     println(s"complexTime    ${complexTime / 1000000} msec")
-    println(s"${ParametersAnalysis.notNullExecute} @NotNull executes")
-    println(s"${ParametersAnalysis.nullableExecute} @Nullable executes")
     println("====")
     println(s"$simpleMethods  simple methods")
     println(s"$complexMethods complex methods")
@@ -215,6 +204,11 @@ class MainProcessor extends FabaProcessor {
     println("====")
     println(s"cycleTime        ${cycleTime / 1000000} msec")
     println(s"nonCycleTime     ${nonCycleTime / 1000000} msec")
+    println("====")
+    println(s"not idle        ${ParametersAnalysis.notIdle}")
+    println(s"@NotNull early  ${ParametersAnalysis.notNullEarly}")
+    println(s"@Nullable early ${ParametersAnalysis.nullableEarly}")
+    println(s"MakeResult      ${ParametersAnalysis.makeResult}")
   }
 
   def process(source: Source): Annotations = {
