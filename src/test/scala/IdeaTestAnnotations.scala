@@ -10,6 +10,5 @@ object IdeaTestAnnotations extends App {
 
   val sources = paths.map(p => JarFileSource(new File(p)))
   new MainProcessor {
-    override val processNullableParameters = false
   }.process(MixedSource(sources), "results/IDEA")
 }
