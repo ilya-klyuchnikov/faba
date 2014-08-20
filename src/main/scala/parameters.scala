@@ -302,8 +302,6 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
 // if everything is return, then parameter is nullable
 class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result] {
 
-  import Analysis._
-
   override val identity: Result = Identity
   val pending = Analysis.ourPending
 
@@ -504,22 +502,23 @@ abstract class Interpreter extends BasicInterpreter {
     if ((opCode == INVOKESPECIAL || opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) && values.get(0).isInstanceOf[ParamValue]) {
       _subResult = NPE
     }
+    if (nullable && opCode == INVOKEINTERFACE) {
+      for (i <- shift until values.size()) {
+        if (values.get(i).isInstanceOf[ParamValue]) {
+          top = true
+          return super.naryOperation(insn, values)
+        }
+      }
+      return super.naryOperation(insn, values)
+    }
     opCode match {
-      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE =>
+      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL =>
         val stable = opCode == INVOKESTATIC || opCode == INVOKESPECIAL
         val mNode = insn.asInstanceOf[MethodInsnNode]
         for (i <- shift until values.size()) {
           if (values.get(i).isInstanceOf[ParamValue]) {
-            if (opCode == INVOKEINTERFACE) {
-              if (nullable && opCode == INVOKEINTERFACE) {
-                top = true
-                return super.naryOperation(insn, values)
-              }
-              // we do not put invoke interface into equations
-            } else {
-              val method = Method(mNode.owner, mNode.name, mNode.desc)
-              _subResult = combine(_subResult, ConditionalNPE(Key(method, In(i - shift), stable)))
-            }
+            val method = Method(mNode.owner, mNode.name, mNode.desc)
+            _subResult = combine(_subResult, ConditionalNPE(Key(method, In(i - shift), stable)))
           }
         }
       case _ =>
