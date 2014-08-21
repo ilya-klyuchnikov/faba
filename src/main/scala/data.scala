@@ -94,8 +94,10 @@ case class MethodExtra(signature: Option[String], access: Int)
 object XmlUtils {
 
   val REGEX_PATTERN = "(?<=[^\\$\\.])\\${1}(?=[^\\$])".r // disallow .$ or $$
+  val nullableResultAnnotations = List(<annotation name='org.jetbrains.annotations.Nullable'/>)
+  val notNullAnn = <annotation name='org.jetbrains.annotations.NotNull'/>
 
-  def toXmlAnnotations(solutions: Iterable[(Key, Value)], extras: Map[Method, MethodExtra], debug: Boolean = false): List[Elem] = {
+  def toXmlAnnotations(solutions: Iterable[(Key, Value)], nullableResults: Iterable[(Key, Value)], extras: Map[Method, MethodExtra], debug: Boolean = false): List[Elem] = {
     var annotations = Map[String, List[Elem]]()
     val inOuts = mutable.HashMap[Method, List[(InOut, Value)]]()
     for ((key, value) <- solutions) {
@@ -104,10 +106,7 @@ object XmlUtils {
           val method = key.method
           val aKey = s"${annotationKey(method, extras(method))} $paramIndex"
           val anns = annotations.getOrElse(aKey, Nil)
-          annotations = annotations.updated(
-            aKey,
-            (<annotation name='org.jetbrains.annotations.NotNull'/> :: anns).sortBy(_.toString())
-          )
+          annotations = annotations.updated(aKey, (notNullAnn :: anns).sortBy(_.toString()))
         case In(paramIndex) if value == Values.Null =>
           val method = key.method
           val aKey = s"${annotationKey(method, extras(method))} $paramIndex"
@@ -148,6 +147,11 @@ object XmlUtils {
       if (annotations.get(key).isEmpty) {
         annotations = annotations.updated(key, contractAnnotation :: annotations.getOrElse(key, Nil))
       }
+    }
+    for ((key, value) <- nullableResults) {
+      val method = key.method
+      val annKey = annotationKey(method, extras(method))
+      annotations = annotations.updated(annKey, annotations.getOrElse(annKey, Nil) ::: nullableResultAnnotations)
     }
     annotations.map {
       case (k, v) => <item name={k}>{v}</item>

@@ -1,6 +1,7 @@
 package faba
 
 import faba.analysis.LimitReachedException
+import faba.asm.nullableResult.NullableResultAnalysis
 import faba.combined.CombinedSingleAnalysis
 import org.objectweb.asm._
 import org.objectweb.asm.tree.{InsnList, MethodNode}
@@ -84,6 +85,11 @@ trait FabaProcessor extends Processor {
       (acc & ACC_FINAL) != 0 || (acc & ACC_PRIVATE) != 0 || (acc & ACC_STATIC) != 0
     var added = false
 
+    // nullable result
+    if (isReferenceResult) {
+      val nullableResultEq = nullableResultEquation(className, methodNode, method, stable)
+      handleNullableResultEquation(nullableResultEq)
+    }
 
     val graph = buildCFG(className, methodNode, jsr)
     if (graph.transitions.nonEmpty) {
@@ -339,6 +345,9 @@ trait FabaProcessor extends Processor {
     }
   }
 
+  def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, stable: Boolean): Equation[Key, Value] =
+    Equation(Key(method, Out, stable), NullableResultAnalysis.analyze(className, methodNode))
+
   def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit = ()
   def handleNullableParamEquation(eq: Equation[Key, Value]): Unit = ()
   def handleNotNullContractEquation(eq: Equation[Key, Value]): Unit = ()
@@ -346,6 +355,7 @@ trait FabaProcessor extends Processor {
   def handleTrueContractEquation(eq: Equation[Key, Value]): Unit = ()
   def handleFalseContractEquation(eq: Equation[Key, Value]): Unit = ()
   def handleOutContractEquation(eq: Equation[Key, Value]): Unit = ()
+  def handleNullableResultEquation(eq: Equation[Key, Value]): Unit = ()
 
   def leakingParameters(className: String, methodNode: MethodNode, jsr: Boolean) =
     LeakingParameters.build(className, methodNode, jsr)

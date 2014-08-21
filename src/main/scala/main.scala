@@ -21,9 +21,11 @@ class MainProcessor extends FabaProcessor {
   val notNullParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.NotNull, Values.Top))
   val nullableParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Null, Values.Top))
   val contractsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Bot, Values.Top))
+  val nullableResultSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Bot, Values.Null))
 
   var notNullParamsTime: Long = 0
   var nullableParamsTime: Long = 0
+  var nullableResultTime: Long = 0
   var outTime: Long = 0
   var falseTime: Long = 0
   var trueTime: Long = 0
@@ -114,6 +116,13 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
+  override def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, stable: Boolean) = {
+    val start = System.nanoTime()
+    val result = super.nullableResultEquation(className, methodNode, method, stable)
+    nullableResultTime += System.nanoTime() - start
+    result
+  }
+
   override def leakingParameters(className: String, methodNode: MethodNode, jsr: Boolean) = {
     val start = System.nanoTime()
     val result = super.leakingParameters(className, methodNode, jsr)
@@ -137,6 +146,8 @@ class MainProcessor extends FabaProcessor {
     contractsSolver.addEquation(eq)
   override def handleOutContractEquation(eq: Equation[Key, Value]): Unit =
     contractsSolver.addEquation(eq)
+  override def handleNullableResultEquation(eq: Equation[Key, Value]): Unit =
+    nullableResultSolver.addEquation(eq)
 
   def printToFile(f: File)(op: PrintWriter => Unit) {
     if (f.getParentFile != null)
@@ -158,6 +169,7 @@ class MainProcessor extends FabaProcessor {
       val notNullParams = notNullParamsSolver.solve().filterNot(p => p._2 == Values.Top)
       val nullableParams = nullableParamsSolver.solve().filterNot(p => p._2 == Values.Top)
       val contracts = contractsSolver.solve()
+      val nullableResults = nullableResultSolver.solve().filter(p => p._2 == Values.Null)
 
       val dupKeys = notNullParams.keys.toSet intersect nullableParams.keys.toSet
       for (k <- dupKeys) println(s"$k both @Nullable and @NotNull")
@@ -173,8 +185,18 @@ class MainProcessor extends FabaProcessor {
       val byPackageProd: Map[String, Map[Key, Values.Value]] =
         prodSolutions.groupBy(_._1.method.internalPackageName)
 
-      for ((pkg, solution) <- byPackageProd) {
-        val xmlAnnotations = XmlUtils.toXmlAnnotations(solution, extras, debug = false)
+      val byPackageNullableResultSolutions: Map[String, Map[Key, Values.Value]] =
+        nullableResults.groupBy(_._1.method.internalPackageName)
+
+      val pkgs = byPackageProd.keys ++ byPackageNullableResultSolutions.keys
+
+      for (pkg <- pkgs) {
+        val xmlAnnotations =
+          XmlUtils.toXmlAnnotations(
+            byPackageProd.getOrElse(pkg, Map()),
+            byPackageNullableResultSolutions.getOrElse(pkg, Map()),
+            extras,
+            debug = false)
         printToFile(new File(s"$outDir${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
           out.println(pp.format(<root>{xmlAnnotations}</root>))
         }
@@ -185,6 +207,8 @@ class MainProcessor extends FabaProcessor {
       println(s"saving took ${(writingEnd - solvingEnd) / 1000.0} sec")
       println(s"${debugSolutions.size} all contracts")
       println(s"${prodSolutions.size} prod contracts")
+      println(s"${nullableParams.size} @Nullable parameters")
+      println(s"${nullableResults.size} @Nullable results")
     }
 
     println("====")
@@ -193,10 +217,12 @@ class MainProcessor extends FabaProcessor {
     println(s"notNullParams  ${notNullParamsTime / 1000000} msec")
     println(s"nullableParams ${nullableParamsTime / 1000000} msec")
     println(s"results        ${outTime    / 1000000} msec")
+    println(s"nullableRes    ${nullableResultTime / 1000000} msec")
     println(s"false          ${falseTime / 1000000} msec")
     println(s"true           ${trueTime / 1000000} msec")
     println(s"null           ${nullTime / 1000000} msec")
     println(s"!null          ${notNullTime / 1000000} msec")
+    println("====")
     println(s"cfg            ${cfgTime / 1000000} msec")
     println(s"origins        ${resultOriginsTime / 1000000} msec")
     println(s"dfs            ${dfsTime / 1000000} msec")
