@@ -5,11 +5,11 @@ import java.nio.file.attribute.BasicFileAttributes
 import java.nio.file._
 
 import faba.asm.ParamsValue
-import faba.engine.{Equation, ELattice, Solver}
 import org.objectweb.asm.tree.MethodNode
 
 import faba.cfg._
 import faba.data._
+import faba.engine._
 import faba.source._
 import faba.parameters.ParametersAnalysis
 import org.objectweb.asm.tree.analysis.Frame
@@ -21,7 +21,7 @@ class MainProcessor extends FabaProcessor {
   val notNullParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.NotNull, Values.Top))
   val nullableParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Null, Values.Top))
   val contractsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Bot, Values.Top))
-  val nullableResultSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Bot, Values.Null))
+  val nullableResultSolver = new NullableResultSolver[Key, Values.Value](doNothing)(ELattice(Values.Bot, Values.Null))
 
   var notNullParamsTime: Long = 0
   var nullableParamsTime: Long = 0

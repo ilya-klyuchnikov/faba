@@ -42,6 +42,8 @@ object NullableResultAnalysis {
   def mkEquation(v: BasicValue): Result[Key, Value] = v match {
     case NullValue() =>
       Final(Values.Null)
+    case Calls(keys) =>
+      Pending[Key, Value](keys map { k => Component(Values.Null, Set(k)) })
     case _ =>
       Final(Values.Bot)
   }
