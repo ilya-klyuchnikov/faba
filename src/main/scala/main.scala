@@ -21,7 +21,9 @@ class MainProcessor extends FabaProcessor {
   val notNullParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.NotNull, Values.Top))
   val nullableParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Null, Values.Top))
   val contractsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Bot, Values.Top))
+  val pureSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Pure, Values.Top))
 
+  var pureTime: Long = 0
   var notNullParamsTime: Long = 0
   var nullableParamsTime: Long = 0
   var outTime: Long = 0
@@ -62,6 +64,14 @@ class MainProcessor extends FabaProcessor {
     val start = System.nanoTime()
     val result = super.buildDFSTree(transitions)
     dfsTime += System.nanoTime() - start
+    result
+  }
+
+
+  override def pureEquation(method: Method, methodNode: MethodNode, stable: Boolean) = {
+    val start = System.nanoTime()
+    val result = super.pureEquation(method, methodNode, stable)
+    pureTime += System.nanoTime() - start
     result
   }
 
@@ -121,6 +131,8 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
+  override def handlePureEquation(eq: Equation[Key, Value]): Unit =
+    pureSolver.addEquation(eq)
   override def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit =
     notNullParamsSolver.addEquation(eq)
   override def handleNullableParamEquation(eq: Equation[Key, Value]): Unit = {
@@ -158,6 +170,8 @@ class MainProcessor extends FabaProcessor {
       val notNullParams = notNullParamsSolver.solve().filterNot(p => p._2 == Values.Top)
       val nullableParams = nullableParamsSolver.solve().filterNot(p => p._2 == Values.Top)
       val contracts = contractsSolver.solve()
+      val pureSolutions = pureSolver.solve()
+      val reallyPureSolutions = pureSolutions.filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
 
       val dupKeys = notNullParams.keys.toSet intersect nullableParams.keys.toSet
       for (k <- dupKeys) println(s"$k both @Nullable and @NotNull")
@@ -173,8 +187,18 @@ class MainProcessor extends FabaProcessor {
       val byPackageProd: Map[String, Map[Key, Values.Value]] =
         prodSolutions.groupBy(_._1.method.internalPackageName)
 
-      for ((pkg, solution) <- byPackageProd) {
-        val xmlAnnotations = XmlUtils.toXmlAnnotations(solution, extras, debug = false)
+      val byPackagePureSolutions: Map[String, Map[Key, Values.Value]] =
+        reallyPureSolutions.groupBy(_._1.method.internalPackageName)
+
+      val pkgs = byPackageProd.keys ++ byPackagePureSolutions.keys
+
+      for (pkg <- pkgs) {
+        val xmlAnnotations =
+          XmlUtils.toXmlAnnotations(
+            byPackageProd.getOrElse(pkg, Map()),
+            byPackagePureSolutions.getOrElse(pkg, Map()),
+            extras,
+            debug = false)
         printToFile(new File(s"$outDir${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
           out.println(pp.format(<root>{xmlAnnotations}</root>))
         }
@@ -183,13 +207,16 @@ class MainProcessor extends FabaProcessor {
 
       println(s"solving took ${(solvingEnd - indexEnd) / 1000.0} sec")
       println(s"saving took ${(writingEnd - solvingEnd) / 1000.0} sec")
+      println(s"${pureSolutions.size} methods")
       println(s"${debugSolutions.size} all contracts")
       println(s"${prodSolutions.size} prod contracts")
+      println(s"${reallyPureSolutions.size} @Pure annotations")
     }
 
     println("====")
     println(s"indexing took ${(indexEnd - indexStart) / 1000.0} sec")
     println("INDEXING TIME")
+    println(s"pure           ${pureTime / 1000000} msec")
     println(s"notNullParams  ${notNullParamsTime / 1000000} msec")
     println(s"nullableParams ${nullableParamsTime / 1000000} msec")
     println(s"results        ${outTime    / 1000000} msec")

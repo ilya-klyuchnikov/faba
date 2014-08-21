@@ -39,7 +39,7 @@ case class Key(method: Method, direction: Direction, stable: Boolean) extends St
 }
 
 object Values extends Enumeration {
-  val Bot, NotNull, Null, True, False, Top = Value
+  val Bot, NotNull, Null, True, False, Pure, Top = Value
 }
 
 object `package` {
@@ -94,8 +94,10 @@ case class MethodExtra(signature: Option[String], access: Int)
 object XmlUtils {
 
   val REGEX_PATTERN = "(?<=[^\\$\\.])\\${1}(?=[^\\$])".r // disallow .$ or $$
+  val pureAnnotations = List(<annotation name='org.jetbrains.annotations.Pure'/>)
+  val notNullAnn = <annotation name='org.jetbrains.annotations.NotNull'/>
 
-  def toXmlAnnotations(solutions: Iterable[(Key, Value)], extras: Map[Method, MethodExtra], debug: Boolean = false): List[Elem] = {
+  def toXmlAnnotations(solutions: Iterable[(Key, Value)], pureSolutions: Iterable[(Key, Value)], extras: Map[Method, MethodExtra], debug: Boolean = false): List[Elem] = {
     var annotations = Map[String, List[Elem]]()
     val inOuts = mutable.HashMap[Method, List[(InOut, Value)]]()
     for ((key, value) <- solutions) {
@@ -104,10 +106,7 @@ object XmlUtils {
           val method = key.method
           val aKey = s"${annotationKey(method, extras(method))} $paramIndex"
           val anns = annotations.getOrElse(aKey, Nil)
-          annotations = annotations.updated(
-            aKey,
-            (<annotation name='org.jetbrains.annotations.NotNull'/> :: anns).sortBy(_.toString())
-          )
+          annotations = annotations.updated(aKey, (notNullAnn :: anns).sortBy(_.toString()))
         case In(paramIndex) if value == Values.Null =>
           val method = key.method
           val aKey = s"${annotationKey(method, extras(method))} $paramIndex"
@@ -147,6 +146,13 @@ object XmlUtils {
         </annotation>
       if (annotations.get(key).isEmpty) {
         annotations = annotations.updated(key, contractAnnotation :: annotations.getOrElse(key, Nil))
+      }
+    }
+    for ((key, value) <- pureSolutions) {
+      if (value == Values.Pure) {
+        val method = key.method
+        val annKey = annotationKey(method, extras(method))
+        annotations = annotations.updated(annKey, annotations.getOrElse(annKey, Nil) ::: pureAnnotations)
       }
     }
     annotations.map {
