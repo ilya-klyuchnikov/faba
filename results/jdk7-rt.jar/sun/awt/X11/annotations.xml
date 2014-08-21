@@ -345,6 +345,9 @@
   <item name="sun.awt.X11.MotifDnDDropTargetProtocol int getMessageType(sun.awt.X11.XClientMessageEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.X11.MotifDnDDropTargetProtocol java.lang.Object getData(long, long)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.X11.MotifDnDDropTargetProtocol java.lang.String getProtocolName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -388,6 +391,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11.Native long toUData(short[]) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.awt.X11.Native long[] card32ToArray(long, int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11.Native long[] toLongs(long, int)">
@@ -786,11 +792,20 @@
   <item name="sun.awt.X11.XBaseWindow java.awt.Dimension getSize()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.X11.XBaseWindow java.awt.Point toGlobal(int, int)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.X11.XBaseWindow java.awt.Point toGlobal(java.awt.Point) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.X11.XBaseWindow java.awt.Point toLocal(int, int)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.X11.XBaseWindow java.awt.Point toLocal(java.awt.Point) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XBaseWindow java.awt.Point toOtherWindow(long, long, int, int)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11.XBaseWindow java.awt.Rectangle getBounds()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1188,7 +1203,13 @@
   <item name="sun.awt.X11.XClientMessageEvent sun.awt.X11.XEvent clone()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.X11.XClipboard byte[] getClipboardData(long)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.X11.XClipboard java.awt.datatransfer.Transferable getContents(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.awt.X11.XClipboard long[] getClipboardFormats()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11.XClipboard void access$300(sun.awt.X11.XClipboard) 0">
@@ -1264,6 +1285,9 @@
   </item>
   <item name="sun.awt.X11.XComponentPeer java.awt.Dimension getPeerSize()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XComponentPeer java.awt.FontMetrics getFontMetrics(java.awt.Font)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11.XComponentPeer java.awt.Image createImage(java.awt.image.ImageProducer)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1577,6 +1601,12 @@
   <item name="sun.awt.X11.XDecoratedPeer java.awt.Insets getWMSetInsets(sun.awt.X11.XAtom)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.awt.X11.XDecoratedPeer java.awt.Insets guessInsets()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.awt.X11.XDecoratedPeer java.awt.Point queryXLocation()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.X11.XDecoratedPeer sun.awt.X11.XFocusProxyWindow createFocusProxy()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1735,6 +1765,9 @@
   </item>
   <item name="sun.awt.X11.XDnDDropTargetProtocol int getMessageType(sun.awt.X11.XClientMessageEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XDnDDropTargetProtocol java.lang.Object getData(long, long)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11.XDnDDropTargetProtocol java.lang.String getProtocolName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2497,6 +2530,12 @@
   </item>
   <item name="sun.awt.X11.XGlobalCursorManager java.awt.Component findComponentAt(java.awt.Container, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XGlobalCursorManager java.awt.Component findHeavyweightUnderCursor()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.awt.X11.XGlobalCursorManager java.awt.Component findHeavyweightUnderCursor(boolean)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11.XGlobalCursorManager java.awt.Cursor getCapableCursor(java.awt.Component) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -3492,6 +3531,9 @@
   <item name="sun.awt.X11.XSelection long[] getFormats(sun.awt.X11.WindowPropertyGetter)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.awt.X11.XSelection long[] getTargets(long)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.X11.XSelection sun.awt.X11.WindowPropertyGetter access$202(sun.awt.X11.WindowPropertyGetter)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
@@ -4125,6 +4167,9 @@
   </item>
   <item name="sun.awt.X11.XToolkit java.lang.Object lazilyLoadDesktopProperty(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XToolkit java.lang.Object lazilyLoadDesktopProperty(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11.XToolkit java.lang.Object targetToPeer(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
