@@ -33,6 +33,9 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="javax.management.openmbean.ArrayType boolean isPrimitiveArray()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="javax.management.openmbean.ArrayType boolean isValue(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -40,6 +43,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
+  </item>
+  <item name="javax.management.openmbean.ArrayType int getDimension()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.openmbean.ArrayType java.lang.Object readResolve()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -75,11 +81,13 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.openmbean.ArrayType java.lang.String getPrimitiveTypeName(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.openmbean.ArrayType javax.management.openmbean.ArrayType&lt;E[]&gt; getArrayType(javax.management.openmbean.OpenType&lt;E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -99,10 +107,14 @@
   <item name="javax.management.openmbean.ArrayType javax.management.openmbean.ArrayType&lt;T&gt; getPrimitiveArrayType(java.lang.Class&lt;T&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.openmbean.ArrayType javax.management.openmbean.OpenType&lt;?&gt; getElementOpenType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="javax.management.openmbean.ArrayType javax.management.openmbean.SimpleType&lt;?&gt; getPrimitiveOpenType(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.openmbean.CompositeDataInvocationHandler CompositeDataInvocationHandler(javax.management.openmbean.CompositeData) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -181,6 +193,9 @@
   </item>
   <item name="javax.management.openmbean.CompositeDataSupport java.util.SortedMap&lt;java.lang.String,java.lang.Object&gt; makeMap(java.util.Map&lt;java.lang.String,?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.openmbean.CompositeDataSupport javax.management.openmbean.CompositeType getCompositeType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.openmbean.CompositeType CompositeType(java.lang.String, java.lang.String, java.lang.String[], java.lang.String[], javax.management.openmbean.OpenType&lt;?&gt;[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -267,6 +282,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport T convertFrom(java.lang.Object, javax.management.openmbean.OpenType&lt;T&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -301,6 +317,18 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport boolean hasDefaultValue()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport boolean hasLegalValues()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport boolean hasMaxValue()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport boolean hasMinValue()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport boolean isValue(javax.management.openmbean.OpenMBeanParameterInfo, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -313,6 +341,15 @@
   <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport java.lang.Comparable&lt;?&gt; comparableValueFrom(javax.management.Descriptor, java.lang.String, javax.management.openmbean.OpenType&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport java.lang.Comparable&lt;?&gt; getMaxValue()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport java.lang.Comparable&lt;?&gt; getMinValue()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport java.lang.Object getDefaultValue()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport java.lang.Object readResolve()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -321,6 +358,9 @@
   </item>
   <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport java.lang.String toString(javax.management.openmbean.OpenMBeanParameterInfo)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport java.util.Set&lt;?&gt; getLegalValues()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport java.util.Set&lt;T&gt; valuesFrom(javax.management.Descriptor, java.lang.String, javax.management.openmbean.OpenType&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -358,6 +398,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null,_,_,_,_-&gt;!null&quot;"/>
     </annotation>
+  </item>
+  <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport javax.management.openmbean.OpenType&lt;?&gt; getOpenType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.openmbean.OpenMBeanAttributeInfoSupport void check(javax.management.openmbean.OpenMBeanParameterInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -515,6 +558,9 @@
       <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="javax.management.openmbean.OpenMBeanOperationInfoSupport javax.management.openmbean.OpenType&lt;?&gt; getReturnOpenType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="javax.management.openmbean.OpenMBeanParameterInfoSupport OpenMBeanParameterInfoSupport(java.lang.String, java.lang.String, javax.management.openmbean.OpenType&lt;T&gt;, T, T[]) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -529,8 +575,35 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="javax.management.openmbean.OpenMBeanParameterInfoSupport boolean hasDefaultValue()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.openmbean.OpenMBeanParameterInfoSupport boolean hasLegalValues()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.openmbean.OpenMBeanParameterInfoSupport boolean hasMaxValue()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.openmbean.OpenMBeanParameterInfoSupport boolean hasMinValue()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.openmbean.OpenMBeanParameterInfoSupport java.lang.Comparable&lt;?&gt; getMaxValue()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.openmbean.OpenMBeanParameterInfoSupport java.lang.Comparable&lt;?&gt; getMinValue()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.openmbean.OpenMBeanParameterInfoSupport java.lang.Object getDefaultValue()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="javax.management.openmbean.OpenMBeanParameterInfoSupport java.lang.Object readResolve()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.openmbean.OpenMBeanParameterInfoSupport java.util.Set&lt;?&gt; getLegalValues()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.openmbean.OpenMBeanParameterInfoSupport javax.management.openmbean.OpenType&lt;?&gt; getOpenType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.openmbean.OpenType OpenType(java.lang.String, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -549,6 +622,21 @@
   </item>
   <item name="javax.management.openmbean.OpenType OpenType(java.lang.String, java.lang.String, java.lang.String, boolean) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.openmbean.OpenType boolean isArray()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.openmbean.OpenType java.lang.String getClassName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.openmbean.OpenType java.lang.String getDescription()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.openmbean.OpenType java.lang.String getTypeName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.openmbean.OpenType java.lang.String safeGetClassName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.openmbean.OpenType java.lang.String valid(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -644,6 +732,9 @@
   <item name="javax.management.openmbean.TabularDataSupport javax.management.openmbean.CompositeData remove(java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.openmbean.TabularDataSupport javax.management.openmbean.TabularType getTabularType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="javax.management.openmbean.TabularDataSupport void checkKeyType(java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -697,6 +788,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
+  </item>
+  <item name="javax.management.openmbean.TabularType java.util.List&lt;java.lang.String&gt; getIndexNames()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.openmbean.TabularType javax.management.openmbean.CompositeType getRowType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.openmbean.TabularType void checkForEmptyString(java.lang.String[], java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

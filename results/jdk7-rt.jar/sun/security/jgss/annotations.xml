@@ -1,4 +1,7 @@
 <root>
+  <item name="sun.security.jgss.GSSCaller GSSCaller()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.jgss.GSSContextImpl GSSContextImpl(sun.security.jgss.GSSManagerImpl, byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -7,6 +10,12 @@
   </item>
   <item name="sun.security.jgss.GSSContextImpl GSSContextImpl(sun.security.jgss.GSSManagerImpl, org.ietf.jgss.GSSName, org.ietf.jgss.Oid, org.ietf.jgss.GSSCredential, int) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.jgss.GSSContextImpl boolean isEstablished()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.jgss.GSSContextImpl boolean isInitiator()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.jgss.GSSContextImpl byte[] acceptSecContext(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -46,6 +55,12 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="sun.security.jgss.GSSCredentialImpl.SearchKey int getUsage()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.jgss.GSSCredentialImpl.SearchKey org.ietf.jgss.Oid getMech()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.jgss.GSSExceptionImpl GSSExceptionImpl(int, org.ietf.jgss.Oid) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -55,14 +70,26 @@
   <item name="sun.security.jgss.GSSHeader int encode(java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.GSSHeader int getLenFieldSize(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.jgss.GSSHeader int getLength()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.jgss.GSSHeader int getLength(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.GSSHeader int getMechTokenLength()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.jgss.GSSHeader int putLength(int, java.io.OutputStream) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.jgss.GSSHeader java.lang.String getHexBytes(byte[], int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.GSSHeader sun.security.util.ObjectIdentifier getOid()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.jgss.GSSManagerImpl org.ietf.jgss.GSSContext createContext(byte[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -142,6 +169,9 @@
   <item name="sun.security.jgss.GSSManagerImpl void addProviderAtFront(java.security.Provider, org.ietf.jgss.Oid) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.GSSManagerImpl.1 1()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.jgss.GSSNameImpl GSSNameImpl(sun.security.jgss.GSSManagerImpl, java.lang.Object, org.ietf.jgss.Oid) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -173,8 +203,14 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="sun.security.jgss.GSSNameImpl boolean isMN()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.jgss.GSSNameImpl byte[] export()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.GSSNameImpl int hashCode()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.jgss.GSSNameImpl java.lang.String getNameTypeStr(org.ietf.jgss.Oid) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -182,11 +218,17 @@
   <item name="sun.security.jgss.GSSNameImpl java.lang.String getNameTypeStr(org.ietf.jgss.Oid)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.GSSNameImpl java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.jgss.GSSNameImpl java.util.Set&lt;sun.security.jgss.spi.GSSNameSpi&gt; getElements()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.jgss.GSSNameImpl org.ietf.jgss.GSSName canonicalize(org.ietf.jgss.Oid) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.jgss.GSSNameImpl org.ietf.jgss.Oid getStringNameType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.jgss.GSSNameImpl sun.security.jgss.GSSNameImpl wrapElement(sun.security.jgss.GSSManagerImpl, sun.security.jgss.spi.GSSNameSpi) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -205,11 +247,23 @@
   <item name="sun.security.jgss.GSSNameImpl void init(sun.security.jgss.GSSManagerImpl, java.lang.Object, org.ietf.jgss.Oid, org.ietf.jgss.Oid) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.GSSToken GSSToken()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.jgss.GSSToken int readBigEndian(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.jgss.GSSToken int readInt(byte[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.GSSToken int readInt(byte[], int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.jgss.GSSToken int readInt(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.GSSToken int readLittleEndian(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.jgss.GSSToken int writeInt(int, byte[], int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -244,6 +298,9 @@
   <item name="sun.security.jgss.GSSToken void writeLittleEndian(int, byte[], int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.GSSUtil GSSUtil()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.jgss.GSSUtil boolean useSubjectCredsOnly(sun.security.jgss.GSSCaller) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -270,11 +327,17 @@
   <item name="sun.security.jgss.GSSUtil void populateCredentials(java.util.Set&lt;java.lang.Object&gt;, java.util.Set&lt;?&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.HttpCaller sun.net.www.protocol.http.HttpCallerInfo info()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.jgss.LoginConfigImpl LoginConfigImpl(sun.security.jgss.GSSCaller, org.ietf.jgss.Oid) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.jgss.LoginConfigImpl boolean isServerSide(sun.security.jgss.GSSCaller) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.jgss.LoginConfigImpl boolean isServerSide(sun.security.jgss.GSSCaller)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.jgss.LoginConfigImpl javax.security.auth.login.AppConfigurationEntry[] getAppConfigurationEntry(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -329,11 +392,29 @@
   <item name="sun.security.jgss.ProviderList.PreferencesEntry java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.ProviderList.PreferencesEntry java.security.Provider getProvider()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.jgss.ProviderList.PreferencesEntry org.ietf.jgss.Oid getOid()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.jgss.TokenTracker java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.jgss.TokenTracker void getProps(int, org.ietf.jgss.MessageProp) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.TokenTracker.Entry boolean contains(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.jgss.TokenTracker.Entry int compareTo(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.jgss.TokenTracker.Entry int getEnd()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.jgss.TokenTracker.Entry int getStart()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.jgss.TokenTracker.Entry java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>

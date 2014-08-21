@@ -5,6 +5,9 @@
   <item name="com.sun.xml.internal.fastinfoset.CommonResourceBundle CommonResourceBundle(java.util.Locale) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.CommonResourceBundle java.util.ResourceBundle getBundle()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.CommonResourceBundle java.util.ResourceBundle getBundle(java.util.Locale) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -12,17 +15,31 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,_,null,_-&gt;true;null,_,_,_-&gt;true&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Decoder boolean compareCharsWithCharBufferFromEndToStart(char[])">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;true&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Decoder boolean getForceStreamClose()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Decoder boolean getParseFragments()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Decoder boolean getStringInterning()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Decoder boolean isFastInfosetDocument(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Decoder com.sun.xml.internal.fastinfoset.QualifiedName decodeLiteralQualifiedName(int, com.sun.xml.internal.fastinfoset.QualifiedName)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Decoder int getBufferSize()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Decoder java.lang.String createQualifiedNameString(char[], java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -57,6 +74,12 @@
   <item name="com.sun.xml.internal.fastinfoset.Decoder java.lang.String decodeUtf8StringAsString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.Decoder java.util.Map getExternalVocabularies()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Decoder java.util.Map getRegisteredEncodingAlgorithms()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.Decoder void decodeAlphabetOctetsAsCharBuffer(char[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -72,11 +95,44 @@
   <item name="com.sun.xml.internal.fastinfoset.Decoder.EncodingAlgorithmInputStream int read(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.DecoderStateTables DecoderStateTables()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.DecoderStateTables int AII(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.DecoderStateTables int DII(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.DecoderStateTables int EII(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.DecoderStateTables int ISTRING(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.DecoderStateTables int ISTRING_PREFIX_NAMESPACE(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.DecoderStateTables int NISTRING(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.DecoderStateTables int UTF8(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.DecoderStateTables int UTF8_NCNAME(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.DecoderStateTables void constructTable(int[], int[][]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder boolean canAddAttributeToTable(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder boolean canAddCharacterContentToTable(int, com.sun.xml.internal.fastinfoset.util.CharArrayIntMap) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder boolean canAddCharacterContentToTable(int, com.sun.xml.internal.fastinfoset.util.CharArrayIntMap)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder boolean encodeLiteralAttributeQualifiedNameOnSecondBit(java.lang.String, java.lang.String, java.lang.String, com.sun.xml.internal.fastinfoset.util.LocalNameQualifiedNamesMap.Entry) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -86,14 +142,41 @@
       <val val="&quot;_,_,_,null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder boolean getIgnoreComments()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder boolean getIgnoreDTD()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder boolean getIgnoreProcesingInstructions()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder boolean getIgnoreWhiteSpaceTextContent()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder boolean hasMark()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder boolean isAttributeValueLengthMatchesLimit(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder boolean isCharacterContentChunkLengthMatchesLimit(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder boolean isWhiteSpace(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder boolean isWhiteSpace(char[], int, int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder boolean isWhiteSpace(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder byte[] access$200(com.sun.xml.internal.fastinfoset.Encoder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder byte[] access$200(com.sun.xml.internal.fastinfoset.Encoder)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder byte[] access$202(com.sun.xml.internal.fastinfoset.Encoder, byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -103,8 +186,14 @@
       <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder com.sun.xml.internal.org.jvnet.fastinfoset.VocabularyApplicationData getVocabularyApplicationData()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder int access$100(com.sun.xml.internal.fastinfoset.Encoder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder int access$100(com.sun.xml.internal.fastinfoset.Encoder)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder int access$102(com.sun.xml.internal.fastinfoset.Encoder, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -118,11 +207,30 @@
   <item name="com.sun.xml.internal.fastinfoset.Encoder int encodeUtf16String(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder int getAttributeValueMapMemoryLimit()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder int getCharacterContentChunkMapMemoryLimit()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder int getMaxAttributeValueSize()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder int getMaxCharacterContentChunkSize()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder int getMinAttributeValueSize()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder int getMinCharacterContentChunkSize()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder int maxCharacter(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder java.lang.String getCharacterEncodingScheme()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder java.lang.String getDefaultEncodingScheme()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -132,6 +240,9 @@
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder java.lang.String getPrefixFromQualifiedName(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder java.util.Map getRegisteredEncodingAlgorithms()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeAIIObjectAlgorithmData(int, java.lang.Object, com.sun.xml.internal.org.jvnet.fastinfoset.EncodingAlgorithm) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -232,8 +343,17 @@
   <item name="com.sun.xml.internal.fastinfoset.Encoder.EncodingBufferOutputStream EncodingBufferOutputStream(com.sun.xml.internal.fastinfoset.Encoder, com.sun.xml.internal.fastinfoset.Encoder.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder.EncodingBufferOutputStream int getLength()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder.EncodingBufferOutputStream void write(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.EncodingConstants EncodingConstants()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.QualifiedName QualifiedName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.QualifiedName QualifiedName(java.lang.String, java.lang.String, java.lang.String, int, int, int, char[]) 6">
     <annotation name="org.jetbrains.annotations.Nullable"/>

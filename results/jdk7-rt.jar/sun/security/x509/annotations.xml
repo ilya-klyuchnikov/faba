@@ -35,6 +35,12 @@
   <item name="sun.security.x509.AVA boolean isDerString(sun.security.util.DerValue, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.AVA boolean isDerString(sun.security.util.DerValue, boolean)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.AVA boolean isTerminator(int, int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.AVA boolean trailingSpace(java.io.Reader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -71,6 +77,9 @@
   <item name="sun.security.x509.AVA java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.AVA sun.security.util.DerValue getDerValue()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.AVA sun.security.util.DerValue parseHexString(java.io.Reader, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -95,14 +104,23 @@
   <item name="sun.security.x509.AVA sun.security.util.DerValue parseString(java.io.Reader, int, int, java.lang.StringBuilder)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.AVA sun.security.util.ObjectIdentifier getObjectIdentifier()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.AVA void derEncode(java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.AVAComparator AVAComparator()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.AVAComparator int compare(sun.security.x509.AVA, sun.security.x509.AVA) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.x509.AVAComparator int compare(sun.security.x509.AVA, sun.security.x509.AVA) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.AVAComparator java.util.Comparator&lt;sun.security.x509.AVA&gt; getInstance()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.AVAKeyword java.lang.String getKeyword(sun.security.util.ObjectIdentifier, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -136,6 +154,12 @@
   <item name="sun.security.x509.AccessDescription java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.AccessDescription sun.security.util.ObjectIdentifier getAccessMethod()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.AccessDescription sun.security.x509.GeneralName getAccessLocation()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.AccessDescription void encode(sun.security.util.DerOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -156,6 +180,7 @@
   </item>
   <item name="sun.security.x509.AlgIdDSA java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.AlgIdDSA java.lang.String paramsToString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -163,11 +188,23 @@
   <item name="sun.security.x509.AlgIdDSA java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.AlgIdDSA java.math.BigInteger getG()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.AlgIdDSA java.math.BigInteger getP()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.AlgIdDSA java.math.BigInteger getQ()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.AlgorithmId boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.security.x509.AlgorithmId boolean equals(sun.security.util.ObjectIdentifier) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.x509.AlgorithmId boolean equals(sun.security.util.ObjectIdentifier)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.AlgorithmId boolean equals(sun.security.x509.AlgorithmId) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -190,8 +227,14 @@
   <item name="sun.security.x509.AlgorithmId java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.AlgorithmId java.security.AlgorithmParameters getParameters()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.AlgorithmId sun.security.util.ObjectIdentifier algOID(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.AlgorithmId sun.security.util.ObjectIdentifier getOID()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.AlgorithmId sun.security.util.ObjectIdentifier oid(int...) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -237,9 +280,13 @@
   </item>
   <item name="sun.security.x509.AuthorityInfoAccessExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.AuthorityInfoAccessExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.AuthorityInfoAccessExtension java.util.List&lt;sun.security.x509.AccessDescription&gt; getAccessDescriptions()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.AuthorityInfoAccessExtension void delete(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -261,6 +308,7 @@
   </item>
   <item name="sun.security.x509.AuthorityKeyIdentifierExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.AuthorityKeyIdentifierExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -288,6 +336,7 @@
   </item>
   <item name="sun.security.x509.BasicConstraintsExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.BasicConstraintsExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -319,6 +368,9 @@
   <item name="sun.security.x509.CRLDistributionPointsExtension java.lang.Object get(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.CRLDistributionPointsExtension java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.CRLDistributionPointsExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -339,6 +391,9 @@
   </item>
   <item name="sun.security.x509.CRLExtensions boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.x509.CRLExtensions boolean hasUnsupportedCriticalExtension()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CRLExtensions java.util.Enumeration&lt;sun.security.x509.Extension&gt; getElements()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -363,6 +418,9 @@
   </item>
   <item name="sun.security.x509.CRLNumberExtension java.lang.Object get(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.CRLNumberExtension java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CRLNumberExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -390,9 +448,13 @@
   </item>
   <item name="sun.security.x509.CRLReasonCodeExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CRLReasonCodeExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.CRLReasonCodeExtension java.security.cert.CRLReason getReasonCode()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CRLReasonCodeExtension void delete(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -408,6 +470,12 @@
   </item>
   <item name="sun.security.x509.CertAndKeyGen CertAndKeyGen(java.lang.String, java.lang.String, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.x509.CertAndKeyGen java.security.PrivateKey getPrivateKey()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.CertAndKeyGen java.security.PublicKey getPublicKeyAnyway()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CertAndKeyGen java.security.cert.X509Certificate getSelfCertificate(sun.security.x509.X500Name, java.util.Date, long) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -427,8 +495,17 @@
   <item name="sun.security.x509.CertAndKeyGen sun.security.pkcs.PKCS10 getCertRequest(sun.security.x509.X500Name)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.CertAndKeyGen sun.security.x509.X509Key getPublicKey()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.CertException int getVerfCode()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.CertException java.lang.String getMessage()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.CertException java.lang.String getMoreData()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CertException java.lang.String getVerfDescription()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -447,6 +524,7 @@
   </item>
   <item name="sun.security.x509.CertificateAlgorithmId java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CertificateAlgorithmId java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -469,14 +547,21 @@
   <item name="sun.security.x509.CertificateExtensions boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.x509.CertificateExtensions boolean hasUnsupportedCriticalExtension()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.CertificateExtensions java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CertificateExtensions java.lang.String getNameByOid(sun.security.util.ObjectIdentifier) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.security.x509.CertificateExtensions java.util.Enumeration&lt;sun.security.x509.Extension&gt; getElements()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.CertificateExtensions java.util.Map&lt;java.lang.String,sun.security.x509.Extension&gt; getUnparseableExtensions()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CertificateExtensions void encode(java.io.OutputStream, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -498,6 +583,7 @@
   </item>
   <item name="sun.security.x509.CertificateIssuerExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CertificateIssuerExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -525,6 +611,7 @@
   </item>
   <item name="sun.security.x509.CertificateIssuerName java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CertificateIssuerName void delete(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -552,6 +639,7 @@
   </item>
   <item name="sun.security.x509.CertificateIssuerUniqueIdentity java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CertificateIssuerUniqueIdentity void delete(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -576,6 +664,7 @@
   </item>
   <item name="sun.security.x509.CertificatePoliciesExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CertificatePoliciesExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -603,8 +692,14 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="sun.security.x509.CertificatePolicyId int hashCode()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.CertificatePolicyId java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.CertificatePolicyId sun.security.util.ObjectIdentifier getIdentifier()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CertificatePolicyId void encode(sun.security.util.DerOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -614,6 +709,12 @@
   </item>
   <item name="sun.security.x509.CertificatePolicyMap java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.CertificatePolicyMap sun.security.x509.CertificatePolicyId getIssuerIdentifier()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.CertificatePolicyMap sun.security.x509.CertificatePolicyId getSubjectIdentifier()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CertificatePolicyMap void encode(sun.security.util.DerOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -644,6 +745,7 @@
   </item>
   <item name="sun.security.x509.CertificateSerialNumber java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CertificateSerialNumber void delete(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -668,6 +770,7 @@
   </item>
   <item name="sun.security.x509.CertificateSubjectName java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CertificateSubjectName void delete(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -695,6 +798,7 @@
   </item>
   <item name="sun.security.x509.CertificateSubjectUniqueIdentity java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CertificateSubjectUniqueIdentity void delete(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -708,6 +812,9 @@
   <item name="sun.security.x509.CertificateSubjectUniqueIdentity void set(java.lang.String, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.CertificateValidity CertificateValidity()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.CertificateValidity CertificateValidity(sun.security.util.DerInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -719,6 +826,7 @@
   </item>
   <item name="sun.security.x509.CertificateValidity java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CertificateValidity java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -753,6 +861,12 @@
   <item name="sun.security.x509.CertificateVersion CertificateVersion(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.CertificateVersion int compare(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.CertificateVersion int getVersion()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.CertificateVersion java.lang.Object get(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -761,6 +875,7 @@
   </item>
   <item name="sun.security.x509.CertificateVersion java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CertificateVersion java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -788,6 +903,7 @@
   </item>
   <item name="sun.security.x509.CertificateX509Key java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.CertificateX509Key void delete(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -810,6 +926,12 @@
   <item name="sun.security.x509.DNSName int constrains(sun.security.x509.GeneralNameInterface) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.x509.DNSName int getType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.DNSName java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.DNSName java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -831,8 +953,20 @@
   <item name="sun.security.x509.DistributionPoint boolean equals(java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.x509.DistributionPoint boolean[] getReasonFlags()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.DistributionPoint java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.DistributionPoint sun.security.x509.GeneralNames getCRLIssuer()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.DistributionPoint sun.security.x509.GeneralNames getFullName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.DistributionPoint sun.security.x509.RDN getRelativeName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.DistributionPoint void encode(sun.security.util.DerOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -855,6 +989,12 @@
   <item name="sun.security.x509.DistributionPointName java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.DistributionPointName sun.security.x509.GeneralNames getFullName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.DistributionPointName sun.security.x509.RDN getRelativeName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.DistributionPointName void encode(sun.security.util.DerOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -868,9 +1008,19 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.EDIPartyName int constrains(sun.security.x509.GeneralNameInterface) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.x509.EDIPartyName int getType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.EDIPartyName java.lang.String getAssignerName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.EDIPartyName java.lang.String getPartyName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.EDIPartyName java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -889,6 +1039,7 @@
   </item>
   <item name="sun.security.x509.ExtendedKeyUsageExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.ExtendedKeyUsageExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -917,8 +1068,23 @@
   <item name="sun.security.x509.Extension boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.x509.Extension boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.Extension boolean isCritical()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.Extension byte[] getExtensionValue()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.Extension int hashCode()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.Extension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.Extension sun.security.util.ObjectIdentifier getExtensionId()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.Extension sun.security.x509.Extension newExtension(sun.security.util.ObjectIdentifier, boolean, byte[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -950,6 +1116,9 @@
   <item name="sun.security.x509.GeneralName boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.x509.GeneralName sun.security.x509.GeneralNameInterface getName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.GeneralName void encode(sun.security.util.DerOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -958,6 +1127,9 @@
   </item>
   <item name="sun.security.x509.GeneralNames boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.x509.GeneralNames java.util.List&lt;sun.security.x509.GeneralName&gt; names()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.GeneralNames sun.security.x509.GeneralNames add(sun.security.x509.GeneralName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -976,8 +1148,17 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="sun.security.x509.GeneralSubtree int getMaximum()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.GeneralSubtree int getMinimum()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.GeneralSubtree java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.GeneralSubtree sun.security.x509.GeneralName getName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.GeneralSubtree void encode(sun.security.util.DerOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -999,6 +1180,9 @@
   </item>
   <item name="sun.security.x509.GeneralSubtrees java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.GeneralSubtrees java.util.List&lt;sun.security.x509.GeneralSubtree&gt; trees()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.GeneralSubtrees sun.security.x509.GeneralNameInterface getGeneralNameInterface(sun.security.x509.GeneralSubtree) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1039,6 +1223,12 @@
   <item name="sun.security.x509.IPAddressName int constrains(sun.security.x509.GeneralNameInterface) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.x509.IPAddressName int getType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.IPAddressName int hashCode()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.IPAddressName java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1062,6 +1252,7 @@
   </item>
   <item name="sun.security.x509.InhibitAnyPolicyExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.InhibitAnyPolicyExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1086,6 +1277,7 @@
   </item>
   <item name="sun.security.x509.InvalidityDateExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.InvalidityDateExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1121,6 +1313,7 @@
   </item>
   <item name="sun.security.x509.IssuerAlternativeNameExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.IssuerAlternativeNameExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1148,6 +1341,7 @@
   </item>
   <item name="sun.security.x509.IssuingDistributionPointExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.IssuingDistributionPointExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1176,6 +1370,9 @@
   <item name="sun.security.x509.KeyIdentifier boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.x509.KeyIdentifier int hashCode()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.KeyIdentifier java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1194,11 +1391,15 @@
   <item name="sun.security.x509.KeyUsageExtension KeyUsageExtension(sun.security.util.BitArray) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.KeyUsageExtension boolean isSet(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.KeyUsageExtension java.lang.Object get(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.x509.KeyUsageExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.KeyUsageExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1232,6 +1433,7 @@
   </item>
   <item name="sun.security.x509.NameConstraintsExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.NameConstraintsExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1257,6 +1459,9 @@
   <item name="sun.security.x509.NetscapeCertTypeExtension NetscapeCertTypeExtension(java.lang.Boolean, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.NetscapeCertTypeExtension boolean isSet(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.NetscapeCertTypeExtension int getPosition(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1265,6 +1470,7 @@
   </item>
   <item name="sun.security.x509.NetscapeCertTypeExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.NetscapeCertTypeExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1292,6 +1498,7 @@
   </item>
   <item name="sun.security.x509.OCSPNoCheckExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.OCSPNoCheckExtension void delete(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1301,6 +1508,9 @@
   </item>
   <item name="sun.security.x509.OCSPNoCheckExtension void set(java.lang.String, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.x509.OIDMap OIDMap()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.OIDMap void addAttribute(java.lang.String, java.lang.String, java.lang.Class) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1320,11 +1530,23 @@
   <item name="sun.security.x509.OIDName boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.x509.OIDName boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.OIDName int constrains(sun.security.x509.GeneralNameInterface) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.x509.OIDName int getType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.OIDName int hashCode()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.OIDName java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.OIDName sun.security.util.ObjectIdentifier getOID()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.OIDName void encode(sun.security.util.DerOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1344,8 +1566,17 @@
   <item name="sun.security.x509.OtherName int constrains(sun.security.x509.GeneralNameInterface) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.x509.OtherName int getType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.OtherName java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.OtherName sun.security.util.ObjectIdentifier getOID()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.PKIXExtensions PKIXExtensions()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.PolicyConstraintsExtension PolicyConstraintsExtension(java.lang.Boolean, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1361,6 +1592,7 @@
   </item>
   <item name="sun.security.x509.PolicyConstraintsExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.PolicyConstraintsExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1396,9 +1628,16 @@
   </item>
   <item name="sun.security.x509.PolicyInformation java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.PolicyInformation java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.PolicyInformation java.util.Set&lt;java.security.cert.PolicyQualifierInfo&gt; getPolicyQualifiers()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.PolicyInformation sun.security.x509.CertificatePolicyId getPolicyIdentifier()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.PolicyInformation void delete(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1420,6 +1659,7 @@
   </item>
   <item name="sun.security.x509.PolicyMappingsExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.PolicyMappingsExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1447,6 +1687,7 @@
   </item>
   <item name="sun.security.x509.PrivateKeyUsageExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.PrivateKeyUsageExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1499,8 +1740,14 @@
   <item name="sun.security.x509.RDN boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.x509.RDN int size()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.RDN sun.security.util.DerValue findAttribute(sun.security.util.ObjectIdentifier) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.x509.RDN sun.security.util.DerValue findAttribute(sun.security.util.ObjectIdentifier)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.RDN void encode(sun.security.util.DerOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1513,6 +1760,12 @@
   </item>
   <item name="sun.security.x509.RFC822Name int constrains(sun.security.x509.GeneralNameInterface) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.x509.RFC822Name int getType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.RFC822Name java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.RFC822Name java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1534,6 +1787,12 @@
   </item>
   <item name="sun.security.x509.ReasonFlags ReasonFlags(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.ReasonFlags boolean isSet(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.ReasonFlags boolean[] getFlags()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.ReasonFlags int name2Index(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1565,6 +1824,9 @@
   <item name="sun.security.x509.SerialNumber java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.SerialNumber java.math.BigInteger getNumber()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.SerialNumber void construct(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1582,6 +1844,7 @@
   </item>
   <item name="sun.security.x509.SubjectAlternativeNameExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.SubjectAlternativeNameExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1609,9 +1872,13 @@
   </item>
   <item name="sun.security.x509.SubjectInfoAccessExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.SubjectInfoAccessExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.SubjectInfoAccessExtension java.util.List&lt;sun.security.x509.AccessDescription&gt; getAccessDescriptions()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.SubjectInfoAccessExtension void delete(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1636,6 +1903,7 @@
   </item>
   <item name="sun.security.x509.SubjectKeyIdentifierExtension java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.SubjectKeyIdentifierExtension java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1661,8 +1929,23 @@
   <item name="sun.security.x509.URIName int constrains(sun.security.x509.GeneralNameInterface) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.x509.URIName int getType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.URIName java.lang.Object getHostObject()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.URIName java.lang.String getHost()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.URIName java.lang.String getScheme()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.URIName java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.URIName java.net.URI getURI()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.URIName sun.security.x509.URIName nameConstraint(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1700,8 +1983,12 @@
   <item name="sun.security.x509.X400Address int constrains(sun.security.x509.GeneralNameInterface) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.x509.X400Address int getType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.X400Address java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.X400Address void encode(sun.security.util.DerOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1768,11 +2055,23 @@
       <val val="&quot;_,_,null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="sun.security.x509.X500Name boolean isEmpty()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.X500Name boolean isWithinSubtree(sun.security.x509.X500Name) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.security.x509.X500Name int constrains(sun.security.x509.GeneralNameInterface) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.x509.X500Name int getType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.X500Name int size()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.X500Name int subtreeDepth()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.X500Name java.lang.String generateRFC2253DN(java.util.Map&lt;java.lang.String,java.lang.String&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1811,6 +2110,9 @@
   <item name="sun.security.x509.X500Name void parseRFC2253DN(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.X500Name.1 1()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.X500Name.1 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1820,11 +2122,20 @@
   <item name="sun.security.x509.X509AttributeName X509AttributeName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.X509AttributeName java.lang.String getPrefix()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.X509AttributeName java.lang.String getSuffix()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.X509CRLEntryImpl X509CRLEntryImpl(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.x509.X509CRLEntryImpl X509CRLEntryImpl(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.X509CRLEntryImpl boolean hasExtensions()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.X509CRLEntryImpl int compareTo(sun.security.x509.X509CRLEntryImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1839,6 +2150,9 @@
   </item>
   <item name="sun.security.x509.X509CRLEntryImpl java.util.Date getRevocationDate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.X509CRLEntryImpl javax.security.auth.x500.X500Principal getCertificateIssuer()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.X509CRLEntryImpl sun.security.x509.X509CRLEntryImpl toImpl(java.security.cert.X509CRLEntry) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1889,8 +2203,14 @@
   <item name="sun.security.x509.X509CRLImpl byte[] getTBSCertList()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.X509CRLImpl int getVersion()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.X509CRLImpl java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.X509CRLImpl java.security.Principal getIssuerDN()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.X509CRLImpl java.util.Date getThisUpdate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1903,6 +2223,9 @@
   </item>
   <item name="sun.security.x509.X509CRLImpl javax.security.auth.x500.X500Principal getIssuerX500Principal(java.security.cert.X509CRL)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.X509CRLImpl sun.security.x509.AlgorithmId getSigAlgId()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.X509CRLImpl sun.security.x509.X509CRLImpl toImpl(java.security.cert.X509CRL) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1936,6 +2259,12 @@
   <item name="sun.security.x509.X509CRLImpl.X509IssuerSerial int compareTo(sun.security.x509.X509CRLImpl.X509IssuerSerial) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.X509CRLImpl.X509IssuerSerial java.math.BigInteger getSerial()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.X509CRLImpl.X509IssuerSerial javax.security.auth.x500.X500Principal getIssuer()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.X509CertImpl X509CertImpl(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1964,6 +2293,7 @@
   </item>
   <item name="sun.security.x509.X509CertImpl java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.X509CertImpl java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2059,11 +2389,18 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="sun.security.x509.X509CertInfo boolean equals(sun.security.x509.X509CertInfo)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.x509.X509CertInfo int hashCode()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.x509.X509CertInfo java.lang.Object get(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.x509.X509CertInfo java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.X509CertInfo java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2121,6 +2458,7 @@
   </item>
   <item name="sun.security.x509.X509Key java.lang.String getFormat()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.X509Key java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2135,6 +2473,9 @@
   </item>
   <item name="sun.security.x509.X509Key java.security.PublicKey parse(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.x509.X509Key sun.security.x509.AlgorithmId getAlgorithmId()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.x509.X509Key void decode(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

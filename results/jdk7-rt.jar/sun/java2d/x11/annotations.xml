@@ -20,11 +20,15 @@
   <item name="sun.java2d.x11.X11PMBlitLoops.DelegateBlitLoop void Blit(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.x11.X11Renderer X11Renderer()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.java2d.x11.X11Renderer long validate(sun.java2d.SunGraphics2D) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.x11.X11Renderer sun.java2d.x11.X11Renderer getInstance()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.java2d.x11.X11Renderer void doPath(sun.java2d.SunGraphics2D, java.awt.Shape, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -77,6 +81,9 @@
   <item name="sun.java2d.x11.X11Renderer void fillRoundRect(sun.java2d.SunGraphics2D, int, int, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.x11.X11Renderer.X11TracingRenderer X11TracingRenderer()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.java2d.x11.X11SurfaceData X11SurfaceData(sun.awt.X11ComponentPeer, sun.awt.X11GraphicsConfig, sun.java2d.loops.SurfaceType, java.awt.image.ColorModel) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -84,6 +91,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null,_,_,_,_,_,_-&gt;true&quot;"/>
     </annotation>
+  </item>
+  <item name="sun.java2d.x11.X11SurfaceData java.awt.GraphicsConfiguration getDeviceConfiguration()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.java2d.x11.X11SurfaceData sun.awt.X11GraphicsConfig getGC(sun.awt.X11ComponentPeer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -118,17 +128,32 @@
   <item name="sun.java2d.x11.X11SurfaceData void validatePipe(sun.java2d.SunGraphics2D) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.x11.X11SurfaceData.LazyPipe LazyPipe()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.java2d.x11.X11SurfaceData.LazyPipe boolean validate(sun.java2d.SunGraphics2D) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.x11.X11SurfaceData.X11PixmapSurfaceData X11PixmapSurfaceData(sun.awt.X11GraphicsConfig, int, int, java.awt.Image, sun.java2d.loops.SurfaceType, java.awt.image.ColorModel, long, int) 5">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.x11.X11SurfaceData.X11PixmapSurfaceData boolean canSourceSendExposures(int, int, int, int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.java2d.x11.X11SurfaceData.X11PixmapSurfaceData int getTransparency()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.java2d.x11.X11SurfaceData.X11PixmapSurfaceData java.awt.Rectangle getBounds()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.x11.X11SurfaceData.X11PixmapSurfaceData java.lang.Object getDestination()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.java2d.x11.X11SurfaceData.X11WindowSurfaceData X11WindowSurfaceData(sun.awt.X11ComponentPeer, sun.awt.X11GraphicsConfig, sun.java2d.loops.SurfaceType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.x11.X11SurfaceData.X11WindowSurfaceData boolean canSourceSendExposures(int, int, int, int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.java2d.x11.X11SurfaceDataProxy sun.java2d.SurfaceData validateSurfaceData(sun.java2d.SurfaceData, sun.java2d.SurfaceData, int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -153,6 +178,9 @@
   <item name="sun.java2d.x11.X11SurfaceDataProxy.Bitmask boolean isSupportedOperation(sun.java2d.SurfaceData, int, sun.java2d.loops.CompositeType, java.awt.Color) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.java2d.x11.X11SurfaceDataProxy.Bitmask int getTransparency()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.java2d.x11.X11SurfaceDataProxy.Opaque boolean isSupportedOperation(sun.java2d.SurfaceData, int, sun.java2d.loops.CompositeType, java.awt.Color) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -161,6 +189,15 @@
   </item>
   <item name="sun.java2d.x11.X11SurfaceDataProxy.Opaque boolean isSupportedOperation(sun.java2d.SurfaceData, int, sun.java2d.loops.CompositeType, java.awt.Color) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.java2d.x11.X11SurfaceDataProxy.Opaque boolean isSupportedOperation(sun.java2d.SurfaceData, int, sun.java2d.loops.CompositeType, java.awt.Color)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.java2d.x11.X11SurfaceDataProxy.Opaque int getTransparency()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.java2d.x11.X11VolatileSurfaceManager boolean isAccelerationEnabled()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.java2d.x11.X11VolatileSurfaceManager boolean isConfigValid(java.awt.GraphicsConfiguration) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -172,5 +209,8 @@
   </item>
   <item name="sun.java2d.x11.X11VolatileSurfaceManager java.awt.ImageCapabilities getCapabilities(java.awt.GraphicsConfiguration)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.x11.XSurfaceData boolean isX11SurfaceDataInitialized()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
 </root>
