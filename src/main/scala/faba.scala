@@ -271,7 +271,7 @@ trait FabaProcessor extends Processor {
     cfg.reducible(graph, dfs)
 
   def pureEquation(method: Method, methodNode: MethodNode, stable: Boolean): Equation[Key, Value] =
-    PureAnalysis.analyze(method, methodNode, stable)
+    PurityAnalysis.analyze(method, methodNode, stable)
 
   def notNullParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean): (Equation[Key, Value], Boolean) = {
     val analyser = new NotNullInAnalysis(richControlFlow, In(i), stable)
