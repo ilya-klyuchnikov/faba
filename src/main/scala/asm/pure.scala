@@ -20,15 +20,24 @@ object PurityAnalysis {
 
     if ((methodNode.access & unknown) != 0)
       return Equation(aKey, finalTop)
-
-    var calls: Set[Key] = Set()
     val insns = methodNode.instructions
 
+    // the first pass - finding top ASAP
+    for (i <- 0 until insns.size()) {
+      val insn = insns.get(i)
+      (insn.getOpcode: @switch) match {
+        case PUTSTATIC | INVOKEDYNAMIC | INVOKEINTERFACE =>
+          return Equation(aKey, finalTop)
+        case _ =>
+      }
+    }
+
+
     val ownershipInterpreter = new OwnershipInterpreter(insns)
-
     new Analyzer(ownershipInterpreter).analyze(method.internalClassName, methodNode)
-
     val ownedInsns = ownershipInterpreter.ownedInsn
+
+    var calls: Set[Key] = Set()
 
     for (i <- 0 until insns.size()) {
       val insn = insns.get(i)
