@@ -39,7 +39,7 @@ case class Key(method: Method, direction: Direction, stable: Boolean) extends St
 }
 
 object Values extends Enumeration {
-  val Bot, NotNull, Null, True, False, Pure, Top = Value
+  val Bot, NotNull, Null, True, False, Pure, LocalEffect, LocalObject, NonLocalObject, Top = Value
 }
 
 object `package` {

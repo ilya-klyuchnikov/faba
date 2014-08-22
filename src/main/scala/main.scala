@@ -4,7 +4,7 @@ import _root_.java.io.{PrintWriter, File}
 import java.nio.file.attribute.BasicFileAttributes
 import java.nio.file._
 
-import faba.asm.ParamsValue
+import faba.asm.{PurityAnalysis, ParamsValue}
 import faba.engine.{Equation, ELattice, Solver}
 import org.objectweb.asm.tree.MethodNode
 
@@ -21,7 +21,7 @@ class MainProcessor extends FabaProcessor {
   val notNullParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.NotNull, Values.Top))
   val nullableParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Null, Values.Top))
   val contractsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Bot, Values.Top))
-  val pureSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Pure, Values.Top))
+  val puritySolver = new Solver[Key, Values.Value](doNothing)(PurityAnalysis.purityLattice)
 
   var pureTime: Long = 0
   var notNullParamsTime: Long = 0
@@ -132,7 +132,7 @@ class MainProcessor extends FabaProcessor {
   }
 
   override def handlePureEquation(eq: Equation[Key, Value]): Unit =
-    pureSolver.addEquation(eq)
+    puritySolver.addEquation(eq)
   override def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit =
     notNullParamsSolver.addEquation(eq)
   override def handleNullableParamEquation(eq: Equation[Key, Value]): Unit = {
@@ -170,7 +170,7 @@ class MainProcessor extends FabaProcessor {
       val notNullParams = notNullParamsSolver.solve().filterNot(p => p._2 == Values.Top)
       val nullableParams = nullableParamsSolver.solve().filterNot(p => p._2 == Values.Top)
       val contracts = contractsSolver.solve()
-      val pureSolutions = pureSolver.solve()
+      val pureSolutions = puritySolver.solve()
       val reallyPureSolutions = pureSolutions.filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
 
       val dupKeys = notNullParams.keys.toSet intersect nullableParams.keys.toSet
