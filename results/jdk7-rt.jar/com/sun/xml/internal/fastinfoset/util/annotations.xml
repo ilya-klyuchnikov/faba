@@ -20,6 +20,9 @@
   <item name="com.sun.xml.internal.fastinfoset.util.CharArray char charAt(int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.CharArray int hashCode()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.util.CharArray int hashCode(char[], int, int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -31,6 +34,12 @@
   </item>
   <item name="com.sun.xml.internal.fastinfoset.util.CharArray java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.CharArray void cloneArray()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.CharArrayArray CharArrayArray(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.util.CharArrayArray com.sun.xml.internal.fastinfoset.util.CharArray[] getArray()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -53,6 +62,9 @@
   <item name="com.sun.xml.internal.fastinfoset.util.CharArrayIntMap.Entry boolean equalsCharArray(char[], int, int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.CharArrayString CharArrayString(java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.util.CharArrayString boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -62,6 +74,9 @@
   <item name="com.sun.xml.internal.fastinfoset.util.CharArrayString java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.ContiguousCharArrayArray ContiguousCharArrayArray(int, int, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.util.ContiguousCharArrayArray int getArrayIndex()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -70,6 +85,12 @@
   </item>
   <item name="com.sun.xml.internal.fastinfoset.util.ContiguousCharArrayArray void setReadOnlyArray(com.sun.xml.internal.fastinfoset.util.ValueArray, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.DuplicateAttributeVerifier DuplicateAttributeVerifier()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.DuplicateAttributeVerifier void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.util.DuplicateAttributeVerifier.Entry Entry()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -132,6 +153,9 @@
   <item name="com.sun.xml.internal.fastinfoset.util.FixedEntryStringIntMap void setReadOnlyMap(com.sun.xml.internal.fastinfoset.util.KeyIntMap, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.KeyIntMap KeyIntMap()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.util.KeyIntMap int hashHash(int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -140,6 +164,9 @@
   </item>
   <item name="com.sun.xml.internal.fastinfoset.util.KeyIntMap int size()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.KeyIntMap.BaseEntry BaseEntry(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.util.LocalNameQualifiedNamesMap boolean eq(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -165,11 +192,17 @@
   <item name="com.sun.xml.internal.fastinfoset.util.LocalNameQualifiedNamesMap int getIndex()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.LocalNameQualifiedNamesMap int getNextIndex()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.util.LocalNameQualifiedNamesMap void setReadOnlyMap(com.sun.xml.internal.fastinfoset.util.KeyIntMap, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.util.LocalNameQualifiedNamesMap void transfer(com.sun.xml.internal.fastinfoset.util.LocalNameQualifiedNamesMap.Entry[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.LocalNameQualifiedNamesMap.Entry Entry(java.lang.String, int, com.sun.xml.internal.fastinfoset.util.LocalNameQualifiedNamesMap.Entry)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.util.NamespaceContextImplementation boolean isCurrentContextEmpty()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -203,6 +236,18 @@
   </item>
   <item name="com.sun.xml.internal.fastinfoset.util.NamespaceContextImplementation void declarePrefix(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.NamespaceContextImplementation void popContext()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.NamespaceContextImplementation void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.NamespaceContextImplementation void resizeContexts()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.NamespaceContextImplementation void resizeNamespaces()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.util.PrefixArray com.sun.xml.internal.fastinfoset.util.PrefixArray.NamespaceEntry[] access$1000(com.sun.xml.internal.fastinfoset.util.PrefixArray) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -246,11 +291,20 @@
   <item name="com.sun.xml.internal.fastinfoset.util.PrefixArray void setReadOnlyArray(com.sun.xml.internal.fastinfoset.util.ValueArray, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.PrefixArray.1 1(com.sun.xml.internal.fastinfoset.util.PrefixArray)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.util.PrefixArray.1 boolean hasNext()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.PrefixArray.1 void moveToNext()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.util.PrefixArray.2 boolean hasNext()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.PrefixArray.2 void moveToNext()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.util.PrefixArray.NamespaceEntry NamespaceEntry()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -362,17 +416,26 @@
   <item name="com.sun.xml.internal.fastinfoset.util.PrefixArray.PrefixEntry int access$502(com.sun.xml.internal.fastinfoset.util.PrefixArray.PrefixEntry, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.QualifiedNameArray QualifiedNameArray(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.util.QualifiedNameArray com.sun.xml.internal.fastinfoset.QualifiedName getNext()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.util.QualifiedNameArray com.sun.xml.internal.fastinfoset.QualifiedName[] getArray()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.QualifiedNameArray void clear()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.util.QualifiedNameArray void setReadOnlyArray(com.sun.xml.internal.fastinfoset.util.QualifiedNameArray, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.util.QualifiedNameArray void setReadOnlyArray(com.sun.xml.internal.fastinfoset.util.ValueArray, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.StringArray StringArray(int, int, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.util.StringArray java.lang.String get(int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -397,6 +460,9 @@
   </item>
   <item name="com.sun.xml.internal.fastinfoset.util.StringIntMap int getIndex()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.StringIntMap int getNextIndex()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.util.StringIntMap int getTotalCharacterCount()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -424,5 +490,8 @@
   </item>
   <item name="com.sun.xml.internal.fastinfoset.util.ValueArray int getSize()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.util.ValueArray void setMaximumCapacity(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

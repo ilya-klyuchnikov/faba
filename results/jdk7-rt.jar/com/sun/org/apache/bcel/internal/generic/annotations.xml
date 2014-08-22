@@ -136,6 +136,9 @@
   <item name="com.sun.org.apache.bcel.internal.generic.BranchInstruction int getTargetOffset(com.sun.org.apache.bcel.internal.generic.InstructionHandle) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.BranchInstruction int updatePosition(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.BranchInstruction java.lang.String toString(boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -257,8 +260,17 @@
   <item name="com.sun.org.apache.bcel.internal.generic.ClassGen void setClassName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ClassGen void setConstantPool(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ClassGen void setMajor(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.ClassGen void setMethods(com.sun.org.apache.bcel.internal.classfile.Method[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ClassGen void setMinor(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.ClassGen void setSuperclassName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -286,6 +298,9 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.CodeExceptionGen java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.CodeExceptionGen void setCatchType(com.sun.org.apache.bcel.internal.generic.ObjectType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.CodeExceptionGen void updateTarget(com.sun.org.apache.bcel.internal.generic.InstructionHandle, com.sun.org.apache.bcel.internal.generic.InstructionHandle) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -379,6 +394,9 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.ConstantPoolGen java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ConstantPoolGen.Index Index(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.ConversionInstruction com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1637,6 +1655,9 @@
   <item name="com.sun.org.apache.bcel.internal.generic.FieldGen java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.FieldGen void cancelInitValue()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.FieldGen void setInitValue(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1651,6 +1672,12 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.FieldGenOrMethodGen java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.FieldGenOrMethodGen void setConstantPool(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.FieldGenOrMethodGen void setName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.FieldGenOrMethodGen void setType(com.sun.org.apache.bcel.internal.generic.Type) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1868,6 +1895,9 @@
   <item name="com.sun.org.apache.bcel.internal.generic.IINC void initFromFile(com.sun.org.apache.bcel.internal.util.ByteSequence, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.IINC void setWide()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.ILOAD void accept(com.sun.org.apache.bcel.internal.generic.Visitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1969,6 +1999,12 @@
   <item name="com.sun.org.apache.bcel.internal.generic.IXOR void accept(com.sun.org.apache.bcel.internal.generic.Visitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Instruction Instruction()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Instruction Instruction(short, short)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.Instruction boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2030,6 +2066,9 @@
   <item name="com.sun.org.apache.bcel.internal.generic.Instruction void setComparator(com.sun.org.apache.bcel.internal.generic.InstructionComparator) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Instruction void setOpcode(short)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionComparator.1 1()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -2041,6 +2080,9 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionFactory InstructionFactory(com.sun.org.apache.bcel.internal.generic.ClassGen) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionFactory InstructionFactory(com.sun.org.apache.bcel.internal.generic.ClassGen, com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionFactory boolean isString(com.sun.org.apache.bcel.internal.generic.Type) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2183,8 +2225,20 @@
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionFactory com.sun.org.apache.bcel.internal.generic.StackInstruction createPop(int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionFactory void setClassGen(com.sun.org.apache.bcel.internal.generic.ClassGen)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionFactory void setConstantPool(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionFactory.MethodObject MethodObject(java.lang.String, java.lang.String, com.sun.org.apache.bcel.internal.generic.Type, com.sun.org.apache.bcel.internal.generic.Type[], int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionHandle com.sun.org.apache.bcel.internal.generic.Instruction getInstruction()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionHandle com.sun.org.apache.bcel.internal.generic.Instruction swapInstruction(com.sun.org.apache.bcel.internal.generic.Instruction)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionHandle com.sun.org.apache.bcel.internal.generic.InstructionHandle getNext()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -2195,11 +2249,20 @@
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionHandle int getPosition()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionHandle int updatePosition(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionHandle java.lang.String toString(boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionHandle void setInstruction(com.sun.org.apache.bcel.internal.generic.Instruction) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionHandle void setPosition(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionList InstructionList()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionList InstructionList(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2325,6 +2388,9 @@
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionList void append(com.sun.org.apache.bcel.internal.generic.InstructionHandle) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionList void clear()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionList void delete(com.sun.org.apache.bcel.internal.generic.Instruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2370,8 +2436,14 @@
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionList void redirectLocalVariables(com.sun.org.apache.bcel.internal.generic.LocalVariableGen[], com.sun.org.apache.bcel.internal.generic.InstructionHandle, com.sun.org.apache.bcel.internal.generic.InstructionHandle) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionList.1 1(com.sun.org.apache.bcel.internal.generic.InstructionList)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionList.1 boolean hasNext()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionList.1 java.lang.Object next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InvokeInstruction com.sun.org.apache.bcel.internal.generic.Type[] getArgumentTypes(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2459,6 +2531,9 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.LDC void initFromFile(com.sun.org.apache.bcel.internal.util.ByteSequence, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LDC void setSize()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.LDC2_W com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2552,6 +2627,9 @@
   <item name="com.sun.org.apache.bcel.internal.generic.LineNumberGen int getSourceLine()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LineNumberGen void setSourceLine(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.LineNumberGen void updateTarget(com.sun.org.apache.bcel.internal.generic.InstructionHandle, com.sun.org.apache.bcel.internal.generic.InstructionHandle) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2593,6 +2671,12 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableGen java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableGen void setName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableGen void setType(com.sun.org.apache.bcel.internal.generic.Type)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableGen void updateTarget(com.sun.org.apache.bcel.internal.generic.InstructionHandle, com.sun.org.apache.bcel.internal.generic.InstructionHandle) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2752,11 +2836,35 @@
   <item name="com.sun.org.apache.bcel.internal.generic.MethodGen java.lang.String[] getExceptions()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.MethodGen void setArgumentNames(java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.MethodGen void setArgumentTypes(com.sun.org.apache.bcel.internal.generic.Type[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.MethodGen void setClassName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.MethodGen void setInstructionList(com.sun.org.apache.bcel.internal.generic.InstructionList)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.MethodGen void setMaxLocals(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.MethodGen void setMaxStack(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.MethodGen void sort(com.sun.org.apache.bcel.internal.generic.LocalVariableGen[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.MethodGen void stripAttributes(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.MethodGen.BranchStack com.sun.org.apache.bcel.internal.generic.MethodGen.BranchTarget visit(com.sun.org.apache.bcel.internal.generic.InstructionHandle, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.MethodGen.BranchTarget BranchTarget(com.sun.org.apache.bcel.internal.generic.InstructionHandle, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.NEW java.lang.Class[] getExceptions()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2827,6 +2935,9 @@
   <item name="com.sun.org.apache.bcel.internal.generic.PUSH PUSH(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.PUSH PUSH(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.PUSH PUSH(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen, java.lang.Boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2885,6 +2996,9 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.RET void initFromFile(com.sun.org.apache.bcel.internal.util.ByteSequence, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.RET void setWide()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.RETURN void accept(com.sun.org.apache.bcel.internal.generic.Visitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2991,6 +3105,9 @@
   <item name="com.sun.org.apache.bcel.internal.generic.Select com.sun.org.apache.bcel.internal.generic.InstructionHandle[] getTargets()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Select int updatePosition(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.Select int[] getIndices()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -3035,6 +3152,9 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.TargetLostException com.sun.org.apache.bcel.internal.generic.InstructionHandle[] getTargets()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Type Type(byte, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.Type byte getType()">
     <annotation name="org.jetbrains.annotations.Pure"/>

@@ -1,4 +1,7 @@
 <root>
+  <item name="sun.net.www.http.ChunkedInputStream ChunkedInputStream(java.io.InputStream, sun.net.www.http.HttpClient, sun.net.www.MessageHeader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.www.http.ChunkedInputStream int read(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -10,6 +13,9 @@
   </item>
   <item name="sun.net.www.http.ChunkedOutputStream int size()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.www.http.ChunkedOutputStream void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.www.http.ChunkedOutputStream void write(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -124,6 +130,18 @@
   <item name="sun.net.www.http.HttpClient void resetProperties()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="sun.net.www.http.HttpClient void setCacheRequest(java.net.CacheRequest)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.www.http.HttpClient void setDoNotRetry(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.www.http.HttpClient void setIgnoreContinue(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.www.http.HttpClient.1 1(sun.net.www.http.HttpClient, java.net.InetSocketAddress)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.www.http.KeepAliveCache java.lang.Thread access$000(sun.net.www.http.KeepAliveCache) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -156,6 +174,12 @@
   <item name="sun.net.www.http.KeepAliveCache void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.net.www.http.KeepAliveCache.1 1(sun.net.www.http.KeepAliveCache, sun.net.www.http.KeepAliveCache)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.www.http.KeepAliveCleanerEntry KeepAliveCleanerEntry(sun.net.www.http.KeepAliveStream, sun.net.www.http.HttpClient)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.www.http.KeepAliveCleanerEntry boolean getQueuedForCleanup()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -165,8 +189,14 @@
   <item name="sun.net.www.http.KeepAliveCleanerEntry sun.net.www.http.KeepAliveStream getKeepAliveStream()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="sun.net.www.http.KeepAliveEntry KeepAliveEntry(sun.net.www.http.HttpClient, long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.www.http.KeepAliveKey KeepAliveKey(java.net.URL, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.www.http.KeepAliveKey KeepAliveKey(java.net.URL, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.www.http.KeepAliveKey boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -200,6 +230,9 @@
   <item name="sun.net.www.http.KeepAliveStream void queueForCleanup(sun.net.www.http.KeepAliveCleanerEntry) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.www.http.KeepAliveStream void setClosed()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.www.http.KeepAliveStream.1 1()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -208,5 +241,8 @@
   </item>
   <item name="sun.net.www.http.KeepAliveStreamCleaner.2 2()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.www.http.PosterOutputStream void close()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

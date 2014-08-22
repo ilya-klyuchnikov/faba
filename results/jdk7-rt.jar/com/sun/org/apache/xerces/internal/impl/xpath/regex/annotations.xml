@@ -40,6 +40,21 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.CaseInsensitiveMap int[] updateMap(int, int[], int, int[], int) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Match Match()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Match void setSource(char[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Match void setSource(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Match void setSource(java.text.CharacterIterator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Op Op(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Op com.sun.org.apache.xerces.internal.impl.xpath.regex.Op createDot()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -93,6 +108,9 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Op.ChildOp com.sun.org.apache.xerces.internal.impl.xpath.regex.Op getChild()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Op.ChildOp void setChild(com.sun.org.apache.xerces.internal.impl.xpath.regex.Op)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Op.ModifierOp int getData()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -195,11 +213,20 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RangeToken java.lang.String toString(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RangeToken void createMap()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RangeToken void intersectRanges(com.sun.org.apache.xerces.internal.impl.xpath.regex.Token) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RangeToken void mergeRanges(com.sun.org.apache.xerces.internal.impl.xpath.regex.Token) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RangeToken void setCompacted()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RangeToken void setSorted(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RangeToken void subtractRanges(com.sun.org.apache.xerces.internal.impl.xpath.regex.Token) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -270,6 +297,15 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegexParser void addCaseInsensitiveCharRange(com.sun.org.apache.xerces.internal.impl.xpath.regex.RangeToken, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegexParser void setContext(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegexParser.ReferencePosition ReferencePosition(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression RegularExpression(java.lang.String, com.sun.org.apache.xerces.internal.impl.xpath.regex.Token, int, boolean, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -332,6 +368,9 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression void setPattern(java.lang.String, java.lang.String, java.util.Locale) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.CharArrayTarget CharArrayTarget(char[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.CharArrayTarget boolean regionMatches(int, int, int, int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -348,6 +387,12 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.CharArrayTarget char charAt(int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.CharArrayTarget void resetTarget(char[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.CharacterIteratorTarget CharacterIteratorTarget(java.text.CharacterIterator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.CharacterIteratorTarget boolean regionMatches(int, int, java.lang.String, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,_,null,_-&gt;true&quot;"/>
@@ -358,6 +403,12 @@
       <val val="&quot;_,_,null,_-&gt;true&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.CharacterIteratorTarget void resetTarget(java.text.CharacterIterator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.ClosureContext ClosureContext()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.ClosureContext boolean contains(int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -365,13 +416,31 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.ClosureContext void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.Context Context()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.Context void setInUse(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.ExpressionTarget ExpressionTarget()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.StringTarget StringTarget(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.StringTarget boolean regionMatches(boolean, int, int, java.lang.String, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,_,_,null,_-&gt;false&quot;"/>
     </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.StringTarget void resetTarget(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Token Token(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Token boolean isSet(int, int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -499,6 +568,12 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Token.ClosureToken java.lang.String toString(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Token.ClosureToken void setMax(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Token.ClosureToken void setMin(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Token.ConcatToken com.sun.org.apache.xerces.internal.impl.xpath.regex.Token getChild(int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -513,6 +588,9 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Token.ConditionToken java.lang.String toString(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Token.FixedStringContainer FixedStringContainer()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Token.ModifierToken com.sun.org.apache.xerces.internal.impl.xpath.regex.Token getChild(int)">
     <annotation name="org.jetbrains.annotations.Pure"/>

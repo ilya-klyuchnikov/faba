@@ -63,6 +63,9 @@
   <item name="com.sun.jmx.snmp.daemon.CommunicatorServer void postRegister(java.lang.Boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jmx.snmp.daemon.CommunicatorServer void postRegister(java.lang.Boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jmx.snmp.daemon.CommunicatorServer void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -257,6 +260,21 @@
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void doProcess()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void incSnmpInASNParseErrs(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void incSnmpInBadCommunityNames(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void incSnmpInBadCommunityUses(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void incSnmpInBadVersions(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void incSnmpSilentDrops(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void postDeregister()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -272,6 +290,12 @@
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void sendTrapPdu(java.net.InetAddress, com.sun.jmx.snmp.SnmpPduPacket) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void setAuthRespEnabled(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void setAuthTrapEnabled(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void setBufferSize(java.lang.Integer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -281,8 +305,14 @@
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void setPduFactory(com.sun.jmx.snmp.SnmpPduFactory) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void setPduFactory(com.sun.jmx.snmp.SnmpPduFactory)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void setTrapPort(java.lang.Integer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void setUserDataFactory(com.sun.jmx.snmp.agent.SnmpUserDataFactory)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpPduTrap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpPduPacket) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -401,6 +431,15 @@
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void updateErrorCounters(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void updateRequestCounters(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void updateVarCounters(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest boolean inProgress()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -456,6 +495,9 @@
   <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest long timeRemainingForAction(long)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest void finalize()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest void handleError(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -467,6 +509,18 @@
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest void sendPduPacket(byte[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest void setErrorStatusAndIndex(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest void setPrevPollTime(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest void setRequestStatus(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest void setTimeout(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest void updateInternalVarBindWithResult(com.sun.jmx.snmp.SnmpVarBind[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -534,6 +588,15 @@
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpMibTree.TreeNode void registerNode(long[], int, com.sun.jmx.snmp.agent.SnmpMibAgent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpMibTree.TreeNode void setAgent(com.sun.jmx.snmp.agent.SnmpMibAgent)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpRequestCounter SnmpRequestCounter()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpRequestCounter int getNewId()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler SnmpRequestHandler(com.sun.jmx.snmp.daemon.SnmpAdaptorServer, int, java.net.DatagramSocket, java.net.DatagramPacket, com.sun.jmx.snmp.daemon.SnmpMibTree, java.util.Vector, java.lang.Object, com.sun.jmx.snmp.SnmpPduFactory, com.sun.jmx.snmp.agent.SnmpUserDataFactory, javax.management.MBeanServer, javax.management.ObjectName) 5">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -635,6 +698,9 @@
   <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler void splitRequest(com.sun.jmx.snmp.SnmpPduRequest) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpResponseHandler SnmpResponseHandler(com.sun.jmx.snmp.daemon.SnmpAdaptorServer, com.sun.jmx.snmp.daemon.SnmpQManager)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpResponseHandler void processDatagram(java.net.DatagramPacket) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -670,6 +736,9 @@
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpSession void processResponse(com.sun.jmx.snmp.daemon.SnmpInformRequest) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpSession void setSyncMode(com.sun.jmx.snmp.daemon.SnmpInformRequest)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpSession void waitForResponse(com.sun.jmx.snmp.daemon.SnmpInformRequest, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -727,6 +796,9 @@
   <item name="com.sun.jmx.snmp.daemon.SnmpSubRequestHandler SnmpSubRequestHandler(com.sun.jmx.snmp.agent.SnmpMibAgent, com.sun.jmx.snmp.SnmpPdu, boolean) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpSubRequestHandler int getErrorIndex()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpSubRequestHandler int getErrorStatus()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -738,6 +810,12 @@
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpSubRequestHandler int mapErrorStatusToV2(int, int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpSubRequestHandler void init(com.sun.jmx.snmp.SnmpEngine, com.sun.jmx.snmp.internal.SnmpIncomingRequest)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpSubRequestHandler void setUserData(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpSubRequestHandler void updateResult(com.sun.jmx.snmp.SnmpVarBind[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

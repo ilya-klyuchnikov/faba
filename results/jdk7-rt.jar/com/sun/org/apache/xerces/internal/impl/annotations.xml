@@ -8,6 +8,9 @@
   <item name="com.sun.org.apache.xerces.internal.impl.Constants void print(java.lang.String, java.lang.String, java.lang.Object[]) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.Constants.ArrayEnumeration ArrayEnumeration(java.lang.Object[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.Constants.ArrayEnumeration boolean hasMoreElements()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -166,6 +169,9 @@
   <item name="com.sun.org.apache.xerces.internal.impl.XML11NSDocumentScannerImpl void scanAttribute(com.sun.org.apache.xerces.internal.util.XMLAttributesImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XML11NSDocumentScannerImpl void setDTDValidator(com.sun.org.apache.xerces.internal.impl.dtd.XMLDTDValidatorFilter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XML11NamespaceBinder boolean prefixBoundToNullURI(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -211,6 +217,12 @@
   <item name="com.sun.org.apache.xerces.internal.impl.XMLDTDScannerImpl com.sun.xml.internal.stream.dtd.nonvalidating.DTDGrammar getGrammar()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDTDScannerImpl int popContentStack()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDTDScannerImpl int popPEStack()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLDTDScannerImpl java.lang.Boolean getFeatureDefault(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -238,6 +250,9 @@
   <item name="com.sun.org.apache.xerces.internal.impl.XMLDTDScannerImpl void endEntity(java.lang.String, com.sun.org.apache.xerces.internal.xni.Augmentations) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDTDScannerImpl void ensureEnumerationSize(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLDTDScannerImpl void reset(com.sun.org.apache.xerces.internal.impl.PropertyManager) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -250,8 +265,17 @@
   <item name="com.sun.org.apache.xerces.internal.impl.XMLDTDScannerImpl void scanEntityValue(java.lang.String, boolean, com.sun.org.apache.xerces.internal.xni.XMLString, com.sun.org.apache.xerces.internal.xni.XMLString) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDTDScannerImpl void setDTDContentModelHandler(com.sun.org.apache.xerces.internal.xni.XMLDTDContentModelHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDTDScannerImpl void setDTDHandler(com.sun.org.apache.xerces.internal.xni.XMLDTDHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLDTDScannerImpl void setInputSource(com.sun.org.apache.xerces.internal.xni.parser.XMLInputSource) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDTDScannerImpl void setScannerState(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLDTDScannerImpl void startEntity(java.lang.String, com.sun.org.apache.xerces.internal.xni.XMLResourceIdentifier, java.lang.String, com.sun.org.apache.xerces.internal.xni.Augmentations) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -352,11 +376,20 @@
   <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl void scanPIData(java.lang.String, com.sun.org.apache.xerces.internal.util.XMLStringBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl void setDocumentHandler(com.sun.org.apache.xerces.internal.xni.XMLDocumentHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl void setDriver(com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.Driver)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl void setFeature(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl void setProperty(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl void setScannerState(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.Element Element(com.sun.org.apache.xerces.internal.xni.QName, com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.Element) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -369,10 +402,31 @@
   <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.ElementStack com.sun.org.apache.xerces.internal.xni.QName getLastPoppedElement()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.ElementStack com.sun.org.apache.xerces.internal.xni.QName getNext()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.ElementStack com.sun.org.apache.xerces.internal.xni.QName popElement()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.ElementStack void clear()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.ElementStack2 boolean matchElement(com.sun.org.apache.xerces.internal.xni.QName)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.ElementStack2 com.sun.org.apache.xerces.internal.xni.QName getNext()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.ElementStack2 int popElement()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.ElementStack2 void clear()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.FragmentContentDriver FragmentContentDriver(com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.FragmentContentDriver boolean elementDepthIsZeroHook()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -465,6 +519,18 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.ContentDriver void endOfFileHook(java.io.EOFException) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.DTDDriver DTDDriver(com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.PrologDriver PrologDriver(com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.TrailingMiscDriver TrailingMiscDriver(com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.XMLDeclDriver XMLDeclDriver(com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager boolean isStandalone()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -563,6 +629,9 @@
   <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager void closeReaders()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager void endExternalSubset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager void print()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -572,11 +641,26 @@
   <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager void reset(com.sun.org.apache.xerces.internal.xni.parser.XMLComponentManager) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager void setEntityHandler(com.sun.org.apache.xerces.internal.impl.XMLEntityHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager void setFeature(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager void setFeature(java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager void setProperty(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager void setStandalone(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager void startExternalSubset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager.CharacterBuffer CharacterBuffer(boolean, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager.CharacterBuffer boolean access$000(com.sun.org.apache.xerces.internal.impl.XMLEntityManager.CharacterBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -584,11 +668,32 @@
   <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager.CharacterBuffer boolean access$000(com.sun.org.apache.xerces.internal.impl.XMLEntityManager.CharacterBuffer)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager.CharacterBufferPool void init()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager.CharacterBufferPool void returnToPool(com.sun.org.apache.xerces.internal.impl.XMLEntityManager.CharacterBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager.CharacterBufferPool void setExternalBufferSize(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager.RewindableInputStream RewindableInputStream(com.sun.org.apache.xerces.internal.impl.XMLEntityManager, java.io.InputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager.RewindableInputStream boolean markSupported()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager.RewindableInputStream void mark(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager.RewindableInputStream void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager.RewindableInputStream void rewind()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityManager.RewindableInputStream void setStartOffset(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityScanner boolean isExternal()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -658,6 +763,9 @@
   <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityScanner void reset(com.sun.org.apache.xerces.internal.impl.PropertyManager) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityScanner void reset(com.sun.org.apache.xerces.internal.util.SymbolTable, com.sun.org.apache.xerces.internal.impl.XMLEntityManager, com.sun.org.apache.xerces.internal.impl.XMLErrorReporter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityScanner void reset(com.sun.org.apache.xerces.internal.xni.parser.XMLComponentManager) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -667,8 +775,14 @@
   <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityScanner void setBaseSystemId(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityScanner void setBufferSize(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityScanner void setColumnNumber(int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityScanner void setCurrentEntity(com.sun.xml.internal.stream.Entity.ScannedEntity)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLEntityScanner void setExpandedSystemId(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -725,11 +839,26 @@
   <item name="com.sun.org.apache.xerces.internal.impl.XMLErrorReporter void reset(com.sun.org.apache.xerces.internal.xni.parser.XMLComponentManager) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLErrorReporter void setDocumentLocator(com.sun.org.apache.xerces.internal.xni.XMLLocator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLErrorReporter void setFeature(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLErrorReporter void setFeature(java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLErrorReporter void setLocale(java.util.Locale)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLErrorReporter void setProperty(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLErrorReporter void setProperty(java.lang.String, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.1 1(com.sun.org.apache.xerces.internal.impl.XMLErrorReporter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.1 com.sun.org.apache.xerces.internal.xni.parser.XMLErrorHandler getErrorHandler()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -748,6 +877,9 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl void reset(com.sun.org.apache.xerces.internal.xni.parser.XMLComponentManager) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl void setDTDValidator(com.sun.org.apache.xerces.internal.impl.dtd.XMLDTDValidatorFilter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLNamespaceBinder boolean getOnlyPassPrefixMappingEvents()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -791,14 +923,26 @@
   <item name="com.sun.org.apache.xerces.internal.impl.XMLNamespaceBinder void reset(com.sun.org.apache.xerces.internal.xni.parser.XMLComponentManager) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLNamespaceBinder void setDocumentHandler(com.sun.org.apache.xerces.internal.xni.XMLDocumentHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLNamespaceBinder void setDocumentSource(com.sun.org.apache.xerces.internal.xni.parser.XMLDocumentSource)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLNamespaceBinder void setFeature(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLNamespaceBinder void setFeature(java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLNamespaceBinder void setOnlyPassPrefixMappingEvents(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLNamespaceBinder void setProperty(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLNamespaceBinder void setProperty(java.lang.String, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLScanner boolean isInvalid(int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -843,6 +987,9 @@
   <item name="com.sun.org.apache.xerces.internal.impl.XMLScanner void endEntity(java.lang.String, com.sun.org.apache.xerces.internal.xni.Augmentations) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLScanner void endEntity(java.lang.String, com.sun.org.apache.xerces.internal.xni.Augmentations)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLScanner void normalizeWhitespace(com.sun.org.apache.xerces.internal.xni.XMLString) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -870,8 +1017,14 @@
   <item name="com.sun.org.apache.xerces.internal.impl.XMLScanner void setFeature(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLScanner void setFeature(java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLScanner void setProperty(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLScanner void setPropertyManager(com.sun.org.apache.xerces.internal.impl.PropertyManager)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLScanner void startEntity(java.lang.String, com.sun.org.apache.xerces.internal.xni.XMLResourceIdentifier, java.lang.String, com.sun.org.apache.xerces.internal.xni.Augmentations) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -884,6 +1037,9 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLScanner void startEntity(java.lang.String, com.sun.org.apache.xerces.internal.xni.XMLResourceIdentifier, java.lang.String, com.sun.org.apache.xerces.internal.xni.Augmentations) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLStreamFilterImpl void setStreamFilter(javax.xml.stream.StreamFilter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLStreamReaderImpl XMLStreamReaderImpl(java.io.Reader, com.sun.org.apache.xerces.internal.impl.PropertyManager) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -962,6 +1118,9 @@
   <item name="com.sun.org.apache.xerces.internal.impl.XMLStreamReaderImpl javax.xml.stream.Location getLocation()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLStreamReaderImpl void close()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLStreamReaderImpl void init(com.sun.org.apache.xerces.internal.impl.PropertyManager) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -988,6 +1147,9 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLStreamReaderImpl.1 java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.XMLVersionDetector XMLVersionDetector()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.XMLVersionDetector void fixupCurrentEntity(com.sun.org.apache.xerces.internal.impl.XMLEntityManager, char[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

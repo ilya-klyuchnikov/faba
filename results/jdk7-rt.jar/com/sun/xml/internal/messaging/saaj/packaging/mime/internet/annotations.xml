@@ -1,4 +1,7 @@
 <root>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.AsciiOutputStream AsciiOutputStream(boolean, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.AsciiOutputStream int getAscii()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -60,11 +63,20 @@
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.BMMimeMultipart void compile(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.BMMimeMultipart void setInputStream(java.io.InputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.BMMimeMultipart void setLazyAttachments(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ContentDisposition ContentDisposition()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ContentDisposition ContentDisposition(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ContentDisposition ContentDisposition(java.lang.String, com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParameterList)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ContentDisposition com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParameterList getParameterList()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -77,8 +89,14 @@
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ContentDisposition void setDisposition(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ContentDisposition void setParameter(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ContentDisposition void setParameterList(com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParameterList)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ContentType ContentType()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -118,6 +136,15 @@
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ContentType void setParameter(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ContentType void setParameterList(com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParameterList)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ContentType void setPrimaryType(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ContentType void setSubType(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.HeaderTokenizer HeaderTokenizer(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -127,11 +154,17 @@
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.HeaderTokenizer HeaderTokenizer(java.lang.String, java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.HeaderTokenizer HeaderTokenizer(java.lang.String, java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.HeaderTokenizer java.lang.String filterToken(java.lang.String, int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.HeaderTokenizer java.lang.String getRemainder()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.HeaderTokenizer.Token Token(int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.HeaderTokenizer.Token int getType()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -156,6 +189,12 @@
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.InternetHeaders void setHeader(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeBodyPart MimeBodyPart(com.sun.xml.internal.messaging.saaj.packaging.mime.internet.InternetHeaders, byte[], int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeBodyPart MimeBodyPart(com.sun.xml.internal.messaging.saaj.packaging.mime.internet.InternetHeaders, byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeBodyPart boolean isMimeType(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -208,11 +247,17 @@
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeBodyPart void setHeader(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeBodyPart void setParent(com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeMultipart)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeBodyPart void setText(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeBodyPart void writeTo(java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeBodyPart.1 1(com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeBodyPart)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeBodyPart.1 java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -248,8 +293,14 @@
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeMultipart void setMultipartDataSource(com.sun.xml.internal.messaging.saaj.packaging.mime.MultipartDataSource) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeMultipart void setParent(com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeBodyPart)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeMultipart void writeTo(java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimePartDataSource MimePartDataSource(com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeBodyPart)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimePullMultipart MimePullMultipart(javax.activation.DataSource, com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ContentType) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -401,6 +452,9 @@
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParameterList ParameterList(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParameterList ParameterList(java.util.HashMap)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParameterList com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParameterList copy()">
     <annotation name="org.jetbrains.annotations.NotNull"/>

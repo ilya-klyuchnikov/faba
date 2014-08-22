@@ -91,6 +91,9 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.AnyNodeCounter com.sun.org.apache.xalan.internal.xsltc.dom.NodeCounter setStartNode(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.ArrayNodeListIterator ArrayNodeListIterator(int[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.ArrayNodeListIterator boolean isReverse()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -99,9 +102,11 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.ArrayNodeListIterator com.sun.org.apache.xml.internal.dtm.DTMAxisIterator reset()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.ArrayNodeListIterator com.sun.org.apache.xml.internal.dtm.DTMAxisIterator setStartNode(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.ArrayNodeListIterator int getLast()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -115,8 +120,23 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.ArrayNodeListIterator int getStartNode()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.ArrayNodeListIterator int next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.ArrayNodeListIterator void gotoMark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.ArrayNodeListIterator void setMark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.ArrayNodeListIterator void setRestartable(boolean)">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.BitArray BitArray(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.BitArray BitArray(int, int[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.BitArray boolean getBit(int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -129,6 +149,9 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.BitArray com.sun.org.apache.xalan.internal.xsltc.dom.BitArray merge(com.sun.org.apache.xalan.internal.xsltc.dom.BitArray)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.BitArray int getBitNumber(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.BitArray int getMask()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -145,6 +168,12 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.BitArray void readExternal(java.io.ObjectInput) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.BitArray void resize(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.BitArray void setMask(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.BitArray void writeExternal(java.io.ObjectOutput) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -153,6 +182,7 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.CachedNodeListIterator com.sun.org.apache.xml.internal.dtm.DTMAxisIterator reset()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.CachedNodeListIterator com.sun.org.apache.xml.internal.dtm.DTMAxisIterator setStartNode(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -168,6 +198,7 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.ClonedNodeListIterator com.sun.org.apache.xml.internal.dtm.DTMAxisIterator reset()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.ClonedNodeListIterator com.sun.org.apache.xml.internal.dtm.DTMAxisIterator setStartNode(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -196,9 +227,19 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.CurrentNodeListIterator com.sun.org.apache.xml.internal.dtm.DTMAxisIterator forceNaturalOrder()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.CurrentNodeListIterator com.sun.org.apache.xml.internal.dtm.DTMAxisIterator setStartNode(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.CurrentNodeListIterator void gotoMark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.CurrentNodeListIterator void setMark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.DOMAdapter DOMAdapter(com.sun.org.apache.xalan.internal.xsltc.DOM, java.lang.String[], java.lang.String[], int[], java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.DOMAdapter com.sun.org.apache.xalan.internal.xsltc.DOM getDOMImpl()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -217,6 +258,15 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.DOMAdapter java.lang.String[] getUrisArray()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.DOMAdapter void setFilter(com.sun.org.apache.xalan.internal.xsltc.StripFilter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.DOMAdapter void setMultiDOMMask(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.DOMAdapter void setupMapping(java.lang.String[], java.lang.String[], int[], java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.DOMWSFilter short getShouldStripSpace(int, com.sun.org.apache.xml.internal.dtm.DTM) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -265,8 +315,23 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.DocumentCache.CachedDocument long getLatency()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.DocumentCache.CachedDocument void incAccessCount()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.DocumentCache.CachedDocument void setLastChecked(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.DocumentCache.CachedDocument void setLastModified(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.DupFilterIterator com.sun.org.apache.xml.internal.dtm.DTMAxisIterator setStartNode(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.DupFilterIterator void gotoMark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.DupFilterIterator void setMark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.EmptyFilter EmptyFilter()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -321,9 +386,11 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex com.sun.org.apache.xml.internal.dtm.DTMAxisIterator reset()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex com.sun.org.apache.xml.internal.dtm.DTMAxisIterator setStartNode(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex int containsID(int, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -337,11 +404,20 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex int getStartNode()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex void gotoMark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex void lookupId(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex void merge(com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex void setDom(com.sun.org.apache.xalan.internal.xsltc.DOM, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex void setMark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex void setRestartable(boolean)">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -354,10 +430,20 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex.KeyIndexIterator.KeyIndexHeapNode com.sun.org.apache.xalan.internal.xsltc.dom.MultiValuedNodeHeapIterator.HeapNode reset()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex.KeyIndexIterator.KeyIndexHeapNode com.sun.org.apache.xalan.internal.xsltc.dom.MultiValuedNodeHeapIterator.HeapNode setStartNode(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex.KeyIndexIterator.KeyIndexHeapNode int step()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex.KeyIndexIterator.KeyIndexHeapNode void gotoMark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex.KeyIndexIterator.KeyIndexHeapNode void setMark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.LoadDocument LoadDocument()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -473,6 +559,15 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.MultiDOM.NodeValueIterator boolean isReverse()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.MultiValuedNodeHeapIterator.HeapNode HeapNode(com.sun.org.apache.xalan.internal.xsltc.dom.MultiValuedNodeHeapIterator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.MultiValuedNodeHeapIterator.HeapNode void gotoMark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.MultiValuedNodeHeapIterator.HeapNode void setMark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.MultipleNodeCounter com.sun.org.apache.xalan.internal.xsltc.dom.NodeCounter getDefaultNodeCounter(com.sun.org.apache.xalan.internal.xsltc.Translet, com.sun.org.apache.xalan.internal.xsltc.DOM, com.sun.org.apache.xml.internal.dtm.DTMAxisIterator)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -487,6 +582,7 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.NodeCounter com.sun.org.apache.xalan.internal.xsltc.dom.NodeCounter setValue(double)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.NodeCounter int parseStringToAnInt(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -509,20 +605,34 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.NodeCounter void setFormatting(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.NodeIteratorBase NodeIteratorBase()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.NodeIteratorBase boolean isReverse()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.NodeIteratorBase com.sun.org.apache.xalan.internal.xsltc.NodeIterator includeSelf()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.NodeIteratorBase com.sun.org.apache.xalan.internal.xsltc.NodeIterator reset()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.NodeIteratorBase com.sun.org.apache.xalan.internal.xsltc.NodeIterator resetPosition()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.NodeIteratorBase int getPosition()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.NodeIteratorBase int returnNode(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.NodeIteratorBase void setRestartable(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.NodeSortRecord NodeSortRecord(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.NodeSortRecord int compareDocOrder(com.sun.org.apache.xalan.internal.xsltc.dom.NodeSortRecord) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -586,6 +696,9 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl boolean lessThan(int, int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl boolean setEscaping(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl com.sun.org.apache.xalan.internal.xsltc.dom.DOMBuilder getBuilder()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -729,6 +842,9 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl void xmlSpaceDefine(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl void xmlSpaceRevert(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl.NamespaceWildcardIterator NamespaceWildcardIterator(com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -743,6 +859,9 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl.TypedNamespaceIterator TypedNamespaceIterator(com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SimpleResultTreeImpl SimpleResultTreeImpl(com.sun.org.apache.xalan.internal.xsltc.dom.XSLTCDTMManager, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SimpleResultTreeImpl boolean getDocumentAllDeclarationsProcessed()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -779,6 +898,9 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SimpleResultTreeImpl boolean needsTwoThreads()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SimpleResultTreeImpl boolean setEscaping(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SimpleResultTreeImpl boolean supportsPreStripping()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -1165,8 +1287,20 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SimpleResultTreeImpl.SimpleIterator com.sun.org.apache.xml.internal.dtm.DTMAxisIterator setStartNode(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SimpleResultTreeImpl.SimpleIterator void gotoMark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SimpleResultTreeImpl.SimpleIterator void setMark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SimpleResultTreeImpl.SingletonIterator com.sun.org.apache.xml.internal.dtm.DTMAxisIterator setStartNode(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SimpleResultTreeImpl.SingletonIterator void gotoMark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SimpleResultTreeImpl.SingletonIterator void setMark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SingleNodeCounter com.sun.org.apache.xalan.internal.xsltc.dom.NodeCounter getDefaultNodeCounter(com.sun.org.apache.xalan.internal.xsltc.Translet, com.sun.org.apache.xalan.internal.xsltc.DOM, com.sun.org.apache.xml.internal.dtm.DTMAxisIterator)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1176,6 +1310,15 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SingleNodeCounter.DefaultSingleNodeCounter com.sun.org.apache.xalan.internal.xsltc.dom.NodeCounter setStartNode(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SingletonIterator void gotoMark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SingletonIterator void setMark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SortSettings SortSettings(com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet, int[], int[], java.util.Locale[], java.text.Collator[], java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SortSettings com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet getTranslet()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -1203,6 +1346,9 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SortingIterator int getPosition()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SortingIterator int next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.UnionIterator com.sun.org.apache.xalan.internal.xsltc.DOM access$000(com.sun.org.apache.xalan.internal.xsltc.dom.UnionIterator) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

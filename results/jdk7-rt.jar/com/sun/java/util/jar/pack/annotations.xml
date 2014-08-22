@@ -29,11 +29,20 @@
   <item name="com.sun.java.util.jar.pack.AdaptiveCoding void readArray(com.sun.java.util.jar.pack.AdaptiveCoding, java.io.InputStream, int[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.AdaptiveCoding void setHeadCoding(com.sun.java.util.jar.pack.CodingMethod)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.AdaptiveCoding void setTailCoding(com.sun.java.util.jar.pack.CodingMethod)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.AdaptiveCoding void writeArray(com.sun.java.util.jar.pack.AdaptiveCoding, java.io.OutputStream, int[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.java.util.jar.pack.Attribute Attribute(com.sun.java.util.jar.pack.Attribute) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Attribute Attribute(com.sun.java.util.jar.pack.Attribute)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.Attribute boolean isCanonical()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -153,6 +162,9 @@
   </item>
   <item name="com.sun.java.util.jar.pack.Attribute void unparseUsing(com.sun.java.util.jar.pack.Attribute.Layout.Element[], java.lang.Object[], com.sun.java.util.jar.pack.Attribute.ValueStream, java.io.ByteArrayOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Attribute.1 1(com.sun.java.util.jar.pack.Attribute, java.util.Collection)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.Attribute.1 int encodeBCI(int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -588,6 +600,9 @@
   <item name="com.sun.java.util.jar.pack.BandStructure.ByteCounter long getCount()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.BandStructure.ByteCounter void setCount(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.BandStructure.CPRefBand CPRefBand(com.sun.java.util.jar.pack.BandStructure, java.lang.String, com.sun.java.util.jar.pack.Coding, byte) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -608,6 +623,9 @@
   </item>
   <item name="com.sun.java.util.jar.pack.BandStructure.CPRefBand void putRef(com.sun.java.util.jar.pack.ConstantPool.Entry, com.sun.java.util.jar.pack.ConstantPool.Index) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.BandStructure.CPRefBand void setIndex(com.sun.java.util.jar.pack.ConstantPool.Index)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.BandStructure.IntBand IntBand(com.sun.java.util.jar.pack.BandStructure, java.lang.String, com.sun.java.util.jar.pack.Coding) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -657,6 +675,9 @@
   <item name="com.sun.java.util.jar.pack.BandStructure.MultiBand java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.BandStructure.MultiBand void setCapacity(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.BandStructure.ValueBand ValueBand(com.sun.java.util.jar.pack.BandStructure, java.lang.String, com.sun.java.util.jar.pack.Coding) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -687,6 +708,12 @@
   <item name="com.sun.java.util.jar.pack.ClassReader void readInnerClasses(com.sun.java.util.jar.pack.Package.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.ClassReader void setAttrCommands(java.util.Map)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.ClassReader void setAttrDefs(java.util.Map&lt;com.sun.java.util.jar.pack.Attribute.Layout,com.sun.java.util.jar.pack.Attribute&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.ClassReader void skip(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -707,6 +734,9 @@
   </item>
   <item name="com.sun.java.util.jar.pack.ClassWriter void writeRef(com.sun.java.util.jar.pack.ConstantPool.Entry) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Code Code(com.sun.java.util.jar.pack.Package.Class.Method)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.Code boolean flagsRequireCode(int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -738,8 +768,14 @@
   <item name="com.sun.java.util.jar.pack.Code void addFixups(java.util.Collection) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.Code void setHandlerCount(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.Code void setInstructionMap(int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Code void setMaxStack(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.Code void visitRefs(int, java.util.Collection&lt;com.sun.java.util.jar.pack.ConstantPool.Entry&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -933,11 +969,17 @@
   <item name="com.sun.java.util.jar.pack.CodingChooser void evaluate(com.sun.java.util.jar.pack.CodingChooser.Choice) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.CodingChooser void reset(int[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.CodingChooser void tryAdaptiveCoding(com.sun.java.util.jar.pack.Coding) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.java.util.jar.pack.CodingChooser void tryPopulationCoding(com.sun.java.util.jar.pack.Coding) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.CodingChooser.Choice Choice(com.sun.java.util.jar.pack.Coding, int, int[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.CodingChooser.Choice boolean isExtra()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -948,11 +990,20 @@
   <item name="com.sun.java.util.jar.pack.CodingChooser.Choice java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.CodingChooser.Choice void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.CodingChooser.Sizer Sizer(java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.CodingChooser.Sizer int getSize()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.java.util.jar.pack.CodingChooser.Sizer java.lang.String stringForDebug()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.CodingChooser.Sizer void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.ConstantPool ConstantPool()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -1078,6 +1129,9 @@
   <item name="com.sun.java.util.jar.pack.ConstantPool.DescriptorEntry java.lang.String stringValueOf(com.sun.java.util.jar.pack.ConstantPool.Entry, com.sun.java.util.jar.pack.ConstantPool.Entry)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.ConstantPool.Entry Entry(byte)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.ConstantPool.Entry boolean isDoubleWord()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -1153,8 +1207,14 @@
   <item name="com.sun.java.util.jar.pack.ConstantPool.Index java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.ConstantPool.Index void clearIndex()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.ConstantPool.Index void setMap(java.util.Collection&lt;com.sun.java.util.jar.pack.ConstantPool.Entry&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.ConstantPool.IndexGroup IndexGroup()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.ConstantPool.IndexGroup com.sun.java.util.jar.pack.ConstantPool.Index getMemberIndex(byte, com.sun.java.util.jar.pack.ConstantPool.ClassEntry) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1304,6 +1364,9 @@
   <item name="com.sun.java.util.jar.pack.FixedList void add(int, E) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.Fixups Fixups(byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.Fixups Fixups(byte[], java.util.Collection) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1372,6 +1435,9 @@
   <item name="com.sun.java.util.jar.pack.Fixups void visitRefs(java.lang.Object, java.util.Collection&lt;com.sun.java.util.jar.pack.ConstantPool.Entry&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.Fixups.Fixup Fixup(int, com.sun.java.util.jar.pack.ConstantPool.Entry)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.Fixups.Fixup boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1395,6 +1461,9 @@
   </item>
   <item name="com.sun.java.util.jar.pack.Fixups.Fixup java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Fixups.Itr Itr(com.sun.java.util.jar.pack.Fixups)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.Fixups.Itr Itr(com.sun.java.util.jar.pack.Fixups, com.sun.java.util.jar.pack.Fixups.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1516,6 +1585,9 @@
   </item>
   <item name="com.sun.java.util.jar.pack.Histogram void print(java.lang.String, java.lang.String[], java.io.PrintStream) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Histogram.1 1(com.sun.java.util.jar.pack.Histogram)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.Instruction boolean equals(com.sun.java.util.jar.pack.Instruction) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1651,6 +1723,9 @@
   </item>
   <item name="com.sun.java.util.jar.pack.Instruction void opcodeChecker(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Instruction void reset(byte[], int, int, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.Instruction void setByte(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1818,6 +1893,9 @@
   <item name="com.sun.java.util.jar.pack.Package void visitInnerClassRefs(java.util.Collection&lt;com.sun.java.util.jar.pack.Package.InnerClass&gt;, int, java.util.Collection&lt;com.sun.java.util.jar.pack.ConstantPool.Entry&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.Package.1 1(com.sun.java.util.jar.pack.Package)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.Package.1 int compare(java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1869,6 +1947,9 @@
   <item name="com.sun.java.util.jar.pack.Package.Class java.util.List&lt;com.sun.java.util.jar.pack.Package.InnerClass&gt; getInnerClasses()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.Package.Class void setCPMap(com.sun.java.util.jar.pack.ConstantPool.Entry[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.Package.Class void setInnerClasses(java.util.Collection&lt;com.sun.java.util.jar.pack.Package.InnerClass&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1883,6 +1964,9 @@
   </item>
   <item name="com.sun.java.util.jar.pack.Package.Class.Field int compareTo(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Package.Class.Member Member(com.sun.java.util.jar.pack.Package.Class, int, com.sun.java.util.jar.pack.ConstantPool.DescriptorEntry)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.Package.Class.Member com.sun.java.util.jar.pack.ConstantPool.DescriptorEntry getDescriptor()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -2023,6 +2107,12 @@
   <item name="com.sun.java.util.jar.pack.PackageReader void reconstructClass(com.sun.java.util.jar.pack.Package.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.PackageReader.1 1(com.sun.java.util.jar.pack.PackageReader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.PackageReader.2 2(com.sun.java.util.jar.pack.PackageReader, com.sun.java.util.jar.pack.BandStructure.Band[], com.sun.java.util.jar.pack.Attribute.Holder)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.PackageReader.LimitedBuffer int read(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2046,6 +2136,9 @@
   </item>
   <item name="com.sun.java.util.jar.pack.PackageWriter void beginCode(com.sun.java.util.jar.pack.Code) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.PackageWriter void endCode()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.PackageWriter void visitAttributeLayoutsIn(int, com.sun.java.util.jar.pack.Attribute.Holder) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2077,17 +2170,26 @@
   <item name="com.sun.java.util.jar.pack.PackageWriter void writeUtf8Bands(com.sun.java.util.jar.pack.ConstantPool.Entry[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.PackageWriter.1 1(com.sun.java.util.jar.pack.PackageWriter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.PackageWriter.1 int compare(java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.java.util.jar.pack.PackageWriter.1 int compare(java.lang.Object, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.PackageWriter.2 2(com.sun.java.util.jar.pack.PackageWriter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.PackageWriter.2 int compare(java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.java.util.jar.pack.PackageWriter.2 int compare(java.lang.Object, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.PackageWriter.3 3(com.sun.java.util.jar.pack.PackageWriter, com.sun.java.util.jar.pack.BandStructure.Band[], com.sun.java.util.jar.pack.Attribute.Holder, int[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.PackerImpl java.util.SortedMap properties()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -2155,6 +2257,9 @@
   <item name="com.sun.java.util.jar.pack.PackerImpl.DoPack.InFile void copyTo(com.sun.java.util.jar.pack.Package.File) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.PopulationCoding PopulationCoding()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.PopulationCoding com.sun.java.util.jar.pack.Coding getTailCoding(com.sun.java.util.jar.pack.CodingMethod)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
@@ -2181,8 +2286,17 @@
   <item name="com.sun.java.util.jar.pack.PopulationCoding java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.PopulationCoding void setFavoredCoding(com.sun.java.util.jar.pack.CodingMethod)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.PopulationCoding void setFavoredValues(int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.PopulationCoding void setHistogram(com.sun.java.util.jar.pack.Histogram)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.PopulationCoding void setUnfavoredCoding(com.sun.java.util.jar.pack.CodingMethod)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.PopulationCoding void writeSequencesTo(java.io.OutputStream, int[], int[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2314,5 +2428,8 @@
   </item>
   <item name="com.sun.java.util.jar.pack.Utils void markJarFile(java.util.jar.JarOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Utils.Pack200Logger Pack200Logger(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

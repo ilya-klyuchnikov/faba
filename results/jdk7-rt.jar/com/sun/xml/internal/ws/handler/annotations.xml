@@ -62,6 +62,9 @@
   <item name="com.sun.xml.internal.ws.handler.ClientSOAPHandlerTube com.sun.xml.internal.ws.handler.MessageUpdatableContext getContext(com.sun.xml.internal.ws.api.message.Packet)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.handler.HandlerChainsModel HandlerChainsModel(java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.handler.HandlerChainsModel com.sun.xml.internal.ws.handler.HandlerChainsModel parseHandlerConfigFile(java.lang.Class, javax.xml.stream.XMLStreamReader) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -85,6 +88,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.handler.HandlerChainsModel void failWithLocalName(java.lang.String, javax.xml.stream.XMLStreamReader, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.handler.HandlerChainsModel void setId(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.handler.HandlerChainsModel void skipChain(javax.xml.stream.XMLStreamReader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -110,6 +116,15 @@
   <item name="com.sun.xml.internal.ws.handler.HandlerChainsModel.HandlerChainType void addProtocolBinding(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.handler.HandlerChainsModel.HandlerChainType void setId(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.handler.HandlerChainsModel.HandlerChainType void setPortNamePattern(javax.xml.namespace.QName)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.handler.HandlerChainsModel.HandlerChainType void setServiceNamePattern(javax.xml.namespace.QName)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.handler.HandlerChainsModel.HandlerType HandlerType()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -121,6 +136,15 @@
   </item>
   <item name="com.sun.xml.internal.ws.handler.HandlerChainsModel.HandlerType java.lang.String getId()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.handler.HandlerChainsModel.HandlerType void setHandlerClass(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.handler.HandlerChainsModel.HandlerType void setHandlerName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.handler.HandlerChainsModel.HandlerType void setId(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.handler.HandlerException HandlerException(java.lang.String, java.lang.Object...) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -162,6 +186,9 @@
   <item name="com.sun.xml.internal.ws.handler.HandlerProcessor void setDirection(com.sun.xml.internal.ws.handler.HandlerProcessor.Direction, C) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.handler.HandlerProcessor void setIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.handler.HandlerTube HandlerTube(com.sun.xml.internal.ws.handler.HandlerTube, com.sun.xml.internal.ws.api.pipe.TubeCloner) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -189,11 +216,20 @@
   <item name="com.sun.xml.internal.ws.handler.HandlerTube.HandlerTubeExchange boolean isHandleFault()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.xml.internal.ws.handler.HandlerTube.HandlerTubeExchange void setHandleFalse()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.handler.HandlerTube.HandlerTubeExchange void setHandleFault(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.handler.LogicalMessageContextImpl LogicalMessageContextImpl(com.sun.xml.internal.ws.api.WSBinding, javax.xml.bind.JAXBContext, com.sun.xml.internal.ws.api.message.Packet) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.handler.LogicalMessageContextImpl void setPacketMessage(com.sun.xml.internal.ws.api.message.Message) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.handler.LogicalMessageImpl LogicalMessageImpl(javax.xml.bind.JAXBContext, com.sun.xml.internal.ws.api.message.Packet)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.handler.LogicalMessageImpl boolean isPayloadModifed()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -247,6 +283,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.handler.LogicalMessageImpl.EmptyLogicalMessageImpl javax.xml.transform.Source getPayload()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.handler.LogicalMessageImpl.ImmutableLM ImmutableLM(com.sun.xml.internal.ws.handler.LogicalMessageImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.handler.LogicalMessageImpl.ImmutableLM ImmutableLM(com.sun.xml.internal.ws.handler.LogicalMessageImpl, com.sun.xml.internal.ws.handler.LogicalMessageImpl.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>

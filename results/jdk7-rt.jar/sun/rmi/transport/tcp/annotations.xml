@@ -5,11 +5,20 @@
   <item name="sun.rmi.transport.tcp.ConnectionMultiplexer void sendClose(sun.rmi.transport.tcp.MultiplexConnectionInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.rmi.transport.tcp.MultiplexConnectionInfo MultiplexConnectionInfo(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.rmi.transport.tcp.MultiplexInputStream MultiplexInputStream(sun.rmi.transport.tcp.ConnectionMultiplexer, sun.rmi.transport.tcp.MultiplexConnectionInfo, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.transport.tcp.MultiplexInputStream int available()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.rmi.transport.tcp.MultiplexInputStream void receive(int, java.io.DataInputStream) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.rmi.transport.tcp.MultiplexOutputStream MultiplexOutputStream(sun.rmi.transport.tcp.ConnectionMultiplexer, sun.rmi.transport.tcp.MultiplexConnectionInfo, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.rmi.transport.tcp.TCPChannel sun.rmi.transport.Connection createConnection()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -23,6 +32,15 @@
   <item name="sun.rmi.transport.tcp.TCPChannel void free(sun.rmi.transport.Connection, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.rmi.transport.tcp.TCPChannel void useMultiplexer(sun.rmi.transport.tcp.ConnectionMultiplexer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.rmi.transport.tcp.TCPChannel.1 1(sun.rmi.transport.tcp.TCPChannel)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.rmi.transport.tcp.TCPConnection TCPConnection(sun.rmi.transport.tcp.TCPChannel, java.net.Socket, java.io.InputStream, java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.transport.tcp.TCPConnection boolean expired(long)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -32,11 +50,20 @@
   <item name="sun.rmi.transport.tcp.TCPConnection void releaseInputStream()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="sun.rmi.transport.tcp.TCPConnection void setExpiration(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.rmi.transport.tcp.TCPConnection void setLastUseTime(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.transport.tcp.TCPEndpoint TCPEndpoint(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.rmi.transport.tcp.TCPEndpoint TCPEndpoint(java.lang.String, int, java.rmi.server.RMIClientSocketFactory, java.rmi.server.RMIServerSocketFactory) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.rmi.transport.tcp.TCPEndpoint TCPEndpoint(java.lang.String, int, java.rmi.server.RMIClientSocketFactory, java.rmi.server.RMIServerSocketFactory)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.rmi.transport.tcp.TCPEndpoint boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -91,6 +118,9 @@
   <item name="sun.rmi.transport.tcp.TCPEndpoint void writeHostPortFormat(java.io.DataOutput) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.rmi.transport.tcp.TCPEndpoint.FQDN FQDN(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.transport.tcp.TCPEndpoint.FQDN java.lang.String attemptFQDN(java.net.InetAddress) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -134,6 +164,12 @@
   </item>
   <item name="sun.rmi.transport.tcp.TCPTransport.1 1()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.rmi.transport.tcp.TCPTransport.AcceptLoop AcceptLoop(sun.rmi.transport.tcp.TCPTransport, java.net.ServerSocket)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.rmi.transport.tcp.TCPTransport.ConnectionHandler ConnectionHandler(sun.rmi.transport.tcp.TCPTransport, java.net.Socket, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.rmi.transport.tcp.TCPTransport.ConnectionHandler java.lang.String getClientHost()">
     <annotation name="org.jetbrains.annotations.Pure"/>

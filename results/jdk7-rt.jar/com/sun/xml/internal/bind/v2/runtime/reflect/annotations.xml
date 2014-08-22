@@ -1,4 +1,7 @@
 <root>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.Accessor Accessor(java.lang.Class&lt;ValueT&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.Accessor boolean access$000()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -120,11 +123,17 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.AdaptedAccessor boolean isAdapted()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.AdaptedLister AdaptedLister(com.sun.xml.internal.bind.v2.runtime.reflect.Lister&lt;BeanT,PropT,InMemItemT,PackT&gt;, java.lang.Class&lt;? extends javax.xml.bind.annotation.adapters.XmlAdapter&lt;OnWireItemT,InMemItemT&gt;&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.AdaptedLister com.sun.xml.internal.bind.v2.runtime.reflect.ListIterator&lt;OnWireItemT&gt; iterator(PropT, com.sun.xml.internal.bind.v2.runtime.XMLSerializer)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.AdaptedLister javax.xml.bind.annotation.adapters.XmlAdapter access$000(com.sun.xml.internal.bind.v2.runtime.reflect.AdaptedLister) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.AdaptedLister.ListIteratorImpl ListIteratorImpl(com.sun.xml.internal.bind.v2.runtime.reflect.ListIterator&lt;InMemItemT&gt;, com.sun.xml.internal.bind.v2.runtime.XMLSerializer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.DefaultTransducedAccessor DefaultTransducedAccessor()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -137,6 +146,9 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.DefaultTransducedAccessor void writeText(com.sun.xml.internal.bind.v2.runtime.XMLSerializer, T, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.ListTransducedAccessorImpl ListTransducedAccessorImpl(com.sun.xml.internal.bind.v2.runtime.Transducer&lt;ItemT&gt;, com.sun.xml.internal.bind.v2.runtime.reflect.Accessor&lt;BeanT,ListT&gt;, com.sun.xml.internal.bind.v2.runtime.reflect.Lister&lt;BeanT,ListT,ItemT,PackT&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.ListTransducedAccessorImpl void parse(BeanT, java.lang.CharSequence) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -228,6 +240,9 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.Lister.2 boolean hasNext()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.Lister.ArrayLister ArrayLister(java.lang.Class&lt;ItemT&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.Lister.ArrayLister com.sun.xml.internal.bind.v2.runtime.reflect.ListIterator iterator(java.lang.Object, com.sun.xml.internal.bind.v2.runtime.XMLSerializer) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -279,8 +294,17 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.Lister.ArrayLister void reset(BeanT, com.sun.xml.internal.bind.v2.runtime.reflect.Accessor&lt;BeanT,ItemT[]&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.Lister.ArrayLister.1 1(com.sun.xml.internal.bind.v2.runtime.reflect.Lister.ArrayLister, java.lang.Object[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.Lister.ArrayLister.1 ItemT next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.Lister.ArrayLister.1 boolean hasNext()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.Lister.CollectionLister CollectionLister(java.lang.Class&lt;? extends T&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.Lister.CollectionLister T startPacking(BeanT, com.sun.xml.internal.bind.v2.runtime.reflect.Accessor&lt;BeanT,T&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -320,6 +344,12 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.Lister.CollectionLister void reset(BeanT, com.sun.xml.internal.bind.v2.runtime.reflect.Accessor&lt;BeanT,T&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.Lister.CollectionLister.1 1(com.sun.xml.internal.bind.v2.runtime.reflect.Lister.CollectionLister, java.util.Iterator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.Lister.IDREFS IDREFS(com.sun.xml.internal.bind.v2.runtime.reflect.Lister, java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.Lister.IDREFS com.sun.xml.internal.bind.v2.runtime.reflect.ListIterator&lt;java.lang.String&gt; iterator(PropT, com.sun.xml.internal.bind.v2.runtime.XMLSerializer)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -371,6 +401,9 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.Lister.IDREFS void endPacking(java.lang.Object, java.lang.Object, com.sun.xml.internal.bind.v2.runtime.reflect.Accessor)">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.Lister.IDREFSIterator IDREFSIterator(com.sun.xml.internal.bind.v2.runtime.reflect.ListIterator, com.sun.xml.internal.bind.v2.runtime.XMLSerializer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.Lister.IDREFSIterator IDREFSIterator(com.sun.xml.internal.bind.v2.runtime.reflect.ListIterator, com.sun.xml.internal.bind.v2.runtime.XMLSerializer, com.sun.xml.internal.bind.v2.runtime.reflect.Lister.1) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -441,8 +474,17 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerBoolean void reset(BeanT, com.sun.xml.internal.bind.v2.runtime.reflect.Accessor&lt;BeanT,boolean[]&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerBoolean.1 1(com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerBoolean, boolean[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerBoolean.1 boolean hasNext()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerBoolean.1 java.lang.Boolean next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerBoolean.BooleanArrayPack BooleanArrayPack()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerBoolean.BooleanArrayPack boolean[] build()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -510,8 +552,17 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerByte void reset(BeanT, com.sun.xml.internal.bind.v2.runtime.reflect.Accessor&lt;BeanT,byte[]&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerByte.1 1(com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerByte, byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerByte.1 boolean hasNext()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerByte.1 java.lang.Byte next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerByte.ByteArrayPack ByteArrayPack()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerByte.ByteArrayPack byte[] build()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -579,8 +630,14 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerCharacter void reset(BeanT, com.sun.xml.internal.bind.v2.runtime.reflect.Accessor&lt;BeanT,char[]&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerCharacter.1 1(com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerCharacter, char[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerCharacter.1 boolean hasNext()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerCharacter.CharacterArrayPack CharacterArrayPack()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerCharacter.CharacterArrayPack char[] build()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -648,11 +705,17 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerDouble void reset(BeanT, com.sun.xml.internal.bind.v2.runtime.reflect.Accessor&lt;BeanT,double[]&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerDouble.1 1(com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerDouble, double[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerDouble.1 boolean hasNext()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerDouble.1 java.lang.Double next()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerDouble.DoubleArrayPack DoubleArrayPack()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerDouble.DoubleArrayPack double[] build()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -720,11 +783,17 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerFloat void reset(BeanT, com.sun.xml.internal.bind.v2.runtime.reflect.Accessor&lt;BeanT,float[]&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerFloat.1 1(com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerFloat, float[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerFloat.1 boolean hasNext()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerFloat.1 java.lang.Float next()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerFloat.FloatArrayPack FloatArrayPack()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerFloat.FloatArrayPack float[] build()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -792,8 +861,14 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerInteger void reset(BeanT, com.sun.xml.internal.bind.v2.runtime.reflect.Accessor&lt;BeanT,int[]&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerInteger.1 1(com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerInteger, int[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerInteger.1 boolean hasNext()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerInteger.IntegerArrayPack IntegerArrayPack()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerInteger.IntegerArrayPack int[] build()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -861,8 +936,14 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerLong void reset(BeanT, com.sun.xml.internal.bind.v2.runtime.reflect.Accessor&lt;BeanT,long[]&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerLong.1 1(com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerLong, long[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerLong.1 boolean hasNext()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerLong.LongArrayPack LongArrayPack()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerLong.LongArrayPack long[] build()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -930,8 +1011,14 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerShort void reset(BeanT, com.sun.xml.internal.bind.v2.runtime.reflect.Accessor&lt;BeanT,short[]&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerShort.1 1(com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerShort, short[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerShort.1 boolean hasNext()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerShort.ShortArrayPack ShortArrayPack()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.PrimitiveArrayListerShort.ShortArrayPack short[] build()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -982,5 +1069,8 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.reflect.TransducedAccessor.IDREFTransducedAccessorImpl void parse(BeanT, java.lang.CharSequence) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.reflect.TransducedAccessor.IDREFTransducedAccessorImpl.1 1(com.sun.xml.internal.bind.v2.runtime.reflect.TransducedAccessor.IDREFTransducedAccessorImpl, java.util.concurrent.Callable, com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext, java.lang.Object, java.lang.String, com.sun.xml.internal.bind.v2.runtime.unmarshaller.LocatorEx)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

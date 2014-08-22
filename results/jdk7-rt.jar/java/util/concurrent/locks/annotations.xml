@@ -5,6 +5,9 @@
   <item name="java.util.concurrent.locks.AbstractOwnableSynchronizer java.lang.Thread getExclusiveOwnerThread()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="java.util.concurrent.locks.AbstractOwnableSynchronizer void setExclusiveOwnerThread(java.lang.Thread)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.locks.AbstractQueuedLongSynchronizer AbstractQueuedLongSynchronizer()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -83,8 +86,14 @@
   <item name="java.util.concurrent.locks.AbstractQueuedLongSynchronizer void setHeadAndPropagate(java.util.concurrent.locks.AbstractQueuedLongSynchronizer.Node, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.locks.AbstractQueuedLongSynchronizer void setState(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.locks.AbstractQueuedLongSynchronizer void unparkSuccessor(java.util.concurrent.locks.AbstractQueuedLongSynchronizer.Node) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.locks.AbstractQueuedLongSynchronizer.ConditionObject ConditionObject(java.util.concurrent.locks.AbstractQueuedLongSynchronizer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.locks.AbstractQueuedLongSynchronizer.ConditionObject boolean await(long, java.util.concurrent.TimeUnit) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -109,6 +118,12 @@
   </item>
   <item name="java.util.concurrent.locks.AbstractQueuedLongSynchronizer.Node Node()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="java.util.concurrent.locks.AbstractQueuedLongSynchronizer.Node Node(java.lang.Thread, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.concurrent.locks.AbstractQueuedLongSynchronizer.Node Node(java.lang.Thread, java.util.concurrent.locks.AbstractQueuedLongSynchronizer.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.locks.AbstractQueuedLongSynchronizer.Node boolean isShared()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -191,8 +206,14 @@
   <item name="java.util.concurrent.locks.AbstractQueuedSynchronizer void setHeadAndPropagate(java.util.concurrent.locks.AbstractQueuedSynchronizer.Node, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.locks.AbstractQueuedSynchronizer void setState(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.locks.AbstractQueuedSynchronizer void unparkSuccessor(java.util.concurrent.locks.AbstractQueuedSynchronizer.Node) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject ConditionObject(java.util.concurrent.locks.AbstractQueuedSynchronizer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject boolean await(long, java.util.concurrent.TimeUnit) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -218,6 +239,12 @@
   <item name="java.util.concurrent.locks.AbstractQueuedSynchronizer.Node Node()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="java.util.concurrent.locks.AbstractQueuedSynchronizer.Node Node(java.lang.Thread, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.concurrent.locks.AbstractQueuedSynchronizer.Node Node(java.lang.Thread, java.util.concurrent.locks.AbstractQueuedSynchronizer.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.locks.AbstractQueuedSynchronizer.Node boolean isShared()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -229,6 +256,12 @@
   </item>
   <item name="java.util.concurrent.locks.LockSupport void unpark(java.lang.Thread) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.concurrent.locks.ReentrantLock ReentrantLock()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.concurrent.locks.ReentrantLock ReentrantLock(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantLock boolean hasWaiters(java.util.concurrent.locks.Condition) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -293,6 +326,9 @@
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock ReadLock(java.util.concurrent.locks.ReentrantReadWriteLock) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock ReadLock(java.util.concurrent.locks.ReentrantReadWriteLock)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock boolean tryLock(long, java.util.concurrent.TimeUnit) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -322,6 +358,9 @@
   </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock WriteLock(java.util.concurrent.locks.ReentrantReadWriteLock) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock WriteLock(java.util.concurrent.locks.ReentrantReadWriteLock)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock boolean tryLock(long, java.util.concurrent.TimeUnit) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>

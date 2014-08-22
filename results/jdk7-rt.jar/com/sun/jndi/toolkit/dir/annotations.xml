@@ -1,4 +1,7 @@
 <root>
+  <item name="com.sun.jndi.toolkit.dir.ContainmentFilter ContainmentFilter(javax.naming.directory.Attributes)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jndi.toolkit.dir.ContainmentFilter boolean check(javax.naming.directory.Attributes) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -30,6 +33,9 @@
   </item>
   <item name="com.sun.jndi.toolkit.dir.ContextEnumerator javax.naming.NamingEnumeration getImmediateChildren(javax.naming.Context) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.toolkit.dir.ContextEnumerator void close()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jndi.toolkit.dir.DirSearch DirSearch()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -135,6 +141,9 @@
   <item name="com.sun.jndi.toolkit.dir.HierMemDirCtx javax.naming.directory.DirContext getSchemaClassDefinition(javax.naming.Name) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jndi.toolkit.dir.HierMemDirCtx void close()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jndi.toolkit.dir.HierMemDirCtx void doBind(javax.naming.Name, java.lang.Object, javax.naming.directory.Attributes, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -159,6 +168,15 @@
   <item name="com.sun.jndi.toolkit.dir.HierMemDirCtx void rename(javax.naming.Name, javax.naming.Name) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.toolkit.dir.HierMemDirCtx void setIgnoreCase(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jndi.toolkit.dir.HierMemDirCtx void setNameParser(javax.naming.NameParser)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jndi.toolkit.dir.HierMemDirCtx void setReadOnly(javax.naming.NamingException)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jndi.toolkit.dir.HierMemDirCtx void unbind(javax.naming.Name) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -168,8 +186,14 @@
   <item name="com.sun.jndi.toolkit.dir.HierMemDirCtx.FlatBindings java.lang.Object next()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.toolkit.dir.HierMemDirCtx.FlatNames FlatNames(com.sun.jndi.toolkit.dir.HierMemDirCtx, java.util.Enumeration)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jndi.toolkit.dir.HierMemDirCtx.FlatNames java.lang.Object next()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.toolkit.dir.HierMemDirCtx.FlatNames void close()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jndi.toolkit.dir.HierMemDirCtx.HierContextEnumerator HierContextEnumerator(com.sun.jndi.toolkit.dir.HierMemDirCtx, javax.naming.Context, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -277,8 +301,17 @@
   <item name="com.sun.jndi.toolkit.dir.SearchFilter void access$000(com.sun.jndi.toolkit.dir.SearchFilter) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.toolkit.dir.SearchFilter void consumeChar()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jndi.toolkit.dir.SearchFilter void consumeChars(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jndi.toolkit.dir.SearchFilter void hexDigit(java.lang.StringBuffer, byte) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.toolkit.dir.SearchFilter.AtomicFilter AtomicFilter(com.sun.jndi.toolkit.dir.SearchFilter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jndi.toolkit.dir.SearchFilter.AtomicFilter boolean check(javax.naming.directory.Attributes)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -287,5 +320,8 @@
   </item>
   <item name="com.sun.jndi.toolkit.dir.SearchFilter.AtomicFilter boolean substringMatch(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.toolkit.dir.SearchFilter.NotFilter NotFilter(com.sun.jndi.toolkit.dir.SearchFilter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

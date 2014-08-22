@@ -1,4 +1,7 @@
 <root>
+  <item name="sun.net.www.HeaderParser HeaderParser()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.www.HeaderParser java.lang.String findKey(int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -20,8 +23,14 @@
   <item name="sun.net.www.HeaderParser sun.net.www.HeaderParser subsequence(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.www.HeaderParser.ParserIterator ParserIterator(sun.net.www.HeaderParser, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.www.HeaderParser.ParserIterator boolean hasNext()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.www.HeaderParser.ParserIterator java.lang.Object next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.www.MessageHeader int access$000(sun.net.www.MessageHeader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -79,6 +88,9 @@
   <item name="sun.net.www.MessageHeader java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt; filterAndAddHeaders(java.lang.String[], java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.www.MessageHeader void grow()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.www.MessageHeader void mergeHeader(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -87,6 +99,9 @@
   </item>
   <item name="sun.net.www.MessageHeader void remove(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.net.www.MessageHeader.HeaderIterator HeaderIterator(sun.net.www.MessageHeader, java.lang.String, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.www.MeteredStream boolean isMarked()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -147,6 +162,18 @@
   </item>
   <item name="sun.net.www.MimeEntry java.lang.String[] getExtensions()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.www.MimeEntry void setAction(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.www.MimeEntry void setAction(int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.www.MimeEntry void setCommand(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.www.MimeEntry void setDescription(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.www.MimeEntry void setExtensions(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -414,6 +441,12 @@
   </item>
   <item name="sun.net.www.URLConnection void addRequestProperty(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.net.www.URLConnection void close()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.www.URLConnection void setProperties(sun.net.www.MessageHeader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.www.URLConnection void setProxiedHost(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

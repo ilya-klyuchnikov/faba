@@ -38,6 +38,9 @@
   <item name="com.sun.org.apache.xerces.internal.parsers.AbstractDOMParser void doctypeDecl(java.lang.String, java.lang.String, java.lang.String, com.sun.org.apache.xerces.internal.xni.Augmentations) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.AbstractDOMParser void dropDocumentReferences()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.AbstractDOMParser void elementDecl(java.lang.String, java.lang.String, com.sun.org.apache.xerces.internal.xni.Augmentations) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -267,6 +270,15 @@
   <item name="com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser void processingInstruction(java.lang.String, com.sun.org.apache.xerces.internal.xni.XMLString, com.sun.org.apache.xerces.internal.xni.Augmentations) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser void setContentHandler(org.xml.sax.ContentHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser void setDTDHandler(org.xml.sax.DTDHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser void setDocumentHandler(org.xml.sax.DocumentHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser void setFeature(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -309,11 +321,20 @@
   <item name="com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser void xmlDecl(java.lang.String, java.lang.String, java.lang.String, com.sun.org.apache.xerces.internal.xni.Augmentations) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser void xmlDecl(java.lang.String, java.lang.String, java.lang.String, com.sun.org.apache.xerces.internal.xni.Augmentations)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.1 1(com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.1 java.lang.String getEncoding()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.1 java.lang.String getXMLVersion()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.2 2(com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.2 java.lang.String getEncoding()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -338,6 +359,12 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.AttributesProxy java.lang.String getValue(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.AttributesProxy void setAttributes(com.sun.org.apache.xerces.internal.xni.XMLAttributes)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.LocatorProxy LocatorProxy(com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser, com.sun.org.apache.xerces.internal.xni.XMLLocator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.AbstractXMLDocumentParser AbstractXMLDocumentParser(com.sun.org.apache.xerces.internal.xni.parser.XMLParserConfiguration) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -471,6 +498,9 @@
   <item name="com.sun.org.apache.xerces.internal.parsers.AbstractXMLDocumentParser void endDTD(com.sun.org.apache.xerces.internal.xni.Augmentations) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.AbstractXMLDocumentParser void endDTD(com.sun.org.apache.xerces.internal.xni.Augmentations)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.AbstractXMLDocumentParser void endDocument(com.sun.org.apache.xerces.internal.xni.Augmentations) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -597,11 +627,23 @@
   <item name="com.sun.org.apache.xerces.internal.parsers.AbstractXMLDocumentParser void processingInstruction(java.lang.String, com.sun.org.apache.xerces.internal.xni.XMLString, com.sun.org.apache.xerces.internal.xni.Augmentations)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.AbstractXMLDocumentParser void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.AbstractXMLDocumentParser void separator(short, com.sun.org.apache.xerces.internal.xni.Augmentations) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.AbstractXMLDocumentParser void separator(short, com.sun.org.apache.xerces.internal.xni.Augmentations)">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.AbstractXMLDocumentParser void setDTDContentModelSource(com.sun.org.apache.xerces.internal.xni.parser.XMLDTDContentModelSource)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.AbstractXMLDocumentParser void setDTDSource(com.sun.org.apache.xerces.internal.xni.parser.XMLDTDSource)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.AbstractXMLDocumentParser void setDocumentSource(com.sun.org.apache.xerces.internal.xni.parser.XMLDocumentSource)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.AbstractXMLDocumentParser void startAttlist(java.lang.String, com.sun.org.apache.xerces.internal.xni.Augmentations) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -638,6 +680,9 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.AbstractXMLDocumentParser void startDTD(com.sun.org.apache.xerces.internal.xni.XMLLocator, com.sun.org.apache.xerces.internal.xni.Augmentations) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.AbstractXMLDocumentParser void startDTD(com.sun.org.apache.xerces.internal.xni.XMLLocator, com.sun.org.apache.xerces.internal.xni.Augmentations)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.AbstractXMLDocumentParser void startDocument(com.sun.org.apache.xerces.internal.xni.XMLLocator, java.lang.String, com.sun.org.apache.xerces.internal.xni.NamespaceContext, com.sun.org.apache.xerces.internal.xni.Augmentations) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -777,6 +822,15 @@
   <item name="com.sun.org.apache.xerces.internal.parsers.BasicParserConfiguration java.util.Locale getLocale()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.BasicParserConfiguration void setDTDContentModelHandler(com.sun.org.apache.xerces.internal.xni.XMLDTDContentModelHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.BasicParserConfiguration void setDTDHandler(com.sun.org.apache.xerces.internal.xni.XMLDTDHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.BasicParserConfiguration void setLocale(java.util.Locale)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.CachingParserPool com.sun.org.apache.xerces.internal.parsers.DOMParser createDOMParser()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -788,6 +842,12 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.CachingParserPool com.sun.org.apache.xerces.internal.xni.grammars.XMLGrammarPool getXMLGrammarPool()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.CachingParserPool void setShadowSymbolTable(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.CachingParserPool.SynchronizedGrammarPool SynchronizedGrammarPool(com.sun.org.apache.xerces.internal.xni.grammars.XMLGrammarPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.DOMParser DOMParser(com.sun.org.apache.xerces.internal.util.SymbolTable) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -872,6 +932,9 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.DOMParserImpl void setParameter(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.DOMParserImpl.AbortHandler AbortHandler(com.sun.org.apache.xerces.internal.parsers.DOMParserImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.DOMParserImpl.AbortHandler AbortHandler(com.sun.org.apache.xerces.internal.parsers.DOMParserImpl, com.sun.org.apache.xerces.internal.parsers.DOMParserImpl.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1152,6 +1215,15 @@
   <item name="com.sun.org.apache.xerces.internal.parsers.DOMParserImpl.AbortHandler void separator(short, com.sun.org.apache.xerces.internal.xni.Augmentations)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.DOMParserImpl.AbortHandler void setDTDContentModelSource(com.sun.org.apache.xerces.internal.xni.parser.XMLDTDContentModelSource)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.DOMParserImpl.AbortHandler void setDTDSource(com.sun.org.apache.xerces.internal.xni.parser.XMLDTDSource)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.DOMParserImpl.AbortHandler void setDocumentSource(com.sun.org.apache.xerces.internal.xni.parser.XMLDocumentSource)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.DOMParserImpl.AbortHandler void startAttlist(java.lang.String, com.sun.org.apache.xerces.internal.xni.Augmentations) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1343,6 +1415,9 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.DTDConfiguration com.sun.org.apache.xerces.internal.xni.parser.XMLDocumentScanner createDocumentScanner()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.DTDConfiguration void setInputSource(com.sun.org.apache.xerces.internal.xni.parser.XMLInputSource)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.DTDParser com.sun.org.apache.xerces.internal.impl.dtd.DTDGrammar getDTDGrammar()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -1629,6 +1704,9 @@
   <item name="com.sun.org.apache.xerces.internal.parsers.NonValidatingConfiguration com.sun.org.apache.xerces.internal.xni.parser.XMLDocumentScanner createDocumentScanner()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.NonValidatingConfiguration void setInputSource(com.sun.org.apache.xerces.internal.xni.parser.XMLInputSource)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.SAXParser SAXParser(com.sun.org.apache.xerces.internal.util.SymbolTable) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1728,6 +1806,15 @@
   <item name="com.sun.org.apache.xerces.internal.parsers.XML11Configuration void addRecognizedParamsAndSetDefaults(com.sun.org.apache.xerces.internal.xni.parser.XMLComponent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.XML11Configuration void setDTDContentModelHandler(com.sun.org.apache.xerces.internal.xni.XMLDTDContentModelHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.XML11Configuration void setDTDHandler(com.sun.org.apache.xerces.internal.xni.XMLDTDHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.XML11Configuration void setInputSource(com.sun.org.apache.xerces.internal.xni.parser.XMLInputSource)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.XML11DTDConfiguration XML11DTDConfiguration(com.sun.org.apache.xerces.internal.util.SymbolTable) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1760,6 +1847,15 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.XML11DTDConfiguration void addRecognizedParamsAndSetDefaults(com.sun.org.apache.xerces.internal.xni.parser.XMLComponent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.XML11DTDConfiguration void setDTDContentModelHandler(com.sun.org.apache.xerces.internal.xni.XMLDTDContentModelHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.XML11DTDConfiguration void setDTDHandler(com.sun.org.apache.xerces.internal.xni.XMLDTDHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.XML11DTDConfiguration void setInputSource(com.sun.org.apache.xerces.internal.xni.parser.XMLInputSource)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.XML11NonValidatingConfiguration XML11NonValidatingConfiguration(com.sun.org.apache.xerces.internal.util.SymbolTable) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1794,6 +1890,15 @@
   <item name="com.sun.org.apache.xerces.internal.parsers.XML11NonValidatingConfiguration void addRecognizedParamsAndSetDefaults(com.sun.org.apache.xerces.internal.xni.parser.XMLComponent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.XML11NonValidatingConfiguration void setDTDContentModelHandler(com.sun.org.apache.xerces.internal.xni.XMLDTDContentModelHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.XML11NonValidatingConfiguration void setDTDHandler(com.sun.org.apache.xerces.internal.xni.XMLDTDHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.XML11NonValidatingConfiguration void setInputSource(com.sun.org.apache.xerces.internal.xni.parser.XMLInputSource)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.XMLDocumentParser XMLDocumentParser(com.sun.org.apache.xerces.internal.xni.parser.XMLParserConfiguration) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1826,8 +1931,14 @@
   <item name="com.sun.org.apache.xerces.internal.parsers.XMLGrammarPreparser java.util.Locale getLocale()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.XMLGrammarPreparser void setEntityResolver(com.sun.org.apache.xerces.internal.xni.parser.XMLEntityResolver)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.XMLGrammarPreparser void setFeature(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.parsers.XMLGrammarPreparser void setGrammarPool(com.sun.org.apache.xerces.internal.xni.grammars.XMLGrammarPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.parsers.XMLParser void reset()">
     <annotation name="org.jetbrains.annotations.Pure"/>

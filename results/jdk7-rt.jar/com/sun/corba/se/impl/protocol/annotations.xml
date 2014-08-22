@@ -194,6 +194,9 @@
   <item name="com.sun.corba.se.impl.protocol.CorbaInvocationInfo CorbaInvocationInfo()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.corba.se.impl.protocol.CorbaInvocationInfo CorbaInvocationInfo(com.sun.corba.se.spi.orb.ORB)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaInvocationInfo boolean isRetryInvocation()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -208,6 +211,24 @@
   </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaInvocationInfo java.util.Iterator getContactInfoListIterator()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.protocol.CorbaInvocationInfo void decrementEntryCount()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.protocol.CorbaInvocationInfo void incrementEntryCount()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.protocol.CorbaInvocationInfo void setClientRequestDispatcher(com.sun.corba.se.pept.protocol.ClientRequestDispatcher)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.protocol.CorbaInvocationInfo void setContactInfoListIterator(java.util.Iterator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.protocol.CorbaInvocationInfo void setIsRetryInvocation(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.protocol.CorbaInvocationInfo void setMessageMediator(com.sun.corba.se.pept.protocol.MessageMediator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl CorbaMessageMediatorImpl(com.sun.corba.se.spi.orb.ORB, com.sun.corba.se.pept.transport.Connection) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -415,8 +436,35 @@
   <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl void sendResponse(com.sun.corba.se.spi.protocol.CorbaMessageMediator) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl void setDIIInfo(org.omg.CORBA.Request)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl void setDispatchBuffer(java.nio.ByteBuffer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl void setDispatchHeader(com.sun.corba.se.impl.protocol.giopmsgheaders.Message)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl void setExecutePIInResponseConstructor(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl void setExecuteRemoveThreadInfoInResponseConstructor(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl void setExecuteReturnServantInResponseConstructor(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl void setInputObject(com.sun.corba.se.pept.encoding.InputObject)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl void setOutputObject(com.sun.corba.se.pept.encoding.OutputObject)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl void setProtocolHandler(com.sun.corba.se.spi.protocol.CorbaProtocolHandler) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl void setReplyExceptionDetailMessage(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl void setReplyHeader(com.sun.corba.se.impl.protocol.giopmsgheaders.LocateReplyOrReplyMessage) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -584,6 +632,9 @@
   </item>
   <item name="com.sun.corba.se.impl.protocol.JIDLLocalCRDImpl void setServant(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.protocol.JIDLLocalCRDImpl void unexport()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.corba.se.impl.protocol.LocalClientRequestDispatcherBase LocalClientRequestDispatcherBase(com.sun.corba.se.spi.orb.ORB, int, com.sun.corba.se.spi.ior.IOR) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

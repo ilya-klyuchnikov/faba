@@ -23,6 +23,15 @@
   <item name="sun.org.mozilla.javascript.internal.ast.ArrayComprehension void addLoop(sun.org.mozilla.javascript.internal.ast.ArrayComprehensionLoop) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ArrayComprehension void setFilterLp(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ArrayComprehension void setFilterRp(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ArrayComprehension void setIfPosition(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ast.ArrayComprehension void setLoops(java.util.List&lt;sun.org.mozilla.javascript.internal.ast.ArrayComprehensionLoop&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -62,8 +71,17 @@
   <item name="sun.org.mozilla.javascript.internal.ast.ArrayLiteral void addElement(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ArrayLiteral void setDestructuringLength(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ast.ArrayLiteral void setElements(java.util.List&lt;sun.org.mozilla.javascript.internal.ast.AstNode&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ArrayLiteral void setIsDestructuring(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ArrayLiteral void setSkipCount(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.ArrayLiteral void visit(sun.org.mozilla.javascript.internal.ast.NodeVisitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -94,6 +112,18 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.AstNode void printList(java.util.List&lt;T&gt;, java.lang.StringBuilder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.AstNode void setLength(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.AstNode void setPosition(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.AstNode void setRelative(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.AstNode.DebugPrintVisitor DebugPrintVisitor(java.lang.StringBuilder)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.AstNode.DebugPrintVisitor boolean visit(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -135,6 +165,12 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.AstRoot void setComments(java.util.SortedSet&lt;sun.org.mozilla.javascript.internal.ast.Comment&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.AstRoot void setInStrictMode(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.AstRoot.1 1(sun.org.mozilla.javascript.internal.ast.AstRoot)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.AstRoot.1 boolean visit(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -186,6 +222,18 @@
   <item name="sun.org.mozilla.javascript.internal.ast.CatchClause void setBody(sun.org.mozilla.javascript.internal.ast.Block) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.CatchClause void setIfPosition(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.CatchClause void setLp(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.CatchClause void setParens(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.CatchClause void setRp(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ast.CatchClause void setVarName(sun.org.mozilla.javascript.internal.ast.Name) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -200,6 +248,9 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.Comment sun.org.mozilla.javascript.internal.Token.CommentType getCommentType()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.Comment void setCommentType(sun.org.mozilla.javascript.internal.Token.CommentType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.Comment void visit(sun.org.mozilla.javascript.internal.ast.NodeVisitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -222,8 +273,14 @@
   <item name="sun.org.mozilla.javascript.internal.ast.ConditionalExpression sun.org.mozilla.javascript.internal.ast.AstNode getTrueExpression()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ConditionalExpression void setColonPosition(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ast.ConditionalExpression void setFalseExpression(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ConditionalExpression void setQuestionMarkPosition(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.ConditionalExpression void setTestExpression(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -258,6 +315,9 @@
   <item name="sun.org.mozilla.javascript.internal.ast.DoLoop void setCondition(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.DoLoop void setWhilePosition(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ast.DoLoop void visit(sun.org.mozilla.javascript.internal.ast.NodeVisitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -278,6 +338,15 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.ElementGet void setElement(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ElementGet void setLb(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ElementGet void setParens(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ElementGet void setRb(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.ElementGet void setTarget(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -328,6 +397,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ErrorNode void setMessage(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ast.ErrorNode void visit(sun.org.mozilla.javascript.internal.ast.NodeVisitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -345,6 +417,9 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.ExpressionStatement void setExpression(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ExpressionStatement void setHasResult()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.ExpressionStatement void visit(sun.org.mozilla.javascript.internal.ast.NodeVisitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -366,6 +441,15 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.ForInLoop sun.org.mozilla.javascript.internal.ast.AstNode getIterator()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ForInLoop void setEachPosition(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ForInLoop void setInPosition(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ForInLoop void setIsForEach(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.ForInLoop void setIteratedObject(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -420,6 +504,15 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.FunctionCall void setArguments(java.util.List&lt;sun.org.mozilla.javascript.internal.ast.AstNode&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.FunctionCall void setLp(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.FunctionCall void setParens(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.FunctionCall void setRp(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.FunctionCall void setTarget(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -484,8 +577,38 @@
   <item name="sun.org.mozilla.javascript.internal.ast.FunctionNode void setBody(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.FunctionNode void setFunctionIsGetter()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.FunctionNode void setFunctionIsSetter()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.FunctionNode void setFunctionType(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.FunctionNode void setIgnoreDynamicScope()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.FunctionNode void setIsExpressionClosure(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.FunctionNode void setIsGenerator()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.FunctionNode void setLp(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ast.FunctionNode void setParams(java.util.List&lt;sun.org.mozilla.javascript.internal.ast.AstNode&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.FunctionNode void setParens(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.FunctionNode void setRequiresActivation()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.FunctionNode void setRp(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.FunctionNode void visit(sun.org.mozilla.javascript.internal.ast.NodeVisitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -513,6 +636,18 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.IfStatement void setCondition(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.IfStatement void setElsePosition(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.IfStatement void setLp(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.IfStatement void setParens(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.IfStatement void setRp(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.IfStatement void setThenPart(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -543,6 +678,9 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.InfixExpression void setLeftAndRight(sun.org.mozilla.javascript.internal.ast.AstNode, sun.org.mozilla.javascript.internal.ast.AstNode) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.InfixExpression void setOperatorPosition(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.InfixExpression void setRight(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -624,6 +762,15 @@
   <item name="sun.org.mozilla.javascript.internal.ast.LetNode sun.org.mozilla.javascript.internal.ast.VariableDeclaration getVariables()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.LetNode void setLp(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.LetNode void setParens(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.LetNode void setRp(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ast.LetNode void setVariables(sun.org.mozilla.javascript.internal.ast.VariableDeclaration) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -642,6 +789,15 @@
   <item name="sun.org.mozilla.javascript.internal.ast.Loop void setBody(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.Loop void setLp(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.Loop void setParens(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.Loop void setRp(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ast.Name Name(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -659,6 +815,9 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.Name void setIdentifier(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.Name void setScope(sun.org.mozilla.javascript.internal.ast.Scope)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.Name void visit(sun.org.mozilla.javascript.internal.ast.NodeVisitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -687,6 +846,9 @@
   <item name="sun.org.mozilla.javascript.internal.ast.NumberLiteral java.lang.String toSource(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.NumberLiteral void setNumber(double)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ast.NumberLiteral void visit(sun.org.mozilla.javascript.internal.ast.NodeVisitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -705,6 +867,9 @@
   <item name="sun.org.mozilla.javascript.internal.ast.ObjectLiteral void setElements(java.util.List&lt;sun.org.mozilla.javascript.internal.ast.ObjectProperty&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ObjectLiteral void setIsDestructuring(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ast.ObjectLiteral void visit(sun.org.mozilla.javascript.internal.ast.NodeVisitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -716,6 +881,12 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.ObjectProperty java.lang.String toSource(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ObjectProperty void setIsGetter()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ObjectProperty void setIsSetter()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.ParenthesizedExpression java.lang.String toSource(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -747,6 +918,21 @@
   <item name="sun.org.mozilla.javascript.internal.ast.ParseProblem sun.org.mozilla.javascript.internal.ast.ParseProblem.Type getType()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ParseProblem void setFileOffset(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ParseProblem void setLength(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ParseProblem void setMessage(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ParseProblem void setSourceName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ParseProblem void setType(sun.org.mozilla.javascript.internal.ast.ParseProblem.Type)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ast.PropertyGet PropertyGet(sun.org.mozilla.javascript.internal.ast.AstNode, sun.org.mozilla.javascript.internal.ast.Name, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -764,6 +950,9 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.RegExpLiteral java.lang.String toSource(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.RegExpLiteral void setFlags(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.RegExpLiteral void visit(sun.org.mozilla.javascript.internal.ast.NodeVisitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -801,6 +990,9 @@
   <item name="sun.org.mozilla.javascript.internal.ast.Scope void addChildScope(sun.org.mozilla.javascript.internal.ast.Scope) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.Scope void clearParentScope()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ast.Scope void joinScopes(sun.org.mozilla.javascript.internal.ast.Scope, sun.org.mozilla.javascript.internal.ast.Scope) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -809,6 +1001,15 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.Scope void putSymbol(sun.org.mozilla.javascript.internal.ast.Symbol) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.Scope void setParentScope(sun.org.mozilla.javascript.internal.ast.Scope)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.Scope void setSymbolTable(java.util.Map&lt;java.lang.String,sun.org.mozilla.javascript.internal.ast.Symbol&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.Scope void setTop(sun.org.mozilla.javascript.internal.ast.ScriptNode)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.Scope void visit(sun.org.mozilla.javascript.internal.ast.NodeVisitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -855,6 +1056,24 @@
   <item name="sun.org.mozilla.javascript.internal.ast.ScriptNode void addSymbol(sun.org.mozilla.javascript.internal.ast.Symbol) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ScriptNode void setEncodedSource(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ScriptNode void setEncodedSourceBounds(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ScriptNode void setEncodedSourceEnd(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ScriptNode void setEncodedSourceStart(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ScriptNode void setSourceName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.ScriptNode void setSymbols(java.util.List&lt;sun.org.mozilla.javascript.internal.ast.Symbol&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ast.ScriptNode void visit(sun.org.mozilla.javascript.internal.ast.NodeVisitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -871,6 +1090,9 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.StringLiteral java.lang.String toSource(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.StringLiteral void setQuoteCharacter(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.StringLiteral void visit(sun.org.mozilla.javascript.internal.ast.NodeVisitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -920,8 +1142,20 @@
   <item name="sun.org.mozilla.javascript.internal.ast.SwitchStatement void setExpression(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.SwitchStatement void setLp(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.SwitchStatement void setParens(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.SwitchStatement void setRp(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ast.SwitchStatement void visit(sun.org.mozilla.javascript.internal.ast.NodeVisitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.Symbol Symbol()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.Symbol int getDeclType()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -943,6 +1177,18 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.Symbol sun.org.mozilla.javascript.internal.ast.Scope getContainingTable()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.Symbol void setContainingTable(sun.org.mozilla.javascript.internal.ast.Scope)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.Symbol void setIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.Symbol void setName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.Symbol void setNode(sun.org.mozilla.javascript.internal.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.ThrowStatement ThrowStatement(int, sun.org.mozilla.javascript.internal.ast.AstNode) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -980,6 +1226,9 @@
   <item name="sun.org.mozilla.javascript.internal.ast.TryStatement void setCatchClauses(java.util.List&lt;sun.org.mozilla.javascript.internal.ast.CatchClause&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.TryStatement void setFinallyPosition(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ast.TryStatement void setTryBlock(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1000,6 +1249,9 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.UnaryExpression sun.org.mozilla.javascript.internal.ast.AstNode getOperand()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.UnaryExpression void setIsPostfix(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.UnaryExpression void setOperand(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1082,6 +1334,15 @@
   <item name="sun.org.mozilla.javascript.internal.ast.WithStatement void setExpression(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.WithStatement void setLp(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.WithStatement void setParens(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.WithStatement void setRp(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ast.WithStatement void setStatement(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1093,6 +1354,9 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.XmlDotQuery java.lang.String toSource(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.XmlDotQuery void setRp(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.XmlElemRef int getLb()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -1106,8 +1370,17 @@
   <item name="sun.org.mozilla.javascript.internal.ast.XmlElemRef sun.org.mozilla.javascript.internal.ast.AstNode getExpression()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.XmlElemRef void setBrackets(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ast.XmlElemRef void setExpression(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.XmlElemRef void setLb(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.XmlElemRef void setRb(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.XmlElemRef void visit(sun.org.mozilla.javascript.internal.ast.NodeVisitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1123,6 +1396,9 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.XmlExpression void setExpression(sun.org.mozilla.javascript.internal.ast.AstNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.XmlExpression void setIsXmlAttribute(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.XmlExpression void visit(sun.org.mozilla.javascript.internal.ast.NodeVisitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1171,6 +1447,12 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.XmlRef sun.org.mozilla.javascript.internal.ast.Name getNamespace()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.XmlRef void setAtPos(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ast.XmlRef void setColonPos(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ast.XmlString java.lang.String getXml()">
     <annotation name="org.jetbrains.annotations.Pure"/>

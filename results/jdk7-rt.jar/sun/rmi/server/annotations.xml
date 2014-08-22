@@ -1,4 +1,10 @@
 <root>
+  <item name="sun.rmi.server.ActivatableRef ActivatableRef()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.rmi.server.ActivatableRef ActivatableRef(java.rmi.activation.ActivationID, java.rmi.server.RemoteRef)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.server.ActivatableRef boolean remoteEquals(java.rmi.server.RemoteRef) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -230,11 +236,17 @@
   <item name="sun.rmi.server.Activation void startActivation(int, java.rmi.server.RMIServerSocketFactory, java.lang.String, java.lang.String[]) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.rmi.server.Activation.1 1(sun.rmi.server.Activation)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.server.Activation.2 2()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.rmi.server.Activation.3 3()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.rmi.server.Activation.4 4(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.rmi.server.Activation.ActLogHandler ActLogHandler()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -244,6 +256,9 @@
   </item>
   <item name="sun.rmi.server.Activation.ActLogHandler java.lang.Object initialSnapshot()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.rmi.server.Activation.ActivationServerSocketFactory ActivationServerSocketFactory(java.net.ServerSocket)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.rmi.server.Activation.ActivationServerSocketFactory java.net.ServerSocket createServerSocket(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -296,6 +311,12 @@
   <item name="sun.rmi.server.Activation.DelayedAcceptServerSocket java.net.ServerSocket access$3100(sun.rmi.server.Activation.DelayedAcceptServerSocket)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="sun.rmi.server.Activation.DelayedAcceptServerSocket.1 1(sun.rmi.server.Activation.DelayedAcceptServerSocket)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.rmi.server.Activation.DelayedAcceptServerSocket.2 2(sun.rmi.server.Activation.DelayedAcceptServerSocket)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.server.Activation.GroupEntry java.rmi.activation.ActivationDesc setActivationDesc(java.rmi.activation.ActivationID, java.rmi.activation.ActivationDesc, boolean) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -311,6 +332,12 @@
   <item name="sun.rmi.server.Activation.GroupEntry.Watchdog Watchdog(sun.rmi.server.Activation.GroupEntry) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.rmi.server.Activation.GroupEntry.Watchdog void noRestart()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.rmi.server.Activation.LogGroupIncarnation LogGroupIncarnation(java.rmi.activation.ActivationGroupID, long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.server.Activation.LogGroupIncarnation java.lang.Object apply(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
@@ -325,6 +352,9 @@
   <item name="sun.rmi.server.Activation.LogRecord LogRecord(sun.rmi.server.Activation.1)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="sun.rmi.server.Activation.LogRegisterGroup LogRegisterGroup(java.rmi.activation.ActivationGroupID, java.rmi.activation.ActivationGroupDesc)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.server.Activation.LogRegisterGroup java.lang.Object apply(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -333,10 +363,16 @@
       <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
   </item>
+  <item name="sun.rmi.server.Activation.LogRegisterObject LogRegisterObject(java.rmi.activation.ActivationID, java.rmi.activation.ActivationDesc)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.server.Activation.LogRegisterObject java.lang.Object apply(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
+  </item>
+  <item name="sun.rmi.server.Activation.LogUnregisterGroup LogUnregisterGroup(java.rmi.activation.ActivationGroupID)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.rmi.server.Activation.LogUnregisterGroup java.lang.Object apply(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -346,20 +382,35 @@
       <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="sun.rmi.server.Activation.LogUnregisterObject LogUnregisterObject(java.rmi.activation.ActivationID)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.server.Activation.LogUnregisterObject java.lang.Object apply(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
+  </item>
+  <item name="sun.rmi.server.Activation.LogUpdateDesc LogUpdateDesc(java.rmi.activation.ActivationID, java.rmi.activation.ActivationDesc)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.rmi.server.Activation.LogUpdateDesc java.lang.Object apply(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="sun.rmi.server.Activation.LogUpdateGroupDesc LogUpdateGroupDesc(java.rmi.activation.ActivationGroupID, java.rmi.activation.ActivationGroupDesc)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.server.Activation.LogUpdateGroupDesc java.lang.Object apply(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
+  </item>
+  <item name="sun.rmi.server.Activation.ObjectEntry ObjectEntry(java.rmi.activation.ActivationDesc)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.rmi.server.Activation.ObjectEntry void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.rmi.server.Activation.SystemRegistryImpl java.lang.String[] list()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -392,6 +443,9 @@
   </item>
   <item name="sun.rmi.server.ActivationGroupImpl java.rmi.MarshalledObject&lt;? extends java.rmi.Remote&gt; newInstance(java.rmi.activation.ActivationID, java.rmi.activation.ActivationDesc) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.rmi.server.ActivationGroupImpl.1 1(sun.rmi.server.ActivationGroupImpl, java.lang.Class, java.lang.Thread, java.lang.ClassLoader, java.rmi.activation.ActivationID, java.rmi.activation.ActivationDesc, java.lang.ClassLoader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.rmi.server.ActivationGroupImpl.ServerSocketFactoryImpl ServerSocketFactoryImpl()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -467,6 +521,9 @@
   <item name="sun.rmi.server.LoaderHandler void addPermissionsForURLs(java.net.URL[], java.security.PermissionCollection, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.rmi.server.LoaderHandler.1 1(java.net.URL[], java.lang.ClassLoader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.server.LoaderHandler.1 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -520,6 +577,12 @@
   <item name="sun.rmi.server.MarshalInputStream java.lang.Class&lt;?&gt; resolveClass(java.io.ObjectStreamClass) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.rmi.server.MarshalInputStream void skipDefaultResolveClass()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.rmi.server.MarshalInputStream void useCodebaseOnly()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.server.MarshalOutputStream boolean access$000(sun.rmi.server.MarshalOutputStream, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -527,6 +590,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
+  </item>
+  <item name="sun.rmi.server.MarshalOutputStream.1 1(sun.rmi.server.MarshalOutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.rmi.server.PipeWriter PipeWriter(java.io.InputStream, java.io.OutputStream, java.lang.String, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -545,6 +611,9 @@
   </item>
   <item name="sun.rmi.server.UnicastRef UnicastRef()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.rmi.server.UnicastRef UnicastRef(sun.rmi.transport.LiveRef)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.rmi.server.UnicastRef boolean remoteEquals(java.rmi.server.RemoteRef) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -622,6 +691,9 @@
   <item name="sun.rmi.server.UnicastRef2 void readExternal(java.io.ObjectInput) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.rmi.server.UnicastServerRef UnicastServerRef()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.server.UnicastServerRef java.lang.String getRefClass(java.io.ObjectOutput) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -653,6 +725,9 @@
   <item name="sun.rmi.server.UnicastServerRef void readExternal(java.io.ObjectInput) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.rmi.server.UnicastServerRef void readExternal(java.io.ObjectInput)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.server.UnicastServerRef void setSkeleton(java.rmi.Remote) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -670,6 +745,9 @@
   </item>
   <item name="sun.rmi.server.UnicastServerRef.HashToMethod_Maps java.util.Map&lt;java.lang.Long,java.lang.reflect.Method&gt; computeValue(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.rmi.server.UnicastServerRef.HashToMethod_Maps.1 1(sun.rmi.server.UnicastServerRef.HashToMethod_Maps, java.lang.reflect.Method)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.rmi.server.UnicastServerRef2 java.lang.String getRefClass(java.io.ObjectOutput) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -727,5 +805,8 @@
   </item>
   <item name="sun.rmi.server.Util void getRemoteInterfaces(java.util.ArrayList&lt;java.lang.Class&lt;?&gt;&gt;, java.lang.Class&lt;?&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.rmi.server.WeakClassHashMap.ValueCell ValueCell()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

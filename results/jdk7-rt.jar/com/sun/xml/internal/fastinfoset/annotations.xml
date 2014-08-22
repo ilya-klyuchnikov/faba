@@ -41,6 +41,9 @@
   <item name="com.sun.xml.internal.fastinfoset.Decoder int getBufferSize()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.Decoder int readBits(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.Decoder java.lang.String createQualifiedNameString(char[], java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -86,8 +89,32 @@
   <item name="com.sun.xml.internal.fastinfoset.Decoder void decodeFourBitAlphabetOctetsAsCharBuffer(char[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.Decoder void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Decoder void resetBits()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Decoder void setBufferSize(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.Decoder void setExternalVocabularies(java.util.Map) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Decoder void setForceStreamClose(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Decoder void setParseFragments(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Decoder void setStringInterning(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Decoder void setVocabulary(com.sun.xml.internal.fastinfoset.vocab.ParserVocabulary)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Decoder.EncodingAlgorithmInputStream EncodingAlgorithmInputStream(com.sun.xml.internal.fastinfoset.Decoder)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Decoder.EncodingAlgorithmInputStream int read(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -334,11 +361,77 @@
   <item name="com.sun.xml.internal.fastinfoset.Encoder void encodeProcessingInstruction(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void ensureEncodingBufferSizeForUtf16String(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void ensureEncodingBufferSizeForUtf8String(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void mark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void resetBits()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void resetMark()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void resize(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void setAttributeValueMapMemoryLimit(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void setCharacterContentChunkMapMemoryLimit(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder void setCharacterEncodingScheme(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void setCharacterEncodingScheme(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder void setExternalVocabulary(com.sun.xml.internal.org.jvnet.fastinfoset.ExternalVocabulary) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void setIgnoreComments(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void setIgnoreDTD(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void setIgnoreProcesingInstructions(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void setIgnoreWhiteSpaceTextContent(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void setMaxAttributeValueSize(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void setMaxCharacterContentChunkSize(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void setMinAttributeValueSize(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void setMinCharacterContentChunkSize(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void setOutputStream(java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void setVocabulary(com.sun.xml.internal.fastinfoset.vocab.SerializerVocabulary)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder void setVocabularyApplicationData(com.sun.xml.internal.org.jvnet.fastinfoset.VocabularyApplicationData)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.Encoder.EncodingBufferOutputStream EncodingBufferOutputStream(com.sun.xml.internal.fastinfoset.Encoder)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.Encoder.EncodingBufferOutputStream EncodingBufferOutputStream(com.sun.xml.internal.fastinfoset.Encoder, com.sun.xml.internal.fastinfoset.Encoder.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -352,14 +445,30 @@
   <item name="com.sun.xml.internal.fastinfoset.EncodingConstants EncodingConstants()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.Notation Notation(java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.QualifiedName QualifiedName()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.QualifiedName QualifiedName(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.QualifiedName QualifiedName(java.lang.String, java.lang.String, java.lang.String, int, int, int, char[]) 6">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.QualifiedName QualifiedName(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.QualifiedName QualifiedName(java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.QualifiedName QualifiedName(java.lang.String, java.lang.String, java.lang.String, java.lang.String, int, int, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.QualifiedName com.sun.xml.internal.fastinfoset.QualifiedName set(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.QualifiedName com.sun.xml.internal.fastinfoset.QualifiedName set(java.lang.String, java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -378,9 +487,11 @@
   </item>
   <item name="com.sun.xml.internal.fastinfoset.QualifiedName com.sun.xml.internal.fastinfoset.QualifiedName set(java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.QualifiedName com.sun.xml.internal.fastinfoset.QualifiedName set(java.lang.String, java.lang.String, java.lang.String, java.lang.String, int, int, int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.QualifiedName java.lang.String createQNameString(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -389,5 +500,11 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,!null-&gt;!null&quot;"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.QualifiedName void createAttributeValues(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.QualifiedName void set(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

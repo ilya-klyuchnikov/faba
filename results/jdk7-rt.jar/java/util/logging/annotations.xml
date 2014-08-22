@@ -1,4 +1,7 @@
 <root>
+  <item name="java.util.logging.ErrorManager ErrorManager()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.logging.ErrorManager void error(java.lang.String, java.lang.Exception, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -26,11 +29,20 @@
   <item name="java.util.logging.FileHandler void open(java.io.File, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.logging.FileHandler.1 1(java.util.logging.FileHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.logging.FileHandler.InitializationErrorManager InitializationErrorManager(java.util.logging.FileHandler.1) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.logging.FileHandler.InitializationErrorManager void error(java.lang.String, java.lang.Exception, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.logging.FileHandler.InitializationErrorManager void error(java.lang.String, java.lang.Exception, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.logging.FileHandler.MeteredStream MeteredStream(java.util.logging.FileHandler, java.io.OutputStream, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.logging.FileHandler.MeteredStream void write(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -246,8 +258,26 @@
   <item name="java.util.logging.LogManager.1 1()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="java.util.logging.LogManager.2 2(java.util.logging.LogManager)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.logging.LogManager.3 3(java.util.logging.LogManager, java.util.logging.Logger, java.util.logging.Logger)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.logging.LogManager.4 4(java.util.logging.LogManager, java.lang.String, java.util.logging.Logger)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.logging.LogManager.5 5(java.util.logging.Logger, java.util.logging.Level)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.logging.LogManager.6 6(java.util.logging.Logger, java.util.logging.Logger)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.logging.LogManager.Cleaner Cleaner(java.util.logging.LogManager, java.util.logging.LogManager.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.logging.LogManager.LogNode LogNode(java.util.logging.LogManager.LogNode, java.util.logging.LogManager.LoggerContext)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.logging.LogManager.LoggerContext LoggerContext(boolean, java.util.logging.LogManager.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -267,11 +297,20 @@
   <item name="java.util.logging.LogManager.LoggerContext void processParentHandlers(java.util.logging.Logger, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.logging.LogManager.LoggerContext.1 1(java.util.logging.LogManager.LoggerContext, java.util.logging.Logger, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.logging.LogManager.LoggerWeakRef LoggerWeakRef(java.util.logging.LogManager, java.util.logging.Logger) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.logging.LogManager.LoggerWeakRef LoggerWeakRef(java.util.logging.LogManager, java.util.logging.Logger) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.logging.LogManager.LoggerWeakRef void setNode(java.util.logging.LogManager.LogNode)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.logging.LogManager.LoggerWeakRef void setParentRef(java.lang.ref.WeakReference&lt;java.util.logging.Logger&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.logging.LogManager.RootLogger RootLogger(java.util.logging.LogManager, java.util.logging.LogManager.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -332,6 +371,39 @@
   </item>
   <item name="java.util.logging.LogRecord void setLevel(java.util.logging.Level) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.logging.LogRecord void setLoggerName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.logging.LogRecord void setMessage(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.logging.LogRecord void setMillis(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.logging.LogRecord void setParameters(java.lang.Object[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.logging.LogRecord void setResourceBundle(java.util.ResourceBundle)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.logging.LogRecord void setResourceBundleName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.logging.LogRecord void setSequenceNumber(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.logging.LogRecord void setSourceClassName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.logging.LogRecord void setSourceMethodName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.logging.LogRecord void setThreadID(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.logging.LogRecord void setThrown(java.lang.Throwable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.logging.LogRecord void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -467,6 +539,9 @@
   <item name="java.util.logging.Logger void setCallersClassLoaderRef(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.logging.Logger void setLogManager(java.util.logging.LogManager)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.logging.Logger void setParent(java.util.logging.Logger) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -476,8 +551,14 @@
   <item name="java.util.logging.Logger void setupResourceInfo(java.lang.String, java.lang.Class&lt;?&gt;) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.logging.Logger.1 1(java.util.Locale)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.logging.Logger.LoggerHelper LoggerHelper()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="java.util.logging.Logger.LoggerHelper.1 1(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.logging.Logging Logging()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -541,6 +622,9 @@
   </item>
   <item name="java.util.logging.MemoryHandler java.util.logging.Level getPushLevel()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="java.util.logging.MemoryHandler void init()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.logging.MemoryHandler void setPushLevel(java.util.logging.Level) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

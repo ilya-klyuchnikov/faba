@@ -51,8 +51,20 @@
   <item name="com.sun.org.apache.xpath.internal.axes.AxesWalker void callVisitors(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.XPathVisitor) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.AxesWalker void detach()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.AxesWalker void setDefaultDTM(com.sun.org.apache.xml.internal.dtm.DTM)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xpath.internal.axes.AxesWalker void setExpression(com.sun.org.apache.xpath.internal.Expression) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.AxesWalker void setNextWalker(com.sun.org.apache.xpath.internal.axes.AxesWalker)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.AxesWalker void setPrevWalker(com.sun.org.apache.xpath.internal.axes.AxesWalker)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.BasicTestIterator BasicTestIterator(com.sun.org.apache.xpath.internal.compiler.Compiler, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -120,6 +132,9 @@
   <item name="com.sun.org.apache.xpath.internal.axes.FilterExprIterator.filterExprOwner com.sun.org.apache.xpath.internal.Expression getExpression()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.FilterExprIterator.filterExprOwner filterExprOwner(com.sun.org.apache.xpath.internal.axes.FilterExprIterator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xpath.internal.axes.FilterExprIterator.filterExprOwner void setExpression(com.sun.org.apache.xpath.internal.Expression) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -160,6 +175,9 @@
   <item name="com.sun.org.apache.xpath.internal.axes.FilterExprIteratorSimple.filterExprOwner com.sun.org.apache.xpath.internal.Expression getExpression()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.FilterExprIteratorSimple.filterExprOwner filterExprOwner(com.sun.org.apache.xpath.internal.axes.FilterExprIteratorSimple)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xpath.internal.axes.FilterExprIteratorSimple.filterExprOwner void setExpression(com.sun.org.apache.xpath.internal.Expression) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -197,8 +215,14 @@
   <item name="com.sun.org.apache.xpath.internal.axes.FilterExprWalker.filterExprOwner com.sun.org.apache.xpath.internal.Expression getExpression()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.FilterExprWalker.filterExprOwner filterExprOwner(com.sun.org.apache.xpath.internal.axes.FilterExprWalker)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xpath.internal.axes.FilterExprWalker.filterExprOwner void setExpression(com.sun.org.apache.xpath.internal.Expression) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.HasPositionalPredChecker HasPositionalPredChecker()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.HasPositionalPredChecker boolean check(com.sun.org.apache.xpath.internal.axes.LocPathIterator) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -213,6 +237,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.HasPositionalPredChecker boolean visitPredicate(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.Expression)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -288,20 +313,35 @@
   <item name="com.sun.org.apache.xpath.internal.axes.LocPathIterator int getWhatToShow()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.LocPathIterator int returnNextNode(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.LocPathIterator void allowDetachToRelease(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xpath.internal.axes.LocPathIterator void callVisitors(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.XPathVisitor) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.LocPathIterator void executeCharsToContentHandler(com.sun.org.apache.xpath.internal.XPathContext, org.xml.sax.ContentHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.LocPathIterator void incrementCurrentPos()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xpath.internal.axes.LocPathIterator void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.LocPathIterator void setCurrentContextNode(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.LocPathIterator void setEnvironment(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.LocPathIterator void setEnvironment(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.LocPathIterator void setIsTopLevel(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.LocPathIterator void setRoot(int, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -314,6 +354,9 @@
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.MatchPatternIterator void setRoot(int, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.NodeSequence NodeSequence()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.NodeSequence boolean cacheComplete()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -344,6 +387,15 @@
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.NodeSequence void fixupVariables(java.util.Vector, int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.NodeSequence void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.NodeSequence void setIter(com.sun.org.apache.xml.internal.dtm.DTMIterator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.NodeSequence.IteratorCache IteratorCache()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.NodeSequence.IteratorCache boolean access$100(com.sun.org.apache.xpath.internal.axes.NodeSequence.IteratorCache) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -381,6 +433,15 @@
   <item name="com.sun.org.apache.xpath.internal.axes.NodeSequence.IteratorCache void access$500(com.sun.org.apache.xpath.internal.axes.NodeSequence.IteratorCache) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.NodeSequence.IteratorCache void increaseUseCount()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.NodeSequence.IteratorCache void setCacheComplete(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.NodeSequence.IteratorCache void setVector(com.sun.org.apache.xml.internal.utils.NodeVector)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xpath.internal.axes.OneStepIterator OneStepIterator(com.sun.org.apache.xpath.internal.compiler.Compiler, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -402,6 +463,12 @@
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.OneStepIteratorForward int getAxis()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.PredicatedNodeTest PredicatedNodeTest()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.PredicatedNodeTest PredicatedNodeTest(com.sun.org.apache.xpath.internal.axes.LocPathIterator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.PredicatedNodeTest boolean deepEquals(com.sun.org.apache.xpath.internal.Expression)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -449,6 +516,12 @@
   <item name="com.sun.org.apache.xpath.internal.axes.PredicatedNodeTest void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.PredicatedNodeTest void setPredicateCount(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.PredicatedNodeTest.PredOwner PredOwner(com.sun.org.apache.xpath.internal.axes.PredicatedNodeTest, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xpath.internal.axes.PredicatedNodeTest.PredOwner com.sun.org.apache.xpath.internal.Expression getExpression()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -475,6 +548,9 @@
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.SelfIteratorNoPredicate int getLastPos(com.sun.org.apache.xpath.internal.XPathContext)">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.SelfIteratorNoPredicate int nextNode()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.UnionChildIterator void addNodeTest(com.sun.org.apache.xpath.internal.axes.PredicatedNodeTest) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -507,6 +583,9 @@
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.UnionPathIterator.iterOwner com.sun.org.apache.xpath.internal.Expression getExpression()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.UnionPathIterator.iterOwner iterOwner(com.sun.org.apache.xpath.internal.axes.UnionPathIterator, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.UnionPathIterator.iterOwner void setExpression(com.sun.org.apache.xpath.internal.Expression) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -706,6 +785,12 @@
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.WalkingIterator void setExpression(com.sun.org.apache.xpath.internal.Expression) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.WalkingIterator void setFirstWalker(com.sun.org.apache.xpath.internal.axes.AxesWalker)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.axes.WalkingIterator void setLastUsedWalker(com.sun.org.apache.xpath.internal.axes.AxesWalker)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.WalkingIterator void setRoot(int, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>

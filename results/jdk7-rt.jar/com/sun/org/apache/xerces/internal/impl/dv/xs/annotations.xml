@@ -132,6 +132,12 @@
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV void validateDateTime(com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData DateTimeData(int, int, int, int, int, double, int, java.lang.String, boolean, com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData DateTimeData(java.lang.String, com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -279,6 +285,9 @@
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.BaseDVFactory void createBuiltInTypes(com.sun.org.apache.xerces.internal.util.SymbolHash) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.BaseSchemaDVFactory BaseSchemaDVFactory()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.BaseSchemaDVFactory com.sun.org.apache.xerces.internal.impl.dv.XSSimpleType createTypeUnion(java.lang.String, java.lang.String, short, com.sun.org.apache.xerces.internal.impl.dv.XSSimpleType[], com.sun.org.apache.xerces.internal.xs.XSObjectList) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -287,6 +296,9 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.BaseSchemaDVFactory void createBuiltInTypes(com.sun.org.apache.xerces.internal.util.SymbolHash, com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.BaseSchemaDVFactory void setDeclPool(com.sun.org.apache.xerces.internal.impl.xs.XSDeclarationPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.BooleanDV BooleanDV()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -873,6 +885,9 @@
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.PrecisionDecimalDV.XPrecisionDecimal void initD(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.PrecisionDecimalDV.XPrecisionDecimal void makeCanonical()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.PrecisionDecimalDV.XPrecisionDecimal void truncateTrailingZeros(java.lang.StringBuffer, java.lang.StringBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1018,11 +1033,17 @@
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.UnionDV short getAllowedFacets()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl XSSimpleTypeDecl()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl XSSimpleTypeDecl(com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl, java.lang.String, java.lang.String, short, boolean, com.sun.org.apache.xerces.internal.xs.XSObjectList) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl XSSimpleTypeDecl(com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl, java.lang.String, java.lang.String, short, boolean, com.sun.org.apache.xerces.internal.xs.XSObjectList, short) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl XSSimpleTypeDecl(com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl, java.lang.String, short, short, boolean, boolean, boolean, boolean, short)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl boolean derivedFrom(java.lang.String, java.lang.String, short) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1264,6 +1285,21 @@
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl void checkFacets(com.sun.org.apache.xerces.internal.impl.dv.ValidatedInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl void setAnonymous(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl void setDVs(com.sun.org.apache.xerces.internal.impl.dv.xs.TypeValidator[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl void setNamespaceItem(com.sun.org.apache.xerces.internal.xs.XSNamespaceItem)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl void setOrdered()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl void validate(com.sun.org.apache.xerces.internal.impl.dv.ValidationContext, com.sun.org.apache.xerces.internal.impl.dv.ValidatedInfo) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1414,8 +1450,14 @@
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl.AbstractObjectList AbstractObjectList(com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl.1) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl.ValidationContextImpl ValidationContextImpl(com.sun.org.apache.xerces.internal.impl.dv.ValidationContext)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl.ValidationContextImpl boolean useNamespaces()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl.ValidationContextImpl void setNSContext(com.sun.org.apache.xerces.internal.xni.NamespaceContext)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl.XSFacetImpl XSFacetImpl(short, java.lang.String, boolean, com.sun.org.apache.xerces.internal.xs.XSAnnotation) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1446,6 +1488,9 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl.XSMVFacetImpl XSMVFacetImpl(short, com.sun.org.apache.xerces.internal.xs.StringList, com.sun.org.apache.xerces.internal.xs.XSObjectList) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl.XSMVFacetImpl XSMVFacetImpl(short, com.sun.org.apache.xerces.internal.xs.StringList, com.sun.org.apache.xerces.internal.xs.XSObjectList)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl.XSMVFacetImpl com.sun.org.apache.xerces.internal.xs.StringList getLexicalFacetValues()">
     <annotation name="org.jetbrains.annotations.Pure"/>

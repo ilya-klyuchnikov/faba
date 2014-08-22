@@ -67,6 +67,9 @@
   <item name="javax.management.monitor.CounterMonitor void setModulus(java.lang.Number) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.monitor.CounterMonitor void setNotify(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.monitor.CounterMonitor void setOffset(java.lang.Number) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -93,6 +96,27 @@
   </item>
   <item name="javax.management.monitor.CounterMonitor.CounterMonitorObservedObject javax.management.monitor.Monitor.NumericalType getType()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.monitor.CounterMonitor.CounterMonitorObservedObject void setDerivedGaugeExceeded(java.lang.Number)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.monitor.CounterMonitor.CounterMonitorObservedObject void setDerivedGaugeValid(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.monitor.CounterMonitor.CounterMonitorObservedObject void setEventAlreadyNotified(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.monitor.CounterMonitor.CounterMonitorObservedObject void setModulusExceeded(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.monitor.CounterMonitor.CounterMonitorObservedObject void setPreviousScanCounter(java.lang.Number)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.monitor.CounterMonitor.CounterMonitorObservedObject void setThreshold(java.lang.Number)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.monitor.CounterMonitor.CounterMonitorObservedObject void setType(javax.management.monitor.Monitor.NumericalType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.monitor.GaugeMonitor boolean getDifferenceMode()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -166,6 +190,12 @@
   <item name="javax.management.monitor.GaugeMonitor void setDerivedGaugeWithDifference(java.lang.Number, javax.management.monitor.GaugeMonitor.GaugeMonitorObservedObject) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.monitor.GaugeMonitor void setNotifyHigh(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.monitor.GaugeMonitor void setNotifyLow(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.monitor.GaugeMonitor void setThresholds(java.lang.Number, java.lang.Number) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -183,6 +213,18 @@
   </item>
   <item name="javax.management.monitor.GaugeMonitor.GaugeMonitorObservedObject javax.management.monitor.Monitor.NumericalType getType()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.monitor.GaugeMonitor.GaugeMonitorObservedObject void setDerivedGaugeValid(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.monitor.GaugeMonitor.GaugeMonitorObservedObject void setPreviousScanGauge(java.lang.Number)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.monitor.GaugeMonitor.GaugeMonitorObservedObject void setStatus(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.monitor.GaugeMonitor.GaugeMonitorObservedObject void setType(javax.management.monitor.Monitor.NumericalType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.monitor.Monitor boolean isActive()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -387,6 +429,9 @@
   <item name="javax.management.monitor.Monitor void updateAlreadyNotified(javax.management.monitor.Monitor.ObservedObject, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.monitor.Monitor void updateDeprecatedAlreadyNotified()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.monitor.Monitor.DaemonThreadFactory DaemonThreadFactory(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -399,6 +444,12 @@
   <item name="javax.management.monitor.Monitor.DaemonThreadFactory java.lang.ThreadGroup getThreadGroup()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="javax.management.monitor.Monitor.MonitorTask.1 1(javax.management.monitor.Monitor.MonitorTask)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.monitor.Monitor.ObservedObject ObservedObject(javax.management.ObjectName)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.monitor.Monitor.ObservedObject int getAlreadyNotified()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -410,6 +461,21 @@
   </item>
   <item name="javax.management.monitor.Monitor.ObservedObject long getDerivedGaugeTimeStamp()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.monitor.Monitor.ObservedObject void setAlreadyNotified(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.monitor.Monitor.ObservedObject void setDerivedGauge(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.monitor.Monitor.ObservedObject void setDerivedGaugeTimeStamp(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.monitor.Monitor.SchedulerTask SchedulerTask(javax.management.monitor.Monitor)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.monitor.Monitor.SchedulerTask void setMonitorTask(javax.management.monitor.Monitor.MonitorTask)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.monitor.MonitorNotification MonitorNotification(java.lang.String, java.lang.Object, long, long, java.lang.String, javax.management.ObjectName, java.lang.String, java.lang.Object, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -462,10 +528,19 @@
   <item name="javax.management.monitor.StringMonitor void onErrorNotification(javax.management.monitor.MonitorNotification) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.monitor.StringMonitor void setNotifyDiffer(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.monitor.StringMonitor void setNotifyMatch(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.monitor.StringMonitor void setStringToCompare(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.monitor.StringMonitor.StringMonitorObservedObject int getStatus()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.monitor.StringMonitor.StringMonitorObservedObject void setStatus(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>
