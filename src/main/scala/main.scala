@@ -170,8 +170,7 @@ class MainProcessor extends FabaProcessor {
       val notNullParams = notNullParamsSolver.solve().filterNot(p => p._2 == Values.Top)
       val nullableParams = nullableParamsSolver.solve().filterNot(p => p._2 == Values.Top)
       val contracts = contractsSolver.solve()
-      val pureSolutions = puritySolver.solve()
-      val reallyPureSolutions = pureSolutions.filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
+      val pureSolutions = puritySolver.solve().filter(p => p._2 == Values.Pure || p._2 == Values.LocalEffect)
 
       val dupKeys = notNullParams.keys.toSet intersect nullableParams.keys.toSet
       for (k <- dupKeys) println(s"$k both @Nullable and @NotNull")
@@ -188,7 +187,7 @@ class MainProcessor extends FabaProcessor {
         prodSolutions.groupBy(_._1.method.internalPackageName)
 
       val byPackagePureSolutions: Map[String, Map[Key, Values.Value]] =
-        reallyPureSolutions.groupBy(_._1.method.internalPackageName)
+        pureSolutions.groupBy(_._1.method.internalPackageName)
 
       val pkgs = byPackageProd.keys ++ byPackagePureSolutions.keys
 
@@ -205,12 +204,15 @@ class MainProcessor extends FabaProcessor {
       }
       val writingEnd = System.currentTimeMillis()
 
+      val pureAnnotations = pureSolutions.count(_._2 == Values.Pure)
+      val localEffectAnnotations = pureSolutions.count(_._2 == Values.LocalEffect)
+
       println(s"solving took ${(solvingEnd - indexEnd) / 1000.0} sec")
       println(s"saving took ${(writingEnd - solvingEnd) / 1000.0} sec")
-      println(s"${pureSolutions.size} methods")
       println(s"${debugSolutions.size} all contracts")
       println(s"${prodSolutions.size} prod contracts")
-      println(s"${reallyPureSolutions.size} @Pure annotations")
+      println(s"${pureAnnotations} @Pure annotations")
+      println(s"${localEffectAnnotations} @LocalEffect annotations")
     }
 
     println("====")

@@ -34,7 +34,6 @@ object PurityAnalysis {
       }
     }
 
-
     // current hack: one of values is locality
     override def meet(x: Values.Value, y: Values.Value): Values.Value = {
       (x, y) match {
@@ -75,8 +74,9 @@ object PurityAnalysis {
 
 
     val ownershipInterpreter = new OwnershipInterpreter(insns, instanceMethod)
-    new Analyzer(ownershipInterpreter).analyze(method.internalClassName, methodNode)
+    new Analyzer(ownershipInterpreter).analyze("this", methodNode)
     val ownedInsns = ownershipInterpreter.ownedInsn
+    val thisInsns = ownershipInterpreter.thisInsn
 
     var calls: Set[Component[Key, Value]] = Set()
 
@@ -85,7 +85,9 @@ object PurityAnalysis {
       (insn.getOpcode: @switch) match {
         case PUTFIELD | IASTORE | LASTORE | FASTORE | DASTORE | AASTORE | BASTORE | CASTORE | SASTORE =>
           // Write to a field/array is a local effect. Local effect is OK for owned objects.
-          if (!ownedInsns(insns.indexOf(insn)))
+          if (thisInsns(insns.indexOf(insn))) {
+            calls += Component(Values.LocalEffect, Set())
+          } else if (!ownedInsns(insns.indexOf(insn)))
             return Equation(aKey, finalTop)
         case PUTSTATIC | INVOKEDYNAMIC | INVOKEINTERFACE =>
           return Equation(aKey, finalTop)
@@ -120,6 +122,10 @@ object PurityAnalysis {
     // instructions that are executed over owned objects
     // owned objects are objects created inside this method and not passed into another methods
     val ownedInsn = new Array[Boolean](insns.size())
+    val thisInsn = new Array[Boolean](insns.size())
+
+    override def newValue(tp: Type): SourceValue =
+      if (tp != null && tp.toString == "Lthis;") ThisValue() else super.newValue(tp)
 
     override def newOperation(insn: AbstractInsnNode): SourceValue = {
       val result = super.newOperation(insn)
@@ -149,7 +155,7 @@ object PurityAnalysis {
              LDIV | DDIV | LREM | LSHL | LSHR | LUSHR | LAND | LOR | LXOR =>
           sourceVal2
         case PUTFIELD =>
-          // if field is put into owned value, then instruction is owned
+          thisInsn(insns.indexOf(insn)) = value1.isInstanceOf[ThisValue]
           ownedInsn(insns.indexOf(insn)) = !value1.insns.isEmpty
           sourceVal1
         case _ =>
