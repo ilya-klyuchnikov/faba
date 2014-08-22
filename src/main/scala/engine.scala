@@ -93,7 +93,6 @@ class Solver[K <: StableAwareId[K], V](val doNothing: Boolean)(implicit lattice:
   type Solution = (K, V)
   val top = lattice.top
   val bot = lattice.bot
-  val unstableValue = top
 
   private val dependencies = mutable.HashMap[K, Set[K]]()
   private val pending = mutable.HashMap[K, Pending[K, V]]()
@@ -131,7 +130,7 @@ class Solver[K <: StableAwareId[K], V](val doNothing: Boolean)(implicit lattice:
         if (ident.stable)
           List((ident, value), (ident.mkUnstable, value))
         else
-          List((ident.mkStable, value), (ident, unstableValue))
+          List((ident.mkStable, value), (ident, mkUnstableValue(value)))
 
       for {
         (pId, pValue) <- toPropagate
@@ -151,6 +150,8 @@ class Solver[K <: StableAwareId[K], V](val doNothing: Boolean)(implicit lattice:
     pending.clear()
     solved
   }
+
+  def mkUnstableValue(v: V) = top
 
   private def substitute(pending: Pending[K, V], id: K, value: V): Result[K, V] = {
 
@@ -175,5 +176,5 @@ class Solver[K <: StableAwareId[K], V](val doNothing: Boolean)(implicit lattice:
 
 class NullableResultSolver[K <: StableAwareId[K], V](doNothing: Boolean)(implicit lattice: Lattice[V])
   extends Solver[K, V](doNothing)(lattice) {
-  override val unstableValue = bot
+  override def mkUnstableValue(v: V) = v
 }
