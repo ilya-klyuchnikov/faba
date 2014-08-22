@@ -37,11 +37,17 @@ object PurityAnalysis {
           // Write to a field/array is a local effect. Local effect is OK for owned objects.
           if (!ownedInsns(insns.indexOf(insn)))
             return Equation(aKey, finalTop)
-        case PUTSTATIC |INVOKEDYNAMIC | INVOKEINTERFACE =>
+        case PUTSTATIC | INVOKEDYNAMIC | INVOKEINTERFACE =>
           return Equation(aKey, finalTop)
-        case INVOKESPECIAL | INVOKESTATIC =>
+        case INVOKESPECIAL =>
           val mNode = insn.asInstanceOf[MethodInsnNode]
           calls += Key(Method(mNode.owner, mNode.name, mNode.desc), Out, true)
+        case INVOKESTATIC =>
+          val mNode = insn.asInstanceOf[MethodInsnNode]
+          if (isArrayCopy(mNode) && ownedInsns(insns.indexOf(insn))) {
+            // nothing - safe to copy to owned object
+          } else
+            calls += Key(Method(mNode.owner, mNode.name, mNode.desc), Out, true)
         case INVOKEVIRTUAL =>
           val mNode = insn.asInstanceOf[MethodInsnNode]
           calls += Key(Method(mNode.owner, mNode.name, mNode.desc), Out, false)
@@ -54,6 +60,9 @@ object PurityAnalysis {
     else
       Equation(aKey, Pending(calls.map(k => Component(Values.Top, Set(k)))))
   }
+
+  def isArrayCopy(mnode: MethodInsnNode) =
+    mnode.owner == "java/lang/System" && mnode.name == "arraycopy"
 
   class OwnershipInterpreter(val insns: InsnList) extends SourceInterpreter {
     val sourceVal1 = new SourceValue(1)
@@ -105,11 +114,16 @@ object PurityAnalysis {
           new SourceValue(1, insn)
         case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL =>
           val mNode = insn.asInstanceOf[MethodInsnNode]
+          if (isArrayCopy(mNode)) {
+            ownedInsn(insns.indexOf(insn)) = !values.get(2).insns.isEmpty
+          }
           val retType = Type.getReturnType(mNode.desc)
           if (retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY)
             new SourceValue(1)
+          else if (retType.getSize == 1)
+            sourceVal1
           else
-          if (retType.getSize == 1) sourceVal1 else sourceVal2
+            sourceVal2
         case INVOKEINTERFACE =>
           val mNode = insn.asInstanceOf[MethodInsnNode]
           val retType = Type.getReturnType(mNode.desc)
