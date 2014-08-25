@@ -162,6 +162,9 @@
   <item name="java.io.CharArrayReader CharArrayReader(char[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.CharArrayReader CharArrayReader(char[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.CharArrayReader CharArrayReader(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -299,11 +302,17 @@
   <item name="java.io.Console.3 void close()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="java.io.Console.LineReader LineReader(java.io.Console, java.io.Reader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.Console.LineReader int read(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.io.Console.LineReader void close()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="java.io.DataInputStream DataInputStream(java.io.InputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.DataInputStream int read(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -319,6 +328,9 @@
   </item>
   <item name="java.io.DataInputStream void readFully(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.io.DataOutputStream DataOutputStream(java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.DataOutputStream int size()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -465,6 +477,9 @@
   <item name="java.io.File void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.File.PathStatus PathStatus(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.File.TempDirectory TempDirectory()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -599,6 +614,7 @@
   </item>
   <item name="java.io.FilePermission java.security.PermissionCollection newPermissionCollection()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="java.io.FilePermission void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -607,6 +623,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.io.FilePermission.1 1(java.io.FilePermission)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.FilePermissionCollection FilePermissionCollection()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.FilePermissionCollection boolean implies(java.security.Permission) 0">
@@ -722,6 +741,9 @@
   <item name="java.io.InputStreamReader InputStreamReader(java.io.InputStream, java.nio.charset.CharsetDecoder) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.LineNumberInputStream LineNumberInputStream(java.io.InputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.LineNumberInputStream int getLineNumber()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -831,6 +853,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.io.ObjectInputStream.1 1(java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.ObjectInputStream.BlockDataInputStream BlockDataInputStream(java.io.ObjectInputStream, java.io.InputStream)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.ObjectInputStream.BlockDataInputStream boolean getBlockDataMode()">
@@ -1004,6 +1029,9 @@
   <item name="java.io.ObjectOutputStream.1 1(java.lang.Class)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.io.ObjectOutputStream.BlockDataOutputStream BlockDataOutputStream(java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.ObjectOutputStream.BlockDataOutputStream boolean getBlockDataMode()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -1030,6 +1058,9 @@
   </item>
   <item name="java.io.ObjectOutputStream.Caches Caches()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="java.io.ObjectOutputStream.DebugTraceInfoStack DebugTraceInfoStack()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.ObjectOutputStream.DebugTraceInfoStack java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1639,6 +1670,9 @@
   <item name="java.io.PipedReader void connect(java.io.PipedWriter) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.PipedWriter PipedWriter()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.PipedWriter void connect(java.io.PipedReader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1959,6 +1993,9 @@
   <item name="java.io.StringReader StringReader(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.StringReader StringReader(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.StringReader boolean markSupported()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -1966,6 +2003,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.io.StringReader void close()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.StringWriter StringWriter()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.StringWriter java.io.StringWriter append(char)">

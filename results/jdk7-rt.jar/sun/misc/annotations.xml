@@ -79,9 +79,14 @@
   </item>
   <item name="sun.misc.Cache java.util.Enumeration elements()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.misc.Cache java.util.Enumeration keys()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.misc.CacheEntry CacheEntry()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.misc.CacheEntry java.lang.Object reconstitute()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -203,6 +208,9 @@
   <item name="sun.misc.ClassLoaderUtil ClassLoaderUtil()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="sun.misc.Cleaner Cleaner(java.lang.Object, java.lang.Runnable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.misc.Cleaner boolean remove(sun.misc.Cleaner) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -223,6 +231,12 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.misc.CompoundEnumeration CompoundEnumeration(java.util.Enumeration[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.misc.ConditionLock ConditionLock()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.misc.ConditionLock ConditionLock(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.misc.DoubleConsts DoubleConsts()">
@@ -358,15 +372,18 @@
   </item>
   <item name="sun.misc.FDBigInt sun.misc.FDBigInt add(sun.misc.FDBigInt)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.misc.FDBigInt sun.misc.FDBigInt mult(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.misc.FDBigInt sun.misc.FDBigInt mult(sun.misc.FDBigInt) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.misc.FDBigInt sun.misc.FDBigInt mult(sun.misc.FDBigInt)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.misc.FDBigInt sun.misc.FDBigInt sub(sun.misc.FDBigInt) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -469,6 +486,9 @@
   <item name="sun.misc.FormattedFloatingDecimal.1 java.lang.Object initialValue()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.misc.FormattedFloatingDecimal.Form Form(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.misc.FpUtils FpUtils()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -1068,6 +1088,7 @@
   </item>
   <item name="sun.misc.ProxyGenerator java.lang.String access$000(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.misc.ProxyGenerator java.lang.String access$600(java.lang.Class[], java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1086,6 +1107,7 @@
   </item>
   <item name="sun.misc.ProxyGenerator java.lang.String dotToSlash(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.misc.ProxyGenerator java.lang.String getFieldType(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1341,9 +1363,11 @@
   </item>
   <item name="sun.misc.Queue java.util.Enumeration elements()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.misc.Queue java.util.Enumeration reverseElements()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.misc.Queue void dump(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1369,11 +1393,17 @@
   <item name="sun.misc.RegexpNode RegexpNode(char, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.misc.RegexpNode sun.misc.RegexpNode add(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.misc.RegexpNode sun.misc.RegexpNode find(char)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.misc.RegexpNode void print(java.io.PrintStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.misc.RegexpPool RegexpPool()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.misc.RegexpPool java.lang.Object delete(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1434,6 +1464,7 @@
   </item>
   <item name="sun.misc.Service java.util.Iterator providers(java.lang.Class, java.lang.ClassLoader)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.misc.Service void access$000(java.lang.Class, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1468,8 +1499,14 @@
   <item name="sun.misc.Service void fail(java.lang.Class, java.net.URL, int, java.lang.String) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.misc.Service.LazyIterator LazyIterator(java.lang.Class, java.lang.ClassLoader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.misc.Service.LazyIterator LazyIterator(java.lang.Class, java.lang.ClassLoader, sun.misc.Service.1) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.misc.Service.LazyIterator LazyIterator(java.lang.Class, java.lang.ClassLoader, sun.misc.Service.1)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.misc.SharedSecrets SharedSecrets()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -1619,6 +1656,9 @@
   <item name="sun.misc.SoftCache.ValueCell ValueCell(java.lang.Object, java.lang.Object, java.lang.ref.ReferenceQueue) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.misc.SoftCache.ValueCell ValueCell(java.lang.Object, java.lang.Object, java.lang.ref.ReferenceQueue)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.misc.SoftCache.ValueCell boolean access$000(sun.misc.SoftCache.ValueCell) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1655,6 +1695,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,!null,_-&gt;!null;_,null,_-&gt;null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.misc.SoftCache.ValueCell sun.misc.SoftCache.ValueCell create(java.lang.Object, java.lang.Object, java.lang.ref.ReferenceQueue) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1666,6 +1707,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,!null,_-&gt;!null;_,null,_-&gt;null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.misc.Sort Sort()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -1738,6 +1780,9 @@
   <item name="sun.misc.UCDecoder void decodeLineSuffix(java.io.PushbackInputStream, java.io.OutputStream) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.misc.UCEncoder UCEncoder()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.misc.UCEncoder int bytesPerAtom()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -1787,9 +1832,11 @@
   </item>
   <item name="sun.misc.URLClassPath java.util.Enumeration&lt;java.net.URL&gt; findResources(java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.misc.URLClassPath java.util.Enumeration&lt;sun.misc.Resource&gt; getResources(java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.misc.URLClassPath sun.misc.URLClassPath.Loader access$000(sun.misc.URLClassPath, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

@@ -5,11 +5,20 @@
   <item name="com.sun.xml.internal.ws.api.pipe.ClientPipeAssemblerContext ClientPipeAssemblerContext(com.sun.xml.internal.ws.api.EndpointAddress, com.sun.xml.internal.ws.api.model.wsdl.WSDLPort, com.sun.xml.internal.ws.api.WSService, com.sun.xml.internal.ws.api.WSBinding, com.sun.xml.internal.ws.api.server.Container) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.api.pipe.ClientPipeAssemblerContext com.sun.xml.internal.ws.api.pipe.Pipe createHandlerPipe(com.sun.xml.internal.ws.api.pipe.Pipe)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.api.pipe.ClientTubeAssemblerContext ClientTubeAssemblerContext(com.sun.xml.internal.ws.api.EndpointAddress, com.sun.xml.internal.ws.api.model.wsdl.WSDLPort, com.sun.xml.internal.ws.api.WSService, com.sun.xml.internal.ws.api.WSBinding) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.pipe.ClientTubeAssemblerContext ClientTubeAssemblerContext(com.sun.xml.internal.ws.api.EndpointAddress, com.sun.xml.internal.ws.api.model.wsdl.WSDLPort, com.sun.xml.internal.ws.api.WSService, com.sun.xml.internal.ws.api.WSBinding, com.sun.xml.internal.ws.api.server.Container) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.api.pipe.ClientTubeAssemblerContext ClientTubeAssemblerContext(com.sun.xml.internal.ws.api.EndpointAddress, com.sun.xml.internal.ws.api.model.wsdl.WSDLPort, com.sun.xml.internal.ws.api.WSService, com.sun.xml.internal.ws.api.WSBinding, com.sun.xml.internal.ws.api.server.Container, com.sun.xml.internal.ws.api.pipe.Codec)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.api.pipe.ClientTubeAssemblerContext ClientTubeAssemblerContext(com.sun.xml.internal.ws.api.EndpointAddress, com.sun.xml.internal.ws.api.model.wsdl.WSDLPort, com.sun.xml.internal.ws.api.WSService, com.sun.xml.internal.ws.api.WSBinding, com.sun.xml.internal.ws.api.server.Container, com.sun.xml.internal.ws.api.pipe.Codec, com.sun.xml.internal.ws.api.model.SEIModel)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.pipe.ClientTubeAssemblerContext ClientTubeAssemblerContext(com.sun.xml.internal.ws.api.EndpointAddress, com.sun.xml.internal.ws.api.model.wsdl.WSDLPort, com.sun.xml.internal.ws.api.WSService, com.sun.xml.internal.ws.developer.WSBindingProvider, com.sun.xml.internal.ws.api.WSBinding, com.sun.xml.internal.ws.api.server.Container, com.sun.xml.internal.ws.api.pipe.Codec, com.sun.xml.internal.ws.api.model.SEIModel)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -42,6 +51,7 @@
   </item>
   <item name="com.sun.xml.internal.ws.api.pipe.ClientTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createHandlerTube(com.sun.xml.internal.ws.api.pipe.Tube)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.pipe.ClientTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createTransportTube()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -84,6 +94,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.pipe.Engine Engine(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.api.pipe.Engine Engine(java.lang.String, java.util.concurrent.Executor)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.pipe.Engine com.sun.xml.internal.ws.api.pipe.Fiber createFiber()">
@@ -131,6 +144,9 @@
   <item name="com.sun.xml.internal.ws.api.pipe.Fiber.InterceptorHandler InterceptorHandler(com.sun.xml.internal.ws.api.pipe.Fiber, com.sun.xml.internal.ws.api.pipe.Fiber.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.api.pipe.Fiber.InterceptorHandler InterceptorHandler(com.sun.xml.internal.ws.api.pipe.Fiber, com.sun.xml.internal.ws.api.pipe.Fiber.1)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.api.pipe.NextAction NextAction()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -149,7 +165,22 @@
   <item name="com.sun.xml.internal.ws.api.pipe.NextAction java.lang.Throwable getThrowable()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.xml.internal.ws.api.pipe.NextAction void invoke(com.sun.xml.internal.ws.api.pipe.Tube, com.sun.xml.internal.ws.api.message.Packet)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.api.pipe.NextAction void invokeAndForget(com.sun.xml.internal.ws.api.pipe.Tube, com.sun.xml.internal.ws.api.message.Packet)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.api.pipe.NextAction void returnWith(com.sun.xml.internal.ws.api.message.Packet)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.api.pipe.NextAction void set(int, com.sun.xml.internal.ws.api.pipe.Tube, com.sun.xml.internal.ws.api.message.Packet, java.lang.Throwable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.api.pipe.NextAction void suspend()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.api.pipe.NextAction void suspend(com.sun.xml.internal.ws.api.pipe.Tube)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.pipe.PipelineAssemblerFactory PipelineAssemblerFactory()">
@@ -157,6 +188,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.api.pipe.ServerPipeAssemblerContext ServerPipeAssemblerContext(com.sun.xml.internal.ws.api.model.SEIModel, com.sun.xml.internal.ws.api.model.wsdl.WSDLPort, com.sun.xml.internal.ws.api.server.WSEndpoint, com.sun.xml.internal.ws.api.pipe.Tube, boolean) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.api.pipe.ServerPipeAssemblerContext com.sun.xml.internal.ws.api.pipe.Pipe getTerminalPipe()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.pipe.ServerTubeAssemblerContext ServerTubeAssemblerContext(com.sun.xml.internal.ws.api.model.SEIModel, com.sun.xml.internal.ws.api.model.wsdl.WSDLPort, com.sun.xml.internal.ws.api.server.WSEndpoint, com.sun.xml.internal.ws.api.pipe.Tube, boolean) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>

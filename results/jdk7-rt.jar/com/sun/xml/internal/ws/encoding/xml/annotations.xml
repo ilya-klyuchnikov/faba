@@ -70,6 +70,7 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage com.sun.xml.internal.ws.api.message.Message create(java.lang.Exception)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage com.sun.xml.internal.ws.api.message.Message create(java.lang.String, java.io.InputStream, com.sun.xml.internal.ws.api.WSBinding)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -91,6 +92,7 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage javax.activation.DataSource createDataSource(java.lang.String, java.io.InputStream)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage javax.activation.DataSource getDataSource(com.sun.xml.internal.ws.api.message.Message, com.sun.xml.internal.ws.api.WSBinding) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -100,11 +102,20 @@
       <val val="&quot;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.FaultMessage FaultMessage(com.sun.xml.internal.ws.api.SOAPVersion)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.FaultMessage boolean isFault()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.UnknownContent UnknownContent(com.sun.xml.internal.ws.encoding.xml.XMLMessage.UnknownContent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.UnknownContent UnknownContent(java.lang.String, java.io.InputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.UnknownContent UnknownContent(javax.activation.DataSource)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.UnknownContent boolean hasHeaders()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -171,6 +182,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.XMLMultiPart void writePayloadTo(org.xml.sax.ContentHandler, org.xml.sax.ErrorHandler, boolean) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.XmlContent XmlContent(java.lang.String, java.io.InputStream, com.sun.xml.internal.ws.api.WSBinding)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.XmlContent boolean hasHeaders()">
     <annotation name="org.jetbrains.annotations.Pure"/>

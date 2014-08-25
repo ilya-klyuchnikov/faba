@@ -151,6 +151,9 @@
   <item name="sun.management.GarbageCollectionNotifInfoCompositeData.1 1(sun.management.GarbageCollectionNotifInfoCompositeData)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.management.GarbageCollectorImpl GarbageCollectorImpl(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.management.GarbageCollectorImpl javax.management.ObjectName getObjectName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -331,9 +334,11 @@
   </item>
   <item name="sun.management.ManagementFactory java.lang.management.GarbageCollectorMXBean createGarbageCollector(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.management.ManagementFactory java.lang.management.MemoryManagerMXBean createMemoryManager(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.management.ManagementFactory java.lang.management.MemoryPoolMXBean createMemoryPool(java.lang.String, boolean, long, long)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -352,6 +357,7 @@
   </item>
   <item name="sun.management.ManagementFactoryHelper java.lang.management.BufferPoolMXBean createBufferPoolMXBean(sun.misc.JavaNioAccess.BufferPool)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.management.ManagementFactoryHelper java.lang.management.PlatformLoggingMXBean getPlatformLoggingMXBean()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -429,6 +435,9 @@
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="sun.management.MappedMXBeanType.ArrayMXBeanType ArrayMXBeanType()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.management.MappedMXBeanType.ArrayMXBeanType ArrayMXBeanType(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -444,6 +453,9 @@
   </item>
   <item name="sun.management.MappedMXBeanType.ArrayMXBeanType java.lang.reflect.Type getJavaType()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.management.MappedMXBeanType.BasicMXBeanType BasicMXBeanType(java.lang.Class, javax.management.openmbean.OpenType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.management.MappedMXBeanType.BasicMXBeanType java.lang.Object toJavaTypeData(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -470,6 +482,9 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.management.MappedMXBeanType.CompositeDataMXBeanType.2 2(sun.management.MappedMXBeanType.CompositeDataMXBeanType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.management.MappedMXBeanType.EnumMXBeanType EnumMXBeanType(java.lang.Class)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.management.MappedMXBeanType.EnumMXBeanType java.lang.Object toOpenTypeData(java.lang.Object) 0">
@@ -542,6 +557,9 @@
   <item name="sun.management.MappedMXBeanType.MapMXBeanType java.lang.reflect.Type getJavaType()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="sun.management.MemoryImpl MemoryImpl(sun.management.VMManagement)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.management.MemoryImpl int getObjectPendingFinalizationCount()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -553,6 +571,9 @@
   </item>
   <item name="sun.management.MemoryImpl javax.management.ObjectName getObjectName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.management.MemoryManagerImpl MemoryManagerImpl(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.management.MemoryManagerImpl boolean isValid()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -605,8 +626,14 @@
   <item name="sun.management.MemoryPoolImpl sun.management.Sensor access$000(sun.management.MemoryPoolImpl)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="sun.management.MemoryPoolImpl.CollectionSensor CollectionSensor(sun.management.MemoryPoolImpl, sun.management.MemoryPoolImpl, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.management.MemoryPoolImpl.CollectionSensor void clearAction()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.management.MemoryPoolImpl.PoolSensor PoolSensor(sun.management.MemoryPoolImpl, sun.management.MemoryPoolImpl, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.management.MemoryPoolImpl.PoolSensor void clearAction()">
     <annotation name="org.jetbrains.annotations.Pure"/>

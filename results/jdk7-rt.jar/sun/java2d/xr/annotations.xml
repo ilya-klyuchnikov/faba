@@ -54,6 +54,9 @@
   <item name="sun.java2d.xr.GrowableByteArray void clear()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.java2d.xr.GrowableEltArray GrowableEltArray(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.xr.GrowableEltArray sun.java2d.xr.GrowableIntArray getGlyphs()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -77,6 +80,12 @@
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.java2d.xr.GrowableIntArray void clear()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.java2d.xr.GrowablePointArray GrowablePointArray(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.java2d.xr.GrowableRectArray GrowableRectArray(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.xr.MaskTile sun.java2d.xr.DirtyRegion getDirtyArea()">
@@ -325,8 +334,14 @@
   <item name="sun.java2d.xr.XRMaskBlit XRMaskBlit(sun.java2d.loops.SurfaceType, sun.java2d.loops.CompositeType, sun.java2d.loops.SurfaceType) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.java2d.xr.XRMaskBlit XRMaskBlit(sun.java2d.loops.SurfaceType, sun.java2d.loops.CompositeType, sun.java2d.loops.SurfaceType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.xr.XRMaskBlit void MaskBlit(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, int, int, byte[], int, int) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.java2d.xr.XRMaskFill XRMaskFill(sun.java2d.loops.SurfaceType, sun.java2d.loops.CompositeType, sun.java2d.loops.SurfaceType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.xr.XRMaskFill void MaskFill(sun.java2d.SunGraphics2D, sun.java2d.SurfaceData, java.awt.Composite, int, int, int, int, byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -343,6 +358,9 @@
   <item name="sun.java2d.xr.XRMaskImage int prepareBlitMask(sun.java2d.xr.XRSurfaceData, java.awt.geom.AffineTransform, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.xr.XRPMBlit XRPMBlit(sun.java2d.loops.SurfaceType, sun.java2d.loops.SurfaceType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.xr.XRPMBlit void Blit(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -355,11 +373,17 @@
   <item name="sun.java2d.xr.XRPMBlitLoops sun.java2d.xr.XRSurfaceData cacheToTmpSurface(sun.java2d.SurfaceData, sun.java2d.xr.XRSurfaceData, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.xr.XRPMScaledBlit XRPMScaledBlit(sun.java2d.loops.SurfaceType, sun.java2d.loops.SurfaceType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.xr.XRPMScaledBlit void Scale(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, double, double, double, double) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.xr.XRPMScaledBlit void Scale(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, double, double, double, double) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.xr.XRPMTransformedBlit XRPMTransformedBlit(sun.java2d.loops.SurfaceType, sun.java2d.loops.SurfaceType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.xr.XRPMTransformedBlit boolean isMaskOmittable(java.awt.geom.AffineTransform, java.awt.Composite, int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -643,6 +667,7 @@
   </item>
   <item name="sun.java2d.xr.XRSurfaceData.XRPixmapSurfaceData java.awt.Rectangle getBounds()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.java2d.xr.XRSurfaceData.XRPixmapSurfaceData java.lang.Object getDestination()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -655,6 +680,12 @@
   </item>
   <item name="sun.java2d.xr.XRSurfaceData.XRWindowSurfaceData boolean canSourceSendExposures(int, int, int, int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.java2d.xr.XRSurfaceDataProxy XRSurfaceDataProxy(sun.java2d.xr.XRGraphicsConfig)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.java2d.xr.XRSurfaceDataProxy XRSurfaceDataProxy(sun.java2d.xr.XRGraphicsConfig, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.xr.XRSurfaceDataProxy boolean isSupportedOperation(sun.java2d.SurfaceData, int, sun.java2d.loops.CompositeType, java.awt.Color) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -757,11 +788,20 @@
   <item name="sun.java2d.xr.XcbRequestCounter void setValue(long)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.java2d.xr.XrSwToPMBlit XrSwToPMBlit(sun.java2d.loops.SurfaceType, sun.java2d.loops.SurfaceType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.xr.XrSwToPMBlit void Blit(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.xr.XrSwToPMScaledBlit XrSwToPMScaledBlit(sun.java2d.loops.SurfaceType, sun.java2d.loops.SurfaceType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.xr.XrSwToPMScaledBlit void Scale(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, double, double, double, double) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.xr.XrSwToPMTransformedBlit XrSwToPMTransformedBlit(sun.java2d.loops.SurfaceType, sun.java2d.loops.SurfaceType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.xr.XrSwToPMTransformedBlit void Transform(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, java.awt.geom.AffineTransform, int, int, int, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

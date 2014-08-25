@@ -62,6 +62,9 @@
   <item name="sun.print.CUPSPrinter.2 2(java.net.HttpURLConnection)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.print.CustomMediaSizeName CustomMediaSizeName(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.print.CustomMediaSizeName java.lang.String getChoiceName()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -70,6 +73,9 @@
   </item>
   <item name="sun.print.CustomMediaSizeName javax.print.attribute.standard.MediaSizeName getStandardMedia()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.print.CustomMediaTray CustomMediaTray(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.print.CustomMediaTray java.lang.String getChoiceName()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -223,6 +229,9 @@
   <item name="sun.print.IPPPrintService.1 1(sun.print.IPPPrintService)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.print.IPPPrintService.ExtFinishing ExtFinishing(sun.print.IPPPrintService, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.print.OpenBook OpenBook(java.awt.print.PageFormat, java.awt.print.Printable)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -234,6 +243,9 @@
   </item>
   <item name="sun.print.OpenBook java.awt.print.Printable getPrintable(int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.print.PSPathGraphics PSPathGraphics(java.awt.Graphics2D, java.awt.print.PrinterJob, java.awt.print.Printable, java.awt.print.PageFormat, int, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.print.PSPathGraphics boolean canDrawStringToWidth()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -406,6 +418,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.print.PSPrinterJob java.lang.String makeCharsetName(java.lang.String, char[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -486,6 +499,9 @@
   <item name="sun.print.PSPrinterJob.EPSPrinter int getNumberOfPages()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="sun.print.PSPrinterJob.GState GState(sun.print.PSPrinterJob)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.print.PSPrinterJob.GState GState(sun.print.PSPrinterJob, sun.print.PSPrinterJob.GState) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -513,11 +529,17 @@
   <item name="sun.print.PSPrinterJob.PrinterOpener PrinterOpener(sun.print.PSPrinterJob, sun.print.PSPrinterJob.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.print.PSPrinterJob.PrinterOpener PrinterOpener(sun.print.PSPrinterJob, sun.print.PSPrinterJob.1)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.print.PSPrinterJob.PrinterSpooler PrinterSpooler(sun.print.PSPrinterJob)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.print.PSPrinterJob.PrinterSpooler PrinterSpooler(sun.print.PSPrinterJob, sun.print.PSPrinterJob.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.print.PSPrinterJob.PrinterSpooler PrinterSpooler(sun.print.PSPrinterJob, sun.print.PSPrinterJob.1)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.print.PSPrinterJob.PrinterSpooler void handleProcessFailure(java.lang.Process, java.lang.String[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -536,6 +558,9 @@
   </item>
   <item name="sun.print.PSStreamPrintJob void print(javax.print.Doc, javax.print.attribute.PrintRequestAttributeSet) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.print.PSStreamPrintService PSStreamPrintService(java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.print.PSStreamPrintService T getAttribute(java.lang.Class&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -607,6 +632,7 @@
   </item>
   <item name="sun.print.PSStreamPrintService javax.print.DocPrintJob createPrintJob()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.print.PSStreamPrintService javax.print.ServiceUIFactory getServiceUIFactory()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -651,6 +677,7 @@
   </item>
   <item name="sun.print.PSStreamPrinterFactory javax.print.StreamPrintService getPrintService(java.io.OutputStream)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.print.PageableDoc PageableDoc(java.awt.print.Pageable)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -669,6 +696,9 @@
   </item>
   <item name="sun.print.PageableDoc javax.print.attribute.DocAttributeSet getAttributes()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.print.PathGraphics PathGraphics(java.awt.Graphics2D, java.awt.print.PrinterJob, java.awt.print.Printable, java.awt.print.PageFormat, int, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.print.PathGraphics boolean canDoRedraws()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -1067,6 +1097,9 @@
   <item name="sun.print.PrintJob2D javax.print.attribute.standard.MediaSizeName mapMedia(java.awt.PageAttributes.MediaType) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.print.PrintJob2D.MessageQ MessageQ(sun.print.PrintJob2D, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.print.PrintJob2D.MessageQ boolean isClosed()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -1080,17 +1113,26 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="sun.print.PrinterGraphicsConfig PrinterGraphicsConfig(java.lang.String, java.awt.geom.AffineTransform, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.print.PrinterGraphicsConfig java.awt.GraphicsDevice getDevice()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.print.PrinterGraphicsConfig java.awt.Rectangle getBounds()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.print.PrinterGraphicsConfig java.awt.geom.AffineTransform getDefaultTransform()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.print.PrinterGraphicsConfig java.awt.geom.AffineTransform getNormalizingTransform()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.print.PrinterGraphicsDevice PrinterGraphicsDevice(java.awt.GraphicsConfiguration, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.print.PrinterGraphicsDevice int getType()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -1181,6 +1223,9 @@
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.print.ProxyGraphics2D void setDelegate(java.awt.Graphics2D)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.print.ProxyPrintGraphics ProxyPrintGraphics(java.awt.Graphics, java.awt.PrintJob)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.print.ProxyPrintGraphics java.awt.Graphics create()">
@@ -1332,6 +1377,9 @@
   </item>
   <item name="sun.print.RasterPrinterJob.GraphicsState GraphicsState(sun.print.RasterPrinterJob, sun.print.RasterPrinterJob.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.print.RasterPrinterJob.GraphicsState GraphicsState(sun.print.RasterPrinterJob, sun.print.RasterPrinterJob.1)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.print.ServiceDialog ServiceDialog(java.awt.GraphicsConfiguration, int, int, javax.print.PrintService, javax.print.DocFlavor, javax.print.attribute.PrintRequestAttributeSet, java.awt.Dialog) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1501,6 +1549,9 @@
   </item>
   <item name="sun.print.ServiceDialog.2 void windowClosing(java.awt.event.WindowEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.print.ServiceDialog.3 3(sun.print.ServiceDialog)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.print.ServiceDialog.3 void actionPerformed(java.awt.event.ActionEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1788,11 +1839,17 @@
   <item name="sun.print.UnixPrintJob.PrinterOpener PrinterOpener(sun.print.UnixPrintJob, sun.print.UnixPrintJob.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.print.UnixPrintJob.PrinterOpener PrinterOpener(sun.print.UnixPrintJob, sun.print.UnixPrintJob.1)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.print.UnixPrintJob.PrinterSpooler PrinterSpooler(sun.print.UnixPrintJob)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.print.UnixPrintJob.PrinterSpooler PrinterSpooler(sun.print.UnixPrintJob, sun.print.UnixPrintJob.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.print.UnixPrintJob.PrinterSpooler PrinterSpooler(sun.print.UnixPrintJob, sun.print.UnixPrintJob.1)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.print.UnixPrintJob.PrinterSpooler void handleProcessFailure(java.lang.Process, java.lang.String[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

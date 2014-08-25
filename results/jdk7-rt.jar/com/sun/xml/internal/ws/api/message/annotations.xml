@@ -2,6 +2,12 @@
   <item name="com.sun.xml.internal.ws.api.message.ExceptionHasMessage ExceptionHasMessage(java.lang.String, java.lang.Object...) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.api.message.FilterMessageImpl FilterMessageImpl(com.sun.xml.internal.ws.api.message.Message)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.api.message.HeaderList HeaderList()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.api.message.HeaderList HeaderList(com.sun.xml.internal.ws.api.message.HeaderList) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -69,15 +75,19 @@
   </item>
   <item name="com.sun.xml.internal.ws.api.message.HeaderList java.util.Iterator&lt;com.sun.xml.internal.ws.api.message.Header&gt; getHeaders(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.message.HeaderList java.util.Iterator&lt;com.sun.xml.internal.ws.api.message.Header&gt; getHeaders(java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.message.HeaderList java.util.Iterator&lt;com.sun.xml.internal.ws.api.message.Header&gt; getHeaders(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.message.HeaderList java.util.Iterator&lt;com.sun.xml.internal.ws.api.message.Header&gt; getHeaders(java.lang.String, java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.message.HeaderList java.util.Iterator&lt;com.sun.xml.internal.ws.api.message.Header&gt; getHeaders(javax.xml.namespace.QName, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -231,12 +241,16 @@
   </item>
   <item name="com.sun.xml.internal.ws.api.message.Headers com.sun.xml.internal.ws.api.message.Header createMustUnderstand(com.sun.xml.internal.ws.api.SOAPVersion, javax.xml.namespace.QName, java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.message.Message Message()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.message.Message boolean hasAttachments()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.api.message.Message com.sun.xml.internal.ws.api.message.AttachmentSet getAttachments()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.message.Message com.sun.xml.internal.ws.api.model.JavaMethod getMethod(com.sun.xml.internal.ws.api.model.SEIModel) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -306,6 +320,7 @@
   </item>
   <item name="com.sun.xml.internal.ws.api.message.Messages com.sun.xml.internal.ws.api.message.Message create(javax.xml.soap.SOAPMessage)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.message.Messages com.sun.xml.internal.ws.api.message.Message create(javax.xml.stream.XMLStreamReader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -339,6 +354,7 @@
   </item>
   <item name="com.sun.xml.internal.ws.api.message.Messages com.sun.xml.internal.ws.api.message.Message createEmpty(com.sun.xml.internal.ws.api.SOAPVersion)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.message.Messages com.sun.xml.internal.ws.api.message.Message createUsingPayload(javax.xml.stream.XMLStreamReader, com.sun.xml.internal.ws.api.SOAPVersion) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

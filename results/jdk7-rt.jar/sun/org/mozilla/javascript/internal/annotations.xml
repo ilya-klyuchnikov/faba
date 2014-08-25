@@ -470,6 +470,9 @@
   <item name="sun.org.mozilla.javascript.internal.Context sun.org.mozilla.javascript.internal.ClassShutter getClassShutter()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.Context sun.org.mozilla.javascript.internal.Context.ClassShutterSetter getClassShutterSetter()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.Context sun.org.mozilla.javascript.internal.ContextFactory getFactory()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -539,6 +542,9 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.Context sun.org.mozilla.javascript.internal.SecurityController getSecurityController()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Context sun.org.mozilla.javascript.internal.WrapFactory getWrapFactory()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Context sun.org.mozilla.javascript.internal.debug.DebuggableScript getDebuggableView(sun.org.mozilla.javascript.internal.Script) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -862,8 +868,17 @@
   <item name="sun.org.mozilla.javascript.internal.FunctionObject void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.IRFactory IRFactory()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.IRFactory IRFactory(sun.org.mozilla.javascript.internal.CompilerEnvirons) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.IRFactory IRFactory(sun.org.mozilla.javascript.internal.CompilerEnvirons)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.IRFactory IRFactory(sun.org.mozilla.javascript.internal.CompilerEnvirons, sun.org.mozilla.javascript.internal.ErrorReporter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.IRFactory boolean isDestructuring(sun.org.mozilla.javascript.internal.Node) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1247,6 +1262,7 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.IRFactory sun.org.mozilla.javascript.internal.ast.Jump makeJump(int, sun.org.mozilla.javascript.internal.Node)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.IRFactory sun.org.mozilla.javascript.internal.ast.Scope createLoopNode(sun.org.mozilla.javascript.internal.Node, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1622,6 +1638,9 @@
   <item name="sun.org.mozilla.javascript.internal.Interpreter java.lang.Object thawGenerator(sun.org.mozilla.javascript.internal.Interpreter.CallFrame, int, sun.org.mozilla.javascript.internal.Interpreter.GeneratorState, int) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.Interpreter java.lang.Object[] getArgsArray(java.lang.Object[], double[], int, int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.Interpreter java.lang.String getEncodedSource(sun.org.mozilla.javascript.internal.InterpreterData) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1760,8 +1779,14 @@
   <item name="sun.org.mozilla.javascript.internal.Interpreter.GeneratorState GeneratorState(int, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.InterpreterData InterpreterData(int, java.lang.String, java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.InterpreterData InterpreterData(sun.org.mozilla.javascript.internal.InterpreterData) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.InterpreterData InterpreterData(sun.org.mozilla.javascript.internal.InterpreterData)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.InterpreterData boolean getParamOrVarConst(int)">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -3213,12 +3238,15 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeObject java.util.Collection&lt;java.lang.Object&gt; values()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeObject java.util.Set&lt;java.lang.Object&gt; keySet()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeObject java.util.Set&lt;java.util.Map.Entry&lt;java.lang.Object,java.lang.Object&gt;&gt; entrySet()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeObject void putAll(java.util.Map) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -3564,6 +3592,7 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.Node java.util.Iterator&lt;sun.org.mozilla.javascript.internal.Node&gt; iterator()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Node sun.org.mozilla.javascript.internal.Node access$000()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -3594,6 +3623,7 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.Node sun.org.mozilla.javascript.internal.Node newTarget()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Node sun.org.mozilla.javascript.internal.Node setType(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3827,6 +3857,7 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ObjToIntMap sun.org.mozilla.javascript.internal.ObjToIntMap.Iterator newIterator()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ObjToIntMap void initIterator(sun.org.mozilla.javascript.internal.ObjToIntMap.Iterator) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3852,8 +3883,14 @@
   <item name="sun.org.mozilla.javascript.internal.ObjToIntMap.Iterator void init(java.lang.Object[], int[], int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.Parser Parser()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.Parser Parser(sun.org.mozilla.javascript.internal.CompilerEnvirons) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Parser Parser(sun.org.mozilla.javascript.internal.CompilerEnvirons)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Parser Parser(sun.org.mozilla.javascript.internal.CompilerEnvirons, sun.org.mozilla.javascript.internal.ErrorReporter)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -4148,6 +4185,9 @@
   <item name="sun.org.mozilla.javascript.internal.Parser.ConditionData ConditionData(sun.org.mozilla.javascript.internal.Parser.1) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.Parser.ConditionData ConditionData(sun.org.mozilla.javascript.internal.Parser.1)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.Parser.ParserException ParserException(sun.org.mozilla.javascript.internal.Parser.1) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -4372,6 +4412,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime java.lang.Boolean wrapBoolean(boolean)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ScriptRuntime java.lang.Number wrapNumber(double)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime java.lang.Object applyOrCall(boolean, sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable, sun.org.mozilla.javascript.internal.Scriptable, java.lang.Object[]) 3">
@@ -5429,6 +5472,9 @@
   <item name="sun.org.mozilla.javascript.internal.ScriptableObject void setPrototype(sun.org.mozilla.javascript.internal.Scriptable)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ScriptableObject.GetterSlot GetterSlot(java.lang.String, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptableObject.GetterSlot sun.org.mozilla.javascript.internal.ScriptableObject getPropertyDescriptor(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -5531,6 +5577,12 @@
   <item name="sun.org.mozilla.javascript.internal.SpecialRef sun.org.mozilla.javascript.internal.Ref createSpecial(sun.org.mozilla.javascript.internal.Context, java.lang.Object, java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.Synchronizer Synchronizer(sun.org.mozilla.javascript.internal.Scriptable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Synchronizer Synchronizer(sun.org.mozilla.javascript.internal.Scriptable, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.Token Token()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -5542,6 +5594,9 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.Token java.lang.String typeToName(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Token.CommentType CommentType(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.TokenStream TokenStream(sun.org.mozilla.javascript.internal.Parser, java.io.Reader, java.lang.String, int) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>

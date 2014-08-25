@@ -34,8 +34,14 @@
   <item name="com.sun.xml.internal.ws.message.AbstractHeaderImpl java.lang.String getRole(com.sun.xml.internal.ws.api.SOAPVersion) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.message.AbstractMessageImpl AbstractMessageImpl(com.sun.xml.internal.ws.api.SOAPVersion)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.message.AbstractMessageImpl AbstractMessageImpl(com.sun.xml.internal.ws.message.AbstractMessageImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.message.AbstractMessageImpl AbstractMessageImpl(com.sun.xml.internal.ws.message.AbstractMessageImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.AbstractMessageImpl T readPayloadAsJAXB(com.sun.xml.internal.bind.api.Bridge&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -48,12 +54,16 @@
   </item>
   <item name="com.sun.xml.internal.ws.message.AbstractMessageImpl javax.xml.transform.Source readEnvelopeAsSource()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.AbstractMessageImpl void writeTo(javax.xml.stream.XMLStreamWriter) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.AbstractMessageImpl void writeTo(org.xml.sax.ContentHandler, org.xml.sax.ErrorHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.message.AttachmentSetImpl AttachmentSetImpl()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.AttachmentSetImpl AttachmentSetImpl(java.lang.Iterable&lt;com.sun.xml.internal.ws.api.message.Attachment&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -84,11 +94,15 @@
   <item name="com.sun.xml.internal.ws.message.ByteArrayAttachment ByteArrayAttachment(java.lang.String, byte[], java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.message.ByteArrayAttachment ByteArrayAttachment(java.lang.String, byte[], java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.message.ByteArrayAttachment byte[] asByteArray()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.ByteArrayAttachment java.io.InputStream asInputStream()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.ByteArrayAttachment java.lang.String getContentId()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -98,6 +112,7 @@
   </item>
   <item name="com.sun.xml.internal.ws.message.ByteArrayAttachment javax.activation.DataHandler asDataHandler()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.ByteArrayAttachment javax.xml.transform.Source asSource()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -156,8 +171,14 @@
   <item name="com.sun.xml.internal.ws.message.DOMMessage T readPayloadAsJAXB(javax.xml.bind.Unmarshaller) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.message.DOMMessage boolean hasHeaders()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.message.DOMMessage boolean hasPayload()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.message.DOMMessage com.sun.xml.internal.ws.api.message.HeaderList getHeaders()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.DOMMessage com.sun.xml.internal.ws.api.message.Message copy()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -186,8 +207,14 @@
   <item name="com.sun.xml.internal.ws.message.DataHandlerAttachment void writeTo(javax.xml.soap.SOAPMessage) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.message.EmptyMessageImpl EmptyMessageImpl(com.sun.xml.internal.ws.api.SOAPVersion)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.message.EmptyMessageImpl EmptyMessageImpl(com.sun.xml.internal.ws.api.message.HeaderList, com.sun.xml.internal.ws.api.message.AttachmentSet, com.sun.xml.internal.ws.api.SOAPVersion) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.message.EmptyMessageImpl EmptyMessageImpl(com.sun.xml.internal.ws.api.message.HeaderList, com.sun.xml.internal.ws.api.message.AttachmentSet, com.sun.xml.internal.ws.api.SOAPVersion)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.EmptyMessageImpl EmptyMessageImpl(com.sun.xml.internal.ws.message.EmptyMessageImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -261,6 +288,9 @@
   <item name="com.sun.xml.internal.ws.message.FaultDetailHeader void writeTo(org.xml.sax.ContentHandler, org.xml.sax.ErrorHandler) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.message.FaultMessage FaultMessage(com.sun.xml.internal.ws.api.message.Message, javax.xml.namespace.QName)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.message.FaultMessage javax.xml.namespace.QName getFirstDetailEntryName()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -284,6 +314,7 @@
   </item>
   <item name="com.sun.xml.internal.ws.message.JAXBAttachment javax.activation.DataHandler asDataHandler()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.JAXBAttachment javax.xml.transform.Source asSource()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -340,6 +371,9 @@
   <item name="com.sun.xml.internal.ws.message.RelatesToHeader void writeTo(javax.xml.stream.XMLStreamWriter) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.message.RootElementSniffer RootElementSniffer()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.message.RootElementSniffer RootElementSniffer(boolean)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -395,6 +429,9 @@
   <item name="com.sun.xml.internal.ws.message.Util boolean parseBool(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.message.XMLReaderImpl XMLReaderImpl(com.sun.xml.internal.ws.api.message.Message)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.message.XMLReaderImpl org.xml.sax.ContentHandler getContentHandler()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -406,5 +443,8 @@
   </item>
   <item name="com.sun.xml.internal.ws.message.XMLReaderImpl void setContentHandler(org.xml.sax.ContentHandler) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.message.XMLReaderImpl void setContentHandler(org.xml.sax.ContentHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

@@ -1,4 +1,7 @@
 <root>
+  <item name="sun.rmi.transport.tcp.ConnectionAcceptor ConnectionAcceptor(sun.rmi.transport.tcp.TCPTransport)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.transport.tcp.ConnectionMultiplexer sun.rmi.transport.tcp.TCPConnection openConnection()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -20,6 +23,9 @@
   <item name="sun.rmi.transport.tcp.MultiplexOutputStream MultiplexOutputStream(sun.rmi.transport.tcp.ConnectionMultiplexer, sun.rmi.transport.tcp.MultiplexConnectionInfo, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.rmi.transport.tcp.TCPChannel TCPChannel(sun.rmi.transport.tcp.TCPTransport, sun.rmi.transport.tcp.TCPEndpoint)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.transport.tcp.TCPChannel sun.rmi.transport.Connection createConnection()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -36,6 +42,12 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.rmi.transport.tcp.TCPChannel.1 1(sun.rmi.transport.tcp.TCPChannel)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.rmi.transport.tcp.TCPConnection TCPConnection(sun.rmi.transport.tcp.TCPChannel, java.io.InputStream, java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.rmi.transport.tcp.TCPConnection TCPConnection(sun.rmi.transport.tcp.TCPChannel, java.net.Socket)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.rmi.transport.tcp.TCPConnection TCPConnection(sun.rmi.transport.tcp.TCPChannel, java.net.Socket, java.io.InputStream, java.io.OutputStream)">
@@ -58,6 +70,9 @@
   </item>
   <item name="sun.rmi.transport.tcp.TCPEndpoint TCPEndpoint(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.rmi.transport.tcp.TCPEndpoint TCPEndpoint(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.rmi.transport.tcp.TCPEndpoint TCPEndpoint(java.lang.String, int, java.rmi.server.RMIClientSocketFactory, java.rmi.server.RMIServerSocketFactory) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

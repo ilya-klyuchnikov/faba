@@ -193,6 +193,9 @@
   <item name="com.sun.xml.internal.ws.model.JavaMethodImpl com.sun.xml.internal.ws.api.model.SEIModel getOwner()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.xml.internal.ws.model.JavaMethodImpl com.sun.xml.internal.ws.api.model.soap.SOAPBinding getBinding()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.model.JavaMethodImpl com.sun.xml.internal.ws.model.CheckedExceptionImpl getCheckedException(com.sun.xml.internal.bind.api.TypeReference)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
@@ -200,6 +203,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.model.JavaMethodImpl com.sun.xml.internal.ws.model.CheckedExceptionImpl getCheckedException(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.model.JavaMethodImpl com.sun.xml.internal.ws.model.soap.SOAPBindingImpl getBinding()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.model.JavaMethodImpl java.lang.String getInputAction()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -327,11 +333,17 @@
   <item name="com.sun.xml.internal.ws.model.ParameterImpl void setTypeReference(com.sun.xml.internal.bind.api.TypeReference)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.xml.internal.ws.model.RuntimeModeler RuntimeModeler(java.lang.Class, javax.xml.namespace.QName, com.sun.xml.internal.ws.api.BindingID, javax.xml.ws.WebServiceFeature...)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.model.RuntimeModeler RuntimeModeler(java.lang.Class, javax.xml.namespace.QName, com.sun.xml.internal.ws.model.wsdl.WSDLPortImpl, com.sun.xml.internal.ws.api.BindingID, javax.xml.ws.WebServiceFeature...)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.model.RuntimeModeler RuntimeModeler(java.lang.Class, javax.xml.namespace.QName, com.sun.xml.internal.ws.model.wsdl.WSDLPortImpl, javax.xml.ws.WebServiceFeature...) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.model.RuntimeModeler RuntimeModeler(java.lang.Class, javax.xml.namespace.QName, com.sun.xml.internal.ws.model.wsdl.WSDLPortImpl, javax.xml.ws.WebServiceFeature...)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.model.RuntimeModeler boolean isWebMethodBySpec(java.lang.reflect.Method, java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -494,6 +506,7 @@
   </item>
   <item name="com.sun.xml.internal.ws.model.WrapperBeanGenerator java.lang.String replaceDotWithSlash(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.model.WrapperBeanGenerator.Field Field(java.lang.String, java.lang.reflect.Type, com.sun.xml.internal.ws.org.objectweb.asm.Type, java.util.List&lt;java.lang.annotation.Annotation&gt;)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -542,6 +555,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.model.WrapperBeanGenerator.FieldFactory java.lang.Object createWrapperBeanMember(java.lang.Object, java.lang.String, java.util.List)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.model.WrapperBeanGenerator.RuntimeWrapperBeanGenerator RuntimeWrapperBeanGenerator(com.sun.xml.internal.bind.v2.model.annotation.AnnotationReader&lt;java.lang.reflect.Type,java.lang.Class,?,java.lang.reflect.Method&gt;, com.sun.xml.internal.bind.v2.model.nav.Navigator&lt;java.lang.reflect.Type,java.lang.Class,?,java.lang.reflect.Method&gt;, com.sun.xml.internal.ws.model.AbstractWrapperBeanGenerator.BeanMemberFactory&lt;java.lang.reflect.Type,com.sun.xml.internal.ws.model.WrapperBeanGenerator.Field&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.model.WrapperBeanGenerator.RuntimeWrapperBeanGenerator boolean isVoidType(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

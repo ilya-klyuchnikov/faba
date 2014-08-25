@@ -94,6 +94,7 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.ArrayBeanInfoImpl java.lang.Object createInstance(com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.ArrayBeanInfoImpl java.lang.Object toArray(java.util.List) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -320,6 +321,9 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.BridgeContextImpl javax.xml.bind.attachment.AttachmentUnmarshaller getAttachmentUnmarshaller()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.BridgeImpl BridgeImpl(com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl, com.sun.xml.internal.bind.v2.runtime.Name, com.sun.xml.internal.bind.v2.runtime.JaxBeanInfo&lt;T&gt;, com.sun.xml.internal.bind.api.TypeReference)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.BridgeImpl T unmarshal(javax.xml.bind.Unmarshaller, java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -471,6 +475,9 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.CompositeStructureBeanInfo void serializeURIs(com.sun.xml.internal.bind.api.CompositeStructure, com.sun.xml.internal.bind.v2.runtime.XMLSerializer)">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.ContentHandlerAdaptor ContentHandlerAdaptor(com.sun.xml.internal.bind.v2.runtime.XMLSerializer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.ContentHandlerAdaptor boolean containsPrefixMapping(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -773,11 +780,20 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.IllegalAnnotationsException java.util.List&lt;com.sun.xml.internal.bind.v2.runtime.IllegalAnnotationException&gt; getErrors()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.IllegalAnnotationsException.Builder Builder()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.InlineBinaryTransducer InlineBinaryTransducer(com.sun.xml.internal.bind.v2.runtime.Transducer&lt;V&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.InlineBinaryTransducer void writeLeafElement(com.sun.xml.internal.bind.v2.runtime.XMLSerializer, com.sun.xml.internal.bind.v2.runtime.Name, V, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.InlineBinaryTransducer void writeText(com.sun.xml.internal.bind.v2.runtime.XMLSerializer, V, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.InternalBridge InternalBridge(com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.InternalBridge com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl getContext()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -891,12 +907,14 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl javax.xml.bind.JAXBIntrospector createJAXBIntrospector()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl javax.xml.bind.Marshaller createMarshaller()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl javax.xml.bind.SchemaOutputResolver createTestResolver()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl javax.xml.bind.Unmarshaller createUnmarshaller()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1334,6 +1352,9 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.MarshallerImpl void write(java.lang.Object, com.sun.xml.internal.bind.v2.runtime.output.XmlOutput, java.lang.Runnable) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.MarshallerImpl.1 1(com.sun.xml.internal.bind.v2.runtime.MarshallerImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.MarshallerImpl.1 void startPrefixMapping(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1342,6 +1363,12 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.MarshallerImpl.2 2(com.sun.xml.internal.bind.v2.runtime.MarshallerImpl, org.xml.sax.ContentHandler) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.Messages Messages(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.MimeTypedTransducer MimeTypedTransducer(com.sun.xml.internal.bind.v2.runtime.Transducer&lt;V&gt;, javax.activation.MimeType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.MimeTypedTransducer void writeLeafElement(com.sun.xml.internal.bind.v2.runtime.XMLSerializer, com.sun.xml.internal.bind.v2.runtime.Name, V, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1482,6 +1509,9 @@
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.SchemaTypeTransducer SchemaTypeTransducer(com.sun.xml.internal.bind.v2.runtime.Transducer&lt;V&gt;, javax.xml.namespace.QName)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.SchemaTypeTransducer void writeLeafElement(com.sun.xml.internal.bind.v2.runtime.XMLSerializer, com.sun.xml.internal.bind.v2.runtime.Name, V, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1593,6 +1623,9 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.ValueListBeanInfoImpl void serializeRoot(java.lang.Object, com.sun.xml.internal.bind.v2.runtime.XMLSerializer) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.ValueListBeanInfoImpl.1 1(com.sun.xml.internal.bind.v2.runtime.ValueListBeanInfoImpl, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.ValueListBeanInfoImpl.1 void text(com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.State, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

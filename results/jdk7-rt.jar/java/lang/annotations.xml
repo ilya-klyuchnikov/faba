@@ -430,11 +430,16 @@
   <item name="java.lang.Character int toCodePoint(char, char)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="java.lang.Character java.lang.Character valueOf(char)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="java.lang.Character java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="java.lang.Character java.lang.String toString(char)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="java.lang.Character void toSurrogates(int, char[], int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -468,6 +473,9 @@
   </item>
   <item name="java.lang.Character.UnicodeBlock java.lang.Character.UnicodeBlock forName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.Character.UnicodeScript UnicodeScript(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.Character.UnicodeScript java.lang.Character.UnicodeScript forName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -790,6 +798,7 @@
   </item>
   <item name="java.lang.Class sun.reflect.generics.factory.GenericsFactory getFactory()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="java.lang.Class void addAll(java.util.Collection&lt;java.lang.reflect.Field&gt;, java.lang.reflect.Field[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1063,9 +1072,13 @@
   </item>
   <item name="java.lang.ClassValue java.lang.ClassValue.Entry&lt;T&gt; makeEntry(java.lang.ClassValue.Version&lt;T&gt;, T)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="java.lang.ClassValue java.lang.ClassValue.Version&lt;T&gt; version()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="java.lang.ClassValue void bumpVersion()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.ClassValue void put(java.lang.Class&lt;?&gt;, T) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1140,6 +1153,12 @@
   <item name="java.lang.ClassValue.ClassValueMap void removeStaleEntries(java.lang.ClassValue.Entry&lt;?&gt;[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.ClassValue.Entry Entry(java.lang.ClassValue.Version&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.ClassValue.Entry Entry(java.lang.ClassValue.Version&lt;T&gt;, T)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.lang.ClassValue.Entry boolean isPromise()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -1148,6 +1167,9 @@
   </item>
   <item name="java.lang.ClassValue.Identity Identity()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="java.lang.ClassValue.Version Version(java.lang.ClassValue&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.ClassValue.Version java.lang.ClassValue&lt;T&gt; classValue()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -1280,6 +1302,7 @@
   </item>
   <item name="java.lang.Double java.lang.Double valueOf(double)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="java.lang.Double java.lang.Double valueOf(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1393,6 +1416,7 @@
   </item>
   <item name="java.lang.Float java.lang.Float valueOf(float)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="java.lang.Float java.lang.Float valueOf(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1615,6 +1639,9 @@
   </item>
   <item name="java.lang.Long java.lang.Long valueOf(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.Long java.lang.Long valueOf(long)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="java.lang.Long java.lang.String toBinaryString(long)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2014,6 +2041,9 @@
   <item name="java.lang.ProcessBuilder.Redirect.5 java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.ProcessBuilder.Redirect.Type Type(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.lang.ProcessEnvironment ProcessEnvironment()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -2152,6 +2182,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;!null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="java.lang.ProcessEnvironment.StringEntrySet java.util.Set access$500(java.lang.ProcessEnvironment.StringEntrySet) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2182,6 +2213,9 @@
   </item>
   <item name="java.lang.ProcessEnvironment.StringEntrySet.2 java.lang.ProcessEnvironment.Variable getKey()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.ProcessEnvironment.StringEnvironment StringEnvironment(java.util.Map&lt;java.lang.ProcessEnvironment.Variable,java.lang.ProcessEnvironment.Value&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.ProcessEnvironment.StringEnvironment boolean containsKey(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2265,6 +2299,9 @@
   <item name="java.lang.ProcessEnvironment.StringValues java.util.Iterator&lt;java.lang.String&gt; iterator()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.ProcessEnvironment.Value Value(java.lang.String, byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.lang.ProcessEnvironment.Value boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2299,6 +2336,9 @@
   </item>
   <item name="java.lang.ProcessEnvironment.Value java.lang.ProcessEnvironment.Value valueOfQueryOnly(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.ProcessEnvironment.Variable Variable(java.lang.String, byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.ProcessEnvironment.Variable boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2534,6 +2574,9 @@
   </item>
   <item name="java.lang.Short java.lang.Short valueOf(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.Short java.lang.Short valueOf(short)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="java.lang.Short java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2841,6 +2884,7 @@
   </item>
   <item name="java.lang.String java.lang.String copyValueOf(char[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="java.lang.String java.lang.String copyValueOf(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2862,6 +2906,7 @@
   </item>
   <item name="java.lang.String java.lang.String replace(char, char)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="java.lang.String java.lang.String replace(java.lang.CharSequence, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2909,12 +2954,14 @@
   </item>
   <item name="java.lang.String java.lang.String valueOf(char)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="java.lang.String java.lang.String valueOf(char[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.String java.lang.String valueOf(char[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="java.lang.String java.lang.String valueOf(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2959,6 +3006,12 @@
   </item>
   <item name="java.lang.String.CaseInsensitiveComparator int compare(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.StringBuffer StringBuffer()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuffer StringBuffer(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.StringBuffer StringBuffer(java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3269,8 +3322,17 @@
   <item name="java.lang.StringBuffer void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.StringBuffer void trimToSize()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.lang.StringBuffer void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.StringBuilder StringBuilder()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuilder StringBuilder(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.StringBuilder StringBuilder(java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3581,6 +3643,9 @@
   <item name="java.lang.StringBuilder void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.StringBuilder void trimToSize()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.lang.StringBuilder void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3810,6 +3875,7 @@
   </item>
   <item name="java.lang.Thread java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="java.lang.Thread java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3864,6 +3930,9 @@
   </item>
   <item name="java.lang.Thread.Caches Caches()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="java.lang.Thread.State State(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.Thread.WeakClassKey WeakClassKey(java.lang.Class&lt;?&gt;, java.lang.ref.ReferenceQueue&lt;java.lang.Class&lt;?&gt;&gt;) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -4023,6 +4092,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.ThreadLocal.ThreadLocalMap void setThreshold(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.ThreadLocal.ThreadLocalMap.Entry Entry(java.lang.ThreadLocal, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.Throwable java.lang.String getMessage()">

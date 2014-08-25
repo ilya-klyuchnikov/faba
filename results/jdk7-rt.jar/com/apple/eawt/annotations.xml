@@ -104,6 +104,9 @@
   <item name="com.apple.eawt.FullScreenAdapter void windowExitingFullScreen(com.apple.eawt.AppEvent.FullScreenEvent)">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="com.apple.eawt.FullScreenHandler FullScreenHandler()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.apple.eawt.FullScreenHandler com.apple.eawt.FullScreenHandler getHandlerFor(javax.swing.RootPaneContainer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -140,6 +143,9 @@
   <item name="com.apple.eawt.QuitResponse QuitResponse(com.apple.eawt._AppEventHandler)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.apple.eawt.QuitStrategy QuitStrategy(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.apple.eawt._AppDockIconHandler _AppDockIconHandler()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -148,6 +154,9 @@
   </item>
   <item name="com.apple.eawt._AppDockIconHandler long getNSImagePtrFrom(sun.lwawt.macosx.CImage) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.apple.eawt._AppEventHandler com.apple.eawt.QuitResponse obtainQuitResponse()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.apple.eawt._AppEventHandler com.apple.eawt._AppEventHandler getInstance()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -162,6 +171,9 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.apple.eawt._AppEventHandler.1 1(com.apple.eawt._AppEventHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.apple.eawt._AppEventHandler._AboutDispatcher _AboutDispatcher(com.apple.eawt._AppEventHandler)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.apple.eawt._AppEventHandler._AboutDispatcher void performDefaultAction(com.apple.eawt._AppEventHandler._NativeEvent) 0">
@@ -188,6 +200,9 @@
   <item name="com.apple.eawt._AppEventHandler._AppEventDispatcher.1 1(com.apple.eawt._AppEventHandler._AppEventDispatcher, java.lang.Object, com.apple.eawt._AppEventHandler._NativeEvent)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.apple.eawt._AppEventHandler._AppEventMultiplexor _AppEventMultiplexor(com.apple.eawt._AppEventHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.apple.eawt._AppEventHandler._AppEventMultiplexor void dispatch(com.apple.eawt._AppEventHandler._NativeEvent, java.lang.Object...) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -200,6 +215,9 @@
   <item name="com.apple.eawt._AppEventHandler._AppEventMultiplexor.1 1(com.apple.eawt._AppEventHandler._AppEventMultiplexor, java.lang.Object, com.apple.eawt._AppEventHandler._NativeEvent)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.apple.eawt._AppEventHandler._AppForegroundDispatcher _AppForegroundDispatcher(com.apple.eawt._AppEventHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.apple.eawt._AppEventHandler._AppForegroundDispatcher com.apple.eawt.AppEvent.AppForegroundEvent createEvent(boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -209,14 +227,23 @@
   <item name="com.apple.eawt._AppEventHandler._AppForegroundDispatcher void performTrueEventOn(com.apple.eawt.AppForegroundListener, com.apple.eawt.AppEvent.AppForegroundEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.apple.eawt._AppEventHandler._AppReOpenedDispatcher _AppReOpenedDispatcher(com.apple.eawt._AppEventHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.apple.eawt._AppEventHandler._AppReOpenedDispatcher void performOnListener(com.apple.eawt.AppReOpenedListener, com.apple.eawt._AppEventHandler._NativeEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.eawt._AppEventHandler._AppReOpenedDispatcher void performOnListener(com.apple.eawt.AppReOpenedListener, com.apple.eawt._AppEventHandler._NativeEvent) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.apple.eawt._AppEventHandler._BooleanAppEventMultiplexor _BooleanAppEventMultiplexor(com.apple.eawt._AppEventHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.apple.eawt._AppEventHandler._BooleanAppEventMultiplexor void performOnListener(L, com.apple.eawt._AppEventHandler._NativeEvent) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.apple.eawt._AppEventHandler._HiddenAppDispatcher _HiddenAppDispatcher(com.apple.eawt._AppEventHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.apple.eawt._AppEventHandler._HiddenAppDispatcher com.apple.eawt.AppEvent.AppHiddenEvent createEvent(boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -233,11 +260,17 @@
   <item name="com.apple.eawt._AppEventHandler._NativeEvent _NativeEvent(java.lang.Object...)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.apple.eawt._AppEventHandler._OpenAppDispatcher _OpenAppDispatcher(com.apple.eawt._AppEventHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.apple.eawt._AppEventHandler._OpenAppDispatcher void performUsing(com.apple.eawt._OpenAppHandler, com.apple.eawt._AppEventHandler._NativeEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.eawt._AppEventHandler._OpenAppDispatcher void performUsing(com.apple.eawt._OpenAppHandler, com.apple.eawt._AppEventHandler._NativeEvent) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.apple.eawt._AppEventHandler._OpenFileDispatcher _OpenFileDispatcher(com.apple.eawt._AppEventHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.apple.eawt._AppEventHandler._OpenFileDispatcher void performUsing(com.apple.eawt.OpenFilesHandler, com.apple.eawt._AppEventHandler._NativeEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -245,11 +278,17 @@
   <item name="com.apple.eawt._AppEventHandler._OpenFileDispatcher void performUsing(com.apple.eawt.OpenFilesHandler, com.apple.eawt._AppEventHandler._NativeEvent) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.apple.eawt._AppEventHandler._OpenURIDispatcher _OpenURIDispatcher(com.apple.eawt._AppEventHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.apple.eawt._AppEventHandler._OpenURIDispatcher void performUsing(com.apple.eawt.OpenURIHandler, com.apple.eawt._AppEventHandler._NativeEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.eawt._AppEventHandler._OpenURIDispatcher void performUsing(com.apple.eawt.OpenURIHandler, com.apple.eawt._AppEventHandler._NativeEvent) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.apple.eawt._AppEventHandler._PreferencesDispatcher _PreferencesDispatcher(com.apple.eawt._AppEventHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.apple.eawt._AppEventHandler._PreferencesDispatcher void performUsing(com.apple.eawt.PreferencesHandler, com.apple.eawt._AppEventHandler._NativeEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -257,11 +296,20 @@
   <item name="com.apple.eawt._AppEventHandler._PreferencesDispatcher void performUsing(com.apple.eawt.PreferencesHandler, com.apple.eawt._AppEventHandler._NativeEvent) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.apple.eawt._AppEventHandler._PrintFileDispatcher _PrintFileDispatcher(com.apple.eawt._AppEventHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.apple.eawt._AppEventHandler._PrintFileDispatcher void performUsing(com.apple.eawt.PrintFilesHandler, com.apple.eawt._AppEventHandler._NativeEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.eawt._AppEventHandler._PrintFileDispatcher void performUsing(com.apple.eawt.PrintFilesHandler, com.apple.eawt._AppEventHandler._NativeEvent) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.apple.eawt._AppEventHandler._QueuingAppEventDispatcher _QueuingAppEventDispatcher(com.apple.eawt._AppEventHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.apple.eawt._AppEventHandler._QuitDispatcher _QuitDispatcher(com.apple.eawt._AppEventHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.apple.eawt._AppEventHandler._QuitDispatcher void performDefaultAction(com.apple.eawt._AppEventHandler._NativeEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -272,6 +320,9 @@
   <item name="com.apple.eawt._AppEventHandler._QuitDispatcher void performUsing(com.apple.eawt.QuitHandler, com.apple.eawt._AppEventHandler._NativeEvent) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.apple.eawt._AppEventHandler._ScreenSleepDispatcher _ScreenSleepDispatcher(com.apple.eawt._AppEventHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.apple.eawt._AppEventHandler._ScreenSleepDispatcher com.apple.eawt.AppEvent.ScreenSleepEvent createEvent(boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -281,6 +332,9 @@
   <item name="com.apple.eawt._AppEventHandler._ScreenSleepDispatcher void performTrueEventOn(com.apple.eawt.ScreenSleepListener, com.apple.eawt.AppEvent.ScreenSleepEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.apple.eawt._AppEventHandler._SystemSleepDispatcher _SystemSleepDispatcher(com.apple.eawt._AppEventHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.apple.eawt._AppEventHandler._SystemSleepDispatcher com.apple.eawt.AppEvent.SystemSleepEvent createEvent(boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -289,6 +343,9 @@
   </item>
   <item name="com.apple.eawt._AppEventHandler._SystemSleepDispatcher void performTrueEventOn(com.apple.eawt.SystemSleepListener, com.apple.eawt.AppEvent.SystemSleepEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.apple.eawt._AppEventHandler._UserSessionDispatcher _UserSessionDispatcher(com.apple.eawt._AppEventHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.apple.eawt._AppEventHandler._UserSessionDispatcher com.apple.eawt.AppEvent.UserSessionEvent createEvent(boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>

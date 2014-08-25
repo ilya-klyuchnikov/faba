@@ -48,6 +48,9 @@
   <item name="com.sun.xml.internal.ws.encoding.DataHandlerDataSource DataHandlerDataSource(javax.activation.DataHandler)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.xml.internal.ws.encoding.DataSourceStreamingDataHandler DataSourceStreamingDataHandler(javax.activation.DataSource)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.encoding.DataSourceStreamingDataHandler void close()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -57,8 +60,14 @@
   <item name="com.sun.xml.internal.ws.encoding.HeaderTokenizer HeaderTokenizer(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.encoding.HeaderTokenizer HeaderTokenizer(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.encoding.HeaderTokenizer HeaderTokenizer(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.HeaderTokenizer HeaderTokenizer(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.HeaderTokenizer HeaderTokenizer(java.lang.String, java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -271,6 +280,9 @@
   <item name="com.sun.xml.internal.ws.encoding.MtomCodec.ByteArrayBuffer void write(java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.encoding.MtomCodec.MtomStreamWriterImpl MtomStreamWriterImpl(javax.xml.stream.XMLStreamWriter, java.io.OutputStream, java.util.List&lt;com.sun.xml.internal.ws.encoding.MtomCodec.ByteArrayBuffer&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.encoding.MtomCodec.MtomStreamWriterImpl com.sun.xml.internal.org.jvnet.staxex.NamespaceContextEx getNamespaceContext()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -288,6 +300,7 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.MtomCodec.MtomStreamWriterImpl javax.xml.bind.attachment.AttachmentMarshaller getAttachmentMarshaller()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.MtomCodec.MtomStreamWriterImpl void writeBinary(com.sun.xml.internal.ws.encoding.MtomCodec.ByteArrayBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -320,6 +333,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.MtomCodec.MtomStreamWriterImpl.MtomNamespaceContextEx MtomNamespaceContextEx(com.sun.xml.internal.ws.encoding.MtomCodec.MtomStreamWriterImpl, javax.xml.namespace.NamespaceContext)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.MtomCodec.MtomXMLStreamReaderEx MtomXMLStreamReaderEx(com.sun.xml.internal.ws.encoding.MimeMultipartParser, javax.xml.stream.XMLStreamReader)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.MtomCodec.MtomXMLStreamReaderEx com.sun.xml.internal.org.jvnet.staxex.NamespaceContextEx getNamespaceContext()">
@@ -453,12 +469,21 @@
   <item name="com.sun.xml.internal.ws.encoding.SOAPBindingCodec.AcceptContentType AcceptContentType(com.sun.xml.internal.ws.encoding.SOAPBindingCodec, com.sun.xml.internal.ws.encoding.SOAPBindingCodec.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.encoding.SOAPBindingCodec.AcceptContentType AcceptContentType(com.sun.xml.internal.ws.encoding.SOAPBindingCodec, com.sun.xml.internal.ws.encoding.SOAPBindingCodec.1)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.encoding.SOAPBindingCodec.AcceptContentType com.sun.xml.internal.ws.encoding.SOAPBindingCodec.AcceptContentType set(com.sun.xml.internal.ws.api.message.Packet, com.sun.xml.internal.ws.api.pipe.ContentType)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.SOAPBindingCodec.AcceptContentType java.lang.String getAcceptHeader()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.SOAPBindingCodec.TriState TriState(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.StreamSOAP11Codec StreamSOAP11Codec()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.StreamSOAP11Codec com.sun.xml.internal.ws.api.pipe.ContentType getContentType(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -478,6 +503,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.StreamSOAP11Codec java.util.List&lt;java.lang.String&gt; getExpectedContentTypes()">
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.StreamSOAP12Codec StreamSOAP12Codec()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.StreamSOAP12Codec com.sun.xml.internal.ws.api.pipe.ContentType getContentType(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -616,6 +644,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.StringDataContentHandler void writeTo(java.lang.Object, java.lang.String, java.io.OutputStream) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.SwACodec SwACodec(com.sun.xml.internal.ws.api.SOAPVersion, com.sun.xml.internal.ws.api.WSBinding, com.sun.xml.internal.ws.api.pipe.Codec)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.SwACodec SwACodec(com.sun.xml.internal.ws.encoding.SwACodec) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -783,6 +814,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.XMLHTTPBindingCodec.AcceptContentType AcceptContentType(com.sun.xml.internal.ws.encoding.XMLHTTPBindingCodec, com.sun.xml.internal.ws.encoding.XMLHTTPBindingCodec.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.XMLHTTPBindingCodec.AcceptContentType AcceptContentType(com.sun.xml.internal.ws.encoding.XMLHTTPBindingCodec, com.sun.xml.internal.ws.encoding.XMLHTTPBindingCodec.1)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.XMLHTTPBindingCodec.AcceptContentType com.sun.xml.internal.ws.encoding.XMLHTTPBindingCodec.AcceptContentType set(com.sun.xml.internal.ws.api.message.Packet, com.sun.xml.internal.ws.api.pipe.ContentType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

@@ -58,6 +58,9 @@
   <item name="javax.management.AttributeChangeNotificationFilter void enableAttribute(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.AttributeList AttributeList()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.AttributeList AttributeList(java.util.List&lt;javax.management.Attribute&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -220,6 +223,9 @@
   <item name="javax.management.BooleanValueExp javax.management.ValueExp apply(javax.management.ObjectName)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
     <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="javax.management.ClassAttributeValueExp ClassAttributeValueExp()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.ClassAttributeValueExp java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -433,6 +439,9 @@
   <item name="javax.management.MBeanException java.lang.Throwable getCause()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="javax.management.MBeanFeatureInfo MBeanFeatureInfo(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.MBeanFeatureInfo MBeanFeatureInfo(java.lang.String, java.lang.String, javax.management.Descriptor)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -564,6 +573,12 @@
   </item>
   <item name="javax.management.MBeanOperationInfo javax.management.MBeanParameterInfo[] parameters(java.lang.Class&lt;?&gt;[], java.lang.annotation.Annotation[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.MBeanParameterInfo MBeanParameterInfo(java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.MBeanParameterInfo MBeanParameterInfo(java.lang.String, java.lang.String, java.lang.String, javax.management.Descriptor)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.MBeanParameterInfo boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -954,6 +969,9 @@
   <item name="javax.management.NotificationBroadcasterSupport.SendNotifJob SendNotifJob(javax.management.NotificationBroadcasterSupport, javax.management.Notification, javax.management.NotificationBroadcasterSupport.ListenerInfo)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="javax.management.NotificationBroadcasterSupport.WildcardListenerInfo WildcardListenerInfo(javax.management.NotificationListener)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.NotificationBroadcasterSupport.WildcardListenerInfo boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -965,6 +983,12 @@
   </item>
   <item name="javax.management.NotificationFilterSupport void enableType(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.NumericValueExp NumericValueExp()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.NumericValueExp NumericValueExp(java.lang.Number)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.NumericValueExp boolean isLong()">
     <annotation name="org.jetbrains.annotations.Pure"/>
@@ -1162,6 +1186,9 @@
   <item name="javax.management.ObjectName void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.ObjectName.PatternProperty PatternProperty(int, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.ObjectName.Property Property(int, int, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -1198,6 +1225,9 @@
   <item name="javax.management.QualifiedAttributeValueExp QualifiedAttributeValueExp()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
+  <item name="javax.management.QualifiedAttributeValueExp QualifiedAttributeValueExp(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.QualifiedAttributeValueExp java.lang.String getAttrClassName()">
     <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
@@ -1217,15 +1247,19 @@
   </item>
   <item name="javax.management.Query javax.management.AttributeValueExp attr(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.AttributeValueExp attr(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.AttributeValueExp classattr()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.QueryExp and(javax.management.QueryExp, javax.management.QueryExp)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.QueryExp anySubString(javax.management.AttributeValueExp, javax.management.StringValueExp) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1235,9 +1269,11 @@
   </item>
   <item name="javax.management.Query javax.management.QueryExp between(javax.management.ValueExp, javax.management.ValueExp, javax.management.ValueExp)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.QueryExp eq(javax.management.ValueExp, javax.management.ValueExp)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.QueryExp finalSubString(javax.management.AttributeValueExp, javax.management.StringValueExp) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1247,12 +1283,15 @@
   </item>
   <item name="javax.management.Query javax.management.QueryExp geq(javax.management.ValueExp, javax.management.ValueExp)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.QueryExp gt(javax.management.ValueExp, javax.management.ValueExp)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.QueryExp in(javax.management.ValueExp, javax.management.ValueExp[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.QueryExp initialSubString(javax.management.AttributeValueExp, javax.management.StringValueExp) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1268,9 +1307,11 @@
   </item>
   <item name="javax.management.Query javax.management.QueryExp leq(javax.management.ValueExp, javax.management.ValueExp)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.QueryExp lt(javax.management.ValueExp, javax.management.ValueExp)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.QueryExp match(javax.management.AttributeValueExp, javax.management.StringValueExp) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1280,42 +1321,55 @@
   </item>
   <item name="javax.management.Query javax.management.QueryExp not(javax.management.QueryExp)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.QueryExp or(javax.management.QueryExp, javax.management.QueryExp)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.StringValueExp value(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.ValueExp div(javax.management.ValueExp, javax.management.ValueExp)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.ValueExp minus(javax.management.ValueExp, javax.management.ValueExp)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.ValueExp plus(javax.management.ValueExp, javax.management.ValueExp)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.ValueExp times(javax.management.ValueExp, javax.management.ValueExp)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.ValueExp value(boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.ValueExp value(double)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.ValueExp value(float)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.ValueExp value(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.ValueExp value(java.lang.Number)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.Query javax.management.ValueExp value(long)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="javax.management.QueryEval QueryEval()">
     <annotation name="org.jetbrains.annotations.Pure"/>
