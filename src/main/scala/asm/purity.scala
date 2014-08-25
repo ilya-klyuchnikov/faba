@@ -127,6 +127,7 @@ object PurityAnalysis {
     mnode.owner == "java/lang/System" && mnode.name == "arraycopy"
 
   case class ThisValue() extends SourceValue(1)
+  case class ParamValue() extends SourceValue(1)
 
   class OwnershipInterpreter(m: MethodNode) extends SourceInterpreter {
     val sourceVal1 = new SourceValue(1)
@@ -137,8 +138,33 @@ object PurityAnalysis {
     val localInsns = new Array[Boolean](insns.size())
     val thisInsns = new Array[Boolean](insns.size())
 
-    override def newValue(tp: Type): SourceValue =
-      if (tp != null && tp.toString == "Lthis;") ThisValue() else super.newValue(tp)
+    var called = -1
+    // the first time newValue is called for return
+    // the second time (if any) for `this`
+    val shift = if ((m.access & ACC_STATIC) == 0) 2 else 1
+    val range = shift until (Type.getArgumentTypes(m.desc).length + shift)
+
+    override def newValue(tp: Type): SourceValue = {
+      if (tp == null)
+        return sourceVal1
+      called += 1
+      if (tp.toString == "Lthis;")
+        return ThisValue()
+      // hack for analyzer
+      if (range.contains(called)) {
+        if (tp eq Type.VOID_TYPE) return null
+        if (Utils.isReferenceType(tp)) {
+          ParamValue()
+        } else {
+          // we are not interested in such parameters
+          if (tp.getSize == 1) sourceVal1 else sourceVal2
+        }
+      } else {
+        if (tp eq Type.VOID_TYPE) null
+        else if (tp.getSize == 1) sourceVal1
+        else sourceVal2
+      }
+    }
 
     override def newOperation(insn: AbstractInsnNode): SourceValue = {
       val result = super.newOperation(insn)
@@ -221,11 +247,13 @@ object PurityAnalysis {
     // local merge local = local
     // _ merge _ = non-local
     override def merge(v1: SourceValue, v2: SourceValue): SourceValue =
-      if (v1.isInstanceOf[ThisValue] && v2.isInstanceOf[ThisValue])
+      if (v1.isInstanceOf[ParamValue] && v2.isInstanceOf[ParamValue])
         v1
-      else if (v1.insns.isEmpty || v2.insns.isEmpty)
-        new SourceValue(math.min(v1.size, v2.size))
-      else
+      else if (v1.isInstanceOf[ThisValue] && v2.isInstanceOf[ThisValue])
+        v1
+      else if (!v1.insns.isEmpty && !v2.insns.isEmpty)
         super.merge(v1, v2)
+      else
+        new SourceValue(math.min(v1.size, v2.size))
   }
 }
