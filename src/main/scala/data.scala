@@ -39,7 +39,12 @@ case class Key(method: Method, direction: Direction, stable: Boolean) extends St
 }
 
 object Values extends Enumeration {
-  val Bot, NotNull, Null, True, False, Pure, LocalEffect, LocalObject, NonLocalObject, Top = Value
+  // current hack for advanced equations (see purity.scala)
+  // ThisObject, LocalObject, NonLocalObjects - receivers
+  // ThisObject - this
+  // LocalObject - object created in this method (method being analyzed)
+  // NonLocalObject - we do not know about origins
+  val Bot, NotNull, Null, True, False, Pure, LocalEffect, ThisObject, LocalObject, NonLocalObject, Top = Value
 }
 
 object `package` {

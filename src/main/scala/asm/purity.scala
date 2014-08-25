@@ -45,6 +45,10 @@ object PurityAnalysis {
           Values.Pure
         case (Values.LocalEffect, Values.LocalObject) =>
           Values.Pure
+        case (Values.ThisObject, Values.LocalEffect) =>
+          Values.LocalEffect
+        case (Values.LocalEffect, Values.ThisObject) =>
+          Values.LocalEffect
         case (Values.NonLocalObject, Values.LocalEffect) =>
           Values.Top
         case (Values.LocalEffect, Values.NonLocalObject) =>
@@ -57,7 +61,6 @@ object PurityAnalysis {
 
   def analyze(method: Method, methodNode: MethodNode, stable: Boolean): Equation[Key, Value] = {
     val aKey = new Key(method, Out, stable)
-    val instanceMethod = (methodNode.access & Opcodes.ACC_STATIC) == 0
     if ((methodNode.access & unknown) != 0)
       return Equation(aKey, finalTop)
     val insns = methodNode.instructions
@@ -73,10 +76,10 @@ object PurityAnalysis {
     }
 
 
-    val ownershipInterpreter = new OwnershipInterpreter(insns, instanceMethod)
+    val ownershipInterpreter = new OwnershipInterpreter(methodNode)
     new Analyzer(ownershipInterpreter).analyze("this", methodNode)
-    val ownedInsns = ownershipInterpreter.ownedInsn
-    val thisInsns = ownershipInterpreter.thisInsn
+    val localInsns = ownershipInterpreter.localInsns
+    val thisInsns = ownershipInterpreter.thisInsns
 
     var calls: Set[Component[Key, Value]] = Set()
 
@@ -84,25 +87,34 @@ object PurityAnalysis {
       val insn = insns.get(i)
       (insn.getOpcode: @switch) match {
         case PUTFIELD | IASTORE | LASTORE | FASTORE | DASTORE | AASTORE | BASTORE | CASTORE | SASTORE =>
-          // Write to a field/array is a local effect. Local effect is OK for owned objects.
-          if (thisInsns(insns.indexOf(insn))) {
+          if (thisInsns(insns.indexOf(insn)))
+            // Write to this.field/array is a local effect. Local effect is OK for owned objects.
             calls += Component(Values.LocalEffect, Set())
-          } else if (!ownedInsns(insns.indexOf(insn)))
+          else if (!localInsns(i))
+            // write to owned object is pure
             return Equation(aKey, finalTop)
         case PUTSTATIC | INVOKEDYNAMIC | INVOKEINTERFACE =>
           return Equation(aKey, finalTop)
         case INVOKESPECIAL =>
           val mNode = insn.asInstanceOf[MethodInsnNode]
-          calls += Component(Values.NonLocalObject, Set(Key(Method(mNode.owner, mNode.name, mNode.desc), Out, true)))
+          val locality =
+            if (thisInsns(i)) Values.ThisObject
+            else if (localInsns(i)) Values.LocalObject
+            else Values.NonLocalObject
+          calls += Component(locality, Set(Key(Method(mNode.owner, mNode.name, mNode.desc), Out, true)))
+        case INVOKEVIRTUAL =>
+          val locality =
+            if (thisInsns(i)) Values.ThisObject
+            else if (localInsns(i)) Values.LocalObject
+            else Values.NonLocalObject
+          val mNode = insn.asInstanceOf[MethodInsnNode]
+          calls += Component(locality, Set(Key(Method(mNode.owner, mNode.name, mNode.desc), Out, false)))
         case INVOKESTATIC =>
           val mNode = insn.asInstanceOf[MethodInsnNode]
-          if (isArrayCopy(mNode) && ownedInsns(insns.indexOf(insn))) {
+          if (isArrayCopy(mNode) && localInsns(insns.indexOf(insn))) {
             // nothing - safe to copy to owned object
           } else
             calls += Component(Values.NonLocalObject, Set(Key(Method(mNode.owner, mNode.name, mNode.desc), Out, true)))
-        case INVOKEVIRTUAL =>
-          val mNode = insn.asInstanceOf[MethodInsnNode]
-          calls += Component(Values.NonLocalObject, Set(Key(Method(mNode.owner, mNode.name, mNode.desc), Out, false)))
         case _ =>
 
       }
@@ -116,13 +128,14 @@ object PurityAnalysis {
 
   case class ThisValue() extends SourceValue(1)
 
-  class OwnershipInterpreter(val insns: InsnList, val instanceMethod: Boolean) extends SourceInterpreter {
+  class OwnershipInterpreter(m: MethodNode) extends SourceInterpreter {
     val sourceVal1 = new SourceValue(1)
     val sourceVal2 = new SourceValue(2)
+    val insns = m.instructions
     // instructions that are executed over owned objects
     // owned objects are objects created inside this method and not passed into another methods
-    val ownedInsn = new Array[Boolean](insns.size())
-    val thisInsn = new Array[Boolean](insns.size())
+    val localInsns = new Array[Boolean](insns.size())
+    val thisInsns = new Array[Boolean](insns.size())
 
     override def newValue(tp: Type): SourceValue =
       if (tp != null && tp.toString == "Lthis;") ThisValue() else super.newValue(tp)
@@ -155,8 +168,8 @@ object PurityAnalysis {
              LDIV | DDIV | LREM | LSHL | LSHR | LUSHR | LAND | LOR | LXOR =>
           sourceVal2
         case PUTFIELD =>
-          thisInsn(insns.indexOf(insn)) = value1.isInstanceOf[ThisValue]
-          ownedInsn(insns.indexOf(insn)) = !value1.insns.isEmpty
+          thisInsns(insns.indexOf(insn)) = value1.isInstanceOf[ThisValue]
+          localInsns(insns.indexOf(insn)) = !value1.insns.isEmpty
           sourceVal1
         case _ =>
           sourceVal1
@@ -171,7 +184,11 @@ object PurityAnalysis {
         case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL =>
           val mNode = insn.asInstanceOf[MethodInsnNode]
           if (isArrayCopy(mNode)) {
-            ownedInsn(insns.indexOf(insn)) = !values.get(2).insns.isEmpty
+            localInsns(insns.indexOf(insn)) = !values.get(2).insns.isEmpty
+          }
+          if (opCode == INVOKESPECIAL || opCode == INVOKEVIRTUAL) {
+            thisInsns(insns.indexOf(insn)) = values.get(0).isInstanceOf[ThisValue]
+            localInsns(insns.indexOf(insn)) = !values.get(0).insns.isEmpty
           }
           val retType = Type.getReturnType(mNode.desc)
           if (retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY)
@@ -192,7 +209,7 @@ object PurityAnalysis {
     }
 
     override def ternaryOperation(insn: AbstractInsnNode, value1: SourceValue, value2: SourceValue, value3: SourceValue) = {
-      ownedInsn(insns.indexOf(insn)) = !value1.insns.isEmpty
+      localInsns(insns.indexOf(insn)) = !value1.insns.isEmpty
       sourceVal1
     }
 
@@ -200,7 +217,9 @@ object PurityAnalysis {
     override def copyOperation(insn: AbstractInsnNode, value: SourceValue) =
       value
 
-    // owned merge owned = owned, otherwise, not owned
+    // this merge this = this
+    // local merge local = local
+    // _ merge _ = non-local
     override def merge(v1: SourceValue, v2: SourceValue): SourceValue =
       if (v1.isInstanceOf[ThisValue] && v2.isInstanceOf[ThisValue])
         v1
