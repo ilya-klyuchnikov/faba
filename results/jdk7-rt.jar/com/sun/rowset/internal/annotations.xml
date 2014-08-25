@@ -1,4 +1,16 @@
 <root>
+  <item name="com.sun.rowset.internal.BaseRow BaseRow()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.rowset.internal.BaseRow java.lang.Object[] getOrigRow()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.rowset.internal.CachedRowSetReader boolean getCloseConnection()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.rowset.internal.CachedRowSetReader boolean reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.rowset.internal.CachedRowSetReader java.sql.Connection connect(javax.sql.RowSetInternal) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -10,6 +22,9 @@
   </item>
   <item name="com.sun.rowset.internal.CachedRowSetReader void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.rowset.internal.CachedRowSetReader void setStartPosition(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.rowset.internal.CachedRowSetWriter boolean deleteOriginalRow(javax.sql.rowset.CachedRowSet, com.sun.rowset.CachedRowSetImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -35,6 +50,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;true&quot;"/>
     </annotation>
+  </item>
+  <item name="com.sun.rowset.internal.CachedRowSetWriter com.sun.rowset.internal.CachedRowSetReader getReader()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.rowset.internal.CachedRowSetWriter java.lang.String buildTableName(java.sql.DatabaseMetaData, java.lang.String, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -63,6 +81,9 @@
   <item name="com.sun.rowset.internal.CachedRowSetWriter void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.rowset.internal.CachedRowSetWriter void setReader(com.sun.rowset.internal.CachedRowSetReader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.rowset.internal.CachedRowSetWriter void updateResolvedConflictToDB(javax.sql.rowset.CachedRowSet, java.sql.Connection) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -76,6 +97,30 @@
   </item>
   <item name="com.sun.rowset.internal.InsertRow void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.rowset.internal.Row boolean getDeleted()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.rowset.internal.Row boolean getInserted()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.rowset.internal.Row boolean getUpdated()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.rowset.internal.Row com.sun.rowset.internal.BaseRow getCurrentRow()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.rowset.internal.Row void clearDeleted()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.rowset.internal.Row void clearInserted()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.rowset.internal.Row void setDeleted()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.rowset.internal.Row void setInserted()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.rowset.internal.SyncResolverImpl boolean columnUpdated(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -215,6 +260,12 @@
   <item name="com.sun.rowset.internal.SyncResolverImpl void rowSetPopulated(javax.sql.RowSetEvent, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.rowset.internal.SyncResolverImpl void setCachedRowSet(javax.sql.rowset.CachedRowSet)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.rowset.internal.SyncResolverImpl void setCachedRowSetWriter(com.sun.rowset.internal.CachedRowSetWriter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.rowset.internal.SyncResolverImpl void setCommand(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -241,6 +292,12 @@
   </item>
   <item name="com.sun.rowset.internal.SyncResolverImpl void setResolvedValue(java.lang.String, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.rowset.internal.SyncResolverImpl void setResolvedValue(java.lang.String, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.rowset.internal.SyncResolverImpl void setStatus(java.util.ArrayList)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.rowset.internal.SyncResolverImpl void setSyncProvider(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -428,6 +485,9 @@
   <item name="com.sun.rowset.internal.WebRowSetXmlReader void readData(javax.sql.RowSetInternal) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.rowset.internal.WebRowSetXmlReader void readData(javax.sql.RowSetInternal)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.rowset.internal.WebRowSetXmlReader void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -438,6 +498,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.rowset.internal.WebRowSetXmlWriter java.lang.String processSpecialCharacters(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -504,17 +565,35 @@
   <item name="com.sun.rowset.internal.WebRowSetXmlWriter void writeXML(javax.sql.rowset.WebRowSet, java.io.Writer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.rowset.internal.XmlErrorHandler XmlErrorHandler()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.rowset.internal.XmlErrorHandler void error(org.xml.sax.SAXParseException) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.rowset.internal.XmlErrorHandler void error(org.xml.sax.SAXParseException)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.rowset.internal.XmlErrorHandler void fatalError(org.xml.sax.SAXParseException) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.rowset.internal.XmlErrorHandler void fatalError(org.xml.sax.SAXParseException)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.rowset.internal.XmlErrorHandler void warning(org.xml.sax.SAXParseException) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.rowset.internal.XmlErrorHandler void warning(org.xml.sax.SAXParseException)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.rowset.internal.XmlReaderContentHandler boolean getBooleanValue(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.rowset.internal.XmlReaderContentHandler boolean getEmptyStringValue()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.rowset.internal.XmlReaderContentHandler boolean getNullValue()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.rowset.internal.XmlReaderContentHandler byte getByteValue(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -529,6 +608,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.rowset.internal.XmlReaderContentHandler double getDoubleValue(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -539,10 +619,17 @@
   <item name="com.sun.rowset.internal.XmlReaderContentHandler int getIntegerValue(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.rowset.internal.XmlReaderContentHandler int getState()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.rowset.internal.XmlReaderContentHandler int getTag()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.rowset.internal.XmlReaderContentHandler java.lang.String getStringValue(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.rowset.internal.XmlReaderContentHandler java.math.BigDecimal getBigDecimalValue(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -574,6 +661,9 @@
   <item name="com.sun.rowset.internal.XmlReaderContentHandler short getShortValue(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.rowset.internal.XmlReaderContentHandler void endDocument()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.rowset.internal.XmlReaderContentHandler void endElement(java.lang.String, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -582,6 +672,9 @@
   </item>
   <item name="com.sun.rowset.internal.XmlReaderContentHandler void error(org.xml.sax.SAXParseException) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.rowset.internal.XmlReaderContentHandler void error(org.xml.sax.SAXParseException)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.rowset.internal.XmlReaderContentHandler void notationDecl(java.lang.String, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -592,8 +685,26 @@
   <item name="com.sun.rowset.internal.XmlReaderContentHandler void notationDecl(java.lang.String, java.lang.String, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.rowset.internal.XmlReaderContentHandler void notationDecl(java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.rowset.internal.XmlReaderContentHandler void setEmptyStringValue(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.rowset.internal.XmlReaderContentHandler void setNullValue(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.rowset.internal.XmlReaderContentHandler void setState(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.rowset.internal.XmlReaderContentHandler void setState(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.rowset.internal.XmlReaderContentHandler void setTag(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.rowset.internal.XmlReaderContentHandler void startDocument()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.rowset.internal.XmlReaderContentHandler void startElement(java.lang.String, java.lang.String, java.lang.String, org.xml.sax.Attributes) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -616,8 +727,14 @@
   <item name="com.sun.rowset.internal.XmlReaderContentHandler void unparsedEntityDecl(java.lang.String, java.lang.String, java.lang.String, java.lang.String) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.rowset.internal.XmlReaderContentHandler void unparsedEntityDecl(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.rowset.internal.XmlReaderContentHandler void warning(org.xml.sax.SAXParseException) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.rowset.internal.XmlResolver XmlResolver()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.rowset.internal.XmlResolver org.xml.sax.InputSource resolveEntity(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

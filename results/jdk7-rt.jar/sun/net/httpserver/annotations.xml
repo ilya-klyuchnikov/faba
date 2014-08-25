@@ -1,15 +1,38 @@
 <root>
+  <item name="sun.net.httpserver.AuthFilter AuthFilter(com.sun.net.httpserver.Authenticator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.AuthFilter java.lang.String description()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.net.httpserver.AuthFilter void consumeInput(com.sun.net.httpserver.HttpExchange) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.AuthFilter void setAuthenticator(com.sun.net.httpserver.Authenticator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.ChunkedInputStream ChunkedInputStream(sun.net.httpserver.ExchangeImpl, java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ChunkedInputStream boolean markSupported()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ChunkedInputStream void mark(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ChunkedOutputStream ChunkedOutputStream(sun.net.httpserver.ExchangeImpl, java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.Code Code()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.Code java.lang.String msg(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ContextList ContextList()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.ContextList sun.net.httpserver.HttpContextImpl findContext(java.lang.String, java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -20,6 +43,9 @@
   <item name="sun.net.httpserver.DefaultHttpServerProvider com.sun.net.httpserver.HttpsServer createHttpsServer(java.net.InetSocketAddress, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.Event Event(sun.net.httpserver.ExchangeImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.ExchangeImpl ExchangeImpl(java.lang.String, java.net.URI, sun.net.httpserver.Request, long, sun.net.httpserver.HttpConnection) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -29,11 +55,26 @@
   <item name="sun.net.httpserver.ExchangeImpl com.sun.net.httpserver.Headers getRequestHeaders()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ExchangeImpl com.sun.net.httpserver.Headers getResponseHeaders()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ExchangeImpl com.sun.net.httpserver.HttpPrincipal getPrincipal()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ExchangeImpl int getResponseCode()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ExchangeImpl java.io.OutputStream getResponseBody()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.ExchangeImpl java.lang.Object getAttribute(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.net.httpserver.ExchangeImpl java.lang.String getProtocol()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.ExchangeImpl java.lang.String getRequestMethod()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.net.httpserver.ExchangeImpl java.net.InetSocketAddress getLocalAddress()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -41,11 +82,26 @@
   <item name="sun.net.httpserver.ExchangeImpl java.net.InetSocketAddress getRemoteAddress()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ExchangeImpl java.net.URI getRequestURI()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ExchangeImpl java.util.TimeZone access$000()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.ExchangeImpl sun.net.httpserver.ExchangeImpl get(com.sun.net.httpserver.HttpExchange) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ExchangeImpl sun.net.httpserver.HttpConnection getConnection()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ExchangeImpl sun.net.httpserver.LeftOverInputStream getOriginalInputStream()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.ExchangeImpl void setAttribute(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.ExchangeImpl void setPrincipal(com.sun.net.httpserver.HttpPrincipal)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.ExchangeImpl void setStreams(java.io.InputStream, java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -68,8 +124,65 @@
   <item name="sun.net.httpserver.FixedLengthInputStream FixedLengthInputStream(sun.net.httpserver.ExchangeImpl, java.io.InputStream, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.FixedLengthInputStream boolean markSupported()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.FixedLengthInputStream void mark(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.FixedLengthOutputStream FixedLengthOutputStream(sun.net.httpserver.ExchangeImpl, java.io.OutputStream, long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection HttpConnection()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection int getRemaining()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection java.io.InputStream getInputStream()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection java.io.OutputStream getRawOutputStream()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection java.lang.String getProtocol()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection java.nio.channels.SelectionKey getSelectionKey()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection java.nio.channels.SocketChannel getChannel()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection javax.net.ssl.SSLContext getSSLContext()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection javax.net.ssl.SSLEngine getSSLEngine()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection sun.net.httpserver.HttpConnection.State getState()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection sun.net.httpserver.HttpContextImpl getHttpContext()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection void setChannel(java.nio.channels.SocketChannel)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection void setContext(sun.net.httpserver.HttpContextImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.HttpConnection void setParameters(java.io.InputStream, java.io.OutputStream, java.nio.channels.SocketChannel, javax.net.ssl.SSLEngine, sun.net.httpserver.SSLStreams, javax.net.ssl.SSLContext, java.lang.String, sun.net.httpserver.HttpContextImpl, java.io.InputStream) 7">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection void setRemaining(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection void setState(sun.net.httpserver.HttpConnection.State)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection.State State(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.HttpContextImpl HttpContextImpl(java.lang.String, java.lang.String, com.sun.net.httpserver.HttpHandler, sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -77,11 +190,74 @@
   <item name="sun.net.httpserver.HttpContextImpl HttpContextImpl(java.lang.String, java.lang.String, com.sun.net.httpserver.HttpHandler, sun.net.httpserver.ServerImpl) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.HttpContextImpl com.sun.net.httpserver.Authenticator getAuthenticator()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.HttpContextImpl com.sun.net.httpserver.HttpHandler getHandler()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.HttpContextImpl java.lang.String getPath()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.HttpContextImpl java.lang.String getProtocol()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.HttpContextImpl java.util.List&lt;com.sun.net.httpserver.Filter&gt; getFilters()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.HttpContextImpl java.util.List&lt;com.sun.net.httpserver.Filter&gt; getSystemFilters()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.HttpContextImpl java.util.Map&lt;java.lang.String,java.lang.Object&gt; getAttributes()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.HttpContextImpl sun.net.httpserver.ServerImpl getServerImpl()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.HttpContextImpl void setHandler(com.sun.net.httpserver.HttpHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.HttpExchangeImpl HttpExchangeImpl(sun.net.httpserver.ExchangeImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.HttpExchangeImpl sun.net.httpserver.ExchangeImpl getExchangeImpl()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.HttpsExchangeImpl HttpsExchangeImpl(sun.net.httpserver.ExchangeImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.HttpsExchangeImpl sun.net.httpserver.ExchangeImpl getExchangeImpl()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.LeftOverInputStream LeftOverInputStream(sun.net.httpserver.ExchangeImpl, java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.LeftOverInputStream boolean isClosed()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.LeftOverInputStream boolean isEOF()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.PlaceholderOutputStream PlaceholderOutputStream(java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.PlaceholderOutputStream boolean isWrapped()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.PlaceholderOutputStream void setWrappedStream(java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.Request java.io.InputStream inputStream()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.Request java.io.OutputStream outputStream()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.Request java.lang.String requestLine()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.Request.ReadStream boolean markSupported()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.net.httpserver.Request.ReadStream int read(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -140,6 +316,9 @@
   <item name="sun.net.httpserver.SSLStreams java.nio.ByteBuffer realloc(java.nio.ByteBuffer, boolean, sun.net.httpserver.SSLStreams.BufType)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.SSLStreams javax.net.ssl.SSLEngine getSSLEngine()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.SSLStreams sun.net.httpserver.SSLStreams.WrapperResult recvData(java.nio.ByteBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -149,11 +328,20 @@
   <item name="sun.net.httpserver.SSLStreams void configureEngine(com.sun.net.httpserver.HttpsConfigurator, java.net.InetSocketAddress) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.net.httpserver.SSLStreams.BufType BufType(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.SSLStreams.EngineWrapper EngineWrapper(sun.net.httpserver.SSLStreams, java.nio.channels.SocketChannel, javax.net.ssl.SSLEngine) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.SSLStreams.EngineWrapper void close()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.SSLStreams.InputStream InputStream(sun.net.httpserver.SSLStreams) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.SSLStreams.InputStream boolean markSupported()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.net.httpserver.SSLStreams.InputStream int read(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -161,8 +349,68 @@
   <item name="sun.net.httpserver.SSLStreams.OutputStream OutputStream(sun.net.httpserver.SSLStreams) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.SSLStreams.OutputStream void flush()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.SSLStreams.OutputStream void write(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.SSLStreams.Parameters Parameters(sun.net.httpserver.SSLStreams, com.sun.net.httpserver.HttpsConfigurator, java.net.InetSocketAddress)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.SSLStreams.Parameters com.sun.net.httpserver.HttpsConfigurator getHttpsConfigurator()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.SSLStreams.Parameters java.net.InetSocketAddress getClientAddress()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.SSLStreams.Parameters javax.net.ssl.SSLParameters getSSLParameters()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.SSLStreams.Parameters void setSSLParameters(javax.net.ssl.SSLParameters)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.SSLStreams.WrapperResult WrapperResult(sun.net.httpserver.SSLStreams)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.ServerConfig ServerConfig()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ServerConfig boolean debugEnabled()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ServerConfig boolean noDelay()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ServerConfig int getClockTick()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ServerConfig int getMaxIdleConnections()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ServerConfig int getMaxReqHeaders()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ServerConfig long getDrainAmount()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ServerConfig long getIdleInterval()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ServerConfig long getMaxReqTime()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ServerConfig long getMaxRspTime()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ServerConfig long getTimerMillis()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ServerConfig.1 1()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ServerConfig.2 2(java.util.logging.Logger)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.ServerImpl ServerImpl(com.sun.net.httpserver.HttpServer, java.lang.String, java.net.InetSocketAddress, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -170,11 +418,20 @@
   <item name="sun.net.httpserver.ServerImpl boolean access$1400(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ServerImpl boolean access$1400(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.ServerImpl boolean access$200(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ServerImpl boolean access$200(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.ServerImpl boolean access$300(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl boolean access$300(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.net.httpserver.ServerImpl boolean access$302(sun.net.httpserver.ServerImpl, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -184,23 +441,50 @@
       <val val="&quot;_,false-&gt;false;_,true-&gt;true&quot;"/>
     </annotation>
   </item>
+  <item name="sun.net.httpserver.ServerImpl com.sun.net.httpserver.HttpServer getWrapper()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl com.sun.net.httpserver.HttpsConfigurator getHttpsConfigurator()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.ServerImpl java.lang.Object access$800(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl java.lang.Object access$800(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.net.httpserver.ServerImpl java.lang.String access$1200(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ServerImpl java.lang.String access$1200(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.ServerImpl java.nio.channels.SelectionKey access$1000(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl java.nio.channels.SelectionKey access$1000(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.net.httpserver.ServerImpl java.nio.channels.Selector access$700(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ServerImpl java.nio.channels.Selector access$700(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl java.nio.channels.Selector getSelector()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.ServerImpl java.nio.channels.ServerSocketChannel access$100(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ServerImpl java.nio.channels.ServerSocketChannel access$100(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.ServerImpl java.util.List access$900(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl java.util.List access$900(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.net.httpserver.ServerImpl java.util.List access$902(sun.net.httpserver.ServerImpl, java.util.List) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -213,26 +497,56 @@
   <item name="sun.net.httpserver.ServerImpl java.util.Set access$1900(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ServerImpl java.util.Set access$1900(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.ServerImpl java.util.Set access$2000(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl java.util.Set access$2000(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.net.httpserver.ServerImpl java.util.Set access$400(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ServerImpl java.util.Set access$400(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.ServerImpl java.util.Set access$500(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl java.util.Set access$500(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.net.httpserver.ServerImpl java.util.concurrent.Executor access$1300(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ServerImpl java.util.concurrent.Executor access$1300(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl java.util.concurrent.Executor getExecutor()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.ServerImpl java.util.logging.Logger access$600(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl java.util.logging.Logger access$600(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl java.util.logging.Logger getLogger()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.net.httpserver.ServerImpl javax.net.ssl.SSLContext access$1500(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ServerImpl javax.net.ssl.SSLContext access$1500(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.ServerImpl long access$1700(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl long access$1700(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.net.httpserver.ServerImpl long access$1702(sun.net.httpserver.ServerImpl, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -240,8 +554,20 @@
   <item name="sun.net.httpserver.ServerImpl long access$1808(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ServerImpl long getTicks()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl long getTime()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl long getTimeMillis(long)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.ServerImpl sun.net.httpserver.ContextList access$1600(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl sun.net.httpserver.ContextList access$1600(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.net.httpserver.ServerImpl sun.net.httpserver.HttpContextImpl createContext(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -291,11 +617,26 @@
   <item name="sun.net.httpserver.ServerImpl void setHttpsConfigurator(com.sun.net.httpserver.HttpsConfigurator) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ServerImpl void startExchange()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl.1 1(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl.DefaultExecutor DefaultExecutor()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.ServerImpl.DefaultExecutor DefaultExecutor(sun.net.httpserver.ServerImpl.1) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.net.httpserver.ServerImpl.DefaultExecutor DefaultExecutor(sun.net.httpserver.ServerImpl.1)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.net.httpserver.ServerImpl.DefaultExecutor void execute(java.lang.Runnable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl.Dispatcher Dispatcher(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.ServerImpl.Dispatcher void handleEvent(sun.net.httpserver.Event) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -309,8 +650,23 @@
   <item name="sun.net.httpserver.ServerImpl.Dispatcher void reRegister(sun.net.httpserver.HttpConnection) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ServerImpl.Exchange Exchange(sun.net.httpserver.ServerImpl, java.nio.channels.SocketChannel, java.lang.String, sun.net.httpserver.HttpConnection)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.ServerImpl.Exchange void sendReply(int, boolean, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl.Exchange.LinkHandler LinkHandler(sun.net.httpserver.ServerImpl.Exchange, com.sun.net.httpserver.Filter.Chain)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl.ServerTimerTask ServerTimerTask(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl.ServerTimerTask1 ServerTimerTask1(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.UndefLengthOutputStream UndefLengthOutputStream(sun.net.httpserver.ExchangeImpl, java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.UnmodifiableHeaders java.util.Collection&lt;java.util.List&lt;java.lang.String&gt;&gt; values()">
     <annotation name="org.jetbrains.annotations.NotNull"/>

@@ -11,6 +11,9 @@
   <item name="com.sun.jndi.cosnaming.CNBindingEnumeration javax.naming.Binding mapBinding(org.omg.CosNaming.Binding)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.cosnaming.CNCtx CNCtx()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jndi.cosnaming.CNCtx CNCtx(org.omg.CORBA.ORB, com.sun.jndi.cosnaming.OrbReuseTracker, org.omg.CosNaming.NamingContext, java.util.Hashtable, org.omg.CosNaming.NameComponent[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -22,6 +25,9 @@
   </item>
   <item name="com.sun.jndi.cosnaming.CNCtx boolean isCorbaUrl(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.cosnaming.CNCtx boolean isCorbaUrl(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.jndi.cosnaming.CNCtx boolean leafNotFound(org.omg.CosNaming.NamingContextPackage.NotFound, org.omg.CosNaming.NameComponent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -88,8 +94,14 @@
   <item name="com.sun.jndi.cosnaming.CNCtx javax.naming.NameParser getNameParser(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jndi.cosnaming.CNCtx javax.naming.NameParser getNameParser(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.jndi.cosnaming.CNCtx javax.naming.NameParser getNameParser(javax.naming.Name) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.jndi.cosnaming.CNCtx javax.naming.NameParser getNameParser(javax.naming.Name)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.jndi.cosnaming.CNCtx javax.naming.NamingEnumeration list(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -113,6 +125,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.jndi.cosnaming.CNCtx void bind(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -123,11 +136,17 @@
   <item name="com.sun.jndi.cosnaming.CNCtx void callDestroy(org.omg.CosNaming.NamingContext) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.cosnaming.CNCtx void close()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jndi.cosnaming.CNCtx void destroySubcontext(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.cosnaming.CNCtx void destroySubcontext(javax.naming.Name) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.cosnaming.CNCtx void incEnumCount()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jndi.cosnaming.CNCtx void rebind(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -156,8 +175,17 @@
   <item name="com.sun.jndi.cosnaming.CNCtx void unbind(javax.naming.Name) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.cosnaming.CNCtxFactory CNCtxFactory()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.jndi.cosnaming.CNCtxFactory javax.naming.Context getInitialContext(java.util.Hashtable&lt;?,?&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.cosnaming.CNNameParser CNNameParser()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.jndi.cosnaming.CNNameParser boolean isMeta(char)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.jndi.cosnaming.CNNameParser java.lang.String cosNameToInsString(org.omg.CosNaming.NameComponent[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -178,6 +206,9 @@
   </item>
   <item name="com.sun.jndi.cosnaming.CNNameParser java.lang.String stringifyComponent(org.omg.CosNaming.NameComponent)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.cosnaming.CNNameParser java.util.Properties access$000()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.jndi.cosnaming.CNNameParser java.util.Vector insStringToStringifiedComps(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -215,8 +246,14 @@
   <item name="com.sun.jndi.cosnaming.CorbanameUrl java.lang.String getLocation()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.cosnaming.CorbanameUrl java.lang.String getStringName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.jndi.cosnaming.CorbanameUrl javax.naming.Name getCosName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.cosnaming.ExceptionMapper ExceptionMapper()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.jndi.cosnaming.ExceptionMapper javax.naming.NamingException mapException(java.lang.Exception, com.sun.jndi.cosnaming.CNCtx, org.omg.CosNaming.NameComponent[])">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -232,14 +269,41 @@
   <item name="com.sun.jndi.cosnaming.ExceptionMapper javax.naming.NamingException tryFed(org.omg.CosNaming.NamingContextPackage.NotFound, com.sun.jndi.cosnaming.CNCtx, org.omg.CosNaming.NameComponent[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.cosnaming.ExceptionMapper.1 1(java.lang.String, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jndi.cosnaming.ExceptionMapper.1 java.lang.Object getContent()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.jndi.cosnaming.ExceptionMapper.2 2(java.lang.String, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jndi.cosnaming.ExceptionMapper.2 java.lang.Object getContent()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.jndi.cosnaming.IiopUrl IiopUrl(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.cosnaming.IiopUrl java.lang.String getStringName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.jndi.cosnaming.IiopUrl java.util.Vector getAddresses()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.jndi.cosnaming.IiopUrl javax.naming.Name getCosName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.cosnaming.IiopUrl.Address Address(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.cosnaming.OrbReuseTracker OrbReuseTracker(org.omg.CORBA.ORB)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jndi.cosnaming.OrbReuseTracker void incRefCount()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jndi.cosnaming.RemoteToCorba RemoteToCorba()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.jndi.cosnaming.RemoteToCorba java.lang.Object getStateToBind(java.lang.Object, javax.naming.Name, javax.naming.Context, java.util.Hashtable&lt;?,?&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

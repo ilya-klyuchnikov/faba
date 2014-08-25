@@ -4,7 +4,7 @@ import _root_.java.io.{PrintWriter, File}
 import java.nio.file.attribute.BasicFileAttributes
 import java.nio.file._
 
-import faba.asm.ParamsValue
+import faba.asm.{PurityAnalysis, ParamsValue}
 import faba.engine.{Equation, ELattice, Solver}
 import org.objectweb.asm.tree.MethodNode
 
@@ -21,7 +21,9 @@ class MainProcessor extends FabaProcessor {
   val notNullParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.NotNull, Values.Top))
   val nullableParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Null, Values.Top))
   val contractsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Bot, Values.Top))
+  val puritySolver = new Solver[Key, Values.Value](doNothing)(PurityAnalysis.purityLattice)
 
+  var pureTime: Long = 0
   var notNullParamsTime: Long = 0
   var nullableParamsTime: Long = 0
   var outTime: Long = 0
@@ -62,6 +64,14 @@ class MainProcessor extends FabaProcessor {
     val start = System.nanoTime()
     val result = super.buildDFSTree(transitions)
     dfsTime += System.nanoTime() - start
+    result
+  }
+
+
+  override def pureEquation(method: Method, methodNode: MethodNode, stable: Boolean) = {
+    val start = System.nanoTime()
+    val result = super.pureEquation(method, methodNode, stable)
+    pureTime += System.nanoTime() - start
     result
   }
 
@@ -121,6 +131,8 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
+  override def handlePureEquation(eq: Equation[Key, Value]): Unit =
+    puritySolver.addEquation(eq)
   override def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit =
     notNullParamsSolver.addEquation(eq)
   override def handleNullableParamEquation(eq: Equation[Key, Value]): Unit = {
@@ -158,6 +170,7 @@ class MainProcessor extends FabaProcessor {
       val notNullParams = notNullParamsSolver.solve().filterNot(p => p._2 == Values.Top)
       val nullableParams = nullableParamsSolver.solve().filterNot(p => p._2 == Values.Top)
       val contracts = contractsSolver.solve()
+      val pureSolutions = puritySolver.solve().filter(p => p._2 == Values.Pure || p._2 == Values.LocalEffect)
 
       val dupKeys = notNullParams.keys.toSet intersect nullableParams.keys.toSet
       for (k <- dupKeys) println(s"$k both @Nullable and @NotNull")
@@ -173,23 +186,39 @@ class MainProcessor extends FabaProcessor {
       val byPackageProd: Map[String, Map[Key, Values.Value]] =
         prodSolutions.groupBy(_._1.method.internalPackageName)
 
-      for ((pkg, solution) <- byPackageProd) {
-        val xmlAnnotations = XmlUtils.toXmlAnnotations(solution, extras, debug = false)
+      val byPackagePureSolutions: Map[String, Map[Key, Values.Value]] =
+        pureSolutions.groupBy(_._1.method.internalPackageName)
+
+      val pkgs = byPackageProd.keys ++ byPackagePureSolutions.keys
+
+      for (pkg <- pkgs) {
+        val xmlAnnotations =
+          XmlUtils.toXmlAnnotations(
+            byPackageProd.getOrElse(pkg, Map()),
+            byPackagePureSolutions.getOrElse(pkg, Map()),
+            extras,
+            debug = false)
         printToFile(new File(s"$outDir${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
           out.println(pp.format(<root>{xmlAnnotations}</root>))
         }
       }
       val writingEnd = System.currentTimeMillis()
 
+      val pureAnnotations = pureSolutions.count(_._2 == Values.Pure)
+      val localEffectAnnotations = pureSolutions.count(_._2 == Values.LocalEffect)
+
       println(s"solving took ${(solvingEnd - indexEnd) / 1000.0} sec")
       println(s"saving took ${(writingEnd - solvingEnd) / 1000.0} sec")
       println(s"${debugSolutions.size} all contracts")
       println(s"${prodSolutions.size} prod contracts")
+      println(s"${pureAnnotations} @Pure annotations")
+      println(s"${localEffectAnnotations} @LocalEffect annotations")
     }
 
     println("====")
     println(s"indexing took ${(indexEnd - indexStart) / 1000.0} sec")
     println("INDEXING TIME")
+    println(s"pure           ${pureTime / 1000000} msec")
     println(s"notNullParams  ${notNullParamsTime / 1000000} msec")
     println(s"nullableParams ${nullableParamsTime / 1000000} msec")
     println(s"results        ${outTime    / 1000000} msec")

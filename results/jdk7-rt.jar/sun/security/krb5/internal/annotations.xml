@@ -19,6 +19,9 @@
   <item name="sun.security.krb5.internal.APRep APRep(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.internal.APRep APRep(sun.security.krb5.EncryptedData)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.krb5.internal.APRep APRep(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -27,6 +30,9 @@
   </item>
   <item name="sun.security.krb5.internal.APReq APReq(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.internal.APReq APReq(sun.security.krb5.internal.APOptions, sun.security.krb5.internal.Ticket, sun.security.krb5.EncryptedData)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.krb5.internal.APReq APReq(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -52,20 +58,41 @@
   <item name="sun.security.krb5.internal.ASReq void init(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.internal.AuthContext AuthContext()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.krb5.internal.Authenticator Authenticator(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.internal.Authenticator Authenticator(sun.security.krb5.Realm, sun.security.krb5.PrincipalName, sun.security.krb5.Checksum, int, sun.security.krb5.internal.KerberosTime, sun.security.krb5.EncryptionKey, java.lang.Integer, sun.security.krb5.internal.AuthorizationData)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.krb5.internal.Authenticator Authenticator(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.internal.Authenticator java.lang.Integer getSeqNumber()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.Authenticator sun.security.krb5.Checksum getChecksum()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.Authenticator sun.security.krb5.EncryptionKey getSubKey()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.krb5.internal.Authenticator void init(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.internal.AuthorizationData AuthorizationData()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.krb5.internal.AuthorizationData AuthorizationData(sun.security.krb5.internal.AuthorizationDataEntry[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.security.krb5.internal.AuthorizationData AuthorizationData(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.internal.AuthorizationData int count()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.krb5.internal.AuthorizationData sun.security.krb5.internal.AuthorizationData parse(sun.security.util.DerInputStream, byte, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -74,6 +101,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,_,false-&gt;!null&quot;"/>
     </annotation>
+  </item>
+  <item name="sun.security.krb5.internal.AuthorizationDataEntry AuthorizationDataEntry()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.AuthorizationDataEntry AuthorizationDataEntry(int, byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.krb5.internal.AuthorizationDataEntry AuthorizationDataEntry(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -87,6 +120,9 @@
   <item name="sun.security.krb5.internal.AuthorizationDataEntry void writeEntry(sun.security.krb5.internal.ccache.CCacheOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.internal.CredentialsUtil CredentialsUtil()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.krb5.internal.CredentialsUtil sun.security.krb5.Credentials acquireServiceCreds(java.lang.String, sun.security.krb5.Credentials) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -96,11 +132,27 @@
   <item name="sun.security.krb5.internal.CredentialsUtil sun.security.krb5.Credentials serviceCreds(sun.security.krb5.ServiceName, sun.security.krb5.Credentials) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.internal.ETypeInfo ETypeInfo()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.krb5.internal.ETypeInfo ETypeInfo(int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.krb5.internal.ETypeInfo ETypeInfo(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.internal.ETypeInfo int getEType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.krb5.internal.ETypeInfo java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.ETypeInfo java.lang.String getSalt()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.ETypeInfo2 ETypeInfo2()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.krb5.internal.ETypeInfo2 ETypeInfo2(int, java.lang.String, byte[]) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -108,14 +160,29 @@
   <item name="sun.security.krb5.internal.ETypeInfo2 ETypeInfo2(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.internal.ETypeInfo2 int getEType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.krb5.internal.ETypeInfo2 java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.internal.ETypeInfo2 java.lang.String getSalt()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.krb5.internal.EncAPRepPart EncAPRepPart(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.internal.EncAPRepPart EncAPRepPart(sun.security.krb5.internal.KerberosTime, int, sun.security.krb5.EncryptionKey, java.lang.Integer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.krb5.internal.EncAPRepPart EncAPRepPart(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.internal.EncAPRepPart java.lang.Integer getSeqNumber()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.EncAPRepPart sun.security.krb5.EncryptionKey getSubKey()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.krb5.internal.EncAPRepPart void init(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -123,8 +190,17 @@
   <item name="sun.security.krb5.internal.EncASRepPart EncASRepPart(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.internal.EncASRepPart EncASRepPart(sun.security.krb5.EncryptionKey, sun.security.krb5.internal.LastReq, int, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.TicketFlags, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.KerberosTime, sun.security.krb5.Realm, sun.security.krb5.PrincipalName, sun.security.krb5.internal.HostAddresses)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.krb5.internal.EncKDCRepPart EncKDCRepPart()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.krb5.internal.EncKDCRepPart EncKDCRepPart(byte[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.internal.EncKDCRepPart EncKDCRepPart(sun.security.krb5.EncryptionKey, sun.security.krb5.internal.LastReq, int, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.TicketFlags, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.KerberosTime, sun.security.krb5.Realm, sun.security.krb5.PrincipalName, sun.security.krb5.internal.HostAddresses, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.krb5.internal.EncKDCRepPart void init(sun.security.util.DerValue, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -156,8 +232,14 @@
   <item name="sun.security.krb5.internal.EncTGSRepPart EncTGSRepPart(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.internal.EncTGSRepPart EncTGSRepPart(sun.security.krb5.EncryptionKey, sun.security.krb5.internal.LastReq, int, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.TicketFlags, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.KerberosTime, sun.security.krb5.Realm, sun.security.krb5.PrincipalName, sun.security.krb5.internal.HostAddresses)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.krb5.internal.EncTicketPart EncTicketPart(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.internal.EncTicketPart EncTicketPart(sun.security.krb5.internal.TicketFlags, sun.security.krb5.EncryptionKey, sun.security.krb5.Realm, sun.security.krb5.PrincipalName, sun.security.krb5.internal.TransitedEncoding, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.HostAddresses, sun.security.krb5.internal.AuthorizationData)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.krb5.internal.EncTicketPart EncTicketPart(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -168,6 +250,9 @@
   <item name="sun.security.krb5.internal.EncTicketPart void init(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.internal.HostAddress HostAddress(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.krb5.internal.HostAddress HostAddress(java.net.InetAddress) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -177,8 +262,17 @@
   <item name="sun.security.krb5.internal.HostAddress boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.krb5.internal.HostAddress boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.krb5.internal.HostAddress int getAddrType(java.net.InetAddress) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.krb5.internal.HostAddress int getAddrType(java.net.InetAddress)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.HostAddress int hashCode()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.krb5.internal.HostAddress java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -190,6 +284,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,_,false-&gt;!null&quot;"/>
     </annotation>
+  </item>
+  <item name="sun.security.krb5.internal.HostAddresses HostAddresses(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.krb5.internal.HostAddresses HostAddresses(java.net.InetAddress[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -240,6 +337,9 @@
       <val val="&quot;_,_,false-&gt;!null&quot;"/>
     </annotation>
   </item>
+  <item name="sun.security.krb5.internal.KDCRep KDCRep()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.krb5.internal.KDCRep KDCRep(byte[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -248,6 +348,9 @@
   </item>
   <item name="sun.security.krb5.internal.KDCRep void init(sun.security.util.DerValue, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.internal.KDCReq KDCReq()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.krb5.internal.KDCReq KDCReq(byte[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -263,6 +366,9 @@
   </item>
   <item name="sun.security.krb5.internal.KDCReqBody KDCReqBody(sun.security.util.DerValue, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.internal.KDCReqBody int getNonce()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.krb5.internal.KRBCred KRBCred(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -294,6 +400,27 @@
   <item name="sun.security.krb5.internal.KRBError boolean isEqual(java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.krb5.internal.KRBError int getErrorCode()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.KRBError java.lang.Integer getClientMicroSeconds()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.KRBError java.lang.Integer getServerMicroSeconds()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.KRBError java.lang.String getErrorString()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.KRBError sun.security.krb5.internal.KerberosTime getClientTime()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.KRBError sun.security.krb5.internal.KerberosTime getServerTime()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.KRBError sun.security.krb5.internal.PAData[] getPA()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.krb5.internal.KRBError void init(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -312,6 +439,9 @@
   <item name="sun.security.krb5.internal.KRBPriv KRBPriv(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.internal.KRBPriv KRBPriv(sun.security.krb5.EncryptedData)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.krb5.internal.KRBPriv KRBPriv(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -320,6 +450,9 @@
   </item>
   <item name="sun.security.krb5.internal.KRBSafe KRBSafe(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.internal.KRBSafe KRBSafe(sun.security.krb5.internal.KRBSafeBody, sun.security.krb5.Checksum)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.krb5.internal.KRBSafe KRBSafe(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -347,23 +480,54 @@
   <item name="sun.security.krb5.internal.KerberosTime KerberosTime(java.util.Date) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.internal.KerberosTime KerberosTime(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.krb5.internal.KerberosTime KerberosTime(long, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.krb5.internal.KerberosTime KerberosTime(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.krb5.internal.KerberosTime boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.krb5.internal.KerberosTime boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.krb5.internal.KerberosTime boolean greaterThan(sun.security.krb5.internal.KerberosTime) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.internal.KerberosTime boolean greaterThan(sun.security.krb5.internal.KerberosTime)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.krb5.internal.KerberosTime boolean greaterThanWRTClockSkew(sun.security.krb5.internal.KerberosTime, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.internal.KerberosTime boolean greaterThanWRTClockSkew(sun.security.krb5.internal.KerberosTime, int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.krb5.internal.KerberosTime boolean inClockSkew(int, sun.security.krb5.internal.KerberosTime) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.internal.KerberosTime boolean inClockSkew(int, sun.security.krb5.internal.KerberosTime)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.KerberosTime boolean isZero()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.KerberosTime int getMicroSeconds()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.KerberosTime int getSeconds()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.KerberosTime int hashCode()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.krb5.internal.KerberosTime java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.krb5.internal.KerberosTime java.lang.String toGeneralizedTimeString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -377,6 +541,9 @@
   <item name="sun.security.krb5.internal.KerberosTime java.util.Date toDate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.internal.KerberosTime long getTime()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.krb5.internal.KerberosTime long toKerberosTime(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -388,11 +555,32 @@
       <val val="&quot;_,_,false-&gt;!null&quot;"/>
     </annotation>
   </item>
+  <item name="sun.security.krb5.internal.KerberosTime void setMicroSeconds(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.krb5.internal.KerberosTime void setMicroSeconds(java.lang.Integer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.krb5.internal.KerberosTime void setMicroSeconds(java.lang.Integer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.krb5.internal.KerberosTime void setSeconds(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.krb5.internal.KerberosTime void setTime(java.util.Date) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.internal.KerberosTime void setTime(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.krb5.internal.Krb5 Krb5()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.KrbCredInfo KrbCredInfo()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.KrbCredInfo KrbCredInfo(sun.security.krb5.EncryptionKey, sun.security.krb5.Realm, sun.security.krb5.PrincipalName, sun.security.krb5.internal.TicketFlags, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.KerberosTime, sun.security.krb5.internal.KerberosTime, sun.security.krb5.Realm, sun.security.krb5.PrincipalName, sun.security.krb5.internal.HostAddresses)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.krb5.internal.KrbCredInfo KrbCredInfo(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -414,6 +602,12 @@
       <val val="&quot;_,_,false-&gt;!null&quot;"/>
     </annotation>
   </item>
+  <item name="sun.security.krb5.internal.LastReqEntry LastReqEntry()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.LastReqEntry LastReqEntry(int, sun.security.krb5.internal.KerberosTime)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.krb5.internal.LastReqEntry LastReqEntry(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -423,17 +617,35 @@
   <item name="sun.security.krb5.internal.LocalSeqNumber LocalSeqNumber(java.lang.Integer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.internal.LocalSeqNumber int current()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.LocalSeqNumber int next()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="sun.security.krb5.internal.LocalSeqNumber int step()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.krb5.internal.LocalSeqNumber void init(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.krb5.internal.MethodData MethodData(int, byte[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.security.krb5.internal.MethodData MethodData(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.internal.NetClient NetClient()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.krb5.internal.NetClient sun.security.krb5.internal.NetClient getInstance(java.lang.String, java.lang.String, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.krb5.internal.NetClient sun.security.krb5.internal.NetClient getInstance(java.lang.String, java.lang.String, int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.internal.PAData PAData()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.krb5.internal.PAData PAData(int, byte[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -443,6 +655,9 @@
   </item>
   <item name="sun.security.krb5.internal.PAData int getPreferredEType(sun.security.krb5.internal.PAData[], int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.krb5.internal.PAData int getType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="sun.security.krb5.internal.PAData java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -457,6 +672,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,null-&gt;null&quot;"/>
     </annotation>
+  </item>
+  <item name="sun.security.krb5.internal.PAData.SaltAndParams SaltAndParams(java.lang.String, byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.krb5.internal.PAEncTSEnc PAEncTSEnc(sun.security.krb5.internal.KerberosTime, java.lang.Integer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.krb5.internal.PAEncTSEnc PAEncTSEnc(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -479,8 +700,14 @@
   <item name="sun.security.krb5.internal.TGSReq TGSReq(sun.security.krb5.internal.PAData[], sun.security.krb5.internal.KDCReqBody) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.krb5.internal.Ticket Ticket()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="sun.security.krb5.internal.Ticket Ticket(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.internal.Ticket Ticket(sun.security.krb5.Realm, sun.security.krb5.PrincipalName, sun.security.krb5.EncryptedData)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.krb5.internal.Ticket Ticket(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -521,6 +748,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,_,false-&gt;!null&quot;"/>
     </annotation>
+  </item>
+  <item name="sun.security.krb5.internal.TransitedEncoding TransitedEncoding(int, byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.krb5.internal.TransitedEncoding TransitedEncoding(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

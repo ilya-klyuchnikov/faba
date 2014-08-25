@@ -1,4 +1,7 @@
 <root>
+  <item name="com.sun.imageio.plugins.gif.GIFImageMetadata boolean isReadOnly()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.imageio.plugins.gif.GIFImageMetadata java.lang.String toISO8859(byte[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -42,9 +45,17 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.imageio.plugins.gif.GIFImageMetadataFormatResources GIFImageMetadataFormatResources()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFImageMetadataFormatResources java.lang.Object[][] getContents()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.imageio.plugins.gif.GIFImageReader GIFImageReader(javax.imageio.spi.ImageReaderSpi)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFImageReader int copyData(byte[], int, byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -54,6 +65,16 @@
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFImageReader javax.imageio.ImageReadParam getDefaultReadParam()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.imageio.plugins.gif.GIFImageReader void computeDecodeThisRow()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.imageio.plugins.gif.GIFImageReader void initNext32Bits()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.imageio.plugins.gif.GIFImageReader void resetStreamSettings()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFImageReaderSpi boolean canDecodeInput(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -68,18 +89,32 @@
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFImageReaderSpi java.lang.String getDescription(java.util.Locale)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFImageReaderSpi javax.imageio.ImageReader createReaderInstance(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFImageReaderSpi javax.imageio.ImageReader createReaderInstance(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.imageio.plugins.gif.GIFImageWriteParam GIFImageWriteParam(java.util.Locale)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.imageio.plugins.gif.GIFImageWriter GIFImageWriter(com.sun.imageio.plugins.gif.GIFImageWriterSpi)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.imageio.plugins.gif.GIFImageWriter boolean canWriteSequence()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFImageWriter boolean needToCreateIndex(java.awt.image.RenderedImage) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFImageWriter byte[] createColorTable(java.awt.image.ColorModel, java.awt.image.SampleModel) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.imageio.plugins.gif.GIFImageWriter int getGifPaletteSize(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFImageWriter javax.imageio.ImageWriteParam getDefaultWriteParam()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -119,6 +154,9 @@
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFImageWriter void prepareWriteSequence(javax.imageio.metadata.IIOMetadata) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.imageio.plugins.gif.GIFImageWriter void resetLocal()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFImageWriter void write(boolean, boolean, javax.imageio.metadata.IIOMetadata, javax.imageio.IIOImage, javax.imageio.ImageWriteParam) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -199,12 +237,14 @@
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFImageWriterSpi java.lang.String getDescription(java.util.Locale)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFImageWriterSpi javax.imageio.ImageWriter createWriterInstance(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFImageWriterSpi javax.imageio.ImageWriter createWriterInstance(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFMetadata boolean getBooleanAttribute(org.w3c.dom.Node, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -254,6 +294,9 @@
   <item name="com.sun.imageio.plugins.gif.GIFMetadata void mergeTree(java.lang.String, org.w3c.dom.Node) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.imageio.plugins.gif.GIFStreamMetadata boolean isReadOnly()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.imageio.plugins.gif.GIFStreamMetadata javax.imageio.metadata.IIOMetadataNode getStandardCompressionNode()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -265,6 +308,12 @@
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFStreamMetadata javax.imageio.metadata.IIOMetadataNode getStandardDocumentNode()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.imageio.plugins.gif.GIFStreamMetadata javax.imageio.metadata.IIOMetadataNode getStandardTextNode()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.imageio.plugins.gif.GIFStreamMetadata javax.imageio.metadata.IIOMetadataNode getStandardTransparencyNode()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFStreamMetadata org.w3c.dom.Node getAsTree(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -297,15 +346,29 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.imageio.plugins.gif.GIFStreamMetadataFormatResources GIFStreamMetadataFormatResources()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFStreamMetadataFormatResources java.lang.Object[][] getContents()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.imageio.plugins.gif.GIFWritableImageMetadata boolean isReadOnly()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFWritableImageMetadata void mergeNativeTree(org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFWritableImageMetadata void mergeStandardTree(org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.imageio.plugins.gif.GIFWritableImageMetadata void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.imageio.plugins.gif.GIFWritableStreamMetadata boolean isReadOnly()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFWritableStreamMetadata void mergeNativeTree(org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -318,5 +381,8 @@
   </item>
   <item name="com.sun.imageio.plugins.gif.GIFWritableStreamMetadata void mergeTree(java.lang.String, org.w3c.dom.Node) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.imageio.plugins.gif.GIFWritableStreamMetadata void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

@@ -35,6 +35,42 @@
   <item name="com.sun.corba.se.impl.interceptors.ClientRequestInfoImpl ClientRequestInfoImpl(com.sun.corba.se.spi.orb.ORB) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.interceptors.ClientRequestInfoImpl boolean isDIIInitiate()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ClientRequestInfoImpl boolean isPICurrentPushed()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ClientRequestInfoImpl com.sun.corba.se.spi.protocol.RetryType getRetryRequest()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ClientRequestInfoImpl int getEntryCount()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ClientRequestInfoImpl void decrementEntryCount()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ClientRequestInfoImpl void incrementEntryCount()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ClientRequestInfoImpl void setDIIInitiate(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ClientRequestInfoImpl void setDIIRequest(org.omg.CORBA.Request)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ClientRequestInfoImpl void setException(java.lang.Exception)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ClientRequestInfoImpl void setPICurrentPushed(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ClientRequestInfoImpl void setReplyStatus(short)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ClientRequestInfoImpl void setRetryRequest(com.sun.corba.se.spi.protocol.RetryType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.corba.se.impl.interceptors.CodecFactoryImpl CodecFactoryImpl(org.omg.CORBA.ORB) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -44,20 +80,41 @@
   <item name="com.sun.corba.se.impl.interceptors.IORInfoImpl IORInfoImpl(com.sun.corba.se.spi.oa.ObjectAdapter) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.interceptors.IORInfoImpl com.sun.corba.se.spi.oa.ObjectAdapter getObjectAdapter()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.corba.se.impl.interceptors.IORInfoImpl void addIORComponentToProfileInternal(org.omg.IOP.TaggedComponent, java.util.Iterator) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.InterceptorInvoker InterceptorInvoker(com.sun.corba.se.spi.orb.ORB, com.sun.corba.se.impl.interceptors.InterceptorList, com.sun.corba.se.impl.interceptors.PICurrent)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.corba.se.impl.interceptors.InterceptorInvoker void invokeServerInterceptorIntermediatePoint(com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.interceptors.InterceptorInvoker void setEnabled(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.corba.se.impl.interceptors.InterceptorInvoker void updateClientRequestDispatcherForward(com.sun.corba.se.impl.interceptors.ClientRequestInfoImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.InterceptorList boolean hasInterceptorsOfType(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.InterceptorList org.omg.PortableInterceptor.Interceptor[] getInterceptors(int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.InterceptorList void lock()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.corba.se.impl.interceptors.InterceptorList void register_interceptor(org.omg.PortableInterceptor.Interceptor, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.interceptors.ORBInitInfoImpl ORBInitInfoImpl(com.sun.corba.se.spi.orb.ORB, java.lang.String[], java.lang.String, org.omg.IOP.CodecFactory) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ORBInitInfoImpl com.sun.corba.se.spi.orb.ORB getORB()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.corba.se.impl.interceptors.ORBInitInfoImpl void add_client_request_interceptor_with_policy(org.omg.PortableInterceptor.ClientRequestInterceptor, org.omg.CORBA.Policy[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -71,14 +128,29 @@
   <item name="com.sun.corba.se.impl.interceptors.ORBInitInfoImpl void register_initial_reference(java.lang.String, org.omg.CORBA.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.interceptors.ORBInitInfoImpl void setStage(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.corba.se.impl.interceptors.PICurrent PICurrent(com.sun.corba.se.spi.orb.ORB) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.interceptors.PICurrent com.sun.corba.se.spi.orb.ORB access$000(com.sun.corba.se.impl.interceptors.PICurrent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.interceptors.PICurrent com.sun.corba.se.spi.orb.ORB access$000(com.sun.corba.se.impl.interceptors.PICurrent)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.corba.se.impl.interceptors.PICurrent int access$100(com.sun.corba.se.impl.interceptors.PICurrent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PICurrent int access$100(com.sun.corba.se.impl.interceptors.PICurrent)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PICurrent int allocateSlotId()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PICurrent void setORBInitializing(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.corba.se.impl.interceptors.PICurrent.1 java.lang.Object initialValue()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -88,6 +160,18 @@
   </item>
   <item name="com.sun.corba.se.impl.interceptors.PIHandlerImpl com.sun.corba.se.impl.interceptors.ORBInitInfoImpl createORBInitInfo()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PIHandlerImpl int allocateServerRequestId()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PIHandlerImpl int convertPIReplyStatusToReplyMessage(short)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PIHandlerImpl org.omg.PortableInterceptor.Current getPICurrent()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PIHandlerImpl void close()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.corba.se.impl.interceptors.PIHandlerImpl void postInitORBInitializers(com.sun.corba.se.impl.interceptors.ORBInitInfoImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -110,6 +194,12 @@
   <item name="com.sun.corba.se.impl.interceptors.PIHandlerImpl.RequestInfoStack RequestInfoStack(com.sun.corba.se.impl.interceptors.PIHandlerImpl, com.sun.corba.se.impl.interceptors.PIHandlerImpl.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl PINoOpHandlerImpl()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl int allocateServerRequestId()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl java.lang.Exception invokeClientPIEndingPoint(int, java.lang.Exception) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -117,6 +207,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,!null-&gt;null;_,null-&gt;null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl java.lang.Exception makeCompletedClientRequest(int, java.lang.Exception) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -125,6 +216,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,!null-&gt;null;_,null-&gt;null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl org.omg.CORBA.Policy create_policy(int, org.omg.CORBA.Any) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -133,9 +225,40 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,!null-&gt;null;_,null-&gt;null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl org.omg.PortableInterceptor.Current getPICurrent()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void adapterManagerStateChanged(int, short)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void adapterStateChanged(org.omg.PortableInterceptor.ObjectReferenceTemplate[], short) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void adapterStateChanged(org.omg.PortableInterceptor.ObjectReferenceTemplate[], short)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void cleanupClientPIRequest()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void cleanupServerPIRequest()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void close()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void destroyInterceptors()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void disableInterceptorsThisThread()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void enableInterceptorsThisThread()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void initialize()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void initializeServerPIInfo(com.sun.corba.se.spi.protocol.CorbaMessageMediator, com.sun.corba.se.spi.oa.ObjectAdapter, byte[], com.sun.corba.se.spi.ior.ObjectKeyTemplate) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -149,29 +272,71 @@
   <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void initializeServerPIInfo(com.sun.corba.se.spi.protocol.CorbaMessageMediator, com.sun.corba.se.spi.oa.ObjectAdapter, byte[], com.sun.corba.se.spi.ior.ObjectKeyTemplate) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void initializeServerPIInfo(com.sun.corba.se.spi.protocol.CorbaMessageMediator, com.sun.corba.se.spi.oa.ObjectAdapter, byte[], com.sun.corba.se.spi.ior.ObjectKeyTemplate)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void initiateClientPIRequest(boolean)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void invokeClientPIStartingPoint()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void invokeServerPIEndingPoint(com.sun.corba.se.impl.protocol.giopmsgheaders.ReplyMessage) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void invokeServerPIEndingPoint(com.sun.corba.se.impl.protocol.giopmsgheaders.ReplyMessage)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void invokeServerPIIntermediatePoint()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void invokeServerPIStartingPoint()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void objectAdapterCreated(com.sun.corba.se.spi.oa.ObjectAdapter) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void objectAdapterCreated(com.sun.corba.se.spi.oa.ObjectAdapter)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void registerPolicyFactory(int, org.omg.PortableInterceptor.PolicyFactory) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void registerPolicyFactory(int, org.omg.PortableInterceptor.PolicyFactory)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void register_interceptor(org.omg.PortableInterceptor.Interceptor, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void register_interceptor(org.omg.PortableInterceptor.Interceptor, int)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void sendCancelRequestIfFinalFragmentNotSent()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void setClientPIInfo(com.sun.corba.se.impl.corba.RequestImpl) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void setClientPIInfo(com.sun.corba.se.impl.corba.RequestImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void setClientPIInfo(com.sun.corba.se.spi.protocol.CorbaMessageMediator) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void setClientPIInfo(com.sun.corba.se.spi.protocol.CorbaMessageMediator)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void setServerPIExceptionInfo(org.omg.CORBA.Any) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void setServerPIExceptionInfo(org.omg.CORBA.Any)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void setServerPIInfo(java.lang.Exception) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void setServerPIInfo(java.lang.Exception)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void setServerPIInfo(java.lang.Object, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -179,14 +344,44 @@
   <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void setServerPIInfo(java.lang.Object, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void setServerPIInfo(java.lang.Object, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void setServerPIInfo(org.omg.CORBA.Any) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void setServerPIInfo(org.omg.CORBA.Any)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void setServerPIInfo(org.omg.CORBA.NVList) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.interceptors.PINoOpHandlerImpl void setServerPIInfo(org.omg.CORBA.NVList)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl RequestInfoImpl(com.sun.corba.se.spi.orb.ORB) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl boolean getAlreadyExecuted()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl com.sun.corba.se.spi.legacy.connection.Connection connection()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl int getEndingPointCall()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl int getFlowStackIndex()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl int getIntermediatePointCall()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl int getStartingPointCall()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl java.lang.Exception getException()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl org.omg.CORBA.Any exceptionToAny(java.lang.Exception) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -203,6 +398,9 @@
   <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl org.omg.IOP.ServiceContext getServiceContext(java.util.HashMap, com.sun.corba.se.spi.servicecontext.ServiceContexts, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl short getReplyStatus()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl void addServiceContext(java.util.HashMap, com.sun.corba.se.spi.servicecontext.ServiceContexts, org.omg.IOP.ServiceContext, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -218,19 +416,106 @@
   <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl void insertUserException(org.omg.CORBA.UserException, org.omg.CORBA.Any) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl void setAlreadyExecuted(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl void setCurrentExecutionPoint(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl void setEndingPointCall(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl void setException(java.lang.Exception)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl void setFlowStackIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl void setForwardRequest(com.sun.corba.se.spi.ior.IOR)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl void setForwardRequest(org.omg.PortableInterceptor.ForwardRequest)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl void setIntermediatePointCall(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl void setReplyStatus(short)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl void setSlotTable(com.sun.corba.se.impl.interceptors.SlotTable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.RequestInfoImpl void setStartingPointCall(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl ServerRequestInfoImpl(com.sun.corba.se.spi.orb.ORB) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl boolean isDynamic()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl boolean isForwardRequestRaisedInEnding()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl int request_id()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl java.lang.String server_id()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl void releaseServant()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl void setDSIArguments(org.omg.CORBA.NVList)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl void setDSIException(org.omg.CORBA.Any)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl void setDSIResult(org.omg.CORBA.Any)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl void setException(java.lang.Exception)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl void setForwardRequestRaisedInEnding()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl void setInfo(com.sun.corba.se.spi.protocol.CorbaMessageMediator, com.sun.corba.se.spi.oa.ObjectAdapter, byte[], com.sun.corba.se.spi.ior.ObjectKeyTemplate) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl void setInfo(java.lang.Object, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl void setReplyMessage(com.sun.corba.se.impl.protocol.giopmsgheaders.ReplyMessage)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl void setReplyStatus(short)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl.AddReplyServiceContextCommand AddReplyServiceContextCommand(com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl.AddReplyServiceContextCommand AddReplyServiceContextCommand(com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl, com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl.AddReplyServiceContextCommand AddReplyServiceContextCommand(com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl, com.sun.corba.se.impl.interceptors.ServerRequestInfoImpl.1)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.SlotTable SlotTable(com.sun.corba.se.spi.orb.ORB, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.SlotTable int getSize()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.corba.se.impl.interceptors.SlotTableStack SlotTableStack(com.sun.corba.se.spi.orb.ORB, com.sun.corba.se.impl.interceptors.SlotTable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.SlotTableStack.SlotTablePool SlotTablePool(com.sun.corba.se.impl.interceptors.SlotTableStack)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.interceptors.SlotTableStack.SlotTablePool com.sun.corba.se.impl.interceptors.SlotTable getSlotTable()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

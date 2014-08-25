@@ -1,9 +1,18 @@
 <root>
+  <item name="com.sun.xml.internal.ws.message.stream.OutboundStreamHeader OutboundStreamHeader(com.sun.xml.internal.stream.buffer.XMLStreamBuffer, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.message.stream.OutboundStreamHeader java.lang.String getAttribute(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.stream.OutboundStreamHeader java.lang.String getAttribute(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.message.stream.OutboundStreamHeader java.lang.String getLocalPart()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.message.stream.OutboundStreamHeader java.lang.String getNamespaceURI()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.stream.OutboundStreamHeader javax.xml.stream.XMLStreamReader readHeader()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -14,6 +23,9 @@
   <item name="com.sun.xml.internal.ws.message.stream.OutboundStreamHeader.Attribute Attribute(java.lang.String, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.message.stream.OutboundStreamHeader.Attribute Attribute(java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.message.stream.OutboundStreamHeader.Attribute java.lang.String fixNull(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -21,6 +33,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.stream.PayloadStreamReaderMessage PayloadStreamReaderMessage(com.sun.xml.internal.ws.api.message.HeaderList, javax.xml.stream.XMLStreamReader, com.sun.xml.internal.ws.api.message.AttachmentSet, com.sun.xml.internal.ws.api.SOAPVersion) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -39,20 +52,40 @@
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.ws.message.stream.PayloadStreamReaderMessage boolean hasPayload()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.message.stream.PayloadStreamReaderMessage com.sun.xml.internal.ws.api.message.Message copy()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.message.stream.PayloadStreamReaderMessage java.lang.String getPayloadLocalPart()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.message.stream.PayloadStreamReaderMessage java.lang.String getPayloadNamespaceURI()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.stream.PayloadStreamReaderMessage void writeTo(org.xml.sax.ContentHandler, org.xml.sax.ErrorHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.message.stream.StreamAttachment StreamAttachment(com.sun.xml.internal.ws.util.ByteArrayBuffer, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.message.stream.StreamAttachment byte[] asByteArray()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.stream.StreamAttachment com.sun.xml.internal.org.jvnet.staxex.Base64Data asBase64Data()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.stream.StreamAttachment java.io.InputStream asInputStream()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.message.stream.StreamAttachment java.lang.String getContentId()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.message.stream.StreamAttachment java.lang.String getContentType()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.stream.StreamAttachment javax.activation.DataHandler asDataHandler()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -80,6 +113,9 @@
       <val val="&quot;_,null-&gt;true&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.ws.message.stream.StreamHeader boolean isRelay()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.message.stream.StreamHeader com.sun.xml.internal.ws.api.addressing.WSEndpointReference readAsEPR(com.sun.xml.internal.ws.api.addressing.AddressingVersion) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -93,6 +129,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.stream.StreamHeader java.lang.String fixNull(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -101,12 +138,19 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.stream.StreamHeader java.lang.String getAttribute(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.stream.StreamHeader java.lang.String getAttribute(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.message.stream.StreamHeader java.lang.String getLocalPart()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.message.stream.StreamHeader java.lang.String getNamespaceURI()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.stream.StreamHeader java.lang.String getRole(com.sun.xml.internal.ws.api.SOAPVersion) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -122,6 +166,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.message.stream.StreamHeader.Attribute Attribute(java.lang.String, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.message.stream.StreamHeader.Attribute Attribute(java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.stream.StreamHeader11 StreamHeader11(javax.xml.stream.XMLStreamReader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -167,6 +214,12 @@
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.ws.message.stream.StreamMessage boolean hasPayload()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.message.stream.StreamMessage com.sun.xml.internal.ws.api.message.HeaderList getHeaders()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.message.stream.StreamMessage com.sun.xml.internal.ws.api.message.Message copy()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -174,6 +227,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.message.stream.StreamMessage java.lang.String getPayloadLocalPart()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.message.stream.StreamMessage java.lang.String getPayloadNamespaceURI()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.stream.StreamMessage void create(com.sun.xml.internal.ws.api.SOAPVersion) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

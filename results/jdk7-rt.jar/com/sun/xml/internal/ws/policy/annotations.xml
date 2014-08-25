@@ -37,6 +37,9 @@
   <item name="com.sun.xml.internal.ws.policy.AssertionSet com.sun.xml.internal.ws.policy.AssertionSet createMergedAssertionSet(java.util.Collection&lt;com.sun.xml.internal.ws.policy.AssertionSet&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.AssertionSet com.sun.xml.internal.ws.policy.AssertionSet emptyAssertionSet()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.AssertionSet java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -47,6 +50,15 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,!null-&gt;!null&quot;"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.AssertionSet java.util.Collection&lt;com.sun.xml.internal.ws.policy.PolicyAssertion&gt; getAssertions()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.AssertionSet java.util.Collection&lt;javax.xml.namespace.QName&gt; getVocabulary()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.AssertionSet.1 1()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.AssertionSet.1 int compare(com.sun.xml.internal.ws.policy.PolicyAssertion, com.sun.xml.internal.ws.policy.PolicyAssertion) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -66,6 +78,15 @@
   <item name="com.sun.xml.internal.ws.policy.ComplexAssertion ComplexAssertion(com.sun.xml.internal.ws.policy.sourcemodel.AssertionData, java.util.Collection&lt;? extends com.sun.xml.internal.ws.policy.PolicyAssertion&gt;, com.sun.xml.internal.ws.policy.AssertionSet) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.ComplexAssertion boolean hasNestedPolicy()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.ComplexAssertion com.sun.xml.internal.ws.policy.NestedPolicy getNestedPolicy()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector EffectiveAlternativeSelector()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector com.sun.xml.internal.ws.policy.Policy selectBestAlternative(com.sun.xml.internal.ws.policy.Policy, com.sun.xml.internal.ws.policy.AssertionValidationProcessor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -75,32 +96,66 @@
   <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector void selectAlternatives(com.sun.xml.internal.ws.policy.EffectivePolicyModifier, com.sun.xml.internal.ws.policy.AssertionValidationProcessor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness AlternativeFitness(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness AlternativeFitness(java.lang.String, int, com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.1) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness AlternativeFitness(java.lang.String, int, com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.1)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness.1 1(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness.1 com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness combine(com.sun.xml.internal.ws.policy.spi.PolicyAssertionValidator.Fitness) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness.2 2(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness.2 com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness combine(com.sun.xml.internal.ws.policy.spi.PolicyAssertionValidator.Fitness) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness.2 com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness combine(com.sun.xml.internal.ws.policy.spi.PolicyAssertionValidator.Fitness)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness.3 3(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness.3 com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness combine(com.sun.xml.internal.ws.policy.spi.PolicyAssertionValidator.Fitness) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness.4 4(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness.4 com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness combine(com.sun.xml.internal.ws.policy.spi.PolicyAssertionValidator.Fitness) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness.5 5(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness.5 com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness combine(com.sun.xml.internal.ws.policy.spi.PolicyAssertionValidator.Fitness) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness.6 6(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness.6 com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness combine(com.sun.xml.internal.ws.policy.spi.PolicyAssertionValidator.Fitness) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness.7 7(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness.7 com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector.AlternativeFitness combine(com.sun.xml.internal.ws.policy.spi.PolicyAssertionValidator.Fitness) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.EffectivePolicyModifier EffectivePolicyModifier()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.EffectivePolicyModifier com.sun.xml.internal.ws.policy.EffectivePolicyModifier createEffectivePolicyModifier()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.EffectivePolicyModifier void setNewEffectivePolicyForEndpointScope(com.sun.xml.internal.ws.policy.PolicyMapKey, com.sun.xml.internal.ws.policy.Policy) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -187,6 +242,9 @@
   <item name="com.sun.xml.internal.ws.policy.Policy boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.Policy com.sun.xml.internal.ws.policy.Policy createEmptyPolicy()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.Policy com.sun.xml.internal.ws.policy.Policy createEmptyPolicy(com.sun.xml.internal.ws.policy.sourcemodel.wspolicy.NamespaceVersion, java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,!null,_-&gt;!null;_,_,!null-&gt;!null&quot;"/>
@@ -196,6 +254,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.Policy com.sun.xml.internal.ws.policy.Policy createNullPolicy()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.Policy com.sun.xml.internal.ws.policy.Policy createNullPolicy(com.sun.xml.internal.ws.policy.sourcemodel.wspolicy.NamespaceVersion, java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -226,6 +287,18 @@
   <item name="com.sun.xml.internal.ws.policy.Policy com.sun.xml.internal.ws.policy.Policy createPolicy(java.util.Collection&lt;com.sun.xml.internal.ws.policy.AssertionSet&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.Policy com.sun.xml.internal.ws.policy.sourcemodel.wspolicy.NamespaceVersion getNamespaceVersion()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.Policy java.lang.String getId()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.Policy java.lang.String getIdOrName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.Policy java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.Policy java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -236,6 +309,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,!null-&gt;!null&quot;"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.Policy java.util.Collection&lt;com.sun.xml.internal.ws.policy.AssertionSet&gt; getContent()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.Policy java.util.Collection&lt;javax.xml.namespace.QName&gt; getVocabulary()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyAssertion PolicyAssertion(com.sun.xml.internal.ws.policy.sourcemodel.AssertionData, java.util.Collection&lt;? extends com.sun.xml.internal.ws.policy.PolicyAssertion&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -258,6 +337,21 @@
   <item name="com.sun.xml.internal.ws.policy.PolicyAssertion boolean isCompatibleWith(com.sun.xml.internal.ws.policy.PolicyAssertion, com.sun.xml.internal.ws.policy.PolicyIntersector.CompatibilityMode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyAssertion boolean isIgnorable()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyAssertion boolean isOptional()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyAssertion boolean isParameter()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyAssertion com.sun.xml.internal.ws.policy.NestedPolicy getNestedPolicy()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyAssertion java.lang.String getValue()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyAssertion java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -275,8 +369,26 @@
   <item name="com.sun.xml.internal.ws.policy.PolicyAssertion java.util.Set&lt;java.util.Map.Entry&lt;javax.xml.namespace.QName,java.lang.String&gt;&gt; getAttributesSet()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyAssertion javax.xml.namespace.QName getName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyConstants PolicyConstants()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyIntersector PolicyIntersector(com.sun.xml.internal.ws.policy.PolicyIntersector.CompatibilityMode)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyIntersector com.sun.xml.internal.ws.policy.Policy intersect(com.sun.xml.internal.ws.policy.Policy...) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyIntersector com.sun.xml.internal.ws.policy.PolicyIntersector createLaxPolicyIntersector()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyIntersector com.sun.xml.internal.ws.policy.PolicyIntersector createStrictPolicyIntersector()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyIntersector.CompatibilityMode CompatibilityMode(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMap com.sun.xml.internal.ws.policy.Policy getEndpointEffectivePolicy(com.sun.xml.internal.ws.policy.PolicyMapKey) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -307,20 +419,38 @@
   <item name="com.sun.xml.internal.ws.policy.PolicyMap com.sun.xml.internal.ws.policy.PolicyMap.ScopeMap access$200(com.sun.xml.internal.ws.policy.PolicyMap) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMap com.sun.xml.internal.ws.policy.PolicyMap.ScopeMap access$200(com.sun.xml.internal.ws.policy.PolicyMap)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMap com.sun.xml.internal.ws.policy.PolicyMap.ScopeMap access$300(com.sun.xml.internal.ws.policy.PolicyMap) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMap com.sun.xml.internal.ws.policy.PolicyMap.ScopeMap access$300(com.sun.xml.internal.ws.policy.PolicyMap)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMap com.sun.xml.internal.ws.policy.PolicyMap.ScopeMap access$400(com.sun.xml.internal.ws.policy.PolicyMap) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMap com.sun.xml.internal.ws.policy.PolicyMap.ScopeMap access$400(com.sun.xml.internal.ws.policy.PolicyMap)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMap com.sun.xml.internal.ws.policy.PolicyMap.ScopeMap access$500(com.sun.xml.internal.ws.policy.PolicyMap) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMap com.sun.xml.internal.ws.policy.PolicyMap.ScopeMap access$500(com.sun.xml.internal.ws.policy.PolicyMap)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMap com.sun.xml.internal.ws.policy.PolicyMap.ScopeMap access$600(com.sun.xml.internal.ws.policy.PolicyMap) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMap com.sun.xml.internal.ws.policy.PolicyMap.ScopeMap access$600(com.sun.xml.internal.ws.policy.PolicyMap)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMap com.sun.xml.internal.ws.policy.PolicyMap.ScopeMap access$700(com.sun.xml.internal.ws.policy.PolicyMap) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMap com.sun.xml.internal.ws.policy.PolicyMap.ScopeMap access$700(com.sun.xml.internal.ws.policy.PolicyMap)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMap com.sun.xml.internal.ws.policy.PolicyMapKey createOperationOrInputOutputMessageKey(javax.xml.namespace.QName, javax.xml.namespace.QName, javax.xml.namespace.QName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -388,6 +518,9 @@
   <item name="com.sun.xml.internal.ws.policy.PolicyMap com.sun.xml.internal.ws.policy.PolicyMapKey createWsdlServiceScopeKey(javax.xml.namespace.QName)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMap com.sun.xml.internal.ws.policy.privateutil.PolicyLogger access$000()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMap java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -415,35 +548,53 @@
   <item name="com.sun.xml.internal.ws.policy.PolicyMap void setNewEffectivePolicyForScope(com.sun.xml.internal.ws.policy.PolicyMap.ScopeType, com.sun.xml.internal.ws.policy.PolicyMapKey, com.sun.xml.internal.ws.policy.Policy) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMap.1 1()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMap.1 boolean areEqual(com.sun.xml.internal.ws.policy.PolicyMapKey, com.sun.xml.internal.ws.policy.PolicyMapKey) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMap.1 boolean areEqual(com.sun.xml.internal.ws.policy.PolicyMapKey, com.sun.xml.internal.ws.policy.PolicyMapKey) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMap.1 boolean areEqual(com.sun.xml.internal.ws.policy.PolicyMapKey, com.sun.xml.internal.ws.policy.PolicyMapKey)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMap.1 int generateHashCode(com.sun.xml.internal.ws.policy.PolicyMapKey) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMap.2 2()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMap.2 boolean areEqual(com.sun.xml.internal.ws.policy.PolicyMapKey, com.sun.xml.internal.ws.policy.PolicyMapKey)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMap.2 int generateHashCode(com.sun.xml.internal.ws.policy.PolicyMapKey) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMap.3 3()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMap.3 boolean areEqual(com.sun.xml.internal.ws.policy.PolicyMapKey, com.sun.xml.internal.ws.policy.PolicyMapKey)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMap.3 int generateHashCode(com.sun.xml.internal.ws.policy.PolicyMapKey) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMap.4 4()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMap.4 boolean areEqual(com.sun.xml.internal.ws.policy.PolicyMapKey, com.sun.xml.internal.ws.policy.PolicyMapKey)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMap.4 int generateHashCode(com.sun.xml.internal.ws.policy.PolicyMapKey) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -463,6 +614,9 @@
   <item name="com.sun.xml.internal.ws.policy.PolicyMap.ScopeMap java.util.Map access$100(com.sun.xml.internal.ws.policy.PolicyMap.ScopeMap) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMap.ScopeMap java.util.Map access$100(com.sun.xml.internal.ws.policy.PolicyMap.ScopeMap)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMap.ScopeMap void putSubject(com.sun.xml.internal.ws.policy.PolicyMapKey, com.sun.xml.internal.ws.policy.PolicySubject) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -472,8 +626,15 @@
   <item name="com.sun.xml.internal.ws.policy.PolicyMap.ScopeMap void setNewEffectivePolicy(com.sun.xml.internal.ws.policy.PolicyMapKey, com.sun.xml.internal.ws.policy.Policy) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMap.ScopeType ScopeType(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMapExtender PolicyMapExtender()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMapExtender com.sun.xml.internal.ws.policy.PolicyMapExtender createPolicyMapExtender()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMapExtender void putEndpointSubject(com.sun.xml.internal.ws.policy.PolicyMapKey, com.sun.xml.internal.ws.policy.PolicySubject) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -496,6 +657,9 @@
   <item name="com.sun.xml.internal.ws.policy.PolicyMapKey PolicyMapKey(com.sun.xml.internal.ws.policy.PolicyMapKey) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMapKey PolicyMapKey(com.sun.xml.internal.ws.policy.PolicyMapKey)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMapKey PolicyMapKey(javax.xml.namespace.QName, javax.xml.namespace.QName, javax.xml.namespace.QName, com.sun.xml.internal.ws.policy.PolicyMapKeyHandler) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -508,14 +672,44 @@
   <item name="com.sun.xml.internal.ws.policy.PolicyMapKey java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMapKey javax.xml.namespace.QName getFaultMessage()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMapKey javax.xml.namespace.QName getOperation()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMapKey javax.xml.namespace.QName getPort()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMapKey javax.xml.namespace.QName getService()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMapKey void setHandler(com.sun.xml.internal.ws.policy.PolicyMapKeyHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMapMutator PolicyMapMutator()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMapMutator boolean isConnected()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMapMutator com.sun.xml.internal.ws.policy.PolicyMap getMap()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMapMutator void disconnect()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMapUtil PolicyMapUtil()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMapUtil void insertPolicies(com.sun.xml.internal.ws.policy.PolicyMap, java.util.Collection&lt;com.sun.xml.internal.ws.policy.PolicySubject&gt;, javax.xml.namespace.QName, javax.xml.namespace.QName) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMapUtil void rejectAlternatives(com.sun.xml.internal.ws.policy.PolicyMap) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMerger PolicyMerger()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyMerger com.sun.xml.internal.ws.policy.Policy merge(java.util.Collection&lt;com.sun.xml.internal.ws.policy.Policy&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -524,6 +718,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyMerger com.sun.xml.internal.ws.policy.PolicyMerger getMerger()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyScope PolicyScope(java.util.List&lt;com.sun.xml.internal.ws.policy.PolicySubject&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -542,6 +739,9 @@
       <val val="&quot;_,!null-&gt;!null&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyScope java.util.Collection&lt;com.sun.xml.internal.ws.policy.PolicySubject&gt; getPolicySubjects()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyScope void attach(com.sun.xml.internal.ws.policy.PolicySubject) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -559,6 +759,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicySubject com.sun.xml.internal.ws.policy.Policy getEffectivePolicy(com.sun.xml.internal.ws.policy.PolicyMerger) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicySubject java.lang.Object getSubject()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicySubject java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -579,5 +782,11 @@
   </item>
   <item name="com.sun.xml.internal.ws.policy.SimpleAssertion SimpleAssertion(com.sun.xml.internal.ws.policy.sourcemodel.AssertionData, java.util.Collection&lt;? extends com.sun.xml.internal.ws.policy.PolicyAssertion&gt;) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.SimpleAssertion boolean hasNestedPolicy()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.SimpleAssertion com.sun.xml.internal.ws.policy.NestedPolicy getNestedPolicy()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
 </root>

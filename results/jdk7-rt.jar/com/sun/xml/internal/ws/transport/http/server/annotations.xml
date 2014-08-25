@@ -28,8 +28,23 @@
       <val val="&quot;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.EndpointImpl boolean isPublished()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.EndpointImpl java.lang.Object getImplementor()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.EndpointImpl java.util.List&lt;javax.xml.transform.Source&gt; getMetadata()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.EndpointImpl java.util.Map&lt;java.lang.String,java.lang.Object&gt; getProperties()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.EndpointImpl java.util.concurrent.Executor getExecutor()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.EndpointImpl javax.xml.ws.Binding getBinding()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.EndpointImpl void publish(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -40,8 +55,17 @@
   <item name="com.sun.xml.internal.ws.transport.http.server.EndpointImpl void publish(javax.xml.ws.spi.http.HttpContext) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.EndpointImpl void setEndpointContext(javax.xml.ws.EndpointContext)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.EndpointImpl void setExecutor(java.util.concurrent.Executor)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.EndpointImpl void setProperties(java.util.Map&lt;java.lang.String,java.lang.Object&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.EndpointImpl.InvokerImpl InvokerImpl(javax.xml.ws.spi.Invoker)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.EndpointImpl.InvokerImpl java.lang.Object invoke(com.sun.xml.internal.ws.api.message.Packet, java.lang.reflect.Method, java.lang.Object...) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -49,11 +73,17 @@
   <item name="com.sun.xml.internal.ws.transport.http.server.EndpointImpl.InvokerImpl void start(com.sun.xml.internal.ws.api.server.WSWebServiceContext, com.sun.xml.internal.ws.api.server.WSEndpoint) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.HttpEndpoint HttpEndpoint(java.util.concurrent.Executor, com.sun.xml.internal.ws.transport.http.HttpAdapter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.HttpEndpoint T getEndpointReference(java.lang.Class&lt;T&gt;, org.w3c.dom.Element...) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.HttpEndpoint T getEndpointReference(java.lang.Class&lt;T&gt;, org.w3c.dom.Element...) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.HttpEndpoint com.sun.xml.internal.ws.transport.http.HttpAdapterList getAdapterOwner()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.HttpEndpoint void publish(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -67,11 +97,21 @@
   <item name="com.sun.xml.internal.ws.transport.http.server.HttpEndpoint void setHandler(javax.xml.ws.spi.http.HttpContext) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.PortableConnectionImpl PortableConnectionImpl(com.sun.xml.internal.ws.transport.http.HttpAdapter, javax.xml.ws.spi.http.HttpExchange)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.PortableConnectionImpl boolean isUserInRole(com.sun.xml.internal.ws.api.message.Packet, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.PortableConnectionImpl com.sun.xml.internal.ws.api.PropertySet.PropertyMap getPropertyMap()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.PortableConnectionImpl com.sun.xml.internal.ws.api.server.WebServiceContextDelegate getWebServiceContextDelegate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.PortableConnectionImpl int getStatus()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.PortableConnectionImpl java.lang.String getBaseAddress()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -91,14 +131,29 @@
   <item name="com.sun.xml.internal.ws.transport.http.server.PortableConnectionImpl java.security.Principal getUserPrincipal(com.sun.xml.internal.ws.api.message.Packet) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.PortableConnectionImpl javax.xml.ws.spi.http.HttpExchange getExchange()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.PortableConnectionImpl void setResponseHeaders(java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.PortableConnectionImpl void setStatus(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.PortableHttpHandler void handleExchange(javax.xml.ws.spi.http.HttpExchange) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.PortableHttpHandler.HttpHandlerRunnable HttpHandlerRunnable(com.sun.xml.internal.ws.transport.http.server.PortableHttpHandler, javax.xml.ws.spi.http.HttpExchange)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.ServerAdapter ServerAdapter(java.lang.String, java.lang.String, com.sun.xml.internal.ws.api.server.WSEndpoint, com.sun.xml.internal.ws.transport.http.server.ServerAdapterList) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerAdapter java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerAdapter java.lang.String getUrlPattern()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.ServerAdapter java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -118,6 +173,12 @@
   <item name="com.sun.xml.internal.ws.transport.http.server.ServerAdapterList com.sun.xml.internal.ws.transport.http.server.ServerAdapter createHttpAdapter(java.lang.String, java.lang.String, com.sun.xml.internal.ws.api.server.WSEndpoint&lt;?&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerConnectionImpl ServerConnectionImpl(com.sun.xml.internal.ws.transport.http.HttpAdapter, com.sun.net.httpserver.HttpExchange)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerConnectionImpl boolean isSecure()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.ServerConnectionImpl boolean isUserInRole(com.sun.xml.internal.ws.api.message.Packet, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -128,12 +189,26 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;false;_,!null-&gt;false;_,null-&gt;false;null,_-&gt;false&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerConnectionImpl com.sun.net.httpserver.HttpExchange getExchange()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerConnectionImpl com.sun.xml.internal.ws.api.PropertySet.PropertyMap getPropertyMap()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.ServerConnectionImpl com.sun.xml.internal.ws.api.server.WebServiceContextDelegate getWebServiceContextDelegate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.ServerConnectionImpl com.sun.xml.internal.ws.transport.http.server.ServerConnectionImpl.LWHSInputStream access$000(com.sun.xml.internal.ws.transport.http.server.ServerConnectionImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerConnectionImpl com.sun.xml.internal.ws.transport.http.server.ServerConnectionImpl.LWHSInputStream access$000(com.sun.xml.internal.ws.transport.http.server.ServerConnectionImpl)">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerConnectionImpl int getStatus()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.ServerConnectionImpl java.lang.String getBaseAddress()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -156,18 +231,57 @@
   <item name="com.sun.xml.internal.ws.transport.http.server.ServerConnectionImpl void setResponseHeaders(java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerConnectionImpl void setStatus(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerConnectionImpl.1 1(com.sun.xml.internal.ws.transport.http.server.ServerConnectionImpl, java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerConnectionImpl.LWHSInputStream LWHSInputStream(java.io.InputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerContainer ServerContainer()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.ServerContainer T getSPI(java.lang.Class&lt;T&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerContainer.1 1(com.sun.xml.internal.ws.transport.http.server.ServerContainer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerContainer.1 java.util.List&lt;com.sun.xml.internal.ws.api.server.BoundEndpoint&gt; getBoundEndpoints()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.ServerMgr com.sun.net.httpserver.HttpContext createContext(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerMgr com.sun.xml.internal.ws.transport.http.server.ServerMgr getInstance()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.ServerMgr void removeContext(com.sun.net.httpserver.HttpContext) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerMgr.ServerState ServerState(com.sun.net.httpserver.HttpServer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerMgr.ServerState com.sun.net.httpserver.HttpServer getServer()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerMgr.ServerState int noOfContexts()">
+    <annotation name="org.jetbrains.annotations.Pure"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerMgr.ServerState void oneLessContext()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.ServerMgr.ServerState void oneMoreContext()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.transport.http.server.WSHttpHandler void handleExchange(com.sun.net.httpserver.HttpExchange) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.server.WSHttpHandler.HttpHandlerRunnable HttpHandlerRunnable(com.sun.xml.internal.ws.transport.http.server.WSHttpHandler, com.sun.net.httpserver.HttpExchange)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>
