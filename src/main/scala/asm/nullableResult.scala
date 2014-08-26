@@ -69,6 +69,12 @@ case class NullableResultInterpreter(insns: InsnList, origins: Array[Boolean]) e
     insn.getOpcode match {
       case GETFIELD | ARRAYLENGTH | MONITORENTER if value.isInstanceOf[Calls] =>
         delta = value.asInstanceOf[Calls].keys
+      case IFNULL if value.isInstanceOf[Calls] =>
+        notNullInsn = Some(insns.indexOf(insn) + 1)
+        notNullCall = value.asInstanceOf[Calls].keys
+      case IFNONNULL if value.isInstanceOf[Calls] =>
+        notNullInsn = Some(insns.indexOf(insn.asInstanceOf[JumpInsnNode].label))
+        notNullCall = value.asInstanceOf[Calls].keys
       case _ =>
     }
     super.unaryOperation(insn, value)
@@ -138,14 +144,22 @@ case class NullableResultInterpreter(insns: InsnList, origins: Array[Boolean]) e
 
   var dereferenced: Set[Key] = null
   var delta: Set[Key] = null
+  var notNullInsn: Option[Int] = None
+  var notNullCall: Set[Key] = Set()
 
   override def init(previous: Set[Key]) {
     dereferenced = previous
     delta = Set()
+    notNullInsn = None
+    notNullCall = Set()
   }
 
-  override def getAfterData: Set[Key] =
-    dereferenced ++ delta
+  override def getAfterData(insn: Int): Set[Key] =
+    dereferenced ++ delta ++ (
+      if (Some(insn) == notNullInsn) {
+        notNullCall
+      } else Set()
+    )
 
   // all keys that were dereferenced to this point
   override def merge(data1: Set[Key], data2: Set[Key]): Set[Key] =

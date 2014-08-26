@@ -173,6 +173,7 @@ public class AnalyzerExt<V extends Value, Data, MyInterpreter extends Interprete
                 if (insnType == AbstractInsnNode.LABEL
                         || insnType == AbstractInsnNode.LINE
                         || insnType == AbstractInsnNode.FRAME) {
+                    interpreter.init(data[insn]);
                     merge(insn + 1, f, subroutine);
                     newControlFlowEdge(insn, insn + 1);
                 } else {
@@ -447,7 +448,7 @@ public class AnalyzerExt<V extends Value, Data, MyInterpreter extends Interprete
         boolean changes = false;
 
         Data oldData = data[insn];
-        Data newData = interpreter.getAfterData();
+        Data newData = interpreter.getAfterData(insn);
 
         if (oldData == null) {
             data[insn] = newData;
