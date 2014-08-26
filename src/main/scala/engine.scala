@@ -88,7 +88,7 @@ trait StableAwareId[K] {
   def mkStable: K
 }
 
-final class Solver[K <: StableAwareId[K], V](val doNothing: Boolean)(implicit lattice: Lattice[V]) {
+class Solver[K <: StableAwareId[K], V](val doNothing: Boolean)(implicit lattice: Lattice[V]) {
 
   type Solution = (K, V)
   val top = lattice.top
@@ -126,12 +126,11 @@ final class Solver[K <: StableAwareId[K], V](val doNothing: Boolean)(implicit la
       val (ident, value) = moving.dequeue()
       solved = solved + (ident -> value)
 
-      // intricate logic here (null -> ... inference is a bit strange for now - optimistic assumption)
       val toPropagate: List[(K, V)] =
         if (ident.stable)
           List((ident, value), (ident.mkUnstable, value))
         else
-          List((ident.mkStable, value), (ident, top))
+          List((ident.mkStable, value), (ident, mkUnstableValue(value)))
 
       for {
         (pId, pValue) <- toPropagate
@@ -152,6 +151,8 @@ final class Solver[K <: StableAwareId[K], V](val doNothing: Boolean)(implicit la
     solved
   }
 
+  def mkUnstableValue(v: V) = top
+
   private def substitute(pending: Pending[K, V], id: K, value: V): Result[K, V] = {
 
     val sum = pending.delta.map { prod =>
@@ -171,4 +172,9 @@ final class Solver[K <: StableAwareId[K], V](val doNothing: Boolean)(implicit la
     else Pending(sum)
   }
 
+}
+
+class NullableResultSolver[K <: StableAwareId[K], V](doNothing: Boolean)(implicit lattice: Lattice[V])
+  extends Solver[K, V](doNothing)(lattice) {
+  override def mkUnstableValue(v: V) = bot
 }

@@ -65,6 +65,9 @@
   <item name="java.security.cert.CertStore java.security.cert.CertStore handleException(java.security.NoSuchAlgorithmException) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.security.cert.CertStore java.security.cert.CertStoreParameters getCertStoreParameters()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.security.cert.CertStoreSpi CertStoreSpi(java.security.cert.CertStoreParameters) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -115,6 +118,9 @@
   </item>
   <item name="java.security.cert.CertificateRevokedException java.lang.String getMessage()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.security.cert.CertificateRevokedException java.util.Date getInvalidityDate()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.security.cert.CertificateRevokedException java.util.Map&lt;java.lang.String,java.security.cert.Extension&gt; getExtensions()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -173,6 +179,12 @@
   <item name="java.security.cert.PKIXParameters java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.security.cert.PKIXParameters java.security.cert.CertSelector getTargetCertConstraints()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.PKIXParameters java.util.Date getDate()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.security.cert.PKIXParameters java.util.List&lt;java.security.cert.CertStore&gt; getCertStores()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -206,6 +218,9 @@
   <item name="java.security.cert.PolicyQualifierInfo PolicyQualifierInfo(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.security.cert.PolicyQualifierInfo byte[] getPolicyQualifier()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.security.cert.TrustAnchor TrustAnchor(java.lang.String, java.security.PublicKey, byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -230,6 +245,9 @@
   <item name="java.security.cert.TrustAnchor TrustAnchor(javax.security.auth.x500.X500Principal, java.security.PublicKey, byte[]) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.security.cert.TrustAnchor byte[] getNameConstraints()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.security.cert.TrustAnchor java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -242,7 +260,16 @@
   <item name="java.security.cert.X509CRL java.security.cert.X509CRLEntry getRevokedCertificate(java.security.cert.X509Certificate) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.security.cert.X509CRL java.security.cert.X509CRLEntry getRevokedCertificate(java.security.cert.X509Certificate)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.security.cert.X509CRLEntry boolean equals(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.X509CRLEntry java.security.cert.CRLReason getRevocationReason()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.X509CRLEntry javax.security.auth.x500.X500Principal getCertificateIssuer()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.security.cert.X509CRLSelector boolean match(java.security.cert.CRL) 0">
@@ -255,6 +282,15 @@
   </item>
   <item name="java.security.cert.X509CRLSelector java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.security.cert.X509CRLSelector java.util.Collection&lt;java.lang.Object&gt; getIssuerNames()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.X509CRLSelector java.util.Collection&lt;javax.security.auth.x500.X500Principal&gt; getIssuers()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.X509CRLSelector java.util.Date getDateAndTime()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.security.cert.X509CRLSelector java.util.HashSet&lt;java.lang.Object&gt; cloneAndCheckIssuerNames(java.util.Collection&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -315,6 +351,33 @@
       <val val="&quot;null-&gt;true&quot;"/>
     </annotation>
   </item>
+  <item name="java.security.cert.X509CertSelector boolean[] getKeyUsage()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.X509CertSelector byte[] getAuthorityKeyIdentifier()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.X509CertSelector byte[] getIssuerAsBytes()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.X509CertSelector byte[] getNameConstraints()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.X509CertSelector byte[] getSubjectAsBytes()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.X509CertSelector byte[] getSubjectKeyIdentifier()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.X509CertSelector java.lang.String getIssuerAsString()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.X509CertSelector java.lang.String getSubjectAsString()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.X509CertSelector java.lang.String getSubjectPublicKeyAlgID()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.security.cert.X509CertSelector java.lang.String keyUsageToString(boolean[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -323,6 +386,21 @@
   </item>
   <item name="java.security.cert.X509CertSelector java.security.cert.Extension getExtensionObject(java.security.cert.X509Certificate, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.security.cert.X509CertSelector java.security.cert.Extension getExtensionObject(java.security.cert.X509Certificate, int)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.X509CertSelector java.util.Collection&lt;java.util.List&lt;?&gt;&gt; getPathToNames()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.X509CertSelector java.util.Collection&lt;java.util.List&lt;?&gt;&gt; getSubjectAlternativeNames()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.X509CertSelector java.util.Date getCertificateValid()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.X509CertSelector java.util.Date getPrivateKeyValid()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.security.cert.X509CertSelector java.util.Set&lt;?&gt; cloneSet(java.util.Set&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -408,6 +486,15 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.security.cert.X509CertSelector void setSubjectPublicKeyAlgID(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.X509Certificate java.util.Collection&lt;java.util.List&lt;?&gt;&gt; getIssuerAlternativeNames()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.X509Certificate java.util.Collection&lt;java.util.List&lt;?&gt;&gt; getSubjectAlternativeNames()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.security.cert.X509Certificate java.util.List&lt;java.lang.String&gt; getExtendedKeyUsage()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
 </root>
