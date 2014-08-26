@@ -116,9 +116,9 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, stable: Boolean) = {
+  override def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, origins: Array[Boolean], stable: Boolean) = {
     val start = System.nanoTime()
-    val result = super.nullableResultEquation(className, methodNode, method, stable)
+    val result = super.nullableResultEquation(className, methodNode, method, origins, stable)
     nullableResultTime += System.nanoTime() - start
     result
   }

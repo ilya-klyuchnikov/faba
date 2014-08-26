@@ -176,5 +176,5 @@ class Solver[K <: StableAwareId[K], V](val doNothing: Boolean)(implicit lattice:
 
 class NullableResultSolver[K <: StableAwareId[K], V](doNothing: Boolean)(implicit lattice: Lattice[V])
   extends Solver[K, V](doNothing)(lattice) {
-  override def mkUnstableValue(v: V) = v
+  override def mkUnstableValue(v: V) = bot
 }

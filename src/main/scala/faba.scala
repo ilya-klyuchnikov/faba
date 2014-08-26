@@ -85,13 +85,16 @@ trait FabaProcessor extends Processor {
       (acc & ACC_FINAL) != 0 || (acc & ACC_PRIVATE) != 0 || (acc & ACC_STATIC) != 0
     var added = false
 
+    val graph = buildCFG(className, methodNode, jsr)
+    lazy val leaking = leakingParameters(className, methodNode, jsr)
+    val resultOrigins = buildResultOrigins(className, methodNode, leaking.frames, graph)
     // nullable result
     if (isReferenceResult) {
-      val nullableResultEq = nullableResultEquation(className, methodNode, method, stable)
+      val nullableResultEq = nullableResultEquation(className, methodNode, method, resultOrigins, stable)
       handleNullableResultEquation(nullableResultEq)
     }
 
-    val graph = buildCFG(className, methodNode, jsr)
+
     if (graph.transitions.nonEmpty) {
       val dfs = buildDFSTree(graph.transitions)
       val complex = dfs.back.nonEmpty || graph.transitions.exists(_.size > 1)
@@ -345,8 +348,8 @@ trait FabaProcessor extends Processor {
     }
   }
 
-  def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, stable: Boolean): Equation[Key, Value] =
-    Equation(Key(method, Out, stable), NullableResultAnalysis.analyze(className, methodNode))
+  def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, origins: Array[Boolean], stable: Boolean): Equation[Key, Value] =
+    Equation(Key(method, Out, stable), NullableResultAnalysis.analyze(className, methodNode, origins))
 
   def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit = ()
   def handleNullableParamEquation(eq: Equation[Key, Value]): Unit = ()
