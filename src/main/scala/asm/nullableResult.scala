@@ -1,6 +1,5 @@
 package faba.asm.nullableResult
 
-import faba.analysis.NullValue
 import faba.asm.{InterpreterExt, AnalyzerExt}
 import faba.data._
 import faba.engine._
@@ -8,44 +7,51 @@ import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.tree.analysis.{BasicInterpreter, BasicValue}
 import org.objectweb.asm.tree._
 import org.objectweb.asm.{Opcodes, Type}
+
+// this is significant to set magic type because of BasicObject#equals
+case class LabeledNull(is: Set[Int]) extends BasicValue(Type.getObjectType("null"))
 case class Calls(keys: Set[Key]) extends BasicValue(NullableResultAnalysis.ObjectType)
 case class ThisValue() extends BasicValue(NullableResultAnalysis.ObjectType)
+case class Constraint(calls: Set[Key], nulls: Set[Int])
 
 object NullableResultAnalysis {
+  val lNull = new LabeledNull(Set())
   val ObjectType = Type.getObjectType("java/lang/Object")
   def analyze(className: String, methodNode: MethodNode, origins: Array[Boolean]): Result[Key, Value] = {
     val insns = methodNode.instructions
-    val data = new Array[Set[Key]](insns.size())
-    val analyzer = new AnalyzerExt[BasicValue, Set[Key], NullableResultInterpreter](NullableResultInterpreter(insns, origins), data, Set())
+    val data = new Array[Constraint](insns.size())
+    val analyzer = new AnalyzerExt[BasicValue, Constraint, NullableResultInterpreter](NullableResultInterpreter(insns, origins), data, Constraint(Set(), Set()))
     val frames = analyzer.analyze("this", methodNode)
     var result = BasicValue.REFERENCE_VALUE
     for (i <- 0 until frames.length) {
       val frame = frames(i)
       if (frame != null && insns.get(i).getOpcode == Opcodes.ARETURN) {
-        val derefs = analyzer.getData()(i)
-        result = combine(result, frame.pop(), derefs)
+        val constraint = analyzer.getData()(i)
+        result = combine(result, frame.pop(), constraint)
       }
     }
     mkEquation(result)
   }
 
-  def combine(v1: BasicValue, v2: BasicValue, derefs: Set[Key]): BasicValue = (v1, v2) match {
-    case (NullValue(), _) =>
-      NullValue()
-    case (_, NullValue()) =>
-      NullValue()
+  // the second is new value
+  def combine(v1: BasicValue, v2: BasicValue, constraint: Constraint): BasicValue = (v1, v2) match {
+    case (LabeledNull(_), _) =>
+      lNull
+    case (_, LabeledNull(is)) =>
+      val aliveNulls = is -- constraint.nulls
+      if (aliveNulls.nonEmpty) lNull else v1
     case (Calls(keys1), Calls(keys2)) =>
-      Calls(keys1 ++ (keys2 -- derefs))
+      Calls(keys1 ++ (keys2 -- constraint.calls))
     case (Calls(_), _) =>
       v1
     case (_, Calls(keys)) =>
-      Calls(keys -- derefs)
+      Calls(keys -- constraint.calls)
     case _ =>
       BasicValue.REFERENCE_VALUE
   }
 
   def mkEquation(v: BasicValue): Result[Key, Value] = v match {
-    case NullValue() =>
+    case LabeledNull(_) =>
       Final(Values.Null)
     case Calls(keys) =>
       Pending[Key, Value](keys map { k => Component(Values.Null, Set(k)) })
@@ -54,14 +60,16 @@ object NullableResultAnalysis {
   }
 }
 
-case class NullableResultInterpreter(insns: InsnList, origins: Array[Boolean]) extends BasicInterpreter with InterpreterExt[Set[Key]] {
+case class NullableResultInterpreter(insns: InsnList, origins: Array[Boolean]) extends BasicInterpreter with InterpreterExt[Constraint] {
 
   override def newValue(tp: Type): BasicValue =
     if (tp != null && tp.toString == "Lthis;") ThisValue() else super.newValue(tp)
 
   override def newOperation(insn: AbstractInsnNode): BasicValue =
-    if (insn.getOpcode == Opcodes.ACONST_NULL)
-      NullValue()
+    if (insn.getOpcode == Opcodes.ACONST_NULL) {
+      val insnIndex = insns.indexOf(insn)
+      if (origins(insnIndex)) LabeledNull(Set(insnIndex)) else super.newOperation(insn)
+    }
     else
       super.newOperation(insn)
 
@@ -72,9 +80,15 @@ case class NullableResultInterpreter(insns: InsnList, origins: Array[Boolean]) e
       case IFNULL if value.isInstanceOf[Calls] =>
         notNullInsn = Some(insns.indexOf(insn) + 1)
         notNullCall = value.asInstanceOf[Calls].keys
+      case IFNULL if value.isInstanceOf[LabeledNull] =>
+        notNullInsn = Some(insns.indexOf(insn) + 1)
+        notNullNull = value.asInstanceOf[LabeledNull].is
       case IFNONNULL if value.isInstanceOf[Calls] =>
         notNullInsn = Some(insns.indexOf(insn.asInstanceOf[JumpInsnNode].label))
         notNullCall = value.asInstanceOf[Calls].keys
+      case IFNONNULL if value.isInstanceOf[LabeledNull] =>
+        notNullInsn = Some(insns.indexOf(insn.asInstanceOf[JumpInsnNode].label))
+        notNullNull = value.asInstanceOf[LabeledNull].is
       case _ =>
     }
     super.unaryOperation(insn, value)
@@ -82,8 +96,14 @@ case class NullableResultInterpreter(insns: InsnList, origins: Array[Boolean]) e
 
   final override def binaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue): BasicValue = {
     insn.getOpcode match {
-      case PUTFIELD | IALOAD | LALOAD | FALOAD | DALOAD | AALOAD | BALOAD | CALOAD | SALOAD if v1.isInstanceOf[Calls] =>
-        delta = v1.asInstanceOf[Calls].keys
+      case PUTFIELD | IALOAD | LALOAD | FALOAD | DALOAD | AALOAD | BALOAD | CALOAD | SALOAD =>
+        v1 match {
+          case Calls(keys) =>
+            delta = keys
+          case LabeledNull(is) =>
+            nullsDelta = is
+          case _ =>
+        }
       case _ =>
     }
     super.binaryOperation(insn, v1, v2)
@@ -92,8 +112,13 @@ case class NullableResultInterpreter(insns: InsnList, origins: Array[Boolean]) e
   final override def ternaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue, v3: BasicValue): BasicValue = {
     insn.getOpcode match {
       case IASTORE | LASTORE | FASTORE | DASTORE | BASTORE | CASTORE | SASTORE | AASTORE =>
-        if (v1.isInstanceOf[Calls])
-          delta = v1.asInstanceOf[Calls].keys
+        v1 match {
+          case Calls(keys) =>
+            delta = keys
+          case LabeledNull(is) =>
+            nullsDelta = is
+          case _ =>
+        }
       case _ =>
     }
     super.ternaryOperation(insn, v1, v2, v3)
@@ -107,6 +132,8 @@ case class NullableResultInterpreter(insns: InsnList, origins: Array[Boolean]) e
         values.get(0) match {
           case Calls(keys) =>
             delta = keys
+          case LabeledNull(is) =>
+            nullsDelta = is
           case _ =>
         }
       case _ =>
@@ -128,10 +155,12 @@ case class NullableResultInterpreter(insns: InsnList, origins: Array[Boolean]) e
   }
 
   override def merge(v1: BasicValue, v2: BasicValue): BasicValue = (v1, v2) match {
-    case (NullValue(), _) =>
-      NullValue()
-    case (_, NullValue()) =>
-      NullValue()
+    case (LabeledNull(is1), LabeledNull(is2)) =>
+      LabeledNull(is1 ++ is2)
+    case (LabeledNull(_), _) =>
+      v1
+    case (_, LabeledNull(_)) =>
+      v2
     case (Calls(keys1), Calls(keys2)) =>
       Calls(keys1 ++ keys2)
     case (Calls(_), _) =>
@@ -142,26 +171,33 @@ case class NullableResultInterpreter(insns: InsnList, origins: Array[Boolean]) e
       super.merge(v1, v2)
   }
 
-  var dereferenced: Set[Key] = null
+  var constraint: Constraint = null
   var delta: Set[Key] = null
+  var nullsDelta: Set[Int] = null
+
   var notNullInsn: Option[Int] = None
   var notNullCall: Set[Key] = Set()
+  var notNullNull: Set[Int] = Set()
 
-  override def init(previous: Set[Key]) {
-    dereferenced = previous
+  override def init(previous: Constraint) {
+    constraint = previous
     delta = Set()
+    nullsDelta = Set()
+
     notNullInsn = None
     notNullCall = Set()
+    notNullNull = Set()
   }
 
-  override def getAfterData(insn: Int): Set[Key] =
-    dereferenced ++ delta ++ (
-      if (Some(insn) == notNullInsn) {
-        notNullCall
-      } else Set()
+  override def getAfterData(insn: Int): Constraint = {
+    val notNull = Some(insn) == notNullInsn
+    Constraint(
+      constraint.calls ++ delta ++ (if (notNull) notNullCall else Set()),
+      constraint.nulls ++ nullsDelta ++ (if (notNull) notNullNull else Set())
     )
+  }
 
   // all keys that were dereferenced to this point
-  override def merge(data1: Set[Key], data2: Set[Key]): Set[Key] =
-    data1 ++ data2
+  override def merge(constraint1: Constraint, constraint2: Constraint): Constraint =
+    Constraint(constraint1.calls ++ constraint2.calls, constraint1.nulls ++ constraint2.nulls)
 }
