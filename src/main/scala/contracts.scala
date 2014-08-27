@@ -115,7 +115,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
       val dereferencedHere: Set[Int] = Set()
       val dereferenced = constraint.dereferenced ++ dereferencedHere
 
-      if (interpreter.dereferenced) {
+      if (interpreter.dereferencedParam) {
         computed(insnIndex) = state :: computed(insnIndex)
         // enough to break this branch - it will be bottom, will not contribute to the result
         return
@@ -207,10 +207,10 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
 
   private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
-      interpreter.dereferenced = false
+      interpreter.reset()
       frame
     case _ =>
-      interpreter.dereferenced = false
+      interpreter.reset()
       val nextFrame = new Frame(frame)
       nextFrame.execute(insnNode, interpreter)
       nextFrame
@@ -266,7 +266,14 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
   def index(insn: AbstractInsnNode) =
     insns.indexOf(insn)
 
-  var dereferenced = false
+  var dereferencedParam = false
+  var dereferencedVal: Option[Int] = None
+
+  def reset(): Unit = {
+    dereferencedParam = false
+    dereferencedVal = None
+  }
+
   val nullAnalysis = direction match {
     case InOut(_, Values.Null) => true
     case _ => false
@@ -306,8 +313,15 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
   override def unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue = {
     val propagate_? = resultOrigins == null || resultOrigins(insns.indexOf(insn))
     insn.getOpcode match {
-      case GETFIELD | ARRAYLENGTH | MONITORENTER if nullAnalysis && value.isInstanceOf[ParamValue] =>
-        dereferenced = true
+      // todo - GETFIELD and GETSTATIC may be origins, should be Trackable (in the future)
+      case GETFIELD | ARRAYLENGTH | MONITORENTER =>
+        value match {
+          case ParamValue(_) =>
+            dereferencedParam = nullAnalysis
+          case tr: Trackable =>
+            dereferencedVal = Some(tr.origin)
+          case _ =>
+        }
         super.unaryOperation(insn, value)
       case CHECKCAST if value.isInstanceOf[ParamValue] =>
         new ParamValue(Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc))
@@ -321,10 +335,16 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
   }
 
   override def binaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue): BasicValue = {
+    // todo - AALOAD maybe origin
     insn.getOpcode match {
-      case IALOAD | LALOAD | FALOAD | DALOAD | AALOAD | BALOAD | CALOAD | SALOAD | PUTFIELD
-        if nullAnalysis && v1.isInstanceOf[ParamValue] =>
-          dereferenced = true
+      case IALOAD | LALOAD | FALOAD | DALOAD | AALOAD | BALOAD | CALOAD | SALOAD | PUTFIELD =>
+        v1 match {
+          case ParamValue(_) =>
+            dereferencedParam = nullAnalysis
+          case tr: Trackable =>
+            dereferencedVal = Some(tr.origin)
+          case _ =>
+        }
       case _ =>
     }
     super.binaryOperation(insn, v1, v2)
@@ -332,12 +352,17 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
 
   override def ternaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue, v3: BasicValue): BasicValue = {
     insn.getOpcode match {
-      case IASTORE | LASTORE | FASTORE | DASTORE | AASTORE | BASTORE | CASTORE | SASTORE
-        if nullAnalysis && v1.isInstanceOf[ParamValue] =>
-        dereferenced = true
+      case IASTORE | LASTORE | FASTORE | DASTORE | AASTORE | BASTORE | CASTORE | SASTORE =>
+        v1 match {
+          case ParamValue(_) =>
+            dereferencedParam = nullAnalysis
+          case tr: Trackable =>
+            dereferencedVal = Some(tr.origin)
+          case _ =>
+        }
       case _ =>
     }
-    super.ternaryOperation(insn, v1, v2, v3)
+    null
   }
 
   @switch
@@ -345,9 +370,16 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
     val propagate_? = resultOrigins == null || resultOrigins(insns.indexOf(insn))
     val opCode = insn.getOpcode
     val shift = if (opCode == INVOKESTATIC) 0 else 1
-    if ((opCode == INVOKESPECIAL || opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) && nullAnalysis && values.get(0).isInstanceOf[ParamValue]) {
-      dereferenced = true
-      return super.naryOperation(insn, values)
+    if (opCode == INVOKESPECIAL || opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) {
+      values.get(0) match {
+        case ParamValue(_) =>
+          dereferencedParam = nullAnalysis
+          if (nullAnalysis)
+            return super.naryOperation(insn, values)
+        case tr: Trackable =>
+          dereferencedVal = Some(tr.origin)
+        case _ =>
+      }
     }
     opCode match {
       case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE  if propagate_? =>
