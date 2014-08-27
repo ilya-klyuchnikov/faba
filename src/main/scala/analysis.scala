@@ -7,14 +7,19 @@ import faba.cfg._
 import faba.data._
 import faba.engine._
 
+trait Trackable {
+  val origin: Int
+}
+
 case class ParamValue(tp: Type) extends BasicValue(tp)
 case class InstanceOfCheckValue() extends BasicValue(Type.INT_TYPE)
 
 case class TrueValue() extends BasicValue(Type.INT_TYPE)
 case class FalseValue() extends BasicValue(Type.INT_TYPE)
-case class NullValue() extends BasicValue(Type.getObjectType("null"))
 case class NotNullValue(tp: Type) extends BasicValue(tp)
-case class CallResultValue(tp: Type, inters: Set[Key]) extends BasicValue(tp)
+
+case class NullValue(origin: Int) extends BasicValue(Type.getObjectType("null")) with Trackable
+case class CallResultValue(origin: Int, tp: Type, inters: Set[Key]) extends BasicValue(tp) with Trackable
 
 case class Conf(insnIndex: Int, frame: Frame[BasicValue]) {
   lazy val _hashCode = {
@@ -161,16 +166,16 @@ object Utils {
       case FalseValue() => true
       case _ => false
     }
-    case NullValue() => curr match {
-      case NullValue() => true
+    case NullValue(_) => curr match {
+      case NullValue(_) => true
       case _ => false
     }
     case NotNullValue(_) => curr match {
       case NotNullValue(_) => true
       case _ => false
     }
-    case CallResultValue(_, prevInters) => curr match {
-      case CallResultValue(_, currInters) => currInters == prevInters
+    case CallResultValue(_, _, prevInters) => curr match {
+      case CallResultValue(_, _, currInters) => currInters == prevInters
       case _ => false
     }
     case _: BasicValue => true
@@ -189,7 +194,7 @@ object Utils {
   def equiv(curr: BasicValue, prev: BasicValue): Boolean =
     if (curr.getClass == prev.getClass) {
       (curr, prev) match {
-        case (CallResultValue(_, k1), CallResultValue(_, k2)) =>
+        case (CallResultValue(_, _, k1), CallResultValue(_, _, k2)) =>
           k1 == k2
         case _ =>
           true

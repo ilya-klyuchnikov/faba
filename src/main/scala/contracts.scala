@@ -128,14 +128,15 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
               myResult = myResult join Final(Values.False)
             case TrueValue() =>
               myResult = myResult join Final(Values.True)
-            case NullValue() =>
-              myResult = myResult join Final(Values.Null)
             case NotNullValue(_) =>
               myResult = myResult join Final(Values.NotNull)
             case ParamValue(_) =>
               val InOut(_, in) = direction
               myResult = myResult join Final(in)
-            case CallResultValue(_, keys) =>
+            // todo - insert dereferenced before
+            case NullValue(_) =>
+              myResult = myResult join Final(Values.Null)
+            case CallResultValue(_, _, keys) =>
               myResult = myResult join Pending[Key, Value](Set(Component(Values.Top, keys)))
             case _ =>
               earlyResult = Some(Final(Values.Top))
@@ -220,13 +221,13 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
   def generalize(conf: Conf): Conf = {
     val frame = new Frame(conf.frame)
     for (i <- generalizeShift until frame.getLocals) frame.getLocal(i) match {
-      case CallResultValue(tp, _) =>
+      case CallResultValue(_, tp, _) =>
         frame.setLocal(i, new BasicValue(tp))
       case TrueValue() =>
         frame.setLocal(i, BasicValue.INT_VALUE)
       case FalseValue() =>
         frame.setLocal(i, BasicValue.INT_VALUE)
-      case NullValue() =>
+      case NullValue(_) =>
         frame.setLocal(i, BasicValue.UNINITIALIZED_VALUE)
       case NotNullValue(tp) =>
         frame.setLocal(i, new BasicValue(tp))
@@ -237,13 +238,13 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     frame.clearStack()
 
     for (v <- stack) v match {
-      case CallResultValue(tp, _) =>
+      case CallResultValue(_, tp, _) =>
         frame.push(new BasicValue(tp))
       case TrueValue() =>
         frame.push(BasicValue.INT_VALUE)
       case FalseValue() =>
         frame.push(BasicValue.INT_VALUE)
-      case NullValue() =>
+      case NullValue(_) =>
         frame.push(BasicValue.UNINITIALIZED_VALUE)
       case NotNullValue(tp) =>
         frame.push(new BasicValue(tp))
@@ -263,6 +264,10 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
 
 case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins: Array[Boolean]) extends BasicInterpreter {
 
+  @inline
+  def index(insn: AbstractInsnNode) =
+    insns.indexOf(insn)
+
   var dereferenced = false
   val nullAnalysis = direction match {
     case InOut(_, Values.Null) => true
@@ -278,7 +283,7 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
       case ICONST_1 if propagate_? =>
         TrueValue()
       case ACONST_NULL if propagate_? =>
-        NullValue()
+        NullValue(index(insn))
       case LDC if propagate_? =>
         insn.asInstanceOf[LdcInsnNode].cst match {
           case tp: Type if tp.getSort == Type.OBJECT || tp.getSort == Type.ARRAY =>
@@ -365,10 +370,10 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
               if (isRefRetType)
                 keys = keys + Key(method, Out, stable)
               if (keys.nonEmpty)
-                return CallResultValue(retType, keys)
+                return CallResultValue(index(insn), retType, keys)
             case _ =>
               if (isRefRetType)
-                return CallResultValue(retType, Set(Key(method, Out, stable)))
+                return CallResultValue(index(insn), retType, Set(Key(method, Out, stable)))
           }
         super.naryOperation(insn, values)
       case MULTIANEWARRAY if propagate_? =>
