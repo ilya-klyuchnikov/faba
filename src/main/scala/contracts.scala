@@ -12,9 +12,20 @@ import faba.cfg._
 import faba.data._
 import faba.engine._
 
-class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Array[Boolean], val stable: Boolean) extends Analysis[Result[Key, Value]] {
+case class InOutConstraint(taken: Boolean)
 
-  val pending = Analysis.ourPending
+object InOutConstraint {
+  val TAKEN = InOutConstraint(true)
+  val NOT_TAKEN = InOutConstraint(false)
+}
+
+class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Array[Boolean], val stable: Boolean)
+  // the only constraint for now - null taken or not
+  extends Analysis[Result[Key, Value], InOutConstraint] {
+
+  import InOutConstraint._
+
+  val pending = Analysis.ourPending.asInstanceOf[Array[CState]]
   type MyResult = Result[Key, Value]
   implicit val contractsLattice = ELattice(Values.Bot, Values.Top)
   // there is no need to generalize this (local var 0)
@@ -50,12 +61,12 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
 
   private var pendingTop: Int = 0
 
-  final def pendingPush(st: State) {
+  final def pendingPush(st: CState) {
     pending(pendingTop) = st
     pendingTop += 1
   }
 
-  final def pendingPop(): State = {
+  final def pendingPop(): CState = {
     pendingTop -= 1
     pending(pendingTop)
   }
@@ -69,10 +80,10 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     mkEquation(earlyResult.getOrElse(myResult))
   }
 
-  override def processState(fState: State): Unit = {
+  override def processState(fState: CState): Unit = {
 
     var state = fState
-    var states: List[State] = Nil
+    var states: List[CState] = Nil
 
     while (true) {
       // sharing
@@ -98,7 +109,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
 
       val conf = if (loopEnter) generalize(preConf) else preConf
 
-      val taken = state.taken
+      val taken = state.constraint
       val frame = conf.frame
       val insnNode = methodNode.instructions.get(insnIndex)
       val nextHistory = if (loopEnter) conf :: history else history
@@ -143,7 +154,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             case InOut(_, Values.NotNull) =>
               methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           }
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, TAKEN)
           states = state :: states
           state = nextState
         case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
@@ -153,19 +164,20 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             case InOut(_, Values.NotNull) =>
               insnIndex + 1
           }
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, TAKEN)
           states = state :: states
           state = nextState
         case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
           val nextInsnIndex =
             methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, TAKEN)
           states = state :: states
           state = nextState
         case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
           val nextInsnIndex = insnIndex + 1
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, TAKEN)
           state = nextState
+
         case _ =>
           // we touch this!
           computed(insnIndex) = state :: computed(insnIndex)
@@ -180,7 +192,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
               } else {
                 nextFrame
               }
-              State(mkId(), Conf(nextInsnIndex, nextFrame1), nextHistory, taken, false)
+              State(mkId(), Conf(nextInsnIndex, nextFrame1), nextHistory, taken)
           }
           states = state :: states
           if (nextStates.size == 1) {
@@ -240,6 +252,13 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     }
     Conf(conf.insnIndex, frame)
   }
+
+  override def startConstraint(): InOutConstraint =
+    NOT_TAKEN
+
+  override def constraintEquiv(ctr1: InOutConstraint, ctr2: InOutConstraint): Boolean =
+    // TODO - change to eq
+    ctr1 == ctr2
 }
 
 case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins: Array[Boolean]) extends BasicInterpreter {
