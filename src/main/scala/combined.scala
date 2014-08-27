@@ -17,10 +17,11 @@ import scala.collection.JavaConversions._
 trait Trackable {
   val origin: Int
 }
-case class TrackableCallValue(origin: Int, tp: Type, method: Method, stableCall: Boolean, args: List[_ <: BasicValue]) extends BasicValue(tp) with Trackable
+case class TrackableCallValue(origin: Int, tp: Type, method: Method, stableCall: Boolean, args: List[_ <: BasicValue], callToThis: Boolean) extends BasicValue(tp) with Trackable
 case class NthParamValue(tp: Type, n: Int) extends BasicValue(tp)
 case class TrackableNullValue(origin: Int) extends BasicValue(Type.getObjectType("null")) with Trackable
 case class TrackableValue(origin: Int, tp: Type) extends BasicValue(tp) with Trackable
+case class ThisValue() extends BasicValue(Type.getObjectType("java/lang/Object"))
 
 // specialized class for analyzing methods without branching
 // this is a good tutorial example
@@ -106,11 +107,11 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
             Final(Values.True)
           case TrackableNullValue(_) =>
             Final(Values.Null)
-          case NotNullValue(_) =>
+          case NotNullValue(_) | ThisValue() =>
             Final(Values.NotNull)
           case NthParamValue(_, `paramIndex`) =>
             Final(inValue)
-          case TrackableCallValue(_, retType, m, stableCall, args) =>
+          case TrackableCallValue(_, retType, m, stableCall, args, _) =>
             val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
             var keys = Set[Key]()
             for ((NthParamValue(_, `paramIndex`), j) <- args.zipWithIndex) {
@@ -142,13 +143,35 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
             Final(Values.True)
           case TrackableNullValue(_) =>
             Final(Values.Null)
-          case NotNullValue(_) =>
+          case NotNullValue(_) | ThisValue() =>
             Final(Values.NotNull)
-          case TrackableCallValue(_, _, m, stableCall, args) =>
+          case TrackableCallValue(_, _, m, stableCall, args, _) =>
             val callKey = Key(m, Out, stableCall)
             Pending[Key, Value](Set(Component(Values.Top, Set(callKey))))
           case _ =>
             Final(Values.Top)
+        }
+      }
+    Equation(key, result)
+  }
+
+  def nullableResultEquation(stable: Boolean): Equation[Key, Value] = {
+    val key = Key(method, Out, stable)
+    val result: Result[Key, Value] =
+      if (exception) Final(Values.Bot)
+      else {
+        returnValue match {
+          case tr: Trackable if interpreter.dereferencedValues(tr.origin) =>
+            Final(Values.Bot)
+          case TrackableCallValue(_, _, m, stableCall, args, callToThis) =>
+            // it was not dereferenced,
+            val callKey = Key(m, Out, stableCall || callToThis)
+            Pending[Key, Value](Set(Component(Values.Null, Set(callKey))))
+          case TrackableNullValue(_) =>
+            // it was not dereferenced
+            Final(Values.Null)
+          case _ =>
+            Final(Values.Bot)
         }
       }
     Equation(key, result)
@@ -163,8 +186,8 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
     val args = Type.getArgumentTypes(methodNode.desc)
     var local = 0
     if ((methodNode.access & Opcodes.ACC_STATIC) == 0) {
-      val basicValue = new NotNullValue(Type.getObjectType(controlFlow.className))
-      frame.setLocal(local, basicValue)
+      val thisValue = ThisValue()
+      frame.setLocal(local, thisValue)
       local += 1
     }
     for (i <- 0 until args.size) {
@@ -197,6 +220,10 @@ class CombinedInterpreter(val insns: InsnList, arity: Int) extends BasicInterpre
   // parameterFlow(i) for i-th parameter stores a set parameter positions it is passed to
   // parameter is @NotNull if any of its usages are @NotNull
   var parameterFlow = Map[Int, Set[Key]]()
+
+  // Trackable values that were dereferenced during execution of a method
+  // Values are are identified by `origin` index
+  val dereferencedValues = new Array[Boolean](insns.size())
 
   @inline
   def index(insn: AbstractInsnNode) = insns.indexOf(insn)
@@ -237,8 +264,13 @@ class CombinedInterpreter(val insns: InsnList, arity: Int) extends BasicInterpre
     val origin = index(insn)
     (insn.getOpcode: @switch) match {
       case GETFIELD | ARRAYLENGTH | MONITORENTER =>
-        if (value.isInstanceOf[NthParamValue])
-          dereferencedParams(value.asInstanceOf[NthParamValue].n) = true
+        value match {
+          case NthParamValue(_, n) =>
+            dereferencedParams(n) = true
+          case tr: Trackable =>
+            dereferencedValues(tr.origin) = true
+          case _ =>
+        }
         track(origin, super.unaryOperation(insn, value))
       case CHECKCAST if value.isInstanceOf[NthParamValue] =>
         val nParam = value.asInstanceOf[NthParamValue]
@@ -253,13 +285,23 @@ class CombinedInterpreter(val insns: InsnList, arity: Int) extends BasicInterpre
   override def binaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue): BasicValue = {
     (insn.getOpcode: @switch) match {
       case PUTFIELD =>
-        if (v1.isInstanceOf[NthParamValue])
-          dereferencedParams(v1.asInstanceOf[NthParamValue].n) = true
+        v1 match {
+          case NthParamValue(_, n) =>
+            dereferencedParams(n) = true
+          case tr: Trackable =>
+            dereferencedValues(tr.origin) = true
+          case _ =>
+        }
         if (v2.isInstanceOf[NthParamValue])
           notNullableParams(v2.asInstanceOf[NthParamValue].n) = true
       case IALOAD | LALOAD | FALOAD | DALOAD | AALOAD | BALOAD | CALOAD | SALOAD =>
-        if (v1.isInstanceOf[NthParamValue])
-          dereferencedParams(v1.asInstanceOf[NthParamValue].n) = true
+        v1 match {
+          case NthParamValue(_, n) =>
+            dereferencedParams(n) = true
+          case tr: Trackable =>
+            dereferencedValues(tr.origin) = true
+          case _ =>
+        }
       case _ =>
     }
     track(index(insn), super.binaryOperation(insn, v1, v2))
@@ -268,11 +310,21 @@ class CombinedInterpreter(val insns: InsnList, arity: Int) extends BasicInterpre
   override def ternaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue, v3: BasicValue): BasicValue = {
     (insn.getOpcode: @switch) match {
       case IASTORE | LASTORE | FASTORE | DASTORE | BASTORE | CASTORE | SASTORE =>
-        if (v1.isInstanceOf[NthParamValue])
-          dereferencedParams(v1.asInstanceOf[NthParamValue].n) = true
+        v1 match {
+          case NthParamValue(_, n) =>
+            dereferencedParams(n) = true
+          case tr: Trackable =>
+            dereferencedValues(tr.origin) = true
+          case _ =>
+        }
       case AASTORE =>
-        if (v1.isInstanceOf[NthParamValue])
-          dereferencedParams(v1.asInstanceOf[NthParamValue].n) = true
+        v1 match {
+          case NthParamValue(_, n) =>
+            dereferencedParams(n) = true
+          case tr: Trackable =>
+            dereferencedValues(tr.origin) = true
+          case _ =>
+        }
         if (v3.isInstanceOf[NthParamValue])
           notNullableParams(v3.asInstanceOf[NthParamValue].n) = true
       case _ =>
@@ -287,8 +339,10 @@ class CombinedInterpreter(val insns: InsnList, arity: Int) extends BasicInterpre
     // catching explicit dereferences
     if (opCode == INVOKESPECIAL || opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) {
       values.get(0) match {
-        case np: NthParamValue =>
-          dereferencedParams(np.n) = true
+        case NthParamValue(_, n) =>
+          dereferencedParams(n) = true
+        case tr: Trackable =>
+          dereferencedValues(tr.origin) = true
         case _ =>
       }
     }
@@ -314,7 +368,8 @@ class CombinedInterpreter(val insns: InsnList, arity: Int) extends BasicInterpre
             case _ =>
           }
         }
-        TrackableCallValue(origin, retType, method, stable, values.drop(shift).toList)
+        val callToThis = (opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) && values.get(0).isInstanceOf[ThisValue]
+        TrackableCallValue(origin, retType, method, stable, values.drop(shift).toList, callToThis)
       case MULTIANEWARRAY =>
         NotNullValue(super.naryOperation(insn, values).getType)
       case _ =>

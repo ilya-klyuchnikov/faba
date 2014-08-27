@@ -86,14 +86,6 @@ trait FabaProcessor extends Processor {
     var added = false
 
     val graph = buildCFG(className, methodNode, jsr)
-    lazy val leaking = leakingParameters(className, methodNode, jsr)
-    val resultOrigins = buildResultOrigins(className, methodNode, leaking.frames, graph)
-    // nullable result
-    if (isReferenceResult) {
-      val nullableResultEq = nullableResultEquation(className, methodNode, method, resultOrigins, stable)
-      handleNullableResultEquation(nullableResultEq)
-    }
-
 
     if (graph.transitions.nonEmpty) {
       val dfs = buildDFSTree(graph.transitions)
@@ -141,6 +133,7 @@ trait FabaProcessor extends Processor {
       }
       if (processContracts && isReferenceResult) {
         handleOutContractEquation(Equation(Key(method, Out, stable), Final(Values.Top)))
+        handleNullableResultEquation(Equation(Key(method, Out, stable), Final(Values.Bot)))
       }
     }
   }
@@ -156,6 +149,7 @@ trait FabaProcessor extends Processor {
     // todo - boolean result as well
     if (isReferenceResult) {
       handleOutContractEquation(analyzer.outContractEquation(stable))
+      handleNullableResultEquation(analyzer.nullableResultEquation(stable))
     }
     for (i <- argumentTypes.indices) {
       val argType = argumentTypes(i)
@@ -197,6 +191,7 @@ trait FabaProcessor extends Processor {
     lazy val resultEquation: Equation[Key, Value] = outContractEquation(richControlFlow, resultOrigins, stable)
     if (processContracts && isReferenceResult) {
       handleOutContractEquation(resultEquation)
+      handleNullableResultEquation(nullableResultEquation(className, methodNode, method, resultOrigins, stable))
     }
     for (i <- argumentTypes.indices) {
       val argType = argumentTypes(i)
