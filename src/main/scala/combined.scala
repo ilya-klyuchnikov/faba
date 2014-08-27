@@ -105,6 +105,8 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
             Final(Values.False)
           case TrueValue() =>
             Final(Values.True)
+          case tr: Trackable if interpreter.dereferencedValues(tr.origin) =>
+            Final(Values.NotNull)
           case TrackableNullValue(_) =>
             Final(Values.Null)
           case NotNullValue(_) | ThisValue() =>
@@ -141,6 +143,8 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
             Final(Values.False)
           case TrueValue() =>
             Final(Values.True)
+          case tr: Trackable if interpreter.dereferencedValues(tr.origin) =>
+            Final(Values.NotNull)
           case TrackableNullValue(_) =>
             Final(Values.Null)
           case NotNullValue(_) | ThisValue() =>
