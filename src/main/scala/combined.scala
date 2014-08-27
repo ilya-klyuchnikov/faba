@@ -86,10 +86,11 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
     Equation(key, result)
   }
 
-  def trueContractEquation(i: Int, stable: Boolean): Equation[Key, Value] = {
-    val key = Key(method, InOut(i, Values.True), stable)
+  def contractEquation(paramIndex: Int, inValue: Value, stable: Boolean): Equation[Key, Value] = {
+    val key = Key(method, InOut(paramIndex, inValue), stable)
     val result: Result[Key, Value] =
-      if (exception) Final(Values.Bot)
+      if (exception || (inValue == Values.Null && interpreter.dereferenced(paramIndex)))
+        Final(Values.Bot)
       else {
         returnValue match {
           case FalseValue() =>
@@ -100,121 +101,13 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
             Final(Values.Null)
           case NotNullValue(_) =>
             Final(Values.NotNull)
-          case NParamValue(_, `i`) =>
-            Final(Values.True)
+          case NParamValue(_, `paramIndex`) =>
+            Final(inValue)
           case CombinedCall(retType, m, stableCall, args) =>
             val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
             var keys = Set[Key]()
-            for ((NParamValue(_, `i`), j) <- args.zipWithIndex) {
-              keys += Key(m, InOut(j, Values.True), stableCall)
-            }
-            if (isRefRetType) {
-              keys += Key(m, Out, stableCall)
-            }
-            if (keys.nonEmpty)
-              Pending[Key, Value](Set(Component(Values.Top, keys)))
-            else
-              Final(Values.Top)
-          case _ =>
-            Final(Values.Top)
-        }
-      }
-    Equation(key, result)
-  }
-
-  def falseContractEquation(i: Int, stable: Boolean): Equation[Key, Value] = {
-    val key = Key(method, InOut(i, Values.False), stable)
-    val result: Result[Key, Value] =
-      if (exception) Final(Values.Bot)
-      else {
-        returnValue match {
-          case FalseValue() =>
-            Final(Values.False)
-          case TrueValue() =>
-            Final(Values.True)
-          case NullValue() =>
-            Final(Values.Null)
-          case NotNullValue(_) =>
-            Final(Values.NotNull)
-          case NParamValue(_, `i`) =>
-            Final(Values.False)
-          case CombinedCall(retType, m, stableCall, args) =>
-            val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
-            var keys = Set[Key]()
-            for ((NParamValue(_, `i`), j) <- args.zipWithIndex) {
-              keys += Key(m, InOut(j, Values.False), stableCall)
-            }
-            if (isRefRetType) {
-              keys += Key(m, Out, stableCall)
-            }
-            if (keys.nonEmpty)
-              Pending[Key, Value](Set(Component(Values.Top, keys)))
-            else
-              Final(Values.Top)
-          case _ =>
-            Final(Values.Top)
-        }
-      }
-    Equation(key, result)
-  }
-
-  def notNullContractEquation(i: Int, stable: Boolean): Equation[Key, Value] = {
-    val key = Key(method, InOut(i, Values.NotNull), stable)
-    val result: Result[Key, Value] =
-      if (exception) Final(Values.Bot)
-      else {
-        returnValue match {
-          case FalseValue() =>
-            Final(Values.False)
-          case TrueValue() =>
-            Final(Values.True)
-          case NullValue() =>
-            Final(Values.Null)
-          case NotNullValue(_) =>
-            Final(Values.NotNull)
-          case NParamValue(_, `i`) =>
-            Final(Values.NotNull)
-          case CombinedCall(retType, m, stableCall, args) =>
-            val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
-            var keys = Set[Key]()
-            for ((NParamValue(_, `i`), j) <- args.zipWithIndex) {
-              keys += Key(m, InOut(j, Values.NotNull), stableCall)
-            }
-            if (isRefRetType) {
-              keys += Key(m, Out, stableCall)
-            }
-            if (keys.nonEmpty)
-              Pending[Key, Value](Set(Component(Values.Top, keys)))
-            else
-              Final(Values.Top)
-          case _ =>
-            Final(Values.Top)
-        }
-      }
-    Equation(key, result)
-  }
-
-  def nullContractEquation(i: Int, stable: Boolean): Equation[Key, Value] = {
-    val key = Key(method, InOut(i, Values.Null), stable)
-    val result: Result[Key, Value] =
-      if (interpreter.dereferenced(i) || exception) Final(Values.Bot)
-      else {
-        returnValue match {
-          case FalseValue() =>
-            Final(Values.False)
-          case TrueValue() =>
-            Final(Values.True)
-          case NullValue() =>
-            Final(Values.Null)
-          case NotNullValue(_) =>
-            Final(Values.NotNull)
-          case NParamValue(_, `i`) =>
-            Final(Values.Null)
-          case CombinedCall(retType, m, stableCall, args) =>
-            val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
-            var keys = Set[Key]()
-            for ((NParamValue(_, `i`), j) <- args.zipWithIndex) {
-              keys += Key(m, InOut(j, Values.Null), stableCall)
+            for ((NParamValue(_, `paramIndex`), j) <- args.zipWithIndex) {
+              keys += Key(m, InOut(j, inValue), stableCall)
             }
             if (isRefRetType) {
               keys += Key(m, Out, stableCall)

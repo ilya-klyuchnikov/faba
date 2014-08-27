@@ -167,12 +167,12 @@ trait FabaProcessor extends Processor {
         handleNullableParamEquation(analyzer.nullableParamEquation(i, stable))
       }
       if (isReferenceArg && (isReferenceResult || isBooleanResult)) {
-        handleNullContractEquation(analyzer.nullContractEquation(i, stable))
-        handleNotNullContractEquation(analyzer.notNullContractEquation(i, stable))
+        handleNullContractEquation(analyzer.contractEquation(i, Values.Null, stable))
+        handleNotNullContractEquation(analyzer.contractEquation(i, Values.NotNull, stable))
       }
       if (booleanArg && (isReferenceResult || isBooleanResult)) {
-        handleFalseContractEquation(analyzer.falseContractEquation(i, stable))
-        handleTrueContractEquation(analyzer.trueContractEquation(i, stable))
+        handleFalseContractEquation(analyzer.contractEquation(i, Values.False, stable))
+        handleTrueContractEquation(analyzer.contractEquation(i, Values.True, stable))
       }
     }
   }
