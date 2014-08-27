@@ -12,18 +12,11 @@ import faba.cfg._
 import faba.data._
 import faba.engine._
 
-case class InOutConstraint(taken: Boolean)
-
-object InOutConstraint {
-  val TAKEN = InOutConstraint(true)
-  val NOT_TAKEN = InOutConstraint(false)
-}
+case class InOutConstraint(taken: Boolean, dereferenced: Set[Int])
 
 class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Array[Boolean], val stable: Boolean)
   // the only constraint for now - null taken or not
   extends Analysis[Result[Key, Value], InOutConstraint] {
-
-  import InOutConstraint._
 
   val pending = Analysis.ourPending.asInstanceOf[Array[CState]]
   type MyResult = Result[Key, Value]
@@ -100,6 +93,8 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
       val loopEnter = dfsTree.loopEnters(insnIndex)
       val history = state.history
 
+      // todo - is it ok not look into taken/not-taken
+      // possible improvement - more restrictions
       val fold = loopEnter && history.exists(prevConf => confInstance(preConf, prevConf))
 
       if (fold) {
@@ -109,15 +104,20 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
 
       val conf = if (loopEnter) generalize(preConf) else preConf
 
-      val taken = state.constraint
+      val constraint = state.constraint
+
+
       val frame = conf.frame
       val insnNode = methodNode.instructions.get(insnIndex)
       val nextHistory = if (loopEnter) conf :: history else history
       val nextFrame = execute(frame, insnNode)
+      // todo - dereferenced here
+      val dereferencedHere: Set[Int] = Set()
+      val dereferenced = constraint.dereferenced ++ dereferencedHere
 
       if (interpreter.dereferenced) {
         computed(insnIndex) = state :: computed(insnIndex)
-        // enough to break this branch
+        // enough to break this branch - it will be bottom, will not contribute to the result
         return
       }
 
@@ -155,7 +155,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             case InOut(_, Values.NotNull) =>
               methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           }
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, TAKEN)
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(true, dereferenced))
           states = state :: states
           state = nextState
         case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
@@ -165,20 +165,19 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             case InOut(_, Values.NotNull) =>
               insnIndex + 1
           }
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, TAKEN)
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(true, dereferenced))
           states = state :: states
           state = nextState
         case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
           val nextInsnIndex =
             methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, TAKEN)
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(true, dereferenced))
           states = state :: states
           state = nextState
         case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
           val nextInsnIndex = insnIndex + 1
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, TAKEN)
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(true, dereferenced))
           state = nextState
-
         case _ =>
           // we touch this!
           computed(insnIndex) = state :: computed(insnIndex)
@@ -193,7 +192,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
               } else {
                 nextFrame
               }
-              State(mkId(), Conf(nextInsnIndex, nextFrame1), nextHistory, taken)
+              State(mkId(), Conf(nextInsnIndex, nextFrame1), nextHistory, InOutConstraint(constraint.taken, dereferenced))
           }
           states = state :: states
           if (nextStates.size == 1) {
@@ -255,10 +254,9 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
   }
 
   override def startConstraint(): InOutConstraint =
-    NOT_TAKEN
+    InOutConstraint(false, Set())
 
   override def constraintEquiv(ctr1: InOutConstraint, ctr2: InOutConstraint): Boolean =
-    // TODO - change to eq
     ctr1 == ctr2
 }
 
