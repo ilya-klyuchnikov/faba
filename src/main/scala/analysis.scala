@@ -30,7 +30,7 @@ case class Conf(insnIndex: Int, frame: Frame[BasicValue]) {
   override def hashCode() = _hashCode
 }
 
-case class State(index: Int, conf: Conf, history: List[Conf], taken: Boolean, hasCompanions: Boolean)
+case class State[Constraint](index: Int, conf: Conf, history: List[Conf], constraint: Constraint)
 
 object LimitReachedException {
   // elementary steps limit
@@ -40,23 +40,26 @@ object LimitReachedException {
 class LimitReachedException extends Exception("Limit reached exception")
 
 object Analysis {
-  sealed trait PendingAction[+Res]
-  case class ProceedState(state: State) extends PendingAction[Nothing]
-  case class MakeResult[Res](states: List[State], subResult: Res, indices: List[Int]) extends PendingAction[Res]
+  sealed trait PendingAction[+Res, +Constraint]
+  case class ProceedState[Constraint](state: State[Constraint]) extends PendingAction[Nothing, Constraint]
+  case class MakeResult[Res, Constraint](states: List[State[Constraint]], subResult: Res, indices: List[Int]) extends PendingAction[Res, Constraint]
 
-  val ourPending = new Array[State](LimitReachedException.limit)
+  val ourPending = new Array[State[_]](LimitReachedException.limit)
 }
 
-abstract class Analysis[Res] {
+abstract class Analysis[Res, Constraint] {
+  type CState = State[Constraint]
 
   val richControlFlow: RichControlFlow
   val direction: Direction
   val stable: Boolean
   def identity: Res
-  def processState(state: State): Unit
+  def processState(state: CState): Unit
   def isEarlyResult(res: Res): Boolean
   def combineResults(delta: Res, subResults: List[Res]): Res
   def mkEquation(result: Res): Equation[Key, Value]
+  def startConstraint(): Constraint
+  def constraintEquiv(ctr1: Constraint, ctr2: Constraint): Boolean
 
   val controlFlow = richControlFlow.controlFlow
   val methodNode = controlFlow.methodNode
@@ -64,17 +67,17 @@ abstract class Analysis[Res] {
   val dfsTree = richControlFlow.dfsTree
   val aKey = Key(method, direction, stable)
 
-  final def createStartState(): State = State(0, Conf(0, createStartFrame()), Nil, false, false)
+  final def createStartState(): CState = State(0, Conf(0, createStartFrame()), Nil, startConstraint())
   final def confInstance(curr: Conf, prev: Conf): Boolean = Utils.isInstance(curr, prev)
 
-  final def stateEquiv(curr: State, prev: State): Boolean =
-    curr.taken == prev.taken && curr.conf.hashCode() == prev.conf.hashCode() &&
+  final def stateEquiv(curr: CState, prev: CState): Boolean =
+    constraintEquiv(curr.constraint, prev.constraint) && curr.conf.hashCode() == prev.conf.hashCode() &&
       Utils.equiv(curr.conf, prev.conf) &&
       curr.history.size == prev.history.size &&
       (curr.history, prev.history).zipped.forall((c1, c2) => c1.hashCode() == c2.hashCode() && Utils.equiv(c1, c2))
 
   // the key is insnIndex
-  var computed = Array.tabulate[List[State]](methodNode.instructions.size()){i => Nil}
+  var computed = Array.tabulate[List[CState]](methodNode.instructions.size()){i => Nil}
   // the key is stateIndex
   var earlyResult: Option[Res] = None
 
