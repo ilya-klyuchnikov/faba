@@ -1,6 +1,6 @@
 package faba.combined
 
-import faba.analysis._
+import faba.analysis.{NotNullValue, TrueValue, FalseValue}
 import faba.cfg.ControlFlowGraph
 import faba.data._
 import faba.engine._
@@ -12,15 +12,22 @@ import org.objectweb.asm.tree.analysis.{BasicInterpreter, BasicValue, Frame}
 import scala.annotation.switch
 import scala.collection.JavaConversions._
 
-case class CallValue(tp: Type, method: Method, stableCall: Boolean, args: List[_ <: BasicValue]) extends BasicValue(tp)
+// a value that was created at an instruction with `origin` index
+// origin is used as identity
+trait Trackable {
+  val origin: Int
+}
+case class TrackableCallValue(origin: Int, tp: Type, method: Method, stableCall: Boolean, args: List[_ <: BasicValue]) extends BasicValue(tp) with Trackable
 case class NthParamValue(tp: Type, n: Int) extends BasicValue(tp)
+case class TrackableNullValue(origin: Int) extends BasicValue(Type.getObjectType("null")) with Trackable
+case class TrackableValue(origin: Int, tp: Type) extends BasicValue(tp) with Trackable
 
 // specialized class for analyzing methods without branching
 // this is a good tutorial example
 class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGraph) {
 
   val methodNode = controlFlow.methodNode
-  val interpreter = CombinedInterpreter(Type.getArgumentTypes(methodNode.desc).length)
+  val interpreter = new CombinedInterpreter(methodNode.instructions, Type.getArgumentTypes(methodNode.desc).length)
   var returnValue: BasicValue = null
   var exception: Boolean = false
 
@@ -97,13 +104,13 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
             Final(Values.False)
           case TrueValue() =>
             Final(Values.True)
-          case NullValue() =>
+          case TrackableNullValue(_) =>
             Final(Values.Null)
           case NotNullValue(_) =>
             Final(Values.NotNull)
           case NthParamValue(_, `paramIndex`) =>
             Final(inValue)
-          case CallValue(retType, m, stableCall, args) =>
+          case TrackableCallValue(_, retType, m, stableCall, args) =>
             val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
             var keys = Set[Key]()
             for ((NthParamValue(_, `paramIndex`), j) <- args.zipWithIndex) {
@@ -133,11 +140,11 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
             Final(Values.False)
           case TrueValue() =>
             Final(Values.True)
-          case NullValue() =>
+          case TrackableNullValue(_) =>
             Final(Values.Null)
           case NotNullValue(_) =>
             Final(Values.NotNull)
-          case CallValue(_, m, stableCall, args) =>
+          case TrackableCallValue(_, _, m, stableCall, args) =>
             val callKey = Key(m, Out, stableCall)
             Pending[Key, Value](Set(Component(Values.Top, Set(callKey))))
           case _ =>
@@ -178,7 +185,7 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
 }
 
 // Full single-pass interpreter, propagates everything needed for analysis.
-case class CombinedInterpreter(arity: Int) extends BasicInterpreter {
+class CombinedInterpreter(val insns: InsnList, arity: Int) extends BasicInterpreter {
   // Parameters dereferenced during execution of a method, tracked by parameter's indices.
   // Dereferenced parameters are @NotNull.
   val dereferencedParams = new Array[Boolean](arity)
@@ -191,14 +198,21 @@ case class CombinedInterpreter(arity: Int) extends BasicInterpreter {
   // parameter is @NotNull if any of its usages are @NotNull
   var parameterFlow = Map[Int, Set[Key]]()
 
+  @inline
+  def index(insn: AbstractInsnNode) = insns.indexOf(insn)
+
+  def track(origin: Int, bv: BasicValue): TrackableValue =
+    if (bv == null) null else TrackableValue(origin, bv.getType)
+
   override def newOperation(insn: AbstractInsnNode): BasicValue = {
+    val origin = index(insn)
     (insn.getOpcode: @switch) match {
       case ICONST_0 =>
         FalseValue()
       case ICONST_1 =>
         TrueValue()
       case ACONST_NULL =>
-        NullValue()
+        TrackableNullValue(origin)
       case LDC =>
         insn.asInstanceOf[LdcInsnNode].cst match {
           case tp: Type if tp.getSort == Type.OBJECT || tp.getSort == Type.ARRAY =>
@@ -210,28 +224,29 @@ case class CombinedInterpreter(arity: Int) extends BasicInterpreter {
           case h: Handle =>
             NotNullValue(Type.getObjectType("java/lang/invoke/MethodHandle"))
           case _ =>
-            super.newOperation(insn)
+            track(origin, super.newOperation(insn))
         }
       case NEW =>
         NotNullValue(Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc))
       case _ =>
-        super.newOperation(insn)
+        track(origin, super.newOperation(insn))
     }
   }
 
   override def unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue = {
+    val origin = index(insn)
     (insn.getOpcode: @switch) match {
       case GETFIELD | ARRAYLENGTH | MONITORENTER =>
         if (value.isInstanceOf[NthParamValue])
           dereferencedParams(value.asInstanceOf[NthParamValue].n) = true
-        super.unaryOperation(insn, value)
+        track(origin, super.unaryOperation(insn, value))
       case CHECKCAST if value.isInstanceOf[NthParamValue] =>
         val nParam = value.asInstanceOf[NthParamValue]
         NthParamValue(Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc), nParam.n)
       case NEWARRAY | ANEWARRAY =>
         NotNullValue(super.unaryOperation(insn, value).getType)
       case _ =>
-        super.unaryOperation(insn, value)
+        track(origin, super.unaryOperation(insn, value))
     }
   }
 
@@ -247,10 +262,9 @@ case class CombinedInterpreter(arity: Int) extends BasicInterpreter {
           dereferencedParams(v1.asInstanceOf[NthParamValue].n) = true
       case _ =>
     }
-    super.binaryOperation(insn, v1, v2)
+    track(index(insn), super.binaryOperation(insn, v1, v2))
   }
 
-  @switch
   override def ternaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue, v3: BasicValue): BasicValue = {
     (insn.getOpcode: @switch) match {
       case IASTORE | LASTORE | FASTORE | DASTORE | BASTORE | CASTORE | SASTORE =>
@@ -263,10 +277,11 @@ case class CombinedInterpreter(arity: Int) extends BasicInterpreter {
           notNullableParams(v3.asInstanceOf[NthParamValue].n) = true
       case _ =>
     }
-    super.ternaryOperation(insn, v1, v2, v3)
+    null
   }
 
   override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
+    val origin = index(insn)
     val opCode = insn.getOpcode
     val shift = if (opCode == INVOKESTATIC) 0 else 1
     // catching explicit dereferences
@@ -299,11 +314,11 @@ case class CombinedInterpreter(arity: Int) extends BasicInterpreter {
             case _ =>
           }
         }
-        CallValue(retType, method, stable, values.drop(shift).toList)
+        TrackableCallValue(origin, retType, method, stable, values.drop(shift).toList)
       case MULTIANEWARRAY =>
         NotNullValue(super.naryOperation(insn, values).getType)
       case _ =>
-        super.naryOperation(insn, values)
+        track(origin, super.naryOperation(insn, values))
     }
 
   }
