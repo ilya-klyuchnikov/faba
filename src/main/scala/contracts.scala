@@ -342,6 +342,8 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
         TrueValue()
       case ACONST_NULL if propagate_? =>
         NullValue(index(insn))
+      case GETSTATIC if propagate_? =>
+        TrackableBasicValue(index(insn), super.newOperation(insn).getType)
       case LDC if propagate_? =>
         insn.asInstanceOf[LdcInsnNode].cst match {
           case tp: Type if tp.getSort == Type.OBJECT || tp.getSort == Type.ARRAY =>
@@ -366,8 +368,21 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
   override def unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue = {
     val propagate_? = resultOrigins == null || insnOrigins(insns.indexOf(insn))
     insn.getOpcode match {
-      // todo - GETFIELD and GETSTATIC may be origins, should be Trackable (in the future)
-      case GETFIELD | ARRAYLENGTH | MONITORENTER =>
+      case GETFIELD =>
+        value match {
+          case ParamValue(_) =>
+            dereferencedParam = nullAnalysis
+          case NThParamValue(n, _) =>
+            dereferencedNthParam = Some(n)
+          case tr: Trackable =>
+            dereferencedVal = Some(tr.origin)
+          case _ =>
+        }
+        if (propagate_?)
+          TrackableBasicValue(index(insn), super.unaryOperation(insn, value).getType)
+        else
+          super.unaryOperation(insn, value)
+      case ARRAYLENGTH | MONITORENTER =>
         value match {
           case ParamValue(_) =>
             dereferencedParam = nullAnalysis
@@ -390,9 +405,23 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
   }
 
   override def binaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue): BasicValue = {
-    // todo - AALOAD maybe origin
+    val propagate_? = resultOrigins == null || insnOrigins(insns.indexOf(insn))
     insn.getOpcode match {
-      case IALOAD | LALOAD | FALOAD | DALOAD | AALOAD | BALOAD | CALOAD | SALOAD | PUTFIELD =>
+      case AALOAD =>
+        v1 match {
+          case ParamValue(_) =>
+            dereferencedParam = nullAnalysis
+          case NThParamValue(n, _) =>
+            dereferencedNthParam = Some(n)
+          case tr: Trackable =>
+            dereferencedVal = Some(tr.origin)
+          case _ =>
+        }
+        if (propagate_?)
+          TrackableBasicValue(index(insn), super.binaryOperation(insn, v1, v2).getType)
+        else
+          super.binaryOperation(insn, v1, v2)
+      case IALOAD | LALOAD | FALOAD | DALOAD | BALOAD | CALOAD | SALOAD | PUTFIELD =>
         v1 match {
           case ParamValue(_) =>
             dereferencedParam = nullAnalysis
