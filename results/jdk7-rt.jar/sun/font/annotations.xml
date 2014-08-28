@@ -511,6 +511,9 @@
   <item name="sun.font.CFontConfiguration java.nio.charset.Charset getDefaultFontCharset(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.font.CFontConfiguration java.nio.charset.Charset getDefaultFontCharset(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.font.CFontConfiguration sun.font.CompositeFontDescriptor[] get2DCompositeFontInfo()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -685,13 +688,20 @@
   <item name="sun.font.CStrike java.awt.geom.GeneralPath getGlyphVectorOutline(int[], float, float) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.font.CStrike java.awt.geom.Point2D.Float getCharMetrics(char)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.font.CStrike java.awt.geom.Point2D.Float getGlyphMetrics(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.font.CStrike java.awt.geom.Point2D.Float getScaledPointForAdvance(float)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.font.CStrike java.awt.geom.Point2D.Float scalePoint(java.awt.geom.Point2D.Float) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.CStrike java.awt.geom.Point2D.Float scalePoint(java.awt.geom.Point2D.Float)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.CStrike void getGlyphImageBounds(int, java.awt.geom.Point2D.Float, java.awt.Rectangle) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -805,6 +815,9 @@
     </annotation>
   </item>
   <item name="sun.font.CompositeStrike CompositeStrike(sun.font.CompositeFont, sun.font.FontStrikeDesc) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.font.CompositeStrike java.awt.geom.GeneralPath getGlyphOutline(int, float, float)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.CompositeStrike java.awt.geom.GeneralPath getGlyphVectorOutline(int[], float, float) 0">
@@ -1047,6 +1060,11 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.font.FcFontConfiguration java.lang.String getFallbackFamilyName(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.font.FcFontConfiguration java.lang.String getFileNameFromComponentFontName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1070,6 +1088,9 @@
   </item>
   <item name="sun.font.FcFontConfiguration java.nio.charset.Charset getDefaultFontCharset(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.font.FcFontConfiguration java.nio.charset.Charset getDefaultFontCharset(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.FcFontConfiguration sun.awt.FontDescriptor[] getFontDescriptors(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2603,9 +2624,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.StandardGlyphVector java.awt.geom.AffineTransform getNonTranslateTX(java.awt.geom.AffineTransform)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.StandardGlyphVector java.awt.geom.AffineTransform[] getGlyphTransforms()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2617,6 +2636,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.font.StandardGlyphVector java.awt.geom.Point2D getGlyphPosition(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.font.StandardGlyphVector java.awt.geom.Rectangle2D getGlyphOutlineBounds(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.StandardGlyphVector java.awt.geom.Rectangle2D getLogicalBounds()">
@@ -2706,9 +2728,10 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.font.StandardGlyphVector.ADL java.lang.StringBuffer toStringBuffer(java.lang.StringBuffer)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.font.StandardGlyphVector.GlyphStrike java.awt.geom.Rectangle2D getGlyphOutlineBounds(int, float, float)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.StandardGlyphVector.GlyphStrike sun.font.StandardGlyphVector.GlyphStrike create(sun.font.StandardGlyphVector, java.awt.geom.AffineTransform, java.awt.geom.AffineTransform) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3150,9 +3173,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.SunFontManager sun.font.Font2DHandle getNewComposite(java.lang.String, int, sun.font.Font2DHandle)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.SunFontManager sun.font.Font2D[] getRegisteredFonts()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3788,6 +3809,9 @@
     </annotation>
   </item>
   <item name="sun.font.Underline.StandardUnderline java.awt.BasicStroke createStroke(float)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.font.Underline.StandardUnderline java.awt.Stroke getStroke(float)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.Underline.StandardUnderline void drawUnderline(java.awt.Graphics2D, float, float, float, float) 0">

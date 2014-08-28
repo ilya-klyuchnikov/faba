@@ -105,6 +105,9 @@
   <item name="java.util.AbstractMap boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.AbstractMap java.lang.Object clone()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.AbstractMap java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -148,6 +151,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="java.util.AbstractQueue E element()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.AbstractQueue E remove()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.AbstractQueue boolean add(E)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1350,9 +1359,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections.EmptyList T[] toArray(T[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections.EmptyList boolean contains(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1523,9 +1530,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections.EmptySet T[] toArray(T[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections.EmptySet boolean contains(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2007,6 +2012,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="java.util.HashMap java.util.Collection&lt;V&gt; values()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.HashMap java.util.HashMap.Entry&lt;K,V&gt; getEntry(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2029,6 +2037,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.HashMap java.util.Iterator&lt;java.util.Map.Entry&lt;K,V&gt;&gt; newEntryIterator()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.HashMap java.util.Set&lt;K&gt; keySet()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.HashMap java.util.Set&lt;java.util.Map.Entry&lt;K,V&gt;&gt; entrySet()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.HashMap void init()">
@@ -2358,6 +2372,15 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="java.util.IdentityHashMap java.util.Collection&lt;V&gt; values()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.IdentityHashMap java.util.Set&lt;K&gt; keySet()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.IdentityHashMap java.util.Set&lt;java.util.Map.Entry&lt;K,V&gt;&gt; entrySet()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.IdentityHashMap void putAll(java.util.Map&lt;? extends K,? extends V&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2538,6 +2561,12 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.Locale java.lang.String getISO3Country()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.Locale java.lang.String getISO3Language()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.Locale java.lang.String getLanguage()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -2565,6 +2594,11 @@
   </item>
   <item name="java.util.Locale java.lang.String[] composeList(java.text.MessageFormat, java.lang.String[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.Locale java.lang.String[] composeList(java.text.MessageFormat, java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="java.util.Locale java.lang.String[] getDisplayVariantArray(sun.util.resources.OpenListResourceBundle, java.util.Locale) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2600,6 +2634,11 @@
   </item>
   <item name="java.util.Properties java.lang.String getProperty(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.Properties java.lang.String getProperty(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="java.util.Properties java.lang.String loadConvert(char[], int, int, char[]) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
