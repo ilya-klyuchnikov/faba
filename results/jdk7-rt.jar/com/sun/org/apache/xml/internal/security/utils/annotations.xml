@@ -96,6 +96,9 @@
   <item name="com.sun.org.apache.xml.internal.security.utils.Base64 org.w3c.dom.Element encodeToElement(org.w3c.dom.Document, java.lang.String, byte[]) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xml.internal.security.utils.Base64 org.w3c.dom.Element encodeToElement(org.w3c.dom.Document, java.lang.String, byte[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.org.apache.xml.internal.security.utils.Base64 void decode(java.io.InputStream, java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -259,11 +262,21 @@
   <item name="com.sun.org.apache.xml.internal.security.utils.ElementProxy org.w3c.dom.Element createElementForFamily(org.w3c.dom.Document, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xml.internal.security.utils.ElementProxy org.w3c.dom.Element createElementForFamily(org.w3c.dom.Document, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.security.utils.ElementProxy org.w3c.dom.Element createElementForFamilyLocal(org.w3c.dom.Document, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.security.utils.ElementProxy org.w3c.dom.Element createElementForFamilyLocal(org.w3c.dom.Document, java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.security.utils.ElementProxy org.w3c.dom.Element createElementForFamilyLocal(org.w3c.dom.Document, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null,_-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.security.utils.ElementProxy org.w3c.dom.Element getElement()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -434,9 +447,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.security.utils.RFC2253Parser java.lang.String parseATAV(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.security.utils.RFC2253Parser java.lang.String parseRDN(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -624,6 +635,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.security.utils.XMLUtils org.w3c.dom.Element createDSctx(org.w3c.dom.Document, java.lang.String, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.security.utils.XMLUtils org.w3c.dom.Element createDSctx(org.w3c.dom.Document, java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.security.utils.XMLUtils org.w3c.dom.Element createElementInSignatureSpace(org.w3c.dom.Document, java.lang.String) 0">

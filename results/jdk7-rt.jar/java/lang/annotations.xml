@@ -978,7 +978,13 @@
   <item name="java.lang.Class java.lang.reflect.Field getDeclaredField(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.Class java.lang.reflect.Field getDeclaredField(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.Class java.lang.reflect.Field getField(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.Class java.lang.reflect.Field getField(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.Class java.lang.reflect.Field getField0(java.lang.String) 0">
@@ -1008,10 +1014,16 @@
   <item name="java.lang.Class java.lang.reflect.Method getDeclaredMethod(java.lang.String, java.lang.Class&lt;?&gt;...) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.lang.Class java.lang.reflect.Method getDeclaredMethod(java.lang.String, java.lang.Class&lt;?&gt;...)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.Class java.lang.reflect.Method getEnclosingMethod()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.Class java.lang.reflect.Method getMethod(java.lang.String, java.lang.Class&lt;?&gt;...) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.Class java.lang.reflect.Method getMethod(java.lang.String, java.lang.Class&lt;?&gt;...)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.Class java.lang.reflect.Method getMethod0(java.lang.String, java.lang.Class&lt;?&gt;[]) 0">
@@ -1218,6 +1230,9 @@
   <item name="java.lang.ClassLoader java.lang.ClassLoader getSystemClassLoader()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.lang.ClassLoader java.lang.Object getClassLoadingLock(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.ClassLoader java.lang.Package definePackage(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.net.URL)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1265,7 +1280,7 @@
   </item>
   <item name="java.lang.ClassLoader java.security.ProtectionDomain preDefineClass(java.lang.String, java.security.ProtectionDomain)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="java.lang.ClassLoader java.util.Enumeration&lt;java.net.URL&gt; findResources(java.lang.String) 0">
@@ -1575,6 +1590,11 @@
   </item>
   <item name="java.lang.ConditionalSpecialCasing char[] toUpperCaseCharArray(java.lang.String, int, java.util.Locale) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.ConditionalSpecialCasing char[] toUpperCaseCharArray(java.lang.String, int, java.util.Locale)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="java.lang.ConditionalSpecialCasing int toLowerCaseEx(java.lang.String, int, java.util.Locale) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2215,6 +2235,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="java.lang.Math java.util.Random initRNG()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.Math long abs(long)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -3305,6 +3328,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="java.lang.StrictMath java.util.Random initRNG()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.StrictMath long abs(long)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -3444,6 +3470,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.String byte[] getBytes(java.nio.charset.Charset) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.String byte[] getBytes(java.nio.charset.Charset)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.String char[] toCharArray()">
@@ -4309,14 +4338,15 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.StringCoding byte[] access$300(byte[], int, java.nio.charset.Charset, boolean)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.StringCoding byte[] encode(char[], int, int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.StringCoding byte[] encode(java.nio.charset.Charset, char[], int, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.StringCoding byte[] encode(java.nio.charset.Charset, char[], int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.StringCoding byte[] safeTrim(byte[], int, java.nio.charset.Charset, boolean) 0">
@@ -4326,9 +4356,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.StringCoding byte[] safeTrim(byte[], int, java.nio.charset.Charset, boolean)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.StringCoding char[] access$100(char[], int, java.nio.charset.Charset, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -4337,14 +4365,15 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.StringCoding char[] access$100(char[], int, java.nio.charset.Charset, boolean)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.StringCoding char[] decode(byte[], int, int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.StringCoding char[] decode(java.nio.charset.Charset, byte[], int, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.StringCoding char[] decode(java.nio.charset.Charset, byte[], int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.StringCoding char[] safeTrim(char[], int, java.nio.charset.Charset, boolean) 0">
@@ -4354,9 +4383,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.StringCoding char[] safeTrim(char[], int, java.nio.charset.Charset, boolean)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.StringCoding int access$000(int, float)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -4372,9 +4399,6 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.StringCoding java.nio.charset.Charset lookupCharset(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.StringCoding void set(java.lang.ThreadLocal&lt;java.lang.ref.SoftReference&lt;T&gt;&gt;, T) 0">
@@ -4392,6 +4416,9 @@
   <item name="java.lang.StringCoding.StringDecoder StringDecoder(java.nio.charset.Charset, java.lang.String, java.lang.StringCoding.1) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.lang.StringCoding.StringDecoder char[] decode(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.StringCoding.StringDecoder java.lang.String requestedCharsetName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -4405,6 +4432,9 @@
   </item>
   <item name="java.lang.StringCoding.StringEncoder StringEncoder(java.nio.charset.Charset, java.lang.String, java.lang.StringCoding.1) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.lang.StringCoding.StringEncoder byte[] encode(char[], int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.StringCoding.StringEncoder java.lang.String requestedCharsetName()">
     <annotation name="org.jetbrains.annotations.Contract">
