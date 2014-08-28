@@ -1,5 +1,7 @@
 package faba.contracts
 
+import faba.asm.Origins
+
 import scala.annotation.switch
 
 import org.objectweb.asm.{Handle, Type}
@@ -15,7 +17,7 @@ import faba.engine._
 case class InOutConstraint(taken: Boolean, dereferenced: Set[Int])
 
 // TODO - dereferenced params as well
-class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Array[Boolean], val stable: Boolean, val noCycle: Boolean)
+class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Origins, val stable: Boolean, val noCycle: Boolean)
   // the only constraint for now - null taken or not
   extends Analysis[Result[Key, Value], InOutConstraint] {
 
@@ -263,7 +265,8 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     ctr1 == ctr2
 }
 
-case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins: Array[Boolean]) extends BasicInterpreter {
+case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins: Origins) extends BasicInterpreter {
+  val insnOrigins = resultOrigins.instructions
 
   @inline
   def index(insn: AbstractInsnNode) =
@@ -284,7 +287,7 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
 
   @switch
   override def newOperation(insn: AbstractInsnNode): BasicValue = {
-    val propagate_? = resultOrigins == null || resultOrigins(insns.indexOf(insn))
+    val propagate_? = resultOrigins == null || insnOrigins(insns.indexOf(insn))
     insn.getOpcode match {
       case ICONST_0 if propagate_? =>
         FalseValue()
@@ -314,7 +317,7 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
 
   @switch
   override def unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue = {
-    val propagate_? = resultOrigins == null || resultOrigins(insns.indexOf(insn))
+    val propagate_? = resultOrigins == null || insnOrigins(insns.indexOf(insn))
     insn.getOpcode match {
       // todo - GETFIELD and GETSTATIC may be origins, should be Trackable (in the future)
       case GETFIELD | ARRAYLENGTH | MONITORENTER =>
@@ -370,7 +373,7 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
 
   @switch
   override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
-    val propagate_? = resultOrigins == null || resultOrigins(insns.indexOf(insn))
+    val propagate_? = resultOrigins == null || insnOrigins(insns.indexOf(insn))
     val opCode = insn.getOpcode
     val shift = if (opCode == INVOKESTATIC) 0 else 1
     if (opCode == INVOKESPECIAL || opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) {

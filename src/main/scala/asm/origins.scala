@@ -1,11 +1,13 @@
 package faba.asm
 
 import faba.cfg.ControlFlowGraph
-import org.objectweb.asm.Opcodes
+import org.objectweb.asm.{Opcodes, Type}
 import org.objectweb.asm.tree.analysis.{Frame, SourceInterpreter, SourceValue}
-import org.objectweb.asm.tree.{AbstractInsnNode, InsnList}
+import org.objectweb.asm.tree.{MethodNode, AbstractInsnNode}
 
 import scala.collection.mutable
+
+case class Origins(instructions: Array[Boolean], parameters: Array[Boolean])
 
 object OriginsAnalysis {
   val nullSet: java.util.Set[AbstractInsnNode] = null
@@ -22,8 +24,15 @@ object OriginsAnalysis {
       value
   }
 
-  def resultOrigins(frames: Array[Frame[ParamsValue]], insns: InsnList, graph: ControlFlowGraph, returnIndices: List[Int]): Array[Boolean] = {
+  private def isReturnOpcode(opcode: Int) =
+    opcode >= Opcodes.IRETURN && opcode <= Opcodes.ARETURN
 
+  def resultOrigins(frames: Array[Frame[ParamsValue]], methodNode: MethodNode, graph: ControlFlowGraph): Origins = {
+    val static = (methodNode.access & Opcodes.ACC_STATIC) != 0
+    val shift = if (static) 0 else 1
+    val arity = Type.getArgumentTypes(methodNode.desc).length
+    val insns = methodNode.instructions
+    val returnIndices = (0 until frames.length).filter { i => isReturnOpcode(insns.get(i).getOpcode)}.toList
     val backTransitions: Array[List[Int]] = Array.tabulate[List[Int]](insns.size){i => Nil}
     for (from <- 0 until graph.transitions.length) {
       for (to <- graph.transitions(from)) {
@@ -40,7 +49,8 @@ object OriginsAnalysis {
       queue.push(sourceLoc)
     }
 
-    val origins = new Array[Boolean](insns.size())
+    val originInsns = new Array[Boolean](insns.size())
+    val originParams = new Array[Boolean](arity)
 
     while (queue.nonEmpty) {
       val resultLocation = queue.pop()
@@ -49,18 +59,27 @@ object OriginsAnalysis {
       sourceLocation match {
         case None =>
           // result was born here
-          origins(insnIndex) = true
+          originInsns(insnIndex) = true
         case Some(loc) =>
-          for (from <- backTransitions(insnIndex)) {
+          val previousInsns = backTransitions(insnIndex)
+          for (from <- previousInsns) {
             val insnLoc = InsnLocation(from, loc)
             if (visited.add(insnLoc))
               queue.push(insnLoc)
+          }
+          if (previousInsns.isEmpty && insnIndex == 0) {
+            loc match {
+              case LocalValLocation(i) if (i >= shift) && (i - shift < arity) =>
+                // result came from some parameter
+                originParams(i - shift) = true
+              case _ =>
+            }
           }
       }
 
     }
 
-    origins
+    Origins(originInsns, originParams)
   }
 
   def previousLocation(postFrame: Frame[ParamsValue], result: InsnLocation, insn: AbstractInsnNode): Option[Location] = {
@@ -73,7 +92,7 @@ object OriginsAnalysis {
     result.location match {
       case LocalValLocation(_) =>
         if (!(opCode >= Opcodes.ISTORE && opCode <= Opcodes.ASTORE || opCode == Opcodes.IINC)) {
-          // nothing is moved into variable
+          // nothing was moved into variable, the same location
           return Some(result.location)
         }
       case _ =>

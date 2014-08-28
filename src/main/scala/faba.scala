@@ -244,15 +244,9 @@ trait FabaProcessor extends Processor {
   def buildCFG(className: String, methodNode: MethodNode, jsr: Boolean): ControlFlowGraph =
     cfg.buildControlFlowGraph(className, methodNode, jsr)
 
-  private def isReturnOpcode(opcode: Int) =
-    opcode >= Opcodes.IRETURN && opcode <= Opcodes.ARETURN
-
   // build other result origins
-  def buildResultOrigins(className: String, methodNode: MethodNode, frames: Array[Frame[ParamsValue]], graph: ControlFlowGraph): Array[Boolean] = {
-    val insns = methodNode.instructions
-    val returnIndices = (0 until frames.length).filter { i => isReturnOpcode(insns.get(i).getOpcode)}.toList
-    OriginsAnalysis.resultOrigins(frames, insns, graph, returnIndices)
-  }
+  def buildResultOrigins(className: String, methodNode: MethodNode, frames: Array[Frame[ParamsValue]], graph: ControlFlowGraph): Origins =
+    OriginsAnalysis.resultOrigins(frames, methodNode, graph)
 
   def buildDFSTree(transitions: Array[List[Int]]): DFSTree =
     cfg.buildDFSTree(transitions)
@@ -284,7 +278,7 @@ trait FabaProcessor extends Processor {
     }
   }
 
-  def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean, noCycle: Boolean): Equation[Key, Value] = {
+  def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, i: Int, stable: Boolean, noCycle: Boolean): Equation[Key, Value] = {
     val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.NotNull), resultOrigins, stable, noCycle)
     try {
       analyser.analyze()
@@ -294,7 +288,7 @@ trait FabaProcessor extends Processor {
     }
   }
 
-  def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean, noCycle: Boolean): Equation[Key, Value] = {
+  def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, i: Int, stable: Boolean, noCycle: Boolean): Equation[Key, Value] = {
     val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.Null), resultOrigins, stable, noCycle)
     try {
       analyser.analyze()
@@ -304,7 +298,7 @@ trait FabaProcessor extends Processor {
     }
   }
 
-  def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], stable: Boolean, noCycle: Boolean): Equation[Key, Value] = {
+  def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, stable: Boolean, noCycle: Boolean): Equation[Key, Value] = {
     val analyser = new InOutAnalysis(richControlFlow, Out, resultOrigins, stable, noCycle)
     try {
       analyser.analyze()
@@ -314,8 +308,8 @@ trait FabaProcessor extends Processor {
     }
   }
 
-  def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, origins: Array[Boolean], stable: Boolean, jsr: Boolean): Equation[Key, Value] =
-    Equation(Key(method, Out, stable), NullableResultAnalysis.analyze(className, methodNode, origins, jsr))
+  def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, origins: Origins, stable: Boolean, jsr: Boolean): Equation[Key, Value] =
+    Equation(Key(method, Out, stable), NullableResultAnalysis.analyze(className, methodNode, origins.instructions, jsr))
 
   def handlePurityEquation(eq: Equation[Key, Value]): Unit = ()
   def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit = ()
