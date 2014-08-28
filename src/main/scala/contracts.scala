@@ -14,7 +14,8 @@ import faba.engine._
 
 case class InOutConstraint(taken: Boolean, dereferenced: Set[Int])
 
-class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Array[Boolean], val stable: Boolean)
+// TODO - dereferenced params as well
+class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Array[Boolean], val stable: Boolean, val noCycle: Boolean)
   // the only constraint for now - null taken or not
   extends Analysis[Result[Key, Value], InOutConstraint] {
 
@@ -112,7 +113,8 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
       val nextHistory = if (loopEnter) conf :: history else history
       val nextFrame = execute(frame, insnNode)
       // todo - dereferenced here
-      val dereferencedHere: Set[Int] = Set()
+      val dereferencedHere: Set[Int] =
+        if (noCycle) interpreter.dereferencedVal.map(Set(_)).getOrElse(Set()) else Set()
       val dereferenced = constraint.dereferenced ++ dereferencedHere
 
       if (interpreter.dereferencedParam) {
@@ -133,7 +135,8 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             case ParamValue(_) =>
               val InOut(_, in) = direction
               myResult = myResult join Final(in)
-            // todo - insert dereferenced before
+            case tr: Trackable if dereferenced(tr.origin) =>
+              myResult = myResult join Final(Values.NotNull)
             case NullValue(_) =>
               myResult = myResult join Final(Values.Null)
             case CallResultValue(_, _, keys) =>
