@@ -14,13 +14,14 @@ trait Trackable {
 case class ParamValue(tp: Type) extends BasicValue(tp)
 case class InstanceOfCheckValue() extends BasicValue(Type.INT_TYPE)
 case class NThParamValue(n: Int, tp: Type) extends BasicValue(tp)
-
 case class TrueValue() extends BasicValue(Type.INT_TYPE)
+
 case class FalseValue() extends BasicValue(Type.INT_TYPE)
 case class NotNullValue(tp: Type) extends BasicValue(tp)
 
 case class NullValue(origin: Int) extends BasicValue(Type.getObjectType("null")) with Trackable
 case class CallResultValue(origin: Int, tp: Type, inters: Set[Key]) extends BasicValue(tp) with Trackable
+case class TrackableBasicValue(origin: Int, tp: Type) extends BasicValue(tp) with Trackable
 
 case class Conf(insnIndex: Int, frame: Frame[BasicValue]) {
   lazy val _hashCode = {
