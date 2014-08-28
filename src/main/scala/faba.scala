@@ -4,9 +4,9 @@ import faba.analysis.LimitReachedException
 import faba.asm.nullableResult.NullableResultAnalysis
 import faba.combined.CombinedSingleAnalysis
 import org.objectweb.asm._
-import org.objectweb.asm.tree.{InsnList, MethodNode}
+import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.Opcodes._
-import org.objectweb.asm.tree.analysis.{Frame, AnalyzerException}
+import org.objectweb.asm.tree.analysis.Frame
 
 import scala.language.existentials
 
@@ -191,7 +191,7 @@ trait FabaProcessor extends Processor {
     lazy val resultEquation: Equation[Key, Value] = outContractEquation(richControlFlow, resultOrigins, stable)
     if (processContracts && isReferenceResult) {
       handleOutContractEquation(resultEquation)
-      handleNullableResultEquation(nullableResultEquation(className, methodNode, method, resultOrigins, stable))
+      handleNullableResultEquation(nullableResultEquation(className, methodNode, method, resultOrigins, stable, jsr))
     }
     for (i <- argumentTypes.indices) {
       val argType = argumentTypes(i)
@@ -343,8 +343,8 @@ trait FabaProcessor extends Processor {
     }
   }
 
-  def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, origins: Array[Boolean], stable: Boolean): Equation[Key, Value] =
-    Equation(Key(method, Out, stable), NullableResultAnalysis.analyze(className, methodNode, origins))
+  def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, origins: Array[Boolean], stable: Boolean, jsr: Boolean): Equation[Key, Value] =
+    Equation(Key(method, Out, stable), NullableResultAnalysis.analyze(className, methodNode, origins, jsr))
 
   def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit = ()
   def handleNullableParamEquation(eq: Equation[Key, Value]): Unit = ()

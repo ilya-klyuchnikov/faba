@@ -1,10 +1,10 @@
 package faba.asm.nullableResult
 
-import faba.asm.{InterpreterExt, AnalyzerExt}
+import faba.asm.{LiteAnalyzerExt, InterpreterExt, AnalyzerExt}
 import faba.data._
 import faba.engine._
 import org.objectweb.asm.Opcodes._
-import org.objectweb.asm.tree.analysis.{BasicInterpreter, BasicValue}
+import org.objectweb.asm.tree.analysis.{Frame, BasicInterpreter, BasicValue}
 import org.objectweb.asm.tree._
 import org.objectweb.asm.{Opcodes, Type}
 
@@ -17,16 +17,21 @@ case class Constraint(calls: Set[Key], nulls: Set[Int])
 object NullableResultAnalysis {
   val lNull = new LabeledNull(Set())
   val ObjectType = Type.getObjectType("java/lang/Object")
-  def analyze(className: String, methodNode: MethodNode, origins: Array[Boolean]): Result[Key, Value] = {
+  def analyze(className: String, methodNode: MethodNode, origins: Array[Boolean], jsr: Boolean): Result[Key, Value] = {
     val insns = methodNode.instructions
     val data = new Array[Constraint](insns.size())
-    val analyzer = new AnalyzerExt[BasicValue, Constraint, NullableResultInterpreter](NullableResultInterpreter(insns, origins), data, Constraint(Set(), Set()))
-    val frames = analyzer.analyze("this", methodNode)
+
+    val frames: Array[Frame[BasicValue]] =
+      if (jsr)
+        new AnalyzerExt[BasicValue, Constraint, NullableResultInterpreter](NullableResultInterpreter(insns, origins), data, Constraint(Set(), Set())).analyze("this", methodNode)
+      else
+        new LiteAnalyzerExt[BasicValue, Constraint, NullableResultInterpreter](NullableResultInterpreter(insns, origins), data, Constraint(Set(), Set())).analyze("this", methodNode)
+
     var result = BasicValue.REFERENCE_VALUE
     for (i <- 0 until frames.length) {
       val frame = frames(i)
       if (frame != null && insns.get(i).getOpcode == Opcodes.ARETURN) {
-        val constraint = analyzer.getData()(i)
+        val constraint = data(i)
         result = combine(result, frame.pop(), constraint)
       }
     }
