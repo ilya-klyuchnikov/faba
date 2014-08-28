@@ -32,10 +32,7 @@ package faba.asm;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.*;
-import org.objectweb.asm.tree.analysis.AnalyzerException;
-import org.objectweb.asm.tree.analysis.Frame;
-import org.objectweb.asm.tree.analysis.Interpreter;
-import org.objectweb.asm.tree.analysis.Value;
+import org.objectweb.asm.tree.analysis.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,13 +44,9 @@ import java.util.List;
 public class LiteAnalyzerExt<V extends Value, Data, MyInterpreter extends Interpreter<V> & InterpreterExt<Data>> implements Opcodes {
 
     private final MyInterpreter interpreter;
-
     private Frame<V>[] frames;
-
     private boolean[] queued;
-
     private int[] queue;
-
     private int top;
 
     public Data[] getData() {
@@ -70,12 +63,14 @@ public class LiteAnalyzerExt<V extends Value, Data, MyInterpreter extends Interp
         }
     }
 
-    public Frame<V>[] analyze(final String owner, final MethodNode m)
-            throws AnalyzerException {
+    public Frame<V>[] analyze(final String owner, final MethodNode m) throws AnalyzerException {
         if ((m.access & (ACC_ABSTRACT | ACC_NATIVE)) != 0) {
             frames = (Frame<V>[]) new Frame<?>[0];
             return frames;
         }
+
+        final V refV = (V) BasicValue.REFERENCE_VALUE;
+
         int n = m.instructions.size();
         InsnList insns = m.instructions;
         List<TryCatchBlockNode>[] handlers = (List<TryCatchBlockNode>[]) new List<?>[n];
@@ -177,25 +172,17 @@ public class LiteAnalyzerExt<V extends Value, Data, MyInterpreter extends Interp
                 if (insnHandlers != null) {
                     for (int i = 0; i < insnHandlers.size(); ++i) {
                         TryCatchBlockNode tcb = insnHandlers.get(i);
-                        Type type;
-                        if (tcb.type == null) {
-                            type = Type.getObjectType("java/lang/Throwable");
-                        } else {
-                            type = Type.getObjectType(tcb.type);
-                        }
                         int jump = insns.indexOf(tcb.handler);
                         handler.init(f);
                         handler.clearStack();
-                        handler.push(interpreter.newValue(type));
+                        handler.push(refV);
                         merge(jump, handler);
                     }
                 }
             } catch (AnalyzerException e) {
-                throw new AnalyzerException(e.node, "Error at instruction "
-                        + insn + ": " + e.getMessage(), e);
+                throw new AnalyzerException(e.node, "Error at instruction " + insn + ": " + e.getMessage(), e);
             } catch (Exception e) {
-                throw new AnalyzerException(insnNode, "Error at instruction "
-                        + insn + ": " + e.getMessage(), e);
+                throw new AnalyzerException(insnNode, "Error at instruction " + insn + ": " + e.getMessage(), e);
             }
         }
 
@@ -226,17 +213,6 @@ public class LiteAnalyzerExt<V extends Value, Data, MyInterpreter extends Interp
         } else {
             changes = oldFrame.merge(frame, interpreter);
         }
-        if (changes && !queued[insn]) {
-            queued[insn] = true;
-            queue[top++] = insn;
-        }
-
-        // delta
-        mergeData(insn, interpreter);
-    }
-
-    private void mergeData(int insn, MyInterpreter interpreter) {
-        boolean changes = false;
 
         Data oldData = data[insn];
         Data newData = interpreter.getAfterData(insn);
@@ -247,7 +223,7 @@ public class LiteAnalyzerExt<V extends Value, Data, MyInterpreter extends Interp
         } else if (newData != null) {
             Data mergedData = interpreter.merge(oldData, newData);
             data[insn] = mergedData;
-            changes = !oldData.equals(mergedData);
+            changes |= !oldData.equals(mergedData);
         }
 
         if (changes && !queued[insn]) {

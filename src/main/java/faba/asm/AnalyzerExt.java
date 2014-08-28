@@ -32,10 +32,7 @@ package faba.asm;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.*;
-import org.objectweb.asm.tree.analysis.AnalyzerException;
-import org.objectweb.asm.tree.analysis.Frame;
-import org.objectweb.asm.tree.analysis.Interpreter;
-import org.objectweb.asm.tree.analysis.Value;
+import org.objectweb.asm.tree.analysis.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,12 +77,13 @@ public class AnalyzerExt<V extends Value, Data, MyInterpreter extends Interprete
         }
     }
 
-    public Frame<V>[] analyze(final String owner, final MethodNode m)
-            throws AnalyzerException {
+    public Frame<V>[] analyze(final String owner, final MethodNode m) throws AnalyzerException {
         if ((m.access & (ACC_ABSTRACT | ACC_NATIVE)) != 0) {
             frames = (Frame<V>[]) new Frame<?>[0];
             return frames;
         }
+        final V refV = (V) BasicValue.REFERENCE_VALUE;
+
         n = m.instructions.size();
         insns = m.instructions;
         handlers = (List<TryCatchBlockNode>[]) new List<?>[n];
@@ -232,8 +230,7 @@ public class AnalyzerExt<V extends Value, Data, MyInterpreter extends Interprete
                                 newControlFlowEdge(insn, call + 1);
                             }
                         }
-                    } else if (insnOpcode != ATHROW
-                            && (insnOpcode < IRETURN || insnOpcode > RETURN)) {
+                    } else if (insnOpcode != ATHROW && (insnOpcode < IRETURN || insnOpcode > RETURN)) {
                         if (subroutine != null) {
                             if (insnNode instanceof VarInsnNode) {
                                 int var = ((VarInsnNode) insnNode).var;
@@ -257,17 +254,11 @@ public class AnalyzerExt<V extends Value, Data, MyInterpreter extends Interprete
                 if (insnHandlers != null) {
                     for (int i = 0; i < insnHandlers.size(); ++i) {
                         TryCatchBlockNode tcb = insnHandlers.get(i);
-                        Type type;
-                        if (tcb.type == null) {
-                            type = Type.getObjectType("java/lang/Throwable");
-                        } else {
-                            type = Type.getObjectType(tcb.type);
-                        }
                         int jump = insns.indexOf(tcb.handler);
                         if (newControlFlowExceptionEdge(insn, tcb)) {
                             handler.init(f);
                             handler.clearStack();
-                            handler.push(interpreter.newValue(type));
+                            handler.push(refV);
                             merge(jump, handler, subroutine);
                         }
                     }
