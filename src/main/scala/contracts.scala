@@ -16,7 +16,6 @@ import faba.engine._
 
 case class InOutConstraint(taken: Boolean, dereferenced: Set[Int], dereferencedParams: Set[Int])
 
-// TODO - dereferenced params as well
 class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Origins, val stable: Boolean, val noCycle: Boolean)
   // the only constraint for now - null taken or not
   extends Analysis[Result[Key, Value], InOutConstraint] {
@@ -178,6 +177,45 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams))
           states = state :: states
           state = nextState
+
+        case IFNONNULL if noCycle && popValue(frame).isInstanceOf[NThParamValue] =>
+          val nullInsn = insnIndex + 1
+          val notNullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+          val n = popValue(frame).asInstanceOf[NThParamValue].n
+          val nullState = State(mkId(), Conf(nullInsn, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams))
+          val notNullState = State(mkId(), Conf(notNullInsn, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams + n))
+          pendingPush(nullState)
+          pendingPush(notNullState)
+          return
+        case IFNONNULL if noCycle && popValue(frame).isInstanceOf[Trackable] =>
+          val nullInsn = insnIndex + 1
+          val notNullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+          val orig = popValue(frame).asInstanceOf[Trackable].origin
+          val nullState = State(mkId(), Conf(nullInsn, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams))
+          val notNullState = State(mkId(), Conf(notNullInsn, nextFrame), nextHistory, InOutConstraint(true, dereferenced + orig, dereferencedParams))
+          pendingPush(nullState)
+          pendingPush(notNullState)
+          return
+        case IFNULL if noCycle && popValue(frame).isInstanceOf[NThParamValue] =>
+          val nullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+          val notNullInsn = insnIndex + 1
+          val n = popValue(frame).asInstanceOf[NThParamValue].n
+          val nullState = State(mkId(), Conf(nullInsn, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams))
+          val notNullState = State(mkId(), Conf(notNullInsn, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams + n))
+          pendingPush(nullState)
+          pendingPush(notNullState)
+          return
+        case IFNULL if noCycle && popValue(frame).isInstanceOf[Trackable] =>
+          val nullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+          val notNullInsn = insnIndex + 1
+          val orig = popValue(frame).asInstanceOf[Trackable].origin
+          val nullState = State(mkId(), Conf(nullInsn, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams))
+          val notNullState = State(mkId(), Conf(notNullInsn, nextFrame), nextHistory, InOutConstraint(true, dereferenced + orig, dereferencedParams))
+          pendingPush(nullState)
+          pendingPush(notNullState)
+          return
+
+
         case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
           val nextInsnIndex =
             methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
