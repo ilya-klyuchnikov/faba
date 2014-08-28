@@ -4,7 +4,7 @@ import _root_.java.io.{PrintWriter, File}
 import java.nio.file.attribute.BasicFileAttributes
 import java.nio.file._
 
-import faba.asm.ParamsValue
+import faba.asm.{Origins, ParamsValue}
 import org.objectweb.asm.tree.MethodNode
 
 import faba.cfg._
@@ -88,28 +88,28 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean, noCycle: Boolean) = {
+  override def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, i: Int, stable: Boolean, noCycle: Boolean) = {
     val start = System.nanoTime()
     val result = super.notNullContractEquation(richControlFlow, resultOrigins, i, stable, noCycle)
     notNullTime += System.nanoTime() - start
     result
   }
 
-  override def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean, noCycle: Boolean) = {
+  override def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, i: Int, stable: Boolean, noCycle: Boolean) = {
     val start = System.nanoTime()
     val result = super.nullContractEquation(richControlFlow, resultOrigins, i, stable, noCycle)
     nullTime += System.nanoTime() - start
     result
   }
 
-  override def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], stable: Boolean, noCycle: Boolean) = {
+  override def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, stable: Boolean, noCycle: Boolean) = {
     val start = System.nanoTime()
     val result = super.outContractEquation(richControlFlow, resultOrigins, stable, noCycle)
     outTime += System.nanoTime() - start
     result
   }
 
-  override def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, origins: Array[Boolean], stable: Boolean, jsr: Boolean) = {
+  override def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, origins: Origins, stable: Boolean, jsr: Boolean) = {
     val start = System.nanoTime()
     val result = super.nullableResultEquation(className, methodNode, method, origins, stable, jsr)
     nullableResultTime += System.nanoTime() - start
