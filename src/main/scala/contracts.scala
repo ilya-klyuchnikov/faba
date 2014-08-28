@@ -4,7 +4,7 @@ import faba.asm.Origins
 
 import scala.annotation.switch
 
-import org.objectweb.asm.{Handle, Type}
+import org.objectweb.asm.{Opcodes, Handle, Type}
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.tree.analysis.{BasicValue, BasicInterpreter, Frame}
 import org.objectweb.asm.tree._
@@ -14,7 +14,7 @@ import faba.cfg._
 import faba.data._
 import faba.engine._
 
-case class InOutConstraint(taken: Boolean, dereferenced: Set[Int])
+case class InOutConstraint(taken: Boolean, dereferenced: Set[Int], dereferencedParams: Set[Int])
 
 // TODO - dereferenced params as well
 class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Origins, val stable: Boolean, val noCycle: Boolean)
@@ -117,7 +117,10 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
       // todo - dereferenced here
       val dereferencedHere: Set[Int] =
         if (noCycle) interpreter.dereferencedVal.map(Set(_)).getOrElse(Set()) else Set()
+      val dereferencedParamsHere: Set[Int] =
+        if (noCycle) interpreter.dereferencedNthParam.map(Set(_)).getOrElse(Set()) else Set()
       val dereferenced = constraint.dereferenced ++ dereferencedHere
+      val dereferencedParams = constraint.dereferencedParams ++ dereferencedParamsHere
 
       if (interpreter.dereferencedParam) {
         computed(insnIndex) = state :: computed(insnIndex)
@@ -138,6 +141,8 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
               val InOut(_, in) = direction
               myResult = myResult join Final(in)
             case tr: Trackable if dereferenced(tr.origin) =>
+              myResult = myResult join Final(Values.NotNull)
+            case NThParamValue(n, _) if dereferencedParams(n) =>
               myResult = myResult join Final(Values.NotNull)
             case NullValue(_) =>
               myResult = myResult join Final(Values.Null)
@@ -160,7 +165,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             case InOut(_, Values.NotNull) =>
               methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           }
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(true, dereferenced))
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams))
           states = state :: states
           state = nextState
         case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
@@ -170,18 +175,18 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             case InOut(_, Values.NotNull) =>
               insnIndex + 1
           }
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(true, dereferenced))
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams))
           states = state :: states
           state = nextState
         case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
           val nextInsnIndex =
             methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(true, dereferenced))
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams))
           states = state :: states
           state = nextState
         case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
           val nextInsnIndex = insnIndex + 1
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(true, dereferenced))
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams))
           state = nextState
         case _ =>
           // we touch this!
@@ -197,7 +202,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
               } else {
                 nextFrame
               }
-              State(mkId(), Conf(nextInsnIndex, nextFrame1), nextHistory, InOutConstraint(constraint.taken, dereferenced))
+              State(mkId(), Conf(nextInsnIndex, nextFrame1), nextHistory, InOutConstraint(constraint.taken, dereferenced, dereferencedParams))
           }
           states = state :: states
           if (nextStates.size == 1) {
@@ -258,8 +263,48 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     Conf(conf.insnIndex, frame)
   }
 
+  // customization: if param is a possible result, it is trackable
+  override def createStartFrame(): Frame[BasicValue] = {
+    val frame = new Frame[BasicValue](methodNode.maxLocals, methodNode.maxStack)
+    val returnType = Type.getReturnType(methodNode.desc)
+    val returnValue = if (returnType == Type.VOID_TYPE) null else new BasicValue(returnType)
+    frame.setReturn(returnValue)
+
+    val args = Type.getArgumentTypes(methodNode.desc)
+    var local = 0
+    if ((methodNode.access & Opcodes.ACC_STATIC) == 0) {
+      val basicValue = new NotNullValue(Type.getObjectType(controlFlow.className))
+      frame.setLocal(local, basicValue)
+      local += 1
+    }
+    for (i <- 0 until args.size) {
+      val value = direction match {
+        case InOut(`i`, _) =>
+          new ParamValue(args(i))
+        case In(`i`) =>
+          new ParamValue(args(i))
+        case _ =>
+          if (noCycle && resultOrigins.parameters(i))
+            NThParamValue(i, args(i))
+          else
+            new BasicValue(args(i))
+      }
+      frame.setLocal(local, value)
+      local += 1
+      if (args(i).getSize == 2) {
+        frame.setLocal(local, BasicValue.UNINITIALIZED_VALUE)
+        local += 1
+      }
+    }
+    while (local < methodNode.maxLocals) {
+      frame.setLocal(local, BasicValue.UNINITIALIZED_VALUE)
+      local += 1
+    }
+    frame
+  }
+
   override def startConstraint(): InOutConstraint =
-    InOutConstraint(false, Set())
+    InOutConstraint(false, Set(), Set())
 
   override def constraintEquiv(ctr1: InOutConstraint, ctr2: InOutConstraint): Boolean =
     ctr1 == ctr2
@@ -274,10 +319,12 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
 
   var dereferencedParam = false
   var dereferencedVal: Option[Int] = None
+  var dereferencedNthParam: Option[Int] = None
 
   def reset(): Unit = {
     dereferencedParam = false
     dereferencedVal = None
+    dereferencedNthParam = None
   }
 
   val nullAnalysis = direction match {
@@ -324,6 +371,8 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
         value match {
           case ParamValue(_) =>
             dereferencedParam = nullAnalysis
+          case NThParamValue(n, _) =>
+            dereferencedNthParam = Some(n)
           case tr: Trackable =>
             dereferencedVal = Some(tr.origin)
           case _ =>
@@ -347,6 +396,8 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
         v1 match {
           case ParamValue(_) =>
             dereferencedParam = nullAnalysis
+          case NThParamValue(n, _) =>
+            dereferencedNthParam = Some(n)
           case tr: Trackable =>
             dereferencedVal = Some(tr.origin)
           case _ =>
@@ -362,6 +413,8 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
         v1 match {
           case ParamValue(_) =>
             dereferencedParam = nullAnalysis
+          case NThParamValue(n, _) =>
+            dereferencedNthParam = Some(n)
           case tr: Trackable =>
             dereferencedVal = Some(tr.origin)
           case _ =>
@@ -382,6 +435,8 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
           dereferencedParam = nullAnalysis
           if (nullAnalysis)
             return super.naryOperation(insn, values)
+        case NThParamValue(n, _) =>
+          dereferencedNthParam = Some(n)
         case tr: Trackable =>
           dereferencedVal = Some(tr.origin)
         case _ =>

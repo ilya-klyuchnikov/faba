@@ -13,6 +13,7 @@ trait Trackable {
 
 case class ParamValue(tp: Type) extends BasicValue(tp)
 case class InstanceOfCheckValue() extends BasicValue(Type.INT_TYPE)
+case class NThParamValue(n: Int, tp: Type) extends BasicValue(tp)
 
 case class TrueValue() extends BasicValue(Type.INT_TYPE)
 case class FalseValue() extends BasicValue(Type.INT_TYPE)
@@ -95,7 +96,7 @@ abstract class Analysis[Res, Constraint] {
   }
   final def lastId(): Int = id
 
-  final def createStartFrame(): Frame[BasicValue] = {
+  def createStartFrame(): Frame[BasicValue] = {
     val frame = new Frame[BasicValue](methodNode.maxLocals, methodNode.maxStack)
     val returnType = Type.getReturnType(methodNode.desc)
     val returnValue = if (returnType == Type.VOID_TYPE) null else new BasicValue(returnType)
@@ -196,6 +197,10 @@ object Utils {
       (curr, prev) match {
         case (CallResultValue(_, _, k1), CallResultValue(_, _, k2)) =>
           k1 == k2
+        case (tr1: Trackable, tr2: Trackable) =>
+          tr1.origin == tr2.origin
+        case (NThParamValue(n1, _), NThParamValue(n2, _)) =>
+          n1 == n2
         case _ =>
           true
       }
