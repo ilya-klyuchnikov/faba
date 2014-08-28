@@ -9,7 +9,7 @@ import org.objectweb.asm.tree._
 import org.objectweb.asm.{Opcodes, Type}
 
 // this is significant to set magic type because of BasicObject#equals
-case class LabeledNull(is: Set[Int]) extends BasicValue(Type.getObjectType("null"))
+case class LabeledNull(origins: Set[Int]) extends BasicValue(Type.getObjectType("null"))
 case class Calls(keys: Set[Key]) extends BasicValue(NullableResultAnalysis.ObjectType)
 case class ThisValue() extends BasicValue(NullableResultAnalysis.ObjectType)
 case class Constraint(calls: Set[Key], nulls: Set[Int])
@@ -66,6 +66,31 @@ object NullableResultAnalysis {
 }
 
 case class NullableResultInterpreter(insns: InsnList, origins: Array[Boolean]) extends BasicInterpreter with InterpreterExt[Constraint] {
+  var constraint: Constraint = null
+  var delta: Set[Key] = null
+  var nullsDelta: Set[Int] = null
+
+  var notNullInsn: Option[Int] = None
+  var notNullCall: Set[Key] = Set()
+  var notNullNull: Set[Int] = Set()
+
+  override def init(previous: Constraint) {
+    constraint = previous
+    delta = Set()
+    nullsDelta = Set()
+
+    notNullInsn = None
+    notNullCall = Set()
+    notNullNull = Set()
+  }
+
+  override def getAfterData(insn: Int): Constraint = {
+    val notNull = Some(insn) == notNullInsn
+    Constraint(
+      constraint.calls ++ delta ++ (if (notNull) notNullCall else Set()),
+      constraint.nulls ++ nullsDelta ++ (if (notNull) notNullNull else Set())
+    )
+  }
 
   override def newValue(tp: Type): BasicValue =
     if (tp != null && tp.toString == "Lthis;") ThisValue() else super.newValue(tp)
@@ -87,13 +112,13 @@ case class NullableResultInterpreter(insns: InsnList, origins: Array[Boolean]) e
         notNullCall = value.asInstanceOf[Calls].keys
       case IFNULL if value.isInstanceOf[LabeledNull] =>
         notNullInsn = Some(insns.indexOf(insn) + 1)
-        notNullNull = value.asInstanceOf[LabeledNull].is
+        notNullNull = value.asInstanceOf[LabeledNull].origins
       case IFNONNULL if value.isInstanceOf[Calls] =>
         notNullInsn = Some(insns.indexOf(insn.asInstanceOf[JumpInsnNode].label))
         notNullCall = value.asInstanceOf[Calls].keys
       case IFNONNULL if value.isInstanceOf[LabeledNull] =>
         notNullInsn = Some(insns.indexOf(insn.asInstanceOf[JumpInsnNode].label))
-        notNullNull = value.asInstanceOf[LabeledNull].is
+        notNullNull = value.asInstanceOf[LabeledNull].origins
       case _ =>
     }
     super.unaryOperation(insn, value)
@@ -144,16 +169,13 @@ case class NullableResultInterpreter(insns: InsnList, origins: Array[Boolean]) e
       case _ =>
     }
     opCode match {
-      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL =>
+      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL if origins(insns.indexOf(insn)) =>
         val stable =
           if (opCode == INVOKESTATIC || opCode == INVOKESPECIAL) true
           else values.get(0).isInstanceOf[ThisValue]
         val mNode = insn.asInstanceOf[MethodInsnNode]
         val method = Method(mNode.owner, mNode.name, mNode.desc)
-        val retType = Type.getReturnType(mNode.desc)
-        val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
-        if (isRefRetType && origins(insns.indexOf(insn)))
-          return Calls(Set(Key(method, Out, stable)))
+        return Calls(Set(Key(method, Out, stable)))
       case _ =>
     }
     super.naryOperation(insn, values)
@@ -174,32 +196,6 @@ case class NullableResultInterpreter(insns: InsnList, origins: Array[Boolean]) e
       v2
     case _ =>
       super.merge(v1, v2)
-  }
-
-  var constraint: Constraint = null
-  var delta: Set[Key] = null
-  var nullsDelta: Set[Int] = null
-
-  var notNullInsn: Option[Int] = None
-  var notNullCall: Set[Key] = Set()
-  var notNullNull: Set[Int] = Set()
-
-  override def init(previous: Constraint) {
-    constraint = previous
-    delta = Set()
-    nullsDelta = Set()
-
-    notNullInsn = None
-    notNullCall = Set()
-    notNullNull = Set()
-  }
-
-  override def getAfterData(insn: Int): Constraint = {
-    val notNull = Some(insn) == notNullInsn
-    Constraint(
-      constraint.calls ++ delta ++ (if (notNull) notNullCall else Set()),
-      constraint.nulls ++ nullsDelta ++ (if (notNull) notNullNull else Set())
-    )
   }
 
   // all keys that were dereferenced to this point
