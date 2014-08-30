@@ -10,13 +10,31 @@ import org.objectweb.asm.{Opcodes, Type}
 
 // this is significant to set magic type because of BasicObject#equals
 case class LabeledNull(origins: Set[Int]) extends BasicValue(Type.getObjectType("null"))
-case class Calls(keys: Set[Key]) extends BasicValue(NullableResultAnalysis.ObjectType)
-case class ThisValue() extends BasicValue(NullableResultAnalysis.ObjectType)
+case class Calls(keys: Set[Key]) extends BasicValue(NullableResultAnalysis.CallType) {
+  override def toString = s"Calls(${keys.toString})"
+
+  override def equals(value: scala.Any): Boolean = value match {
+    case Calls(keys1) => keys == keys1
+    case _ => false
+  }
+
+  override def hashCode(): Int =
+    keys.hashCode()
+}
+case class ThisValue() extends BasicValue(NullableResultAnalysis.ObjectType) {
+  override def equals(value: scala.Any) = value match {
+    case ThisValue() => true
+    case _ => false
+  }
+
+  override def hashCode() = 1
+}
 case class Constraint(calls: Set[Key], nulls: Set[Int])
 
 object NullableResultAnalysis {
   val lNull = new LabeledNull(Set())
   val ObjectType = Type.getObjectType("java/lang/Object")
+  val CallType = Type.getObjectType("/Call")
   def analyze(className: String, methodNode: MethodNode, origins: Array[Boolean], jsr: Boolean): Result[Key, Value] = {
     val insns = methodNode.instructions
     val data = new Array[Constraint](insns.size())
@@ -171,8 +189,7 @@ case class NullableResultInterpreter(insns: InsnList, origins: Array[Boolean]) e
     opCode match {
       case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL if origins(insns.indexOf(insn)) =>
         val stable =
-          if (opCode == INVOKESTATIC || opCode == INVOKESPECIAL) true
-          else values.get(0).isInstanceOf[ThisValue]
+          (opCode == INVOKESTATIC) || (opCode == INVOKESPECIAL) || values.get(0).isInstanceOf[ThisValue]
         val mNode = insn.asInstanceOf[MethodInsnNode]
         val method = Method(mNode.owner, mNode.name, mNode.desc)
         return Calls(Set(Key(method, Out, stable)))
@@ -182,20 +199,20 @@ case class NullableResultInterpreter(insns: InsnList, origins: Array[Boolean]) e
   }
 
   override def merge(v1: BasicValue, v2: BasicValue): BasicValue = (v1, v2) match {
-    case (LabeledNull(is1), LabeledNull(is2)) =>
-      LabeledNull(is1 ++ is2)
-    case (LabeledNull(_), _) =>
-      v1
-    case (_, LabeledNull(_)) =>
-      v2
-    case (Calls(keys1), Calls(keys2)) =>
-      Calls(keys1 ++ keys2)
-    case (Calls(_), _) =>
-      v1
-    case (_, Calls(_)) =>
-      v2
-    case _ =>
-      super.merge(v1, v2)
+      case (LabeledNull(is1), LabeledNull(is2)) =>
+        LabeledNull(is1 ++ is2)
+      case (LabeledNull(_), _) =>
+        v1
+      case (_, LabeledNull(_)) =>
+        v2
+      case (Calls(keys1), Calls(keys2)) =>
+        Calls(keys1 ++ keys2)
+      case (Calls(_), _) =>
+        v1
+      case (_, Calls(_)) =>
+        v2
+      case _ =>
+        super.merge(v1, v2)
   }
 
   // all keys that were dereferenced to this point
