@@ -15,8 +15,6 @@ import static faba.asm.FastValues.*;
 
 public class FastFrame {
 
-    private int returnValue;
-
     private int[] values;
 
     private int locals;
@@ -34,14 +32,9 @@ public class FastFrame {
     }
 
     public FastFrame init(final FastFrame src) {
-        returnValue = src.returnValue;
         System.arraycopy(src.values, 0, values, 0, values.length);
         top = src.top;
         return this;
-    }
-
-    public void setReturn(final int v) {
-        returnValue = v;
     }
 
     public int getLocals() {
@@ -433,14 +426,9 @@ public class FastFrame {
             case Opcodes.ARETURN:
                 value1 = pop();
                 interpreter.unaryOperation(insn, value1);
-                interpreter.returnOperation(insn, value1, returnValue);
+                interpreter.returnOperation(insn, value1);
                 break;
             case Opcodes.RETURN:
-                // todo
-                /*
-                if (returnValue != null) {
-                    throw new AnalyzerException(insn, "Incompatible return type");
-                }*/
                 break;
             case Opcodes.GETSTATIC:
                 push(interpreter.newOperation(insn));

@@ -158,12 +158,10 @@ public abstract class FastInterpreter {
      *            the bytecode instruction to be interpreted.
      * @param value
      *            the argument of the instruction to be interpreted.
-     * @param expected
-     *            the expected return type of the analyzed method.
      * @throws AnalyzerException
      *             if an error occured during the interpretation.
      */
-    public abstract void returnOperation(AbstractInsnNode insn, int value, int expected) throws AnalyzerException;
+    public abstract void returnOperation(AbstractInsnNode insn, int value) throws AnalyzerException;
 
     /**
      * Merges two values. The merge operation must return a value that

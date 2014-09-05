@@ -1,9 +1,8 @@
 package faba.asm;
 
 public class FastValues {
-    static final int DOUBLE_OR_LONG = -1;
-    static final int ANY_VAL = 0;
-
-    static final int NULL_VAL = 1;
-    static final int NOT_NULL_VAL = 2;
+    public static final int DOUBLE_OR_LONG = -1;
+    public static final int ANY_VAL = 0;
+    public static final int PARAM_VAL = 1;
+    public static final int INSTANCE_OF_CHECK_VAL = 2;
 }
