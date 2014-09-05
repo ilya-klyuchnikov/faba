@@ -1,26 +1,14 @@
 package faba.fastAnalysis
 
-import org.objectweb.asm.tree.analysis.{BasicValue, Frame}
+import faba.asm.{FastFrame, FastValues}
 import org.objectweb.asm.{Opcodes, Type}
 
 import faba.cfg._
 import faba.data._
 import faba.engine._
 
-case class ParamValue(tp: Type) extends BasicValue(tp)
-case class InstanceOfCheckValue() extends BasicValue(Type.INT_TYPE)
-
-case class Conf(insnIndex: Int, frame: Frame[BasicValue]) {
-  lazy val _hashCode = {
-    var result = 0
-    for (i <- 0 until frame.getLocals) {
-      result = result * 31 + frame.getLocal(i).getClass.hashCode()
-    }
-    for (i <- 0 until frame.getStackSize) {
-      result = result * 31 + frame.getStack(i).getClass.hashCode()
-    }
-    result
-  }
+case class Conf(insnIndex: Int, frame: FastFrame) {
+  val _hashCode = frame.hashCode()
   override def hashCode() = _hashCode
 }
 
@@ -62,10 +50,7 @@ abstract class Analysis[Res] {
   final def confInstance(curr: Conf, prev: Conf): Boolean = Utils.isInstance(curr, prev)
 
   final def stateEquiv(curr: State, prev: State): Boolean =
-    curr.taken == prev.taken && curr.conf.hashCode() == prev.conf.hashCode() &&
-      Utils.equiv(curr.conf, prev.conf) &&
-      curr.history.size == prev.history.size &&
-      (curr.history, prev.history).zipped.forall((c1, c2) => c1.hashCode() == c2.hashCode() && Utils.equiv(c1, c2))
+    curr.taken == prev.taken && Utils.equiv(curr.conf, prev.conf) && Utils.equivHistory(curr.history, prev.history)
 
   // the key is insnIndex
   var computed = Array.tabulate[List[State]](methodNode.instructions.size()){i => Nil}
@@ -81,44 +66,38 @@ abstract class Analysis[Res] {
   }
   final def lastId(): Int = id
 
-  final def createStartFrame(): Frame[BasicValue] = {
-    val frame = new Frame[BasicValue](methodNode.maxLocals, methodNode.maxStack)
-    val returnType = Type.getReturnType(methodNode.desc)
-    val returnValue = if (returnType == Type.VOID_TYPE) null else new BasicValue(returnType)
-    frame.setReturn(returnValue)
-
+  final def createStartFrame(): FastFrame = {
+    val frame = new FastFrame(methodNode.maxLocals, methodNode.maxStack)
     val args = Type.getArgumentTypes(methodNode.desc)
     var local = 0
     if ((methodNode.access & Opcodes.ACC_STATIC) == 0) {
-      val basicValue = new BasicValue(Type.getObjectType(controlFlow.className))
-      frame.setLocal(local, basicValue)
+      frame.setLocal(local, FastValues.ANY_VAL)
       local += 1
     }
     for (i <- 0 until args.size) {
+      val argSize = args(i).getSize
       val value = direction match {
-        case InOut(`i`, _) =>
-          new ParamValue(args(i))
         case In(`i`) =>
-          new ParamValue(args(i))
+          FastValues.PARAM_VAL
         case _ =>
-          new BasicValue(args(i))
+          if (argSize == 1) FastValues.ANY_VAL else FastValues.DOUBLE_OR_LONG
       }
       frame.setLocal(local, value)
       local += 1
-      if (args(i).getSize == 2) {
-        frame.setLocal(local, BasicValue.UNINITIALIZED_VALUE)
+      if (argSize == 2) {
+        frame.setLocal(local, FastValues.ANY_VAL)
         local += 1
       }
     }
     while (local < methodNode.maxLocals) {
-      frame.setLocal(local, BasicValue.UNINITIALIZED_VALUE)
+      frame.setLocal(local, FastValues.ANY_VAL)
       local += 1
     }
     frame
   }
 
-  final def popValue(frame: Frame[BasicValue]): BasicValue =
-    frame.getStack(frame.getStackSize - 1)
+  final def popValue(frame: FastFrame): Int =
+    if (frame.getStackSize == 0) FastValues.ANY_VAL else frame.getStack(frame.getStackSize - 1)
 }
 
 object Utils {
@@ -135,28 +114,28 @@ object Utils {
     true
   }
 
-  def isInstance(curr: BasicValue, prev: BasicValue): Boolean = prev match {
-    case (_: ParamValue) => curr match {
-      case _: ParamValue => true
-      case _ => false
-    }
-    case InstanceOfCheckValue() => curr match {
-      case InstanceOfCheckValue() => true
-      case _ => false
-    }
-    case _: BasicValue => true
+  def isInstance(curr: Int, prev: Int): Boolean = {
+    if (prev == FastValues.PARAM_VAL || prev == FastValues.INSTANCE_OF_CHECK_VAL)
+      prev == curr
+    else
+      true
   }
 
-  def equiv(curr: Conf, prev: Conf): Boolean = {
-    val currFr = curr.frame
-    val prevFr = prev.frame
-    for (i <- (currFr.getStackSize - 1) to 0 by -1 if !equiv(currFr.getStack(i), prevFr.getStack(i)))
+  def equiv(curr: Conf, prev: Conf): Boolean =
+    curr._hashCode == prev._hashCode && curr.frame == prev.frame
+
+  def equivHistory(history1: List[Conf], history2: List[Conf]): Boolean = {
+    if (history1.size != history2.size) {
       return false
-    for (i <- (currFr.getLocals - 1) to 0 by -1 if !equiv(currFr.getLocal(i), prevFr.getLocal(i)))
-      return false
+    }
+    var h1 = history1
+    var h2 = history1
+    while (h1.nonEmpty) {
+      if (!equiv(h1.head, h2.head))
+        return false
+      h1 = h1.tail
+      h2 = h2.tail
+    }
     true
   }
-
-  def equiv(curr: BasicValue, prev: BasicValue): Boolean =
-    curr.getClass == prev.getClass
 }

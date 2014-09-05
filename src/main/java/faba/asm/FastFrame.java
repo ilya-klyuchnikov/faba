@@ -559,5 +559,35 @@ public class FastFrame {
     public String toString() {
         return Arrays.toString(values);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        FastFrame fastFrame = (FastFrame) o;
+        if (locals != fastFrame.locals) return false;
+        if (top != fastFrame.top) return false;
+
+        int[] thisValues = values;
+        int[] thatValue = fastFrame.values;
+        int size = locals + top;
+        int i = 0;
+        while (i < size) {
+            if (thisValues[i] != thatValue[i]) {
+                return false;
+            }
+            i++;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 0;
+        int size = locals + top;
+        int i = 0;
+        while (i < size) {
+            result = 31 * result + values[i++];
+        }
+        return result;
+    }
 }
 

@@ -1,8 +1,7 @@
 package faba.fastParameters
 
-import org.objectweb.asm.Type
-import org.objectweb.asm.tree.analysis.{BasicInterpreter, Frame, BasicValue}
-import org.objectweb.asm.tree.{MethodInsnNode, TypeInsnNode, JumpInsnNode, AbstractInsnNode}
+import faba.asm.{FastFrame, FastValues, FastBasicInterpreter}
+import org.objectweb.asm.tree.{MethodInsnNode, JumpInsnNode, AbstractInsnNode}
 import org.objectweb.asm.Opcodes._
 
 import faba.fastAnalysis._
@@ -162,14 +161,16 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
 
   def alreadyComputed(state: State): Option[Int] = {
     val start = System.nanoTime()
-    val alreadyDone = computed(state.conf.insnIndex).find(prevState => stateEquiv(state, prevState)) match {
-      case Some(ps) =>
-        Some(ps.index)
-      case None =>
-        None
+    var candidates = computed(state.conf.insnIndex)
+    var already: Option[Int] = None
+    while (candidates.nonEmpty && already.isEmpty) {
+      if (stateEquiv(state, candidates.head))
+        already = Some(candidates.head.index)
+      else
+        candidates = candidates.tail
     }
     ParametersAnalysis.findEquivTime += System.nanoTime() - start
-    alreadyDone
+    already
   }
 
   override def processState(fState: State): Unit = {
@@ -252,22 +253,22 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
           if (states.nonEmpty)
             pendingPush(MakeResult(states, subResult, List(stateIndex)))
           return
-        case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
+        case IFNONNULL if popValue(frame) == FastValues.PARAM_VAL =>
           val nextInsnIndex = insnIndex + 1
           val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
           states = state :: states
           state = nextState
-        case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
+        case IFNULL if popValue(frame) == FastValues.PARAM_VAL =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
           states = state :: states
           state = nextState
-        case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
+        case IFEQ if popValue(frame) == FastValues.INSTANCE_OF_CHECK_VAL =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
           states = state :: states
           state = nextState
-        case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
+        case IFNE if popValue(frame) == FastValues.INSTANCE_OF_CHECK_VAL =>
           val nextInsnIndex = insnIndex + 1
           val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
           states = state :: states
@@ -277,9 +278,9 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
           val nextStates = nextInsnIndices.map {
             nextInsnIndex =>
               val nextFrame1 = if (controlFlow.errors(nextInsnIndex) && controlFlow.errorTransitions(insnIndex -> nextInsnIndex)) {
-                val handler = new Frame(frame)
+                val handler = new FastFrame(frame)
                 handler.clearStack()
-                handler.push(new BasicValue(Type.getType("java/lang/Throwable")))
+                handler.push(FastValues.ANY_VAL)
                 handler
               } else {
                 nextFrame
@@ -298,13 +299,13 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     }
   }
 
-  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = {
+  private def execute(frame: FastFrame, insnNode: AbstractInsnNode) = {
     val start = System.nanoTime()
     val result = insnNode.getType match {
       case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
         (frame, Identity)
       case _ =>
-        val nextFrame = new Frame(frame)
+        val nextFrame = new FastFrame(frame)
         NonNullInterpreter.reset()
         nextFrame.execute(insnNode, NonNullInterpreter)
         (nextFrame, NonNullInterpreter.getSubResult)
@@ -361,9 +362,16 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
 
   def alreadyComputed(state: State): Boolean = {
     val start = System.nanoTime()
-    val alreadyDone = computed(state.conf.insnIndex).exists(prevState => stateEquiv(state, prevState))
+    var candidates = computed(state.conf.insnIndex)
+    var already = false
+    while (!already && candidates.nonEmpty) {
+      if (stateEquiv(state, candidates.head))
+        already = true
+      else
+        candidates = candidates.tail
+    }
     ParametersAnalysis.findEquivTime += System.nanoTime() - start
-    alreadyDone
+    already
   }
 
   override def processState(fState: State): Unit = {
@@ -405,7 +413,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
 
       insnNode.getOpcode match {
         case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
-          if (insnNode.getOpcode == ARETURN && popValue(frame).isInstanceOf[ParamValue]) {
+          if (insnNode.getOpcode == ARETURN && popValue(frame) == FastValues.PARAM_VAL) {
             earlyResult = Some(NPE)
             return
           }
@@ -415,16 +423,16 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
           return
         case ATHROW =>
           return
-        case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
+        case IFNONNULL if popValue(frame) == FastValues.PARAM_VAL =>
           val nextInsnIndex = insnIndex + 1
           state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-        case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
+        case IFNULL if popValue(frame) == FastValues.PARAM_VAL =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-        case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
+        case IFEQ if popValue(frame) == FastValues.INSTANCE_OF_CHECK_VAL =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-        case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
+        case IFNE if popValue(frame) == FastValues.INSTANCE_OF_CHECK_VAL =>
           val nextInsnIndex = insnIndex + 1
           state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
         case _ =>
@@ -432,9 +440,9 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
           val nextStates = nextInsnIndices.map {
             nextInsnIndex =>
               val nextFrame1 = if (controlFlow.errors(nextInsnIndex) && controlFlow.errorTransitions(insnIndex -> nextInsnIndex)) {
-                val handler = new Frame(frame)
+                val handler = new FastFrame(frame)
                 handler.clearStack()
-                handler.push(new BasicValue(Type.getType("java/lang/Throwable")))
+                handler.push(FastValues.ANY_VAL)
                 handler
               } else {
                 nextFrame
@@ -451,13 +459,13 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
     }
   }
 
-  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = {
+  private def execute(frame: FastFrame, insnNode: AbstractInsnNode) = {
     val start = System.nanoTime()
     val result = insnNode.getType match {
       case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
         (frame, Identity, false)
       case _ =>
-        val nextFrame = new Frame(frame)
+        val nextFrame = new FastFrame(frame)
         NullableInterpreter.reset()
         nextFrame.execute(insnNode, NullableInterpreter)
         (nextFrame, NullableInterpreter.getSubResult, NullableInterpreter.top)
@@ -468,7 +476,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
 
 }
 
-abstract class Interpreter extends BasicInterpreter {
+abstract class Interpreter extends FastBasicInterpreter {
   var top = false
   val nullable: Boolean
   protected var _subResult: Result = Identity
@@ -482,54 +490,54 @@ abstract class Interpreter extends BasicInterpreter {
   def getSubResult: Result =
     _subResult
 
-  final override def unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue = {
+  final override def unaryOperation(insn: AbstractInsnNode, value: Int): Int = {
     insn.getOpcode match {
-      case GETFIELD | ARRAYLENGTH | MONITORENTER if value.isInstanceOf[ParamValue] =>
+      case GETFIELD | ARRAYLENGTH | MONITORENTER if value == FastValues.PARAM_VAL =>
         _subResult = NPE
-      case CHECKCAST if value.isInstanceOf[ParamValue] =>
-        return new ParamValue(Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc))
-      case INSTANCEOF if value.isInstanceOf[ParamValue] =>
-        return InstanceOfCheckValue()
+      case CHECKCAST if value == FastValues.PARAM_VAL =>
+        return FastValues.PARAM_VAL
+      case INSTANCEOF if value == FastValues.PARAM_VAL =>
+        return FastValues.INSTANCE_OF_CHECK_VAL
       case _ =>
     }
     super.unaryOperation(insn, value)
   }
 
-  final override def binaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue): BasicValue = {
+  final override def binaryOperation(insn: AbstractInsnNode, v1: Int, v2: Int): Int = {
     insn.getOpcode match {
       case PUTFIELD
-        if v1.isInstanceOf[ParamValue] || (nullable && v2.isInstanceOf[ParamValue]) =>
+        if (v1 == FastValues.PARAM_VAL) || (nullable && v2 == FastValues.PARAM_VAL) =>
         _subResult = NPE
-      case IALOAD | LALOAD | FALOAD | DALOAD | AALOAD | BALOAD | CALOAD | SALOAD if v1.isInstanceOf[ParamValue] =>
+      case IALOAD | LALOAD | FALOAD | DALOAD | AALOAD | BALOAD | CALOAD | SALOAD if v1 == FastValues.PARAM_VAL =>
         _subResult = NPE
       case _ =>
     }
     super.binaryOperation(insn, v1, v2)
   }
 
-  final override def ternaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue, v3: BasicValue): BasicValue = {
+  final override def ternaryOperation(insn: AbstractInsnNode, v1: Int, v2: Int, v3: Int): Int = {
     insn.getOpcode match {
       case IASTORE | LASTORE | FASTORE | DASTORE | BASTORE | CASTORE | SASTORE
-        if v1.isInstanceOf[ParamValue] =>
+        if v1 == FastValues.PARAM_VAL =>
         _subResult = NPE
       case AASTORE
-        if v1.isInstanceOf[ParamValue] || (nullable && v3.isInstanceOf[ParamValue]) =>
+        if v1 == FastValues.PARAM_VAL || (nullable && v3 == FastValues.PARAM_VAL) =>
         _subResult = NPE
       case _ =>
     }
     super.ternaryOperation(insn, v1, v2, v3)
   }
 
-  final override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
+  final override def naryOperation(insn: AbstractInsnNode, values: Array[Int]): Int = {
     val opCode = insn.getOpcode
     val static = opCode == INVOKESTATIC
     val shift = if (static) 0 else 1
-    if ((opCode == INVOKESPECIAL || opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) && values.get(0).isInstanceOf[ParamValue]) {
+    if ((opCode == INVOKESPECIAL || opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) && values(0) == FastValues.PARAM_VAL) {
       _subResult = NPE
     }
     if (nullable && opCode == INVOKEINTERFACE) {
-      for (i <- shift until values.size()) {
-        if (values.get(i).isInstanceOf[ParamValue]) {
+      for (i <- shift until values.length) {
+        if (values(i) == FastValues.PARAM_VAL) {
           top = true
           return super.naryOperation(insn, values)
         }
@@ -540,8 +548,8 @@ abstract class Interpreter extends BasicInterpreter {
       case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL =>
         val stable = opCode == INVOKESTATIC || opCode == INVOKESPECIAL
         val mNode = insn.asInstanceOf[MethodInsnNode]
-        for (i <- shift until values.size()) {
-          if (values.get(i).isInstanceOf[ParamValue]) {
+        for (i <- shift until values.length) {
+          if (values(i) == FastValues.PARAM_VAL) {
             val method = Method(mNode.owner, mNode.name, mNode.desc)
             _subResult = combine(_subResult, ConditionalNPE(Key(method, In(i - shift), stable)))
           }

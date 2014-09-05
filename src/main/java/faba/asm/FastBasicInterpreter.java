@@ -8,11 +8,7 @@ import org.objectweb.asm.tree.analysis.AnalyzerException;
 public class FastBasicInterpreter extends FastInterpreter implements Opcodes {
 
     public FastBasicInterpreter() {
-        super(ASM5);
-    }
-
-    protected FastBasicInterpreter(final int api) {
-        super(api);
+        super();
     }
 
     @Override
@@ -44,6 +40,8 @@ public class FastBasicInterpreter extends FastInterpreter implements Opcodes {
                 } else {
                     return FastValues.ANY_VAL;
                 }
+            case GETSTATIC:
+                return newValue(Type.getType(((FieldInsnNode) insn).desc));
             default:
                 return FastValues.ANY_VAL;
         }
@@ -66,6 +64,8 @@ public class FastBasicInterpreter extends FastInterpreter implements Opcodes {
             case L2D:
             case F2D:
                 return FastValues.DOUBLE_OR_LONG;
+            case GETFIELD:
+                return newValue(Type.getType(((FieldInsnNode) insn).desc));
             default:
                 return FastValues.ANY_VAL;
         }
@@ -107,7 +107,7 @@ public class FastBasicInterpreter extends FastInterpreter implements Opcodes {
     public int naryOperation(final AbstractInsnNode insn, final int[] values) throws AnalyzerException {
         int opcode = insn.getOpcode();
         if (opcode == MULTIANEWARRAY) {
-            return newValue(Type.getType(((MultiANewArrayInsnNode) insn).desc));
+            return FastValues.ANY_VAL;
         } else if (opcode == INVOKEDYNAMIC) {
             return newValue(Type.getReturnType(((InvokeDynamicInsnNode) insn).desc));
         } else {

@@ -8,15 +8,10 @@ import org.objectweb.asm.tree.analysis.AnalyzerException;
  * Specialization of {@link org.objectweb.asm.tree.analysis.Interpreter} to work with
  * symbolic values encoded as integers.
  *
- * IMPORTANT: for convenience, double and long values are encoded as 0
- * (to recognize that they are of size 2).
  */
 public abstract class FastInterpreter {
 
-    protected final int api;
-
-    protected FastInterpreter(final int api) {
-        this.api = api;
+    protected FastInterpreter() {
     }
 
     /**
