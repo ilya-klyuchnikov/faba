@@ -14,7 +14,7 @@ import faba.asm._
 import faba.cfg._
 import faba.data._
 import faba.contracts._
-import faba.parameters._
+import faba.fastParameters._
 import faba.engine._
 import faba.source._
 

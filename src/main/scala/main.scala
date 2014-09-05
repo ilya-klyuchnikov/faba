@@ -12,7 +12,7 @@ import faba.cfg._
 import faba.data._
 import faba.engine._
 import faba.source._
-import faba.parameters.ParametersAnalysis
+import faba.fastParameters._
 import org.objectweb.asm.tree.analysis.Frame
 import scala.xml.PrettyPrinter
 import scala.collection.mutable.ListBuffer
