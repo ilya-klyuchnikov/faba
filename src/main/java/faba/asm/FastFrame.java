@@ -19,6 +19,10 @@ public class FastFrame {
 
     private int locals;
 
+    public int getSize() {
+        return locals + top;
+    }
+
     private int top;
 
     public FastFrame(final int nLocals, final int nStack) {
@@ -585,7 +589,7 @@ public class FastFrame {
         int size = locals + top;
         int i = 0;
         while (i < size) {
-            result = 31 * result + values[i++];
+            result = 4 * result + values[i++];
         }
         return result;
     }

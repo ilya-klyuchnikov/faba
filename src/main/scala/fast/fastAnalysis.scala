@@ -122,7 +122,10 @@ object Utils {
   }
 
   def equiv(curr: Conf, prev: Conf): Boolean =
-    curr._hashCode == prev._hashCode && curr.frame == prev.frame
+    if (curr.frame.getSize < 16)
+      curr._hashCode == prev._hashCode
+    else
+      curr._hashCode == prev._hashCode && curr.frame == prev.frame
 
   def equivHistory(history1: List[Conf], history2: List[Conf]): Boolean = {
     if (history1.size != history2.size) {
