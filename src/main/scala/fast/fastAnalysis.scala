@@ -21,7 +21,7 @@ object LimitReachedException {
 
 class LimitReachedException extends Exception("Limit reached exception")
 
-object Analysis {
+object FastAnalysis {
   sealed trait PendingAction[+Res]
   case class ProceedState(state: State) extends PendingAction[Nothing]
   case class MakeResult[Res](states: List[State], subResult: Res, indices: List[Int]) extends PendingAction[Res]
@@ -29,7 +29,7 @@ object Analysis {
   val ourPending = new Array[State](LimitReachedException.limit)
 }
 
-abstract class Analysis[Res] {
+abstract class FastAnalysis[Res] {
 
   val richControlFlow: RichControlFlow
   val direction: Direction
@@ -47,15 +47,23 @@ abstract class Analysis[Res] {
   val aKey = Key(method, direction, stable)
 
   final def createStartState(): State = State(0, Conf(0, createStartFrame()), Nil, false, false)
-  final def confInstance(curr: Conf, prev: Conf): Boolean = Utils.isInstance(curr, prev)
 
   final def stateEquiv(curr: State, prev: State): Boolean =
     curr.taken == prev.taken && Utils.equiv(curr.conf, prev.conf) && Utils.equivHistory(curr.history, prev.history)
 
   // the key is insnIndex
-  var computed = Array.tabulate[List[State]](methodNode.instructions.size()){i => Nil}
+  val computed = new Array[List[State]](methodNode.instructions.size())
   // the key is stateIndex
   var earlyResult: Option[Res] = None
+
+  final def addComputed(insnsIndex: Int, state: State) {
+    val alreadyComputed = computed(insnsIndex)
+    if (alreadyComputed == null) {
+      computed(insnsIndex) = state :: Nil
+    } else {
+      computed(insnsIndex) = state :: alreadyComputed
+    }
+  }
 
   private var id = 0
   @inline
@@ -141,4 +149,7 @@ object Utils {
     }
     true
   }
+
+  def isFold(conf: Conf, history: List[Conf]) =
+    history.exists(prevConf => isInstance(conf, prevConf))
 }

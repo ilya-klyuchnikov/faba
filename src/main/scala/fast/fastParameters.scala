@@ -4,7 +4,7 @@ import faba.asm.{FastFrame, FastValues, FastBasicInterpreter}
 import org.objectweb.asm.tree.{MethodInsnNode, JumpInsnNode, AbstractInsnNode}
 import org.objectweb.asm.Opcodes._
 
-import faba.fastAnalysis._
+import faba.fastAnalysis.{Utils => FUtils, _}
 import faba.cfg._
 import faba.data._
 import faba.engine._
@@ -93,15 +93,15 @@ object Result {
 }
 
 object ParametersAnalysis {
-  import Analysis._
+  import FastAnalysis._
   val myArray = new Array[Result](LimitReachedException.limit)
   val myPending = new Array[PendingAction[Result]](LimitReachedException.limit)
   var executeTime: Long = 0
   var findEquivTime: Long = 0
 }
 
-class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result] {
-  import Analysis._
+class NotNullInFastAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends FastAnalysis[Result] {
+  import FastAnalysis._
 
   override val identity: Result = Identity
   val results = ParametersAnalysis.myArray
@@ -149,7 +149,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
           for (state <- states) {
             val insnIndex = state.conf.insnIndex
             results(state.index) = result
-            computed(insnIndex) = state :: computed(insnIndex)
+            addComputed(insnIndex, state)
           }
         }
       case ProceedState(state) =>
@@ -163,11 +163,13 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     val start = System.nanoTime()
     var candidates = computed(state.conf.insnIndex)
     var already: Option[Int] = None
-    while (candidates.nonEmpty && already.isEmpty) {
-      if (stateEquiv(state, candidates.head))
-        already = Some(candidates.head.index)
-      else
-        candidates = candidates.tail
+    if (candidates != null) {
+      while (candidates.nonEmpty && already.isEmpty) {
+        if (stateEquiv(state, candidates.head))
+          already = Some(candidates.head.index)
+        else
+          candidates = candidates.tail
+      }
     }
     ParametersAnalysis.findEquivTime += System.nanoTime() - start
     already
@@ -185,7 +187,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
         case Some(psIndex) =>
           results(state.index) = results(psIndex)
           if (states.nonEmpty)
-            pendingPush(MakeResult(states, subResult, List(psIndex)))
+            pendingPush(MakeResult(states, subResult, psIndex :: Nil))
           return
         case None =>
       }
@@ -195,11 +197,11 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
       val insnIndex = conf.insnIndex
       val history = state.history
 
-      val fold = dfsTree.loopEnters(insnIndex) && history.exists(prevConf => confInstance(conf, prevConf))
+      val fold = dfsTree.loopEnters(insnIndex) && FUtils.isFold(conf, history)
 
       if (fold) {
         results(stateIndex) = identity
-        computed(insnIndex) = state :: computed(insnIndex)
+        addComputed(insnIndex, state)
         if (states.nonEmpty)
           pendingPush(MakeResult(states, subResult, List(stateIndex)))
         return
@@ -222,8 +224,8 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
         // npe was detected
         npe = true
         results(stateIndex) = NPE
-        computed(insnIndex) = state :: computed(insnIndex)
-        pendingPush(MakeResult(states, subResult, List(stateIndex)))
+        addComputed(insnIndex, state)
+        pendingPush(MakeResult(states, subResult, stateIndex :: Nil))
         return
       }
 
@@ -234,7 +236,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
             return
           } else {
             results(stateIndex) = Return
-            computed(insnIndex) = state :: computed(insnIndex)
+            addComputed(insnIndex, state)
             // important to put subResult
             if (states.nonEmpty)
               pendingPush(MakeResult(states, subResult, List(stateIndex)))
@@ -243,13 +245,13 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
         case ATHROW if taken =>
           results(stateIndex) = NPE
           npe = true
-          computed(insnIndex) = state :: computed(insnIndex)
+          addComputed(insnIndex, state)
           if (states.nonEmpty)
             pendingPush(MakeResult(states, subResult, List(stateIndex)))
           return
         case ATHROW =>
           results(stateIndex) = Error
-          computed(insnIndex) = state :: computed(insnIndex)
+          addComputed(insnIndex, state)
           if (states.nonEmpty)
             pendingPush(MakeResult(states, subResult, List(stateIndex)))
           return
@@ -317,10 +319,10 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
 }
 
 // if everything is return, then parameter is nullable
-class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result] {
+class NullableInFastAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends FastAnalysis[Result] {
 
   override val identity: Result = Identity
-  val pending = Analysis.ourPending
+  val pending = FastAnalysis.ourPending
 
   override def combineResults(delta: Result, subResults: List[Result]): Result =
     Result.combineNullable(delta, subResults.reduce(Result.combineNullable))
@@ -364,11 +366,13 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
     val start = System.nanoTime()
     var candidates = computed(state.conf.insnIndex)
     var already = false
-    while (!already && candidates.nonEmpty) {
-      if (stateEquiv(state, candidates.head))
-        already = true
-      else
-        candidates = candidates.tail
+    if (candidates != null) {
+      while (!already && candidates.nonEmpty) {
+        if (stateEquiv(state, candidates.head))
+          already = true
+        else
+          candidates = candidates.tail
+      }
     }
     ParametersAnalysis.findEquivTime += System.nanoTime() - start
     already
@@ -389,9 +393,9 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
       val history = state.history
 
       val isLoopEnter = dfsTree.loopEnters(insnIndex)
-      val fold = isLoopEnter && history.exists(prevConf => confInstance(conf, prevConf))
+      val fold = isLoopEnter && FUtils.isFold(conf, history)
 
-      computed(insnIndex) = state :: computed(insnIndex)
+      addComputed(insnIndex, state)
 
       if (fold) {
         return
@@ -536,11 +540,13 @@ abstract class Interpreter extends FastBasicInterpreter {
       _subResult = NPE
     }
     if (nullable && opCode == INVOKEINTERFACE) {
-      for (i <- shift until values.length) {
+      var i = shift
+      while (i < values.length) {
         if (values(i) == FastValues.PARAM_VAL) {
           top = true
           return super.naryOperation(insn, values)
         }
+        i += 1
       }
       return super.naryOperation(insn, values)
     }
@@ -548,11 +554,13 @@ abstract class Interpreter extends FastBasicInterpreter {
       case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL =>
         val stable = opCode == INVOKESTATIC || opCode == INVOKESPECIAL
         val mNode = insn.asInstanceOf[MethodInsnNode]
-        for (i <- shift until values.length) {
+        var i = shift
+        while (i < values.length) {
           if (values(i) == FastValues.PARAM_VAL) {
             val method = Method(mNode.owner, mNode.name, mNode.desc)
             _subResult = combine(_subResult, ConditionalNPE(Key(method, In(i - shift), stable)))
           }
+          i += 1
         }
       case _ =>
     }

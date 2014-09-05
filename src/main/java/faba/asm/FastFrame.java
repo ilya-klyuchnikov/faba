@@ -124,7 +124,7 @@ public class FastFrame {
             case Opcodes.FLOAD:
             case Opcodes.DLOAD:
             case Opcodes.ALOAD:
-                push(interpreter.copyOperation(insn, getLocal(((VarInsnNode) insn).var)));
+                push(getLocal(((VarInsnNode) insn).var));
                 break;
             case Opcodes.IALOAD:
             case Opcodes.LALOAD:
