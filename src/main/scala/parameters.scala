@@ -97,8 +97,8 @@ object ParametersAnalysis {
   import Analysis._
   val myArray = new Array[Result](LimitReachedException.limit)
   val myPending = new Array[PendingAction[Result]](LimitReachedException.limit)
-  var nullableExecute: Long = 0
-  var notNullExecute: Long = 0
+  var executeTime: Long = 0
+  var findEquivTime: Long = 0
 }
 
 class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result] {
@@ -160,6 +160,18 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     mkEquation(earlyResult.getOrElse(results(0)))
   }
 
+  def alreadyComputed(state: State): Option[Int] = {
+    val start = System.nanoTime()
+    val alreadyDone = computed(state.conf.insnIndex).find(prevState => stateEquiv(state, prevState)) match {
+      case Some(ps) =>
+        Some(ps.index)
+      case None =>
+        None
+    }
+    ParametersAnalysis.findEquivTime += System.nanoTime() - start
+    alreadyDone
+  }
+
   override def processState(fState: State): Unit = {
 
     var state = fState
@@ -167,15 +179,15 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     var subResult = identity
 
     while (true) {
-      computed(state.conf.insnIndex).find(prevState => stateEquiv(state, prevState)) match {
-        case Some(ps) =>
-          results(state.index) = results(ps.index)
+
+      alreadyComputed(state) match {
+        case Some(psIndex) =>
+          results(state.index) = results(psIndex)
           if (states.nonEmpty)
-            pendingPush(MakeResult(states, subResult, List(ps.index)))
+            pendingPush(MakeResult(states, subResult, List(psIndex)))
           return
         case None =>
       }
-
 
       val stateIndex = state.index
       val conf = state.conf
@@ -286,15 +298,19 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     }
   }
 
-  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
-    case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
-      (frame, Identity)
-    case _ =>
-      ParametersAnalysis.notNullExecute += 1
-      val nextFrame = new Frame(frame)
-      NonNullInterpreter.reset()
-      nextFrame.execute(insnNode, NonNullInterpreter)
-      (nextFrame, NonNullInterpreter.getSubResult)
+  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = {
+    val start = System.nanoTime()
+    val result = insnNode.getType match {
+      case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
+        (frame, Identity)
+      case _ =>
+        val nextFrame = new Frame(frame)
+        NonNullInterpreter.reset()
+        nextFrame.execute(insnNode, NonNullInterpreter)
+        (nextFrame, NonNullInterpreter.getSubResult)
+    }
+    ParametersAnalysis.executeTime += System.nanoTime() - start
+    result
   }
 
 }
@@ -343,15 +359,20 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
     mkEquation(earlyResult.getOrElse(myResult))
   }
 
+  def alreadyComputed(state: State): Boolean = {
+    val start = System.nanoTime()
+    val alreadyDone = computed(state.conf.insnIndex).exists(prevState => stateEquiv(state, prevState))
+    ParametersAnalysis.findEquivTime += System.nanoTime() - start
+    alreadyDone
+  }
+
   override def processState(fState: State): Unit = {
 
     var state = fState
 
     while (true) {
-      computed(state.conf.insnIndex).find(prevState => stateEquiv(state, prevState)) match {
-        case Some(ps) =>
-          return
-        case None =>
+      if (alreadyComputed(state)) {
+        return
       }
 
       val stateIndex = state.index
@@ -430,15 +451,19 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
     }
   }
 
-  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
-    case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
-      (frame, Identity, false)
-    case _ =>
-      ParametersAnalysis.nullableExecute += 1
-      val nextFrame = new Frame(frame)
-      NullableInterpreter.reset()
-      nextFrame.execute(insnNode, NullableInterpreter)
-      (nextFrame, NullableInterpreter.getSubResult, NullableInterpreter.top)
+  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = {
+    val start = System.nanoTime()
+    val result = insnNode.getType match {
+      case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
+        (frame, Identity, false)
+      case _ =>
+        val nextFrame = new Frame(frame)
+        NullableInterpreter.reset()
+        nextFrame.execute(insnNode, NullableInterpreter)
+        (nextFrame, NullableInterpreter.getSubResult, NullableInterpreter.top)
+    }
+    ParametersAnalysis.executeTime += System.nanoTime() - start
+    result
   }
 
 }

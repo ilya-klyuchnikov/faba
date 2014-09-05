@@ -4,6 +4,7 @@ import _root_.java.io.{PrintWriter, File}
 import java.nio.file.attribute.BasicFileAttributes
 import java.nio.file._
 
+import faba.analysis.Analysis
 import faba.asm.ParamsValue
 import org.objectweb.asm.tree.MethodNode
 
@@ -230,8 +231,6 @@ class MainProcessor extends FabaProcessor {
     println(s"leakingParams  ${leakingParametersTime / 1000000} msec")
     println(s"simpleTime0    ${simpleTime / 1000000} msec")
     println(s"complexTime    ${complexTime / 1000000} msec")
-    println(s"${ParametersAnalysis.notNullExecute} @NotNull executes")
-    println(s"${ParametersAnalysis.nullableExecute} @Nullable executes")
     println("====")
     println(s"$simpleMethods  simple methods")
     println(s"$complexMethods complex methods")
@@ -239,8 +238,11 @@ class MainProcessor extends FabaProcessor {
     println(s"$cycleMethods    cycle methods methods")
     println(s"$nonCycleMethods non cycle methods methods")
     println("====")
-    println(s"cycleTime        ${cycleTime / 1000000} msec")
-    println(s"nonCycleTime     ${nonCycleTime / 1000000} msec")
+    println(s"cycleTime                  ${cycleTime / 1000000} msec")
+    println(s"nonCycleTime               ${nonCycleTime / 1000000} msec")
+    println(s"contractFindEquivTime      ${Analysis.findEquivTime / 1000000} msec")
+    println(s"paramFindEquivTime         ${ParametersAnalysis.findEquivTime / 1000000} msec")
+    println(s"paramExecTime              ${ParametersAnalysis.executeTime / 1000000} msec")
   }
 
   def process(source: Source): Annotations = {
