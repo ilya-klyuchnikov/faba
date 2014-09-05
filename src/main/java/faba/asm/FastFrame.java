@@ -11,10 +11,9 @@ import org.objectweb.asm.tree.VarInsnNode;
 import org.objectweb.asm.tree.analysis.AnalyzerException;
 
 import java.util.Arrays;
+import static faba.asm.FastValues.*;
 
 public class FastFrame {
-
-    static final int DOUBLE_OR_LONG = -1;
 
     private int returnValue;
 

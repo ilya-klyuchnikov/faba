@@ -10,9 +10,6 @@ import faba.engine._
 case class ParamValue(tp: Type) extends BasicValue(tp)
 case class InstanceOfCheckValue() extends BasicValue(Type.INT_TYPE)
 
-case class NullValue() extends BasicValue(Type.getObjectType("null"))
-case class NotNullValue(tp: Type) extends BasicValue(tp)
-
 case class Conf(insnIndex: Int, frame: Frame[BasicValue]) {
   lazy val _hashCode = {
     var result = 0
@@ -93,7 +90,7 @@ abstract class Analysis[Res] {
     val args = Type.getArgumentTypes(methodNode.desc)
     var local = 0
     if ((methodNode.access & Opcodes.ACC_STATIC) == 0) {
-      val basicValue = new NotNullValue(Type.getObjectType(controlFlow.className))
+      val basicValue = new BasicValue(Type.getObjectType(controlFlow.className))
       frame.setLocal(local, basicValue)
       local += 1
     }
@@ -145,14 +142,6 @@ object Utils {
     }
     case InstanceOfCheckValue() => curr match {
       case InstanceOfCheckValue() => true
-      case _ => false
-    }
-    case NullValue() => curr match {
-      case NullValue() => true
-      case _ => false
-    }
-    case NotNullValue(_) => curr match {
-      case NotNullValue(_) => true
       case _ => false
     }
     case _: BasicValue => true
