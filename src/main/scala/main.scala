@@ -11,7 +11,6 @@ import faba.cfg._
 import faba.data._
 import faba.engine._
 import faba.source._
-import faba.parameters.ParametersAnalysis
 import org.objectweb.asm.tree.analysis.Frame
 import scala.xml.PrettyPrinter
 import scala.collection.mutable.ListBuffer
@@ -230,8 +229,6 @@ class MainProcessor extends FabaProcessor {
     println(s"leakingParams  ${leakingParametersTime / 1000000} msec")
     println(s"simpleTime0    ${simpleTime / 1000000} msec")
     println(s"complexTime    ${complexTime / 1000000} msec")
-    println(s"${ParametersAnalysis.notNullExecute} @NotNull executes")
-    println(s"${ParametersAnalysis.nullableExecute} @Nullable executes")
     println("====")
     println(s"$simpleMethods  simple methods")
     println(s"$complexMethods complex methods")
