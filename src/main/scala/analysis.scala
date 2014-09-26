@@ -46,14 +46,6 @@ object LimitReachedException {
 
 class LimitReachedException extends Exception("Limit reached exception")
 
-object Analysis {
-  sealed trait PendingAction[+Res, +Constraint]
-  case class ProceedState[Constraint](state: State[Constraint]) extends PendingAction[Nothing, Constraint]
-  case class MakeResult[Res, Constraint](states: List[State[Constraint]], subResult: Res, indices: List[Int]) extends PendingAction[Res, Constraint]
-
-  val ourPending = new Array[State[_]](LimitReachedException.limit)
-}
-
 abstract class Analysis[Res, Constraint] {
   type CState = State[Constraint]
 

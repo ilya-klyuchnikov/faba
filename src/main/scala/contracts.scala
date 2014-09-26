@@ -16,16 +16,24 @@ import faba.engine._
 
 case class InOutConstraint(taken: Boolean, dereferenced: Set[Int], dereferencedParams: Set[Int])
 
+object InOutAnalysis {
+  // Shared (between analysis runs) array/stack of pending states.
+  // Since:
+  //  1. We know upper bound of its size (LimitReachedException.limit)
+  //  2. There is not need to empty this array on each run (it is used as stack)
+  val sharedPendingStack = new Array[State[InOutConstraint]](LimitReachedException.limit)
+}
+
 class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Origins, val stable: Boolean, val noCycle: Boolean)
   // the only constraint for now - null taken or not
   extends Analysis[Result[Key, Value], InOutConstraint] {
 
-  val pending = Analysis.ourPending.asInstanceOf[Array[CState]]
   type MyResult = Result[Key, Value]
   implicit val contractsLattice = ELattice(Values.Bot, Values.Top)
-  // there is no need to generalize this (local var 0)
-  val generalizeShift =
-    if ((methodNode.access & ACC_STATIC) == 0) 1 else 0
+
+  val pendingStack = InOutAnalysis.sharedPendingStack
+  // there is no need to generalize `this` (local var 0) for instance methods
+  val generalizeShift = if ((methodNode.access & ACC_STATIC) == 0) 1 else 0
 
   override val identity = Final(Values.Bot)
 
@@ -54,22 +62,22 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
 
   private var myResult: MyResult = identity
 
-  private var pendingTop: Int = 0
+  private var pendingStackTop: Int = 0
 
   final def pendingPush(st: CState) {
-    pending(pendingTop) = st
-    pendingTop += 1
+    pendingStack(pendingStackTop) = st
+    pendingStackTop += 1
   }
 
   final def pendingPop(): CState = {
-    pendingTop -= 1
-    pending(pendingTop)
+    pendingStackTop -= 1
+    pendingStack(pendingStackTop)
   }
 
   def analyze(): Equation[Key, Value] = {
     pendingPush(createStartState())
 
-    while (pendingTop > 0 && earlyResult.isEmpty)
+    while (pendingStackTop > 0 && earlyResult.isEmpty)
       processState(pendingPop())
 
     mkEquation(earlyResult.getOrElse(myResult))

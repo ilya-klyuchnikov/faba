@@ -93,22 +93,23 @@ object Result {
   }
 }
 
-object ParametersAnalysis {
-  import Analysis._
-  val myArray = new Array[Result](LimitReachedException.limit)
-  val myPending = new Array[PendingAction[Result, NotNullInConstraint]](LimitReachedException.limit)
-  var nullableExecute: Long = 0
-  var notNullExecute: Long = 0
-}
-
 case class NotNullInConstraint(taken: Boolean, hasCompanions: Boolean)
 
+object NotNullInAnalysis {
+  sealed trait PendingAction
+  case class ProceedState(state: State[NotNullInConstraint]) extends PendingAction
+  case class MakeResult(states: List[State[NotNullInConstraint]], subResult: Result, indices: List[Int]) extends PendingAction
+  val sharedResults = new Array[Result](LimitReachedException.limit)
+  val sharedPendingStack = new Array[PendingAction](LimitReachedException.limit)
+}
+
 class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result, NotNullInConstraint] {
-  import Analysis._
+  import NotNullInAnalysis._
 
   override val identity: Result = Identity
-  val results = ParametersAnalysis.myArray
-  val pending = ParametersAnalysis.myPending
+
+  val results = NotNullInAnalysis.sharedResults
+  val pending = NotNullInAnalysis.sharedPendingStack
 
   override def combineResults(delta: Result, subResults: List[Result]): Result =
     Result.meet(delta, subResults.reduce(Result.join))
@@ -127,14 +128,12 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
 
   private var pendingTop: Int = 0
 
-  @inline
-  final def pendingPush(action: PendingAction[Result, NotNullInConstraint]) {
+  final def pendingPush(action: PendingAction) {
     pending(pendingTop) = action
     pendingTop += 1
   }
 
-  @inline
-  final def pendingPop(): PendingAction[Result, NotNullInConstraint] = {
+  final def pendingPop(): PendingAction = {
     pendingTop -= 1
     pending(pendingTop)
   }
@@ -292,7 +291,6 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
       (frame, Identity)
     case _ =>
-      ParametersAnalysis.notNullExecute += 1
       val nextFrame = new Frame(frame)
       NonNullInterpreter.reset()
       nextFrame.execute(insnNode, NonNullInterpreter)
@@ -313,11 +311,14 @@ object NullableInConstraint {
   val NOT_TAKEN = NullableInConstraint(false)
 }
 
-// if everything is return, then parameter is nullable
+object NullableInAnalysis {
+  val sharedPendingStack = new Array[State[NullableInConstraint]](LimitReachedException.limit)
+}
+
 class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result, NullableInConstraint] {
 
   override val identity: Result = Identity
-  val pending = Analysis.ourPending.asInstanceOf[Array[CState]]
+  val pending = NullableInAnalysis.sharedPendingStack
 
   override def combineResults(delta: Result, subResults: List[Result]): Result =
     Result.combineNullable(delta, subResults.reduce(Result.combineNullable))
@@ -336,13 +337,11 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
 
   private var pendingTop: Int = 0
 
-  @inline
   final def pendingPush(state: CState) {
     pending(pendingTop) = state
     pendingTop += 1
   }
 
-  @inline
   final def pendingPop(): CState = {
     pendingTop -= 1
     pending(pendingTop)
@@ -368,7 +367,6 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
         case None =>
       }
 
-      val stateIndex = state.index
       val conf = state.conf
       val insnIndex = conf.insnIndex
       val history = state.history
@@ -448,7 +446,6 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
       (frame, Identity, false)
     case _ =>
-      ParametersAnalysis.nullableExecute += 1
       val nextFrame = new Frame(frame)
       NullableInterpreter.reset()
       nextFrame.execute(insnNode, NullableInterpreter)
