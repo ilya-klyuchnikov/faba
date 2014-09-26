@@ -14,7 +14,7 @@ import faba.asm._
 import faba.cfg._
 import faba.data._
 import faba.contracts._
-import faba.parameters._
+import faba.fastParameters._
 import faba.engine._
 import faba.source._
 
@@ -273,7 +273,7 @@ trait FabaProcessor extends Processor {
     cfg.reducible(graph, dfs)
 
   def notNullParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean): (Equation[Key, Value], Boolean) = {
-    val analyser = new NotNullInAnalysis(richControlFlow, In(i), stable)
+    val analyser = new NotNullInFastAnalysis(richControlFlow, In(i), stable)
     try {
       val eq = analyser.analyze()
       (eq, analyser.npe)
@@ -284,7 +284,7 @@ trait FabaProcessor extends Processor {
   }
 
   def nullableParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean): Equation[Key, Value] = {
-    val analyser = new NullableInAnalysis(richControlFlow, In(i), stable)
+    val analyser = new NullableInFastAnalysis(richControlFlow, In(i), stable)
     try {
       analyser.analyze()
     } catch {

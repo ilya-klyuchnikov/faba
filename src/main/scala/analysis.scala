@@ -45,6 +45,7 @@ object Analysis {
   case class MakeResult[Res](states: List[State], subResult: Res, indices: List[Int]) extends PendingAction[Res]
 
   val ourPending = new Array[State](LimitReachedException.limit)
+  var findEquivTime: Long = 0
 }
 
 abstract class Analysis[Res] {

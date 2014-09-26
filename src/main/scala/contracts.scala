@@ -69,18 +69,21 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     mkEquation(earlyResult.getOrElse(myResult))
   }
 
+  def alreadyComputed(state: State): Boolean = {
+    val start = System.nanoTime()
+    val alreadyDone = computed(state.conf.insnIndex).exists(prevState => stateEquiv(state, prevState))
+    Analysis.findEquivTime += System.nanoTime() - start
+    alreadyDone
+  }
+
   override def processState(fState: State): Unit = {
 
     var state = fState
     var states: List[State] = Nil
 
     while (true) {
-      // sharing
-      computed(state.conf.insnIndex).find(prevState => stateEquiv(state, prevState)) match {
-        case Some(ps) =>
-          // was computed before
-          return
-        case None =>
+      if (alreadyComputed(state)) {
+        return
       }
 
       val stateIndex = state.index
