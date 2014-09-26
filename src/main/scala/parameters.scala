@@ -384,9 +384,9 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
       val frame = conf.frame
       val insnNode = methodNode.instructions.get(insnIndex)
       val nextHistory = if (isLoopEnter) conf :: history else history
-      val (nextFrame, localSubResult, top) = execute(frame, insnNode)
+      val (nextFrame, localSubResult) = execute(frame, insnNode)
 
-      if (localSubResult == NPE || top) {
+      if (localSubResult == NPE) {
         earlyResult = Some(NPE)
         return
       }
@@ -444,12 +444,12 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
 
   private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
-      (frame, Identity, false)
+      (frame, Identity)
     case _ =>
       val nextFrame = new Frame(frame)
       NullableInterpreter.reset()
       nextFrame.execute(insnNode, NullableInterpreter)
-      (nextFrame, NullableInterpreter.getSubResult, NullableInterpreter.top)
+      (nextFrame, NullableInterpreter.getSubResult)
   }
 
   override def startConstraint(): NullableInConstraint =
@@ -460,12 +460,10 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
 }
 
 abstract class Interpreter extends BasicInterpreter {
-  var top = false
   val nullable: Boolean
   protected var _subResult: Result = Identity
   final def reset(): Unit = {
     _subResult = Identity
-    top = false
   }
 
   def combine(res1: Result, res2: Result): Result
@@ -521,7 +519,7 @@ abstract class Interpreter extends BasicInterpreter {
     if (nullable && opCode == INVOKEINTERFACE) {
       for (i <- shift until values.size()) {
         if (values.get(i).isInstanceOf[ParamValue]) {
-          top = true
+          _subResult = NPE
           return super.naryOperation(insn, values)
         }
       }
