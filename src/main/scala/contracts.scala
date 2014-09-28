@@ -14,7 +14,7 @@ import faba.cfg._
 import faba.data._
 import faba.engine._
 
-case class InOutConstraint(taken: Boolean, dereferenced: Set[Int], dereferencedParams: Set[Int])
+case class InOutConstraint(dereferenced: Set[Int], dereferencedParams: Set[Int])
 
 object InOutAnalysis {
   // Shared (between analysis runs) array/stack of pending states.
@@ -172,7 +172,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             case InOut(_, Values.NotNull) =>
               methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           }
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams))
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(dereferenced, dereferencedParams))
           states = state :: states
           state = nextState
         case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
@@ -182,7 +182,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             case InOut(_, Values.NotNull) =>
               insnIndex + 1
           }
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams))
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(dereferenced, dereferencedParams))
           states = state :: states
           state = nextState
 
@@ -190,8 +190,8 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           val nullInsn = insnIndex + 1
           val notNullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           val n = popValue(frame).asInstanceOf[NThParamValue].n
-          val nullState = State(mkId(), Conf(nullInsn, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams))
-          val notNullState = State(mkId(), Conf(notNullInsn, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams + n))
+          val nullState = State(mkId(), Conf(nullInsn, nextFrame), nextHistory, InOutConstraint(dereferenced, dereferencedParams))
+          val notNullState = State(mkId(), Conf(notNullInsn, nextFrame), nextHistory, InOutConstraint(dereferenced, dereferencedParams + n))
           pendingPush(nullState)
           pendingPush(notNullState)
           return
@@ -199,8 +199,8 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           val nullInsn = insnIndex + 1
           val notNullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           val orig = popValue(frame).asInstanceOf[Trackable].origin
-          val nullState = State(mkId(), Conf(nullInsn, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams))
-          val notNullState = State(mkId(), Conf(notNullInsn, nextFrame), nextHistory, InOutConstraint(true, dereferenced + orig, dereferencedParams))
+          val nullState = State(mkId(), Conf(nullInsn, nextFrame), nextHistory, InOutConstraint(dereferenced, dereferencedParams))
+          val notNullState = State(mkId(), Conf(notNullInsn, nextFrame), nextHistory, InOutConstraint(dereferenced + orig, dereferencedParams))
           pendingPush(nullState)
           pendingPush(notNullState)
           return
@@ -208,8 +208,8 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           val nullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           val notNullInsn = insnIndex + 1
           val n = popValue(frame).asInstanceOf[NThParamValue].n
-          val nullState = State(mkId(), Conf(nullInsn, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams))
-          val notNullState = State(mkId(), Conf(notNullInsn, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams + n))
+          val nullState = State(mkId(), Conf(nullInsn, nextFrame), nextHistory, InOutConstraint(dereferenced, dereferencedParams))
+          val notNullState = State(mkId(), Conf(notNullInsn, nextFrame), nextHistory, InOutConstraint(dereferenced, dereferencedParams + n))
           pendingPush(nullState)
           pendingPush(notNullState)
           return
@@ -217,8 +217,8 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           val nullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           val notNullInsn = insnIndex + 1
           val orig = popValue(frame).asInstanceOf[Trackable].origin
-          val nullState = State(mkId(), Conf(nullInsn, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams))
-          val notNullState = State(mkId(), Conf(notNullInsn, nextFrame), nextHistory, InOutConstraint(true, dereferenced + orig, dereferencedParams))
+          val nullState = State(mkId(), Conf(nullInsn, nextFrame), nextHistory, InOutConstraint(dereferenced, dereferencedParams))
+          val notNullState = State(mkId(), Conf(notNullInsn, nextFrame), nextHistory, InOutConstraint(dereferenced + orig, dereferencedParams))
           pendingPush(nullState)
           pendingPush(notNullState)
           return
@@ -227,13 +227,14 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
         case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
           val nextInsnIndex =
             methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams))
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(dereferenced, dereferencedParams))
           states = state :: states
           state = nextState
         case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
           val nextInsnIndex = insnIndex + 1
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(true, dereferenced, dereferencedParams))
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, InOutConstraint(dereferenced, dereferencedParams))
           state = nextState
+
         case _ =>
           // we touch this!
           computed(insnIndex) = state :: computed(insnIndex)
@@ -248,7 +249,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
               } else {
                 nextFrame
               }
-              State(mkId(), Conf(nextInsnIndex, nextFrame1), nextHistory, InOutConstraint(constraint.taken, dereferenced, dereferencedParams))
+              State(mkId(), Conf(nextInsnIndex, nextFrame1), nextHistory, InOutConstraint(dereferenced, dereferencedParams))
           }
           states = state :: states
           if (nextStates.size == 1) {
@@ -350,7 +351,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
   }
 
   override def startConstraint(): InOutConstraint =
-    InOutConstraint(false, Set(), Set())
+    InOutConstraint(Set(), Set())
 
   override def constraintEquiv(ctr1: InOutConstraint, ctr2: InOutConstraint): Boolean =
     ctr1 == ctr2
