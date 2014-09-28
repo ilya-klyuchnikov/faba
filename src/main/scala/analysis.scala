@@ -160,6 +160,7 @@ object Utils {
       case FalseValue() => true
       case _ => false
     }
+    // TODO - is it safe??
     case NullValue(_) => curr match {
       case NullValue(_) => true
       case _ => false
@@ -168,6 +169,7 @@ object Utils {
       case NotNullValue(_) => true
       case _ => false
     }
+    // TODO - is it safe??
     case CallResultValue(_, _, prevInters) => curr match {
       case CallResultValue(_, _, currInters) => currInters == prevInters
       case _ => false
