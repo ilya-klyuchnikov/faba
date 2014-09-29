@@ -54,6 +54,11 @@ class MainProcessor extends FabaProcessor {
   var leakingParametersTime: Long = 0
   val processNullableParameters = true
 
+  // origins.size < 32
+  var smallOrigins: Long = 0
+  // origins.size >= 32
+  var largeOrigins: Long = 0
+
   override def buildCFG(className: String, methodNode: MethodNode, jsr: Boolean) = {
     val start = System.nanoTime()
     val result = super.buildCFG(className, methodNode, jsr)
@@ -65,6 +70,13 @@ class MainProcessor extends FabaProcessor {
     val start = System.nanoTime()
     val result = super.buildResultOrigins(className, methodNode, frames, graph)
     resultOriginsTime += System.nanoTime() - start
+    val originSize = result.instructions.count(x => x) + result.parameters.count(x => x)
+    if (originSize < 32)
+      smallOrigins += 1
+    else {
+      largeOrigins += 1
+      println(s"largeOrigins: $className ${methodNode.name}${methodNode.desc}")
+    }
     result
   }
 
@@ -300,6 +312,9 @@ class MainProcessor extends FabaProcessor {
     println("====")
     println(s"cycleTime        ${cycleTime / 1000000} msec")
     println(s"nonCycleTime     ${nonCycleTime / 1000000} msec")
+    println("====")
+    println(s"smallOrigins        $smallOrigins")
+    println(s"largeOrigins        $largeOrigins")
   }
 
   def process(source: Source): Annotations = {
