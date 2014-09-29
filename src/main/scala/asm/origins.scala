@@ -2,127 +2,183 @@ package faba.asm
 
 import faba.cfg.ControlFlowGraph
 import org.objectweb.asm.{Opcodes, Type}
-import org.objectweb.asm.tree.analysis.{Frame, SourceInterpreter, SourceValue}
+import org.objectweb.asm.tree.analysis.{Frame, SourceInterpreter, SourceValue, Value}
 import org.objectweb.asm.tree.{MethodNode, AbstractInsnNode}
 
 import scala.collection.mutable
 
+/**
+ * The result of origins analysis.
+ *
+ * @param instructions  instructions(i) means that the result was born at i-th instruction
+ * @param parameters    parameters(i) means that the result may come from i-th parameter
+ */
 case class Origins(instructions: Array[Boolean], parameters: Array[Boolean])
 
 object OriginsAnalysis {
-  val nullSet: java.util.Set[AbstractInsnNode] = null
-  case class LocalVarValue(slot: Int, _size: Int) extends SourceValue(_size, nullSet)
-  case class OnStackValue(slot: Int, _size: Int) extends SourceValue(_size, nullSet)
 
-  sealed trait Location
-  case class LocalValLocation(slot: Int) extends Location
-  case class OnStackLocation(slot: Int) extends Location
-  case class InsnLocation(insnIndex: Int, location: Location)
+  /**
+   * Location of a value inside a frame
+   */
+  sealed trait InFrameLocation
 
+  /**
+   * Value is located in a list of local variables.
+   * @param slot local variable index
+   */
+  case class LocalVarLocation(slot: Int) extends InFrameLocation
+
+  /**
+   * Value is located on operand stack
+   * @param slot stack index
+   */
+  case class OnStackLocation(slot: Int) extends InFrameLocation
+
+  /**
+   * Precise value location = instruction, frame location
+   * @param insnIndex instruction index
+   * @param location  Inside frame location
+   */
+  case class PreciseValueLocation(insnIndex: Int, location: InFrameLocation)
+
+  /**
+   * Tweak of [[org.objectweb.asm.tree.analysis.SourceInterpreter]] enough for backward analysis
+   */
   object TracingInterpreter extends SourceInterpreter {
     override def copyOperation(insn: AbstractInsnNode, value: SourceValue): SourceValue =
       value
   }
 
-  private def isReturnOpcode(opcode: Int) =
-    opcode >= Opcodes.IRETURN && opcode <= Opcodes.ARETURN
+  private val nullSet: java.util.Set[AbstractInsnNode] = null
+  // Values to support backward analysis
+  case class LocalVarValue(slot: Int, _size: Int) extends SourceValue(_size, nullSet)
+  case class OnStackValue(slot: Int, _size: Int) extends SourceValue(_size, nullSet)
 
-  def resultOrigins(frames: Array[Frame[ParamsValue]], methodNode: MethodNode, graph: ControlFlowGraph): Origins = {
-    val static = (methodNode.access & Opcodes.ACC_STATIC) != 0
-    val shift = if (static) 0 else 1
+  /**
+   * Detects points (parameters ans instructions) where the result of the method was born.
+   * Internally this analysis executes bytecode instructions backward.
+   *
+   * @param frames     fixpoint of frames (after some analysis) - to know local vars and stack partition and value sizes
+   * @param methodNode bytecode of a method
+   * @param graph      control flow graph of a method
+   * @return           result of analysis
+   */
+  def resultOrigins(frames: Array[Frame[Value]], methodNode: MethodNode, graph: ControlFlowGraph): Origins = {
+    val shift = if ((methodNode.access & Opcodes.ACC_STATIC) != 0) 0 else 1
     val arity = Type.getArgumentTypes(methodNode.desc).length
     val insns = methodNode.instructions
-    val returnIndices = (0 until frames.length).filter { i => isReturnOpcode(insns.get(i).getOpcode)}.toList
-    val backTransitions: Array[List[Int]] = Array.tabulate[List[Int]](insns.size){i => Nil}
-    for (from <- 0 until graph.transitions.length) {
-      for (to <- graph.transitions(from)) {
-        backTransitions(to) = from :: backTransitions(to)
-      }
-    }
+    val backwardTransitions = reverseTransitions(graph.transitions)
 
-    val queue = mutable.Stack[InsnLocation]()
-    val visited = mutable.HashSet[InsnLocation]()
+    val queue = mutable.Stack[PreciseValueLocation]()
+    val visited = mutable.HashSet[PreciseValueLocation]()
 
-    for (returnIndex <- returnIndices; returnFrame = frames(returnIndex); from <- backTransitions(returnIndex)) {
-      val sourceLoc = InsnLocation(from, OnStackLocation(returnFrame.getStackSize - 1))
+    val returnIndices = (0 until frames.length).filter { i => isReturnOpcode(insns.get(i).getOpcode)}
+    for (returnIndex <- returnIndices; from <- backwardTransitions(returnIndex)) {
+      // return value is on top of the stack
+      val sourceLoc = PreciseValueLocation(from, OnStackLocation(frames(returnIndex).getStackSize - 1))
       visited.add(sourceLoc)
       queue.push(sourceLoc)
     }
+
 
     val originInsns = new Array[Boolean](insns.size())
     val originParams = new Array[Boolean](arity)
 
     while (queue.nonEmpty) {
-      val resultLocation = queue.pop()
-      val insnIndex = resultLocation.insnIndex
-      val sourceLocation = previousLocation(frames(insnIndex), resultLocation, insns.get(insnIndex))
-      sourceLocation match {
+      val PreciseValueLocation(insnIndex, location) = queue.pop()
+      preLocation(insns.get(insnIndex), location, frames(insnIndex)) match {
         case None =>
-          // result was born here
+          // result was born here, logging it
           originInsns(insnIndex) = true
         case Some(loc) =>
-          val previousInsns = backTransitions(insnIndex)
+          val previousInsns = backwardTransitions(insnIndex)
           for (from <- previousInsns) {
-            val insnLoc = InsnLocation(from, loc)
+            val insnLoc = PreciseValueLocation(from, loc)
             if (visited.add(insnLoc))
               queue.push(insnLoc)
           }
           if (previousInsns.isEmpty && insnIndex == 0) {
             loc match {
-              case LocalValLocation(i) if (i >= shift) && (i - shift < arity) =>
-                // result came from some parameter
+              case LocalVarLocation(i) if (i >= shift) && (i - shift < arity) =>
+                // result came from some parameter, logging it
                 originParams(i - shift) = true
               case _ =>
             }
           }
       }
-
     }
 
     Origins(originInsns, originParams)
   }
 
-  def previousLocation(postFrame: Frame[ParamsValue], result: InsnLocation, insn: AbstractInsnNode): Option[Location] = {
+  /**
+   * reverses forward transitions of control flow graph
+   *
+   * @param transitions forward transitions of control flow graph
+   * @return            backward transitions
+   */
+  private def reverseTransitions(transitions: Array[List[Int]]): Array[List[Int]] = {
+    val backTransitions: Array[List[Int]] = Array.tabulate[List[Int]](transitions.length) { i => Nil}
+    for (from <- 0 until transitions.length) {
+      for (to <- transitions(from)) {
+        backTransitions(to) = from :: backTransitions(to)
+      }
+    }
+    backTransitions
+  }
+
+  /**
+   * One step of symbolic backward execution.
+   *
+   * @param insn          executed instruction
+   * @param postLocation  value (in-frame) location after execution of instruction
+   * @param postFrame     frame after execution of instruction
+   * @return              value (in-frame) location before execution of instruction
+   */
+  private def preLocation(insn: AbstractInsnNode, postLocation: InFrameLocation, postFrame: Frame[Value]): Option[InFrameLocation] = {
+    // optimization: instruction execution doesn't change location of our value, returning the same location
     insn.getType match {
       case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
-        return Some(result.location)
+        return Some(postLocation)
       case _ =>
     }
     val opCode = insn.getOpcode
-    result.location match {
-      case LocalValLocation(_) =>
+    postLocation match {
+      case LocalVarLocation(_) =>
         if (!(opCode >= Opcodes.ISTORE && opCode <= Opcodes.ASTORE || opCode == Opcodes.IINC)) {
           // nothing was moved into variable, the same location
-          return Some(result.location)
+          return Some(postLocation)
         }
       case _ =>
     }
-    val preFrame = makePreFrame(postFrame)
-    preFrame.execute(insn, TracingInterpreter)
-    result.location match {
-      case LocalValLocation(slot) =>
-        preFrame.getLocal(slot) match {
-          case LocalVarValue(sourceSlot, _) =>
-            Some(LocalValLocation(sourceSlot))
-          case OnStackValue(sourceSlot, _) =>
-            Some(OnStackLocation(sourceSlot))
-          case _ => None
-        }
-      case OnStackLocation(slot) =>
-        preFrame.getStack(slot) match {
-          case LocalVarValue(sourceSlot, _) =>
-            Some(LocalValLocation(sourceSlot))
-          case OnStackValue(sourceSlot, _) =>
-            Some(OnStackLocation(sourceSlot))
-          case _ => None
-        }
+
+    // real analysis: backward execution
+    val frame = makePreFrame(postFrame)
+    frame.execute(insn, TracingInterpreter)
+    // connect postLocation with executed frame
+    postLocation match {
+      case LocalVarLocation(slot) => frame.getLocal(slot) match {
+        case LocalVarValue(sourceSlot, _) => Some(LocalVarLocation(sourceSlot))
+        case OnStackValue(sourceSlot, _)  => Some(OnStackLocation(sourceSlot))
+        case _                            => None
+      }
+      case OnStackLocation(slot) => frame.getStack(slot) match {
+        case LocalVarValue(sourceSlot, _) => Some(LocalVarLocation(sourceSlot))
+        case OnStackValue(sourceSlot, _)  => Some(OnStackLocation(sourceSlot))
+        case _                            => None
+      }
       case _ =>
         None
     }
   }
 
-  // makes a corresponding frame for backtracking
-  def makePreFrame(frame: Frame[ParamsValue]): Frame[SourceValue] = {
+  /**
+   * makes a corresponding frame for backtracking
+   *
+   * @param frame frame with traditional values
+   * @return      frame with [[LocalVarValue]]s and [[OnStackValue]]s
+   */
+  private def makePreFrame(frame: Frame[Value]): Frame[SourceValue] = {
     val preFrame = new Frame[SourceValue](frame.getLocals, frame.getMaxStackSize)
     for (i <- 0 until frame.getLocals) {
       preFrame.setLocal(i, LocalVarValue(i, frame.getLocal(i).getSize))
@@ -132,4 +188,8 @@ object OriginsAnalysis {
     }
     preFrame
   }
+
+  private def isReturnOpcode(opcode: Int) =
+    opcode >= Opcodes.IRETURN && opcode <= Opcodes.ARETURN
+
 }
