@@ -75,6 +75,10 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
   }
 
   def analyze(): Equation[Key, Value] = {
+    // give up if we cannot encode constraints via integers
+    if (resultOrigins.size > 32)
+      return Equation(aKey, Final(Values.Top))
+
     pendingPush(createStartState())
 
     while (pendingStackTop > 0 && earlyResult.isEmpty)
@@ -360,7 +364,6 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
 case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins: Origins) extends BasicInterpreter {
   val insnOrigins = resultOrigins.instructions
 
-  @inline
   def index(insn: AbstractInsnNode) =
     insns.indexOf(insn)
 
