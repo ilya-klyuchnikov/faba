@@ -3,7 +3,7 @@ package faba.asm
 import faba.cfg.ControlFlowGraph
 import org.objectweb.asm.{Opcodes, Type}
 import org.objectweb.asm.tree.analysis.{Frame, SourceInterpreter, SourceValue, Value}
-import org.objectweb.asm.tree.{MethodNode, AbstractInsnNode}
+import org.objectweb.asm.tree.{IincInsnNode, VarInsnNode, MethodNode, AbstractInsnNode}
 
 import scala.collection.mutable
 
@@ -139,13 +139,13 @@ object OriginsAnalysis {
     // optimization: instruction execution doesn't change location of our value, returning the same location
     insn.getType match {
       case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
+        // idle instruction, the same location
         return Some(postLocation)
       case _ =>
     }
-    val opCode = insn.getOpcode
     postLocation match {
-      case LocalVarLocation(_) =>
-        if (!(opCode >= Opcodes.ISTORE && opCode <= Opcodes.ASTORE || opCode == Opcodes.IINC)) {
+      case LocalVarLocation(localVar) =>
+        if (!isWriteToLocalVarInsn(localVar, insn)) {
           // nothing was moved into variable, the same location
           return Some(postLocation)
         }
@@ -157,20 +157,18 @@ object OriginsAnalysis {
     frame.execute(insn, TracingInterpreter)
     // connect postLocation with executed frame
     postLocation match {
-      case LocalVarLocation(slot) => frame.getLocal(slot) match {
-        case LocalVarValue(sourceSlot, _) => Some(LocalVarLocation(sourceSlot))
-        case OnStackValue(sourceSlot, _)  => Some(OnStackLocation(sourceSlot))
-        case _                            => None
-      }
-      case OnStackLocation(slot) => frame.getStack(slot) match {
-        case LocalVarValue(sourceSlot, _) => Some(LocalVarLocation(sourceSlot))
-        case OnStackValue(sourceSlot, _)  => Some(OnStackLocation(sourceSlot))
-        case _                            => None
-      }
-      case _ =>
-        None
+      case LocalVarLocation(slot) => valueToLocation(frame.getLocal(slot))
+      case OnStackLocation(slot)  => valueToLocation(frame.getStack(slot))
+      case _                      => None
     }
   }
+
+  private def valueToLocation(value: SourceValue): Option[InFrameLocation] =
+    value match {
+      case LocalVarValue(sourceSlot, _) => Some(LocalVarLocation(sourceSlot))
+      case OnStackValue(sourceSlot, _)  => Some(OnStackLocation(sourceSlot))
+      case _                            => None
+    }
 
   /**
    * makes a corresponding frame for backtracking
@@ -187,6 +185,21 @@ object OriginsAnalysis {
       preFrame.push(OnStackValue(i, frame.getStack(i).getSize))
     }
     preFrame
+  }
+
+  /**
+   *
+   * @param localVar location of a local var
+   * @param insn     executed instruction
+   * @return         whether executed insn writes into localVar
+   */
+  private def isWriteToLocalVarInsn(localVar: Int, insn: AbstractInsnNode): Boolean = {
+    val opCode = insn.getOpcode
+    if (opCode >= Opcodes.ISTORE && opCode <= Opcodes.ASTORE)
+      return insn.asInstanceOf[VarInsnNode].`var` == localVar
+    if (opCode == Opcodes.IINC)
+      return insn.asInstanceOf[IincInsnNode].`var` == localVar
+    false
   }
 
   private def isReturnOpcode(opcode: Int) =
