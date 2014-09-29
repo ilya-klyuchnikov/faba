@@ -75,7 +75,6 @@ class MainProcessor extends FabaProcessor {
       smallOrigins += 1
     else {
       largeOrigins += 1
-      println(s"largeOrigins: $className ${methodNode.name}${methodNode.desc}")
     }
     result
   }
