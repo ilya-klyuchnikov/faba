@@ -13,7 +13,33 @@ import scala.collection.mutable
  * @param instructions  instructions(i) means that the result was born at i-th instruction
  * @param parameters    parameters(i) means that the result may come from i-th parameter
  */
-case class Origins(instructions: Array[Boolean], parameters: Array[Boolean])
+case class Origins(instructions: Array[Boolean], parameters: Array[Boolean]) {
+  val instructionsMap = new Array[Int](instructions.length)
+  val parametersMap = new Array[Int](instructions.length)
+  // size of results
+  val size: Int = {
+    var shift: Int = 0
+    var i: Int = 0
+    val maxInsnIndex = instructions.length
+    while (i < maxInsnIndex) {
+      if (instructions(i)) {
+        instructionsMap(i) = 1 << shift
+        shift += 1
+      }
+      i += 1
+    }
+    i = 0
+    val maxParam = parameters.length
+    while (i < maxParam) {
+      if (parameters(i)) {
+        parametersMap(i) << shift
+        shift += 1
+      }
+      i += 1
+    }
+    shift
+  }
+}
 
 object OriginsAnalysis {
 
