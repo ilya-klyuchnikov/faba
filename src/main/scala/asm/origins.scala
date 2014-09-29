@@ -32,7 +32,7 @@ case class Origins(instructions: Array[Boolean], parameters: Array[Boolean]) {
     val maxParam = parameters.length
     while (i < maxParam) {
       if (parameters(i)) {
-        parametersMap(i) << shift
+        parametersMap(i) = 1 << shift
         shift += 1
       }
       i += 1
