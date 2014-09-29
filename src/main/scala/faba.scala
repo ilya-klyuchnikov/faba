@@ -6,7 +6,7 @@ import faba.combined.CombinedSingleAnalysis
 import org.objectweb.asm._
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.Opcodes._
-import org.objectweb.asm.tree.analysis.Frame
+import org.objectweb.asm.tree.analysis.{Frame, Value => ASMValue}
 
 import scala.language.existentials
 
@@ -246,7 +246,7 @@ trait FabaProcessor extends Processor {
 
   // build other result origins
   def buildResultOrigins(className: String, methodNode: MethodNode, frames: Array[Frame[ParamsValue]], graph: ControlFlowGraph): Origins =
-    OriginsAnalysis.resultOrigins(frames, methodNode, graph)
+    OriginsAnalysis.resultOrigins(frames.asInstanceOf[Array[Frame[ASMValue]]], methodNode, graph)
 
   def buildDFSTree(transitions: Array[List[Int]]): DFSTree =
     cfg.buildDFSTree(transitions)
