@@ -380,6 +380,9 @@
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XML sun.org.mozilla.javascript.internal.xmlimpl.XMLList getPropertyList(sun.org.mozilla.javascript.internal.xmlimpl.XMLName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XML sun.org.mozilla.javascript.internal.xmlimpl.XML[] getAttributes()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XML sun.org.mozilla.javascript.internal.xmlimpl.XML[] getChildren()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -485,6 +488,11 @@
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLLibImpl java.lang.Object addXMLObjects(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.xml.XMLObject, sun.org.mozilla.javascript.internal.xml.XMLObject) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLLibImpl java.lang.Object addXMLObjects(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.xml.XMLObject, sun.org.mozilla.javascript.internal.xml.XMLObject)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLLibImpl java.lang.Object toDefaultXmlNamespace(sun.org.mozilla.javascript.internal.Context, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -544,6 +552,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLLibImpl sun.org.mozilla.javascript.internal.xmlimpl.Namespace[] createNamespaces(sun.org.mozilla.javascript.internal.xmlimpl.XmlNode.Namespace[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLLibImpl sun.org.mozilla.javascript.internal.xmlimpl.Namespace[] createNamespaces(sun.org.mozilla.javascript.internal.xmlimpl.XmlNode.Namespace[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLLibImpl sun.org.mozilla.javascript.internal.xmlimpl.QName castToQName(sun.org.mozilla.javascript.internal.Context, java.lang.Object) 0">
@@ -630,9 +641,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLLibImpl sun.org.mozilla.javascript.internal.xmlimpl.XMLList newXMLListFrom(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLLibImpl sun.org.mozilla.javascript.internal.xmlimpl.XMLName toAttributeName(sun.org.mozilla.javascript.internal.Context, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -989,6 +998,9 @@
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLObjectImpl java.lang.Object[] toObjectArray(java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLObjectImpl java.lang.Object[] toObjectArray(java.lang.Object[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLObjectImpl java.lang.String ecmaEscapeAttributeValue(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1029,6 +1041,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLObjectImpl sun.org.mozilla.javascript.internal.xmlimpl.Namespace[] createNamespaces(sun.org.mozilla.javascript.internal.xmlimpl.XmlNode.Namespace[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLObjectImpl sun.org.mozilla.javascript.internal.xmlimpl.Namespace[] createNamespaces(sun.org.mozilla.javascript.internal.xmlimpl.XmlNode.Namespace[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLObjectImpl sun.org.mozilla.javascript.internal.xmlimpl.QName newQName(java.lang.String, java.lang.String, java.lang.String) 2">
@@ -1082,9 +1097,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLObjectImpl sun.org.mozilla.javascript.internal.xmlimpl.XMLList newXMLListFrom(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLObjectImpl sun.org.mozilla.javascript.internal.xmlimpl.XmlProcessor getProcessor()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1218,7 +1231,13 @@
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlNode sun.org.mozilla.javascript.internal.xmlimpl.XmlNode.Namespace getNodeNamespace()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlNode sun.org.mozilla.javascript.internal.xmlimpl.XmlNode.Namespaces getAllNamespaces()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlNode sun.org.mozilla.javascript.internal.xmlimpl.XmlNode.QName getQname()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlNode sun.org.mozilla.javascript.internal.xmlimpl.XmlNode[] getAttributes()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlNode void addNamespaces(sun.org.mozilla.javascript.internal.xmlimpl.XmlNode.Namespaces, org.w3c.dom.Element) 1">
