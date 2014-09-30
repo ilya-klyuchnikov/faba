@@ -107,7 +107,6 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
         case None =>
       }
 
-      val stateIndex = state.index
       val preConf = state.conf
       val insnIndex = preConf.insnIndex
       val loopEnter = dfsTree.loopEnters(insnIndex)
@@ -122,7 +121,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
         return
       }
 
-      val conf = if (loopEnter) generalize(preConf) else preConf
+      val conf = if (loopEnter && resultOrigins.size > 1) generalize(preConf) else preConf
 
       val frame = conf.frame
       val insnNode = methodNode.instructions.get(insnIndex)
