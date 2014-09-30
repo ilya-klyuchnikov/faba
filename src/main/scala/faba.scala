@@ -23,7 +23,6 @@ import faba.source._
  **/
 trait FabaProcessor extends Processor {
   val doNothing = false
-  val processContracts = true
   var extras = Map[Method, MethodExtra]()
   var complexTime: Long = 0
   var nonCycleTime: Long = 0
@@ -122,16 +121,16 @@ trait FabaProcessor extends Processor {
         if (isReferenceArg) {
           handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
         }
-        if (processContracts && isReferenceArg && (isReferenceResult || isBooleanResult)) {
+        if (isReferenceArg && (isReferenceResult || isBooleanResult)) {
           handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Top)))
           handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), Final(Values.Top)))
         }
-        if (processContracts && booleanArg && (isReferenceResult || isBooleanResult)) {
+        if (booleanArg && (isReferenceResult || isBooleanResult)) {
           handleTrueContractEquation(Equation(Key(method, InOut(i, Values.True), stable), Final(Values.Top)))
           handleFalseContractEquation(Equation(Key(method, InOut(i, Values.False), stable), Final(Values.Top)))
         }
       }
-      if (processContracts && isReferenceResult) {
+      if (isReferenceResult) {
         handleOutContractEquation(Equation(Key(method, Out, stable), Final(Values.Top)))
         handleNullableResultEquation(Equation(Key(method, Out, stable), Final(Values.Bot)))
       }
@@ -189,7 +188,7 @@ trait FabaProcessor extends Processor {
     lazy val resultOrigins = buildResultOrigins(className, methodNode, leaking.frames, graph)
     val richControlFlow = RichControlFlow(graph, dfs)
     lazy val resultEquation: Equation[Key, Value] = outContractEquation(richControlFlow, resultOrigins, stable)
-    if (processContracts && isReferenceResult) {
+    if (isReferenceResult) {
       handleOutContractEquation(resultEquation)
       handleNullableResultEquation(nullableResultEquation(className, methodNode, method, resultOrigins, stable, jsr))
     }
@@ -220,7 +219,7 @@ trait FabaProcessor extends Processor {
           handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Null)))
 
       }
-      if (processContracts && isReferenceArg && (isReferenceResult || isBooleanResult)) {
+      if (isReferenceArg && (isReferenceResult || isBooleanResult)) {
         if (leaking.parameters(i)) {
           if (!notNullParam) {
             handleNullContractEquation(nullContractEquation(richControlFlow, resultOrigins, i, stable))
@@ -233,7 +232,7 @@ trait FabaProcessor extends Processor {
           handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
         }
       }
-      if (processContracts && booleanArg && (isReferenceResult || isBooleanResult)) {
+      if (booleanArg && (isReferenceResult || isBooleanResult)) {
         if (leaking.parameters(i)) {
           handleFalseContractEquation(falseContractEquation(richControlFlow, resultOrigins, i, stable))
           handleTrueContractEquation(trueContractEquation(richControlFlow, resultOrigins, i, stable))

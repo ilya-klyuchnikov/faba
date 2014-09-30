@@ -278,14 +278,3 @@ object Main extends MainProcessor {
     }
   }
 }
-
-object MainParams extends MainProcessor {
-  override val processContracts = false
-  def main(args: Array[String]) {
-    if (args.length != 2) {
-      println(s"Usage: faba.MainParams inputJar outputDir")
-    } else {
-      process(JarFileSource(new File(args(0))), args(1))
-    }
-  }
-}
