@@ -66,12 +66,6 @@ abstract class Analysis[Res] {
   final def createStartState(): State = State(0, Conf(0, createStartFrame()), Nil, 0)
   final def confInstance(curr: Conf, prev: Conf): Boolean = Utils.isInstance(curr, prev)
 
-  final def stateEquiv(curr: State, prev: State): Boolean =
-    curr.constraint == prev.constraint && curr.conf.hashCode() == prev.conf.hashCode() &&
-      Utils.equiv(curr.conf, prev.conf) &&
-      curr.history.size == prev.history.size &&
-      (curr.history, prev.history).zipped.forall((c1, c2) => c1.hashCode() == c2.hashCode() && Utils.equiv(c1, c2))
-
   // the key is insnIndex
   var computed = Array.tabulate[List[State]](methodNode.instructions.size()){i => Nil}
   // the key is stateIndex
@@ -127,6 +121,12 @@ abstract class Analysis[Res] {
 }
 
 object Utils {
+  final def stateEquiv(curr: State, prev: State): Boolean =
+    curr.constraint == prev.constraint && curr.conf.hashCode() == prev.conf.hashCode() &&
+      Utils.equiv(curr.conf, prev.conf) &&
+      curr.history.size == prev.history.size &&
+      (curr.history, prev.history).zipped.forall((c1, c2) => c1.hashCode() == c2.hashCode() && Utils.equiv(c1, c2))
+
   def isInstance(curr: Conf, prev: Conf): Boolean = {
     if (curr.insnIndex != prev.insnIndex) {
       return false

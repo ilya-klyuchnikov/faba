@@ -5,7 +5,7 @@ import org.objectweb.asm.tree.analysis.{BasicInterpreter, Frame, BasicValue}
 import org.objectweb.asm.tree.{MethodInsnNode, TypeInsnNode, JumpInsnNode, AbstractInsnNode}
 import org.objectweb.asm.Opcodes._
 
-import faba.analysis._
+import faba.analysis.{Utils => AnalysisUtils, _}
 import faba.cfg._
 import faba.data._
 import faba.engine._
@@ -179,7 +179,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     var subResult = identity
 
     while (true) {
-      computed(state.conf.insnIndex).find(prevState => stateEquiv(state, prevState)) match {
+      computed(state.conf.insnIndex).find(prevState => AnalysisUtils.stateEquiv(state, prevState)) match {
         case Some(ps) =>
           results(state.index) = results(ps.index)
           if (states.nonEmpty)
@@ -369,7 +369,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
     var state = fState
 
     while (true) {
-      computed(state.conf.insnIndex).find(prevState => stateEquiv(state, prevState)) match {
+      computed(state.conf.insnIndex).find(prevState => AnalysisUtils.stateEquiv(state, prevState)) match {
         case Some(ps) =>
           return
         case None =>
