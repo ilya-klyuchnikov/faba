@@ -378,7 +378,7 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
 
   @switch
   override def newOperation(insn: AbstractInsnNode): BasicValue = {
-    val propagate_? = resultOrigins == null || insnOrigins(insns.indexOf(insn))
+    val propagate_? = insnOrigins(insns.indexOf(insn))
     insn.getOpcode match {
       case ICONST_0 if propagate_? =>
         FalseValue()
@@ -410,7 +410,7 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
 
   @switch
   override def unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue = {
-    val propagate_? = resultOrigins == null || insnOrigins(insns.indexOf(insn))
+    val propagate_? = insnOrigins(insns.indexOf(insn))
     insn.getOpcode match {
       case GETFIELD =>
         value match {
@@ -449,7 +449,7 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
   }
 
   override def binaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue): BasicValue = {
-    val propagate_? = resultOrigins == null || insnOrigins(insns.indexOf(insn))
+    val propagate_? = insnOrigins(insns.indexOf(insn))
     insn.getOpcode match {
       case AALOAD =>
         v1 match {
@@ -499,7 +499,7 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
 
   @switch
   override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
-    val propagate_? = resultOrigins == null || insnOrigins(insns.indexOf(insn))
+    val propagate_? = insnOrigins(insns.indexOf(insn))
     val opCode = insn.getOpcode
     val shift = if (opCode == INVOKESTATIC) 0 else 1
     if (opCode == INVOKESPECIAL || opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) {
