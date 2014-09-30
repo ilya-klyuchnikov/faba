@@ -93,17 +93,28 @@ object Result {
   }
 }
 
-case class NotNullInConstraint(taken: Boolean, hasCompanions: Boolean)
+object NotNullInConstraint {
+  // (taken: Boolean, hasCompanions: Boolean)
+  val TAKEN = 1 // 1 << 0
+  val HAS_COMPANIONS = 2 //1 << 1
+
+  // (x != null) / (x instanceOf ..) was proceeded
+  def isTaken(constraint: Int) = (constraint & TAKEN) != 0
+
+  // some previous configuration is foo(param) -
+  // hasCompanions = true means that it is possible indirect dereference
+  def hasCompanions(constraint: Int) = (constraint & HAS_COMPANIONS) != 0
+}
 
 object NotNullInAnalysis {
   sealed trait PendingAction
-  case class ProceedState(state: State[NotNullInConstraint]) extends PendingAction
-  case class MakeResult(states: List[State[NotNullInConstraint]], subResult: Result, indices: List[Int]) extends PendingAction
+  case class ProceedState(state: State) extends PendingAction
+  case class MakeResult(states: List[State], subResult: Result, indices: List[Int]) extends PendingAction
   val sharedResults = new Array[Result](LimitReachedException.limit)
   val sharedPendingStack = new Array[PendingAction](LimitReachedException.limit)
 }
 
-class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result, NotNullInConstraint] {
+class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result] {
   import NotNullInAnalysis._
 
   override val identity: Result = Identity
@@ -161,10 +172,10 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     mkEquation(earlyResult.getOrElse(results(0)))
   }
 
-  override def processState(fState: CState): Unit = {
+  override def processState(fState: State): Unit = {
 
     var state = fState
-    var states: List[CState] = Nil
+    var states: List[State] = Nil
     var subResult = identity
 
     while (true) {
@@ -193,11 +204,9 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
         return
       }
 
-      val taken = state.constraint.taken
       val frame = conf.frame
       val insnNode = methodNode.instructions.get(insnIndex)
       val nextHistory = if (dfsTree.loopEnters(insnIndex)) conf :: history else history
-      val hasCompanions = state.constraint.hasCompanions
       val (nextFrame, localSubResult) = execute(frame, insnNode)
       val notEmptySubResult = localSubResult != Identity
 
@@ -215,9 +224,14 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
         return
       }
 
+      val constraint = state.constraint
+      // the constant will be inlined by javac
+      val companionsNow = if (localSubResult != Identity) 2 else 0
+      val constraint1 = constraint | companionsNow
+
       insnNode.getOpcode match {
         case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
-          if (!hasCompanions) {
+          if (!NotNullInConstraint.hasCompanions(constraint)) {
             earlyResult = Some(Return)
             return
           } else {
@@ -228,7 +242,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
               pendingPush(MakeResult(states, subResult, List(stateIndex)))
             return
           }
-        case ATHROW if taken =>
+        case ATHROW if NotNullInConstraint.isTaken(constraint) =>
           results(stateIndex) = NPE
           npe = true
           computed(insnIndex) = state :: computed(insnIndex)
@@ -243,22 +257,22 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
           return
         case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = insnIndex + 1
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, NotNullInConstraint(true, hasCompanions || notEmptySubResult))
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, constraint1 | 1)
           states = state :: states
           state = nextState
         case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, NotNullInConstraint(true, hasCompanions || notEmptySubResult))
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, constraint1 | 1)
           states = state :: states
           state = nextState
         case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, NotNullInConstraint(true, hasCompanions || notEmptySubResult))
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, constraint1 | 1)
           states = state :: states
           state = nextState
         case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
           val nextInsnIndex = insnIndex + 1
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, NotNullInConstraint(true, hasCompanions || notEmptySubResult))
+          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, constraint1 | 1)
           states = state :: states
           state = nextState
         case _ =>
@@ -273,7 +287,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
               } else {
                 nextFrame
               }
-              State(mkId(), Conf(nextInsnIndex, nextFrame1), nextHistory, NotNullInConstraint(taken, hasCompanions || notEmptySubResult))
+              State(mkId(), Conf(nextInsnIndex, nextFrame1), nextHistory, constraint1)
           }
           states = state :: states
           if (nextStates.size == 1 && noSwitch) {
@@ -296,26 +310,20 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
       nextFrame.execute(insnNode, NonNullInterpreter)
       (nextFrame, NonNullInterpreter.getSubResult)
   }
-
-  override def startConstraint(): NotNullInConstraint =
-    NotNullInConstraint(false, false)
-
-  override def constraintEquiv(ctr1: NotNullInConstraint, ctr2: NotNullInConstraint): Boolean =
-    ctr1.taken == ctr2.taken
 }
 
 case class NullableInConstraint(taken: Boolean)
 
 object NullableInConstraint {
-  val TAKEN = NullableInConstraint(true)
-  val NOT_TAKEN = NullableInConstraint(false)
+  val TAKEN = 1
+  val NOT_TAKEN = 0
 }
 
 object NullableInAnalysis {
-  val sharedPendingStack = new Array[State[NullableInConstraint]](LimitReachedException.limit)
+  val sharedPendingStack = new Array[State](LimitReachedException.limit)
 }
 
-class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result, NullableInConstraint] {
+class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result] {
 
   override val identity: Result = Identity
   val pending = NullableInAnalysis.sharedPendingStack
@@ -337,12 +345,12 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
 
   private var pendingTop: Int = 0
 
-  final def pendingPush(state: CState) {
+  final def pendingPush(state: State) {
     pending(pendingTop) = state
     pendingTop += 1
   }
 
-  final def pendingPop(): CState = {
+  final def pendingPop(): State = {
     pendingTop -= 1
     pending(pendingTop)
   }
@@ -356,7 +364,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
     mkEquation(earlyResult.getOrElse(myResult))
   }
 
-  override def processState(fState: CState): Unit = {
+  override def processState(fState: State): Unit = {
 
     var state = fState
 
@@ -401,23 +409,23 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
             return
           }
           return
-        case ATHROW if taken.taken =>
+        case ATHROW if state.constraint == 1 =>
           earlyResult = Some(NPE)
           return
         case ATHROW =>
           return
         case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = insnIndex + 1
-          state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, NullableInConstraint.TAKEN)
+          state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, 1)
         case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, NullableInConstraint.TAKEN)
+          state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, 1)
         case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, NullableInConstraint.TAKEN)
+          state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, 1)
         case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
           val nextInsnIndex = insnIndex + 1
-          state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, NullableInConstraint.TAKEN)
+          state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, 1)
         case _ =>
           val nextInsnIndices = controlFlow.transitions(insnIndex)
           val nextStates = nextInsnIndices.map {
@@ -451,12 +459,6 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
       nextFrame.execute(insnNode, NullableInterpreter)
       (nextFrame, NullableInterpreter.getSubResult)
   }
-
-  override def startConstraint(): NullableInConstraint =
-    NullableInConstraint.NOT_TAKEN
-
-  override def constraintEquiv(ctr1: NullableInConstraint, ctr2: NullableInConstraint): Boolean =
-    ctr1 == ctr2
 }
 
 abstract class Interpreter extends BasicInterpreter {

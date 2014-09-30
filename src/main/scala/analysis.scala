@@ -37,7 +37,7 @@ case class Conf(insnIndex: Int, frame: Frame[BasicValue]) {
   override def hashCode() = _hashCode
 }
 
-case class State[Constraint](index: Int, conf: Conf, history: List[Conf], constraint: Constraint)
+case class State(index: Int, conf: Conf, history: List[Conf], constraint: Int)
 
 object LimitReachedException {
   // elementary steps limit
@@ -46,19 +46,16 @@ object LimitReachedException {
 
 class LimitReachedException extends Exception("Limit reached exception")
 
-abstract class Analysis[Res, Constraint] {
-  type CState = State[Constraint]
+abstract class Analysis[Res] {
 
   val richControlFlow: RichControlFlow
   val direction: Direction
   val stable: Boolean
   def identity: Res
-  def processState(state: CState): Unit
+  def processState(state: State): Unit
   def isEarlyResult(res: Res): Boolean
   def combineResults(delta: Res, subResults: List[Res]): Res
   def mkEquation(result: Res): Equation[Key, Value]
-  def startConstraint(): Constraint
-  def constraintEquiv(ctr1: Constraint, ctr2: Constraint): Boolean
 
   val controlFlow = richControlFlow.controlFlow
   val methodNode = controlFlow.methodNode
@@ -66,17 +63,17 @@ abstract class Analysis[Res, Constraint] {
   val dfsTree = richControlFlow.dfsTree
   val aKey = Key(method, direction, stable)
 
-  final def createStartState(): CState = State(0, Conf(0, createStartFrame()), Nil, startConstraint())
+  final def createStartState(): State = State(0, Conf(0, createStartFrame()), Nil, 0)
   final def confInstance(curr: Conf, prev: Conf): Boolean = Utils.isInstance(curr, prev)
 
-  final def stateEquiv(curr: CState, prev: CState): Boolean =
-    constraintEquiv(curr.constraint, prev.constraint) && curr.conf.hashCode() == prev.conf.hashCode() &&
+  final def stateEquiv(curr: State, prev: State): Boolean =
+    curr.constraint == prev.constraint && curr.conf.hashCode() == prev.conf.hashCode() &&
       Utils.equiv(curr.conf, prev.conf) &&
       curr.history.size == prev.history.size &&
       (curr.history, prev.history).zipped.forall((c1, c2) => c1.hashCode() == c2.hashCode() && Utils.equiv(c1, c2))
 
   // the key is insnIndex
-  var computed = Array.tabulate[List[CState]](methodNode.instructions.size()){i => Nil}
+  var computed = Array.tabulate[List[State]](methodNode.instructions.size()){i => Nil}
   // the key is stateIndex
   var earlyResult: Option[Res] = None
 
