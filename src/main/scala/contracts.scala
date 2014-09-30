@@ -9,7 +9,7 @@ import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.tree.analysis.{BasicValue, BasicInterpreter, Frame}
 import org.objectweb.asm.tree._
 
-import faba.analysis._
+import faba.analysis.{Utils => AnalysisUtils, _}
 import faba.cfg._
 import faba.data._
 import faba.engine._
@@ -100,7 +100,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
 
     while (true) {
       // sharing
-      computed(state.conf.insnIndex).find(prevState => stateEquiv(state, prevState)) match {
+      computed(state.conf.insnIndex).find(prevState => AnalysisUtils.stateEquiv(state, prevState)) match {
         case Some(ps) =>
           // was computed before
           return
