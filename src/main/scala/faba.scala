@@ -125,10 +125,6 @@ trait FabaProcessor extends Processor {
           handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Top)))
           handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), Final(Values.Top)))
         }
-        if (booleanArg && (isReferenceResult || isBooleanResult)) {
-          handleTrueContractEquation(Equation(Key(method, InOut(i, Values.True), stable), Final(Values.Top)))
-          handleFalseContractEquation(Equation(Key(method, InOut(i, Values.False), stable), Final(Values.Top)))
-        }
       }
       if (isReferenceResult) {
         handleOutContractEquation(Equation(Key(method, Out, stable), Final(Values.Top)))
@@ -162,10 +158,6 @@ trait FabaProcessor extends Processor {
       if (isReferenceArg && (isReferenceResult || isBooleanResult)) {
         handleNullContractEquation(analyzer.contractEquation(i, Values.Null, stable))
         handleNotNullContractEquation(analyzer.contractEquation(i, Values.NotNull, stable))
-      }
-      if (booleanArg && (isReferenceResult || isBooleanResult)) {
-        handleFalseContractEquation(analyzer.contractEquation(i, Values.False, stable))
-        handleTrueContractEquation(analyzer.contractEquation(i, Values.True, stable))
       }
     }
   }
@@ -230,15 +222,6 @@ trait FabaProcessor extends Processor {
         } else {
           handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
           handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
-        }
-      }
-      if (booleanArg && (isReferenceResult || isBooleanResult)) {
-        if (leaking.parameters(i)) {
-          handleFalseContractEquation(falseContractEquation(richControlFlow, resultOrigins, i, stable))
-          handleTrueContractEquation(trueContractEquation(richControlFlow, resultOrigins, i, stable))
-        } else {
-          handleTrueContractEquation(Equation(Key(method, InOut(i, Values.True), stable), resultEquation.rhs))
-          handleFalseContractEquation(Equation(Key(method, InOut(i, Values.False), stable), resultEquation.rhs))
         }
       }
     }
@@ -312,26 +295,6 @@ trait FabaProcessor extends Processor {
     }
   }
 
-  def trueContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean): Equation[Key, Value] = {
-    val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.True), resultOrigins, stable)
-    try {
-      analyser.analyze()
-    } catch {
-      case _: LimitReachedException =>
-        Equation(analyser.aKey, Final(Values.Top))
-    }
-  }
-
-  def falseContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean): Equation[Key, Value] = {
-    val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.False), resultOrigins, stable)
-    try {
-      analyser.analyze()
-    } catch {
-      case _: LimitReachedException =>
-        Equation(analyser.aKey, Final(Values.Top))
-    }
-  }
-
   def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], stable: Boolean): Equation[Key, Value] = {
     val analyser = new InOutAnalysis(richControlFlow, Out, resultOrigins, stable)
     try {
@@ -349,8 +312,6 @@ trait FabaProcessor extends Processor {
   def handleNullableParamEquation(eq: Equation[Key, Value]): Unit = ()
   def handleNotNullContractEquation(eq: Equation[Key, Value]): Unit = ()
   def handleNullContractEquation(eq: Equation[Key, Value]): Unit = ()
-  def handleTrueContractEquation(eq: Equation[Key, Value]): Unit = ()
-  def handleFalseContractEquation(eq: Equation[Key, Value]): Unit = ()
   def handleOutContractEquation(eq: Equation[Key, Value]): Unit = ()
   def handleNullableResultEquation(eq: Equation[Key, Value]): Unit = ()
 

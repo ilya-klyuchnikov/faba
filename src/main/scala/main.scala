@@ -27,8 +27,6 @@ class MainProcessor extends FabaProcessor {
   var nullableParamsTime: Long = 0
   var nullableResultTime: Long = 0
   var outTime: Long = 0
-  var falseTime: Long = 0
-  var trueTime: Long = 0
   var nullTime: Long = 0
   var notNullTime: Long = 0
   var cfgTime: Long = 0
@@ -95,20 +93,6 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def trueContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean) = {
-    val start = System.nanoTime()
-    val result = super.trueContractEquation(richControlFlow, resultOrigins, i, stable)
-    trueTime += System.nanoTime() - start
-    result
-  }
-
-  override def falseContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean) = {
-    val start = System.nanoTime()
-    val result = super.falseContractEquation(richControlFlow, resultOrigins, i, stable)
-    falseTime += System.nanoTime() - start
-    result
-  }
-
   override def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], stable: Boolean) = {
     val start = System.nanoTime()
     val result = super.outContractEquation(richControlFlow, resultOrigins, stable)
@@ -139,10 +123,6 @@ class MainProcessor extends FabaProcessor {
   override def handleNotNullContractEquation(eq: Equation[Key, Value]): Unit =
     contractsSolver.addEquation(eq)
   override def handleNullContractEquation(eq: Equation[Key, Value]): Unit =
-    contractsSolver.addEquation(eq)
-  override def handleTrueContractEquation(eq: Equation[Key, Value]): Unit =
-    contractsSolver.addEquation(eq)
-  override def handleFalseContractEquation(eq: Equation[Key, Value]): Unit =
     contractsSolver.addEquation(eq)
   override def handleOutContractEquation(eq: Equation[Key, Value]): Unit =
     contractsSolver.addEquation(eq)
@@ -218,10 +198,8 @@ class MainProcessor extends FabaProcessor {
     println(s"nullableParams ${nullableParamsTime / 1000000} msec")
     println(s"results        ${outTime    / 1000000} msec")
     println(s"nullableRes    ${nullableResultTime / 1000000} msec")
-    println(s"false          ${falseTime / 1000000} msec")
-    println(s"true           ${trueTime / 1000000} msec")
-    println(s"null           ${nullTime / 1000000} msec")
-    println(s"!null          ${notNullTime / 1000000} msec")
+    println(s" null->...     ${nullTime / 1000000} msec")
+    println(s"!null->...     ${notNullTime / 1000000} msec")
     println("====")
     println(s"cfg            ${cfgTime / 1000000} msec")
     println(s"origins        ${resultOriginsTime / 1000000} msec")

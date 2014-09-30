@@ -42,12 +42,6 @@ object Statistics extends FabaProcessor {
   override def handleNullContractEquation(eq: Equation[Key, Value]) =
     handleEquation(eq)
 
-  override def handleTrueContractEquation(eq: Equation[Key, Value]) =
-    handleEquation(eq)
-
-  override def handleFalseContractEquation(eq: Equation[Key, Value]) =
-    handleEquation(eq)
-
   override def handleOutContractEquation(eq: Equation[Key, Value]) =
     handleEquation(eq)
 
