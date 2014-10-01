@@ -33,9 +33,4 @@ public class Data01 {
     static Object id(Object o) {
         return o;
     }
-
-    @ExpectContract("false->false;true->true")
-    static boolean id(boolean b) {
-        return b;
-    }
 }

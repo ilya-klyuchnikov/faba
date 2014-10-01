@@ -166,26 +166,6 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
           val nextInsnIndex = insnIndex + 1
           val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
           state = nextState
-        case IFEQ if popValue(frame).isInstanceOf[ParamValue] =>
-          val nextInsnIndex = (direction: @unchecked) match {
-            case InOut(_, Values.False) =>
-              methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-            case InOut(_, Values.True) =>
-              insnIndex + 1
-          }
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-          states = state :: states
-          state = nextState
-        case IFNE if popValue(frame).isInstanceOf[ParamValue] =>
-          val nextInsnIndex = (direction: @unchecked) match {
-            case InOut(_, Values.False) =>
-              insnIndex + 1
-            case InOut(_, Values.True) =>
-              methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          }
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
-          states = state :: states
-          state = nextState
         case _ =>
           // we touch this!
           computed(insnIndex) = state :: computed(insnIndex)

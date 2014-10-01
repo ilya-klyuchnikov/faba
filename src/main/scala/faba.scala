@@ -150,7 +150,6 @@ trait FabaProcessor extends Processor {
       val argType = argumentTypes(i)
       val argSort = argType.getSort
       val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
-      val booleanArg = argType == Type.BOOLEAN_TYPE
       if (isReferenceArg) {
         handleNotNullParamEquation(analyzer.notNullParamEquation(i, stable))
         handleNullableParamEquation(analyzer.nullableParamEquation(i, stable))

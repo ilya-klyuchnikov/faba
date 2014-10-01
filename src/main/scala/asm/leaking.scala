@@ -36,6 +36,7 @@ case class ParamsValue(params: Set[Int], size: Int) extends Value {
 }
 
 // tracks flow of parameters into values of frame
+// value has the super-set of all possible parameters caming into it
 class ParametersUsage(m: MethodNode) extends Interpreter[ParamsValue](ASM5) {
   val val1 = ParamsValue(Set(), 1)
   val val2 = ParamsValue(Set(), 2)
@@ -52,7 +53,7 @@ class ParametersUsage(m: MethodNode) extends Interpreter[ParamsValue](ASM5) {
     // hack for analyzer
     if (range.contains(called)) {
       if (tp eq Type.VOID_TYPE) return null
-      if (Utils.isReferenceType(tp) || Utils.isBooleanType(tp)) {
+      if (Utils.isReferenceType(tp)) {
         if (tp.getSize == 1) ParamsValue(Set(called - shift), 1)
         else ParamsValue(Set(called - shift), 2)
       } else {
