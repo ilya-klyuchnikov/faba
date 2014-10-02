@@ -181,8 +181,8 @@ trait FabaProcessor extends Processor {
     val cycle = dfs.back.nonEmpty
     // leaking params will be taken for
     lazy val leaking = leakingParameters(className, methodNode, jsr)
-
     lazy val resultOrigins = buildResultOrigins(className, methodNode, leaking.frames, graph)
+    lazy val influence = ResultInfluence.analyze(methodNode, leaking, resultOrigins)
     val richControlFlow = RichControlFlow(graph, dfs)
 
     lazy val resultEquation: Equation[Key, Value] = outContractEquation(richControlFlow, resultOrigins, stable, !cycle)
@@ -194,7 +194,6 @@ trait FabaProcessor extends Processor {
       val argType = argumentTypes(i)
       val argSort = argType.getSort
       val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
-      val booleanArg = argType == Type.BOOLEAN_TYPE
       var notNullParam = false
       var touched = false
       if (isReferenceArg) {
@@ -218,13 +217,19 @@ trait FabaProcessor extends Processor {
 
       }
       if (isReferenceArg && (isReferenceResult || isBooleanResult)) {
+        val paramInfluence = leaking.splittingParameters(i) || influence(i)
         if (leaking.parameters(i)) {
-          if (!notNullParam) {
+          if (!notNullParam && paramInfluence) {
             handleNullContractEquation(nullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle))
           } else {
             handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Bot)))
           }
-          handleNotNullContractEquation(notNullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle))
+          if (paramInfluence) {
+            val eq1 = notNullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle)
+            handleNotNullContractEquation(eq1)
+          } else {
+            handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
+          }
         } else {
           handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
           handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))

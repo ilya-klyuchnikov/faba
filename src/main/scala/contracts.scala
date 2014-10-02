@@ -32,6 +32,8 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
 
   type MyResult = Result[Key, Value]
   implicit val contractsLattice = ELattice(Values.Bot, Values.Top)
+  val propagate = true //noCycle || resultOrigins.size < 2
+  //val propagate = true
 
   val pendingStack = InOutAnalysis.sharedPendingStack
   // there is no need to generalize `this` (local var 0) for instance methods
@@ -121,7 +123,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
         return
       }
 
-      val conf = if (loopEnter && resultOrigins.size > 1) generalize(preConf) else preConf
+      val conf = if (loopEnter && !propagate) generalize(preConf) else preConf
 
       val frame = conf.frame
       val insnNode = methodNode.instructions.get(insnIndex)
@@ -189,7 +191,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
           states = state :: states
           state = nextState
 
-        case IFNONNULL if noCycle && popValue(frame).isInstanceOf[NThParamValue] =>
+        case IFNONNULL if propagate && popValue(frame).isInstanceOf[NThParamValue] =>
           val nullInsn = insnIndex + 1
           val notNullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           val n = popValue(frame).asInstanceOf[NThParamValue].n
@@ -198,7 +200,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
           pendingPush(nullState)
           pendingPush(notNullState)
           return
-        case IFNONNULL if noCycle && popValue(frame).isInstanceOf[Trackable] =>
+        case IFNONNULL if propagate && popValue(frame).isInstanceOf[Trackable] =>
           val nullInsn = insnIndex + 1
           val notNullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           val orig = popValue(frame).asInstanceOf[Trackable].origin
@@ -207,7 +209,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
           pendingPush(nullState)
           pendingPush(notNullState)
           return
-        case IFNULL if noCycle && popValue(frame).isInstanceOf[NThParamValue] =>
+        case IFNULL if propagate && popValue(frame).isInstanceOf[NThParamValue] =>
           val nullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           val notNullInsn = insnIndex + 1
           val n = popValue(frame).asInstanceOf[NThParamValue].n
@@ -216,7 +218,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
           pendingPush(nullState)
           pendingPush(notNullState)
           return
-        case IFNULL if noCycle && popValue(frame).isInstanceOf[Trackable] =>
+        case IFNULL if propagate && popValue(frame).isInstanceOf[Trackable] =>
           val nullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           val notNullInsn = insnIndex + 1
           val orig = popValue(frame).asInstanceOf[Trackable].origin
@@ -225,7 +227,6 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
           pendingPush(nullState)
           pendingPush(notNullState)
           return
-
 
         case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
           val nextInsnIndex =
@@ -334,7 +335,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
         case In(`i`) =>
           new ParamValue(args(i))
         case _ =>
-          if (noCycle && resultOrigins.parameters(i))
+          if (resultOrigins.parameters(i))
             NThParamValue(i, args(i))
           else
             new BasicValue(args(i))
@@ -505,7 +506,6 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
       values.get(0) match {
         case ParamValue(_) =>
           dereferencedParam = true
-
           if (nullAnalysis)
             return super.naryOperation(insn, values)
         case NThParamValue(n, _) =>
@@ -524,6 +524,7 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
         val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
         val isBooleanRetType = retType == Type.BOOLEAN_TYPE
         if (isRefRetType || isBooleanRetType)
+          // TODO - hack into parameters here
           direction match {
             case InOut(_, inValue) =>
               var keys = Set[Key]()
