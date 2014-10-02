@@ -15,7 +15,7 @@ import scala.collection.mutable
  */
 case class Origins(instructions: Array[Boolean], parameters: Array[Boolean]) {
   val instructionsMap = new Array[Int](instructions.length)
-  val parametersMap = new Array[Int](instructions.length)
+  val parametersMap = new Array[Int](parameters.length)
   // size of results
   val size: Int = {
     var shift: Int = 0
