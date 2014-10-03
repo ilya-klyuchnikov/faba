@@ -436,8 +436,16 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
           case _ =>
         }
         super.unaryOperation(insn, value)
-      case CHECKCAST if value.isInstanceOf[ParamValue] =>
-        new ParamValue(Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc))
+      case CHECKCAST =>
+        val tp = Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc)
+        value match {
+          case ParamValue(_) =>
+            new ParamValue(tp)
+          case tr: Trackable =>
+            tr.cast(to = tp)
+          case _ =>
+            newValue(tp)
+        }
       case INSTANCEOF if value.isInstanceOf[ParamValue] =>
         InstanceOfCheckValue()
       case NEWARRAY | ANEWARRAY if propagate_? =>
