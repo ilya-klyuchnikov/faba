@@ -256,6 +256,9 @@
   <item name="sun.security.x509.AlgorithmId java.lang.String getEncAlgFromSigAlg(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.x509.AlgorithmId java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.x509.AlgorithmId java.lang.String makeSigAlg(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2442,6 +2445,14 @@
   <item name="sun.security.x509.X500Name sun.security.util.DerValue findMostSpecificAttribute(sun.security.util.ObjectIdentifier)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.x509.X500Name sun.security.util.ObjectIdentifier intern(sun.security.util.ObjectIdentifier)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.security.x509.X500Name sun.security.x509.X500Name asX500Name(javax.security.auth.x500.X500Principal)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.x509.X500Name sun.security.x509.X500Name commonAncestor(sun.security.x509.X500Name) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2662,7 +2673,7 @@
   </item>
   <item name="sun.security.x509.X509CRLImpl sun.security.x509.X509CRLImpl toImpl(java.security.cert.X509CRL)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2867,7 +2878,7 @@
   </item>
   <item name="sun.security.x509.X509CertImpl sun.security.x509.X509CertImpl toImpl(java.security.cert.X509Certificate)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
