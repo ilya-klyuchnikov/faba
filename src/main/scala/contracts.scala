@@ -22,18 +22,15 @@ object InOutAnalysis {
   val sharedPendingStack = new Array[State](LimitReachedException.limit)
 }
 
-// constraint is a bit mask of dereferenced values
-// TODO document it in clearer way
 class InOutAnalysis(val richControlFlow: RichControlFlow,
                     val direction: Direction,
                     resultOrigins: Origins,
                     val stable: Boolean,
-                    val noCycle: Boolean) extends Analysis[Result[Key, Value]] {
+                    val _noCycle: Boolean) extends Analysis[Result[Key, Value]] {
 
   type MyResult = Result[Key, Value]
   implicit val contractsLattice = ELattice(Values.Bot, Values.Top)
-  val propagate = true //noCycle || resultOrigins.size < 2
-  //val propagate = true
+  val propagate = true
 
   val pendingStack = InOutAnalysis.sharedPendingStack
   // there is no need to generalize `this` (local var 0) for instance methods
@@ -130,7 +127,9 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
       val nextHistory = if (loopEnter) conf :: history else history
       val nextFrame = execute(frame, insnNode)
 
-      val dereferencedHere: Int = if (noCycle) interpreter.dereferenced else 0
+      val dereferencedHere: Int = interpreter.dereferenced
+
+
       val dereferenced = state.constraint | dereferencedHere
 
       // executed only during null
