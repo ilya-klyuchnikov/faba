@@ -416,7 +416,7 @@
   </item>
   <item name="java.lang.invoke.FilterGeneric java.lang.invoke.MethodType entryType(java.lang.invoke.FilterGeneric.Kind, int, java.lang.invoke.MethodType, java.lang.invoke.MethodType)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,null-&gt;null&quot;"/>
+      <val val="&quot;_,_,_,!null-&gt;!null;_,_,_,null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="java.lang.invoke.FilterGeneric java.lang.invoke.MethodType targetType(java.lang.invoke.MethodType, java.lang.invoke.FilterGeneric.Kind, int, java.lang.invoke.MethodType) 1">
@@ -424,7 +424,7 @@
   </item>
   <item name="java.lang.invoke.FilterGeneric java.lang.invoke.MethodType targetType(java.lang.invoke.MethodType, java.lang.invoke.FilterGeneric.Kind, int, java.lang.invoke.MethodType)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_-&gt;null&quot;"/>
+      <val val="&quot;!null,_,_,_-&gt;!null;null,_,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="java.lang.invoke.FilterGeneric.Adapter Adapter(java.lang.invoke.MethodHandle) 0">
@@ -950,6 +950,9 @@
   <item name="java.lang.invoke.Invokers java.lang.invoke.MethodType invokerType(java.lang.invoke.MethodType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.Invokers java.lang.invoke.MethodType invokerType(java.lang.invoke.MethodType)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.invoke.MemberName MemberName(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1337,6 +1340,9 @@
   <item name="java.lang.invoke.MethodHandleImpl.AllocateObject java.lang.invoke.MethodType makeConType(java.lang.invoke.MethodHandle) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.MethodHandleImpl.AllocateObject java.lang.invoke.MethodType makeConType(java.lang.invoke.MethodHandle)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.invoke.MethodHandleImpl.FieldAccessor FieldAccessor(java.lang.invoke.MemberName, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1429,6 +1435,12 @@
   <item name="java.lang.invoke.MethodHandleImpl.FieldAccessor java.lang.invoke.MethodType atype(java.lang.Class&lt;?&gt;, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.MethodHandleImpl.FieldAccessor java.lang.invoke.MethodType atype(java.lang.Class&lt;?&gt;, boolean)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.MethodHandleImpl.FieldAccessor java.lang.invoke.MethodType ftype(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;, boolean, boolean)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.invoke.MethodHandleImpl.FieldAccessor long getElementJ(long[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1514,6 +1526,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.MethodHandleNatives java.lang.invoke.MethodType findMethodHandleType(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.MethodHandleNatives java.lang.invoke.MethodType findMethodHandleType(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.MethodHandleNatives void notifyGenericMethodType(java.lang.invoke.MethodType) 0">
@@ -2053,6 +2068,9 @@
   <item name="java.lang.invoke.MethodType java.lang.IndexOutOfBoundsException newIndexOutOfBoundsException(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.MethodType java.lang.Object readResolve()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.invoke.MethodType java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2062,27 +2080,55 @@
   <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType appendParameterTypes(java.lang.Class&lt;?&gt;...) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType appendParameterTypes(java.lang.Class&lt;?&gt;...)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType appendParameterTypes(java.util.List&lt;java.lang.Class&lt;?&gt;&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType appendParameterTypes(java.util.List&lt;java.lang.Class&lt;?&gt;&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType changeParameterType(int, java.lang.Class&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType changeReturnType(java.lang.Class&lt;?&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType dropParameterTypes(int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType fromMethodDescriptorString(java.lang.String, java.lang.ClassLoader)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType insertParameterTypes(int, java.lang.Class&lt;?&gt;...) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType insertParameterTypes(int, java.lang.Class&lt;?&gt;...)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType insertParameterTypes(int, java.util.List&lt;java.lang.Class&lt;?&gt;&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType insertParameterTypes(int, java.util.List&lt;java.lang.Class&lt;?&gt;&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType makeImpl(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;[], boolean) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType makeImpl(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;[], boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType methodType(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType methodType(java.lang.Class&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType methodType(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType methodType(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType methodType(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;...) 0">
@@ -2091,7 +2137,13 @@
   <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType methodType(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;...) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType methodType(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;...)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType methodType(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType methodType(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType methodType(java.lang.Class&lt;?&gt;, java.lang.invoke.MethodType) 0">
@@ -2100,10 +2152,16 @@
   <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType methodType(java.lang.Class&lt;?&gt;, java.lang.invoke.MethodType) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType methodType(java.lang.Class&lt;?&gt;, java.lang.invoke.MethodType)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType methodType(java.lang.Class&lt;?&gt;, java.util.List&lt;java.lang.Class&lt;?&gt;&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType methodType(java.lang.Class&lt;?&gt;, java.util.List&lt;java.lang.Class&lt;?&gt;&gt;) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType methodType(java.lang.Class&lt;?&gt;, java.util.List&lt;java.lang.Class&lt;?&gt;&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType unwrap()">
@@ -2201,7 +2259,7 @@
   </item>
   <item name="java.lang.invoke.MethodTypeForm java.lang.invoke.MethodType reorderParameters(java.lang.invoke.MethodType, int[], java.lang.Class&lt;?&gt;[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_-&gt;null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;!null;_,!null,_-&gt;!null;null,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="java.lang.invoke.MethodTypeForm java.lang.invoke.MethodTypeForm findForm(java.lang.invoke.MethodType) 0">
@@ -2252,6 +2310,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.SpreadGeneric java.lang.invoke.MethodType preSpreadType(java.lang.invoke.MethodType, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.SpreadGeneric java.lang.invoke.MethodType preSpreadType(java.lang.invoke.MethodType, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.SpreadGeneric java.lang.invoke.SpreadGeneric of(java.lang.invoke.MethodType, int) 0">
