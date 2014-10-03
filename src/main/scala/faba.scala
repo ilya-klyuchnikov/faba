@@ -230,28 +230,34 @@ trait FabaProcessor extends Processor {
 
         // [[[ contract analysis
         if (isReferenceResult || isBooleanResult) {
-          val paramInfluence = leaking.splittingParameters(i) || influence(i)
-          if (leaking.parameters(i)) {
-            val unconditionalDereference = dereferenceFound && !leaking.splittingParameters(i) && !resultOrigins.parameters(i)
-            // null->... analysis
-            if (notNullParam) {
-              handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Bot)))
-            } else if (unconditionalDereference) {
-              handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
-            } else if (paramInfluence) {
-              handleNullContractEquation(nullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle))
+          if (stable) {
+            val paramInfluence = leaking.splittingParameters(i) || influence(i)
+            if (leaking.parameters(i)) {
+              val unconditionalDereference = dereferenceFound && !leaking.splittingParameters(i) && !resultOrigins.parameters(i)
+              // null->... analysis
+              if (notNullParam) {
+                handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Bot)))
+              } else if (unconditionalDereference) {
+                handleNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
+              } else if (paramInfluence) {
+                handleNullContractEquation(nullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle))
+              } else {
+                // no influence - result is the same as the main equation
+                handleNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
+              }
+              if (paramInfluence) {
+                val eq1 = notNullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle)
+                handleNotNullContractEquation(eq1)
+              } else {
+                handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
+              }
             } else {
-              // no influence - result is the same as the main equation
+              handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
               handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
             }
-            if (paramInfluence) {
-              val eq1 = notNullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle)
-              handleNotNullContractEquation(eq1)
-            } else {
-              handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
-            }
-          } else {
-            handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
+          }
+          else {
+            handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Top)))
             handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
           }
         }
