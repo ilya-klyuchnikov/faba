@@ -73,6 +73,10 @@ object OriginsAnalysis {
   object TracingInterpreter extends SourceInterpreter {
     override def copyOperation(insn: AbstractInsnNode, value: SourceValue): SourceValue =
       value
+
+    override def unaryOperation(insn: AbstractInsnNode, value: SourceValue) =
+      if (insn.getOpcode == Opcodes.CHECKCAST) value
+      else super.unaryOperation(insn, value)
   }
 
   private val nullSet: java.util.Set[AbstractInsnNode] = null
