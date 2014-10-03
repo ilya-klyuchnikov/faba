@@ -139,6 +139,11 @@
   <item name="sun.net.www.protocol.http.AuthenticationInfo sun.net.www.protocol.http.AuthenticationInfo getProxyAuth(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.www.protocol.http.AuthenticationInfo sun.net.www.protocol.http.AuthenticationInfo getServerAuth(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.net.www.protocol.http.AuthenticationInfo sun.net.www.protocol.http.AuthenticationInfo getServerAuth(java.net.URL) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -410,11 +415,6 @@
   <item name="sun.net.www.protocol.http.HttpURLConnection boolean isExternalMessageHeaderAllowed(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.net.www.protocol.http.HttpURLConnection boolean isRestrictedHeader(java.lang.String, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.net.www.protocol.http.HttpURLConnection boolean streaming()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -508,6 +508,12 @@
   <item name="sun.net.www.protocol.http.HttpURLConnection sun.net.www.MessageHeader mapToMessageHeader(java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.www.protocol.http.HttpURLConnection sun.net.www.http.HttpClient getNewHttpClient(java.net.URL, java.net.Proxy, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.www.protocol.http.HttpURLConnection sun.net.www.http.HttpClient getNewHttpClient(java.net.URL, java.net.Proxy, int, boolean)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.net.www.protocol.http.HttpURLConnection sun.net.www.protocol.http.AuthenticationInfo getHttpProxyAuthentication(sun.net.www.protocol.http.AuthenticationHeader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -569,9 +575,6 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.net.www.protocol.http.HttpURLConnection.ErrorStream java.io.InputStream getErrorStream(java.io.InputStream, long, sun.net.www.http.HttpClient)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.net.www.protocol.http.HttpURLConnection.HttpInputStream int read(byte[]) 0">
@@ -613,11 +616,6 @@
   </item>
   <item name="sun.net.www.protocol.http.NegotiateAuthentication boolean setHeaders(sun.net.www.protocol.http.HttpURLConnection, sun.net.www.HeaderParser, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="sun.net.www.protocol.http.NegotiateAuthentication boolean setHeaders(sun.net.www.protocol.http.HttpURLConnection, sun.net.www.HeaderParser, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null-&gt;false;null,_,_-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="sun.net.www.protocol.http.NegotiateAuthentication boolean supportsPreemptiveAuthorization()">
     <annotation name="org.jetbrains.annotations.Contract">

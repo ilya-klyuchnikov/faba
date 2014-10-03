@@ -318,6 +318,11 @@
   <item name="javax.management.ImmutableDescriptor java.lang.Object[] getFieldValues(java.lang.String...) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.management.ImmutableDescriptor java.lang.Object[] getFieldValues(java.lang.String...)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="javax.management.ImmutableDescriptor java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -816,18 +821,25 @@
     </annotation>
   </item>
   <item name="javax.management.MBeanServerFactory java.lang.String mBeanServerId(javax.management.MBeanServer)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.MBeanServerFactory java.util.ArrayList&lt;javax.management.MBeanServer&gt; findMBeanServer(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.MBeanServerFactory java.util.ArrayList&lt;javax.management.MBeanServer&gt; findMBeanServer(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.MBeanServerFactory javax.management.MBeanServer createMBeanServer()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.MBeanServerFactory javax.management.MBeanServer createMBeanServer(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.MBeanServerFactory javax.management.MBeanServer newMBeanServer()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.MBeanServerFactory javax.management.MBeanServer newMBeanServer(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.MBeanServerFactory javax.management.MBeanServerBuilder newBuilder(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -858,11 +870,6 @@
   </item>
   <item name="javax.management.MBeanServerInvocationHandler boolean isLocal(java.lang.Object, java.lang.reflect.Method) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="javax.management.MBeanServerInvocationHandler boolean isLocal(java.lang.Object, java.lang.reflect.Method)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;true&quot;"/>
-    </annotation>
   </item>
   <item name="javax.management.MBeanServerInvocationHandler boolean isMXBean()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1617,11 +1624,6 @@
   </item>
   <item name="javax.management.StandardMBean boolean overrides(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;, java.lang.String, java.lang.Class&lt;?&gt;...) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.management.StandardMBean boolean overrides(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;, java.lang.String, java.lang.Class&lt;?&gt;...)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="javax.management.StandardMBean int getImpact(javax.management.MBeanOperationInfo) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

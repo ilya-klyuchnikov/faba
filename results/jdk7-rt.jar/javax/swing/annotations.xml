@@ -304,6 +304,9 @@
   <item name="javax.swing.AbstractButton.AccessibleAbstractButton javax.accessibility.AccessibleKeyBinding getAccessibleKeyBinding()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.swing.AbstractButton.AccessibleAbstractButton javax.accessibility.AccessibleRelationSet getAccessibleRelationSet()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.AbstractButton.AccessibleAbstractButton javax.accessibility.AccessibleText getAccessibleText()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -703,6 +706,11 @@
   <item name="javax.swing.BufferStrategyPaintManager boolean access$200(javax.swing.BufferStrategyPaintManager)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.swing.BufferStrategyPaintManager boolean paint(javax.swing.JComponent, javax.swing.JComponent, java.awt.Graphics, int, int, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_,_,_,_,_-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="javax.swing.BufferStrategyPaintManager boolean show(java.awt.Container, int, int, int, int) 0">
@@ -1230,11 +1238,6 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="javax.swing.DefaultDesktopManager boolean isFloaterCollision(java.awt.Rectangle, java.awt.Rectangle)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.swing.DefaultDesktopManager boolean wasIcon(javax.swing.JInternalFrame) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1508,9 +1511,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.DefaultRowSorter int[] getViewToModelAsInts(javax.swing.DefaultRowSorter.Row[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.DefaultRowSorter java.util.Comparator&lt;?&gt; getComparator(int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -3211,7 +3212,13 @@
   <item name="javax.swing.JEditorPane javax.swing.text.Document access$100(javax.swing.JEditorPane, javax.swing.text.EditorKit, java.net.URL) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.swing.JEditorPane javax.swing.text.Document access$100(javax.swing.JEditorPane, javax.swing.text.EditorKit, java.net.URL)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.JEditorPane javax.swing.text.Document initializeModel(javax.swing.text.EditorKit, java.net.URL) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.JEditorPane javax.swing.text.Document initializeModel(javax.swing.text.EditorKit, java.net.URL)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.JEditorPane javax.swing.text.EditorKit access$000(javax.swing.JEditorPane) 0">
@@ -6943,8 +6950,14 @@
   <item name="javax.swing.JTable int[] access$300(javax.swing.JTable, javax.swing.event.RowSorterEvent) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.swing.JTable int[] access$300(javax.swing.JTable, javax.swing.event.RowSorterEvent)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.JTable int[] convertSelectionToModel(javax.swing.event.RowSorterEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.swing.JTable int[] convertSelectionToModel(javax.swing.event.RowSorterEvent)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.JTable int[] getSelectedRows()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -6990,6 +7003,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.JTable java.lang.Object setDropLocation(javax.swing.TransferHandler.DropLocation, java.lang.Object, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.JTable java.lang.String getToolTipText(java.awt.event.MouseEvent) 0">
@@ -7739,7 +7755,7 @@
   </item>
   <item name="javax.swing.JTable.GenericEditor java.awt.Component getTableCellEditorComponent(javax.swing.JTable, java.lang.Object, boolean, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_,_-&gt;null&quot;"/>
+      <val val="&quot;_,null,_,_,_-&gt;null;null,_,_,_,_-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -8390,6 +8406,9 @@
   <item name="javax.swing.JTree javax.swing.tree.TreePath[] getDescendantSelectedPaths(javax.swing.tree.TreePath, boolean)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.swing.JTree javax.swing.tree.TreePath[] getPathBetweenRows(int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.JTree javax.swing.tree.TreePath[] getSelectionPaths()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -8726,11 +8745,6 @@
   <item name="javax.swing.JViewport boolean access$000(javax.swing.JViewport)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
-    </annotation>
-  </item>
-  <item name="javax.swing.JViewport boolean computeBlit(int, int, java.awt.Point, java.awt.Point, java.awt.Dimension, java.awt.Rectangle)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,_,_,null-&gt;false;_,_,_,_,null,_-&gt;false;_,_,_,null,_,_-&gt;false;_,_,null,_,_,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="javax.swing.JViewport boolean isBackingStoreEnabled()">
@@ -9123,6 +9137,11 @@
   <item name="javax.swing.LookAndFeel void uninstallBorder(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.swing.MenuSelectionManager boolean isComponentPartOfCurrentMenu(java.awt.Component)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="javax.swing.MenuSelectionManager boolean isComponentPartOfCurrentMenu(javax.swing.MenuElement, java.awt.Component) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -9285,6 +9304,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.PopupFactory javax.swing.Popup getHeavyWeightPopup(java.awt.Component, java.awt.Component, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_,_-&gt;!null;null,_,_,_-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.PopupFactory javax.swing.Popup getLightWeightPopup(java.awt.Component, java.awt.Component, int, int)">
@@ -9349,6 +9371,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="javax.swing.PopupFactory.HeavyWeightPopup javax.swing.Popup getHeavyWeightPopup(java.awt.Component, java.awt.Component, int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.PopupFactory.HeavyWeightPopup javax.swing.PopupFactory.HeavyWeightPopup getRecycledHeavyWeightPopup(java.awt.Window)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -10646,11 +10671,6 @@
   <item name="javax.swing.SwingUtilities boolean isDescendingFrom(java.awt.Component, java.awt.Component) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="javax.swing.SwingUtilities boolean isDescendingFrom(java.awt.Component, java.awt.Component)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.swing.SwingUtilities boolean isLeftMouseButton(java.awt.event.MouseEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -10690,7 +10710,7 @@
   </item>
   <item name="javax.swing.SwingUtilities boolean notifyAction(javax.swing.Action, javax.swing.KeyStroke, java.awt.event.KeyEvent, java.lang.Object, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null,_,_-&gt;false;null,_,_,_,_-&gt;false&quot;"/>
+      <val val="&quot;null,_,_,_,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="javax.swing.SwingUtilities boolean processKeyBindings(java.awt.event.KeyEvent) 0">
@@ -10729,6 +10749,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.SwingUtilities java.awt.Component getRoot(java.awt.Component)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.SwingUtilities java.awt.Component getUnwrappedView(javax.swing.JViewport) 0">
@@ -11377,11 +11400,6 @@
   <item name="javax.swing.TransferHandler boolean canImport(javax.swing.TransferHandler.TransferSupport) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.swing.TransferHandler boolean importData(javax.swing.JComponent, java.awt.datatransfer.Transferable)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.swing.TransferHandler boolean importData(javax.swing.TransferHandler.TransferSupport) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -11397,18 +11415,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.TransferHandler java.awt.datatransfer.DataFlavor getPropertyDataFlavor(java.lang.Class&lt;?&gt;, java.awt.datatransfer.DataFlavor[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.TransferHandler java.awt.datatransfer.Transferable createTransferable(javax.swing.JComponent)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.TransferHandler java.beans.PropertyDescriptor getPropertyDescriptor(javax.swing.JComponent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.TransferHandler javax.swing.Action getCopyAction()">
@@ -11760,7 +11772,7 @@
   </item>
   <item name="javax.swing.UIDefaults.ProxyLazyValue java.lang.Class[] access$400(javax.swing.UIDefaults.ProxyLazyValue, java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null&quot;"/>
+      <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -11769,7 +11781,7 @@
   </item>
   <item name="javax.swing.UIDefaults.ProxyLazyValue java.lang.Class[] getClassArray(java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>

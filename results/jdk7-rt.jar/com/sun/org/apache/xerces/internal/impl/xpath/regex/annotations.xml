@@ -49,6 +49,11 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.CaseInsensitiveMap int[] updateMap(int, int[], int, int[], int) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.CaseInsensitiveMap int[] updateMap(int, int[], int, int[], int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null,_,_,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Match java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -145,6 +150,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.ParserForXMLSchema com.sun.org.apache.xerces.internal.impl.xpath.regex.RangeToken parseCharacterClass(boolean)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.ParserForXMLSchema com.sun.org.apache.xerces.internal.impl.xpath.regex.Token processCaret()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -207,9 +215,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.REUtil java.lang.String quoteMeta(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.REUtil java.lang.String stripExtendedComment(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -363,11 +369,6 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression boolean matchAnchor(com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.ExpressionTarget, com.sun.org.apache.xerces.internal.impl.xpath.regex.Op, com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.Context, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression boolean matchAnchor(com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.ExpressionTarget, com.sun.org.apache.xerces.internal.impl.xpath.regex.Op, com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.Context, int, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null,_,_-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression boolean matches(char[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -402,19 +403,14 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression void setPattern(java.lang.String, java.lang.String, java.util.Locale) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.CharArrayTarget boolean regionMatches(boolean, int, int, java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.CharArrayTarget boolean regionMatches(int, int, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
-    </annotation>
-  </item>
-  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.CharArrayTarget boolean regionMatches(int, int, java.lang.String, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null,_-&gt;true&quot;"/>
-    </annotation>
-  </item>
-  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.CharArrayTarget boolean regionMatchesIgnoreCase(int, int, java.lang.String, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null,_-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.CharArrayTarget char charAt(int)">
@@ -422,14 +418,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.CharacterIteratorTarget boolean regionMatches(int, int, java.lang.String, int)">
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.CharacterIteratorTarget boolean regionMatches(boolean, int, int, java.lang.String, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null,_-&gt;true&quot;"/>
-    </annotation>
-  </item>
-  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.CharacterIteratorTarget boolean regionMatchesIgnoreCase(int, int, java.lang.String, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null,_-&gt;true&quot;"/>
+      <val val="&quot;_,_,_,null,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression.ClosureContext boolean contains(int)">
@@ -694,6 +685,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Token.StringToken java.lang.String toString(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xpath.regex.Token.UnionToken java.lang.String toString(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>

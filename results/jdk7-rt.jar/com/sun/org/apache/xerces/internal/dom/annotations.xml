@@ -10,11 +10,6 @@
       <val val="value=&quot;!null,_,_-&gt;false;_,!null,_-&gt;false;_,null,_-&gt;false;null,_,_-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
-  <item name="com.sun.org.apache.xerces.internal.dom.AttrImpl boolean isEqualNode(org.w3c.dom.Node)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.org.apache.xerces.internal.dom.AttrImpl com.sun.org.apache.xerces.internal.dom.ChildNode lastChild()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -39,9 +34,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.AttrImpl org.w3c.dom.Node internalInsertBefore(org.w3c.dom.Node, org.w3c.dom.Node, boolean)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.AttrImpl org.w3c.dom.Node internalRemoveChild(org.w3c.dom.Node, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -248,9 +241,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.CoreDOMImplementationImpl java.lang.Object getFeature(java.lang.String, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.CoreDOMImplementationImpl org.w3c.dom.DOMImplementation getDOMImplementation()">
@@ -557,6 +547,11 @@
   <item name="com.sun.org.apache.xerces.internal.dom.CoreDocumentImpl org.w3c.dom.Node renameNode(org.w3c.dom.Node, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.dom.CoreDocumentImpl org.w3c.dom.Node renameNode(org.w3c.dom.Node, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.dom.CoreDocumentImpl org.w3c.dom.Node replaceChild(org.w3c.dom.Node, org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -858,7 +853,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.DOMConfigurationImpl boolean canSetParameter(java.lang.String, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;true;null,_-&gt;true&quot;"/>
+      <val val="&quot;_,null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.DOMConfigurationImpl com.sun.org.apache.xerces.internal.impl.validation.ValidationManager createValidationManager()">
@@ -989,11 +984,6 @@
   <item name="com.sun.org.apache.xerces.internal.dom.DOMImplementationSourceImpl boolean testImpl(org.w3c.dom.DOMImplementation, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.org.apache.xerces.internal.dom.DOMImplementationSourceImpl boolean testImpl(org.w3c.dom.DOMImplementation, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.org.apache.xerces.internal.dom.DOMImplementationSourceImpl org.w3c.dom.DOMImplementation getDOMImplementation(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1072,7 +1062,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.DOMMessageFormatter java.lang.String formatMessage(java.lang.String, java.lang.String, java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null-&gt;!null&quot;"/>
+      <val val="&quot;_,!null,_-&gt;!null;_,_,null-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.DOMMessageFormatter java.util.ResourceBundle getResourceBundle(java.lang.String)">
@@ -1988,11 +1978,6 @@
   <item name="com.sun.org.apache.xerces.internal.dom.DocumentImpl void setEventListeners(com.sun.org.apache.xerces.internal.dom.NodeImpl, java.util.Vector) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.org.apache.xerces.internal.dom.DocumentTypeImpl boolean isEqualNode(org.w3c.dom.Node)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.org.apache.xerces.internal.dom.DocumentTypeImpl java.lang.Object getUserData(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2046,11 +2031,6 @@
   <item name="com.sun.org.apache.xerces.internal.dom.ElementImpl boolean isDerivedFrom(java.lang.String, java.lang.String, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_,_-&gt;false;_,!null,_-&gt;false;_,null,_-&gt;false;null,_,_-&gt;false&quot;,pure=true"/>
-    </annotation>
-  </item>
-  <item name="com.sun.org.apache.xerces.internal.dom.ElementImpl boolean isEqualNode(org.w3c.dom.Node)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.ElementImpl com.sun.org.apache.xerces.internal.dom.NamedNodeMapImpl getDefaultAttributes()">
@@ -2203,9 +2183,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.NamedNodeMapImpl java.util.ArrayList cloneMap(java.util.ArrayList)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.NamedNodeMapImpl org.w3c.dom.Node getNamedItem(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2260,11 +2238,6 @@
   <item name="com.sun.org.apache.xerces.internal.dom.NodeImpl boolean internalIsIgnorableWhitespace()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
-    </annotation>
-  </item>
-  <item name="com.sun.org.apache.xerces.internal.dom.NodeImpl boolean isEqualNode(org.w3c.dom.Node)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.NodeImpl boolean isFirstChild()">
@@ -2517,9 +2490,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.NodeIteratorImpl org.w3c.dom.Node previousNode(org.w3c.dom.Node)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.NodeIteratorImpl org.w3c.dom.traversal.NodeFilter getFilter()">
@@ -2615,11 +2585,6 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.PSVIDOMImplementationImpl boolean hasFeature(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="com.sun.org.apache.xerces.internal.dom.PSVIDOMImplementationImpl boolean hasFeature(java.lang.String, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;true&quot;"/>
-    </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.PSVIDOMImplementationImpl org.w3c.dom.DOMImplementation getDOMImplementation()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2760,11 +2725,6 @@
   <item name="com.sun.org.apache.xerces.internal.dom.ParentNode boolean hasTextContent(org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.org.apache.xerces.internal.dom.ParentNode boolean isEqualNode(org.w3c.dom.Node)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.org.apache.xerces.internal.dom.ParentNode com.sun.org.apache.xerces.internal.dom.ChildNode lastChild()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -2797,9 +2757,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.ParentNode org.w3c.dom.Node internalInsertBefore(org.w3c.dom.Node, org.w3c.dom.Node, boolean)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.ParentNode org.w3c.dom.Node internalRemoveChild(org.w3c.dom.Node, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2913,11 +2871,14 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.RangeImpl org.w3c.dom.Node getRootContainer(org.w3c.dom.Node)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.RangeImpl org.w3c.dom.Node getSelectedNode(org.w3c.dom.Node, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.dom.RangeImpl org.w3c.dom.Node getSelectedNode(org.w3c.dom.Node, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.RangeImpl org.w3c.dom.Node nextNode(org.w3c.dom.Node, boolean) 0">
@@ -2951,9 +2912,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.RangeImpl org.w3c.dom.Node traversePartiallySelected(org.w3c.dom.Node, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.dom.RangeImpl org.w3c.dom.Node traverseRightBoundary(org.w3c.dom.Node, int) 0">

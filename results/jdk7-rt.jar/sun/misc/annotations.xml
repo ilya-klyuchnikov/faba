@@ -297,18 +297,19 @@
   <item name="sun.misc.ExtensionDependency boolean checkExtensionAgainst(java.lang.String, java.util.jar.Attributes, java.io.File) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.misc.ExtensionDependency boolean checkExtensions(java.util.jar.JarFile)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.misc.ExtensionDependency boolean installExtension(sun.misc.ExtensionInfo, sun.misc.ExtensionInfo) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.misc.ExtensionDependency java.io.File[] access$000()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.misc.ExtensionDependency java.io.File[] access$300(java.io.File[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.misc.ExtensionDependency java.io.File[] access$300(java.io.File[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.misc.ExtensionDependency java.io.File[] getExtDirs()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.misc.ExtensionDependency java.io.File[] getExtFiles(java.io.File[]) 0">
@@ -398,7 +399,7 @@
   </item>
   <item name="sun.misc.FDBigInt boolean dataInRangeIsZero(int, int, sun.misc.FDBigInt)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;_,_,null-&gt;true&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="sun.misc.FDBigInt int cmp(sun.misc.FDBigInt) 0">
@@ -761,6 +762,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="sun.misc.IOUtils byte[] readFully(java.io.InputStream, int, boolean)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.misc.IoTrace IoTrace()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -851,18 +855,12 @@
     </annotation>
   </item>
   <item name="sun.misc.JarIndex sun.misc.JarIndex getJarIndex(java.util.jar.JarFile)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.misc.JarIndex sun.misc.JarIndex getJarIndex(java.util.jar.JarFile, sun.misc.MetaIndex) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.misc.JarIndex sun.misc.JarIndex getJarIndex(java.util.jar.JarFile, sun.misc.MetaIndex)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.misc.JarIndex void add(java.lang.String, java.lang.String) 0">
@@ -898,17 +896,13 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.misc.Launcher java.io.File[] access$200(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.misc.Launcher java.io.File[] getClassPath(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.misc.Launcher java.io.File[] getClassPath(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.misc.Launcher java.lang.ClassLoader getClassLoader()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -994,6 +988,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.misc.Launcher.ExtClassLoader ExtClassLoader(java.io.File[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.misc.Launcher.ExtClassLoader java.io.File[] getExtDirs()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.misc.Launcher.ExtClassLoader java.lang.String findLibrary(java.lang.String)">
@@ -1088,7 +1085,7 @@
   </item>
   <item name="sun.misc.MetaIndex boolean mayContain(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="sun.misc.NativeSignalHandler long getHandler()">
@@ -1148,9 +1145,6 @@
     </annotation>
   </item>
   <item name="sun.misc.Perf byte[] getBytes(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.misc.Perf java.nio.ByteBuffer attach(int, java.lang.String) 1">
@@ -1602,6 +1596,9 @@
   <item name="sun.misc.Regexp boolean matches(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.misc.RegexpNode sun.misc.RegexpNode add(char)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.misc.RegexpNode sun.misc.RegexpNode find(char)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1658,6 +1655,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="sun.misc.Resource byte[] getBytes()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.misc.Resource java.nio.ByteBuffer getByteBuffer()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2011,15 +2011,13 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="sun.misc.TimerThread boolean dequeue(sun.misc.Timer)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.misc.TimerThread void enqueue(sun.misc.Timer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.misc.TimerThread void requeue(sun.misc.Timer) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.misc.TimerTickThread sun.misc.TimerTickThread call(sun.misc.Timer, long)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.misc.UCDecoder int bytesPerAtom()">
@@ -2114,6 +2112,9 @@
   <item name="sun.misc.URLClassPath java.net.URL[] pathToURLs(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.misc.URLClassPath java.net.URL[] pathToURLs(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.misc.URLClassPath java.util.Enumeration&lt;java.net.URL&gt; findResources(java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2148,9 +2149,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.misc.URLClassPath.FileLoader sun.misc.Resource getResource(java.lang.String, boolean)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.misc.URLClassPath.FileLoader.1 java.io.InputStream getInputStream()">

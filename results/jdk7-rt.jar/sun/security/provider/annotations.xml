@@ -54,6 +54,9 @@
   <item name="sun.security.provider.DSA java.math.BigInteger generateK(int[], java.math.BigInteger) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.provider.DSA java.math.BigInteger generateK(java.math.BigInteger)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.DSA java.math.BigInteger generateR(java.math.BigInteger, java.math.BigInteger, java.math.BigInteger, java.math.BigInteger) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -153,6 +156,9 @@
   <item name="sun.security.provider.DSAKeyPairGenerator java.math.BigInteger generateX(int[], java.math.BigInteger) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.provider.DSAKeyPairGenerator java.math.BigInteger generateX(java.security.SecureRandom, java.math.BigInteger)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.DSAKeyPairGenerator java.math.BigInteger generateY(java.math.BigInteger, java.math.BigInteger, java.math.BigInteger) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -180,11 +186,17 @@
   <item name="sun.security.provider.DSAParameterGenerator java.math.BigInteger generateG(java.math.BigInteger, java.math.BigInteger) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.provider.DSAParameterGenerator java.math.BigInteger generateG(java.math.BigInteger, java.math.BigInteger)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.DSAParameterGenerator java.math.BigInteger[] generatePandQ(byte[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.DSAParameterGenerator java.math.BigInteger[] generatePandQ(byte[], int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.provider.DSAParameterGenerator java.math.BigInteger[] generatePandQ(java.security.SecureRandom, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.DSAParameterGenerator java.security.AlgorithmParameters engineGenerateParameters()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -281,6 +293,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.security.provider.JavaKeyStore java.security.MessageDigest getPreKeyedHash(char[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.provider.JavaKeyStore java.security.MessageDigest getPreKeyedHash(char[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.JavaKeyStore java.security.cert.Certificate engineGetCertificate(java.lang.String)">
@@ -525,6 +540,9 @@
   <item name="sun.security.provider.NativePRNG.RandomIO byte[] implGenerateSeed(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.provider.NativePRNG.RandomIO sun.security.provider.SecureRandom getMixRandom()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.NativePRNG.RandomIO void access$100(sun.security.provider.NativePRNG.RandomIO, byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -577,11 +595,6 @@
   <item name="sun.security.provider.PolicyFile boolean checkEntryPs(java.security.Principal[], sun.security.provider.PolicyParser.PrincipalEntry) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.security.provider.PolicyFile boolean checkEntryPs(java.security.Principal[], sun.security.provider.PolicyParser.PrincipalEntry)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.security.provider.PolicyFile boolean checkForTrustedIdentity(java.security.cert.Certificate, sun.security.provider.PolicyFile.PolicyInfo) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -608,9 +621,6 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.PolicyFile java.lang.String getDN(java.lang.String, java.security.KeyStore)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.security.provider.PolicyFile java.lang.String printPD(java.security.ProtectionDomain) 0">
@@ -623,9 +633,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.PolicyFile java.lang.String[][] getPrincipalInfo(sun.security.provider.PolicyParser.PrincipalEntry, java.security.Principal[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.PolicyFile java.security.CodeSource access$700(sun.security.provider.PolicyFile, java.security.CodeSource, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -791,11 +799,6 @@
   <item name="sun.security.provider.PolicyFile.SelfPermission java.security.cert.Certificate[] getCerts()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
-    </annotation>
-  </item>
-  <item name="sun.security.provider.PolicyParser boolean peek(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="sun.security.provider.PolicyParser java.lang.String expand(java.lang.String)">
@@ -1193,13 +1196,25 @@
   <item name="sun.security.provider.X509Factory java.util.Collection&lt;? extends java.security.cert.CRL&gt; engineGenerateCRLs(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.provider.X509Factory java.util.Collection&lt;? extends java.security.cert.CRL&gt; engineGenerateCRLs(java.io.InputStream)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.X509Factory java.util.Collection&lt;? extends java.security.cert.CRL&gt; parseX509orPKCS7CRL(java.io.InputStream) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.provider.X509Factory java.util.Collection&lt;? extends java.security.cert.CRL&gt; parseX509orPKCS7CRL(java.io.InputStream)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.X509Factory java.util.Collection&lt;? extends java.security.cert.Certificate&gt; engineGenerateCertificates(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.provider.X509Factory java.util.Collection&lt;? extends java.security.cert.Certificate&gt; engineGenerateCertificates(java.io.InputStream)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.X509Factory java.util.Collection&lt;? extends java.security.cert.Certificate&gt; parseX509orPKCS7Cert(java.io.InputStream) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.provider.X509Factory java.util.Collection&lt;? extends java.security.cert.Certificate&gt; parseX509orPKCS7Cert(java.io.InputStream)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.X509Factory sun.security.x509.X509CRLImpl intern(java.security.cert.X509CRL) 0">

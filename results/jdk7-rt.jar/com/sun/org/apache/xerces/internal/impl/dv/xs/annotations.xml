@@ -20,11 +20,6 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV boolean isNextCharUTCSign(java.lang.String, int, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV double parseSecond(java.lang.String, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -267,9 +262,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AnyURIDV java.lang.String encode(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AnyURIDV short getAllowedFacets()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -525,7 +518,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.DoubleDV boolean isIdentical(java.lang.Object, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
+      <val val="&quot;_,null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.DoubleDV boolean isPossibleFP(java.lang.String) 0">
@@ -567,11 +560,6 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.DoubleDV.XDouble boolean isIdentical(com.sun.org.apache.xerces.internal.impl.dv.xs.DoubleDV.XDouble)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.DoubleDV.XDouble double getValue()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -611,9 +599,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.DurationDV com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData addDuration(com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData, com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData, com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.DurationDV com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData parse(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -675,7 +661,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.FloatDV boolean isIdentical(java.lang.Object, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
+      <val val="&quot;_,null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.FloatDV int compare(java.lang.Object, java.lang.Object) 0">
@@ -712,11 +698,6 @@
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.FloatDV.XFloat boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
-    </annotation>
-  </item>
-  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.FloatDV.XFloat boolean isIdentical(com.sun.org.apache.xerces.internal.impl.dv.xs.FloatDV.XFloat)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.FloatDV.XFloat float getValue()">
@@ -1272,6 +1253,11 @@
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl boolean isDerivedByAny(java.lang.String, java.lang.String, com.sun.org.apache.xerces.internal.xs.XSTypeDefinition) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl boolean isDerivedByAny(java.lang.String, java.lang.String, com.sun.org.apache.xerces.internal.xs.XSTypeDefinition)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;false;_,null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl boolean isDerivedByList(java.lang.String, java.lang.String, com.sun.org.apache.xerces.internal.xs.XSTypeDefinition) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1291,7 +1277,7 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl boolean isDerivedByRestriction(java.lang.String, java.lang.String, com.sun.org.apache.xerces.internal.xs.XSTypeDefinition)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null-&gt;false;_,null,_-&gt;false&quot;"/>
+      <val val="&quot;_,_,null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl boolean isDerivedByUnion(java.lang.String, java.lang.String, com.sun.org.apache.xerces.internal.xs.XSTypeDefinition) 0">
@@ -1349,9 +1335,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl setRestrictionValues(com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl, java.lang.String, java.lang.String, short, com.sun.org.apache.xerces.internal.xs.XSObjectList)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl setUnionValues(java.lang.String, java.lang.String, short, com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl[], com.sun.org.apache.xerces.internal.xs.XSObjectList)">

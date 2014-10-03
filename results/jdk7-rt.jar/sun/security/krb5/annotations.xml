@@ -80,9 +80,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.security.krb5.Config java.lang.String getDefault(java.lang.String, java.util.Hashtable)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.security.krb5.Config java.lang.String getJavaFileName()">
@@ -95,6 +92,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.security.krb5.Config java.lang.String getNativeFileName()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.Config java.lang.String getRealmFromDNS()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.krb5.Config java.lang.String toString()">
@@ -452,7 +452,7 @@
   </item>
   <item name="sun.security.krb5.KdcComm byte[] send(byte[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -461,7 +461,7 @@
   </item>
   <item name="sun.security.krb5.KdcComm byte[] send(byte[], boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -470,7 +470,7 @@
   </item>
   <item name="sun.security.krb5.KdcComm byte[] send(byte[], java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_-&gt;null;null,_,_-&gt;null&quot;"/>
+      <val val="&quot;null,_,_-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1036,7 +1036,7 @@
   </item>
   <item name="sun.security.krb5.PrincipalName boolean equalsWithoutRealm(sun.security.krb5.PrincipalName)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;null-&gt;true&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="sun.security.krb5.PrincipalName boolean match(sun.security.krb5.PrincipalName) 0">

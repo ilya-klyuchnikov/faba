@@ -285,9 +285,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.font.AttributeValues java.util.Map&lt;java.awt.font.TextAttribute,java.lang.Object&gt; toMap(java.util.Map&lt;java.awt.font.TextAttribute,java.lang.Object&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.AttributeValues sun.font.AttributeValues applyIMHighlight()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -401,7 +399,7 @@
   </item>
   <item name="sun.font.BidiUtils int[] createInverseMap(int[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -431,11 +429,6 @@
   </item>
   <item name="sun.font.BidiUtils void reorderVisually(byte[], java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="sun.font.CCharToGlyphMapper boolean charsToGlyphsNS(int, char[], int[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="sun.font.CCharToGlyphMapper.Cache.SparseBitShiftingTwoLayerArray int get(int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -803,11 +796,6 @@
   <item name="sun.font.CompositeGlyphMapper CompositeGlyphMapper(sun.font.CompositeFont) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.font.CompositeGlyphMapper boolean charsToGlyphsNS(int, char[], int[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null-&gt;false;_,null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.font.CompositeGlyphMapper int compositeGlyphCode(int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -825,6 +813,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.CompositeStrike java.awt.geom.GeneralPath getGlyphVectorOutline(int[], float, float) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.font.CompositeStrike java.awt.geom.GeneralPath getGlyphVectorOutline(int[], float, float)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.CoreMetrics boolean equals(java.lang.Object) 0">
@@ -1369,11 +1360,6 @@
   <item name="sun.font.FontDesignMetrics sun.font.FontDesignMetrics getMetrics(java.awt.Font, java.awt.font.FontRenderContext) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.font.FontDesignMetrics sun.font.FontDesignMetrics getMetrics(java.awt.Font, java.awt.font.FontRenderContext)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;!null&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.font.FontDesignMetrics void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1445,9 +1431,6 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.FontFamily sun.font.FontFamily getLocaleFamily(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.font.FontFamily void addLocaleNames(sun.font.FontFamily, java.lang.String[]) 1">
@@ -1461,7 +1444,7 @@
   </item>
   <item name="sun.font.FontLineMetrics boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="sun.font.FontLineMetrics float getAscent()">
@@ -1590,11 +1573,6 @@
   <item name="sun.font.FontStrikeDesc FontStrikeDesc(sun.font.FontStrikeDesc) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.font.FontStrikeDesc boolean equals(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.font.FontStrikeDesc int getAAHintIntVal(java.lang.Object, sun.font.Font2D, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1634,7 +1612,7 @@
   </item>
   <item name="sun.font.FontUtilities boolean isComplexText(char[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;null,_,_-&gt;false&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="sun.font.FontUtilities boolean isLogging()">
@@ -1649,7 +1627,7 @@
   </item>
   <item name="sun.font.FontUtilities java.lang.String mapFcName(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;null-&gt;null&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1727,6 +1705,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="sun.font.GlyphLayout sun.font.GlyphLayout get(sun.font.GlyphLayout.LayoutEngineFactory)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.font.GlyphLayout sun.font.GlyphLayout.GVData access$700(sun.font.GlyphLayout) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1756,9 +1737,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.font.GlyphLayout sun.font.StandardGlyphVector layout(java.awt.Font, java.awt.font.FontRenderContext, char[], int, int, int, sun.font.StandardGlyphVector)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,_,_,_,!null-&gt;!null;_,_,_,_,_,_,null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.GlyphLayout sun.font.TextRecord access$000(sun.font.GlyphLayout) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1780,9 +1759,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.font.GlyphLayout.GVData sun.font.StandardGlyphVector createGlyphVector(java.awt.Font, java.awt.font.FontRenderContext, sun.font.StandardGlyphVector)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null-&gt;!null;_,_,null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.GlyphLayout.GVData void adjustPositions(java.awt.geom.AffineTransform) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1830,11 +1807,6 @@
   </item>
   <item name="sun.font.GlyphLayout.SDCache.SDKey SDKey(java.awt.Font, java.awt.font.FontRenderContext) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="sun.font.GlyphLayout.SDCache.SDKey boolean equals(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="sun.font.GlyphLayout.SDCache.SDKey int hashCode()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2511,25 +2483,19 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.font.StandardGlyphVector float[] getGlyphPositions(float[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.StandardGlyphVector float[] getGlyphPositions(int, int, float[]) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.font.StandardGlyphVector float[] getGlyphPositions(int, int, float[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.StandardGlyphVector float[] internalGetGlyphPositions(int, int, int, float[]) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.font.StandardGlyphVector float[] internalGetGlyphPositions(int, int, int, float[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.StandardGlyphVector int getGlyphCode(int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2553,17 +2519,13 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.font.StandardGlyphVector int[] getGlyphCharIndices(int, int, int[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.StandardGlyphVector int[] getGlyphCodes(int, int, int[]) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.font.StandardGlyphVector int[] getGlyphCodes(int, int, int[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.StandardGlyphVector int[] getValidatedGlyphs(int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2587,11 +2549,20 @@
   <item name="sun.font.StandardGlyphVector java.awt.Rectangle getGlyphPixelBounds(int, java.awt.font.FontRenderContext, float, float) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.font.StandardGlyphVector java.awt.Rectangle getGlyphPixelBounds(int, java.awt.font.FontRenderContext, float, float)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.font.StandardGlyphVector java.awt.Rectangle getGlyphsPixelBounds(java.awt.font.FontRenderContext, float, float, int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.font.StandardGlyphVector java.awt.Rectangle getGlyphsPixelBounds(java.awt.font.FontRenderContext, float, float, int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.font.StandardGlyphVector java.awt.Rectangle getPixelBounds(java.awt.font.FontRenderContext, float, float) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.font.StandardGlyphVector java.awt.Rectangle getPixelBounds(java.awt.font.FontRenderContext, float, float)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.StandardGlyphVector java.awt.Shape getGlyphOutline(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2678,8 +2649,16 @@
   <item name="sun.font.StandardGlyphVector java.awt.geom.Rectangle2D getLogicalBounds()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.font.StandardGlyphVector java.awt.geom.Rectangle2D getVisualBounds()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.font.StandardGlyphVector java.lang.Object setupGlyphImages(long[], float[], double[]) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.font.StandardGlyphVector java.lang.Object setupGlyphImages(long[], float[], double[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_-&gt;!null;null,_,_-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.font.StandardGlyphVector java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2688,9 +2667,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.font.StandardGlyphVector java.lang.StringBuffer appendString(java.lang.StringBuffer)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.StandardGlyphVector sun.font.Font2D access$900(sun.font.StandardGlyphVector) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2809,6 +2786,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="sun.font.StandardGlyphVector.GlyphTransformInfo java.awt.Rectangle getGlyphsPixelBounds(java.awt.geom.AffineTransform, float, float, int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.StandardGlyphVector.GlyphTransformInfo java.awt.geom.AffineTransform getGlyphTransform(int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -3109,6 +3089,9 @@
   <item name="sun.font.SunFontManager java.lang.String[] getInstalledFontFamilyNames(java.util.Locale) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.font.SunFontManager java.lang.String[] getInstalledFontFamilyNames(java.util.Locale)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.font.SunFontManager java.lang.String[] getNativeNames(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -3192,9 +3175,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.font.SunFontManager sun.font.Font2D findFontFromPlatformMap(java.lang.String, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.font.SunFontManager sun.font.Font2D getDefaultLogicalFont(int)">
@@ -3219,6 +3199,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.font.SunFontManager sun.font.PhysicalFont findDeferredFont(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.font.SunFontManager sun.font.PhysicalFont findJREDeferredFont(java.lang.String, int) 0">
@@ -3442,7 +3425,7 @@
   </item>
   <item name="sun.font.SunFontManager.T1Filter boolean accept(java.io.File, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;_,null-&gt;false&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="sun.font.SunFontManager.TTFilter TTFilter()">
@@ -3580,6 +3563,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="sun.font.TextSourceLabel java.awt.font.GlyphVector createGV()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.font.TextSourceLabel java.awt.geom.AffineTransform getBaselineTransform()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -3694,11 +3680,6 @@
   <item name="sun.font.TrueTypeGlyphMapper TrueTypeGlyphMapper(sun.font.TrueTypeFont) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.font.TrueTypeGlyphMapper boolean charsToGlyphsNS(int, char[], int[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null-&gt;false;_,null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.font.TrueTypeGlyphMapper boolean hasSupplementaryChars()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -3732,9 +3713,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.Type1Font java.lang.String fullName2FamilyName(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.Type1Font java.lang.String getPostscriptName()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -3790,11 +3769,6 @@
   </item>
   <item name="sun.font.Type1Font.T1DisposerRecord.1 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="sun.font.Type1GlyphMapper boolean charsToGlyphsNS(int, char[], int[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null-&gt;false;_,null,_-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="sun.font.Type1GlyphMapper int getMissingGlyphCode()">
     <annotation name="org.jetbrains.annotations.Contract">

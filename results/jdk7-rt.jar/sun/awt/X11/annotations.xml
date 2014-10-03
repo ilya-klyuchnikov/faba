@@ -354,11 +354,6 @@
   <item name="sun.awt.X11.ListHelper boolean doWheelScroll(sun.awt.X11.XVerticalScrollbar, sun.awt.X11.XHorizontalScrollbar, java.awt.event.MouseWheelEvent) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.awt.X11.ListHelper boolean doWheelScroll(sun.awt.X11.XVerticalScrollbar, sun.awt.X11.XHorizontalScrollbar, java.awt.event.MouseWheelEvent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.awt.X11.ListHelper boolean isFocusedIndex(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -367,16 +362,6 @@
   <item name="sun.awt.X11.ListHelper boolean isHSBVisible()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
-    </annotation>
-  </item>
-  <item name="sun.awt.X11.ListHelper boolean isInHorizSB(java.awt.Rectangle, int, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
-  <item name="sun.awt.X11.ListHelper boolean isInVertSB(java.awt.Rectangle, int, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.X11.ListHelper boolean isVSBVisible()">
@@ -592,15 +577,13 @@
   <item name="sun.awt.X11.MotifDnDDropTargetProtocol boolean processDropStart(sun.awt.X11.XClientMessageEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.awt.X11.MotifDnDDropTargetProtocol boolean processTopLevelEnter(sun.awt.X11.XClientMessageEvent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.awt.X11.MotifDnDDropTargetProtocol boolean processTopLevelLeave(sun.awt.X11.XClientMessageEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.X11.MotifDnDDropTargetProtocol int getMessageType(sun.awt.X11.XClientMessageEvent) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.MotifDnDDropTargetProtocol java.lang.Object getData(long, long)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.X11.MotifDnDDropTargetProtocol java.lang.String getProtocolName()">
@@ -1251,6 +1234,12 @@
   <item name="sun.awt.X11.XBaseMenuWindow sun.awt.X11.XBaseMenuWindow getMenuWindowFromPoint(java.awt.Point)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.awt.X11.XBaseMenuWindow sun.awt.X11.XBaseMenuWindow getRootMenuWindow()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XBaseMenuWindow sun.awt.X11.XBaseMenuWindow getShowingLeaf()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.awt.X11.XBaseMenuWindow sun.awt.X11.XMenuItemPeer getFirstSelectableItem()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1355,10 +1344,16 @@
   <item name="sun.awt.X11.XBaseWindow java.awt.Dimension getSize()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.X11.XBaseWindow java.awt.Point toGlobal(int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.awt.X11.XBaseWindow java.awt.Point toGlobal(java.awt.Point) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.X11.XBaseWindow java.awt.Point toGlobal(java.awt.Point)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XBaseWindow java.awt.Point toLocal(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.X11.XBaseWindow java.awt.Point toLocal(java.awt.Point) 0">
@@ -2073,6 +2068,9 @@
   <item name="sun.awt.X11.XClientMessageEvent sun.awt.X11.XEvent clone()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.X11.XClipboard byte[] getClipboardData(long)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.awt.X11.XClipboard java.awt.datatransfer.Transferable getContents(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2090,6 +2088,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="sun.awt.X11.XClipboard long[] getClipboardFormats()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.X11.XClipboard void access$300(sun.awt.X11.XClipboard) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2235,7 +2236,7 @@
   </item>
   <item name="sun.awt.X11.XComponentPeer boolean rejectFocusRequestHelper(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+      <val val="&quot;!null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.X11.XComponentPeer boolean updateGraphicsData(java.awt.GraphicsConfiguration) 0">
@@ -2692,11 +2693,6 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="sun.awt.X11.XDataTransferer boolean isMimeFormat(long, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.awt.X11.XDataTransferer java.io.ByteArrayOutputStream convertFileListToBytes(java.util.ArrayList&lt;java.lang.String&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3028,11 +3024,6 @@
   <item name="sun.awt.X11.XDnDDropTargetProtocol boolean processXdndDrop(sun.awt.X11.XClientMessageEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.awt.X11.XDnDDropTargetProtocol boolean processXdndEnter(sun.awt.X11.XClientMessageEvent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.awt.X11.XDnDDropTargetProtocol boolean processXdndLeave(sun.awt.X11.XClientMessageEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3040,6 +3031,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.X11.XDnDDropTargetProtocol int getMessageType(sun.awt.X11.XClientMessageEvent) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XDnDDropTargetProtocol java.lang.Object getData(long, long)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.X11.XDnDDropTargetProtocol java.lang.String getProtocolName()">
@@ -3102,7 +3096,7 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="sun.awt.X11.XDragSourceContextPeer boolean processProxyModeEvent(sun.awt.X11.XEvent)">
+  <item name="sun.awt.X11.XDragSourceContextPeer boolean processEvent(sun.awt.X11.XEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
@@ -3219,11 +3213,6 @@
   </item>
   <item name="sun.awt.X11.XDropTargetProtocol XDropTargetProtocol(sun.awt.X11.XDropTargetProtocolListener) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="sun.awt.X11.XDropTargetProtocol boolean forwardClientMessageToToplevel(long, sun.awt.X11.XClientMessageEvent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="sun.awt.X11.XDropTargetProtocol boolean processClientMessage(sun.awt.X11.XClientMessageEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -5056,7 +5045,7 @@
   </item>
   <item name="sun.awt.X11.XKeyboardFocusManagerPeer boolean deliverFocus(java.awt.Component, java.awt.Component, boolean, boolean, long, sun.awt.CausedFocusEvent.Cause)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_,_,_-&gt;true;_,!null,_,_,_,_-&gt;true;_,_,_,_,_,!null-&gt;true;_,_,_,_,_,null-&gt;true;_,null,_,_,_,_-&gt;true;null,_,_,_,_,_-&gt;true&quot;"/>
+      <val val="&quot;!null,_,_,_,_,_-&gt;true;_,!null,_,_,_,_-&gt;true;_,_,_,_,_,!null-&gt;true;null,_,_,_,_,_-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.X11.XKeyboardFocusManagerPeer java.awt.Component getCurrentFocusOwner()">
@@ -5220,11 +5209,6 @@
   <item name="sun.awt.X11.XListPeer boolean isSelected(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
-    </annotation>
-  </item>
-  <item name="sun.awt.X11.XListPeer boolean prePostMouseEvent(java.awt.event.MouseEvent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.X11.XListPeer int getFocusIndex()">
@@ -5778,17 +5762,7 @@
   <item name="sun.awt.X11.XMouseInfoPeer boolean isWindowUnderMouse(java.awt.Window) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.awt.X11.XNETProtocol boolean isStateChange(sun.awt.X11.XPropertyEvent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.awt.X11.XNETProtocol boolean isWMName(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
-  <item name="sun.awt.X11.XNETProtocol boolean isWMStateNetHidden(sun.awt.X11.XWindowPeer)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
@@ -6496,12 +6470,21 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="sun.awt.X11.XSelection byte[] getData(long, long)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.awt.X11.XSelection long access$300()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="sun.awt.X11.XSelection long[] getFormats(sun.awt.X11.WindowPropertyGetter) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XSelection long[] getFormats(sun.awt.X11.WindowPropertyGetter)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.X11.XSelection long[] getTargets(long)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.X11.XSelection sun.awt.X11.WindowPropertyGetter access$200()">
@@ -6805,7 +6788,7 @@
   </item>
   <item name="sun.awt.X11.XTextAreaPeer boolean setTextImpl(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;true;null-&gt;true&quot;"/>
+      <val val="&quot;!null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.X11.XTextAreaPeer java.awt.Dimension getMinimumSize(int, int)">
@@ -7061,7 +7044,7 @@
   </item>
   <item name="sun.awt.X11.XTextFieldPeer boolean setXAWTTextField(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;true;null-&gt;true&quot;"/>
+      <val val="&quot;!null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.X11.XTextFieldPeer int getIndexAtPoint(int, int)">
@@ -7271,16 +7254,6 @@
   <item name="sun.awt.X11.XToolkit boolean enableInputMethodsForTextComponent()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
-    </annotation>
-  </item>
-  <item name="sun.awt.X11.XToolkit boolean getLastCursorPos(java.awt.Point)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
-  <item name="sun.awt.X11.XToolkit boolean initXSettingsIfNeeded(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.X11.XToolkit boolean isDynamicLayoutSet()">
@@ -7824,11 +7797,6 @@
   <item name="sun.awt.X11.XVisualInfo sun.awt.X11.XEvent clone()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.awt.X11.XWINProtocol boolean isStateChange(sun.awt.X11.XPropertyEvent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.awt.X11.XWINProtocol int getState(sun.awt.X11.XWindowPeer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -7848,11 +7816,6 @@
   </item>
   <item name="sun.awt.X11.XWM boolean isStateChange(sun.awt.X11.XDecoratedPeer, sun.awt.X11.XPropertyEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="sun.awt.X11.XWM boolean isStateChange(sun.awt.X11.XDecoratedPeer, sun.awt.X11.XPropertyEvent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="sun.awt.X11.XWM boolean needRemap(sun.awt.X11.XDecoratedPeer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -7885,9 +7848,6 @@
     </annotation>
   </item>
   <item name="sun.awt.X11.XWM java.awt.Insets getInsets(sun.awt.X11.XDecoratedPeer, long, long)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11.XWM java.awt.Insets getInsetsFromExtents(long)">
