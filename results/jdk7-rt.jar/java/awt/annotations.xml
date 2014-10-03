@@ -1052,9 +1052,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.Color float[] getComponents(java.awt.color.ColorSpace, float[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.Color float[] getRGBColorComponents(float[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1442,9 +1440,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.Component java.awt.Component findUnderMouseInWindow(java.awt.PointerInfo)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.Component java.awt.Component getComponentAt(int, int)">
@@ -2224,7 +2219,7 @@
   </item>
   <item name="java.awt.Container boolean isRemoveNotifyNeeded(java.awt.Component, java.awt.Container, java.awt.Container)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null-&gt;false;_,null,_-&gt;false;null,_,_-&gt;false&quot;"/>
+      <val val="&quot;_,null,_-&gt;false;null,_,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="java.awt.Container boolean isValidateRoot()">
@@ -2239,11 +2234,6 @@
   </item>
   <item name="java.awt.Container boolean removeDelicately(java.awt.Component, java.awt.Container, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="java.awt.Container boolean removeDelicately(java.awt.Component, java.awt.Container, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="java.awt.Container int getComponentZOrder(java.awt.Component) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2985,6 +2975,9 @@
   <item name="java.awt.EventQueue java.awt.AWTEvent getCurrentEventImpl()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.awt.EventQueue java.awt.AWTEvent getNextEvent()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.awt.EventQueue java.awt.AWTEvent getNextEventPrivate()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -3457,6 +3450,9 @@
   <item name="java.awt.Font java.awt.font.GlyphVector layoutGlyphVector(java.awt.font.FontRenderContext, char[], int, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.Font java.awt.font.GlyphVector layoutGlyphVector(java.awt.font.FontRenderContext, char[], int, int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.awt.Font java.awt.font.LineMetrics getLineMetrics(char[], int, int, java.awt.font.FontRenderContext) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -3479,6 +3475,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.Font java.awt.font.LineMetrics getLineMetrics(java.text.CharacterIterator, int, int, java.awt.font.FontRenderContext)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.Font java.awt.geom.AffineTransform getTransform()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.Font java.awt.geom.Rectangle2D getMaxCharBounds(java.awt.font.FontRenderContext)">
@@ -4095,11 +4094,6 @@
   <item name="java.awt.GridBagLayout boolean calculateBaseline(java.awt.Component, java.awt.GridBagConstraints, java.awt.Dimension) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.awt.GridBagLayout boolean calculateBaseline(java.awt.Component, java.awt.GridBagConstraints, java.awt.Dimension)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null-&gt;false;null,_,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.awt.GridBagLayout double[][] getLayoutWeights()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -4388,6 +4382,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="java.awt.JobAttributes int[][] getPageRanges()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.awt.JobAttributes java.awt.JobAttributes.DefaultSelectionType getDefaultSelection()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -4495,11 +4492,6 @@
   <item name="java.awt.JobAttributes.SidesType java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
-    </annotation>
-  </item>
-  <item name="java.awt.KeyboardFocusManager boolean isAutoFocusTransferEnabledFor(java.awt.Component)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="java.awt.KeyboardFocusManager java.awt.AWTEvent retargetFocusEvent(java.awt.AWTEvent)">
@@ -5098,6 +5090,11 @@
   <item name="java.awt.MediaEntry java.awt.MediaEntry insert(java.awt.MediaEntry, java.awt.MediaEntry) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.MediaEntry java.awt.MediaEntry insert(java.awt.MediaEntry, java.awt.MediaEntry)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.MediaTracker java.lang.Object[] getErrorsAny()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -5119,9 +5116,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.Menu java.awt.MenuItem add(java.awt.MenuItem)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.Menu java.awt.MenuItem getShortcutMenuItem(java.awt.MenuShortcut)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -5163,9 +5158,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.MenuBar java.awt.Menu add(java.awt.Menu)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.MenuBar java.awt.Menu getHelpMenu()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -5220,7 +5213,7 @@
   </item>
   <item name="java.awt.MenuComponent boolean postEvent(java.awt.Event)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+      <val val="&quot;!null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="java.awt.MenuComponent int getAccessibleChildIndex(java.awt.MenuComponent) 0">
@@ -7475,11 +7468,6 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="java.awt.Window boolean postEvent(java.awt.Event)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.awt.Window double access$802(java.awt.Window, double) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -7568,6 +7556,9 @@
   </item>
   <item name="java.awt.Window java.awt.Shape getShape()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.awt.Window java.awt.Window getDocumentRoot()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.Window java.awt.Window getOwner()">
     <annotation name="org.jetbrains.annotations.Contract">

@@ -196,7 +196,7 @@
   </item>
   <item name="java.util.AbstractQueue boolean add(E)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;true;null-&gt;true&quot;"/>
+      <val val="&quot;!null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="java.util.AbstractQueue boolean addAll(java.util.Collection&lt;? extends E&gt;) 0">
@@ -1137,6 +1137,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="java.util.BitSet byte[] toByteArray()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.BitSet int cardinality()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1163,6 +1166,9 @@
     </annotation>
   </item>
   <item name="java.util.BitSet java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.BitSet java.util.BitSet get(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.BitSet java.util.BitSet valueOf(byte[]) 0">
@@ -1298,9 +1304,6 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Calendar java.lang.String[] getFieldStrings(int, int, java.text.DateFormatSymbols)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.Calendar java.util.Calendar createCalendar(java.util.TimeZone, java.util.Locale) 1">
@@ -1785,6 +1788,9 @@
   <item name="java.util.Collections.CheckedMap.CheckedEntrySet T[] toArray(T[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.Collections.CheckedMap.CheckedEntrySet T[] toArray(T[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.Collections.CheckedMap.CheckedEntrySet boolean add(java.util.Map.Entry&lt;K,V&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1812,6 +1818,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
+  </item>
+  <item name="java.util.Collections.CheckedMap.CheckedEntrySet java.lang.Object[] toArray()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections.CheckedMap.CheckedEntrySet java.util.Collections.CheckedMap.CheckedEntrySet.CheckedEntry&lt;K,V,T&gt; checkedEntry(java.util.Map.Entry&lt;K,V&gt;, java.lang.Class&lt;T&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2347,6 +2356,9 @@
   <item name="java.util.Collections.UnmodifiableMap.UnmodifiableEntrySet boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.Collections.UnmodifiableMap.UnmodifiableEntrySet java.lang.Object[] toArray()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.Collections.UnmodifiableMap.UnmodifiableEntrySet java.util.Iterator&lt;java.util.Map.Entry&lt;K,V&gt;&gt; iterator()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2492,9 +2504,6 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Currency.CurrencyNameGetter java.lang.String getObject(java.util.spi.CurrencyNameProvider, java.util.Locale, java.lang.String, java.lang.Object...)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.Currency.CurrencyNameGetter java.util.Currency.CurrencyNameGetter access$500()">
@@ -2606,9 +2615,6 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.EnumMap V get(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.EnumMap V put(K, V) 0">
@@ -2621,9 +2627,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.EnumMap V remove(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.EnumMap V unmaskNull(java.lang.Object)">
@@ -2638,34 +2641,14 @@
   <item name="java.util.EnumMap boolean access$1000(java.util.EnumMap, java.lang.Object, java.lang.Object) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.util.EnumMap boolean access$1000(java.util.EnumMap, java.lang.Object, java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.util.EnumMap boolean access$900(java.util.EnumMap, java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.EnumMap boolean access$900(java.util.EnumMap, java.lang.Object, java.lang.Object) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.util.EnumMap boolean access$900(java.util.EnumMap, java.lang.Object, java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
-  <item name="java.util.EnumMap boolean containsKey(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.util.EnumMap boolean containsMapping(java.lang.Object, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="java.util.EnumMap boolean containsMapping(java.lang.Object, java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="java.util.EnumMap boolean containsValue(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2686,11 +2669,6 @@
   </item>
   <item name="java.util.EnumMap boolean removeMapping(java.lang.Object, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="java.util.EnumMap boolean removeMapping(java.lang.Object, java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="java.util.EnumMap int access$1600(java.util.EnumMap, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3272,6 +3250,9 @@
   <item name="java.util.Formatter.FormatSpecifier char[] addZeros(char[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.Formatter.FormatSpecifier char[] addZeros(char[], int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.Formatter.FormatSpecifier char[] exponent(char[], int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -3280,7 +3261,7 @@
   </item>
   <item name="java.util.Formatter.FormatSpecifier char[] trailingZeros(char[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="java.util.Formatter.FormatSpecifier int index()">
@@ -3339,9 +3320,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.Formatter.FormatSpecifier java.lang.StringBuilder localizedMagnitude(java.lang.StringBuilder, char[], java.util.Formatter.Flags, int, java.util.Locale)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Formatter.FormatSpecifier java.lang.StringBuilder localizedMagnitude(java.lang.StringBuilder, long, java.util.Formatter.Flags, int, java.util.Locale) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -3353,9 +3332,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.Formatter.FormatSpecifier java.lang.StringBuilder localizedMagnitude(java.lang.StringBuilder, long, java.util.Formatter.Flags, int, java.util.Locale)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Formatter.FormatSpecifier java.lang.StringBuilder trailingSign(java.lang.StringBuilder, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -3722,6 +3699,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="java.util.HashMap.HashIterator java.util.HashMap.Entry&lt;K,V&gt; nextEntry()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.HashMap.Holder Holder()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -4552,6 +4532,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="java.util.LinkedList java.lang.Object clone()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.LinkedList java.lang.Object[] toArray()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -4686,9 +4669,6 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Locale java.lang.String getISO3Code(java.lang.String, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;!null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.Locale java.lang.String getISO3Country()">
@@ -4808,18 +4788,12 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.Locale sun.util.locale.LocaleExtensions access$800(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.Locale sun.util.locale.LocaleExtensions getCompatibilityExtensions(java.lang.String, java.lang.String, java.lang.String, java.lang.String) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.Locale sun.util.locale.LocaleExtensions getCompatibilityExtensions(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.Locale sun.util.locale.LocaleExtensions getLocaleExtensions()">
@@ -4950,9 +4924,6 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Locale.LocaleNameGetter java.lang.String getObject(java.util.spi.LocaleNameProvider, java.util.Locale, java.lang.String, java.lang.Object...)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.Locale.LocaleNameGetter java.util.Locale.LocaleNameGetter access$500()">
@@ -5392,6 +5363,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.ResourceBundle java.util.ResourceBundle findBundle(java.util.ResourceBundle.CacheKey, java.util.List&lt;java.util.Locale&gt;, java.util.List&lt;java.lang.String&gt;, int, java.util.ResourceBundle.Control, java.util.ResourceBundle)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_,_,_-&gt;!null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.ResourceBundle java.util.ResourceBundle findBundleInCache(java.util.ResourceBundle.CacheKey, java.util.ResourceBundle.Control)">
@@ -5605,11 +5579,6 @@
   <item name="java.util.ResourceBundle.Control boolean needsReload(java.lang.String, java.util.Locale, java.lang.String, java.lang.ClassLoader, java.util.ResourceBundle, long) 4">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.util.ResourceBundle.Control boolean needsReload(java.lang.String, java.util.Locale, java.lang.String, java.lang.ClassLoader, java.util.ResourceBundle, long)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,null,_,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.util.ResourceBundle.Control java.lang.String toBundleName(java.lang.String, java.util.Locale)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;!null&quot;"/>
@@ -5678,6 +5647,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.ResourceBundle.Control.CandidateListCache java.util.List&lt;java.util.Locale&gt; createObject(sun.util.locale.BaseLocale) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.ResourceBundle.Control.CandidateListCache java.util.List&lt;java.util.Locale&gt; createObject(sun.util.locale.BaseLocale)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.ResourceBundle.Control.CandidateListCache java.util.List&lt;java.util.Locale&gt; getDefaultList(java.lang.String, java.lang.String, java.lang.String, java.lang.String) 0">
@@ -5835,6 +5807,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="java.util.Scanner java.lang.Object next()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.Scanner java.lang.Readable makeReadable(java.io.InputStream, java.nio.charset.Charset) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -5898,10 +5873,16 @@
   <item name="java.util.Scanner java.lang.String matchPatternInBuffer(java.util.regex.Pattern)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.Scanner java.lang.String next()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.Scanner java.lang.String next(java.util.regex.Pattern) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Scanner java.lang.String processFloatToken(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.Scanner java.lang.String processFloatToken(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Scanner java.lang.String processIntegerToken(java.lang.String) 0">
@@ -6933,11 +6914,6 @@
   <item name="java.util.TreeSet void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.util.UUID boolean equals(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.util.UUID int compareTo(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -7136,11 +7112,6 @@
   </item>
   <item name="java.util.WeakHashMap boolean containsValue(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="java.util.WeakHashMap boolean eq(java.lang.Object, java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;true&quot;"/>
-    </annotation>
   </item>
   <item name="java.util.WeakHashMap boolean removeMapping(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

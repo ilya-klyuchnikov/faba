@@ -25,6 +25,11 @@
   <item name="javax.naming.ldap.ControlFactory javax.naming.ldap.Control getControlInstance(javax.naming.ldap.Control, javax.naming.Context, java.util.Hashtable&lt;?,?&gt;) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.naming.ldap.ControlFactory javax.naming.ldap.Control getControlInstance(javax.naming.ldap.Control, javax.naming.Context, java.util.Hashtable&lt;?,?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="javax.naming.ldap.InitialLdapContext InitialLdapContext(java.util.Hashtable&lt;?,?&gt;, javax.naming.ldap.Control[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -36,11 +41,6 @@
   </item>
   <item name="javax.naming.ldap.LdapName LdapName(java.util.List&lt;javax.naming.ldap.Rdn&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="javax.naming.ldap.LdapName boolean doesListMatch(int, int, java.util.List)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null-&gt;true&quot;"/>
-    </annotation>
   </item>
   <item name="javax.naming.ldap.LdapName boolean endsWith(java.util.List&lt;javax.naming.ldap.Rdn&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -187,6 +187,9 @@
   <item name="javax.naming.ldap.Rdn byte[] decodeHexPairs(char[], int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.naming.ldap.Rdn byte[] getUtf8Octets(char[], int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.naming.ldap.Rdn int compareTo(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -307,18 +310,8 @@
   <item name="javax.naming.ldap.Rfc2253Parser javax.naming.ldap.Rdn doParse(javax.naming.ldap.Rdn) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.naming.ldap.Rfc2253Parser javax.naming.ldap.Rdn doParse(javax.naming.ldap.Rdn)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.naming.ldap.Rfc2253Parser javax.naming.ldap.Rdn parseRdn(javax.naming.ldap.Rdn) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="javax.naming.ldap.Rfc2253Parser javax.naming.ldap.Rdn parseRdn(javax.naming.ldap.Rdn)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
   </item>
   <item name="javax.naming.ldap.SortControl SortControl(java.lang.String[], boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

@@ -376,6 +376,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.DOMHelper org.w3c.dom.Node getRoot(org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.DOMHelper org.w3c.dom.Node getRootNode(org.w3c.dom.Node) 0">
@@ -916,18 +919,10 @@
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.StringComparable int[] getFirstCaseDiff(java.lang.String, java.lang.String, java.util.Locale)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_-&gt;null;null,_,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.StringComparable java.lang.Comparable getComparator(java.lang.String, java.util.Locale, java.text.Collator, java.lang.String) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="com.sun.org.apache.xml.internal.utils.StringComparable java.lang.Comparable getComparator(java.lang.String, java.util.Locale, java.text.Collator, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null,_-&gt;!null&quot;"/>
-    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.StringComparable java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1168,16 +1163,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.SystemIDResolver boolean isAbsolutePath(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
-  <item name="com.sun.org.apache.xml.internal.utils.SystemIDResolver boolean isAbsoluteURI(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
-  <item name="com.sun.org.apache.xml.internal.utils.SystemIDResolver boolean isWindowsAbsolutePath(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
@@ -1436,11 +1421,6 @@
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode boolean isDefaultNamespace(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
-    </annotation>
-  </item>
-  <item name="com.sun.org.apache.xml.internal.utils.UnImplNode boolean isEqualNode(org.w3c.dom.Node)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode boolean isId()">
@@ -2179,12 +2159,7 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.XMLCharacterRecognizer boolean isWhiteSpace(char[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;null,_,_-&gt;true&quot;,pure=true"/>
-    </annotation>
-  </item>
-  <item name="com.sun.org.apache.xml.internal.utils.XMLCharacterRecognizer boolean isWhiteSpace(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;true&quot;"/>
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.XMLCharacterRecognizer boolean isWhiteSpace(java.lang.StringBuffer) 0">

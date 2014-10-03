@@ -25,22 +25,12 @@
   <item name="java.lang.invoke.AdapterMethodHandle boolean canCheckCast(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.lang.invoke.AdapterMethodHandle boolean canCheckCast(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false&quot;"/>
-    </annotation>
-  </item>
-  <item name="java.lang.invoke.AdapterMethodHandle boolean canCheckCast(java.lang.invoke.MethodType, java.lang.invoke.MethodType, int, java.lang.Class&lt;?&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_,_-&gt;false;null,_,_,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.lang.invoke.AdapterMethodHandle boolean canConvertArgument(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,null-&gt;true;null,_-&gt;true&quot;"/>
     </annotation>
   </item>
-  <item name="java.lang.invoke.AdapterMethodHandle boolean canDupArguments(java.lang.invoke.MethodType, java.lang.invoke.MethodType, int, int)">
+  <item name="java.lang.invoke.AdapterMethodHandle boolean canDropArguments(java.lang.invoke.MethodType, java.lang.invoke.MethodType, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,null,_,_-&gt;false;null,_,_,_-&gt;false&quot;"/>
     </annotation>
@@ -51,38 +41,8 @@
   <item name="java.lang.invoke.AdapterMethodHandle boolean canPairwiseConvert(java.lang.invoke.MethodType, java.lang.invoke.MethodType) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.lang.invoke.AdapterMethodHandle boolean canPrimCast(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
-  <item name="java.lang.invoke.AdapterMethodHandle boolean canPrimCast(java.lang.invoke.MethodType, java.lang.invoke.MethodType, int, java.lang.Class&lt;?&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_,_-&gt;false;null,_,_,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
-  <item name="java.lang.invoke.AdapterMethodHandle boolean canRotateArguments(java.lang.invoke.MethodType, java.lang.invoke.MethodType, int, int, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_,_,_-&gt;false;null,_,_,_,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
-  <item name="java.lang.invoke.AdapterMethodHandle boolean canSpreadArguments(java.lang.invoke.MethodType, java.lang.invoke.MethodType, java.lang.Class&lt;?&gt;, int, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_,_,_-&gt;false;null,_,_,_,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
-  <item name="java.lang.invoke.AdapterMethodHandle boolean canSwapArguments(java.lang.invoke.MethodType, java.lang.invoke.MethodType, int, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_,_-&gt;false;null,_,_,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.lang.invoke.AdapterMethodHandle boolean canUnboxArgument(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="java.lang.invoke.AdapterMethodHandle boolean canUnboxArgument(java.lang.invoke.MethodType, java.lang.invoke.MethodType, int, java.lang.Class&lt;?&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_,_-&gt;false;null,_,_,_-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="java.lang.invoke.AdapterMethodHandle byte basicType(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -145,6 +105,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.AdapterMethodHandle java.lang.invoke.MethodHandle makeDropArguments(java.lang.invoke.MethodType, java.lang.invoke.MethodHandle, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_-&gt;null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.invoke.AdapterMethodHandle java.lang.invoke.MethodHandle makeDupArguments(java.lang.invoke.MethodType, java.lang.invoke.MethodHandle, int, int) 1">
@@ -165,13 +128,13 @@
   <item name="java.lang.invoke.AdapterMethodHandle java.lang.invoke.MethodHandle makePermutation(java.lang.invoke.MethodType, java.lang.invoke.MethodHandle, int[]) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.AdapterMethodHandle java.lang.invoke.MethodHandle makePermutation(java.lang.invoke.MethodType, java.lang.invoke.MethodHandle, int[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.invoke.AdapterMethodHandle java.lang.invoke.MethodHandle makePrimCast(java.lang.invoke.MethodType, java.lang.invoke.MethodHandle, int, java.lang.Class&lt;?&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.AdapterMethodHandle java.lang.invoke.MethodHandle makePrimCast(java.lang.invoke.MethodType, java.lang.invoke.MethodHandle, int, java.lang.Class&lt;?&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.invoke.AdapterMethodHandle java.lang.invoke.MethodHandle makeRetype(java.lang.invoke.MethodType, java.lang.invoke.MethodHandle, boolean) 1">
@@ -196,9 +159,6 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.AdapterMethodHandle java.lang.invoke.MethodHandle makeRotateArguments(java.lang.invoke.MethodType, java.lang.invoke.MethodHandle, int, int, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.invoke.AdapterMethodHandle java.lang.invoke.MethodHandle makeSpreadArguments(java.lang.invoke.MethodType, java.lang.invoke.MethodHandle, java.lang.Class&lt;?&gt;, int, int) 1">
@@ -306,6 +266,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.BoundMethodHandle java.lang.RuntimeException badBoundArgumentException(java.lang.Object, java.lang.invoke.MethodHandle, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.BoundMethodHandle java.lang.String baseName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.BoundMethodHandle java.lang.String noParens(java.lang.String) 0">
@@ -938,11 +901,6 @@
   <item name="java.lang.invoke.InvokeGeneric boolean returnConversionNeeded(java.lang.invoke.MethodType, java.lang.invoke.MethodHandle) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.lang.invoke.InvokeGeneric boolean returnConversionNeeded(java.lang.invoke.MethodType, java.lang.invoke.MethodHandle)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.lang.invoke.InvokeGeneric java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1345,6 +1303,11 @@
   </item>
   <item name="java.lang.invoke.MethodHandleImpl java.lang.invoke.MethodHandle spreadArguments(java.lang.invoke.MethodHandle, java.lang.invoke.MethodType, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.MethodHandleImpl java.lang.invoke.MethodHandle spreadArguments(java.lang.invoke.MethodHandle, java.lang.invoke.MethodType, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="java.lang.invoke.MethodHandleImpl java.lang.invoke.MethodHandle throwException(java.lang.invoke.MethodType)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1799,6 +1762,9 @@
   <item name="java.lang.invoke.MethodHandles java.lang.invoke.MethodHandle insertArguments(java.lang.invoke.MethodHandle, int, java.lang.Object...) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.MethodHandles java.lang.invoke.MethodHandle insertArguments(java.lang.invoke.MethodHandle, int, java.lang.Object...)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.invoke.MethodHandles java.lang.invoke.MethodHandle permuteArguments(java.lang.invoke.MethodHandle, java.lang.invoke.MethodType, int...) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2099,6 +2065,11 @@
   <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType appendParameterTypes(java.util.List&lt;java.lang.Class&lt;?&gt;&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType changeReturnType(java.lang.Class&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType insertParameterTypes(int, java.lang.Class&lt;?&gt;...) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2296,9 +2267,6 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.SpreadGeneric java.lang.invoke.SpreadGeneric.Adapter findAdapter(java.lang.invoke.SpreadGeneric, java.lang.invoke.MethodHandle[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.invoke.SpreadGeneric.Adapter Adapter(java.lang.invoke.SpreadGeneric, java.lang.invoke.MethodHandle) 0">

@@ -51,7 +51,7 @@
   </item>
   <item name="com.sun.jmx.mbeanserver.ConvertingMethod java.lang.Object[] fromOpenParameters(java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.jmx.mbeanserver.ConvertingMethod java.lang.Object[] toOpenParameters(com.sun.jmx.mbeanserver.MXBeanLookup, java.lang.Object[]) 0">
@@ -59,7 +59,7 @@
   </item>
   <item name="com.sun.jmx.mbeanserver.ConvertingMethod java.lang.Object[] toOpenParameters(com.sun.jmx.mbeanserver.MXBeanLookup, java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null&quot;"/>
+      <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.jmx.mbeanserver.ConvertingMethod java.lang.String getName()">
@@ -151,6 +151,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.mbeanserver.DefaultMXBeanMappingFactory com.sun.jmx.mbeanserver.MXBeanMapping makeTabularMapping(java.lang.reflect.Type, boolean, java.lang.reflect.Type, java.lang.reflect.Type, com.sun.jmx.mbeanserver.MXBeanMappingFactory)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.mbeanserver.DefaultMXBeanMappingFactory com.sun.jmx.mbeanserver.MXBeanMapping mappingForType(java.lang.reflect.Type, com.sun.jmx.mbeanserver.MXBeanMappingFactory)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.mbeanserver.DefaultMXBeanMappingFactory java.io.InvalidObjectException invalidObjectException(java.lang.Throwable) 0">
@@ -292,9 +295,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.mbeanserver.DefaultMXBeanMappingFactory.CompositeBuilderViaSetters java.lang.String applicable(java.lang.reflect.Method[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.mbeanserver.DefaultMXBeanMappingFactory.CompositeMapping CompositeMapping(java.lang.Class&lt;?&gt;, javax.management.openmbean.CompositeType, java.lang.String[], java.lang.reflect.Method[], com.sun.jmx.mbeanserver.MXBeanMappingFactory) 1">
@@ -400,6 +400,9 @@
   <item name="com.sun.jmx.mbeanserver.DefaultMXBeanMappingFactory.TabularMapping java.lang.Object fromNonNullOpenValue(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jmx.mbeanserver.DefaultMXBeanMappingFactory.TabularMapping java.lang.Object fromNonNullOpenValue(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jmx.mbeanserver.DefaultMXBeanMappingFactory.TabularMapping java.lang.Object toNonNullOpenValue(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -438,6 +441,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.mbeanserver.Introspector java.lang.Class&lt;? super T&gt; getMXBeanInterface(java.lang.Class&lt;T&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.mbeanserver.Introspector java.lang.Class&lt;? super T&gt; getStandardMBeanInterface(java.lang.Class&lt;T&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.mbeanserver.Introspector java.lang.Class&lt;? super T&gt; implementsMBean(java.lang.Class&lt;T&gt;, java.lang.String) 0">
@@ -482,6 +488,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.mbeanserver.Introspector javax.management.MBeanInfo testCompliance(java.lang.Class&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.mbeanserver.Introspector javax.management.MBeanInfo testCompliance(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;) 1">
@@ -534,6 +543,9 @@
   </item>
   <item name="com.sun.jmx.mbeanserver.Introspector.SimpleIntrospector java.util.List&lt;java.lang.reflect.Method&gt; getCachedMethods(java.lang.Class&lt;?&gt;)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.jmx.mbeanserver.Introspector.SimpleIntrospector java.util.List&lt;java.lang.reflect.Method&gt; getReadMethods(java.lang.Class&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.mbeanserver.JmxMBeanServer JmxMBeanServer(java.lang.String, javax.management.MBeanServer, javax.management.MBeanServerDelegate) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -600,7 +612,7 @@
   </item>
   <item name="com.sun.jmx.mbeanserver.JmxMBeanServer javax.management.AttributeList cloneAttributeList(javax.management.AttributeList)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.jmx.mbeanserver.JmxMBeanServer javax.management.MBeanServer access$100(com.sun.jmx.mbeanserver.JmxMBeanServer) 0">
@@ -762,7 +774,7 @@
   </item>
   <item name="com.sun.jmx.mbeanserver.MBeanInstantiator java.lang.Class&lt;?&gt;[] findSignatureClasses(java.lang.String[], java.lang.ClassLoader)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -771,7 +783,7 @@
   </item>
   <item name="com.sun.jmx.mbeanserver.MBeanInstantiator java.lang.Class&lt;?&gt;[] loadSignatureClasses(java.lang.String[], java.lang.ClassLoader)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -795,7 +807,7 @@
   </item>
   <item name="com.sun.jmx.mbeanserver.MBeanInstantiator java.lang.reflect.Constructor&lt;?&gt; findConstructor(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
+      <val val="&quot;_,null-&gt;null;null,_-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1003,11 +1015,6 @@
   <item name="com.sun.jmx.mbeanserver.MXBeanIntrospector boolean validParameter(com.sun.jmx.mbeanserver.ConvertingMethod, java.lang.Object, int, java.lang.Object) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.jmx.mbeanserver.MXBeanIntrospector boolean validParameter(com.sun.jmx.mbeanserver.ConvertingMethod, java.lang.Object, int, java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.jmx.mbeanserver.MXBeanIntrospector com.sun.jmx.mbeanserver.ConvertingMethod mFrom(java.lang.reflect.Method) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1175,7 +1182,7 @@
   </item>
   <item name="com.sun.jmx.mbeanserver.MXBeanProxy.SetHandler java.lang.Object invoke(javax.management.MBeanServerConnection, javax.management.ObjectName, java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;null;_,!null,_-&gt;null;_,_,!null-&gt;null;_,null,_-&gt;null&quot;"/>
+      <val val="&quot;!null,_,_-&gt;null;_,!null,_-&gt;null;_,_,!null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1380,11 +1387,6 @@
   </item>
   <item name="com.sun.jmx.mbeanserver.Repository.ObjectNamePattern ObjectNamePattern(javax.management.ObjectName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="com.sun.jmx.mbeanserver.Repository.ObjectNamePattern boolean matchKeys(javax.management.ObjectName)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;true&quot;"/>
-    </annotation>
   </item>
   <item name="com.sun.jmx.mbeanserver.StandardMBeanIntrospector StandardMBeanIntrospector()">
     <annotation name="org.jetbrains.annotations.Contract">

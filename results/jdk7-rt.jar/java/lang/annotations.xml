@@ -1196,17 +1196,12 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="java.lang.ClassLoader boolean loadLibrary1(java.lang.Class, java.io.File)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.lang.ClassLoader boolean needsClassLoaderPermissionCheck(java.lang.ClassLoader, java.lang.ClassLoader) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.ClassLoader boolean needsClassLoaderPermissionCheck(java.lang.ClassLoader, java.lang.ClassLoader)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
+      <val val="&quot;null,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="java.lang.ClassLoader java.io.InputStream getResourceAsStream(java.lang.String)">
@@ -1217,6 +1212,9 @@
   </item>
   <item name="java.lang.ClassLoader java.lang.Class defineTransformedClass(java.lang.String, byte[], int, int, java.security.ProtectionDomain, java.lang.ClassFormatError, java.lang.String) 5">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.lang.ClassLoader java.lang.Class defineTransformedClass(java.lang.String, byte[], int, int, java.security.ProtectionDomain, java.lang.ClassFormatError, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.ClassLoader java.lang.Class findBootstrapClassOrNull(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1411,7 +1409,13 @@
   <item name="java.lang.ClassValue java.lang.ClassValue.ClassValueMap getMap(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.ClassValue java.lang.ClassValue.ClassValueMap getMap(java.lang.Class&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.ClassValue java.lang.ClassValue.ClassValueMap initializeMap(java.lang.Class&lt;?&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.ClassValue java.lang.ClassValue.ClassValueMap initializeMap(java.lang.Class&lt;?&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.ClassValue java.lang.ClassValue.Entry&lt;?&gt;[] getCacheCarefully(java.lang.Class&lt;?&gt;) 0">
@@ -1565,23 +1569,8 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="java.lang.ConditionalSpecialCasing boolean isAfterI(java.lang.String, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
-  <item name="java.lang.ConditionalSpecialCasing boolean isAfterSoftDotted(java.lang.String, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.lang.ConditionalSpecialCasing boolean isBeforeDot(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="java.lang.ConditionalSpecialCasing boolean isFinalCased(java.lang.String, int, java.util.Locale)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="java.lang.ConditionalSpecialCasing boolean isMoreAbove(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1595,18 +1584,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.ConditionalSpecialCasing char[] lookUpTable(java.lang.String, int, java.util.Locale, boolean)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.ConditionalSpecialCasing char[] toLowerCaseCharArray(java.lang.String, int, java.util.Locale) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.ConditionalSpecialCasing char[] toLowerCaseCharArray(java.lang.String, int, java.util.Locale)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.ConditionalSpecialCasing char[] toUpperCaseCharArray(java.lang.String, int, java.util.Locale) 0">
@@ -3101,6 +3084,12 @@
   </item>
   <item name="java.lang.SecurityManager java.lang.String[] getPackages(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.lang.SecurityManager java.lang.String[] getPackages(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.SecurityManager java.lang.ThreadGroup getRootGroup()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.SecurityManager void checkAccept(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -4999,6 +4988,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="java.lang.UNIXProcess.ProcessReaperThreadFactory.1 java.lang.Object run()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.UNIXProcess.ProcessReaperThreadFactory.1 java.lang.ThreadGroup run()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.Void Void()">
     <annotation name="org.jetbrains.annotations.Contract">

@@ -123,9 +123,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.font.GlyphVector int[] getGlyphCharIndices(int, int, int[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.font.GlyphVector java.awt.Rectangle getGlyphPixelBounds(int, java.awt.font.FontRenderContext, float, float) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -698,6 +696,9 @@
   <item name="java.awt.font.TextLayout java.awt.Font singleFont(char[], int, int, java.util.Map)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.awt.font.TextLayout java.awt.Rectangle getPixelBounds(java.awt.font.FontRenderContext, float, float)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.awt.font.TextLayout java.awt.Shape getCaretShape(java.awt.font.TextHitInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -834,10 +835,19 @@
   <item name="java.awt.font.TextLayout java.awt.geom.GeneralPath boundingShape(double[], double[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.font.TextLayout java.awt.geom.GeneralPath boundingShape(double[], double[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.awt.font.TextLayout java.awt.geom.GeneralPath caretBoundingShape(int, int, java.awt.geom.Rectangle2D) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.font.TextLayout java.awt.geom.GeneralPath caretBoundingShape(int, int, java.awt.geom.Rectangle2D)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.awt.font.TextLayout java.awt.geom.GeneralPath leftShape(java.awt.geom.Rectangle2D) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.font.TextLayout java.awt.geom.GeneralPath leftShape(java.awt.geom.Rectangle2D)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.font.TextLayout java.awt.geom.GeneralPath pathToShape(double[], boolean, sun.font.LayoutPathImpl) 0">
@@ -846,7 +856,15 @@
   <item name="java.awt.font.TextLayout java.awt.geom.GeneralPath pathToShape(double[], boolean, sun.font.LayoutPathImpl) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.awt.font.TextLayout java.awt.geom.GeneralPath pathToShape(double[], boolean, sun.font.LayoutPathImpl)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.font.TextLayout java.awt.geom.GeneralPath rightShape(java.awt.geom.Rectangle2D) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.font.TextLayout java.awt.geom.GeneralPath rightShape(java.awt.geom.Rectangle2D)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.font.TextLayout java.awt.geom.Rectangle2D getBounds()">
@@ -948,6 +966,9 @@
   <item name="java.awt.font.TextLine float[] getNormalizedOffsets(float[], byte) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.font.TextLine float[] getNormalizedOffsets(float[], byte)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.awt.font.TextLine int access$200(java.awt.font.TextLine, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -982,7 +1003,7 @@
   </item>
   <item name="java.awt.font.TextLine int[] computeComponentOrder(sun.font.TextLineComponent[], int[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null;null,_-&gt;null&quot;"/>
+      <val val="&quot;_,null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -996,6 +1017,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.font.TextLine java.awt.Rectangle computePixelBounds(java.awt.image.BufferedImage)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.font.TextLine java.awt.Rectangle getPixelBounds(java.awt.font.FontRenderContext, float, float)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.font.TextLine java.awt.Shape getOutline(java.awt.geom.AffineTransform) 0">
@@ -1045,7 +1069,13 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="java.awt.font.TextLine java.awt.geom.Rectangle2D getCharBounds(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.awt.font.TextLine java.awt.geom.Rectangle2D getItalicBounds()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.font.TextLine java.awt.geom.Rectangle2D getVisualBounds()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.font.TextLine java.lang.String toString()">
@@ -1079,6 +1109,9 @@
   <item name="java.awt.font.TextLine sun.font.TextLineComponent[] createComponentsOnRun(int, int, char[], int[], byte[], sun.font.TextLabelFactory, java.awt.Font, sun.font.CoreMetrics, java.awt.font.FontRenderContext, sun.font.Decoration, sun.font.TextLineComponent[], int) 7">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.awt.font.TextLine sun.font.TextLineComponent[] createComponentsOnRun(int, int, char[], int[], byte[], sun.font.TextLabelFactory, java.awt.Font, sun.font.CoreMetrics, java.awt.font.FontRenderContext, sun.font.Decoration, sun.font.TextLineComponent[], int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.awt.font.TextLine sun.font.TextLineComponent[] expandArray(sun.font.TextLineComponent[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1089,6 +1122,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.font.TextLine sun.font.TextLineComponent[] getComponents(java.awt.font.StyledParagraph, char[], int, int, int[], byte[], sun.font.TextLabelFactory) 6">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.font.TextLine sun.font.TextLineComponent[] getComponents(java.awt.font.StyledParagraph, char[], int, int, int[], byte[], sun.font.TextLabelFactory)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.font.TextLine.1 1()">
@@ -1164,11 +1200,6 @@
   </item>
   <item name="java.awt.font.TransformAttribute TransformAttribute(java.awt.geom.AffineTransform) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="java.awt.font.TransformAttribute boolean equals(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="java.awt.font.TransformAttribute boolean isIdentity()">
     <annotation name="org.jetbrains.annotations.Contract">

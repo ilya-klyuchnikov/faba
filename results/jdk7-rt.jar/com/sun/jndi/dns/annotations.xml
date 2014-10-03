@@ -110,12 +110,17 @@
   </item>
   <item name="com.sun.jndi.dns.DnsContext com.sun.jndi.dns.CT[] attrIdsToClassesAndTypes(java.lang.String[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jndi.dns.DnsContext com.sun.jndi.dns.DnsName fullyQualify(javax.naming.Name) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.DnsContext com.sun.jndi.dns.NameNode getNameNode(com.sun.jndi.dns.DnsName)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.dns.DnsContext com.sun.jndi.dns.NameNode populateZone(com.sun.jndi.dns.ZoneNode, com.sun.jndi.dns.DnsName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -303,11 +308,6 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="com.sun.jndi.dns.DnsContextFactory boolean platformServersUsed(com.sun.jndi.dns.DnsUrl[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.jndi.dns.DnsContextFactory com.sun.jndi.dns.DnsContext getContext(java.lang.String, com.sun.jndi.dns.DnsUrl[], java.util.Hashtable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -346,7 +346,7 @@
   </item>
   <item name="com.sun.jndi.dns.DnsContextFactory java.util.List filterNameServers(java.util.List, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.jndi.dns.DnsContextFactory javax.naming.Context getInitialContext(java.util.Hashtable&lt;?,?&gt;) 0">
@@ -670,11 +670,6 @@
   </item>
   <item name="com.sun.jndi.dns.ResourceRecord java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="com.sun.jndi.dns.ResourceRecord java.lang.String valueToName(int, java.lang.String[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;!null&quot;"/>
-    </annotation>
   </item>
   <item name="com.sun.jndi.dns.ResourceRecord long getUInt(int)">
     <annotation name="org.jetbrains.annotations.Contract">

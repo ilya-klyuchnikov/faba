@@ -584,6 +584,9 @@
   <item name="java.net.HttpCookie java.net.HttpCookie parseInternal(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.HttpCookie java.net.HttpCookie parseInternal(java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.net.HttpCookie java.util.List access$100(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1296,10 +1299,12 @@
     </annotation>
   </item>
   <item name="java.net.InetAddress java.net.InetAddress[] checkLookupTable(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.net.InetAddress java.net.InetAddress[] getAddressesFromNameService(java.lang.String, java.net.InetAddress)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="java.net.InetAddress java.net.InetAddress[] getAllByName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1314,7 +1319,7 @@
   </item>
   <item name="java.net.InetAddress java.net.InetAddress[] getAllByName(java.lang.String, java.net.InetAddress)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,null-&gt;!null;null,_-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="java.net.InetAddress java.net.InetAddress[] getAllByName0(java.lang.String) 0">
@@ -2066,11 +2071,6 @@
   <item name="java.net.SocketPermission boolean authorizedIPv4(java.lang.String, byte[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.net.SocketPermission boolean authorizedIPv4(java.lang.String, byte[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.net.SocketPermission boolean authorizedIPv6(java.lang.String, byte[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2498,9 +2498,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URI java.lang.String encode(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URI java.lang.String getHost()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2549,14 +2547,15 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URI java.lang.String quote(java.lang.String, long, long)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URI java.lang.String resolvePath(java.lang.String, java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URI java.lang.String resolvePath(java.lang.String, java.lang.String, boolean) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.URI java.lang.String toASCIIString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URI java.lang.String toString(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int, java.lang.String, java.lang.String, java.lang.String) 0">
@@ -3294,9 +3293,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URLDecoder java.lang.String decode(java.lang.String, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URLEncoder URLEncoder()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -3316,9 +3313,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URLEncoder java.lang.String encode(java.lang.String, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URLStreamHandler URLStreamHandler()">
     <annotation name="org.jetbrains.annotations.Contract">
