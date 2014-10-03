@@ -125,10 +125,10 @@ trait FabaProcessor extends Processor {
         val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
         if (isReferenceArg) {
           handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
-        }
-        if (isReferenceArg && (isReferenceResult || isBooleanResult)) {
-          handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Top)))
-          handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), Final(Values.Top)))
+          if (isReferenceResult || isBooleanResult) {
+            handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Top)))
+            handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), Final(Values.Top)))
+          }
         }
       }
       if (isReferenceResult) {
@@ -146,22 +146,21 @@ trait FabaProcessor extends Processor {
                          stable: Boolean) {
     val analyzer = new CombinedSingleAnalysis(method, graph)
     analyzer.analyze()
-    // todo - boolean result as well
     if (isReferenceResult) {
       handleOutContractEquation(analyzer.outContractEquation(stable))
       handleNullableResultEquation(analyzer.nullableResultEquation(stable))
     }
     for (i <- argumentTypes.indices) {
-      val argType = argumentTypes(i)
-      val argSort = argType.getSort
+      val argSort = argumentTypes(i).getSort
       val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
       if (isReferenceArg) {
         handleNotNullParamEquation(analyzer.notNullParamEquation(i, stable))
         handleNullableParamEquation(analyzer.nullableParamEquation(i, stable))
-      }
-      if (isReferenceArg && (isReferenceResult || isBooleanResult)) {
-        handleNullContractEquation(analyzer.contractEquation(i, Values.Null, stable))
-        handleNotNullContractEquation(analyzer.contractEquation(i, Values.NotNull, stable))
+        // contracts
+        if (isReferenceResult || isBooleanResult) {
+          handleNullContractEquation(analyzer.contractEquation(i, Values.Null, stable))
+          handleNotNullContractEquation(analyzer.contractEquation(i, Values.NotNull, stable))
+        }
       }
     }
   }
@@ -229,24 +228,22 @@ trait FabaProcessor extends Processor {
           handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Null)))
         // ]]] parameter analysis
 
-
         // [[[ contract analysis
         if (isReferenceResult || isBooleanResult) {
           val paramInfluence = leaking.splittingParameters(i) || influence(i)
           if (leaking.parameters(i)) {
-            val unconditionalDereference = dereferenceFound && !leaking.splittingParameters(i)
+            val unconditionalDereference = dereferenceFound && !leaking.splittingParameters(i) && !resultOrigins.parameters(i)
             // null->... analysis
-
             if (notNullParam) {
-              // it is dereferenced anyway
               handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Bot)))
+            } else if (unconditionalDereference) {
+              handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
             } else if (paramInfluence) {
               handleNullContractEquation(nullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle))
             } else {
               // no influence - result is the same as the main equation
               handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
             }
-
             if (paramInfluence) {
               val eq1 = notNullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle)
               handleNotNullContractEquation(eq1)
