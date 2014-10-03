@@ -123,7 +123,6 @@ trait FabaProcessor extends Processor {
         val argType = argumentTypes(i)
         val argSort = argType.getSort
         val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
-        val booleanArg = argType == Type.BOOLEAN_TYPE
         if (isReferenceArg) {
           handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
         }
@@ -194,47 +193,74 @@ trait FabaProcessor extends Processor {
       val argType = argumentTypes(i)
       val argSort = argType.getSort
       val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
-      var notNullParam = false
-      var touched = false
+
       if (isReferenceArg) {
+
+        // have we discovered that param is @NotNull now?
+        var notNullParam = false
+        // an execution path was discovered at which this param is dereferenced
+        var dereferenceFound = false
+
+        // [[[ parameter analysis
         if (leaking.parameters(i)) {
-          val (notNullPEquation, npe) = notNullParamEquation(richControlFlow, i, stable)
-          touched = npe
-          notNullParam = notNullPEquation.rhs == Final(Values.NotNull)
-          handleNotNullParamEquation(notNullPEquation)
+          val (notNullParamEq, npe) = notNullParamEquation(richControlFlow, i, stable)
+          notNullParam = notNullParamEq.rhs == Final(Values.NotNull)
+          if (notNullParam || npe) {
+            dereferenceFound = true
+          }
+          handleNotNullParamEquation(notNullParamEq)
         }
         else
           handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
 
         if (leaking.nullableParameters(i)) {
-          if (notNullParam || touched) // it was dereferenced
+          if (dereferenceFound) {
             handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
-          else
-            handleNullableParamEquation(nullableParamEquation(richControlFlow, i, stable))
+          }
+          else {
+            val nullableParamEq = nullableParamEquation(richControlFlow, i, stable)
+            if (nullableParamEq.rhs == Final(Values.Top)) {
+              dereferenceFound = true
+            }
+            handleNullableParamEquation(nullableParamEq)
+          }
         }
         else
           handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Null)))
+        // ]]] parameter analysis
 
-      }
-      if (isReferenceArg && (isReferenceResult || isBooleanResult)) {
-        val paramInfluence = leaking.splittingParameters(i) || influence(i)
-        if (leaking.parameters(i)) {
-          if (!notNullParam && paramInfluence) {
-            handleNullContractEquation(nullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle))
+
+        // [[[ contract analysis
+        if (isReferenceResult || isBooleanResult) {
+          val paramInfluence = leaking.splittingParameters(i) || influence(i)
+          if (leaking.parameters(i)) {
+            val unconditionalDereference = dereferenceFound && !leaking.splittingParameters(i)
+            // null->... analysis
+
+            if (notNullParam) {
+              // it is dereferenced anyway
+              handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Bot)))
+            } else if (paramInfluence) {
+              handleNullContractEquation(nullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle))
+            } else {
+              // no influence - result is the same as the main equation
+              handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
+            }
+
+            if (paramInfluence) {
+              val eq1 = notNullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle)
+              handleNotNullContractEquation(eq1)
+            } else {
+              handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
+            }
           } else {
-            handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Bot)))
-          }
-          if (paramInfluence) {
-            val eq1 = notNullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle)
-            handleNotNullContractEquation(eq1)
-          } else {
+            handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
             handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
           }
-        } else {
-          handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
-          handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
         }
+        // ]]] contract analysis
       }
+
     }
     val time = System.nanoTime() - start
     if (cycle) {
