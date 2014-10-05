@@ -29,7 +29,7 @@ trait FabaProcessor extends Processor {
    * it will be safely approximated to TOP during result and contract analysis.
    */
   @inline
-  final val maxResultOrigins = 4
+  final val maxResultOrigins = 8
 
   /**
    * Setting for benchmarking.
@@ -192,13 +192,14 @@ trait FabaProcessor extends Processor {
     // leaking params will be taken for
     lazy val leaking = leakingParameters(className, methodNode, jsr)
     lazy val resultOrigins = buildResultOrigins(className, methodNode, leaking.frames, graph)
-    lazy val approximateToTop = resultOrigins.size > maxResultOrigins
+    lazy val toMushResultOrigins = resultOrigins.size > maxResultOrigins
     lazy val influence = ResultInfluence.analyze(methodNode, leaking, resultOrigins)
     val richControlFlow = RichControlFlow(graph, dfs)
 
+    // todo - do we need equations for boolean results?
     lazy val resultEquation: Equation[Key, Value] = outContractEquation(richControlFlow, resultOrigins, stable, !cycle)
     if (isReferenceResult) {
-      if (approximateToTop) {
+      if (toMushResultOrigins) {
         handleOutContractEquation(Equation(Key(method, Out, stable), Final(Values.Top)))
       } else {
         handleOutContractEquation(resultEquation)
@@ -247,17 +248,19 @@ trait FabaProcessor extends Processor {
 
         // [[[ contract analysis
         if (isReferenceResult || isBooleanResult) {
-          if (approximateToTop) {
-            handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Top)))
-            handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), Final(Values.Top)))
-          }
-          else if (stable) {
+          if (stable) {
             val paramInfluence = leaking.splittingParameters(i) || influence(i)
+            // result may depend on a parameter
             if (leaking.parameters(i)) {
               val unconditionalDereference = dereferenceFound && !leaking.splittingParameters(i) && !resultOrigins.parameters(i)
-
               // [[[ null->... analysis
-              if (notNullParam) {
+              if (toMushResultOrigins) {
+                // even if there-are too much results,
+                if (leaking.splittingParameters(i))
+                  handleNullContractEquation(nullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle))
+                else
+                  handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Top)))
+              } else if (notNullParam) {
                 handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Bot)))
               } else if (unconditionalDereference) {
                 handleNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
@@ -270,7 +273,13 @@ trait FabaProcessor extends Processor {
               // ]]] null->... analysis
 
               // [[[ !null -> analysis
-              if (paramInfluence) {
+              if (toMushResultOrigins) {
+                if (leaking.splittingParameters(i))
+                  handleNotNullContractEquation(notNullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle))
+                else
+                  handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
+              }
+              else if (paramInfluence) {
                 handleNotNullContractEquation(notNullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle))
               } else {
                 handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
