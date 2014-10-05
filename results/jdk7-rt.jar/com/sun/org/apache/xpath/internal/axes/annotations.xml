@@ -598,9 +598,6 @@
   <item name="com.sun.org.apache.xpath.internal.axes.UnionPathIterator com.sun.org.apache.xpath.internal.axes.LocPathIterator createDTMIterator(com.sun.org.apache.xpath.internal.compiler.Compiler, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.org.apache.xpath.internal.axes.UnionPathIterator com.sun.org.apache.xpath.internal.axes.LocPathIterator createDTMIterator(com.sun.org.apache.xpath.internal.compiler.Compiler, int)">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="com.sun.org.apache.xpath.internal.axes.UnionPathIterator com.sun.org.apache.xpath.internal.axes.LocPathIterator createUnionIterator(com.sun.org.apache.xpath.internal.compiler.Compiler, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -816,13 +813,17 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.WalkerFactory com.sun.org.apache.xml.internal.dtm.DTMIterator newDTMIterator(com.sun.org.apache.xpath.internal.compiler.Compiler, int, boolean)">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.WalkerFactory com.sun.org.apache.xpath.internal.axes.AxesWalker createDefaultWalker(com.sun.org.apache.xpath.internal.compiler.Compiler, int, com.sun.org.apache.xpath.internal.axes.WalkingIterator, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.WalkerFactory com.sun.org.apache.xpath.internal.axes.AxesWalker createDefaultWalker(com.sun.org.apache.xpath.internal.compiler.Compiler, int, com.sun.org.apache.xpath.internal.axes.WalkingIterator, int)">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_,_-&gt;!null;_,_,!null,_-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xpath.internal.axes.WalkerFactory com.sun.org.apache.xpath.internal.axes.AxesWalker loadOneWalker(com.sun.org.apache.xpath.internal.axes.WalkingIterator, com.sun.org.apache.xpath.internal.compiler.Compiler, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
