@@ -230,7 +230,7 @@ class CombinedInterpreter(val insns: InsnList, arity: Int) extends BasicInterpre
   val dereferencedValues = new Array[Boolean](insns.size())
 
   @inline
-  def index(insn: AbstractInsnNode) = insns.indexOf(insn)
+  final def index(insn: AbstractInsnNode) = insns.indexOf(insn)
 
   def track(origin: Int, bv: BasicValue): TrackableValue =
     if (bv == null) null else TrackableValue(origin, bv.getType)
