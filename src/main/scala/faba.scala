@@ -22,7 +22,23 @@ import faba.source._
  * Default faba processor. A lot of fine-grained method to override.
  **/
 trait FabaProcessor extends Processor {
-  val doNothing = false
+
+  /**
+   * Setting to tune performance.
+   * If a method has more result origins than [[maxResultOrigins]],
+   * it will be safely approximated to TOP during result and contract analysis.
+   */
+  @inline
+  final val maxResultOrigins = 4
+
+  /**
+   * Setting for benchmarking.
+   * If [[idle]] is true, then FABA doesn't solve equations.
+   * May be useful to set [[idle]] to true when you would like to measure/optimize performance of analysis.
+   */
+  @inline
+  final val idle = false
+
   var extras = Map[Method, MethodExtra]()
   var complexTime: Long = 0
   var nonCycleTime: Long = 0
@@ -76,7 +92,7 @@ trait FabaProcessor extends Processor {
     val stable = stableClass || (methodNode.name == "<init>") ||
       (acc & ACC_FINAL) != 0 || (acc & ACC_PRIVATE) != 0 || (acc & ACC_STATIC) != 0
 
-    if (!doNothing)
+    if (!idle)
       extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
 
     handlePurityEquation(purityEquation(method, methodNode, stable))
@@ -84,10 +100,6 @@ trait FabaProcessor extends Processor {
     if (argumentTypes.length == 0 && !(isReferenceResult || isBooleanResult)) {
       return
     }
-
-
-    if (!doNothing)
-      extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
 
     var added = false
     val graph = buildCFG(className, methodNode, jsr)
@@ -180,12 +192,17 @@ trait FabaProcessor extends Processor {
     // leaking params will be taken for
     lazy val leaking = leakingParameters(className, methodNode, jsr)
     lazy val resultOrigins = buildResultOrigins(className, methodNode, leaking.frames, graph)
+    lazy val approximateToTop = resultOrigins.size > maxResultOrigins
     lazy val influence = ResultInfluence.analyze(methodNode, leaking, resultOrigins)
     val richControlFlow = RichControlFlow(graph, dfs)
 
     lazy val resultEquation: Equation[Key, Value] = outContractEquation(richControlFlow, resultOrigins, stable, !cycle)
     if (isReferenceResult) {
-      handleOutContractEquation(resultEquation)
+      if (approximateToTop) {
+        handleOutContractEquation(Equation(Key(method, Out, stable), Final(Values.Top)))
+      } else {
+        handleOutContractEquation(resultEquation)
+      }
       handleNullableResultEquation(nullableResultEquation(className, methodNode, method, resultOrigins, stable, jsr))
     }
     for (i <- argumentTypes.indices) {
@@ -230,11 +247,16 @@ trait FabaProcessor extends Processor {
 
         // [[[ contract analysis
         if (isReferenceResult || isBooleanResult) {
-          if (stable) {
+          if (approximateToTop) {
+            handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Top)))
+            handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), Final(Values.Top)))
+          }
+          else if (stable) {
             val paramInfluence = leaking.splittingParameters(i) || influence(i)
             if (leaking.parameters(i)) {
               val unconditionalDereference = dereferenceFound && !leaking.splittingParameters(i) && !resultOrigins.parameters(i)
-              // null->... analysis
+
+              // [[[ null->... analysis
               if (notNullParam) {
                 handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Bot)))
               } else if (unconditionalDereference) {
@@ -245,13 +267,17 @@ trait FabaProcessor extends Processor {
                 // no influence - result is the same as the main equation
                 handleNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
               }
+              // ]]] null->... analysis
+
+              // [[[ !null -> analysis
               if (paramInfluence) {
-                val eq1 = notNullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle)
-                handleNotNullContractEquation(eq1)
+                handleNotNullContractEquation(notNullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle))
               } else {
                 handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
               }
-            } else {
+            }
+            // not leaking - approximating it by out equation
+            else {
               handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
               handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
             }
