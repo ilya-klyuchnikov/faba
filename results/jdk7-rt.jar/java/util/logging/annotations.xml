@@ -38,6 +38,11 @@
   <item name="java.util.logging.FileHandler.MeteredStream void write(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.logging.Formatter Formatter()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.util.logging.Formatter java.lang.String formatMessage(java.util.logging.LogRecord) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -45,16 +50,42 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.logging.Formatter java.lang.String getHead(java.util.logging.Handler)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.logging.Formatter java.lang.String getTail(java.util.logging.Handler) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.logging.Formatter java.lang.String getTail(java.util.logging.Handler)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.logging.Handler boolean isLoggable(java.util.logging.LogRecord) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.logging.Handler java.lang.String getEncoding()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.Handler java.util.logging.Filter getFilter()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.Handler java.util.logging.Formatter getFormatter()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.Handler java.util.logging.Level getLevel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.util.logging.Handler void setErrorManager(java.util.logging.ErrorManager) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -73,17 +104,62 @@
   </item>
   <item name="java.util.logging.Level boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
+      <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="java.util.logging.Level int access$100(java.util.logging.Level) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.logging.Level int access$100(java.util.logging.Level)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.Level int hashCode()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.Level int intValue()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.util.logging.Level java.lang.String access$000(java.util.logging.Level) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.logging.Level java.lang.String access$000(java.util.logging.Level)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.util.logging.Level java.lang.String access$200(java.util.logging.Level) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.logging.Level java.lang.String access$200(java.util.logging.Level)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.Level java.lang.String getLevelName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.Level java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.Level java.lang.String getResourceBundleName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.Level java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.util.logging.Level java.util.logging.Level findLevel(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -144,8 +220,23 @@
   <item name="java.util.logging.LogManager java.lang.ref.ReferenceQueue access$1300(java.util.logging.LogManager) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.logging.LogManager java.lang.ref.ReferenceQueue access$1300(java.util.logging.LogManager)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.util.logging.LogManager java.util.List&lt;java.util.logging.LogManager.LoggerContext&gt; contexts()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.logging.LogManager java.util.logging.Level access$1400()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.LogManager java.util.logging.LogManager access$100()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.util.logging.LogManager java.util.logging.LogManager access$102(java.util.logging.LogManager)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -155,11 +246,26 @@
   <item name="java.util.logging.LogManager java.util.logging.LogManager.LoggerContext access$400(java.util.logging.LogManager) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.logging.LogManager java.util.logging.LogManager.LoggerContext access$400(java.util.logging.LogManager)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.util.logging.LogManager java.util.logging.LogManager.LoggerContext access$500(java.util.logging.LogManager) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.logging.LogManager java.util.logging.LogManager.LoggerContext access$500(java.util.logging.LogManager)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.util.logging.LogManager java.util.logging.Logger access$200(java.util.logging.LogManager) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.logging.LogManager java.util.logging.Logger access$200(java.util.logging.LogManager)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.util.logging.LogManager java.util.logging.Logger access$202(java.util.logging.LogManager, java.util.logging.Logger) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -186,6 +292,11 @@
   </item>
   <item name="java.util.logging.LogManager void resetLogger(java.util.logging.Logger) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.logging.LogManager.1 1()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.util.logging.LogManager.1 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -268,6 +379,61 @@
   <item name="java.util.logging.LogRecord boolean isLoggerImplFrame(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.logging.LogRecord boolean isLoggerImplFrame(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.LogRecord int getThreadID()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.LogRecord java.lang.Object[] getParameters()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.LogRecord java.lang.String getLoggerName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.LogRecord java.lang.String getMessage()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.LogRecord java.lang.String getResourceBundleName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.LogRecord java.lang.Throwable getThrown()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.LogRecord java.util.ResourceBundle getResourceBundle()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.LogRecord java.util.logging.Level getLevel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.LogRecord long getMillis()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.LogRecord long getSequenceNumber()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.util.logging.LogRecord void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -286,14 +452,34 @@
   <item name="java.util.logging.Logger Logger(java.lang.String, java.lang.String, java.lang.Class&lt;?&gt;) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.logging.Logger boolean getUseParentHandlers()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.util.logging.Logger boolean isLoggable(java.util.logging.Level) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.logging.Logger boolean isLoggable(java.util.logging.Level)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.util.logging.Logger java.lang.ClassLoader getCallersClassLoader()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.logging.Logger java.lang.String getEffectiveResourceBundleName()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.logging.Logger java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.Logger java.lang.String getResourceBundleName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.util.logging.Logger java.util.ResourceBundle findResourceBundle(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -313,6 +499,16 @@
   <item name="java.util.logging.Logger java.util.ResourceBundle getResourceBundle()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.logging.Logger java.util.logging.Filter getFilter()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.Logger java.util.logging.Level getLevel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.util.logging.Logger java.util.logging.Logger getAnonymousLogger()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -321,6 +517,16 @@
   </item>
   <item name="java.util.logging.Logger java.util.logging.Logger getAnonymousLogger(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.logging.Logger java.util.logging.Logger getGlobal()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.Logger java.util.logging.Logger getParent()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.util.logging.Logger void addHandler(java.util.logging.Handler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -412,6 +618,16 @@
   <item name="java.util.logging.Logger.1 java.util.ResourceBundle run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.logging.Logger.LoggerHelper LoggerHelper()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.util.logging.Logging Logging()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.util.logging.Logging java.lang.String getLoggerLevel(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -430,11 +646,21 @@
   <item name="java.util.logging.LoggingPermission LoggingPermission(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.logging.LoggingProxyImpl LoggingProxyImpl()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.util.logging.LoggingProxyImpl boolean isLoggable(java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.logging.LoggingProxyImpl int getLevelValue(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.logging.LoggingProxyImpl int getLevelValue(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.util.logging.LoggingProxyImpl java.lang.Object getLevel(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -444,6 +670,11 @@
   </item>
   <item name="java.util.logging.LoggingProxyImpl java.lang.String getLevelName(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.logging.LoggingProxyImpl java.lang.String getLevelName(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.util.logging.LoggingProxyImpl void log(java.lang.Object, java.lang.Object, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -465,6 +696,11 @@
   </item>
   <item name="java.util.logging.MemoryHandler boolean isLoggable(java.util.logging.LogRecord) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.logging.MemoryHandler java.util.logging.Level getPushLevel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.util.logging.MemoryHandler void setPushLevel(java.util.logging.Level) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -499,6 +735,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.logging.XMLFormatter java.lang.String getTail(java.util.logging.Handler)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.logging.XMLFormatter void a2(java.lang.StringBuffer, int) 0">

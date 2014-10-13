@@ -2,14 +2,39 @@
   <item name="com.sun.jndi.ldap.BasicControl BasicControl(java.lang.String, boolean, byte[]) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jndi.ldap.BasicControl boolean isCritical()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.BasicControl byte[] getEncodedValue()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.jndi.ldap.BasicControl java.lang.String getID()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.Ber Ber()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.BerDecoder byte[] parseOctetString(int, int[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jndi.ldap.BerDecoder byte[] parseOctetString(int, int[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.BerDecoder int bytesLeft()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.BerDecoder int getParsePosition()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.BerDecoder int parseSeq(int[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -26,6 +51,11 @@
   <item name="com.sun.jndi.ldap.BerEncoder byte[] getTrimmedBuf()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.BerEncoder int getDataLen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.BerEncoder void encodeOctetString(byte[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -37,6 +67,11 @@
   </item>
   <item name="com.sun.jndi.ldap.BerEncoder void encodeStringArray(java.lang.String[], boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.jndi.ldap.BindingWithControls javax.naming.ldap.Control[] getControls()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.ClientId ClientId(int, java.lang.String, int, java.lang.String, javax.naming.ldap.Control[], java.io.OutputStream, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -66,6 +101,11 @@
       <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.jndi.ldap.ClientId int hashCode()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.ClientId int hashCodeControls(javax.naming.ldap.Control[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -85,6 +125,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.Connection com.sun.jndi.ldap.LdapRequest findRequest(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jndi.ldap.Connection com.sun.jndi.ldap.LdapRequest writeRequest(com.sun.jndi.ldap.BerEncoder, int) 0">
@@ -104,6 +147,11 @@
   </item>
   <item name="com.sun.jndi.ldap.Connection com.sun.jndi.ldap.LdapRequest writeRequest(com.sun.jndi.ldap.BerEncoder, int, boolean, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.Connection java.io.InputStream getInputStream()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.Connection java.net.Socket createSocket(java.lang.String, int, java.lang.String, int) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -125,6 +173,11 @@
   </item>
   <item name="com.sun.jndi.ldap.Connection void removeRequest(com.sun.jndi.ldap.LdapRequest) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.jndi.ldap.DefaultResponseControlFactory DefaultResponseControlFactory()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.DefaultResponseControlFactory javax.naming.ldap.Control getControlInstance(javax.naming.ldap.Control) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -152,11 +205,31 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.jndi.ldap.DigestClientId int hashCode()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.DigestClientId java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.EntryChangeResponseControl EntryChangeResponseControl(java.lang.String, boolean, byte[]) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.jndi.ldap.EntryChangeResponseControl int getChangeType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.EntryChangeResponseControl java.lang.String getPreviousDN()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.EntryChangeResponseControl long getChangeNumber()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.EventSupport void addNamingListener(java.lang.String, int, javax.naming.event.NamingListener) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -170,8 +243,28 @@
   <item name="com.sun.jndi.ldap.EventSupport void queueEvent(java.util.EventObject, java.util.Vector) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.Filter Filter()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.Filter byte[] unescapeFilterValue(byte[], int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.Filter int findUnescaped(byte[], char, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.Filter int hexchar2int(byte)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.Filter int indexOf(byte[], char, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.Filter int indexOf(byte[], java.lang.String, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -247,6 +340,11 @@
   <item name="com.sun.jndi.ldap.LdapClient LdapClient(java.lang.String, int, java.lang.String, int, int, java.io.OutputStream, com.sun.jndi.ldap.pool.PoolCallback) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapClient boolean authenticateCalled()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.LdapClient boolean hasNoValue(javax.naming.directory.Attribute) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -255,6 +353,11 @@
   </item>
   <item name="com.sun.jndi.ldap.LdapClient boolean isBinaryValued(java.lang.String, java.util.Hashtable) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapClient boolean usingSaslStreams()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.LdapClient byte[] encodePassword(java.lang.Object, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -493,6 +596,11 @@
   <item name="com.sun.jndi.ldap.LdapCtx boolean searchToCompare(java.lang.String, javax.naming.directory.SearchControls, java.lang.String[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapCtx boolean targetMustExist()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.LdapCtx com.sun.jndi.ldap.LdapResult compare(javax.naming.Name, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -540,6 +648,11 @@
   <item name="com.sun.jndi.ldap.LdapCtx int findControl(javax.naming.ldap.Control[], javax.naming.ldap.Control) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapCtx int findControl(javax.naming.ldap.Control[], javax.naming.ldap.Control)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.LdapCtx java.lang.Object addToEnvironment(java.lang.String, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -570,8 +683,18 @@
   <item name="com.sun.jndi.ldap.LdapCtx java.lang.String fullyQualifiedName(javax.naming.Name) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapCtx java.lang.String getNameInNamespace()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.LdapCtx java.lang.String getTargetName(javax.naming.Name) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapCtx java.util.Hashtable p_getEnvironment()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.LdapCtx java.util.Vector appendVector(java.util.Vector, java.util.Vector) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -870,6 +993,11 @@
   <item name="com.sun.jndi.ldap.LdapCtx void setWaitForReply(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapCtxFactory LdapCtxFactory()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.LdapCtxFactory boolean isLdapRef(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -911,6 +1039,11 @@
   <item name="com.sun.jndi.ldap.LdapName LdapName(java.lang.String, java.util.Vector) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapName boolean access$000(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.LdapName boolean endsWith(javax.naming.Name) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -920,6 +1053,11 @@
   <item name="com.sun.jndi.ldap.LdapName boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapName boolean isWhitespace(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.jndi.ldap.LdapName boolean matches(int, int, javax.naming.Name)">
@@ -983,6 +1121,11 @@
   </item>
   <item name="com.sun.jndi.ldap.LdapName.DnParser DnParser(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapName.DnParser boolean atTerminator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.LdapName.DnParser java.lang.String parseAttrType()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1048,8 +1191,18 @@
   <item name="com.sun.jndi.ldap.LdapName.TypeAndValue java.lang.String escapeValue(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapName.TypeAndValue java.lang.String getType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.LdapName.TypeAndValue java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapNameParser LdapNameParser()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.LdapNameParser javax.naming.Name parse(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1077,6 +1230,11 @@
   </item>
   <item name="com.sun.jndi.ldap.LdapNamingEnumeration void update(com.sun.jndi.ldap.LdapNamingEnumeration) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapPoolManager LdapPoolManager()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.LdapPoolManager boolean isPoolingAllowed(java.lang.String, java.io.OutputStream, java.lang.String, java.lang.String, java.util.Hashtable) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1129,8 +1287,18 @@
   <item name="com.sun.jndi.ldap.LdapReferralContext java.lang.String composeName(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapReferralContext java.lang.String overrideFilter(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.LdapReferralContext javax.naming.Context createSubcontext(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapReferralContext javax.naming.Name overrideName(javax.naming.Name)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.LdapReferralContext javax.naming.Name toName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1245,6 +1413,11 @@
   <item name="com.sun.jndi.ldap.LdapRequest boolean addReplyBer(com.sun.jndi.ldap.BerDecoder)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapRequest boolean hasSearchCompleted()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.jndi.ldap.LdapSchemaCtx com.sun.jndi.ldap.LdapSchemaCtx setup(int, java.lang.String, javax.naming.directory.Attributes) 1">
@@ -1528,6 +1701,41 @@
   <item name="com.sun.jndi.ldap.LdapURL boolean hasQueryComponents(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapURL boolean hasQueryComponents(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapURL boolean useSsl()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapURL java.lang.String getAttributes()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapURL java.lang.String getDN()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapURL java.lang.String getExtensions()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapURL java.lang.String getFilter()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapURL java.lang.String getScope()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.LdapURL java.lang.String toUrlString(java.lang.String, int, java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1536,6 +1744,11 @@
   </item>
   <item name="com.sun.jndi.ldap.LdapURL java.lang.String[] fromList(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.NameClassPairWithControls javax.naming.ldap.Control[] getControls()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.NamingEventNotifier NamingEventNotifier(com.sun.jndi.ldap.EventSupport, com.sun.jndi.ldap.LdapCtx, com.sun.jndi.ldap.NotifierArgs, javax.naming.event.NamingListener) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1558,12 +1771,22 @@
   <item name="com.sun.jndi.ldap.NotifierArgs boolean checkStringArrays(java.lang.String[], java.lang.String[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jndi.ldap.NotifierArgs boolean checkStringArrays(java.lang.String[], java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.NotifierArgs boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jndi.ldap.NotifierArgs boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.Obj Obj()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.jndi.ldap.Obj java.lang.Object decodeObject(javax.naming.directory.Attributes) 0">
@@ -1627,6 +1850,16 @@
   <item name="com.sun.jndi.ldap.PersistentSearchControl byte[] setEncodedValue()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.SearchResultWithControls javax.naming.ldap.Control[] getControls()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.ServiceLocator ServiceLocator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.ServiceLocator java.lang.String mapDnToDomainName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1657,6 +1890,11 @@
   <item name="com.sun.jndi.ldap.ServiceLocator.SrvRecord int compareTo(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.ServiceLocator.SrvRecord int compareTo(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.SimpleClientId SimpleClientId(int, java.lang.String, int, java.lang.String, javax.naming.ldap.Control[], java.io.OutputStream, java.lang.String, java.lang.String, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1674,6 +1912,11 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.jndi.ldap.SimpleClientId int hashCode()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.SimpleClientId java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1686,10 +1929,55 @@
   <item name="com.sun.jndi.ldap.UnsolicitedResponseImpl UnsolicitedResponseImpl(java.lang.String, byte[], java.util.Vector, int, java.lang.String, java.lang.String, javax.naming.ldap.Control[]) 5">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jndi.ldap.UnsolicitedResponseImpl byte[] getEncodedValue()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.UnsolicitedResponseImpl java.lang.String getID()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.UnsolicitedResponseImpl java.lang.String[] getReferrals()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.UnsolicitedResponseImpl javax.naming.NamingException getException()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.UnsolicitedResponseImpl javax.naming.ldap.Control[] getControls()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.VersionHelper VersionHelper()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.VersionHelper com.sun.jndi.ldap.VersionHelper getVersionHelper()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.VersionHelper java.net.URL[] getUrlArray(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.ldap.VersionHelper12 VersionHelper12()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.VersionHelper12 java.lang.ClassLoader getURLClassLoader(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.jndi.ldap.VersionHelper12.1 1()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
 </root>

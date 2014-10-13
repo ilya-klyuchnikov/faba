@@ -107,8 +107,18 @@
   <item name="com.sun.org.apache.bcel.internal.util.ByteSequence ByteSequence(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.util.ByteSequence int getIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.util.ByteSequence.ByteArrayStream ByteArrayStream(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.util.ByteSequence.ByteArrayStream int getPosition()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.util.Class2HTML Class2HTML(com.sun.org.apache.bcel.internal.classfile.JavaClass, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -142,7 +152,7 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.util.ClassLoader com.sun.org.apache.bcel.internal.classfile.JavaClass modifyClass(com.sun.org.apache.bcel.internal.classfile.JavaClass)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+      <val val="value=&quot;!null-&gt;!null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.util.ClassLoader void addIgnoredPkgs(java.lang.String[]) 0">
@@ -171,7 +181,7 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.util.ClassPath boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
+      <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.util.ClassPath byte[] getBytes(java.lang.String, java.lang.String)">
@@ -180,8 +190,18 @@
   <item name="com.sun.org.apache.bcel.internal.util.ClassPath java.lang.String getPath(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.util.ClassPath java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.util.ClassPath void getPathComponents(java.lang.String, java.util.ArrayList) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.util.ClassPath.1 1()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.util.ClassPath.1 boolean accept(java.io.File, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -201,14 +221,39 @@
   <item name="com.sun.org.apache.bcel.internal.util.ClassPath.Dir java.lang.String access$100(com.sun.org.apache.bcel.internal.util.ClassPath.Dir) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.util.ClassPath.Dir java.lang.String access$100(com.sun.org.apache.bcel.internal.util.ClassPath.Dir)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.util.ClassPath.Dir java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.util.ClassPath.Dir.1 java.io.InputStream getInputStream()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.util.ClassPath.Dir.1 java.lang.String getBase()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.util.ClassPath.Dir.1 java.lang.String getPath()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.util.ClassPath.PathEntry PathEntry()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.util.ClassPath.PathEntry PathEntry(com.sun.org.apache.bcel.internal.util.ClassPath.1) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.util.ClassPath.PathEntry PathEntry(com.sun.org.apache.bcel.internal.util.ClassPath.1)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.util.ClassPath.Zip com.sun.org.apache.bcel.internal.util.ClassPath.ClassFile getClassFile(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -221,6 +266,11 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.util.ClassPath.Zip java.util.zip.ZipFile access$200(com.sun.org.apache.bcel.internal.util.ClassPath.Zip) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.util.ClassPath.Zip java.util.zip.ZipFile access$200(com.sun.org.apache.bcel.internal.util.ClassPath.Zip)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.util.ClassSet boolean add(com.sun.org.apache.bcel.internal.classfile.JavaClass) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -267,8 +317,23 @@
   <item name="com.sun.org.apache.bcel.internal.util.ConstantHTML int getMethodNumber(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.util.ConstantHTML java.lang.String referenceConstant(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.util.InstructionFinder char makeChar(short)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.util.InstructionFinder com.sun.org.apache.bcel.internal.generic.InstructionHandle[] getMatch(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.util.InstructionFinder com.sun.org.apache.bcel.internal.generic.InstructionList getInstructionList()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.util.InstructionFinder java.lang.String compilePattern(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -351,14 +416,34 @@
   <item name="com.sun.org.apache.bcel.internal.util.Objects int hashCode(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.util.SecuritySupport SecuritySupport()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.util.SecuritySupport com.sun.org.apache.bcel.internal.util.SecuritySupport getInstance()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.util.SecuritySupport java.lang.ClassLoader findClassLoader()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.util.SecuritySupport.1 1()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.util.SecuritySupport.1 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.util.SecuritySupport.10 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.util.SecuritySupport.2 2()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.util.SecuritySupport.2 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>

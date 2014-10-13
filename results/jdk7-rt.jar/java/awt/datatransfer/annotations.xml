@@ -5,8 +5,18 @@
   <item name="java.awt.datatransfer.Clipboard java.awt.datatransfer.Transferable getContents(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.awt.datatransfer.Clipboard java.awt.datatransfer.Transferable getContents(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.awt.datatransfer.Clipboard java.lang.Object getData(java.awt.datatransfer.DataFlavor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.datatransfer.Clipboard java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.awt.datatransfer.Clipboard java.util.Set getAvailableDataFlavorSet()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -16,6 +26,11 @@
   </item>
   <item name="java.awt.datatransfer.Clipboard void removeFlavorListener(java.awt.datatransfer.FlavorListener) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.awt.datatransfer.DataFlavor DataFlavor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.awt.datatransfer.DataFlavor DataFlavor(java.lang.Class&lt;?&gt;, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -98,6 +113,21 @@
   <item name="java.awt.datatransfer.DataFlavor java.io.Reader getReaderForText(java.awt.datatransfer.Transferable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.datatransfer.DataFlavor java.lang.Class&lt;?&gt; getDefaultRepresentationClass()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.datatransfer.DataFlavor java.lang.Class&lt;?&gt; getRepresentationClass()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.datatransfer.DataFlavor java.lang.String getHumanPresentableName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.awt.datatransfer.DataFlavor java.lang.String getMimeType()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -115,7 +145,7 @@
   </item>
   <item name="java.awt.datatransfer.DataFlavor java.lang.String normalizeMimeType(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+      <val val="value=&quot;!null-&gt;!null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="java.awt.datatransfer.DataFlavor java.lang.String normalizeMimeTypeParameter(java.lang.String, java.lang.String) 0">
@@ -123,7 +153,7 @@
   </item>
   <item name="java.awt.datatransfer.DataFlavor java.lang.String normalizeMimeTypeParameter(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
+      <val val="value=&quot;_,!null-&gt;!null;_,null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="java.awt.datatransfer.DataFlavor java.lang.String paramString()">
@@ -153,6 +183,11 @@
   <item name="java.awt.datatransfer.FlavorEvent FlavorEvent(java.awt.datatransfer.Clipboard) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.datatransfer.MimeType MimeType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.awt.datatransfer.MimeType MimeType(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -179,6 +214,11 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="java.awt.datatransfer.MimeType boolean isTokenChar(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.awt.datatransfer.MimeType boolean isValidToken(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -201,6 +241,16 @@
   <item name="java.awt.datatransfer.MimeType java.lang.String getBaseType()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.datatransfer.MimeType java.lang.String getPrimaryType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.datatransfer.MimeType java.lang.String getSubType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.awt.datatransfer.MimeType java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -219,6 +269,11 @@
   <item name="java.awt.datatransfer.MimeTypeParameterList boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="java.awt.datatransfer.MimeTypeParameterList boolean isTokenChar(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="java.awt.datatransfer.MimeTypeParameterList int skipWhiteSpace(java.lang.String, int) 0">
@@ -267,6 +322,11 @@
   <item name="java.awt.datatransfer.StringSelection void lostOwnership(java.awt.datatransfer.Clipboard, java.awt.datatransfer.Transferable) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.awt.datatransfer.StringSelection void lostOwnership(java.awt.datatransfer.Clipboard, java.awt.datatransfer.Transferable)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.awt.datatransfer.SystemFlavorMap boolean continueLine(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -275,7 +335,7 @@
   </item>
   <item name="java.awt.datatransfer.SystemFlavorMap boolean isJavaMIMEType(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
+      <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="java.awt.datatransfer.SystemFlavorMap java.awt.datatransfer.DataFlavor decodeDataFlavor(java.lang.String)">

@@ -58,6 +58,11 @@
   <item name="com.sun.xml.internal.ws.addressing.EPRSDDocumentFilter.1 void writeStartElement(java.lang.String, java.lang.String, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.addressing.EndpointReferenceUtil EndpointReferenceUtil()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.addressing.EndpointReferenceUtil T transform(java.lang.Class&lt;T&gt;, javax.xml.ws.EndpointReference) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -78,7 +83,7 @@
   </item>
   <item name="com.sun.xml.internal.ws.addressing.EndpointReferenceUtil java.lang.String fixNull(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+      <val val="value=&quot;!null-&gt;!null;null-&gt;!null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.addressing.EndpointReferenceUtil java.util.Map&lt;javax.xml.namespace.QName,java.lang.String&gt; getAttributes(org.w3c.dom.Node) 0">
@@ -89,6 +94,31 @@
   </item>
   <item name="com.sun.xml.internal.ws.addressing.EndpointReferenceUtil javax.xml.ws.wsaddressing.W3CEndpointReference toW3CEpr(com.sun.xml.internal.ws.developer.MemberSubmissionEndpointReference)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.addressing.ProblemAction ProblemAction()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.addressing.ProblemAction java.lang.String getAction()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.addressing.ProblemAction java.lang.String getSoapAction()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.addressing.ProblemHeaderQName ProblemHeaderQName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.addressing.W3CAddressingMetadataConstants W3CAddressingMetadataConstants()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.addressing.W3CWsaClientTube W3CWsaClientTube(com.sun.xml.internal.ws.addressing.WsaClientTube, com.sun.xml.internal.ws.api.pipe.TubeCloner) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -129,8 +159,18 @@
   <item name="com.sun.xml.internal.ws.addressing.W3CWsaServerTube void checkAnonymousSemantics(com.sun.xml.internal.ws.api.model.wsdl.WSDLBoundOperation, com.sun.xml.internal.ws.api.addressing.WSEndpointReference, com.sun.xml.internal.ws.api.addressing.WSEndpointReference) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.addressing.WSEPRExtension javax.xml.namespace.QName getQName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.addressing.WSEPRExtension javax.xml.stream.XMLStreamReader readAsXMLStreamReader()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.addressing.WsaActionUtil WsaActionUtil()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.addressing.WsaActionUtil java.lang.String getDefaultFaultAction(com.sun.xml.internal.ws.api.model.JavaMethod, com.sun.xml.internal.ws.api.model.CheckedException) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -165,6 +205,11 @@
   <item name="com.sun.xml.internal.ws.addressing.WsaClientTube com.sun.xml.internal.ws.api.pipe.NextAction processResponse(com.sun.xml.internal.ws.api.message.Packet) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.addressing.WsaPropertyBag com.sun.xml.internal.ws.api.PropertySet.PropertyMap getPropertyMap()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.addressing.WsaPropertyBag com.sun.xml.internal.ws.api.addressing.WSEndpointReference getEPR(javax.xml.namespace.QName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -194,7 +239,7 @@
   </item>
   <item name="com.sun.xml.internal.ws.addressing.WsaServerTube boolean isAnonymousRequired(com.sun.xml.internal.ws.api.model.wsdl.WSDLBoundOperation)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+      <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.addressing.WsaServerTube com.sun.xml.internal.ws.addressing.WsaServerTube copy(com.sun.xml.internal.ws.api.pipe.TubeCloner) 0">
@@ -217,6 +262,11 @@
   </item>
   <item name="com.sun.xml.internal.ws.addressing.WsaServerTube void checkAnonymousSemantics(com.sun.xml.internal.ws.api.model.wsdl.WSDLBoundOperation, com.sun.xml.internal.ws.api.addressing.WSEndpointReference, com.sun.xml.internal.ws.api.addressing.WSEndpointReference) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.addressing.WsaServerTube void checkAnonymousSemantics(com.sun.xml.internal.ws.api.model.wsdl.WSDLBoundOperation, com.sun.xml.internal.ws.api.addressing.WSEndpointReference, com.sun.xml.internal.ws.api.addressing.WSEndpointReference)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.addressing.WsaServerTube void checkNonAnonymousAddresses(com.sun.xml.internal.ws.api.addressing.WSEndpointReference, com.sun.xml.internal.ws.api.addressing.WSEndpointReference) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
