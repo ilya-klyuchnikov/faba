@@ -71,19 +71,25 @@ trait FabaProcessor extends Processor {
     val isReferenceResult = resultSort == Type.OBJECT || resultSort == Type.ARRAY
     val isBooleanResult = Type.BOOLEAN_TYPE == resultType
 
+    val method = Method(className, methodNode.name, methodNode.desc)
+    val acc = methodNode.access
+    val stable = stableClass || (methodNode.name == "<init>") ||
+      (acc & ACC_FINAL) != 0 || (acc & ACC_PRIVATE) != 0 || (acc & ACC_STATIC) != 0
+
+    if (!doNothing)
+      extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
+
+    handlePurityEquation(purityEquation(method, methodNode, stable))
+
     if (argumentTypes.length == 0 && !(isReferenceResult || isBooleanResult)) {
       return
     }
 
-    val method = Method(className, methodNode.name, methodNode.desc)
+
     if (!doNothing)
       extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
 
-    val acc = methodNode.access
-    val stable = stableClass || (methodNode.name == "<init>") ||
-      (acc & ACC_FINAL) != 0 || (acc & ACC_PRIVATE) != 0 || (acc & ACC_STATIC) != 0
     var added = false
-
     val graph = buildCFG(className, methodNode, jsr)
 
     if (graph.transitions.nonEmpty) {
@@ -253,6 +259,9 @@ trait FabaProcessor extends Processor {
   def isReducible(graph: ControlFlowGraph, dfs: DFSTree): Boolean =
     cfg.reducible(graph, dfs)
 
+  def purityEquation(method: Method, methodNode: MethodNode, stable: Boolean): Equation[Key, Value] =
+    PurityAnalysis.analyze(method, methodNode, stable)
+
   def notNullParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean): (Equation[Key, Value], Boolean) = {
     val analyser = new NotNullInAnalysis(richControlFlow, In(i), stable)
     try {
@@ -307,6 +316,7 @@ trait FabaProcessor extends Processor {
   def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, origins: Array[Boolean], stable: Boolean, jsr: Boolean): Equation[Key, Value] =
     Equation(Key(method, Out, stable), NullableResultAnalysis.analyze(className, methodNode, origins, jsr))
 
+  def handlePurityEquation(eq: Equation[Key, Value]): Unit = ()
   def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit = ()
   def handleNullableParamEquation(eq: Equation[Key, Value]): Unit = ()
   def handleNotNullContractEquation(eq: Equation[Key, Value]): Unit = ()

@@ -22,6 +22,7 @@ class MainProcessor extends FabaProcessor {
   val nullableParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Null, Values.Top))
   val contractsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Bot, Values.Top))
   val nullableResultSolver = new NullableResultSolver[Key, Values.Value](doNothing)(ELattice(Values.Bot, Values.Null))
+  val puritySolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Pure, Values.Top))
 
   var notNullParamsTime: Long = 0
   var nullableParamsTime: Long = 0
@@ -29,6 +30,7 @@ class MainProcessor extends FabaProcessor {
   var outTime: Long = 0
   var nullTime: Long = 0
   var notNullTime: Long = 0
+  var purityTime: Long = 0
   var cfgTime: Long = 0
   var resultOriginsTime: Long = 0
   var resultOriginsTime2: Long = 0
@@ -62,6 +64,13 @@ class MainProcessor extends FabaProcessor {
     val start = System.nanoTime()
     val result = super.buildDFSTree(transitions)
     dfsTime += System.nanoTime() - start
+    result
+  }
+
+  override def purityEquation(method: Method, methodNode: MethodNode, stable: Boolean) = {
+    val start = System.nanoTime()
+    val result = super.purityEquation(method, methodNode, stable)
+    purityTime += System.nanoTime() - start
     result
   }
 
@@ -114,6 +123,8 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
+  override def handlePurityEquation(eq: Equation[Key, Value]): Unit =
+    puritySolver.addEquation(eq)
   override def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit =
     notNullParamsSolver.addEquation(eq)
   override def handleNullableParamEquation(eq: Equation[Key, Value]): Unit = {
@@ -168,13 +179,22 @@ class MainProcessor extends FabaProcessor {
       val byPackageNullableResultSolutions: Map[String, Map[Key, Values.Value]] =
         nullableResults.groupBy(_._1.method.internalPackageName)
 
-      val pkgs = byPackageProd.keys ++ byPackageNullableResultSolutions.keys
+      val puritySolutions =
+        puritySolver.solve().filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
+
+      val byPackagePuritySolutions: Map[String, Map[Key, Values.Value]] =
+        puritySolutions.groupBy(_._1.method.internalPackageName)
+
+      // combining all packages
+      val pkgs =
+        byPackageProd.keys ++ byPackageNullableResultSolutions.keys ++ byPackagePuritySolutions.keys
 
       for (pkg <- pkgs) {
         val xmlAnnotations =
           XmlUtils.toXmlAnnotations(
             byPackageProd.getOrElse(pkg, Map()),
             byPackageNullableResultSolutions.getOrElse(pkg, Map()),
+            byPackagePuritySolutions.getOrElse(pkg, Map()),
             extras,
             debug = false)
         printToFile(new File(s"$outDir${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
@@ -189,6 +209,7 @@ class MainProcessor extends FabaProcessor {
       println(s"${prodSolutions.size} prod contracts")
       println(s"${nullableParams.size} @Nullable parameters")
       println(s"${nullableResults.size} @Nullable results")
+      println(s"${puritySolutions.size} @Pure methods")
     }
 
     println("====")
@@ -200,6 +221,7 @@ class MainProcessor extends FabaProcessor {
     println(s"nullableRes    ${nullableResultTime / 1000000} msec")
     println(s" null->...     ${nullTime / 1000000} msec")
     println(s"!null->...     ${notNullTime / 1000000} msec")
+    println(s"pure=true      ${purityTime / 1000000} msec")
     println("====")
     println(s"cfg            ${cfgTime / 1000000} msec")
     println(s"origins        ${resultOriginsTime / 1000000} msec")

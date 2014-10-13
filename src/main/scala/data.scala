@@ -2,6 +2,7 @@ package faba.data
 
 import faba.engine.StableAwareId
 import org.objectweb.asm.signature.{SignatureVisitor, SignatureReader}
+import scala.collection.mutable.ListBuffer
 import scala.xml.Elem
 
 import org.objectweb.asm.{Opcodes, Type}
@@ -39,7 +40,7 @@ case class Key(method: Method, direction: Direction, stable: Boolean) extends St
 }
 
 object Values extends Enumeration {
-  val Bot, NotNull, Null, True, False, Top = Value
+  val Bot, NotNull, Null, True, False, Pure, Top = Value
 }
 
 object `package` {
@@ -97,9 +98,22 @@ object XmlUtils {
   val nullableResultAnnotations = List(<annotation name='org.jetbrains.annotations.Nullable'/>)
   val notNullAnn = <annotation name='org.jetbrains.annotations.NotNull'/>
 
-  def toXmlAnnotations(solutions: Iterable[(Key, Value)], nullableResults: Iterable[(Key, Value)], extras: Map[Method, MethodExtra], debug: Boolean = false): List[Elem] = {
+  // intermediate data structure to serialize @Contract annotations
+  class Contract {
+    var pure = false
+    var clauses = ListBuffer[(InOut, Value)]()
+  }
+
+  def toXmlAnnotations(solutions: Iterable[(Key, Value)],
+                       nullableResults: Iterable[(Key, Value)],
+                       pureSolutions: Iterable[(Key, Value)],
+                       extras: Map[Method, MethodExtra],
+                       debug: Boolean = false): List[Elem] = {
     var annotations = Map[String, List[Elem]]()
-    val inOuts = mutable.HashMap[Method, List[(InOut, Value)]]()
+
+    // preparations for contracts
+    val contracts = mutable.HashMap[Method, Contract]()
+
     for ((key, value) <- solutions) {
       key.direction match {
         case In(paramIndex) if value == Values.NotNull =>
@@ -128,31 +142,72 @@ object XmlUtils {
             List(<annotation name={value.toString.toLowerCase}/>)
           )
         case inOut:InOut =>
-          inOuts(key.method) = (inOut, value) :: inOuts.getOrElse(key.method, Nil)
+          if (!contracts.contains(key.method)) {
+            contracts(key.method) = new Contract()
+          }
+          contracts(key.method).clauses += (inOut -> value)
         case _ =>
 
       }
     }
-    for ((method, inOuts) <- inOuts) {
-      val key = annotationKey(method, extras(method))
-      val arity = Type.getArgumentTypes(method.methodDesc).size
-      val contractValues = inOuts.map { case (InOut(i, inValue), outValue) =>
-        (0 until arity).map { j =>
-          if (i == j) Utils.contractValueString(inValue) else "_" }.mkString("", ",", s"->${Utils.contractValueString(outValue)}")
-      }.sorted.mkString("\"", ";", "\"")
-      val contractAnnotation =
-        <annotation name='org.jetbrains.annotations.Contract'>
-          <val val={contractValues}/>
-        </annotation>
-      if (annotations.get(key).isEmpty) {
-        annotations = annotations.updated(key, contractAnnotation :: annotations.getOrElse(key, Nil))
+
+    // processing purity
+    for ((key, value) <- pureSolutions) {
+      if (value == Values.Pure) {
+        if (!contracts.contains(key.method)) {
+          contracts(key.method) = new Contract()
+        }
+        contracts(key.method).pure = true
       }
     }
+
+    // merging contracts and purity
+    for ((method, contract) <- contracts) {
+      val key = annotationKey(method, extras(method))
+      val arity = Type.getArgumentTypes(method.methodDesc).size
+
+      val contractValues: Option[String] =
+        if (annotations.get(key).isEmpty && contract.clauses.nonEmpty)
+          // to this moment `annotations` contains only @NotNull methods (for this key)
+          // if @NotNull is already inferred, we do not output @Contract clauses
+          // (but we may output @Contract(pure=true) part of contract annotation)
+          Some(contract.clauses.map { case (InOut(i, inValue), outValue) =>
+            (0 until arity).map { j =>
+              if (i == j) Utils.contractValueString(inValue) else "_" }.mkString("", ",", s"->${Utils.contractValueString(outValue)}")
+          }.sorted.mkString("\"", ";", "\""))
+        else None
+
+      val pure = contract.pure
+
+      val contractString: Option[String] = (contractValues, pure) match {
+        case (Some(values), false) =>
+          Some(values)
+        case (Some(values), true) =>
+          Some(s"value=$values,pure=true")
+        case (None, true) =>
+          Some("pure=true")
+        case (_, _) =>
+          None
+      }
+
+      val contractAnnotation = contractString.map { values =>
+        <annotation name='org.jetbrains.annotations.Contract'>
+          <val val={values}/>
+        </annotation>
+      }
+
+      contractAnnotation.foreach { ann =>
+        annotations = annotations.updated(key, ann :: annotations.getOrElse(key, Nil))
+      }
+
+    }
+
     for ((key, value) <- nullableResults) {
       val method = key.method
       val annKey = annotationKey(method, extras(method))
       annotations = annotations.updated(annKey, annotations.getOrElse(annKey, Nil) ::: nullableResultAnnotations)
     }
+
     annotations.map {
       case (k, v) => <item name={k}>{v}</item>
     }.toList.sortBy(s => (s \\ "@name").toString())
