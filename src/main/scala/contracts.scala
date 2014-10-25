@@ -25,8 +25,7 @@ object InOutAnalysis {
 class InOutAnalysis(val richControlFlow: RichControlFlow,
                     val direction: Direction,
                     resultOrigins: Origins,
-                    val stable: Boolean,
-                    val _noCycle: Boolean) extends Analysis[Result[Key, Value]] {
+                    val stable: Boolean) extends Analysis[Result[Key, Value]] {
 
   type MyResult = Result[Key, Value]
   implicit val contractsLattice = ELattice(Values.Bot, Values.Top)

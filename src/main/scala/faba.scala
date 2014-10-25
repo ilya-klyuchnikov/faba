@@ -188,7 +188,7 @@ trait FabaProcessor extends Processor {
     val richControlFlow = RichControlFlow(graph, dfs)
 
     // todo - do we need equations for boolean results?
-    lazy val resultEquation: Equation[Key, Value] = outContractEquation(richControlFlow, resultOrigins, stable, !cycle)
+    lazy val resultEquation: Equation[Key, Value] = outContractEquation(richControlFlow, resultOrigins, stable)
     if (isReferenceResult) {
       handleOutContractEquation(resultEquation)
       handleNullableResultEquation(nullableResultEquation(className, methodNode, method, resultOrigins, stable, jsr))
@@ -246,7 +246,7 @@ trait FabaProcessor extends Processor {
               } else if (unconditionalDereference) {
                 handleNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
               } else if (paramInfluence) {
-                handleNullContractEquation(nullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle))
+                handleNullContractEquation(nullContractEquation(richControlFlow, resultOrigins, i, stable))
               } else {
                 // no influence - result is the same as the main equation
                 handleNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
@@ -255,7 +255,7 @@ trait FabaProcessor extends Processor {
 
               // [[[ !null -> analysis
               if (paramInfluence) {
-                handleNotNullContractEquation(notNullContractEquation(richControlFlow, resultOrigins, i, stable, !cycle))
+                handleNotNullContractEquation(notNullContractEquation(richControlFlow, resultOrigins, i, stable))
               } else {
                 handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
               }
@@ -322,8 +322,8 @@ trait FabaProcessor extends Processor {
     }
   }
 
-  def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, i: Int, stable: Boolean, noCycle: Boolean): Equation[Key, Value] = {
-    val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.NotNull), resultOrigins, stable, noCycle)
+  def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, i: Int, stable: Boolean): Equation[Key, Value] = {
+    val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.NotNull), resultOrigins, stable)
     try {
       analyser.analyze()
     } catch {
@@ -332,8 +332,8 @@ trait FabaProcessor extends Processor {
     }
   }
 
-  def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, i: Int, stable: Boolean, noCycle: Boolean): Equation[Key, Value] = {
-    val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.Null), resultOrigins, stable, noCycle)
+  def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, i: Int, stable: Boolean): Equation[Key, Value] = {
+    val analyser = new InOutAnalysis(richControlFlow, InOut(i, Values.Null), resultOrigins, stable)
     try {
       analyser.analyze()
     } catch {
@@ -342,8 +342,8 @@ trait FabaProcessor extends Processor {
     }
   }
 
-  def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, stable: Boolean, noCycle: Boolean): Equation[Key, Value] = {
-    val analyser = new InOutAnalysis(richControlFlow, Out, resultOrigins, stable, noCycle)
+  def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, stable: Boolean): Equation[Key, Value] = {
+    val analyser = new InOutAnalysis(richControlFlow, Out, resultOrigins, stable)
     try {
       analyser.analyze()
     } catch {

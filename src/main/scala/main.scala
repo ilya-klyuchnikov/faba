@@ -114,9 +114,9 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, i: Int, stable: Boolean, noCycle: Boolean) = {
+  override def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, i: Int, stable: Boolean) = {
     val start = System.nanoTime()
-    val result = super.notNullContractEquation(richControlFlow, resultOrigins, i, stable, noCycle)
+    val result = super.notNullContractEquation(richControlFlow, resultOrigins, i, stable)
     val delta = System.nanoTime() - start
     notNullTime += delta
     result.rhs match {
@@ -132,9 +132,9 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, i: Int, stable: Boolean, noCycle: Boolean) = {
+  override def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, i: Int, stable: Boolean) = {
     val start = System.nanoTime()
-    val result = super.nullContractEquation(richControlFlow, resultOrigins, i, stable, noCycle)
+    val result = super.nullContractEquation(richControlFlow, resultOrigins, i, stable)
     val delta = System.nanoTime() - start
     nullTime += delta
     result.rhs match {
@@ -150,9 +150,9 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, stable: Boolean, noCycle: Boolean) = {
+  override def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, stable: Boolean) = {
     val start = System.nanoTime()
-    val result = super.outContractEquation(richControlFlow, resultOrigins, stable, noCycle)
+    val result = super.outContractEquation(richControlFlow, resultOrigins, stable)
     val delta = System.nanoTime() - start
     outTime += delta
     result.rhs match {
