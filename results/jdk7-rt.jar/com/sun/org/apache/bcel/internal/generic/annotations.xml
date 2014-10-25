@@ -8,6 +8,11 @@
   <item name="com.sun.org.apache.bcel.internal.generic.ACONST_NULL com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ACONST_NULL com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.ACONST_NULL void accept(com.sun.org.apache.bcel.internal.generic.Visitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -47,6 +52,11 @@
   <item name="com.sun.org.apache.bcel.internal.generic.ArrayInstruction com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ArrayInstruction java.lang.Class[] getExceptions()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.ArrayType ArrayType(com.sun.org.apache.bcel.internal.generic.Type, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -61,6 +71,16 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ArrayType com.sun.org.apache.bcel.internal.generic.Type getBasicType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ArrayType int getDimensions()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.BALOAD void accept(com.sun.org.apache.bcel.internal.generic.Visitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -69,6 +89,11 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.BIPUSH com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.BIPUSH com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.BIPUSH java.lang.Number getValue()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -93,7 +118,17 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.BasicType boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
+      <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.BasicType int hashCode()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.BranchHandle int getPosition()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.BranchHandle void setInstruction(com.sun.org.apache.bcel.internal.generic.Instruction) 0">
@@ -101,6 +136,21 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.BranchInstruction boolean containsTarget(com.sun.org.apache.bcel.internal.generic.InstructionHandle) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.BranchInstruction boolean containsTarget(com.sun.org.apache.bcel.internal.generic.InstructionHandle)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.BranchInstruction com.sun.org.apache.bcel.internal.generic.InstructionHandle getTarget()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.BranchInstruction int getIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.BranchInstruction int getTargetOffset(com.sun.org.apache.bcel.internal.generic.InstructionHandle) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -140,6 +190,11 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.CPInstruction com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.CPInstruction int getIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.CPInstruction java.lang.String toString(boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -195,8 +250,48 @@
   <item name="com.sun.org.apache.bcel.internal.generic.ClassGen com.sun.org.apache.bcel.internal.classfile.Method[] getMethods()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ClassGen com.sun.org.apache.bcel.internal.generic.ConstantPoolGen getConstantPool()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ClassGen int getClassNameIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ClassGen int getMajor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ClassGen int getMinor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ClassGen int getSuperclassNameIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.ClassGen java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ClassGen java.lang.String getClassName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ClassGen java.lang.String getFileName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ClassGen java.lang.String getSuperclassName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.ClassGen java.lang.String[] getInterfaceNames()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -219,8 +314,33 @@
   <item name="com.sun.org.apache.bcel.internal.generic.CodeExceptionGen boolean containsTarget(com.sun.org.apache.bcel.internal.generic.InstructionHandle) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.CodeExceptionGen boolean containsTarget(com.sun.org.apache.bcel.internal.generic.InstructionHandle)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.CodeExceptionGen com.sun.org.apache.bcel.internal.classfile.CodeException getCodeException(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.CodeExceptionGen com.sun.org.apache.bcel.internal.generic.InstructionHandle getEndPC()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.CodeExceptionGen com.sun.org.apache.bcel.internal.generic.InstructionHandle getHandlerPC()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.CodeExceptionGen com.sun.org.apache.bcel.internal.generic.InstructionHandle getStartPC()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.CodeExceptionGen com.sun.org.apache.bcel.internal.generic.ObjectType getCatchType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.CodeExceptionGen java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -236,6 +356,11 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.ConstantPoolGen ConstantPoolGen(com.sun.org.apache.bcel.internal.classfile.Constant[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ConstantPoolGen com.sun.org.apache.bcel.internal.classfile.Constant getConstant(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.ConstantPoolGen com.sun.org.apache.bcel.internal.classfile.ConstantPool getConstantPool()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -264,6 +389,11 @@
   <item name="com.sun.org.apache.bcel.internal.generic.ConstantPoolGen int addMethodref(com.sun.org.apache.bcel.internal.generic.MethodGen) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ConstantPoolGen int getSize()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.ConstantPoolGen int lookupClass(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -276,6 +406,11 @@
   <item name="com.sun.org.apache.bcel.internal.generic.ConstantPoolGen int lookupFieldref(java.lang.String, java.lang.String, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ConstantPoolGen int lookupInteger(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.ConstantPoolGen int lookupInterfaceMethodref(com.sun.org.apache.bcel.internal.generic.MethodGen) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -287,6 +422,11 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.ConstantPoolGen int lookupInterfaceMethodref(java.lang.String, java.lang.String, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ConstantPoolGen int lookupLong(long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.ConstantPoolGen int lookupMethodref(com.sun.org.apache.bcel.internal.generic.MethodGen) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -333,17 +473,32 @@
   <item name="com.sun.org.apache.bcel.internal.generic.DCMPG com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.DCMPG com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.DCMPG void accept(com.sun.org.apache.bcel.internal.generic.Visitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.DCMPL com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.DCMPL com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.DCMPL void accept(com.sun.org.apache.bcel.internal.generic.Visitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.DCONST com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.DCONST com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.DCONST java.lang.Number getValue()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -393,545 +548,1450 @@
   <item name="com.sun.org.apache.bcel.internal.generic.DUP_X2 void accept(com.sun.org.apache.bcel.internal.generic.Visitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor EmptyVisitor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitAALOAD(com.sun.org.apache.bcel.internal.generic.AALOAD) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitAALOAD(com.sun.org.apache.bcel.internal.generic.AALOAD)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitAASTORE(com.sun.org.apache.bcel.internal.generic.AASTORE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitAASTORE(com.sun.org.apache.bcel.internal.generic.AASTORE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitACONST_NULL(com.sun.org.apache.bcel.internal.generic.ACONST_NULL) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitACONST_NULL(com.sun.org.apache.bcel.internal.generic.ACONST_NULL)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitALOAD(com.sun.org.apache.bcel.internal.generic.ALOAD) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitALOAD(com.sun.org.apache.bcel.internal.generic.ALOAD)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitANEWARRAY(com.sun.org.apache.bcel.internal.generic.ANEWARRAY) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitANEWARRAY(com.sun.org.apache.bcel.internal.generic.ANEWARRAY)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitARETURN(com.sun.org.apache.bcel.internal.generic.ARETURN) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitARETURN(com.sun.org.apache.bcel.internal.generic.ARETURN)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitARRAYLENGTH(com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitARRAYLENGTH(com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitASTORE(com.sun.org.apache.bcel.internal.generic.ASTORE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitASTORE(com.sun.org.apache.bcel.internal.generic.ASTORE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitATHROW(com.sun.org.apache.bcel.internal.generic.ATHROW) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitATHROW(com.sun.org.apache.bcel.internal.generic.ATHROW)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitAllocationInstruction(com.sun.org.apache.bcel.internal.generic.AllocationInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitAllocationInstruction(com.sun.org.apache.bcel.internal.generic.AllocationInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitArithmeticInstruction(com.sun.org.apache.bcel.internal.generic.ArithmeticInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitArithmeticInstruction(com.sun.org.apache.bcel.internal.generic.ArithmeticInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitArrayInstruction(com.sun.org.apache.bcel.internal.generic.ArrayInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitArrayInstruction(com.sun.org.apache.bcel.internal.generic.ArrayInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitBALOAD(com.sun.org.apache.bcel.internal.generic.BALOAD) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitBALOAD(com.sun.org.apache.bcel.internal.generic.BALOAD)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitBASTORE(com.sun.org.apache.bcel.internal.generic.BASTORE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitBASTORE(com.sun.org.apache.bcel.internal.generic.BASTORE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitBIPUSH(com.sun.org.apache.bcel.internal.generic.BIPUSH) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitBIPUSH(com.sun.org.apache.bcel.internal.generic.BIPUSH)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitBREAKPOINT(com.sun.org.apache.bcel.internal.generic.BREAKPOINT) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitBREAKPOINT(com.sun.org.apache.bcel.internal.generic.BREAKPOINT)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitBranchInstruction(com.sun.org.apache.bcel.internal.generic.BranchInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitBranchInstruction(com.sun.org.apache.bcel.internal.generic.BranchInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitCALOAD(com.sun.org.apache.bcel.internal.generic.CALOAD) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitCALOAD(com.sun.org.apache.bcel.internal.generic.CALOAD)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitCASTORE(com.sun.org.apache.bcel.internal.generic.CASTORE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitCASTORE(com.sun.org.apache.bcel.internal.generic.CASTORE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitCHECKCAST(com.sun.org.apache.bcel.internal.generic.CHECKCAST) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitCHECKCAST(com.sun.org.apache.bcel.internal.generic.CHECKCAST)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitCPInstruction(com.sun.org.apache.bcel.internal.generic.CPInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitCPInstruction(com.sun.org.apache.bcel.internal.generic.CPInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitConstantPushInstruction(com.sun.org.apache.bcel.internal.generic.ConstantPushInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitConstantPushInstruction(com.sun.org.apache.bcel.internal.generic.ConstantPushInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitConversionInstruction(com.sun.org.apache.bcel.internal.generic.ConversionInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitConversionInstruction(com.sun.org.apache.bcel.internal.generic.ConversionInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitD2F(com.sun.org.apache.bcel.internal.generic.D2F) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitD2F(com.sun.org.apache.bcel.internal.generic.D2F)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitD2I(com.sun.org.apache.bcel.internal.generic.D2I) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitD2I(com.sun.org.apache.bcel.internal.generic.D2I)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitD2L(com.sun.org.apache.bcel.internal.generic.D2L) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitD2L(com.sun.org.apache.bcel.internal.generic.D2L)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDADD(com.sun.org.apache.bcel.internal.generic.DADD) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDADD(com.sun.org.apache.bcel.internal.generic.DADD)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDALOAD(com.sun.org.apache.bcel.internal.generic.DALOAD) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDALOAD(com.sun.org.apache.bcel.internal.generic.DALOAD)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDASTORE(com.sun.org.apache.bcel.internal.generic.DASTORE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDASTORE(com.sun.org.apache.bcel.internal.generic.DASTORE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDCMPG(com.sun.org.apache.bcel.internal.generic.DCMPG) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDCMPG(com.sun.org.apache.bcel.internal.generic.DCMPG)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDCMPL(com.sun.org.apache.bcel.internal.generic.DCMPL) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDCMPL(com.sun.org.apache.bcel.internal.generic.DCMPL)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDCONST(com.sun.org.apache.bcel.internal.generic.DCONST) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDCONST(com.sun.org.apache.bcel.internal.generic.DCONST)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDDIV(com.sun.org.apache.bcel.internal.generic.DDIV) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDDIV(com.sun.org.apache.bcel.internal.generic.DDIV)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDLOAD(com.sun.org.apache.bcel.internal.generic.DLOAD) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDLOAD(com.sun.org.apache.bcel.internal.generic.DLOAD)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDMUL(com.sun.org.apache.bcel.internal.generic.DMUL) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDMUL(com.sun.org.apache.bcel.internal.generic.DMUL)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDNEG(com.sun.org.apache.bcel.internal.generic.DNEG) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDNEG(com.sun.org.apache.bcel.internal.generic.DNEG)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDREM(com.sun.org.apache.bcel.internal.generic.DREM) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDREM(com.sun.org.apache.bcel.internal.generic.DREM)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDRETURN(com.sun.org.apache.bcel.internal.generic.DRETURN) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDRETURN(com.sun.org.apache.bcel.internal.generic.DRETURN)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDSTORE(com.sun.org.apache.bcel.internal.generic.DSTORE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDSTORE(com.sun.org.apache.bcel.internal.generic.DSTORE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDSUB(com.sun.org.apache.bcel.internal.generic.DSUB) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDSUB(com.sun.org.apache.bcel.internal.generic.DSUB)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDUP(com.sun.org.apache.bcel.internal.generic.DUP) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDUP(com.sun.org.apache.bcel.internal.generic.DUP)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDUP2(com.sun.org.apache.bcel.internal.generic.DUP2) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDUP2(com.sun.org.apache.bcel.internal.generic.DUP2)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDUP2_X1(com.sun.org.apache.bcel.internal.generic.DUP2_X1) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDUP2_X1(com.sun.org.apache.bcel.internal.generic.DUP2_X1)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDUP2_X2(com.sun.org.apache.bcel.internal.generic.DUP2_X2) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDUP2_X2(com.sun.org.apache.bcel.internal.generic.DUP2_X2)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDUP_X1(com.sun.org.apache.bcel.internal.generic.DUP_X1) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDUP_X1(com.sun.org.apache.bcel.internal.generic.DUP_X1)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDUP_X2(com.sun.org.apache.bcel.internal.generic.DUP_X2) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitDUP_X2(com.sun.org.apache.bcel.internal.generic.DUP_X2)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitExceptionThrower(com.sun.org.apache.bcel.internal.generic.ExceptionThrower) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitExceptionThrower(com.sun.org.apache.bcel.internal.generic.ExceptionThrower)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitF2D(com.sun.org.apache.bcel.internal.generic.F2D) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitF2D(com.sun.org.apache.bcel.internal.generic.F2D)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitF2I(com.sun.org.apache.bcel.internal.generic.F2I) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitF2I(com.sun.org.apache.bcel.internal.generic.F2I)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitF2L(com.sun.org.apache.bcel.internal.generic.F2L) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitF2L(com.sun.org.apache.bcel.internal.generic.F2L)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFADD(com.sun.org.apache.bcel.internal.generic.FADD) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFADD(com.sun.org.apache.bcel.internal.generic.FADD)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFALOAD(com.sun.org.apache.bcel.internal.generic.FALOAD) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFALOAD(com.sun.org.apache.bcel.internal.generic.FALOAD)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFASTORE(com.sun.org.apache.bcel.internal.generic.FASTORE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFASTORE(com.sun.org.apache.bcel.internal.generic.FASTORE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFCMPG(com.sun.org.apache.bcel.internal.generic.FCMPG) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFCMPG(com.sun.org.apache.bcel.internal.generic.FCMPG)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFCMPL(com.sun.org.apache.bcel.internal.generic.FCMPL) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFCMPL(com.sun.org.apache.bcel.internal.generic.FCMPL)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFCONST(com.sun.org.apache.bcel.internal.generic.FCONST) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFCONST(com.sun.org.apache.bcel.internal.generic.FCONST)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFDIV(com.sun.org.apache.bcel.internal.generic.FDIV) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFDIV(com.sun.org.apache.bcel.internal.generic.FDIV)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFLOAD(com.sun.org.apache.bcel.internal.generic.FLOAD) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFLOAD(com.sun.org.apache.bcel.internal.generic.FLOAD)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFMUL(com.sun.org.apache.bcel.internal.generic.FMUL) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFMUL(com.sun.org.apache.bcel.internal.generic.FMUL)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFNEG(com.sun.org.apache.bcel.internal.generic.FNEG) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFNEG(com.sun.org.apache.bcel.internal.generic.FNEG)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFREM(com.sun.org.apache.bcel.internal.generic.FREM) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFREM(com.sun.org.apache.bcel.internal.generic.FREM)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFRETURN(com.sun.org.apache.bcel.internal.generic.FRETURN) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFRETURN(com.sun.org.apache.bcel.internal.generic.FRETURN)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFSTORE(com.sun.org.apache.bcel.internal.generic.FSTORE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFSTORE(com.sun.org.apache.bcel.internal.generic.FSTORE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFSUB(com.sun.org.apache.bcel.internal.generic.FSUB) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFSUB(com.sun.org.apache.bcel.internal.generic.FSUB)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFieldInstruction(com.sun.org.apache.bcel.internal.generic.FieldInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFieldInstruction(com.sun.org.apache.bcel.internal.generic.FieldInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFieldOrMethod(com.sun.org.apache.bcel.internal.generic.FieldOrMethod) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitFieldOrMethod(com.sun.org.apache.bcel.internal.generic.FieldOrMethod)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitGETFIELD(com.sun.org.apache.bcel.internal.generic.GETFIELD) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitGETFIELD(com.sun.org.apache.bcel.internal.generic.GETFIELD)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitGETSTATIC(com.sun.org.apache.bcel.internal.generic.GETSTATIC) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitGETSTATIC(com.sun.org.apache.bcel.internal.generic.GETSTATIC)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitGOTO(com.sun.org.apache.bcel.internal.generic.GOTO) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitGOTO(com.sun.org.apache.bcel.internal.generic.GOTO)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitGOTO_W(com.sun.org.apache.bcel.internal.generic.GOTO_W) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitGOTO_W(com.sun.org.apache.bcel.internal.generic.GOTO_W)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitGotoInstruction(com.sun.org.apache.bcel.internal.generic.GotoInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitGotoInstruction(com.sun.org.apache.bcel.internal.generic.GotoInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitI2B(com.sun.org.apache.bcel.internal.generic.I2B) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitI2B(com.sun.org.apache.bcel.internal.generic.I2B)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitI2C(com.sun.org.apache.bcel.internal.generic.I2C) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitI2C(com.sun.org.apache.bcel.internal.generic.I2C)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitI2D(com.sun.org.apache.bcel.internal.generic.I2D) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitI2D(com.sun.org.apache.bcel.internal.generic.I2D)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitI2F(com.sun.org.apache.bcel.internal.generic.I2F) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitI2F(com.sun.org.apache.bcel.internal.generic.I2F)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitI2L(com.sun.org.apache.bcel.internal.generic.I2L) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitI2L(com.sun.org.apache.bcel.internal.generic.I2L)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitI2S(com.sun.org.apache.bcel.internal.generic.I2S) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitI2S(com.sun.org.apache.bcel.internal.generic.I2S)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIADD(com.sun.org.apache.bcel.internal.generic.IADD) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIADD(com.sun.org.apache.bcel.internal.generic.IADD)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIALOAD(com.sun.org.apache.bcel.internal.generic.IALOAD) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIALOAD(com.sun.org.apache.bcel.internal.generic.IALOAD)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIAND(com.sun.org.apache.bcel.internal.generic.IAND) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIAND(com.sun.org.apache.bcel.internal.generic.IAND)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIASTORE(com.sun.org.apache.bcel.internal.generic.IASTORE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIASTORE(com.sun.org.apache.bcel.internal.generic.IASTORE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitICONST(com.sun.org.apache.bcel.internal.generic.ICONST) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitICONST(com.sun.org.apache.bcel.internal.generic.ICONST)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIDIV(com.sun.org.apache.bcel.internal.generic.IDIV) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIDIV(com.sun.org.apache.bcel.internal.generic.IDIV)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIFEQ(com.sun.org.apache.bcel.internal.generic.IFEQ) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIFEQ(com.sun.org.apache.bcel.internal.generic.IFEQ)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIFGE(com.sun.org.apache.bcel.internal.generic.IFGE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIFGE(com.sun.org.apache.bcel.internal.generic.IFGE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIFGT(com.sun.org.apache.bcel.internal.generic.IFGT) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIFGT(com.sun.org.apache.bcel.internal.generic.IFGT)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIFLE(com.sun.org.apache.bcel.internal.generic.IFLE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIFLE(com.sun.org.apache.bcel.internal.generic.IFLE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIFLT(com.sun.org.apache.bcel.internal.generic.IFLT) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIFLT(com.sun.org.apache.bcel.internal.generic.IFLT)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIFNE(com.sun.org.apache.bcel.internal.generic.IFNE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIFNE(com.sun.org.apache.bcel.internal.generic.IFNE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIFNONNULL(com.sun.org.apache.bcel.internal.generic.IFNONNULL) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIFNONNULL(com.sun.org.apache.bcel.internal.generic.IFNONNULL)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIFNULL(com.sun.org.apache.bcel.internal.generic.IFNULL) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIFNULL(com.sun.org.apache.bcel.internal.generic.IFNULL)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIF_ACMPEQ(com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIF_ACMPEQ(com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIF_ACMPNE(com.sun.org.apache.bcel.internal.generic.IF_ACMPNE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIF_ACMPNE(com.sun.org.apache.bcel.internal.generic.IF_ACMPNE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIF_ICMPEQ(com.sun.org.apache.bcel.internal.generic.IF_ICMPEQ) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIF_ICMPEQ(com.sun.org.apache.bcel.internal.generic.IF_ICMPEQ)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIF_ICMPGE(com.sun.org.apache.bcel.internal.generic.IF_ICMPGE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIF_ICMPGE(com.sun.org.apache.bcel.internal.generic.IF_ICMPGE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIF_ICMPGT(com.sun.org.apache.bcel.internal.generic.IF_ICMPGT) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIF_ICMPGT(com.sun.org.apache.bcel.internal.generic.IF_ICMPGT)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIF_ICMPLE(com.sun.org.apache.bcel.internal.generic.IF_ICMPLE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIF_ICMPLE(com.sun.org.apache.bcel.internal.generic.IF_ICMPLE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIF_ICMPLT(com.sun.org.apache.bcel.internal.generic.IF_ICMPLT) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIF_ICMPLT(com.sun.org.apache.bcel.internal.generic.IF_ICMPLT)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIF_ICMPNE(com.sun.org.apache.bcel.internal.generic.IF_ICMPNE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIF_ICMPNE(com.sun.org.apache.bcel.internal.generic.IF_ICMPNE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIINC(com.sun.org.apache.bcel.internal.generic.IINC) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIINC(com.sun.org.apache.bcel.internal.generic.IINC)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitILOAD(com.sun.org.apache.bcel.internal.generic.ILOAD) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitILOAD(com.sun.org.apache.bcel.internal.generic.ILOAD)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIMPDEP1(com.sun.org.apache.bcel.internal.generic.IMPDEP1) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIMPDEP1(com.sun.org.apache.bcel.internal.generic.IMPDEP1)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIMPDEP2(com.sun.org.apache.bcel.internal.generic.IMPDEP2) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIMPDEP2(com.sun.org.apache.bcel.internal.generic.IMPDEP2)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIMUL(com.sun.org.apache.bcel.internal.generic.IMUL) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIMUL(com.sun.org.apache.bcel.internal.generic.IMUL)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitINEG(com.sun.org.apache.bcel.internal.generic.INEG) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitINEG(com.sun.org.apache.bcel.internal.generic.INEG)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitINSTANCEOF(com.sun.org.apache.bcel.internal.generic.INSTANCEOF) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitINSTANCEOF(com.sun.org.apache.bcel.internal.generic.INSTANCEOF)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitINVOKEINTERFACE(com.sun.org.apache.bcel.internal.generic.INVOKEINTERFACE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitINVOKEINTERFACE(com.sun.org.apache.bcel.internal.generic.INVOKEINTERFACE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitINVOKESPECIAL(com.sun.org.apache.bcel.internal.generic.INVOKESPECIAL) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitINVOKESPECIAL(com.sun.org.apache.bcel.internal.generic.INVOKESPECIAL)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitINVOKESTATIC(com.sun.org.apache.bcel.internal.generic.INVOKESTATIC) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitINVOKESTATIC(com.sun.org.apache.bcel.internal.generic.INVOKESTATIC)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitINVOKEVIRTUAL(com.sun.org.apache.bcel.internal.generic.INVOKEVIRTUAL) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitINVOKEVIRTUAL(com.sun.org.apache.bcel.internal.generic.INVOKEVIRTUAL)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIOR(com.sun.org.apache.bcel.internal.generic.IOR) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIOR(com.sun.org.apache.bcel.internal.generic.IOR)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIREM(com.sun.org.apache.bcel.internal.generic.IREM) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIREM(com.sun.org.apache.bcel.internal.generic.IREM)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIRETURN(com.sun.org.apache.bcel.internal.generic.IRETURN) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIRETURN(com.sun.org.apache.bcel.internal.generic.IRETURN)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitISHL(com.sun.org.apache.bcel.internal.generic.ISHL) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitISHL(com.sun.org.apache.bcel.internal.generic.ISHL)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitISHR(com.sun.org.apache.bcel.internal.generic.ISHR) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitISHR(com.sun.org.apache.bcel.internal.generic.ISHR)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitISTORE(com.sun.org.apache.bcel.internal.generic.ISTORE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitISTORE(com.sun.org.apache.bcel.internal.generic.ISTORE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitISUB(com.sun.org.apache.bcel.internal.generic.ISUB) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitISUB(com.sun.org.apache.bcel.internal.generic.ISUB)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIUSHR(com.sun.org.apache.bcel.internal.generic.IUSHR) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIUSHR(com.sun.org.apache.bcel.internal.generic.IUSHR)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIXOR(com.sun.org.apache.bcel.internal.generic.IXOR) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIXOR(com.sun.org.apache.bcel.internal.generic.IXOR)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIfInstruction(com.sun.org.apache.bcel.internal.generic.IfInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitIfInstruction(com.sun.org.apache.bcel.internal.generic.IfInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitInvokeInstruction(com.sun.org.apache.bcel.internal.generic.InvokeInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitInvokeInstruction(com.sun.org.apache.bcel.internal.generic.InvokeInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitJSR(com.sun.org.apache.bcel.internal.generic.JSR) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitJSR(com.sun.org.apache.bcel.internal.generic.JSR)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitJSR_W(com.sun.org.apache.bcel.internal.generic.JSR_W) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitJSR_W(com.sun.org.apache.bcel.internal.generic.JSR_W)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitJsrInstruction(com.sun.org.apache.bcel.internal.generic.JsrInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitJsrInstruction(com.sun.org.apache.bcel.internal.generic.JsrInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitL2D(com.sun.org.apache.bcel.internal.generic.L2D) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitL2D(com.sun.org.apache.bcel.internal.generic.L2D)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitL2F(com.sun.org.apache.bcel.internal.generic.L2F) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitL2F(com.sun.org.apache.bcel.internal.generic.L2F)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitL2I(com.sun.org.apache.bcel.internal.generic.L2I) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitL2I(com.sun.org.apache.bcel.internal.generic.L2I)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLADD(com.sun.org.apache.bcel.internal.generic.LADD) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLADD(com.sun.org.apache.bcel.internal.generic.LADD)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLALOAD(com.sun.org.apache.bcel.internal.generic.LALOAD) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLALOAD(com.sun.org.apache.bcel.internal.generic.LALOAD)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLAND(com.sun.org.apache.bcel.internal.generic.LAND) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLAND(com.sun.org.apache.bcel.internal.generic.LAND)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLASTORE(com.sun.org.apache.bcel.internal.generic.LASTORE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLASTORE(com.sun.org.apache.bcel.internal.generic.LASTORE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLCMP(com.sun.org.apache.bcel.internal.generic.LCMP) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLCMP(com.sun.org.apache.bcel.internal.generic.LCMP)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLCONST(com.sun.org.apache.bcel.internal.generic.LCONST) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLCONST(com.sun.org.apache.bcel.internal.generic.LCONST)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLDC(com.sun.org.apache.bcel.internal.generic.LDC) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLDC(com.sun.org.apache.bcel.internal.generic.LDC)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLDC2_W(com.sun.org.apache.bcel.internal.generic.LDC2_W) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLDC2_W(com.sun.org.apache.bcel.internal.generic.LDC2_W)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLDIV(com.sun.org.apache.bcel.internal.generic.LDIV) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLDIV(com.sun.org.apache.bcel.internal.generic.LDIV)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLLOAD(com.sun.org.apache.bcel.internal.generic.LLOAD) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLLOAD(com.sun.org.apache.bcel.internal.generic.LLOAD)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLMUL(com.sun.org.apache.bcel.internal.generic.LMUL) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLMUL(com.sun.org.apache.bcel.internal.generic.LMUL)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLNEG(com.sun.org.apache.bcel.internal.generic.LNEG) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLNEG(com.sun.org.apache.bcel.internal.generic.LNEG)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLOOKUPSWITCH(com.sun.org.apache.bcel.internal.generic.LOOKUPSWITCH) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLOOKUPSWITCH(com.sun.org.apache.bcel.internal.generic.LOOKUPSWITCH)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLOR(com.sun.org.apache.bcel.internal.generic.LOR) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLOR(com.sun.org.apache.bcel.internal.generic.LOR)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLREM(com.sun.org.apache.bcel.internal.generic.LREM) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLREM(com.sun.org.apache.bcel.internal.generic.LREM)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLRETURN(com.sun.org.apache.bcel.internal.generic.LRETURN) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLRETURN(com.sun.org.apache.bcel.internal.generic.LRETURN)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLSHL(com.sun.org.apache.bcel.internal.generic.LSHL) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLSHL(com.sun.org.apache.bcel.internal.generic.LSHL)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLSHR(com.sun.org.apache.bcel.internal.generic.LSHR) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLSHR(com.sun.org.apache.bcel.internal.generic.LSHR)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLSTORE(com.sun.org.apache.bcel.internal.generic.LSTORE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLSTORE(com.sun.org.apache.bcel.internal.generic.LSTORE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLSUB(com.sun.org.apache.bcel.internal.generic.LSUB) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLSUB(com.sun.org.apache.bcel.internal.generic.LSUB)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLUSHR(com.sun.org.apache.bcel.internal.generic.LUSHR) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLUSHR(com.sun.org.apache.bcel.internal.generic.LUSHR)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLXOR(com.sun.org.apache.bcel.internal.generic.LXOR) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLXOR(com.sun.org.apache.bcel.internal.generic.LXOR)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLoadClass(com.sun.org.apache.bcel.internal.generic.LoadClass) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLoadClass(com.sun.org.apache.bcel.internal.generic.LoadClass)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLoadInstruction(com.sun.org.apache.bcel.internal.generic.LoadInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLoadInstruction(com.sun.org.apache.bcel.internal.generic.LoadInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLocalVariableInstruction(com.sun.org.apache.bcel.internal.generic.LocalVariableInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitLocalVariableInstruction(com.sun.org.apache.bcel.internal.generic.LocalVariableInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitMONITORENTER(com.sun.org.apache.bcel.internal.generic.MONITORENTER) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitMONITORENTER(com.sun.org.apache.bcel.internal.generic.MONITORENTER)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitMONITOREXIT(com.sun.org.apache.bcel.internal.generic.MONITOREXIT) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitMONITOREXIT(com.sun.org.apache.bcel.internal.generic.MONITOREXIT)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitMULTIANEWARRAY(com.sun.org.apache.bcel.internal.generic.MULTIANEWARRAY) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitMULTIANEWARRAY(com.sun.org.apache.bcel.internal.generic.MULTIANEWARRAY)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitNEW(com.sun.org.apache.bcel.internal.generic.NEW) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitNEW(com.sun.org.apache.bcel.internal.generic.NEW)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitNEWARRAY(com.sun.org.apache.bcel.internal.generic.NEWARRAY) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitNEWARRAY(com.sun.org.apache.bcel.internal.generic.NEWARRAY)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitNOP(com.sun.org.apache.bcel.internal.generic.NOP) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitNOP(com.sun.org.apache.bcel.internal.generic.NOP)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitPOP(com.sun.org.apache.bcel.internal.generic.POP) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitPOP(com.sun.org.apache.bcel.internal.generic.POP)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitPOP2(com.sun.org.apache.bcel.internal.generic.POP2) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitPOP2(com.sun.org.apache.bcel.internal.generic.POP2)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitPUTFIELD(com.sun.org.apache.bcel.internal.generic.PUTFIELD) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitPUTFIELD(com.sun.org.apache.bcel.internal.generic.PUTFIELD)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitPUTSTATIC(com.sun.org.apache.bcel.internal.generic.PUTSTATIC) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitPUTSTATIC(com.sun.org.apache.bcel.internal.generic.PUTSTATIC)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitPopInstruction(com.sun.org.apache.bcel.internal.generic.PopInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitPopInstruction(com.sun.org.apache.bcel.internal.generic.PopInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitPushInstruction(com.sun.org.apache.bcel.internal.generic.PushInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitPushInstruction(com.sun.org.apache.bcel.internal.generic.PushInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitRET(com.sun.org.apache.bcel.internal.generic.RET) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitRET(com.sun.org.apache.bcel.internal.generic.RET)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitRETURN(com.sun.org.apache.bcel.internal.generic.RETURN) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitRETURN(com.sun.org.apache.bcel.internal.generic.RETURN)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitReturnInstruction(com.sun.org.apache.bcel.internal.generic.ReturnInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitReturnInstruction(com.sun.org.apache.bcel.internal.generic.ReturnInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitSALOAD(com.sun.org.apache.bcel.internal.generic.SALOAD) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitSALOAD(com.sun.org.apache.bcel.internal.generic.SALOAD)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitSASTORE(com.sun.org.apache.bcel.internal.generic.SASTORE) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitSASTORE(com.sun.org.apache.bcel.internal.generic.SASTORE)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitSIPUSH(com.sun.org.apache.bcel.internal.generic.SIPUSH) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitSIPUSH(com.sun.org.apache.bcel.internal.generic.SIPUSH)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitSWAP(com.sun.org.apache.bcel.internal.generic.SWAP) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitSWAP(com.sun.org.apache.bcel.internal.generic.SWAP)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitSelect(com.sun.org.apache.bcel.internal.generic.Select) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitSelect(com.sun.org.apache.bcel.internal.generic.Select)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitStackConsumer(com.sun.org.apache.bcel.internal.generic.StackConsumer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitStackConsumer(com.sun.org.apache.bcel.internal.generic.StackConsumer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitStackInstruction(com.sun.org.apache.bcel.internal.generic.StackInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitStackInstruction(com.sun.org.apache.bcel.internal.generic.StackInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitStackProducer(com.sun.org.apache.bcel.internal.generic.StackProducer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitStackProducer(com.sun.org.apache.bcel.internal.generic.StackProducer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitStoreInstruction(com.sun.org.apache.bcel.internal.generic.StoreInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitStoreInstruction(com.sun.org.apache.bcel.internal.generic.StoreInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitTABLESWITCH(com.sun.org.apache.bcel.internal.generic.TABLESWITCH) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitTABLESWITCH(com.sun.org.apache.bcel.internal.generic.TABLESWITCH)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitTypedInstruction(com.sun.org.apache.bcel.internal.generic.TypedInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitTypedInstruction(com.sun.org.apache.bcel.internal.generic.TypedInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitUnconditionalBranch(com.sun.org.apache.bcel.internal.generic.UnconditionalBranch) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitUnconditionalBranch(com.sun.org.apache.bcel.internal.generic.UnconditionalBranch)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitVariableLengthInstruction(com.sun.org.apache.bcel.internal.generic.VariableLengthInstruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.EmptyVisitor void visitVariableLengthInstruction(com.sun.org.apache.bcel.internal.generic.VariableLengthInstruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.F2D void accept(com.sun.org.apache.bcel.internal.generic.Visitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -954,17 +2014,32 @@
   <item name="com.sun.org.apache.bcel.internal.generic.FCMPG com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.FCMPG com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.FCMPG void accept(com.sun.org.apache.bcel.internal.generic.Visitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.FCMPL com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.FCMPL com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.FCMPL void accept(com.sun.org.apache.bcel.internal.generic.Visitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.FCONST com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.FCONST com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.FCONST java.lang.Number getValue()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1014,8 +2089,23 @@
   <item name="com.sun.org.apache.bcel.internal.generic.FieldGenOrMethodGen com.sun.org.apache.bcel.internal.classfile.Attribute[] getAttributes()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.FieldGenOrMethodGen com.sun.org.apache.bcel.internal.generic.ConstantPoolGen getConstantPool()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.FieldGenOrMethodGen com.sun.org.apache.bcel.internal.generic.Type getType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.FieldGenOrMethodGen java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.FieldGenOrMethodGen java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.FieldGenOrMethodGen void setType(com.sun.org.apache.bcel.internal.generic.Type) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1097,6 +2187,11 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.ICONST com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ICONST com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.ICONST java.lang.Number getValue()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1209,6 +2304,16 @@
   <item name="com.sun.org.apache.bcel.internal.generic.IINC com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.IINC com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.IINC int getIncrement()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.IINC java.lang.String toString(boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1239,11 +2344,26 @@
   <item name="com.sun.org.apache.bcel.internal.generic.INSTANCEOF com.sun.org.apache.bcel.internal.generic.ObjectType getLoadClassType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.INSTANCEOF java.lang.Class[] getExceptions()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.INSTANCEOF void accept(com.sun.org.apache.bcel.internal.generic.Visitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.INVOKEINTERFACE int consumeStack(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.INVOKEINTERFACE int consumeStack(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.INVOKEINTERFACE int getCount()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.INVOKEINTERFACE java.lang.Class[] getExceptions()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1325,17 +2445,52 @@
   <item name="com.sun.org.apache.bcel.internal.generic.Instruction com.sun.org.apache.bcel.internal.generic.Instruction readInstruction(com.sun.org.apache.bcel.internal.util.ByteSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Instruction com.sun.org.apache.bcel.internal.generic.InstructionComparator getComparator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.Instruction int consumeStack(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Instruction int consumeStack(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Instruction int getLength()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.Instruction int produceStack(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Instruction int produceStack(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.Instruction java.lang.String className(short)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Instruction java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.Instruction java.lang.String toString(com.sun.org.apache.bcel.internal.classfile.ConstantPool) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Instruction short getOpcode()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Instruction void dispose()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.Instruction void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1343,8 +2498,18 @@
   <item name="com.sun.org.apache.bcel.internal.generic.Instruction void initFromFile(com.sun.org.apache.bcel.internal.util.ByteSequence, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Instruction void initFromFile(com.sun.org.apache.bcel.internal.util.ByteSequence, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.Instruction void setComparator(com.sun.org.apache.bcel.internal.generic.InstructionComparator) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionComparator.1 1()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionComparator.1 boolean equals(com.sun.org.apache.bcel.internal.generic.Instruction, com.sun.org.apache.bcel.internal.generic.Instruction) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1360,7 +2525,7 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionFactory boolean isString(com.sun.org.apache.bcel.internal.generic.Type)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
+      <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionFactory com.sun.org.apache.bcel.internal.generic.ArithmeticInstruction createBinaryOperation(java.lang.String, com.sun.org.apache.bcel.internal.generic.Type) 0">
@@ -1380,6 +2545,16 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionFactory com.sun.org.apache.bcel.internal.generic.CHECKCAST createCheckCast(com.sun.org.apache.bcel.internal.generic.ReferenceType)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionFactory com.sun.org.apache.bcel.internal.generic.ClassGen getClassGen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionFactory com.sun.org.apache.bcel.internal.generic.ConstantPoolGen getConstantPool()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionFactory com.sun.org.apache.bcel.internal.generic.FieldInstruction createFieldAccess(java.lang.String, java.lang.String, com.sun.org.apache.bcel.internal.generic.Type, short) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1477,8 +2652,48 @@
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionFactory com.sun.org.apache.bcel.internal.generic.ReturnInstruction createReturn(com.sun.org.apache.bcel.internal.generic.Type) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionFactory com.sun.org.apache.bcel.internal.generic.StackInstruction createDup(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionFactory com.sun.org.apache.bcel.internal.generic.StackInstruction createDup_1(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionFactory com.sun.org.apache.bcel.internal.generic.StackInstruction createDup_2(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionFactory com.sun.org.apache.bcel.internal.generic.StackInstruction createPop(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionHandle com.sun.org.apache.bcel.internal.generic.Instruction getInstruction()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionHandle com.sun.org.apache.bcel.internal.generic.InstructionHandle getNext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionHandle com.sun.org.apache.bcel.internal.generic.InstructionHandle getPrev()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionHandle com.sun.org.apache.bcel.internal.generic.InstructionTargeter[] getTargeters()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionHandle int getPosition()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionHandle java.lang.Object getAttribute(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1498,12 +2713,22 @@
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionList boolean contains(com.sun.org.apache.bcel.internal.generic.Instruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionList boolean contains(com.sun.org.apache.bcel.internal.generic.Instruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionList boolean contains(com.sun.org.apache.bcel.internal.generic.InstructionHandle) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionList boolean contains(com.sun.org.apache.bcel.internal.generic.InstructionHandle)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
+      <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionList boolean isEmpty()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionList byte[] getByteCode()">
@@ -1511,6 +2736,11 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionList com.sun.org.apache.bcel.internal.generic.InstructionHandle access$000(com.sun.org.apache.bcel.internal.generic.InstructionList) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionList com.sun.org.apache.bcel.internal.generic.InstructionHandle access$000(com.sun.org.apache.bcel.internal.generic.InstructionList)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionList com.sun.org.apache.bcel.internal.generic.InstructionHandle append(com.sun.org.apache.bcel.internal.generic.CompoundInstruction) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1546,7 +2776,7 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionList com.sun.org.apache.bcel.internal.generic.InstructionHandle findHandle(com.sun.org.apache.bcel.internal.generic.InstructionHandle[], int[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_-&gt;null&quot;"/>
+      <val val="value=&quot;null,_,_,_-&gt;null&quot;,pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1557,13 +2787,29 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionList com.sun.org.apache.bcel.internal.generic.InstructionHandle findInstruction1(com.sun.org.apache.bcel.internal.generic.Instruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionList com.sun.org.apache.bcel.internal.generic.InstructionHandle findInstruction2(com.sun.org.apache.bcel.internal.generic.Instruction) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionList com.sun.org.apache.bcel.internal.generic.InstructionHandle findInstruction2(com.sun.org.apache.bcel.internal.generic.Instruction)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionList com.sun.org.apache.bcel.internal.generic.InstructionHandle getEnd()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionList com.sun.org.apache.bcel.internal.generic.InstructionHandle getStart()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionList com.sun.org.apache.bcel.internal.generic.InstructionHandle insert(com.sun.org.apache.bcel.internal.generic.CompoundInstruction) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1587,6 +2833,21 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionList com.sun.org.apache.bcel.internal.generic.Instruction[] getInstructions()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionList int getLength()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionList int size()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionList int[] getInstructionPositions()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionList java.lang.String toString(boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1642,6 +2903,11 @@
   <item name="com.sun.org.apache.bcel.internal.generic.InstructionList void redirectLocalVariables(com.sun.org.apache.bcel.internal.generic.LocalVariableGen[], com.sun.org.apache.bcel.internal.generic.InstructionHandle, com.sun.org.apache.bcel.internal.generic.InstructionHandle) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.InstructionList.1 boolean hasNext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.InvokeInstruction com.sun.org.apache.bcel.internal.generic.Type[] getArgumentTypes(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1693,11 +2959,21 @@
   <item name="com.sun.org.apache.bcel.internal.generic.LCMP com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LCMP com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.LCMP void accept(com.sun.org.apache.bcel.internal.generic.Visitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.LCONST com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LCONST com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.LCONST java.lang.Number getValue()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1707,6 +2983,11 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.LDC com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LDC java.lang.Class[] getExceptions()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.LDC java.lang.Object getValue(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1798,8 +3079,23 @@
   <item name="com.sun.org.apache.bcel.internal.generic.LineNumberGen boolean containsTarget(com.sun.org.apache.bcel.internal.generic.InstructionHandle) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LineNumberGen boolean containsTarget(com.sun.org.apache.bcel.internal.generic.InstructionHandle)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.LineNumberGen com.sun.org.apache.bcel.internal.classfile.LineNumber getLineNumber()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LineNumberGen com.sun.org.apache.bcel.internal.generic.InstructionHandle getInstruction()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LineNumberGen int getSourceLine()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.LineNumberGen java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1813,8 +3109,18 @@
   <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableGen boolean containsTarget(com.sun.org.apache.bcel.internal.generic.InstructionHandle) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableGen boolean containsTarget(com.sun.org.apache.bcel.internal.generic.InstructionHandle)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableGen boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableGen boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableGen com.sun.org.apache.bcel.internal.classfile.LocalVariable getLocalVariable(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1822,8 +3128,33 @@
   <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableGen com.sun.org.apache.bcel.internal.classfile.LocalVariable getLocalVariable(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableGen com.sun.org.apache.bcel.internal.generic.InstructionHandle getEnd()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableGen com.sun.org.apache.bcel.internal.generic.InstructionHandle getStart()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableGen com.sun.org.apache.bcel.internal.generic.Type getType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableGen int getIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableGen java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableGen java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableGen java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1831,8 +3162,23 @@
   <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableGen void updateTarget(com.sun.org.apache.bcel.internal.generic.InstructionHandle, com.sun.org.apache.bcel.internal.generic.InstructionHandle) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableInstruction boolean wide()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableInstruction com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableInstruction int getIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableInstruction short getCanonicalTag()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.LocalVariableInstruction void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1855,6 +3201,11 @@
   <item name="com.sun.org.apache.bcel.internal.generic.MULTIANEWARRAY int consumeStack(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.MULTIANEWARRAY int consumeStack(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.MULTIANEWARRAY java.lang.Class[] getExceptions()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1866,6 +3217,11 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.MULTIANEWARRAY java.lang.String toString(com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.MULTIANEWARRAY short getDimensions()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.MULTIANEWARRAY void accept(com.sun.org.apache.bcel.internal.generic.Visitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1918,6 +3274,11 @@
   <item name="com.sun.org.apache.bcel.internal.generic.MethodGen com.sun.org.apache.bcel.internal.generic.CodeExceptionGen[] getExceptionHandlers()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.MethodGen com.sun.org.apache.bcel.internal.generic.InstructionList getInstructionList()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.MethodGen com.sun.org.apache.bcel.internal.generic.LineNumberGen addLineNumber(com.sun.org.apache.bcel.internal.generic.InstructionHandle, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1933,11 +3294,36 @@
   <item name="com.sun.org.apache.bcel.internal.generic.MethodGen com.sun.org.apache.bcel.internal.generic.MethodGen copy(java.lang.String, com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.MethodGen com.sun.org.apache.bcel.internal.generic.Type getArgumentType(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.MethodGen int getMaxLocals()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.MethodGen int getMaxStack()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.MethodGen int getMaxStack(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen, com.sun.org.apache.bcel.internal.generic.InstructionList, com.sun.org.apache.bcel.internal.generic.CodeExceptionGen[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.MethodGen int getMaxStack(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen, com.sun.org.apache.bcel.internal.generic.InstructionList, com.sun.org.apache.bcel.internal.generic.CodeExceptionGen[]) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.MethodGen java.lang.String getArgumentName(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.MethodGen java.lang.String getClassName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.MethodGen java.lang.String getSignature()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1965,6 +3351,11 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.NEWARRAY NEWARRAY(com.sun.org.apache.bcel.internal.generic.BasicType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.NEWARRAY byte getTypecode()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.NEWARRAY com.sun.org.apache.bcel.internal.generic.Type getType()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2000,12 +3391,17 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.ObjectType boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
+      <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.ObjectType boolean subclassOf(com.sun.org.apache.bcel.internal.generic.ObjectType)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ObjectType java.lang.String getClassName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.POP void accept(com.sun.org.apache.bcel.internal.generic.Visitor) 0">
@@ -2032,6 +3428,11 @@
   <item name="com.sun.org.apache.bcel.internal.generic.PUSH PUSH(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.PUSH com.sun.org.apache.bcel.internal.generic.Instruction getInstruction()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.PUSH com.sun.org.apache.bcel.internal.generic.InstructionList getInstructionList()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2052,6 +3453,16 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.RET com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.RET com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.RET int getIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.RET java.lang.String toString(boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2102,6 +3513,11 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.ReturnaddressType com.sun.org.apache.bcel.internal.generic.InstructionHandle getTarget()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.SALOAD void accept(com.sun.org.apache.bcel.internal.generic.Visitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2110,6 +3526,11 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.SIPUSH com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.SIPUSH com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.SIPUSH java.lang.Number getValue()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2141,6 +3562,16 @@
   <item name="com.sun.org.apache.bcel.internal.generic.SWITCH SWITCH(int[], com.sun.org.apache.bcel.internal.generic.InstructionHandle[], com.sun.org.apache.bcel.internal.generic.InstructionHandle, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.SWITCH boolean matchIsOrdered(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.SWITCH com.sun.org.apache.bcel.internal.generic.Instruction getInstruction()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.SWITCH com.sun.org.apache.bcel.internal.generic.InstructionList getInstructionList()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2152,6 +3583,26 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.Select boolean containsTarget(com.sun.org.apache.bcel.internal.generic.InstructionHandle) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Select boolean containsTarget(com.sun.org.apache.bcel.internal.generic.InstructionHandle)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Select com.sun.org.apache.bcel.internal.generic.InstructionHandle[] getTargets()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Select int[] getIndices()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Select int[] getMatchs()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.Select java.lang.String toString(boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2167,6 +3618,11 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.StackInstruction com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.StackInstruction com.sun.org.apache.bcel.internal.generic.Type getType(com.sun.org.apache.bcel.internal.generic.ConstantPoolGen)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.StoreInstruction void accept(com.sun.org.apache.bcel.internal.generic.Visitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2186,6 +3642,16 @@
   <item name="com.sun.org.apache.bcel.internal.generic.TABLESWITCH void initFromFile(com.sun.org.apache.bcel.internal.util.ByteSequence, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.TargetLostException com.sun.org.apache.bcel.internal.generic.InstructionHandle[] getTargets()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Type byte getType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.Type com.sun.org.apache.bcel.internal.generic.Type getReturnType(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2201,11 +3667,21 @@
   <item name="com.sun.org.apache.bcel.internal.generic.Type com.sun.org.apache.bcel.internal.generic.Type[] getArgumentTypes(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Type int getSize()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.generic.Type java.lang.String getMethodSignature(com.sun.org.apache.bcel.internal.generic.Type, com.sun.org.apache.bcel.internal.generic.Type[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.Type java.lang.String getMethodSignature(com.sun.org.apache.bcel.internal.generic.Type, com.sun.org.apache.bcel.internal.generic.Type[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.generic.Type java.lang.String getSignature()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.generic.Type java.lang.String getSignature(java.lang.reflect.Method) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

@@ -5,17 +5,82 @@
   <item name="javax.imageio.IIOImage IIOImage(java.awt.image.RenderedImage, java.util.List&lt;? extends java.awt.image.BufferedImage&gt;, javax.imageio.metadata.IIOMetadata) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.imageio.IIOImage boolean hasRaster()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.IIOImage java.awt.image.Raster getRaster()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.IIOImage java.awt.image.RenderedImage getRenderedImage()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.IIOImage java.util.List&lt;? extends java.awt.image.BufferedImage&gt; getThumbnails()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.IIOImage javax.imageio.metadata.IIOMetadata getMetadata()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.IIOImage void setRaster(java.awt.image.Raster) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.imageio.IIOImage void setRenderedImage(java.awt.image.RenderedImage) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.imageio.IIOParam boolean hasController()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.IIOParam int getSourceXSubsampling()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.IIOParam int getSourceYSubsampling()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.IIOParam int getSubsamplingXOffset()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.IIOParam int getSubsamplingYOffset()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.IIOParam int[] getSourceBands()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.imageio.IIOParam java.awt.Rectangle getSourceRegion()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.IIOParam javax.imageio.IIOParamController getController()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.IIOParam javax.imageio.IIOParamController getDefaultController()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.IIOParam javax.imageio.ImageTypeSpecifier getDestinationType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.IIOParam void setDestinationOffset(java.awt.Point) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -25,6 +90,11 @@
   </item>
   <item name="javax.imageio.IIOParam void setSourceRegion(java.awt.Rectangle) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.ImageIO ImageIO()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.ImageIO boolean access$200(java.lang.String[], java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -146,6 +216,11 @@
   <item name="javax.imageio.ImageIO javax.imageio.ImageWriter getWriter(java.awt.image.RenderedImage, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.imageio.ImageIO javax.imageio.spi.IIORegistry access$100()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.ImageIO javax.imageio.stream.ImageInputStream createImageInputStream(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -157,6 +232,21 @@
   </item>
   <item name="javax.imageio.ImageIO javax.imageio.stream.ImageOutputStream createImageOutputStream(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.ImageIO.CacheInfo boolean getUseCache()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageIO.CacheInfo java.io.File getCacheDirectory()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageIO.CacheInfo java.lang.Boolean getHasPermission()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.ImageIO.CanDecodeInputFilter boolean filter(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -199,17 +289,97 @@
   <item name="javax.imageio.ImageIO.TranscoderFilter boolean filter(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.imageio.ImageReadParam boolean canSetSourceRenderSize()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageReadParam int getSourceMaxProgressivePass()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageReadParam int getSourceMinProgressivePass()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageReadParam int getSourceNumProgressivePasses()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.ImageReadParam int[] getDestinationBands()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.imageio.ImageReadParam java.awt.Dimension getSourceRenderSize()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.imageio.ImageReadParam java.awt.image.BufferedImage getDestination()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.ImageReadParam void setDestinationBands(int[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.imageio.ImageReadParam void setSourceRenderSize(java.awt.Dimension) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.ImageReader boolean abortRequested()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageReader boolean canReadRaster()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageReader boolean isIgnoringMetadata()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageReader boolean isImageTiled(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageReader boolean isRandomAccessEasy(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageReader boolean isSeekForwardOnly()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageReader boolean readerSupportsThumbnails()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageReader int getMinIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageReader int getNumThumbnails(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageReader int getTileGridXOffset(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageReader int getTileGridYOffset(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.ImageReader java.awt.Rectangle getSourceRegion(javax.imageio.ImageReadParam, int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -224,6 +394,11 @@
   </item>
   <item name="javax.imageio.ImageReader java.awt.image.Raster readRaster(int, javax.imageio.ImageReadParam) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.ImageReader java.lang.Object getInput()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.ImageReader java.util.Iterator&lt;javax.imageio.IIOImage&gt; readAll(java.util.Iterator&lt;? extends javax.imageio.ImageReadParam&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -241,6 +416,11 @@
       <val val="&quot;null,_-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.ImageReader java.util.Locale getLocale()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.ImageReader java.util.Locale[] getAvailableLocales()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -278,6 +458,11 @@
   <item name="javax.imageio.ImageReader javax.imageio.metadata.IIOMetadata getStreamMetadata(java.lang.String, java.util.Set&lt;java.lang.String&gt;)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.imageio.ImageReader javax.imageio.spi.ImageReaderSpi getOriginatingProvider()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.ImageReader void addIIOReadProgressListener(javax.imageio.event.IIOReadProgressListener) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -293,6 +478,11 @@
   <item name="javax.imageio.ImageReader void computeRegions(javax.imageio.ImageReadParam, int, int, java.awt.image.BufferedImage, java.awt.Rectangle, java.awt.Rectangle) 5">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.imageio.ImageReader void dispose()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.ImageReader void removeIIOReadProgressListener(javax.imageio.event.IIOReadProgressListener) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -301,6 +491,11 @@
   </item>
   <item name="javax.imageio.ImageReader void removeIIOReadWarningListener(javax.imageio.event.IIOReadWarningListener) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.ImageTypeSpecifier ImageTypeSpecifier()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.ImageTypeSpecifier ImageTypeSpecifier(java.awt.image.ColorModel, java.awt.image.SampleModel) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -314,12 +509,22 @@
   <item name="javax.imageio.ImageTypeSpecifier ImageTypeSpecifier(javax.imageio.ImageTypeSpecifier.1) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.imageio.ImageTypeSpecifier ImageTypeSpecifier(javax.imageio.ImageTypeSpecifier.1)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.ImageTypeSpecifier boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.imageio.ImageTypeSpecifier boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageTypeSpecifier int getNumBands()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="javax.imageio.ImageTypeSpecifier java.awt.image.BufferedImage createBufferedImage(int, int)">
@@ -330,6 +535,16 @@
   </item>
   <item name="javax.imageio.ImageTypeSpecifier java.awt.image.ColorModel createComponentCM(java.awt.color.ColorSpace, int, int, boolean, boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.imageio.ImageTypeSpecifier java.awt.image.ColorModel getColorModel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageTypeSpecifier java.awt.image.SampleModel getSampleModel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.ImageTypeSpecifier javax.imageio.ImageTypeSpecifier createBanded(java.awt.color.ColorSpace, int[], int[], int, boolean, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -431,6 +646,26 @@
   <item name="javax.imageio.ImageTypeSpecifier.Packed Packed(java.awt.color.ColorSpace, int, int, int, int, int, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.imageio.ImageWriteParam boolean canOffsetTiles()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageWriteParam boolean canWriteCompressed()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageWriteParam boolean canWriteProgressive()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageWriteParam boolean canWriteTiles()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.ImageWriteParam float[] getCompressionQualityValues()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -452,6 +687,26 @@
   <item name="javax.imageio.ImageWriteParam java.lang.String[] getCompressionTypes()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.imageio.ImageWriteParam java.util.Locale getLocale()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageWriter boolean abortRequested()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageWriter boolean canWriteRasters()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageWriter boolean canWriteSequence()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.ImageWriter int getNumThumbnailsSupported(javax.imageio.ImageTypeSpecifier, javax.imageio.ImageWriteParam, javax.imageio.metadata.IIOMetadata, javax.imageio.metadata.IIOMetadata) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -463,6 +718,11 @@
   </item>
   <item name="javax.imageio.ImageWriter int getNumThumbnailsSupported(javax.imageio.ImageTypeSpecifier, javax.imageio.ImageWriteParam, javax.imageio.metadata.IIOMetadata, javax.imageio.metadata.IIOMetadata) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.ImageWriter int getNumThumbnailsSupported(javax.imageio.ImageTypeSpecifier, javax.imageio.ImageWriteParam, javax.imageio.metadata.IIOMetadata, javax.imageio.metadata.IIOMetadata)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.ImageWriter java.awt.Dimension[] getPreferredThumbnailSizes(javax.imageio.ImageTypeSpecifier, javax.imageio.ImageWriteParam, javax.imageio.metadata.IIOMetadata, javax.imageio.metadata.IIOMetadata) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -478,9 +738,19 @@
   </item>
   <item name="javax.imageio.ImageWriter java.awt.Dimension[] getPreferredThumbnailSizes(javax.imageio.ImageTypeSpecifier, javax.imageio.ImageWriteParam, javax.imageio.metadata.IIOMetadata, javax.imageio.metadata.IIOMetadata)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;null;_,!null,_,_-&gt;null;_,_,!null,_-&gt;null;_,_,_,!null-&gt;null;_,_,_,null-&gt;null;_,_,null,_-&gt;null;_,null,_,_-&gt;null;null,_,_,_-&gt;null&quot;"/>
+      <val val="value=&quot;!null,_,_,_-&gt;null;_,!null,_,_-&gt;null;_,_,!null,_-&gt;null;_,_,_,!null-&gt;null;_,_,_,null-&gt;null;_,_,null,_-&gt;null;_,null,_,_-&gt;null;null,_,_,_-&gt;null&quot;,pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.ImageWriter java.lang.Object getOutput()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageWriter java.util.Locale getLocale()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.ImageWriter java.util.Locale[] getAvailableLocales()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -488,11 +758,21 @@
   <item name="javax.imageio.ImageWriter javax.imageio.ImageWriteParam getDefaultWriteParam()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.imageio.ImageWriter javax.imageio.spi.ImageWriterSpi getOriginatingProvider()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.ImageWriter void addIIOWriteProgressListener(javax.imageio.event.IIOWriteProgressListener) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.imageio.ImageWriter void addIIOWriteWarningListener(javax.imageio.event.IIOWriteWarningListener) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.ImageWriter void dispose()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.ImageWriter void prepareInsertEmpty(int, javax.imageio.ImageTypeSpecifier, int, int, javax.imageio.metadata.IIOMetadata, java.util.List&lt;? extends java.awt.image.BufferedImage&gt;, javax.imageio.ImageWriteParam) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>

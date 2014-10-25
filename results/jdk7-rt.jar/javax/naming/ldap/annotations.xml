@@ -1,4 +1,24 @@
 <root>
+  <item name="javax.naming.ldap.BasicControl boolean isCritical()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.naming.ldap.BasicControl byte[] getEncodedValue()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.naming.ldap.BasicControl java.lang.String getID()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.naming.ldap.ControlFactory ControlFactory()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.naming.ldap.ControlFactory javax.naming.ldap.Control getControlInstance(javax.naming.ldap.Control, javax.naming.Context, java.util.Hashtable&lt;?,?&gt;) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -123,7 +143,15 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.naming.ldap.PagedResultsResponseControl byte[] getCookie()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.naming.ldap.PagedResultsResponseControl int getResultSize()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.naming.ldap.Rdn Rdn(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -149,6 +177,11 @@
   <item name="javax.naming.ldap.Rdn boolean isEmptyValue(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="javax.naming.ldap.Rdn boolean isWhitespace(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="javax.naming.ldap.Rdn int compareTo(java.lang.Object) 0">
@@ -210,6 +243,11 @@
       <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="javax.naming.ldap.Rdn.RdnEntry java.lang.Object getValue()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.naming.ldap.Rdn.RdnEntry java.lang.String access$102(javax.naming.ldap.Rdn.RdnEntry, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -218,11 +256,26 @@
       <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="javax.naming.ldap.Rdn.RdnEntry java.lang.String getType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.naming.ldap.Rdn.RdnEntry java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.naming.ldap.Rfc2253Parser Rfc2253Parser(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.naming.ldap.Rfc2253Parser boolean atTerminator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.naming.ldap.Rfc2253Parser boolean isWhitespace(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.naming.ldap.Rfc2253Parser java.lang.String parseAttrType()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -267,16 +320,57 @@
   <item name="javax.naming.ldap.SortControl byte[] setEncodedValue(javax.naming.ldap.SortKey[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.naming.ldap.SortKey boolean isAscending()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.naming.ldap.SortKey java.lang.String getAttributeID()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.naming.ldap.SortKey java.lang.String getMatchingRuleID()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.naming.ldap.SortResponseControl SortResponseControl(java.lang.String, boolean, byte[]) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.naming.ldap.SortResponseControl boolean isSorted()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.naming.ldap.SortResponseControl int getResultCode()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="javax.naming.ldap.SortResponseControl java.lang.String getAttributeID()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.naming.ldap.SortResponseControl javax.naming.NamingException getException()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.naming.ldap.StartTlsRequest StartTlsRequest()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.naming.ldap.StartTlsRequest byte[] getEncodedValue()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.naming.ldap.StartTlsRequest java.lang.String getID()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.naming.ldap.StartTlsRequest javax.naming.ConfigurationException wrapException(java.lang.Exception)">
@@ -285,14 +379,30 @@
   <item name="javax.naming.ldap.StartTlsRequest javax.naming.ldap.ExtendedResponse createExtendedResponse(java.lang.String, byte[], int, int) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.naming.ldap.StartTlsResponse StartTlsResponse()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.naming.ldap.StartTlsResponse byte[] getEncodedValue()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.naming.ldap.StartTlsResponse java.lang.String getID()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.naming.ldap.UnsolicitedNotificationEvent UnsolicitedNotificationEvent(java.lang.Object, javax.naming.ldap.UnsolicitedNotification) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.naming.ldap.UnsolicitedNotificationEvent javax.naming.ldap.UnsolicitedNotification getNotification()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.naming.ldap.UnsolicitedNotificationEvent void dispatch(javax.naming.ldap.UnsolicitedNotificationListener) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
