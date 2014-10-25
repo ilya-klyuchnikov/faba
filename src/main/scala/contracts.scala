@@ -29,11 +29,9 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
 
   type MyResult = Result[Key, Value]
   implicit val contractsLattice = ELattice(Values.Bot, Values.Top)
-  val propagate = true
 
   val pendingStack = InOutAnalysis.sharedPendingStack
-  // there is no need to generalize `this` (local var 0) for instance methods
-  val generalizeShift = if ((methodNode.access & ACC_STATIC) == 0) 1 else 0
+
   val nullAnalysis = direction match {
     case InOut(_, Values.Null) => true
     case _ => false
@@ -105,21 +103,19 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
         case None =>
       }
 
-      val preConf = state.conf
-      val insnIndex = preConf.insnIndex
+      val conf = state.conf
+      val insnIndex = conf.insnIndex
       val loopEnter = dfsTree.loopEnters(insnIndex)
       val history = state.history
 
       // todo - is it ok not look into taken/not-taken
       // possible improvement - more restrictions
-      val fold = loopEnter && history.exists(prevConf => confInstance(preConf, prevConf))
+      val fold = loopEnter && history.exists(prevConf => confInstance(conf, prevConf))
 
       if (fold) {
         computed(insnIndex) = state :: computed(insnIndex)
         return
       }
-
-      val conf = if (loopEnter && !propagate) generalize(preConf) else preConf
 
       val frame = conf.frame
       val insnNode = methodNode.instructions.get(insnIndex)
@@ -127,8 +123,6 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
       val nextFrame = execute(frame, insnNode)
 
       val dereferencedHere: Int = interpreter.dereferenced
-
-
       val dereferenced = state.constraint | dereferencedHere
 
       // executed only during null
@@ -189,7 +183,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
           states = state :: states
           state = nextState
 
-        case IFNONNULL if propagate && popValue(frame).isInstanceOf[NThParamValue] =>
+        case IFNONNULL if popValue(frame).isInstanceOf[NThParamValue] =>
           val nullInsn = insnIndex + 1
           val notNullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           val n = popValue(frame).asInstanceOf[NThParamValue].n
@@ -198,7 +192,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
           pendingPush(nullState)
           pendingPush(notNullState)
           return
-        case IFNONNULL if propagate && popValue(frame).isInstanceOf[Trackable] =>
+        case IFNONNULL if popValue(frame).isInstanceOf[Trackable] =>
           val nullInsn = insnIndex + 1
           val notNullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           val orig = popValue(frame).asInstanceOf[Trackable].origin
@@ -207,7 +201,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
           pendingPush(nullState)
           pendingPush(notNullState)
           return
-        case IFNULL if propagate && popValue(frame).isInstanceOf[NThParamValue] =>
+        case IFNULL if popValue(frame).isInstanceOf[NThParamValue] =>
           val nullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           val notNullInsn = insnIndex + 1
           val n = popValue(frame).asInstanceOf[NThParamValue].n
@@ -216,7 +210,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
           pendingPush(nullState)
           pendingPush(notNullState)
           return
-        case IFNULL if propagate && popValue(frame).isInstanceOf[Trackable] =>
+        case IFNULL if popValue(frame).isInstanceOf[Trackable] =>
           val nullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           val notNullInsn = insnIndex + 1
           val orig = popValue(frame).asInstanceOf[Trackable].origin
@@ -273,43 +267,6 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
       val nextFrame = new Frame(frame)
       nextFrame.execute(insnNode, interpreter)
       nextFrame
-  }
-
-  // in-place generalization
-  def generalize(conf: Conf): Conf = {
-    val frame = new Frame(conf.frame)
-    for (i <- generalizeShift until frame.getLocals) frame.getLocal(i) match {
-      case CallResultValue(_, tp, _) =>
-        frame.setLocal(i, new BasicValue(tp))
-      case TrueValue() =>
-        frame.setLocal(i, BasicValue.INT_VALUE)
-      case FalseValue() =>
-        frame.setLocal(i, BasicValue.INT_VALUE)
-      case NullValue(_) =>
-        frame.setLocal(i, BasicValue.UNINITIALIZED_VALUE)
-      case NotNullValue(tp) =>
-        frame.setLocal(i, new BasicValue(tp))
-      case _ =>
-    }
-
-    val stack = (0 until frame.getStackSize).map(frame.getStack)
-    frame.clearStack()
-
-    for (v <- stack) v match {
-      case CallResultValue(_, tp, _) =>
-        frame.push(new BasicValue(tp))
-      case TrueValue() =>
-        frame.push(BasicValue.INT_VALUE)
-      case FalseValue() =>
-        frame.push(BasicValue.INT_VALUE)
-      case NullValue(_) =>
-        frame.push(BasicValue.UNINITIALIZED_VALUE)
-      case NotNullValue(tp) =>
-        frame.push(new BasicValue(tp))
-      case _ =>
-        frame.push(v)
-    }
-    Conf(conf.insnIndex, frame)
   }
 
   // customization: if param is a possible result, it is trackable
