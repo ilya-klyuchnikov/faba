@@ -20,7 +20,7 @@
 
 ## How to run
 
-    faba.Main path_to_lib1.jar path_to_lib2.jar output dir 
+    faba.Main path_to_lib1.jar path_to_lib2.jar output_dir 
     
 It is easier to experiment with FABA directly from sbt:
 
