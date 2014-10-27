@@ -44,10 +44,11 @@ case class Conf(insnIndex: Int, frame: Frame[BasicValue]) {
   override def hashCode() = _hashCode
 }
 
-// TODO - is it correct to consider history as history of configurations only
-// TODO - not as history of states?
 /**
  * Program point considered by analysis.
+ *
+ * Note about constraints: it turns out, that representation of constraints as a bit mask
+ * provides quite good performance.
  *
  * @param index unique index of state. Used as identity.
  * @param conf configuration of this program point.
@@ -104,8 +105,6 @@ abstract class Analysis[Res] {
 
   final def createStartState(): State =
     State(0, Conf(0, createStartFrame()), Nil, 0)
-  final def confInstance(curr: Conf, prev: Conf): Boolean =
-    Utils.isInstance(curr, prev)
 
   /**
    * Bookkeeping of already analyzed states.
@@ -213,7 +212,7 @@ object Utils {
       case FalseValue() => true
       case _ => false
     }
-    // TODO - is it safe??
+    // TODO - is it safe to ignore origin of null value?
     case NullValue(_) => curr match {
       case NullValue(_) => true
       case _ => false
@@ -222,7 +221,7 @@ object Utils {
       case NotNullValue(_) => true
       case _ => false
     }
-    // TODO - is it safe??
+    // TODO - is it safe to ignore origin and type of call?
     case CallResultValue(_, _, prevInters) => curr match {
       case CallResultValue(_, _, currInters) => currInters == prevInters
       case _ => false
