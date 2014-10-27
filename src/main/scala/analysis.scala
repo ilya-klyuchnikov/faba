@@ -103,6 +103,11 @@ abstract class Analysis[Res] {
    */
   def mkEquation(result: Res): Equation[Key, Value]
 
+  /**
+   * Utility method for creating start state
+   *
+   * @return start state for analysis
+   */
   final def createStartState(): State =
     State(0, Conf(0, createStartFrame()), Nil, 0)
 
@@ -126,14 +131,20 @@ abstract class Analysis[Res] {
    */
   var earlyResult: Option[Res] = None
 
+  // internal counter for creating monotone ids
   private var id = 0
-  @inline
-  final def mkId(): Int = {
+
+  /**
+   * Generates new unique id.
+   *
+   * @return new unique id.
+   * @throws LimitReachedException if graph of configurations is too big.
+   */
+  final def genId(): Int = {
     id += 1
     if (id > LimitReachedException.limit) throw new LimitReachedException
     id
   }
-  final def lastId(): Int = id
 
   def createStartFrame(): Frame[BasicValue] = {
     val frame = new Frame[BasicValue](methodNode.maxLocals, methodNode.maxStack)
