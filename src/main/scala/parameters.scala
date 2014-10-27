@@ -293,22 +293,22 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
           return
         case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = insnIndex + 1
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, constraint1 | 1)
+          val nextState = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, constraint1 | 1)
           states = state :: states
           state = nextState
         case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, constraint1 | 1)
+          val nextState = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, constraint1 | 1)
           states = state :: states
           state = nextState
         case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, constraint1 | 1)
+          val nextState = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, constraint1 | 1)
           states = state :: states
           state = nextState
         case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
           val nextInsnIndex = insnIndex + 1
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, constraint1 | 1)
+          val nextState = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, constraint1 | 1)
           states = state :: states
           state = nextState
         case _ =>
@@ -323,7 +323,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
               } else {
                 nextFrame
               }
-              State(mkId(), Conf(nextInsnIndex, nextFrame1), nextHistory, constraint1)
+              State(genId(), Conf(nextInsnIndex, nextFrame1), nextHistory, constraint1)
           }
           states = state :: states
           if (nextStates.size == 1 && noSwitch) {
@@ -444,16 +444,16 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
           return
         case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = insnIndex + 1
-          state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, 1)
+          state = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, 1)
         case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, 1)
+          state = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, 1)
         case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, 1)
+          state = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, 1)
         case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
           val nextInsnIndex = insnIndex + 1
-          state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, 1)
+          state = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, 1)
         case _ =>
           val nextInsnIndices = controlFlow.transitions(insnIndex)
           val nextStates = nextInsnIndices.map {
@@ -466,7 +466,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
               } else {
                 nextFrame
               }
-              State(mkId(), Conf(nextInsnIndex, nextFrame1), nextHistory, taken)
+              State(genId(), Conf(nextInsnIndex, nextFrame1), nextHistory, taken)
           }
           if (nextStates.size == 1) {
             state = nextStates.head
