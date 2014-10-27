@@ -107,9 +107,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
       val loopEnter = dfsTree.loopEnters(insnIndex)
       val history = state.history
 
-      // todo - is it ok not look into taken/not-taken
-      // possible improvement - more restrictions
-      val fold = loopEnter && history.exists(prevConf => confInstance(conf, prevConf))
+      val fold = loopEnter && history.exists(prevConf => AnalysisUtils.isInstance(conf, prevConf))
 
       if (fold) {
         computed(insnIndex) = state :: computed(insnIndex)

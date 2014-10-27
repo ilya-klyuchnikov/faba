@@ -230,7 +230,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
       val insnIndex = conf.insnIndex
       val history = state.history
 
-      val fold = dfsTree.loopEnters(insnIndex) && history.exists(prevConf => confInstance(conf, prevConf))
+      val fold = dfsTree.loopEnters(insnIndex) && history.exists(prevConf => AnalysisUtils.isInstance(conf, prevConf))
 
       if (fold) {
         results(stateIndex) = Identity
@@ -409,13 +409,12 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
       val history = state.history
 
       val isLoopEnter = dfsTree.loopEnters(insnIndex)
-      val fold = isLoopEnter && history.exists(prevConf => confInstance(conf, prevConf))
+      val fold = isLoopEnter && history.exists(prevConf => AnalysisUtils.isInstance(conf, prevConf))
 
       computed(insnIndex) = state :: computed(insnIndex)
 
-      if (fold) {
+      if (fold)
         return
-      }
 
       val taken = state.constraint
       val frame = conf.frame
