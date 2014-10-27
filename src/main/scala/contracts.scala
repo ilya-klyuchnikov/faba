@@ -37,32 +37,31 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
     case _ => false
   }
 
-  override val identity = Final(Values.Bot)
-
   private val interpreter = InOutInterpreter(direction, methodNode.instructions, resultOrigins)
   private val optIn: Option[Value] = direction match {
     case InOut(_, in) => Some(in)
     case _ => None
   }
 
-  override def combineResults(delta: MyResult, subResults: List[MyResult]): MyResult =
-    subResults.reduce(_ join _)
-
   override def mkEquation(result: MyResult): Equation[Key, Value] =
     Equation(aKey, result)
 
-  override def isEarlyResult(res: MyResult): Boolean = res match {
-    case Final(Values.Top) => true
-    case _                 => false
-  }
-
+  /**
+   *
+   */
   def checkEarlyResult(): Unit = myResult match {
     case Final(Values.Top) =>
       earlyResult = Some(myResult)
     case _ =>
   }
 
-  private var myResult: MyResult = identity
+  /**
+   * Result computed so far.
+   * Completion of the path in graph of configurations changes [[myResult]] in the following way:
+   *
+   * myResult = myResult join pathResult.
+   */
+  private var myResult: MyResult = Final(Values.Bot)
 
   private var pendingStackTop: Int = 0
 

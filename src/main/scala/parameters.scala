@@ -107,33 +107,74 @@ object NotNullInConstraint {
 }
 
 object NotNullInAnalysis {
+  // For inference of @NotNull parameters we need to combine information from all configurations,
+  // not just from leaf configurations.
+  // So we need to build and traverse graph of configurations in some tricky order.
+  // For this purpose we maintain "pending list" of what to do.
+
+  /**
+   * Element of pending list - pending action.
+   */
   sealed trait PendingAction
+
+  /**
+   * "Forward step". Driving of current configuration.
+   * @param state state to process
+   *
+   * @see faba.parameters.NotNullInAnalysis#processState(faba.analysis.State)
+   */
   case class ProceedState(state: State) extends PendingAction
+
+  /**
+   * "Combine step". Calculates "approximation" (see the paper) of behavior from some configuration.
+   * Given local delta and sub-sigmas, computes current sigma.
+   *
+   * A note about states:
+   * there is a micro optimization: driving of straight section/piece of graph of configurations without push/pop of actions.
+   * States are states/configurations from this straight section of a graph.
+   *
+   * @param states a list of states representing the straight section of a graph.
+   * @param subResult - local delta (see the paper), produced by driving of straight section.
+   * @param indices - indices of child states
+   */
   case class MakeResult(states: List[State], subResult: Result, indices: List[Int]) extends PendingAction
-  val sharedResults = new Array[Result](LimitReachedException.limit)
+
+  /**
+   * Reusable pending list (pending stack) for push/pop actions during analyses.
+   * @see faba.parameters.NotNullInAnalysis#pending
+   */
   val sharedPendingStack = new Array[PendingAction](LimitReachedException.limit)
+
+  /**
+   * Reusable storage of sub results during analyses.
+   * @see faba.parameters.NotNullInAnalysis#results
+   */
+  val sharedResults = new Array[Result](LimitReachedException.limit)
 }
 
 class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result] {
   import NotNullInAnalysis._
 
-  override val identity: Result = Identity
-
   val results = NotNullInAnalysis.sharedResults
   val pending = NotNullInAnalysis.sharedPendingStack
 
-  override def combineResults(delta: Result, subResults: List[Result]): Result =
+  /**
+   *
+   * @param delta
+   * @param subResults
+   * @return
+   */
+  def combineResults(delta: Result, subResults: List[Result]): Result =
     Result.meet(delta, subResults.reduce(Result.join))
 
   override def mkEquation(result: Result): Equation[Key, Value] = result match {
-    case Identity | Return | Error => Equation(aKey, Final(Values.Top))
-    case NPE => Equation(aKey, Final(Values.NotNull))
+    case Identity | Return | Error =>
+      Equation(aKey, Final(Values.Top))
+    case NPE =>
+      Equation(aKey, Final(Values.NotNull))
     case ConditionalNPE(cnf) =>
       Equation(aKey, Pending(cnf.map(p => Component(Values.Top, p))))
   }
-
-  override def isEarlyResult(res: Result): Boolean =
-    false
 
   var npe = false
 
@@ -155,15 +196,10 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     while (pendingTop > 0 && earlyResult.isEmpty) pendingPop() match {
       case MakeResult(states, delta, subIndices) =>
         val result = combineResults(delta, subIndices.map(results))
-        if (isEarlyResult(result)) {
-          earlyResult = Some(result)
-        } else {
-          // updating all results
-          for (state <- states) {
-            val insnIndex = state.conf.insnIndex
-            results(state.index) = result
-            computed(insnIndex) = state :: computed(insnIndex)
-          }
+        for (state <- states) {
+          val insnIndex = state.conf.insnIndex
+          results(state.index) = result
+          computed(insnIndex) = state :: computed(insnIndex)
         }
       case ProceedState(state) =>
         processState(state)
@@ -176,7 +212,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
 
     var state = fState
     var states: List[State] = Nil
-    var subResult = identity
+    var subResult: Result = Identity
 
     while (true) {
       computed(state.conf.insnIndex).find(prevState => AnalysisUtils.stateEquiv(state, prevState)) match {
@@ -197,7 +233,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
       val fold = dfsTree.loopEnters(insnIndex) && history.exists(prevConf => confInstance(conf, prevConf))
 
       if (fold) {
-        results(stateIndex) = identity
+        results(stateIndex) = Identity
         computed(insnIndex) = state :: computed(insnIndex)
         if (states.nonEmpty)
           pendingPush(MakeResult(states, subResult, List(stateIndex)))
@@ -216,7 +252,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
       subResult = subResult2
 
       if (localSubResult == NPE) {
-        // npe was detected
+        // npe was detected, storing this fact for further analyses
         npe = true
         results(stateIndex) = NPE
         computed(insnIndex) = state :: computed(insnIndex)
@@ -325,23 +361,16 @@ object NullableInAnalysis {
 
 class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result] {
 
-  override val identity: Result = Identity
   val pending = NullableInAnalysis.sharedPendingStack
 
-  override def combineResults(delta: Result, subResults: List[Result]): Result =
-    Result.combineNullable(delta, subResults.reduce(Result.combineNullable))
-
   override def mkEquation(result: Result): Equation[Key, Value] = result match {
-      case NPE => Equation(aKey, Final(Values.Top))
-      case Identity | Return | Error => Equation(aKey, Final(Values.Null))
-      case ConditionalNPE(cnf) =>
-        Equation(aKey, Pending(cnf.map(p => Component(Values.Top, p))))
-    }
+    case NPE => Equation(aKey, Final(Values.Top))
+    case Identity | Return | Error => Equation(aKey, Final(Values.Null))
+    case ConditionalNPE(cnf) =>
+      Equation(aKey, Pending(cnf.map(p => Component(Values.Top, p))))
+  }
 
-  override def isEarlyResult(res: Result): Boolean =
-    false
-
-  private var myResult = identity
+  private var myResult: Result = Identity
 
   private var pendingTop: Int = 0
 

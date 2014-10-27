@@ -44,6 +44,16 @@ case class Conf(insnIndex: Int, frame: Frame[BasicValue]) {
   override def hashCode() = _hashCode
 }
 
+// TODO - is it correct to consider history as history of configurations only
+// TODO - not as history of states?
+/**
+ * Program point considered by analysis.
+ *
+ * @param index unique index of state. Used as identity.
+ * @param conf configuration of this program point.
+ * @param history history - ancestors of a current configuration
+ * @param constraint constraint encoded as int bit-mask.
+ */
 case class State(index: Int, conf: Conf, history: List[Conf], constraint: Int)
 
 object LimitReachedException {
@@ -53,29 +63,68 @@ object LimitReachedException {
 
 class LimitReachedException extends Exception("Limit reached exception")
 
+/**
+ * Skeleton for implementing analysis via exploration of graph of configurations.
+ * All analyses are implemented by following scenario:
+ *
+ * During construction of a graph of configurations, some internal result `Res` is constructed.
+ * Then this internal `Res` is translated into equation.
+ *
+ * @tparam Res internal Result of analysis.
+ *
+ * @see `mkEquation(result: Res): Equation[Key, Value]`
+ */
 abstract class Analysis[Res] {
 
   val richControlFlow: RichControlFlow
   val direction: Direction
   val stable: Boolean
-  def identity: Res
-  def processState(state: State): Unit
-  def isEarlyResult(res: Res): Boolean
-  def combineResults(delta: Res, subResults: List[Res]): Res
-  def mkEquation(result: Res): Equation[Key, Value]
-
   val controlFlow = richControlFlow.controlFlow
   val methodNode = controlFlow.methodNode
   val method = Method(controlFlow.className, methodNode.name, methodNode.desc)
   val dfsTree = richControlFlow.dfsTree
   val aKey = Key(method, direction, stable)
 
-  final def createStartState(): State = State(0, Conf(0, createStartFrame()), Nil, 0)
-  final def confInstance(curr: Conf, prev: Conf): Boolean = Utils.isInstance(curr, prev)
+  /**
+   * Performs one step of analysis. The implied result of this method is side-effect.
+   *
+   * @param state current state (program point with some history)
+   */
+  def processState(state: State): Unit
 
-  // the key is insnIndex
-  var computed = Array.tabulate[List[State]](methodNode.instructions.size()){i => Nil}
-  // the key is stateIndex
+  /**
+   * Transforms an internal result of analysis into a corresponding equation.
+   * When exploration of a graph of configurations is finished,
+   * this method is called to gen an equation.
+   *
+   * @param result internal result
+   * @return
+   */
+  def mkEquation(result: Res): Equation[Key, Value]
+
+  final def createStartState(): State =
+    State(0, Conf(0, createStartFrame()), Nil, 0)
+  final def confInstance(curr: Conf, prev: Conf): Boolean =
+    Utils.isInstance(curr, prev)
+
+  /**
+   * Bookkeeping of already analyzed states.
+   * `computed(i)` is a set of already analyzed states having `state.conf.insnIndex = i`
+   * (the key is insnIndex)
+   */
+  val computed = Array.tabulate[List[State]](methodNode.instructions.size()){i => Nil}
+
+  /**
+   * Part of analysis state.
+   * Quite often during analysis it is possible to identify the result of analysis
+   * without processing the whole graph of configurations.
+   * If such situation is encountered, `earlyResult` may be set to `Some(result)`.
+   * `earlyResult` is checked at each step of analysis.
+   *
+   * @see [[faba.contracts.InOutAnalysis#analyze()]]
+   * @see [[faba.parameters.NotNullInAnalysis.analyze()]]
+   * @see [[faba.parameters.NullableInAnalysis.analyze()]]
+   */
   var earlyResult: Option[Res] = None
 
   private var id = 0
