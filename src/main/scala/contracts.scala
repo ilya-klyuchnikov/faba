@@ -266,45 +266,16 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
       nextFrame
   }
 
-  // customization: if param is a possible result, it is trackable
-  override def createStartFrame(): Frame[BasicValue] = {
-    val frame = new Frame[BasicValue](methodNode.maxLocals, methodNode.maxStack)
-    val returnType = Type.getReturnType(methodNode.desc)
-    val returnValue = if (returnType == Type.VOID_TYPE) null else new BasicValue(returnType)
-    frame.setReturn(returnValue)
-
-    val args = Type.getArgumentTypes(methodNode.desc)
-    var local = 0
-    if ((methodNode.access & Opcodes.ACC_STATIC) == 0) {
-      val basicValue = new NotNullValue(Type.getObjectType(controlFlow.className))
-      frame.setLocal(local, basicValue)
-      local += 1
-    }
-    for (i <- 0 until args.size) {
-      val value = direction match {
-        case InOut(`i`, _) =>
-          new ParamValue(args(i))
-        case In(`i`) =>
-          new ParamValue(args(i))
-        case _ =>
-          if (resultOrigins.parameters(i))
-            NThParamValue(i, args(i))
-          else
-            new BasicValue(args(i))
-      }
-      frame.setLocal(local, value)
-      local += 1
-      if (args(i).getSize == 2) {
-        frame.setLocal(local, BasicValue.UNINITIALIZED_VALUE)
-        local += 1
-      }
-    }
-    while (local < methodNode.maxLocals) {
-      frame.setLocal(local, BasicValue.UNINITIALIZED_VALUE)
-      local += 1
-    }
-    frame
-  }
+  /**
+   * Customized for tracking dereferencing of parameters which leak into result.
+   *
+   * @param i parameter's index
+   * @param tp parameter's type
+   * @return `NThParamValue(i, tp)` if parameter goes into result, calls `super` method otherwise.
+   */
+  override def createStartValueForParameter(i: Int, tp: Type): BasicValue =
+    if (resultOrigins.parameters(i)) NThParamValue(i, tp)
+    else super.createStartValueForParameter(i, tp)
 }
 
 case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins: Origins) extends BasicInterpreter {
