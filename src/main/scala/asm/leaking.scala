@@ -1,5 +1,6 @@
 package faba.asm
 
+import faba.analysis.AsmAbstractValue
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree._
@@ -32,7 +33,7 @@ object LeakingParameters {
   }
 }
 
-case class ParamsValue(params: Set[Int], size: Int) extends Value {
+@AsmAbstractValue case class ParamsValue(params: Set[Int], size: Int) extends Value {
   override def getSize: Int = size
 }
 
