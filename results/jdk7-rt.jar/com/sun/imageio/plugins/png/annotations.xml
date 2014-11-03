@@ -61,11 +61,6 @@
   <item name="com.sun.imageio.plugins.png.PNGImageReaderSpi boolean canDecodeInput(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.imageio.plugins.png.PNGImageReaderSpi boolean canDecodeInput(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.imageio.plugins.png.PNGImageReaderSpi java.lang.String getDescription(java.util.Locale) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -106,11 +101,6 @@
   </item>
   <item name="com.sun.imageio.plugins.png.PNGImageWriter javax.imageio.metadata.IIOMetadata convertImageMetadata(javax.imageio.metadata.IIOMetadata, javax.imageio.ImageTypeSpecifier, javax.imageio.ImageWriteParam) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="com.sun.imageio.plugins.png.PNGImageWriter javax.imageio.metadata.IIOMetadata convertImageMetadata(javax.imageio.metadata.IIOMetadata, javax.imageio.ImageTypeSpecifier, javax.imageio.ImageWriteParam)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_-&gt;!null&quot;"/>
-    </annotation>
   </item>
   <item name="com.sun.imageio.plugins.png.PNGImageWriter javax.imageio.metadata.IIOMetadata convertStreamMetadata(javax.imageio.metadata.IIOMetadata, javax.imageio.ImageWriteParam) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -231,9 +221,12 @@
   </item>
   <item name="com.sun.imageio.plugins.png.PNGMetadata java.util.ArrayList&lt;byte[]&gt; cloneBytesArrayList(java.util.ArrayList&lt;byte[]&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.imageio.plugins.png.PNGMetadata javax.imageio.metadata.IIOMetadataNode getStandardChromaNode()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.imageio.plugins.png.PNGMetadata javax.imageio.metadata.IIOMetadataNode getStandardCompressionNode()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -254,6 +247,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.imageio.plugins.png.PNGMetadata org.w3c.dom.Node getAsTree(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.imageio.plugins.png.PNGMetadata org.w3c.dom.Node getNativeTree()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.imageio.plugins.png.PNGMetadata void initialize(javax.imageio.ImageTypeSpecifier, int) 0">

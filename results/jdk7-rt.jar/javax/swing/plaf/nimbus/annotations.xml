@@ -26,6 +26,11 @@
   <item name="javax.swing.plaf.nimbus.AbstractRegionPainter java.awt.Color getComponentColor(javax.swing.JComponent, java.lang.String, java.awt.Color, float, float, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.swing.plaf.nimbus.AbstractRegionPainter java.awt.Color getComponentColor(javax.swing.JComponent, java.lang.String, java.awt.Color, float, float, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,!null,_,_,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="javax.swing.plaf.nimbus.AbstractRegionPainter java.awt.LinearGradientPaint decodeGradient(float, float, float, float, float[], java.awt.Color[]) 4">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -481,11 +486,6 @@
   <item name="javax.swing.plaf.nimbus.ComboBoxEditableState boolean isInState(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="javax.swing.plaf.nimbus.ComboBoxEditableState boolean isInState(javax.swing.JComponent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.swing.plaf.nimbus.ComboBoxPainter java.awt.Paint decodeGradient1(java.awt.Shape) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -653,11 +653,6 @@
   <item name="javax.swing.plaf.nimbus.DerivedColor.UIResource boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="javax.swing.plaf.nimbus.DerivedColor.UIResource boolean equals(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.swing.plaf.nimbus.DesktopIconPainter java.awt.Paint decodeGradient1(java.awt.Shape) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -717,9 +712,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.plaf.nimbus.DropShadowEffect java.awt.image.BufferedImage applyEffect(java.awt.image.BufferedImage, java.awt.image.BufferedImage, int, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null,_,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.plaf.nimbus.DropShadowEffect javax.swing.plaf.nimbus.Effect.EffectType getEffectType()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -748,23 +741,31 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="javax.swing.plaf.nimbus.Effect javax.swing.plaf.nimbus.Effect.ArrayCache getArrayCache()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.plaf.nimbus.Effect.ArrayCache byte[] getTmpByteArray1(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.plaf.nimbus.Effect.ArrayCache byte[] getTmpByteArray2(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.plaf.nimbus.Effect.ArrayCache byte[] getTmpByteArray3(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.plaf.nimbus.Effect.ArrayCache int[] getTmpIntArray(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.plaf.nimbus.EffectUtils EffectUtils()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="javax.swing.plaf.nimbus.EffectUtils byte[] getPixels(java.awt.image.BufferedImage, int, int, int, int, byte[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_,_,_-&gt;!null&quot;"/>
-    </annotation>
+  <item name="javax.swing.plaf.nimbus.EffectUtils float[] createGaussianKernel(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.plaf.nimbus.EffectUtils int[] getPixels(java.awt.image.BufferedImage, int, int, int, int, int[]) 5">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.swing.plaf.nimbus.EffectUtils int[] getPixels(java.awt.image.BufferedImage, int, int, int, int, int[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_,_,_-&gt;!null&quot;"/>
-    </annotation>
   </item>
   <item name="javax.swing.plaf.nimbus.EffectUtils java.awt.image.BufferedImage createColorModelCompatibleImage(java.awt.image.BufferedImage) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -776,9 +777,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.plaf.nimbus.EffectUtils java.awt.image.BufferedImage gaussianBlur(java.awt.image.BufferedImage, java.awt.image.BufferedImage, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null,_-&gt;!null;_,null,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.plaf.nimbus.EffectUtils void clearImage(java.awt.image.BufferedImage) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1050,9 +1049,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.plaf.nimbus.InnerShadowEffect java.awt.image.BufferedImage applyEffect(java.awt.image.BufferedImage, java.awt.image.BufferedImage, int, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null,_,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.plaf.nimbus.InnerShadowEffect javax.swing.plaf.nimbus.Effect.EffectType getEffectType()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1381,18 +1378,8 @@
   <item name="javax.swing.plaf.nimbus.InternalFrameTitlePaneWindowFocusedState boolean isInState(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="javax.swing.plaf.nimbus.InternalFrameTitlePaneWindowFocusedState boolean isInState(javax.swing.JComponent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.swing.plaf.nimbus.InternalFrameWindowFocusedState boolean isInState(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.swing.plaf.nimbus.InternalFrameWindowFocusedState boolean isInState(javax.swing.JComponent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="javax.swing.plaf.nimbus.LoweredBorder LoweredBorder()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1417,9 +1404,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.plaf.nimbus.LoweredBorder java.lang.Object[] getExtendedCacheKeys(javax.swing.JComponent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.plaf.nimbus.LoweredBorder javax.swing.plaf.nimbus.AbstractRegionPainter.PaintContext getPaintContext()">
@@ -1617,6 +1601,9 @@
     </annotation>
   </item>
   <item name="javax.swing.plaf.nimbus.NimbusDefaults.LazyStyle java.util.List&lt;java.lang.String&gt; split(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.plaf.nimbus.NimbusDefaults.LazyStyle java.util.List&lt;java.lang.String&gt; split(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.plaf.nimbus.NimbusDefaults.LazyStyle javax.swing.plaf.nimbus.NimbusDefaults.LazyStyle.Part[] access$400(javax.swing.plaf.nimbus.NimbusDefaults.LazyStyle) 0">
@@ -1843,9 +1830,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.plaf.nimbus.NimbusStyle java.awt.Insets getInsets(javax.swing.plaf.synth.SynthContext, java.awt.Insets)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.plaf.nimbus.NimbusStyle java.lang.Object get(javax.swing.plaf.synth.SynthContext, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2091,18 +2076,8 @@
   <item name="javax.swing.plaf.nimbus.ProgressBarFinishedState boolean isInState(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="javax.swing.plaf.nimbus.ProgressBarFinishedState boolean isInState(javax.swing.JComponent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.swing.plaf.nimbus.ProgressBarIndeterminateState boolean isInState(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.swing.plaf.nimbus.ProgressBarIndeterminateState boolean isInState(javax.swing.JComponent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="javax.swing.plaf.nimbus.ProgressBarPainter java.awt.Paint decodeGradient1(java.awt.Shape) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2852,18 +2827,8 @@
   <item name="javax.swing.plaf.nimbus.SplitPaneDividerVerticalState boolean isInState(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="javax.swing.plaf.nimbus.SplitPaneDividerVerticalState boolean isInState(javax.swing.JComponent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.swing.plaf.nimbus.SplitPaneVerticalState boolean isInState(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.swing.plaf.nimbus.SplitPaneVerticalState boolean isInState(javax.swing.JComponent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="javax.swing.plaf.nimbus.State java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -3789,18 +3754,8 @@
   <item name="javax.swing.plaf.nimbus.ToolBarEastState boolean isInState(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="javax.swing.plaf.nimbus.ToolBarEastState boolean isInState(javax.swing.JComponent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.swing.plaf.nimbus.ToolBarNorthState boolean isInState(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.swing.plaf.nimbus.ToolBarNorthState boolean isInState(javax.swing.JComponent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="javax.swing.plaf.nimbus.ToolBarPainter java.awt.Paint decodeGradient1(java.awt.Shape) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3847,11 +3802,6 @@
   </item>
   <item name="javax.swing.plaf.nimbus.ToolBarSouthState boolean isInState(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.swing.plaf.nimbus.ToolBarSouthState boolean isInState(javax.swing.JComponent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="javax.swing.plaf.nimbus.ToolBarToggleButtonPainter java.awt.Paint decodeGradient1(java.awt.Shape) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3929,11 +3879,6 @@
   </item>
   <item name="javax.swing.plaf.nimbus.ToolBarWestState boolean isInState(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.swing.plaf.nimbus.ToolBarWestState boolean isInState(javax.swing.JComponent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="javax.swing.plaf.nimbus.ToolTipPainter javax.swing.plaf.nimbus.AbstractRegionPainter.PaintContext getPaintContext()">
     <annotation name="org.jetbrains.annotations.Contract">

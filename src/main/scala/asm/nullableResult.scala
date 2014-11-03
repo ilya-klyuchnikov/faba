@@ -1,5 +1,6 @@
 package faba.asm.nullableResult
 
+import faba.analysis.AsmAbstractValue
 import faba.asm.{LiteAnalyzerExt, InterpreterExt, AnalyzerExt}
 import faba.data._
 import faba.engine._
@@ -9,8 +10,8 @@ import org.objectweb.asm.tree._
 import org.objectweb.asm.{Opcodes, Type}
 
 // this is significant to set magic type because of BasicObject#equals
-case class LabeledNull(origins: Set[Int]) extends BasicValue(Type.getObjectType("null"))
-case class Calls(keys: Set[Key]) extends BasicValue(NullableResultAnalysis.CallType) {
+@AsmAbstractValue case class LabeledNull(origins: Set[Int]) extends BasicValue(Type.getObjectType("null"))
+@AsmAbstractValue case class Calls(keys: Set[Key]) extends BasicValue(NullableResultAnalysis.CallType) {
   override def toString = s"Calls(${keys.toString})"
 
   override def equals(value: scala.Any): Boolean = value match {
@@ -21,7 +22,7 @@ case class Calls(keys: Set[Key]) extends BasicValue(NullableResultAnalysis.CallT
   override def hashCode(): Int =
     keys.hashCode()
 }
-case class ThisValue() extends BasicValue(NullableResultAnalysis.ObjectType) {
+@AsmAbstractValue case class ThisValue() extends BasicValue(NullableResultAnalysis.ObjectType) {
   override def equals(value: scala.Any) = value match {
     case ThisValue() => true
     case _ => false

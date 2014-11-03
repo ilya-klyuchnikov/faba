@@ -31,10 +31,8 @@
   <item name="sun.swing.CachedPainter java.awt.Image createImage(java.awt.Component, int, int, java.awt.GraphicsConfiguration, java.lang.Object[]) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.swing.CachedPainter java.awt.Image createImage(java.awt.Component, int, int, java.awt.GraphicsConfiguration, java.lang.Object[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,null,_-&gt;!null&quot;"/>
-    </annotation>
+  <item name="sun.swing.CachedPainter sun.swing.ImageCache getCache(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.swing.CachedPainter void paintImage(java.awt.Component, java.awt.Graphics, int, int, int, int, java.awt.Image, java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -59,16 +57,6 @@
   <item name="sun.swing.DefaultLayoutStyle boolean isLabelAndNonlabel(javax.swing.JComponent, javax.swing.JComponent, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
-    </annotation>
-  </item>
-  <item name="sun.swing.DefaultLayoutStyle boolean isLeftAligned(javax.swing.AbstractButton, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
-  <item name="sun.swing.DefaultLayoutStyle boolean isRightAligned(javax.swing.AbstractButton, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="sun.swing.DefaultLayoutStyle int getButtonGap(javax.swing.JComponent, int) 0">
@@ -117,11 +105,31 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="sun.swing.DefaultLookup java.awt.Color getColor(javax.swing.JComponent, javax.swing.plaf.ComponentUI, java.lang.String, java.awt.Color)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.swing.DefaultLookup java.awt.Insets getInsets(javax.swing.JComponent, javax.swing.plaf.ComponentUI, java.lang.String, java.awt.Insets)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.swing.DefaultLookup java.lang.Object getDefault(javax.swing.JComponent, javax.swing.plaf.ComponentUI, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.swing.DefaultLookup java.lang.Object getDefault(javax.swing.JComponent, javax.swing.plaf.ComponentUI, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.swing.DefaultLookup javax.swing.Icon getIcon(javax.swing.JComponent, javax.swing.plaf.ComponentUI, java.lang.String, javax.swing.Icon)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.swing.DefaultLookup javax.swing.border.Border getBorder(javax.swing.JComponent, javax.swing.plaf.ComponentUI, java.lang.String, javax.swing.border.Border)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,!null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.swing.FilePane boolean access$2000(sun.swing.FilePane) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -175,9 +183,6 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.swing.FilePane java.awt.Component findChildComponent(java.awt.Container, java.lang.Class)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.swing.FilePane java.awt.event.FocusListener access$1900(sun.swing.FilePane) 0">
@@ -472,6 +477,9 @@
   <item name="sun.swing.FilePane.DetailsTableCellRenderer java.awt.Component getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.swing.FilePane.DetailsTableCellRenderer java.awt.Insets getInsets(java.awt.Insets)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.swing.FilePane.DetailsTableModel DetailsTableModel(sun.swing.FilePane, javax.swing.JFileChooser) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -585,6 +593,9 @@
   </item>
   <item name="sun.swing.ImageCache sun.swing.ImageCache.Entry getEntry(java.lang.Object, java.awt.GraphicsConfiguration, int, int, java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.swing.ImageCache sun.swing.ImageCache.Entry getEntry(java.lang.Object, java.awt.GraphicsConfiguration, int, int, java.lang.Object[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.swing.ImageCache void setImage(java.lang.Object, java.awt.GraphicsConfiguration, int, int, java.lang.Object[], java.awt.Image) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1200,7 +1211,7 @@
   </item>
   <item name="sun.swing.SwingLazyValue java.lang.Class[] getClassArray(java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1237,7 +1248,7 @@
   </item>
   <item name="sun.swing.SwingUtilities2 boolean isComplexLayout(char[], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;null,_,_-&gt;false&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="sun.swing.SwingUtilities2 boolean isFontRenderContextPrintCompatible(java.awt.font.FontRenderContext, java.awt.font.FontRenderContext) 0">
@@ -1260,17 +1271,12 @@
   <item name="sun.swing.SwingUtilities2 boolean pointOutsidePrefSize(javax.swing.JTable, int, int, java.awt.Point) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.swing.SwingUtilities2 boolean pointOutsidePrefSize(javax.swing.JTable, int, int, java.awt.Point)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,null-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.swing.SwingUtilities2 boolean shouldIgnore(java.awt.event.MouseEvent, javax.swing.JComponent) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.swing.SwingUtilities2 boolean shouldIgnore(java.awt.event.MouseEvent, javax.swing.JComponent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;true;null,_-&gt;true&quot;"/>
+      <val val="&quot;_,null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.swing.SwingUtilities2 boolean tabbedPaneChangeFocusTo(java.awt.Component) 0">
@@ -1313,6 +1319,9 @@
   </item>
   <item name="sun.swing.SwingUtilities2 java.awt.FontMetrics getFontMetrics(javax.swing.JComponent, java.awt.Font) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.swing.SwingUtilities2 java.awt.FontMetrics getFontMetrics(javax.swing.JComponent, java.awt.Font)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.swing.SwingUtilities2 java.awt.FontMetrics getFontMetrics(javax.swing.JComponent, java.awt.Graphics) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1363,9 +1372,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.swing.SwingUtilities2 java.lang.String clipStringIfNecessary(javax.swing.JComponent, java.awt.FontMetrics, java.lang.String, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null,_-&gt;!null;_,_,null,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.swing.SwingUtilities2 java.lang.String displayPropertiesToCSS(java.awt.Font, java.awt.Color) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1538,6 +1545,9 @@
     </annotation>
   </item>
   <item name="sun.swing.WindowsPlacesBar WindowsPlacesBar(javax.swing.JFileChooser, boolean) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.swing.WindowsPlacesBar java.awt.Dimension getPreferredSize()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.swing.WindowsPlacesBar void actionPerformed(java.awt.event.ActionEvent) 0">

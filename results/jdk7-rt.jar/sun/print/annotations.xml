@@ -5,11 +5,6 @@
   <item name="sun.print.AttributeClass boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.print.AttributeClass boolean equals(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.print.AttributeClass byte getByteValue()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -38,6 +33,9 @@
   </item>
   <item name="sun.print.AttributeClass int[] getArrayOfIntValues()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.print.AttributeClass int[] getIntRangeValue()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.print.AttributeClass java.lang.Object getObjectValue()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -164,11 +162,6 @@
       <val val="&quot;_,null-&gt;true;null,_-&gt;true&quot;"/>
     </annotation>
   </item>
-  <item name="sun.print.IPPPrintService boolean isDocFlavorSupported(javax.print.DocFlavor)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.print.IPPPrintService boolean isIPPSupportedImages(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -178,22 +171,12 @@
   <item name="sun.print.IPPPrintService boolean isSupportedMedia(javax.print.attribute.standard.MediaSizeName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.print.IPPPrintService boolean isSupportedMediaTray(javax.print.attribute.standard.MediaTray)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.print.IPPPrintService boolean usesClass(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.print.IPPPrintService boolean usesClass(java.lang.Class)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
-    </annotation>
-  </item>
-  <item name="sun.print.IPPPrintService boolean writeIPPRequest(java.io.OutputStream, java.lang.String, sun.print.AttributeClass[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null-&gt;false;_,null,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="sun.print.IPPPrintService java.lang.Object getDefaultAttributeValue(java.lang.Class&lt;? extends javax.print.attribute.Attribute&gt;) 0">
@@ -231,9 +214,6 @@
     </annotation>
   </item>
   <item name="sun.print.IPPPrintService java.net.HttpURLConnection getIPPConnection(java.net.URL)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.print.IPPPrintService java.util.HashMap[] readIPPResponse(java.io.InputStream) 0">
@@ -261,24 +241,18 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.print.IPPPrintService javax.print.attribute.AttributeSet getUnsupportedAttributes(javax.print.DocFlavor, javax.print.attribute.AttributeSet)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.print.IPPPrintService javax.print.attribute.PrintServiceAttributeSet getAttributes()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.print.IPPPrintService javax.print.attribute.standard.Media getIPPMedia(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.print.IPPPrintService javax.print.attribute.standard.Media[] getSupportedMedia()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.print.IPPPrintService sun.print.CustomMediaSizeName findCustomMedia(javax.print.attribute.standard.MediaSizeName)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.print.IPPPrintService.1 java.lang.Object run()">
@@ -309,7 +283,7 @@
   </item>
   <item name="sun.print.PSPathGraphics boolean drawImageToPlatform(java.awt.Image, java.awt.geom.AffineTransform, java.awt.Color, int, int, int, int, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_,_,_,_,_-&gt;true;_,!null,_,_,_,_,_,_-&gt;true;_,_,!null,_,_,_,_,_-&gt;true;_,_,null,_,_,_,_,_-&gt;true;_,null,_,_,_,_,_,_-&gt;true;null,_,_,_,_,_,_,_-&gt;true&quot;"/>
+      <val val="&quot;!null,_,_,_,_,_,_,_-&gt;true;_,!null,_,_,_,_,_,_-&gt;true;_,_,!null,_,_,_,_,_-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.print.PSPathGraphics java.awt.Graphics create()">
@@ -497,9 +471,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.print.PSPrinterJob java.lang.String escapeParens(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.print.PSPrinterJob java.lang.String makeCharsetName(java.lang.String, char[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -640,18 +612,8 @@
   <item name="sun.print.PSStreamPrintService boolean isAttributeValueSupported(javax.print.attribute.Attribute, javax.print.DocFlavor, javax.print.attribute.AttributeSet) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.print.PSStreamPrintService boolean isDocFlavorSupported(javax.print.DocFlavor)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.print.PSStreamPrintService boolean isSupportedCopies(javax.print.attribute.standard.Copies) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="sun.print.PSStreamPrintService boolean isSupportedMedia(javax.print.attribute.standard.MediaSizeName)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="sun.print.PSStreamPrintService boolean usesClass(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -713,9 +675,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.print.PSStreamPrintService javax.print.attribute.AttributeSet getUnsupportedAttributes(javax.print.DocFlavor, javax.print.attribute.AttributeSet)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.print.PSStreamPrintService javax.print.attribute.PrintServiceAttributeSet getAttributes()">
@@ -795,21 +754,11 @@
   <item name="sun.print.PathGraphics boolean drawBitmaskImage(java.awt.image.BufferedImage, java.awt.geom.AffineTransform, java.awt.Color, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.print.PathGraphics boolean drawBitmaskImage(java.awt.image.BufferedImage, java.awt.geom.AffineTransform, java.awt.Color, int, int, int, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_,_,_,_,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.print.PathGraphics boolean drawImage(java.awt.Image, int, int, int, int, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.print.PathGraphics boolean drawImage(java.awt.Image, int, int, int, int, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver) 10">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="sun.print.PathGraphics boolean drawImage(java.awt.Image, int, int, int, int, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_,_,_,_,_,_,_,_-&gt;true&quot;"/>
-    </annotation>
   </item>
   <item name="sun.print.PathGraphics boolean drawImage(java.awt.Image, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -817,29 +766,14 @@
   <item name="sun.print.PathGraphics boolean drawImage(java.awt.Image, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver) 5">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.print.PathGraphics boolean drawImage(java.awt.Image, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_,_,_,_-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.print.PathGraphics boolean drawImage(java.awt.Image, int, int, java.awt.Color, java.awt.image.ImageObserver) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="sun.print.PathGraphics boolean drawImage(java.awt.Image, int, int, java.awt.Color, java.awt.image.ImageObserver)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_,_-&gt;true&quot;"/>
-    </annotation>
   </item>
   <item name="sun.print.PathGraphics boolean drawImage(java.awt.Image, java.awt.geom.AffineTransform, java.awt.image.ImageObserver) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.print.PathGraphics boolean drawImage(java.awt.Image, java.awt.geom.AffineTransform, java.awt.image.ImageObserver) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="sun.print.PathGraphics boolean drawImage(java.awt.Image, java.awt.geom.AffineTransform, java.awt.image.ImageObserver)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_-&gt;true&quot;"/>
-    </annotation>
   </item>
   <item name="sun.print.PathGraphics boolean hasTransparentPixels(java.awt.image.BufferedImage) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -864,12 +798,10 @@
   <item name="sun.print.PathGraphics boolean samePositions(java.awt.font.GlyphVector, int[], int[], float[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.print.PathGraphics boolean samePositions(java.awt.font.GlyphVector, int[], int[], float[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,null-&gt;false;_,_,null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.print.PathGraphics char[] getGlyphToCharMapForFont(sun.font.Font2D) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.print.PathGraphics char[] getGlyphToCharMapForFont(sun.font.Font2D)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.print.PathGraphics int getPageIndex()">
@@ -892,9 +824,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.print.PathGraphics java.awt.image.BufferedImage getBufferedImage(java.awt.Image)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.print.PathGraphics java.awt.print.PageFormat getPageFormat()">
@@ -946,58 +875,23 @@
   <item name="sun.print.PeekGraphics boolean drawImage(java.awt.Image, int, int, int, int, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.print.PeekGraphics boolean drawImage(java.awt.Image, int, int, int, int, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_,_,_,_,_,_,_,_-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.print.PeekGraphics boolean drawImage(java.awt.Image, int, int, int, int, int, int, int, int, java.awt.image.ImageObserver) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="sun.print.PeekGraphics boolean drawImage(java.awt.Image, int, int, int, int, int, int, int, int, java.awt.image.ImageObserver)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_,_,_,_,_,_,_-&gt;true&quot;"/>
-    </annotation>
   </item>
   <item name="sun.print.PeekGraphics boolean drawImage(java.awt.Image, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.print.PeekGraphics boolean drawImage(java.awt.Image, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_,_,_,_-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.print.PeekGraphics boolean drawImage(java.awt.Image, int, int, int, int, java.awt.image.ImageObserver) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="sun.print.PeekGraphics boolean drawImage(java.awt.Image, int, int, int, int, java.awt.image.ImageObserver)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_,_,_-&gt;true&quot;"/>
-    </annotation>
   </item>
   <item name="sun.print.PeekGraphics boolean drawImage(java.awt.Image, int, int, java.awt.Color, java.awt.image.ImageObserver) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.print.PeekGraphics boolean drawImage(java.awt.Image, int, int, java.awt.Color, java.awt.image.ImageObserver)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_,_-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.print.PeekGraphics boolean drawImage(java.awt.Image, int, int, java.awt.image.ImageObserver) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.print.PeekGraphics boolean drawImage(java.awt.Image, int, int, java.awt.image.ImageObserver)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.print.PeekGraphics boolean drawImage(java.awt.Image, java.awt.geom.AffineTransform, java.awt.image.ImageObserver) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="sun.print.PeekGraphics boolean drawImage(java.awt.Image, java.awt.geom.AffineTransform, java.awt.image.ImageObserver)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_-&gt;true&quot;"/>
-    </annotation>
   </item>
   <item name="sun.print.PeekGraphics boolean getAWTDrawingOnly()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1182,6 +1076,9 @@
   <item name="sun.print.PrintJob2D int[] getSize(java.awt.PageAttributes.MediaType) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.print.PrintJob2D int[] getSize(java.awt.PageAttributes.MediaType)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.print.PrintJob2D java.awt.Dimension getPageDimension()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1288,26 +1185,11 @@
   <item name="sun.print.ProxyGraphics2D boolean drawImage(java.awt.Image, int, int, int, int, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.print.ProxyGraphics2D boolean drawImage(java.awt.Image, int, int, int, int, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_,_,_,_,_,_,_,_-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.print.ProxyGraphics2D boolean drawImage(java.awt.Image, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.print.ProxyGraphics2D boolean drawImage(java.awt.Image, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_,_,_,_-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.print.ProxyGraphics2D boolean drawImage(java.awt.Image, int, int, java.awt.Color, java.awt.image.ImageObserver) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="sun.print.ProxyGraphics2D boolean drawImage(java.awt.Image, int, int, java.awt.Color, java.awt.image.ImageObserver)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_,_-&gt;true&quot;"/>
-    </annotation>
   </item>
   <item name="sun.print.ProxyGraphics2D boolean needToCopyBgColorImage(java.awt.Image) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1363,11 +1245,6 @@
   <item name="sun.print.RasterPrinterJob boolean isSupportedValue(javax.print.attribute.Attribute, javax.print.attribute.PrintRequestAttributeSet) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.print.RasterPrinterJob boolean isSupportedValue(javax.print.attribute.Attribute, javax.print.attribute.PrintRequestAttributeSet)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.print.RasterPrinterJob boolean printDialog(javax.print.attribute.PrintRequestAttributeSet) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1410,13 +1287,16 @@
   <item name="sun.print.RasterPrinterJob java.awt.print.PageFormat defaultPage(java.awt.print.PageFormat) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.print.RasterPrinterJob java.awt.print.PageFormat defaultPage(java.awt.print.PageFormat)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.print.RasterPrinterJob java.awt.print.PageFormat pageDialog(javax.print.attribute.PrintRequestAttributeSet)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.print.RasterPrinterJob java.awt.print.PageFormat validatePage(java.awt.print.PageFormat) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.print.RasterPrinterJob java.awt.print.PageFormat validatePage(java.awt.print.PageFormat)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.print.RasterPrinterJob java.awt.print.Pageable getPageable()">
@@ -1433,9 +1313,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.print.RasterPrinterJob java.lang.String removeControlChars(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.print.RasterPrinterJob javax.print.PrintService lookupDefaultPrintService()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1546,6 +1424,12 @@
     </annotation>
   </item>
   <item name="sun.print.ServiceDialog java.lang.String removeMnemonics(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.print.ServiceDialog java.net.URL access$1700(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.print.ServiceDialog java.net.URL getImageResource(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.print.ServiceDialog java.util.ResourceBundle access$100()">
@@ -1973,6 +1857,9 @@
   <item name="sun.print.UnixPrintJob java.lang.String[] access$1100(sun.print.UnixPrintJob, java.lang.String, java.lang.String, boolean, java.lang.String, int, java.lang.String) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.print.UnixPrintJob java.lang.String[] access$1100(sun.print.UnixPrintJob, java.lang.String, java.lang.String, boolean, java.lang.String, int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.print.UnixPrintJob java.lang.String[] printExecCmd(java.lang.String, java.lang.String, boolean, java.lang.String, int, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1981,6 +1868,9 @@
   </item>
   <item name="sun.print.UnixPrintJob java.lang.String[] printExecCmd(java.lang.String, java.lang.String, boolean, java.lang.String, int, java.lang.String) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.print.UnixPrintJob java.lang.String[] printExecCmd(java.lang.String, java.lang.String, boolean, java.lang.String, int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.print.UnixPrintJob javax.print.PrintService getPrintService()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2041,21 +1931,11 @@
   <item name="sun.print.UnixPrintService boolean isAutoSense(javax.print.DocFlavor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.print.UnixPrintService boolean isDocFlavorSupported(javax.print.DocFlavor)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.print.UnixPrintService boolean isServiceFormattedFlavor(javax.print.DocFlavor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.print.UnixPrintService boolean isSupportedCopies(javax.print.attribute.standard.Copies) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="sun.print.UnixPrintService boolean isSupportedMedia(javax.print.attribute.standard.MediaSizeName)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="sun.print.UnixPrintService boolean usesClass(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2107,9 +1987,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.print.UnixPrintService javax.print.attribute.AttributeSet getUnsupportedAttributes(javax.print.DocFlavor, javax.print.attribute.AttributeSet)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.print.UnixPrintService javax.print.attribute.PrintServiceAttributeSet getAttributes()">
@@ -2163,11 +2040,6 @@
   </item>
   <item name="sun.print.UnixPrintServiceLookup boolean matchesAttributes(javax.print.PrintService, javax.print.attribute.PrintServiceAttributeSet) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="sun.print.UnixPrintServiceLookup boolean matchesAttributes(javax.print.PrintService, javax.print.attribute.PrintServiceAttributeSet)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;true&quot;"/>
-    </annotation>
   </item>
   <item name="sun.print.UnixPrintServiceLookup int access$300()">
     <annotation name="org.jetbrains.annotations.Contract">

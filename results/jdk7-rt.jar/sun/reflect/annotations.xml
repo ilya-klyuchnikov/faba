@@ -249,11 +249,6 @@
   <item name="sun.reflect.Reflection boolean isSameClassPackage(java.lang.ClassLoader, java.lang.String, java.lang.ClassLoader, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.reflect.Reflection boolean isSameClassPackage(java.lang.ClassLoader, java.lang.String, java.lang.ClassLoader, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,null-&gt;false;_,null,_,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.reflect.Reflection boolean isSubclassOf(java.lang.Class, java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -268,12 +263,22 @@
   <item name="sun.reflect.Reflection boolean verifyMemberAccess(java.lang.Class, java.lang.Class, java.lang.Object, int) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.reflect.Reflection java.lang.reflect.Field[] filterFields(java.lang.Class, java.lang.reflect.Field[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.reflect.Reflection java.lang.reflect.Member[] filter(java.lang.reflect.Member[], java.lang.String[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.reflect.Reflection java.lang.reflect.Member[] filter(java.lang.reflect.Member[], java.lang.String[])">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="sun.reflect.Reflection java.lang.reflect.Method[] filterMethods(java.lang.Class, java.lang.reflect.Method[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="sun.reflect.Reflection java.util.Map&lt;java.lang.Class,java.lang.String[]&gt; registerFilter(java.util.Map&lt;java.lang.Class,java.lang.String[]&gt;, java.lang.Class, java.lang.String...) 0">
@@ -310,17 +315,9 @@
   <item name="sun.reflect.ReflectionFactory sun.reflect.FieldAccessor newFieldAccessor(java.lang.reflect.Field, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.reflect.ReflectionFactory sun.reflect.FieldAccessor newFieldAccessor(java.lang.reflect.Field, boolean)">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="sun.reflect.ReflectionFactory sun.reflect.LangReflectAccess langReflectAccess()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
-    </annotation>
-  </item>
-  <item name="sun.reflect.ReflectionFactory sun.reflect.MethodAccessor newMethodAccessor(java.lang.reflect.Method)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="sun.reflect.ReflectionFactory void setLangReflectAccess(sun.reflect.LangReflectAccess) 0">
@@ -359,6 +356,9 @@
     </annotation>
   </item>
   <item name="sun.reflect.UTF8 byte[] encode(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.reflect.UTF8 byte[] encode(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.reflect.UTF8 int utf8Length(java.lang.String) 0">
@@ -517,9 +517,6 @@
     </annotation>
   </item>
   <item name="sun.reflect.UnsafeFieldAccessorFactory sun.reflect.FieldAccessor newFieldAccessor(java.lang.reflect.Field, boolean) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="sun.reflect.UnsafeFieldAccessorFactory sun.reflect.FieldAccessor newFieldAccessor(java.lang.reflect.Field, boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.reflect.UnsafeFieldAccessorImpl UnsafeFieldAccessorImpl(java.lang.reflect.Field) 0">

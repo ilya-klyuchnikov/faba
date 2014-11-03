@@ -45,11 +45,6 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.AdaptiveResultTreeImpl com.sun.org.apache.xml.internal.dtm.DTMAxisIterator getTypedChildren(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.AdaptiveResultTreeImpl com.sun.org.apache.xml.internal.dtm.DTMAxisIterator orderNodes(com.sun.org.apache.xml.internal.dtm.DTMAxisIterator, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.AdaptiveResultTreeImpl com.sun.org.apache.xml.internal.dtm.DTMAxisTraverser getAxisTraverser(int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -74,11 +69,17 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.AdaptiveResultTreeImpl java.lang.String getDocumentTypeDeclarationSystemIdentifier()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.AdaptiveResultTreeImpl java.lang.String getDocumentURI(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.AdaptiveResultTreeImpl java.lang.String getDocumentVersion(int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.AdaptiveResultTreeImpl java.lang.String getLanguage(int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.AdaptiveResultTreeImpl java.lang.String getNamespaceName(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.AdaptiveResultTreeImpl java.lang.String getNodeValue(int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -102,9 +103,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.AdaptiveResultTreeImpl org.w3c.dom.Node makeNode(com.sun.org.apache.xml.internal.dtm.DTMAxisIterator)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.AdaptiveResultTreeImpl org.w3c.dom.Node makeNode(int)">
@@ -388,9 +386,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.DocumentCache com.sun.org.apache.xalan.internal.xsltc.DOM retrieveDocument(java.lang.String, java.lang.String, com.sun.org.apache.xalan.internal.xsltc.Translet)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.DocumentCache com.sun.org.apache.xalan.internal.xsltc.dom.XSLTCDTMManager access$100(com.sun.org.apache.xalan.internal.xsltc.dom.DocumentCache) 0">
@@ -569,6 +564,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex.KeyIndexIterator.KeyIndexHeapNode com.sun.org.apache.xalan.internal.xsltc.dom.MultiValuedNodeHeapIterator.HeapNode cloneHeapNode()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.KeyIndex.KeyIndexIterator.KeyIndexHeapNode com.sun.org.apache.xalan.internal.xsltc.dom.MultiValuedNodeHeapIterator.HeapNode reset()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -600,6 +598,9 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.LoadDocument com.sun.org.apache.xml.internal.dtm.DTMAxisIterator document(com.sun.org.apache.xml.internal.dtm.DTMAxisIterator, java.lang.String, com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet, com.sun.org.apache.xalan.internal.xsltc.DOM) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.LoadDocument com.sun.org.apache.xml.internal.dtm.DTMAxisIterator document(com.sun.org.apache.xml.internal.dtm.DTMAxisIterator, java.lang.String, com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet, com.sun.org.apache.xalan.internal.xsltc.DOM)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.LoadDocument com.sun.org.apache.xml.internal.dtm.DTMAxisIterator documentF(java.lang.Object, com.sun.org.apache.xml.internal.dtm.DTMAxisIterator, java.lang.String, com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet, com.sun.org.apache.xalan.internal.xsltc.DOM) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -831,6 +832,9 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.NodeSortRecordFactory NodeSortRecordFactory(com.sun.org.apache.xalan.internal.xsltc.DOM, java.lang.String, com.sun.org.apache.xalan.internal.xsltc.Translet, java.lang.String[], java.lang.String[], java.lang.String[], java.lang.String[]) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.NodeSortRecordFactory com.sun.org.apache.xalan.internal.xsltc.dom.NodeSortRecord makeNodeSortRecord(int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.NodeSortRecordFactory java.lang.String getClassName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -952,11 +956,26 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl int[] getReverseMapping(java.lang.String[], java.lang.String[], int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl int[] getReverseMapping(java.lang.String[], java.lang.String[], int[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl int[] setupMapping(java.lang.String[], java.lang.String[], int[], int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl java.lang.String getAttributeValue(java.lang.String, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl java.lang.String getDocumentURI()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl java.lang.String getDocumentURI(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl java.lang.String getLanguage(int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl java.lang.String getNamespaceName(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl java.lang.String lookupNamespace(int, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -982,13 +1001,25 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl short[] getMapping(java.lang.String[], java.lang.String[], int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl short[] getMapping(java.lang.String[], java.lang.String[], int[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl short[] getMapping2(java.lang.String[], java.lang.String[], int[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl short[] getMapping2(java.lang.String[], java.lang.String[], int[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl short[] getNamespaceMapping(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl short[] getNamespaceMapping(java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl short[] getReverseNamespaceMapping(java.lang.String[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl short[] getReverseNamespaceMapping(java.lang.String[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl void copy(com.sun.org.apache.xml.internal.dtm.DTMAxisIterator, com.sun.org.apache.xml.internal.serializer.SerializationHandler) 0">
@@ -1761,6 +1792,9 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.UnionIterator.LookAheadIterator boolean isLessThan(com.sun.org.apache.xalan.internal.xsltc.dom.MultiValuedNodeHeapIterator.HeapNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.UnionIterator.LookAheadIterator com.sun.org.apache.xalan.internal.xsltc.dom.MultiValuedNodeHeapIterator.HeapNode cloneHeapNode()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.UnionIterator.LookAheadIterator com.sun.org.apache.xalan.internal.xsltc.dom.MultiValuedNodeHeapIterator.HeapNode reset()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1771,6 +1805,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.dom.XSLTCDTMManager com.sun.org.apache.xml.internal.dtm.DTM getDTM(javax.xml.transform.Source, boolean, com.sun.org.apache.xml.internal.dtm.DTMWSFilter, boolean, boolean, boolean, int, boolean, boolean)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.XSLTCDTMManager java.lang.Class getDTMManagerClass()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.dom.XSLTCDTMManager java.lang.Class getDTMManagerClass(boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
 </root>

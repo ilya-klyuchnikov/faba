@@ -1,5 +1,6 @@
 package faba.asm
 
+import faba.analysis.AsmAbstractValue
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree._
@@ -9,7 +10,8 @@ import scala.collection.JavaConversions._
 
 case class LeakingParameters(frames: Array[Frame[ParamsValue]],
                              parameters: Array[Boolean],
-                             nullableParameters: Array[Boolean])
+                             nullableParameters: Array[Boolean],
+                             splittingParameters: Array[Boolean])
 
 object LeakingParameters {
   def build(className: String, methodNode: MethodNode, jsr: Boolean): LeakingParameters = {
@@ -27,16 +29,16 @@ object LeakingParameters {
           new Frame(frame).execute(insnNode, collector)
       }
     }
-    LeakingParameters(frames, collector.parameters, collector.nullableParameters)
+    LeakingParameters(frames, collector.parameters, collector.nullableParameters, collector.splittingParameters)
   }
 }
 
-case class ParamsValue(params: Set[Int], size: Int) extends Value {
+@AsmAbstractValue case class ParamsValue(params: Set[Int], size: Int) extends Value {
   override def getSize: Int = size
 }
 
 // tracks flow of parameters into values of frame
-// value has the super-set of all possible parameters caming into it
+// value has the super-set of all possible parameters coming into it
 class ParametersUsage(m: MethodNode) extends Interpreter[ParamsValue](ASM5) {
   val val1 = ParamsValue(Set(), 1)
   val val2 = ParamsValue(Set(), 2)
@@ -66,7 +68,6 @@ class ParametersUsage(m: MethodNode) extends Interpreter[ParamsValue](ASM5) {
       else val2
     }
   }
-
 
   override def newOperation(insn: AbstractInsnNode): ParamsValue =
     insn.getOpcode match {
@@ -134,11 +135,17 @@ class LeakingParametersCollector(m: MethodNode) extends ParametersUsage(m) {
   val arity = Type.getArgumentTypes(m.desc).length
   val parameters = new Array[Boolean](arity)
   val nullableParameters = new Array[Boolean](arity)
+  val splittingParameters = new Array[Boolean](arity)
 
   override def unaryOperation(insn: AbstractInsnNode, v: ParamsValue): ParamsValue = {
     insn.getOpcode match {
-      case GETFIELD | ARRAYLENGTH | MONITORENTER | INSTANCEOF | IRETURN | ARETURN |
-           IFNONNULL | IFNULL | IFEQ | IFNE =>
+      case INSTANCEOF | IFNONNULL | IFNULL | IFEQ | IFNE =>
+        for (i <- v.params) {
+          parameters(i) = true
+          nullableParameters(i) = true
+          splittingParameters(i) = true
+        }
+      case GETFIELD | ARRAYLENGTH | MONITORENTER | IRETURN | ARETURN =>
         for (i <- v.params) {
           parameters(i) = true
           nullableParameters(i) = true

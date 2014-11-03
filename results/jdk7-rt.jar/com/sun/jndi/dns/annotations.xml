@@ -23,6 +23,9 @@
   <item name="com.sun.jndi.dns.DnsClient byte[] doTcpQuery(com.sun.jndi.dns.Tcp, com.sun.jndi.dns.Packet) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.dns.DnsClient byte[] doTcpQuery(com.sun.jndi.dns.Tcp, com.sun.jndi.dns.Packet)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.dns.DnsClient byte[] doUdpQuery(com.sun.jndi.dns.Packet, java.net.InetAddress, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -42,6 +45,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.DnsClient com.sun.jndi.dns.ResourceRecords queryZone(com.sun.jndi.dns.DnsName, int, boolean) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.DnsClient com.sun.jndi.dns.ResourceRecords queryZone(com.sun.jndi.dns.DnsName, int, boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.DnsClient void checkResponseCode(com.sun.jndi.dns.Header) 0">
@@ -104,7 +110,7 @@
   </item>
   <item name="com.sun.jndi.dns.DnsContext com.sun.jndi.dns.CT[] attrIdsToClassesAndTypes(java.lang.String[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -206,11 +212,17 @@
   <item name="com.sun.jndi.dns.DnsContext javax.naming.directory.Attributes c_getAttributes(javax.naming.Name, java.lang.String[], com.sun.jndi.toolkit.ctx.Continuation) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.dns.DnsContext javax.naming.directory.Attributes c_getAttributes(javax.naming.Name, java.lang.String[], com.sun.jndi.toolkit.ctx.Continuation)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.dns.DnsContext javax.naming.directory.Attributes rrsToAttrs(com.sun.jndi.dns.ResourceRecords, com.sun.jndi.dns.CT[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.DnsContext javax.naming.directory.Attributes rrsToAttrs(com.sun.jndi.dns.ResourceRecords, com.sun.jndi.dns.CT[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.jndi.dns.DnsContext javax.naming.directory.Attributes rrsToAttrs(com.sun.jndi.dns.ResourceRecords, com.sun.jndi.dns.CT[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.DnsContext javax.naming.directory.DirContext c_createSubcontext(javax.naming.Name, javax.naming.directory.Attributes, com.sun.jndi.toolkit.ctx.Continuation) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -291,11 +303,6 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="com.sun.jndi.dns.DnsContextFactory boolean platformServersUsed(com.sun.jndi.dns.DnsUrl[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.jndi.dns.DnsContextFactory com.sun.jndi.dns.DnsContext getContext(java.lang.String, com.sun.jndi.dns.DnsUrl[], java.util.Hashtable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -329,12 +336,15 @@
   <item name="com.sun.jndi.dns.DnsContextFactory java.lang.String getInitCtxUrl(java.util.Hashtable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.dns.DnsContextFactory java.lang.String getInitCtxUrl(java.util.Hashtable)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.dns.DnsContextFactory java.lang.String[] serversForUrls(com.sun.jndi.dns.DnsUrl[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.DnsContextFactory java.util.List filterNameServers(java.util.List, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.jndi.dns.DnsContextFactory javax.naming.Context getInitialContext(java.util.Hashtable&lt;?,?&gt;) 0">
@@ -401,6 +411,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.DnsName java.lang.Object clone()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.DnsName java.lang.Object remove(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.DnsName java.lang.String getKey(int)">
@@ -523,6 +536,9 @@
   <item name="com.sun.jndi.dns.NameNode com.sun.jndi.dns.NameNode add(com.sun.jndi.dns.DnsName, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.dns.NameNode com.sun.jndi.dns.NameNode add(com.sun.jndi.dns.DnsName, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.dns.NameNode com.sun.jndi.dns.NameNode get(com.sun.jndi.dns.DnsName, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -565,6 +581,9 @@
   </item>
   <item name="com.sun.jndi.dns.Resolver com.sun.jndi.dns.ResourceRecord findSoa(com.sun.jndi.dns.DnsName, int, boolean)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.jndi.dns.Resolver java.lang.String[] findNameServers(com.sun.jndi.dns.DnsName, boolean)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.ResourceRecord com.sun.jndi.dns.DnsName decodeName(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -674,6 +693,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.ZoneNode com.sun.jndi.dns.NameNode populate(com.sun.jndi.dns.DnsName, com.sun.jndi.dns.ResourceRecords) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.ZoneNode com.sun.jndi.dns.NameNode populate(com.sun.jndi.dns.DnsName, com.sun.jndi.dns.ResourceRecords)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.ZoneNode com.sun.jndi.dns.ZoneNode getDeepestPopulated(com.sun.jndi.dns.DnsName) 0">

@@ -2,11 +2,6 @@
   <item name="sun.security.provider.certpath.AdaptableX509CertSelector boolean match(java.security.cert.Certificate) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.security.provider.certpath.AdaptableX509CertSelector boolean match(java.security.cert.Certificate)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.security.provider.certpath.AdaptableX509CertSelector void parseAuthorityKeyIdentifierExtension(sun.security.x509.AuthorityKeyIdentifierExtension) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -194,8 +189,14 @@
   <item name="sun.security.provider.certpath.CollectionCertStore java.util.Collection&lt;java.security.cert.CRL&gt; engineGetCRLs(java.security.cert.CRLSelector) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.provider.certpath.CollectionCertStore java.util.Collection&lt;java.security.cert.CRL&gt; engineGetCRLs(java.security.cert.CRLSelector)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.certpath.CollectionCertStore java.util.Collection&lt;java.security.cert.Certificate&gt; engineGetCertificates(java.security.cert.CertSelector) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.provider.certpath.CollectionCertStore java.util.Collection&lt;java.security.cert.Certificate&gt; engineGetCertificates(java.security.cert.CertSelector)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.ConstraintsChecker boolean isForwardCheckingSupported()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -271,11 +272,6 @@
   <item name="sun.security.provider.certpath.CrlRevocationChecker void verifyWithSeparateSigningKey(java.security.cert.X509Certificate, java.security.PublicKey, boolean, java.util.Set&lt;java.security.cert.X509Certificate&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.security.provider.certpath.CrlRevocationChecker.RejectKeySelector boolean match(java.security.cert.Certificate)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.security.provider.certpath.CrlRevocationChecker.RejectKeySelector java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -296,11 +292,6 @@
   <item name="sun.security.provider.certpath.DistributionPointFetcher boolean verifyCRL(sun.security.x509.X509CertImpl, sun.security.x509.DistributionPoint, java.security.cert.X509CRL, boolean[], boolean, java.security.PublicKey, java.lang.String, java.util.Set&lt;java.security.cert.TrustAnchor&gt;, java.util.List&lt;java.security.cert.CertStore&gt;, java.util.Date) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.security.provider.certpath.DistributionPointFetcher boolean verifyCRL(sun.security.x509.X509CertImpl, sun.security.x509.DistributionPoint, java.security.cert.X509CRL, boolean[], boolean, java.security.PublicKey, java.lang.String, java.util.Set&lt;java.security.cert.TrustAnchor&gt;, java.util.List&lt;java.security.cert.CertStore&gt;, java.util.Date)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null,_,_,_,_,_,_,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.security.provider.certpath.DistributionPointFetcher java.security.cert.X509CRL getCRL(sun.security.x509.URIName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -316,6 +307,9 @@
   <item name="sun.security.provider.certpath.DistributionPointFetcher java.util.Collection&lt;java.security.cert.X509CRL&gt; getCRLs(sun.security.x509.X500Name, javax.security.auth.x500.X500Principal, java.util.List&lt;java.security.cert.CertStore&gt;) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.provider.certpath.DistributionPointFetcher java.util.Collection&lt;java.security.cert.X509CRL&gt; getCRLs(sun.security.x509.X500Name, javax.security.auth.x500.X500Principal, java.util.List&lt;java.security.cert.CertStore&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.certpath.DistributionPointFetcher sun.security.x509.GeneralNames getFullNames(sun.security.x509.X500Name, sun.security.x509.RDN) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -324,16 +318,6 @@
   </item>
   <item name="sun.security.provider.certpath.ForwardBuilder ForwardBuilder(java.security.cert.PKIXBuilderParameters, javax.security.auth.x500.X500Principal, boolean, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="sun.security.provider.certpath.ForwardBuilder boolean getCerts(sun.security.x509.AuthorityInfoAccessExtension, java.util.Collection&lt;java.security.cert.X509Certificate&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
-  <item name="sun.security.provider.certpath.ForwardBuilder boolean isPathCompleted(java.security.cert.X509Certificate)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="sun.security.provider.certpath.ForwardBuilder java.util.Collection&lt;java.security.cert.X509Certificate&gt; getMatchingCerts(sun.security.provider.certpath.State, java.util.List&lt;java.security.cert.CertStore&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -377,6 +361,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="sun.security.provider.certpath.ForwardState java.lang.Object clone()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.certpath.ForwardState java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -392,18 +379,8 @@
   <item name="sun.security.provider.certpath.IndexedCollectionCertStore java.util.Collection&lt;? extends java.security.cert.Certificate&gt; engineGetCertificates(java.security.cert.CertSelector) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.security.provider.certpath.IndexedCollectionCertStore java.util.Collection&lt;? extends java.security.cert.Certificate&gt; engineGetCertificates(java.security.cert.CertSelector)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.security.provider.certpath.IndexedCollectionCertStore java.util.Collection&lt;java.security.cert.CRL&gt; engineGetCRLs(java.security.cert.CRLSelector) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="sun.security.provider.certpath.IndexedCollectionCertStore java.util.Collection&lt;java.security.cert.CRL&gt; engineGetCRLs(java.security.cert.CRLSelector)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
   </item>
   <item name="sun.security.provider.certpath.IndexedCollectionCertStore void buildIndex(java.util.Collection&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -472,6 +449,9 @@
   <item name="sun.security.provider.certpath.OCSP sun.security.provider.certpath.OCSPResponse check(java.util.List&lt;sun.security.provider.certpath.CertId&gt;, java.net.URI, java.util.List&lt;java.security.cert.X509Certificate&gt;, java.util.Date) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.provider.certpath.OCSP sun.security.provider.certpath.OCSPResponse check(java.util.List&lt;sun.security.provider.certpath.CertId&gt;, java.net.URI, java.util.List&lt;java.security.cert.X509Certificate&gt;, java.util.Date)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.certpath.OCSPChecker boolean isForwardCheckingSupported()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -491,7 +471,7 @@
   </item>
   <item name="sun.security.provider.certpath.OCSPChecker java.net.URI getOCSPServerURI(sun.security.x509.X509CertImpl, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null;null,_-&gt;!null&quot;"/>
+      <val val="&quot;_,!null-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="sun.security.provider.certpath.OCSPChecker java.util.Set&lt;java.lang.String&gt; getSupportedExtensions()">
@@ -629,7 +609,7 @@
   </item>
   <item name="sun.security.provider.certpath.PKIXMasterCertPathValidator boolean isRevocationCheck(java.security.cert.PKIXCertPathChecker, int, java.util.List&lt;java.security.cert.PKIXCertPathChecker&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null-&gt;false;null,_,_-&gt;false&quot;"/>
+      <val val="&quot;null,_,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="sun.security.provider.certpath.PKIXMasterCertPathValidator void validate(java.security.cert.CertPath, java.util.List&lt;java.security.cert.X509Certificate&gt;) 1">
@@ -743,8 +723,9 @@
   </item>
   <item name="sun.security.provider.certpath.PolicyNodeImpl java.lang.String policyToString(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;!null-&gt;!null&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.PolicyNodeImpl java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -764,6 +745,21 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.PolicyNodeImpl java.util.Set&lt;sun.security.provider.certpath.PolicyNodeImpl&gt; getPolicyNodesExpected(int, java.lang.String, boolean) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.provider.certpath.PolicyNodeImpl java.util.Set&lt;sun.security.provider.certpath.PolicyNodeImpl&gt; getPolicyNodesExpected(int, java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.provider.certpath.PolicyNodeImpl java.util.Set&lt;sun.security.provider.certpath.PolicyNodeImpl&gt; getPolicyNodesExpectedHelper(int, java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.provider.certpath.PolicyNodeImpl java.util.Set&lt;sun.security.provider.certpath.PolicyNodeImpl&gt; getPolicyNodesValid(int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.provider.certpath.PolicyNodeImpl sun.security.provider.certpath.PolicyNodeImpl copyTree()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.provider.certpath.PolicyNodeImpl sun.security.provider.certpath.PolicyNodeImpl copyTree(sun.security.provider.certpath.PolicyNodeImpl)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.ReverseBuilder ReverseBuilder(java.security.cert.PKIXBuilderParameters, javax.security.auth.x500.X500Principal) 0">
@@ -812,6 +808,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="sun.security.provider.certpath.ReverseState java.lang.Object clone()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.certpath.ReverseState java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -827,11 +826,6 @@
   <item name="sun.security.provider.certpath.SunCertPathBuilder boolean anchorIsTarget(java.security.cert.TrustAnchor, java.security.cert.X509CertSelector) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.security.provider.certpath.SunCertPathBuilder boolean anchorIsTarget(java.security.cert.TrustAnchor, java.security.cert.X509CertSelector)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.security.provider.certpath.SunCertPathBuilder java.security.cert.CertPathBuilderResult buildCertPath(boolean, boolean, java.util.List&lt;java.util.List&lt;sun.security.provider.certpath.Vertex&gt;&gt;) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -839,6 +833,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.security.provider.certpath.SunCertPathBuilder java.security.cert.CertPathBuilderResult engineBuild(java.security.cert.CertPathParameters) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.provider.certpath.SunCertPathBuilder java.security.cert.CertPathBuilderResult engineBuild(java.security.cert.CertPathParameters)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.SunCertPathBuilder java.util.List&lt;sun.security.provider.certpath.Vertex&gt; addVertices(java.util.Collection&lt;java.security.cert.X509Certificate&gt;, java.util.List&lt;java.util.List&lt;sun.security.provider.certpath.Vertex&gt;&gt;) 0">
@@ -929,6 +926,9 @@
   <item name="sun.security.provider.certpath.URICertStore URICertStore(java.security.cert.CertStoreParameters) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.provider.certpath.URICertStore java.security.cert.CertStore getInstance(sun.security.provider.certpath.URICertStore.URICertStoreParameters)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.certpath.URICertStore java.security.cert.CertStore getInstance(sun.security.x509.AccessDescription) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -948,7 +948,7 @@
   </item>
   <item name="sun.security.provider.certpath.URICertStore java.util.Collection&lt;java.security.cert.X509Certificate&gt; getMatchingCerts(java.util.Collection&lt;java.security.cert.X509Certificate&gt;, java.security.cert.CertSelector)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="sun.security.provider.certpath.URICertStore.LDAP LDAP()">
@@ -977,11 +977,6 @@
   </item>
   <item name="sun.security.provider.certpath.URICertStore.URICertStoreParameters boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="sun.security.provider.certpath.URICertStore.URICertStoreParameters boolean equals(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="sun.security.provider.certpath.URICertStore.URICertStoreParameters java.net.URI access$000(sun.security.provider.certpath.URICertStore.URICertStoreParameters) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1097,6 +1092,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="sun.security.provider.certpath.X509CertificatePair sun.security.provider.certpath.X509CertificatePair generateCertificatePair(byte[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.X509CertificatePair void emit(sun.security.util.DerOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

@@ -41,6 +41,9 @@
   <item name="com.sun.corba.se.impl.orbutil.CorbaResourceUtil java.lang.String getString(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.orbutil.CorbaResourceUtil java.lang.String getText(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.orbutil.CorbaResourceUtil java.lang.String getText(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -107,18 +110,19 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
-  <item name="com.sun.corba.se.impl.orbutil.ORBUtility boolean isSystemExceptionTypeCode(org.omg.CORBA.TypeCode, com.sun.corba.se.spi.orb.ORB)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.corba.se.impl.orbutil.ORBUtility byte getEncodingVersion(com.sun.corba.se.spi.orb.ORB, com.sun.corba.se.spi.ior.IOR) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.ORBUtility com.sun.corba.se.spi.ior.IOR connectAndGetIOR(com.sun.corba.se.spi.orb.ORB, org.omg.CORBA.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.orbutil.ORBUtility com.sun.corba.se.spi.ior.IOR connectAndGetIOR(com.sun.corba.se.spi.orb.ORB, org.omg.CORBA.Object)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.orbutil.ORBUtility com.sun.corba.se.spi.ior.IOR getIOR(org.omg.CORBA.Object) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.orbutil.ORBUtility com.sun.corba.se.spi.ior.IOR getIOR(org.omg.CORBA.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.ORBUtility com.sun.corba.se.spi.protocol.CorbaClientDelegate makeClientDelegate(com.sun.corba.se.spi.ior.IOR) 0">
@@ -153,17 +157,16 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.ORBUtility int[] parseVersion(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.orbutil.ORBUtility java.lang.String classNameOf(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.ORBUtility java.lang.String compressClassName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.ORBUtility java.lang.String compressClassName(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.ORBUtility java.lang.String formatStackTraceElement(java.lang.StackTraceElement) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -175,9 +178,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.ORBUtility java.lang.String getThreadName(java.lang.Thread)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.ORBUtility java.lang.String operationNameAndRequestId(com.sun.corba.se.spi.protocol.CorbaMessageMediator) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -185,10 +186,16 @@
   <item name="com.sun.corba.se.impl.orbutil.ORBUtility java.lang.String operationNameAndRequestId(com.sun.corba.se.spi.protocol.CorbaMessageMediator)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.orbutil.ORBUtility java.lang.String repositoryIdOf(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.orbutil.ORBUtility java.lang.String[] concatenateStringArrays(java.lang.String[], java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.ORBUtility java.lang.String[] concatenateStringArrays(java.lang.String[], java.lang.String[]) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.orbutil.ORBUtility java.lang.String[] concatenateStringArrays(java.lang.String[], java.lang.String[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.ORBUtility javax.rmi.CORBA.ValueHandler createValueHandler()">
@@ -203,7 +210,13 @@
   <item name="com.sun.corba.se.impl.orbutil.ORBUtility org.omg.CORBA.SystemException extractSystemException(org.omg.CORBA.Any) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.orbutil.ORBUtility org.omg.CORBA.SystemException extractSystemException(org.omg.CORBA.Any)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.orbutil.ORBUtility org.omg.CORBA.SystemException readSystemException(org.omg.CORBA.portable.InputStream) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.orbutil.ORBUtility org.omg.CORBA.SystemException readSystemException(org.omg.CORBA.portable.InputStream)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.ORBUtility org.omg.CORBA.TypeCode getSystemExceptionTypeCode(com.sun.corba.se.spi.orb.ORB, java.lang.String, java.lang.String) 0">
@@ -301,6 +314,9 @@
   <item name="com.sun.corba.se.impl.orbutil.ObjectStreamClassUtil_1_3.1 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.orbutil.ObjectStreamClassUtil_1_3.2 java.lang.Object run()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.orbutil.ObjectStreamClassUtil_1_3.3 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -353,6 +369,9 @@
   <item name="com.sun.corba.se.impl.orbutil.ObjectStreamClassUtil_1_3.MethodSignature com.sun.corba.se.impl.orbutil.ObjectStreamClassUtil_1_3.MethodSignature[] removePrivateAndSort(java.lang.reflect.Member[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.orbutil.ObjectStreamClassUtil_1_3.MethodSignature com.sun.corba.se.impl.orbutil.ObjectStreamClassUtil_1_3.MethodSignature[] removePrivateAndSort(java.lang.reflect.Member[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.orbutil.ObjectStreamClass_1_3_1 ObjectStreamClass_1_3_1(java.lang.Class, com.sun.corba.se.impl.orbutil.ObjectStreamClass_1_3_1, boolean, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -376,11 +395,6 @@
   <item name="com.sun.corba.se.impl.orbutil.ObjectStreamClass_1_3_1 boolean hasExternalizableBlockDataMode()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
-    </annotation>
-  </item>
-  <item name="com.sun.corba.se.impl.orbutil.ObjectStreamClass_1_3_1 boolean hasField(org.omg.CORBA.ValueMember)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.ObjectStreamClass_1_3_1 boolean hasWriteObject()">
@@ -432,14 +446,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.ObjectStreamClass_1_3_1 com.sun.corba.se.impl.orbutil.ObjectStreamClass_1_3_1 lookupInternal(java.lang.Class)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.ObjectStreamClass_1_3_1 com.sun.corba.se.impl.orbutil.ObjectStreamField getField(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.ObjectStreamClass_1_3_1 com.sun.corba.se.impl.orbutil.ObjectStreamField[] access$000(com.sun.corba.se.impl.orbutil.ObjectStreamClass_1_3_1) 0">
@@ -559,6 +568,9 @@
   <item name="com.sun.corba.se.impl.orbutil.ObjectStreamClass_1_3_1.2 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.orbutil.ObjectStreamClass_1_3_1.3 java.lang.Object run()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.orbutil.ObjectStreamClass_1_3_1.CompareClassByName CompareClassByName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -608,6 +620,9 @@
   <item name="com.sun.corba.se.impl.orbutil.ObjectStreamClass_1_3_1.MethodSignature com.sun.corba.se.impl.orbutil.ObjectStreamClass_1_3_1.MethodSignature[] removePrivateAndSort(java.lang.reflect.Member[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.orbutil.ObjectStreamClass_1_3_1.MethodSignature com.sun.corba.se.impl.orbutil.ObjectStreamClass_1_3_1.MethodSignature[] removePrivateAndSort(java.lang.reflect.Member[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.orbutil.ObjectStreamClass_1_3_1.ObjectStreamClassEntry java.lang.Object get()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -626,11 +641,6 @@
   </item>
   <item name="com.sun.corba.se.impl.orbutil.ObjectStreamField boolean typeEquals(com.sun.corba.se.impl.orbutil.ObjectStreamField) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="com.sun.corba.se.impl.orbutil.ObjectStreamField boolean typeEquals(com.sun.corba.se.impl.orbutil.ObjectStreamField)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.ObjectStreamField char getTypeCode()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -791,18 +801,27 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.RepIdDelegator java.lang.String createForAnyType(java.lang.Class)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.RepIdDelegator java.lang.String createForJavaType(java.io.Serializable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.orbutil.RepIdDelegator java.lang.String createForJavaType(java.io.Serializable)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.orbutil.RepIdDelegator java.lang.String createForJavaType(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.orbutil.RepIdDelegator java.lang.String createForJavaType(java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.orbutil.RepIdDelegator java.lang.String createSequenceRepID(java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.orbutil.RepIdDelegator java.lang.String createSequenceRepID(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.orbutil.RepIdDelegator java.lang.String createSequenceRepID(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.RepIdDelegator java.lang.String getClassDescValueRepId()">

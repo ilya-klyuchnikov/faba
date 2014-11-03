@@ -28,6 +28,9 @@
   <item name="com.sun.jndi.toolkit.dir.ContextEnumerator com.sun.jndi.toolkit.dir.ContextEnumerator newEnumerator(javax.naming.Context, int, java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.toolkit.dir.ContextEnumerator javax.naming.Binding getNextChild()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jndi.toolkit.dir.ContextEnumerator javax.naming.NamingEnumeration getImmediateChildren(javax.naming.Context) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -76,6 +79,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.toolkit.dir.HierMemDirCtx javax.naming.Name canonizeName(javax.naming.Name) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.toolkit.dir.HierMemDirCtx javax.naming.Name composeName(javax.naming.Name, javax.naming.Name)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.toolkit.dir.HierMemDirCtx javax.naming.Name getInternalName(javax.naming.Name) 0">
@@ -258,11 +264,6 @@
   <item name="com.sun.jndi.toolkit.dir.SearchFilter boolean check(javax.naming.directory.Attributes) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.jndi.toolkit.dir.SearchFilter boolean check(javax.naming.directory.Attributes)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.jndi.toolkit.dir.SearchFilter com.sun.jndi.toolkit.dir.SearchFilter.StringFilter createNextFilter()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -301,16 +302,16 @@
   <item name="com.sun.jndi.toolkit.dir.SearchFilter javax.naming.directory.Attributes selectAttributes(javax.naming.directory.Attributes, java.lang.String[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jndi.toolkit.dir.SearchFilter javax.naming.directory.Attributes selectAttributes(javax.naming.directory.Attributes, java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.toolkit.dir.SearchFilter void access$000(com.sun.jndi.toolkit.dir.SearchFilter) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.toolkit.dir.SearchFilter void hexDigit(java.lang.StringBuffer, byte) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="com.sun.jndi.toolkit.dir.SearchFilter.AtomicFilter boolean check(javax.naming.directory.Attributes)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="com.sun.jndi.toolkit.dir.SearchFilter.AtomicFilter boolean substringMatch(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

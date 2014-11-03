@@ -7,14 +7,35 @@ import faba.cfg._
 import faba.data._
 import faba.engine._
 
-case class ParamValue(tp: Type) extends BasicValue(tp)
-case class InstanceOfCheckValue() extends BasicValue(Type.INT_TYPE)
+/**
+ * Marker annotation to denote data-class for some abstract value.
+ * The reason for this annotation is to ease navigation and understanding of code.
+ *
+ * FABA plugs into existing infrastructure of asm lib and extends
+ * [[org.objectweb.asm.tree.analysis.Value]] and [[org.objectweb.asm.tree.analysis.BasicValue]] classes.
+ */
+class AsmAbstractValue extends scala.annotation.StaticAnnotation
 
-case class TrueValue() extends BasicValue(Type.INT_TYPE)
-case class FalseValue() extends BasicValue(Type.INT_TYPE)
-case class NullValue() extends BasicValue(Type.getObjectType("null"))
-case class NotNullValue(tp: Type) extends BasicValue(tp)
-case class CallResultValue(tp: Type, inters: Set[Key]) extends BasicValue(tp)
+trait Trackable {
+  val origin: Int
+  def cast(to: Type): BasicValue
+}
+
+@AsmAbstractValue case class ParamValue(tp: Type) extends BasicValue(tp)
+@AsmAbstractValue case class InstanceOfCheckValue() extends BasicValue(Type.INT_TYPE)
+@AsmAbstractValue case class NThParamValue(n: Int, tp: Type) extends BasicValue(tp)
+@AsmAbstractValue case class TrueValue() extends BasicValue(Type.INT_TYPE)
+@AsmAbstractValue case class FalseValue() extends BasicValue(Type.INT_TYPE)
+@AsmAbstractValue case class NotNullValue(tp: Type) extends BasicValue(tp)
+@AsmAbstractValue case class NullValue(origin: Int) extends BasicValue(Type.getObjectType("null")) with Trackable {
+  override def cast(tp: Type) = this
+}
+@AsmAbstractValue case class CallResultValue(origin: Int, tp: Type, inters: Set[Key]) extends BasicValue(tp) with Trackable {
+  override def cast(to: Type) = CallResultValue(origin, to, inters)
+}
+@AsmAbstractValue case class TrackableBasicValue(origin: Int, tp: Type) extends BasicValue(tp) with Trackable {
+  override def cast(to: Type) = TrackableBasicValue(origin, to)
+}
 
 case class Conf(insnIndex: Int, frame: Frame[BasicValue]) {
   lazy val _hashCode = {
@@ -30,7 +51,18 @@ case class Conf(insnIndex: Int, frame: Frame[BasicValue]) {
   override def hashCode() = _hashCode
 }
 
-case class State(index: Int, conf: Conf, history: List[Conf], taken: Boolean, hasCompanions: Boolean)
+/**
+ * Program point considered by analysis.
+ *
+ * Note about constraints: it turns out, that representation of constraints as a bit mask
+ * provides quite good performance.
+ *
+ * @param index unique index of state. Used as identity.
+ * @param conf configuration of this program point.
+ * @param history history - ancestors of a current configuration
+ * @param constraint constraint encoded as int bit-mask.
+ */
+case class State(index: Int, conf: Conf, history: List[Conf], constraint: Int)
 
 object LimitReachedException {
   // elementary steps limit
@@ -39,54 +71,95 @@ object LimitReachedException {
 
 class LimitReachedException extends Exception("Limit reached exception")
 
-object Analysis {
-  sealed trait PendingAction[+Res]
-  case class ProceedState(state: State) extends PendingAction[Nothing]
-  case class MakeResult[Res](states: List[State], subResult: Res, indices: List[Int]) extends PendingAction[Res]
-
-  val ourPending = new Array[State](LimitReachedException.limit)
-}
-
+/**
+ * Skeleton for implementing analysis via exploration of graph of configurations.
+ * All analyses are implemented by following scenario:
+ *
+ * During construction of a graph of configurations, some internal result `Res` is constructed.
+ * Then this internal `Res` is translated into equation.
+ *
+ * @tparam Res internal Result of analysis.
+ *
+ * @see `mkEquation(result: Res): Equation[Key, Value]`
+ */
 abstract class Analysis[Res] {
 
   val richControlFlow: RichControlFlow
   val direction: Direction
   val stable: Boolean
-  def identity: Res
-  def processState(state: State): Unit
-  def isEarlyResult(res: Res): Boolean
-  def combineResults(delta: Res, subResults: List[Res]): Res
-  def mkEquation(result: Res): Equation[Key, Value]
-
   val controlFlow = richControlFlow.controlFlow
   val methodNode = controlFlow.methodNode
   val method = Method(controlFlow.className, methodNode.name, methodNode.desc)
   val dfsTree = richControlFlow.dfsTree
   val aKey = Key(method, direction, stable)
 
-  final def createStartState(): State = State(0, Conf(0, createStartFrame()), Nil, false, false)
-  final def confInstance(curr: Conf, prev: Conf): Boolean = Utils.isInstance(curr, prev)
+  /**
+   * Performs one step of analysis. The implied result of this method is side-effect.
+   *
+   * @param state current state (program point with some history)
+   */
+  def processState(state: State): Unit
 
-  final def stateEquiv(curr: State, prev: State): Boolean =
-    curr.taken == prev.taken && curr.conf.hashCode() == prev.conf.hashCode() &&
-      Utils.equiv(curr.conf, prev.conf) &&
-      curr.history.size == prev.history.size &&
-      (curr.history, prev.history).zipped.forall((c1, c2) => c1.hashCode() == c2.hashCode() && Utils.equiv(c1, c2))
+  /**
+   * Transforms an internal result of analysis into a corresponding equation.
+   * When exploration of a graph of configurations is finished,
+   * this method is called to gen an equation.
+   *
+   * @param result internal result
+   * @return
+   */
+  def mkEquation(result: Res): Equation[Key, Value]
 
-  // the key is insnIndex
-  var computed = Array.tabulate[List[State]](methodNode.instructions.size()){i => Nil}
-  // the key is stateIndex
+  /**
+   * Bookkeeping of already analyzed states.
+   * `computed(i)` is a set of already analyzed states having `state.conf.insnIndex = i`
+   * (the key is insnIndex)
+   */
+  val computed = Array.tabulate[List[State]](methodNode.instructions.size()){i => Nil}
+
+  /**
+   * Part of analysis state.
+   * Quite often during analysis it is possible to identify the result of analysis
+   * without processing the whole graph of configurations.
+   * If such situation is encountered, `earlyResult` may be set to `Some(result)`.
+   * `earlyResult` is checked at each step of analysis.
+   *
+   * @see [[faba.contracts.InOutAnalysis#analyze()]]
+   * @see [[faba.parameters.NotNullInAnalysis.analyze()]]
+   * @see [[faba.parameters.NullableInAnalysis.analyze()]]
+   */
   var earlyResult: Option[Res] = None
 
+  // internal counter for creating monotone ids
   private var id = 0
-  @inline
-  final def mkId(): Int = {
+
+  /**
+   * Generates new unique id.
+   *
+   * @return new unique id.
+   * @throws LimitReachedException if graph of configurations is too big.
+   */
+  final def genId(): Int = {
     id += 1
     if (id > LimitReachedException.limit) throw new LimitReachedException
     id
   }
-  final def lastId(): Int = id
 
+  /**
+   * Utility method for creating start state for analysis.
+   *
+   * @return start state for analysis
+   */
+  final def createStartState(): State =
+    State(0, Conf(0, createStartFrame()), Nil, 0)
+
+  /**
+   * Creates start frame for analysis.
+   *
+   * @return start frame for analysis
+   * @see `createStartState`
+   * @see `createStartValueForParameter`
+   */
   final def createStartFrame(): Frame[BasicValue] = {
     val frame = new Frame[BasicValue](methodNode.maxLocals, methodNode.maxStack)
     val returnType = Type.getReturnType(methodNode.desc)
@@ -102,12 +175,10 @@ abstract class Analysis[Res] {
     }
     for (i <- 0 until args.size) {
       val value = direction match {
-        case InOut(`i`, _) =>
-          new ParamValue(args(i))
-        case In(`i`) =>
+        case InOut(`i`, _) | In(`i`) =>
           new ParamValue(args(i))
         case _ =>
-          new BasicValue(args(i))
+          createStartValueForParameter(i, args(i))
       }
       frame.setLocal(local, value)
       local += 1
@@ -123,11 +194,35 @@ abstract class Analysis[Res] {
     frame
   }
 
+  /**
+   * Creates initial value for parameter. Intended to be overridden/customized.
+   * The default implementation returns {{{BasicValue(tp)}}}.
+   *
+   * @param i parameter's index
+   * @param tp parameter's type
+   * @return Abstract value to be used as a starting point for analysis.
+   * @see `createStartFrame`
+   * @see `InOutAnalysis.createStartValueForParameter`
+   */
+  def createStartValueForParameter(i: Int, tp: Type): BasicValue =
+    new BasicValue(tp)
+
+  /**
+   *
+   * @param frame frame
+   * @return top of the stack of this frame
+   */
   final def popValue(frame: Frame[BasicValue]): BasicValue =
     frame.getStack(frame.getStackSize - 1)
 }
 
 object Utils {
+  final def stateEquiv(curr: State, prev: State): Boolean =
+    curr.constraint == prev.constraint && curr.conf.hashCode() == prev.conf.hashCode() &&
+      Utils.equiv(curr.conf, prev.conf) &&
+      curr.history.size == prev.history.size &&
+      (curr.history, prev.history).zipped.forall((c1, c2) => c1.hashCode() == c2.hashCode() && Utils.equiv(c1, c2))
+
   def isInstance(curr: Conf, prev: Conf): Boolean = {
     if (curr.insnIndex != prev.insnIndex) {
       return false
@@ -158,16 +253,18 @@ object Utils {
       case FalseValue() => true
       case _ => false
     }
-    case NullValue() => curr match {
-      case NullValue() => true
+    // TODO - is it safe to ignore origin of null value?
+    case NullValue(_) => curr match {
+      case NullValue(_) => true
       case _ => false
     }
     case NotNullValue(_) => curr match {
       case NotNullValue(_) => true
       case _ => false
     }
-    case CallResultValue(_, prevInters) => curr match {
-      case CallResultValue(_, currInters) => currInters == prevInters
+    // TODO - is it safe to ignore origin and type of call?
+    case CallResultValue(_, _, prevInters) => curr match {
+      case CallResultValue(_, _, currInters) => currInters == prevInters
       case _ => false
     }
     case _: BasicValue => true
@@ -186,8 +283,12 @@ object Utils {
   def equiv(curr: BasicValue, prev: BasicValue): Boolean =
     if (curr.getClass == prev.getClass) {
       (curr, prev) match {
-        case (CallResultValue(_, k1), CallResultValue(_, k2)) =>
+        case (CallResultValue(_, _, k1), CallResultValue(_, _, k2)) =>
           k1 == k2
+        case (tr1: Trackable, tr2: Trackable) =>
+          tr1.origin == tr2.origin
+        case (NThParamValue(n1, _), NThParamValue(n2, _)) =>
+          n1 == n2
         case _ =>
           true
       }

@@ -432,11 +432,6 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.ClassBeanInfoImpl ClassBeanInfoImpl(com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl, com.sun.xml.internal.bind.v2.model.runtime.RuntimeClassInfo) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.xml.internal.bind.v2.runtime.ClassBeanInfoImpl boolean reset(BeanT, com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.ClassBeanInfoImpl com.sun.xml.internal.bind.v2.runtime.Transducer&lt;BeanT&gt; getTransducer()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -547,9 +542,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.ContentHandlerAdaptor java.lang.String getPrefix(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.ContentHandlerAdaptor void endElement(java.lang.String, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -802,6 +795,11 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.ElementBeanInfoImpl.IntercepterLoader java.lang.Object intercept(com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.State, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.ElementBeanInfoImpl.IntercepterLoader java.lang.Object intercept(com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.State, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.ElementBeanInfoImpl.IntercepterLoader void startElement(com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.State, com.sun.xml.internal.bind.v2.runtime.unmarshaller.TagName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -919,6 +917,12 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl com.sun.xml.internal.bind.v2.model.core.NonElement&lt;java.lang.reflect.Type,java.lang.Class&gt; getXmlType(com.sun.xml.internal.bind.v2.model.runtime.RuntimeTypeInfoSet, com.sun.xml.internal.bind.api.TypeReference) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl com.sun.xml.internal.bind.v2.runtime.ClassBeanInfoImpl getOrCreate(com.sun.xml.internal.bind.v2.model.runtime.RuntimeClassInfo)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl com.sun.xml.internal.bind.v2.runtime.ElementBeanInfoImpl getOrCreate(com.sun.xml.internal.bind.v2.model.runtime.RuntimeElementInfo)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl com.sun.xml.internal.bind.v2.runtime.JaxBeanInfo getBeanInfo(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -929,10 +933,13 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl com.sun.xml.internal.bind.v2.runtime.JaxBeanInfo getBeanInfo(java.lang.Object, boolean)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl com.sun.xml.internal.bind.v2.runtime.JaxBeanInfo getOrCreate(com.sun.xml.internal.bind.v2.model.runtime.RuntimeArrayInfo)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl com.sun.xml.internal.bind.v2.runtime.JaxBeanInfo getOrCreate(com.sun.xml.internal.bind.v2.model.runtime.RuntimeEnumLeafInfo)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl com.sun.xml.internal.bind.v2.runtime.JaxBeanInfo getOrCreate(com.sun.xml.internal.bind.v2.model.runtime.RuntimeTypeInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -953,6 +960,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl createUnmarshaller()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl com.sun.xml.internal.bind.v2.schemagen.XmlSchemaGenerator&lt;java.lang.reflect.Type,java.lang.Class,java.lang.reflect.Field,java.lang.reflect.Method&gt; createSchemaGenerator()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl int getNumberOfAttributeNames()">
@@ -1027,6 +1037,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl java.util.Set&lt;javax.xml.namespace.QName&gt; getValidRootNames()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.JAXBContextImpl javax.xml.bind.Binder&lt;org.w3c.dom.Node&gt; createBinder()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1545,7 +1558,7 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.Name boolean equals(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;null,_-&gt;false&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.Name int compareTo(com.sun.xml.internal.bind.v2.runtime.Name) 0">
@@ -1619,6 +1632,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.NameBuilder java.lang.String[] list(java.util.Map&lt;java.lang.String,java.lang.Integer&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.NameBuilder java.lang.String[] list(java.util.Map&lt;java.lang.String,java.lang.Integer&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.RuntimeUtil RuntimeUtil()">

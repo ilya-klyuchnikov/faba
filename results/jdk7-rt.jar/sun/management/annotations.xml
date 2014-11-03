@@ -14,9 +14,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.management.Agent java.util.Properties parseString(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.Agent void agentmain(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -103,6 +101,9 @@
   <item name="sun.management.ConnectorAddressLink java.lang.String importFrom(int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.management.ConnectorAddressLink java.util.Map&lt;java.lang.String,java.lang.String&gt; importRemoteFrom(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.management.ConnectorAddressLink void export(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -151,6 +152,12 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="sun.management.Flag java.util.List&lt;sun.management.Flag&gt; getAllFlags()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.management.Flag java.util.List&lt;sun.management.Flag&gt; getFlags(java.lang.String[], int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.management.Flag sun.management.Flag getFlag(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -173,7 +180,19 @@
   <item name="sun.management.GarbageCollectionNotifInfoCompositeData com.sun.management.GcInfo getGcInfo(javax.management.openmbean.CompositeData)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.management.GarbageCollectionNotifInfoCompositeData java.lang.String getGcAction(javax.management.openmbean.CompositeData)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.management.GarbageCollectionNotifInfoCompositeData java.lang.String getGcCause(javax.management.openmbean.CompositeData)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.management.GarbageCollectionNotifInfoCompositeData java.lang.String getGcName(javax.management.openmbean.CompositeData)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.management.GarbageCollectionNotifInfoCompositeData javax.management.openmbean.CompositeData getCompositeData()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.management.GarbageCollectionNotifInfoCompositeData javax.management.openmbean.CompositeType getCompositeTypeByBuilder()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.GarbageCollectionNotifInfoCompositeData void validateCompositeData(javax.management.openmbean.CompositeData) 0">
@@ -245,6 +264,9 @@
   <item name="sun.management.HotSpotDiagnostic com.sun.management.VMOption getVMOption(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.management.HotSpotDiagnostic java.util.List&lt;com.sun.management.VMOption&gt; getDiagnosticOptions()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.management.HotSpotDiagnostic javax.management.ObjectName getObjectName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -258,6 +280,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="sun.management.HotspotCompilation java.util.List&lt;sun.management.CompilerThreadStat&gt; getCompilerThreadStats()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.HotspotCompilation sun.management.MethodInfo getFailedCompile()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -274,8 +299,14 @@
   <item name="sun.management.HotspotCompilation sun.management.counter.Counter access$000(sun.management.HotspotCompilation, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.management.HotspotCompilation sun.management.counter.Counter access$000(sun.management.HotspotCompilation, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.management.HotspotCompilation sun.management.counter.Counter lookup(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.management.HotspotCompilation sun.management.counter.Counter lookup(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.HotspotCompilation.CompilerThreadInfo CompilerThreadInfo(sun.management.HotspotCompilation, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -313,16 +344,6 @@
   <item name="sun.management.LazyCompositeData boolean getBoolean(javax.management.openmbean.CompositeData, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.management.LazyCompositeData boolean isTypeMatched(javax.management.openmbean.CompositeType, javax.management.openmbean.CompositeType)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;true;null,_-&gt;true&quot;"/>
-    </annotation>
-  </item>
-  <item name="sun.management.LazyCompositeData boolean isTypeMatched(javax.management.openmbean.TabularType, javax.management.openmbean.TabularType)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;true;null,_-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.management.LazyCompositeData int getInt(javax.management.openmbean.CompositeData, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -349,6 +370,9 @@
     </annotation>
   </item>
   <item name="sun.management.LockDataConverter sun.management.LockDataConverter newLockDataConverter(java.lang.management.ThreadInfo) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.management.LockDataConverter sun.management.LockDataConverter newLockDataConverter(java.lang.management.ThreadInfo)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.LockDataConverter.1 1()">
@@ -408,10 +432,22 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.management.ManagementFactoryHelper java.util.List&lt;java.lang.management.GarbageCollectorMXBean&gt; getGarbageCollectorMXBeans()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.management.ManagementFactoryHelper java.util.List&lt;java.lang.management.MemoryManagerMXBean&gt; getMemoryManagerMXBeans()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.management.ManagementFactoryHelper java.util.List&lt;java.lang.management.MemoryPoolMXBean&gt; getMemoryPoolMXBeans()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.management.ManagementFactoryHelper void addMBean(javax.management.MBeanServer, java.lang.Object, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.ManagementFactoryHelper void unregisterMBean(javax.management.MBeanServer, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.management.ManagementFactoryHelper.1 javax.management.ObjectName getObjectName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.ManagementFactoryHelper.2 java.lang.Object run()">
@@ -430,6 +466,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="sun.management.ManagementFactoryHelper.PlatformLoggingImpl javax.management.ObjectName getObjectName()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.MappedMXBeanType boolean isBasicType()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -489,26 +528,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="sun.management.MappedMXBeanType sun.management.MappedMXBeanType getMappedType(java.lang.reflect.Type)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.management.MappedMXBeanType sun.management.MappedMXBeanType newBasicType(java.lang.Class, javax.management.openmbean.OpenType)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.MappedMXBeanType sun.management.MappedMXBeanType newMappedType(java.lang.reflect.Type)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.MappedMXBeanType.ArrayMXBeanType ArrayMXBeanType(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="sun.management.MappedMXBeanType.ArrayMXBeanType java.lang.Object toJavaTypeData(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
-  </item>
-  <item name="sun.management.MappedMXBeanType.ArrayMXBeanType java.lang.Object toOpenTypeData(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
   </item>
   <item name="sun.management.MappedMXBeanType.ArrayMXBeanType java.lang.reflect.Type getJavaType()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -537,6 +567,15 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="sun.management.MappedMXBeanType.CompositeDataMXBeanType.1 java.lang.reflect.Method run()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.management.MappedMXBeanType.CompositeDataMXBeanType.2 java.lang.reflect.Method[] run()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.management.MappedMXBeanType.EnumMXBeanType java.lang.Object toJavaTypeData(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.MappedMXBeanType.EnumMXBeanType java.lang.Object toOpenTypeData(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -592,6 +631,9 @@
   <item name="sun.management.MappedMXBeanType.ListMXBeanType java.lang.Object toJavaTypeData(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.management.MappedMXBeanType.ListMXBeanType java.lang.Object toJavaTypeData(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.management.MappedMXBeanType.ListMXBeanType java.lang.Object toOpenTypeData(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -611,7 +653,13 @@
   <item name="sun.management.MappedMXBeanType.MapMXBeanType java.lang.Object toJavaTypeData(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.management.MappedMXBeanType.MapMXBeanType java.lang.Object toJavaTypeData(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.management.MappedMXBeanType.MapMXBeanType java.lang.Object toOpenTypeData(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.management.MappedMXBeanType.MapMXBeanType java.lang.Object toOpenTypeData(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.MappedMXBeanType.MapMXBeanType java.lang.String getName()">
@@ -650,7 +698,13 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="sun.management.MemoryManagerImpl java.lang.String[] getMemoryPoolNames()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.management.MemoryManagerImpl javax.management.ObjectName getObjectName()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.management.MemoryNotifInfoCompositeData java.lang.String getPoolName(javax.management.openmbean.CompositeData)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.MemoryNotifInfoCompositeData java.lang.management.MemoryNotificationInfo getMemoryNotifInfo()">
@@ -689,6 +743,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="sun.management.MemoryPoolImpl java.lang.String[] getMemoryManagerNames()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.MemoryPoolImpl java.lang.management.MemoryType getType()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -793,6 +850,9 @@
   <item name="sun.management.OperatingSystemImpl javax.management.ObjectName getObjectName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.management.RuntimeImpl java.util.Map&lt;java.lang.String,java.lang.String&gt; getSystemProperties()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.management.RuntimeImpl javax.management.ObjectName getObjectName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -860,6 +920,9 @@
   <item name="sun.management.ThreadImpl long[] findMonitorDeadlockedThreads()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.management.ThreadImpl long[] getAllThreadIds()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.management.ThreadImpl long[] getThreadAllocatedBytes(long[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -894,8 +957,17 @@
   </item>
   <item name="sun.management.ThreadInfoCompositeData boolean isV5Attribute(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;null-&gt;true&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="sun.management.ThreadInfoCompositeData java.lang.StackTraceElement[] stackTrace()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.management.ThreadInfoCompositeData java.lang.String threadName()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.management.ThreadInfoCompositeData java.lang.management.MonitorInfo[] lockedMonitors()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.ThreadInfoCompositeData java.lang.management.ThreadInfo getThreadInfo()">
     <annotation name="org.jetbrains.annotations.Contract">

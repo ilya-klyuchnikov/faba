@@ -103,11 +103,6 @@
   <item name="sun.java2d.xr.MutableInteger boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.java2d.xr.MutableInteger boolean equals(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.java2d.xr.MutableInteger int getValue()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -156,7 +151,13 @@
   <item name="sun.java2d.xr.XRBackendNative long[] getGlyphInfoPtrs(java.util.List&lt;sun.font.XRGlyphCacheEntry&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.xr.XRBackendNative long[] getGlyphInfoPtrs(java.util.List&lt;sun.font.XRGlyphCacheEntry&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.java2d.xr.XRBackendNative short[] getRenderColors(int[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.xr.XRBackendNative short[] getRenderColors(int[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.xr.XRBackendNative void GCRectangles(int, long, sun.java2d.xr.GrowableRectArray) 2">
@@ -235,6 +236,9 @@
     </annotation>
   </item>
   <item name="sun.java2d.xr.XRColor int[] ARGBPrePixelToXRColors(int[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.xr.XRColor int[] ARGBPrePixelToXRColors(int[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.xr.XRColor java.lang.String toString()">
@@ -384,11 +388,6 @@
   <item name="sun.java2d.xr.XRPMScaledBlit void Scale(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, double, double, double, double) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.java2d.xr.XRPMTransformedBlit boolean isMaskOmittable(java.awt.geom.AffineTransform, java.awt.Composite, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.java2d.xr.XRPMTransformedBlit java.awt.Rectangle getCompositeBounds(java.awt.geom.AffineTransform, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -419,6 +418,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.xr.XRPaints int[] convertToIntArgbPixels(java.awt.Color[], boolean) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.xr.XRPaints int[] convertToIntArgbPixels(java.awt.Color[], boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.xr.XRPaints sun.java2d.xr.XRPaints getXRPaint(sun.java2d.SunGraphics2D) 0">
@@ -594,11 +596,6 @@
   <item name="sun.java2d.xr.XRSurfaceData XRSurfaceData(sun.awt.X11ComponentPeer, sun.java2d.xr.XRGraphicsConfig, sun.java2d.loops.SurfaceType, java.awt.image.ColorModel, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.java2d.xr.XRSurfaceData boolean copyArea(sun.java2d.SunGraphics2D, int, int, int, int, int, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_,_,_,_-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.java2d.xr.XRSurfaceData int getPicture()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -735,6 +732,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="sun.java2d.xr.XRSurfaceData.XRWindowSurfaceData java.awt.Rectangle getBounds()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.java2d.xr.XRSurfaceDataProxy boolean isSupportedOperation(sun.java2d.SurfaceData, int, sun.java2d.loops.CompositeType, java.awt.Color) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -746,7 +746,7 @@
   </item>
   <item name="sun.java2d.xr.XRSurfaceDataProxy boolean isSupportedOperation(sun.java2d.SurfaceData, int, sun.java2d.loops.CompositeType, java.awt.Color)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;_,_,_,null-&gt;true&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="sun.java2d.xr.XRSurfaceDataProxy int getTransparency()">
@@ -761,9 +761,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.java2d.xr.XRSurfaceDataProxy sun.java2d.SurfaceData validateSurfaceData(sun.java2d.SurfaceData, sun.java2d.SurfaceData, int, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null,_,_-&gt;!null;_,null,_,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.xr.XRSurfaceDataProxy sun.java2d.SurfaceDataProxy createProxy(sun.java2d.SurfaceData, sun.java2d.xr.XRGraphicsConfig) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -809,6 +807,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.xr.XRUtils int[] convertFloatsToFixed(float[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.xr.XRUtils int[] convertFloatsToFixed(float[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.xr.XRUtils long intToULong(int)">

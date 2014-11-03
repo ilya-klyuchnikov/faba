@@ -14,6 +14,11 @@
   <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor T getNotificationBroadcaster(javax.management.ObjectName, java.lang.Object, java.lang.Class&lt;T&gt;) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor T getNotificationBroadcaster(javax.management.ObjectName, java.lang.Object, java.lang.Class&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor boolean isInstanceOf(javax.management.ObjectName, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -139,7 +144,7 @@
   </item>
   <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor java.util.Set&lt;javax.management.ObjectInstance&gt; filterListOfObjectInstances(java.util.Set&lt;javax.management.ObjectInstance&gt;, javax.management.QueryExp)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor java.util.Set&lt;javax.management.ObjectInstance&gt; objectInstancesFromFilteredNamedObjects(java.util.Set&lt;com.sun.jmx.mbeanserver.NamedObject&gt;, javax.management.QueryExp) 0">
@@ -148,11 +153,26 @@
   <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor java.util.Set&lt;javax.management.ObjectInstance&gt; objectInstancesFromFilteredNamedObjects(java.util.Set&lt;com.sun.jmx.mbeanserver.NamedObject&gt;, javax.management.QueryExp) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor java.util.Set&lt;javax.management.ObjectInstance&gt; objectInstancesFromFilteredNamedObjects(java.util.Set&lt;com.sun.jmx.mbeanserver.NamedObject&gt;, javax.management.QueryExp)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor java.util.Set&lt;javax.management.ObjectInstance&gt; queryMBeansImpl(javax.management.ObjectName, javax.management.QueryExp)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor java.util.Set&lt;javax.management.ObjectName&gt; objectNamesFromFilteredNamedObjects(java.util.Set&lt;com.sun.jmx.mbeanserver.NamedObject&gt;, javax.management.QueryExp) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor java.util.Set&lt;javax.management.ObjectName&gt; objectNamesFromFilteredNamedObjects(java.util.Set&lt;com.sun.jmx.mbeanserver.NamedObject&gt;, javax.management.QueryExp) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor java.util.Set&lt;javax.management.ObjectName&gt; objectNamesFromFilteredNamedObjects(java.util.Set&lt;com.sun.jmx.mbeanserver.NamedObject&gt;, javax.management.QueryExp)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor java.util.Set&lt;javax.management.ObjectName&gt; queryNames(javax.management.ObjectName, javax.management.QueryExp)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor java.util.Set&lt;javax.management.ObjectName&gt; queryNamesImpl(javax.management.ObjectName, javax.management.QueryExp)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor javax.management.AttributeList getAttributes(javax.management.ObjectName, java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -169,7 +189,13 @@
   <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor javax.management.DynamicMBean getMBean(javax.management.ObjectName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor javax.management.DynamicMBean getMBean(javax.management.ObjectName)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor javax.management.MBeanInfo getMBeanInfo(javax.management.ObjectName) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor javax.management.MBeanInfo getMBeanInfo(javax.management.ObjectName)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor javax.management.NotificationListener getListener(javax.management.ObjectName) 0">
@@ -227,6 +253,11 @@
   </item>
   <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor javax.management.ObjectName preRegister(javax.management.DynamicMBean, javax.management.MBeanServer, javax.management.ObjectName) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor javax.management.ObjectName preRegister(javax.management.DynamicMBean, javax.management.MBeanServer, javax.management.ObjectName)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,!null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor void access$000(com.sun.jmx.interceptor.DefaultMBeanServerInterceptor, java.lang.ClassLoader, javax.management.ObjectName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -319,11 +350,6 @@
   </item>
   <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.ListenerWrapper boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.ListenerWrapper boolean equals(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.ResourceContext.1 1()">
     <annotation name="org.jetbrains.annotations.Contract">

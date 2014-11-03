@@ -23,11 +23,6 @@
   <item name="javax.management.Attribute boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="javax.management.Attribute boolean equals(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.management.Attribute java.lang.Object getValue()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -318,16 +313,30 @@
   <item name="javax.management.ImmutableDescriptor java.lang.Object[] getFieldValues(java.lang.String...) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.management.ImmutableDescriptor java.lang.Object[] getFieldValues(java.lang.String...)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="javax.management.ImmutableDescriptor java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.ImmutableDescriptor java.lang.String[] getFields()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.management.ImmutableDescriptor java.util.SortedMap&lt;java.lang.String,?&gt; makeMap(java.lang.String[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.ImmutableDescriptor java.util.SortedMap&lt;java.lang.String,?&gt; makeMap(java.lang.String[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.ImmutableDescriptor java.util.SortedMap&lt;java.lang.String,?&gt; makeMap(java.lang.String[], java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.ImmutableDescriptor java.util.SortedMap&lt;java.lang.String,?&gt; makeMap(java.lang.String[], java.lang.Object[]) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.ImmutableDescriptor java.util.SortedMap&lt;java.lang.String,?&gt; makeMap(java.lang.String[], java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.ImmutableDescriptor javax.management.Descriptor clone()">
@@ -505,6 +514,9 @@
   <item name="javax.management.MBeanConstructorInfo javax.management.MBeanParameterInfo[] constructorSignature(java.lang.reflect.Constructor&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.MBeanConstructorInfo javax.management.MBeanParameterInfo[] constructorSignature(java.lang.reflect.Constructor&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.management.MBeanException java.lang.Exception getTargetException()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -669,7 +681,13 @@
   <item name="javax.management.MBeanOperationInfo javax.management.MBeanParameterInfo[] methodSignature(java.lang.reflect.Method) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.MBeanOperationInfo javax.management.MBeanParameterInfo[] methodSignature(java.lang.reflect.Method)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.management.MBeanOperationInfo javax.management.MBeanParameterInfo[] parameters(java.lang.Class&lt;?&gt;[], java.lang.annotation.Annotation[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.MBeanOperationInfo javax.management.MBeanParameterInfo[] parameters(java.lang.Class&lt;?&gt;[], java.lang.annotation.Annotation[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.MBeanParameterInfo boolean equals(java.lang.Object) 0">
@@ -697,11 +715,6 @@
   </item>
   <item name="javax.management.MBeanPermission boolean implies(java.security.Permission) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.management.MBeanPermission boolean implies(java.security.Permission)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="javax.management.MBeanPermission int getMask(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -798,18 +811,25 @@
     </annotation>
   </item>
   <item name="javax.management.MBeanServerFactory java.lang.String mBeanServerId(javax.management.MBeanServer)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.MBeanServerFactory java.util.ArrayList&lt;javax.management.MBeanServer&gt; findMBeanServer(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.MBeanServerFactory java.util.ArrayList&lt;javax.management.MBeanServer&gt; findMBeanServer(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.MBeanServerFactory javax.management.MBeanServer createMBeanServer()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.MBeanServerFactory javax.management.MBeanServer createMBeanServer(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.MBeanServerFactory javax.management.MBeanServer newMBeanServer()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.MBeanServerFactory javax.management.MBeanServer newMBeanServer(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.MBeanServerFactory javax.management.MBeanServerBuilder newBuilder(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -841,17 +861,15 @@
   <item name="javax.management.MBeanServerInvocationHandler boolean isLocal(java.lang.Object, java.lang.reflect.Method) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.management.MBeanServerInvocationHandler boolean isLocal(java.lang.Object, java.lang.reflect.Method)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.management.MBeanServerInvocationHandler boolean isMXBean()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="javax.management.MBeanServerInvocationHandler boolean shouldDoLocally(java.lang.Object, java.lang.reflect.Method) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.MBeanServerInvocationHandler com.sun.jmx.mbeanserver.MXBeanProxy findMXBeanProxy(java.lang.Class&lt;?&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.MBeanServerInvocationHandler java.lang.Object doLocally(java.lang.Object, java.lang.reflect.Method, java.lang.Object[]) 1">
@@ -918,7 +936,7 @@
   </item>
   <item name="javax.management.MBeanServerPermission boolean implies(java.security.Permission)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="javax.management.MBeanServerPermission int hashCode()">
@@ -1099,7 +1117,7 @@
   </item>
   <item name="javax.management.NotificationBroadcasterSupport.ListenerInfo boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="javax.management.NotificationBroadcasterSupport.WildcardListenerInfo boolean equals(java.lang.Object) 0">
@@ -1144,11 +1162,6 @@
   </item>
   <item name="javax.management.ObjectInstance boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.management.ObjectInstance boolean equals(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="javax.management.ObjectInstance java.lang.String getClassName()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1300,9 +1313,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.ObjectName javax.management.ObjectName getInstance(javax.management.ObjectName)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.ObjectName void addProperty(javax.management.ObjectName.Property, int, java.util.Map&lt;java.lang.String,javax.management.ObjectName.Property&gt;, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1602,11 +1613,6 @@
   <item name="javax.management.StandardMBean boolean overrides(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;, java.lang.String, java.lang.Class&lt;?&gt;...) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="javax.management.StandardMBean boolean overrides(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;, java.lang.String, java.lang.Class&lt;?&gt;...)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.management.StandardMBean int getImpact(javax.management.MBeanOperationInfo) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1636,27 +1642,18 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.StandardMBean java.lang.String getDescription(javax.management.MBeanConstructorInfo, javax.management.MBeanParameterInfo, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.StandardMBean java.lang.String getDescription(javax.management.MBeanFeatureInfo) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.StandardMBean java.lang.String getDescription(javax.management.MBeanFeatureInfo)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.StandardMBean java.lang.String getDescription(javax.management.MBeanInfo) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.StandardMBean java.lang.String getDescription(javax.management.MBeanInfo)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.StandardMBean java.lang.String getDescription(javax.management.MBeanOperationInfo)">
@@ -1669,9 +1666,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.StandardMBean java.lang.String getDescription(javax.management.MBeanOperationInfo, javax.management.MBeanParameterInfo, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.StandardMBean java.lang.String getParameterName(javax.management.MBeanConstructorInfo, javax.management.MBeanParameterInfo, int) 0">
@@ -1681,9 +1675,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.StandardMBean java.lang.String getParameterName(javax.management.MBeanConstructorInfo, javax.management.MBeanParameterInfo, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.StandardMBean java.lang.String getParameterName(javax.management.MBeanOperationInfo, javax.management.MBeanParameterInfo, int) 0">
@@ -1693,15 +1684,18 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.StandardMBean java.lang.String getParameterName(javax.management.MBeanOperationInfo, javax.management.MBeanParameterInfo, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.StandardMBean javax.management.AttributeList getAttributes(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.StandardMBean javax.management.AttributeList getAttributes(java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.management.StandardMBean javax.management.AttributeList setAttributes(javax.management.AttributeList) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.StandardMBean javax.management.AttributeList setAttributes(javax.management.AttributeList)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.StandardMBean javax.management.Descriptor getDescriptor(javax.management.MBeanInfo, boolean) 0">
@@ -1711,9 +1705,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.StandardMBean javax.management.MBeanAttributeInfo customize(javax.management.MBeanAttributeInfo, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.StandardMBean javax.management.MBeanAttributeInfo[] getAttributes(javax.management.MBeanInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1725,9 +1717,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.StandardMBean javax.management.MBeanConstructorInfo customize(javax.management.MBeanConstructorInfo, java.lang.String, javax.management.MBeanParameterInfo[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.StandardMBean javax.management.MBeanConstructorInfo[] getConstructors(javax.management.MBeanConstructorInfo[], java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1737,7 +1727,7 @@
   </item>
   <item name="javax.management.StandardMBean javax.management.MBeanConstructorInfo[] getConstructors(javax.management.MBeanConstructorInfo[], java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;null,_-&gt;null&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1752,6 +1742,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="javax.management.StandardMBean javax.management.MBeanInfo getMBeanInfo()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.management.StandardMBean javax.management.MBeanNotificationInfo[] getNotifications(javax.management.MBeanInfo) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1765,9 +1758,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.StandardMBean javax.management.MBeanOperationInfo customize(javax.management.MBeanOperationInfo, java.lang.String, javax.management.MBeanParameterInfo[], int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.StandardMBean javax.management.MBeanOperationInfo[] getOperations(javax.management.MBeanInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1779,9 +1770,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.StandardMBean javax.management.MBeanParameterInfo customize(javax.management.MBeanParameterInfo, java.lang.String, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.StandardMBean javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName)">
     <annotation name="org.jetbrains.annotations.Contract">

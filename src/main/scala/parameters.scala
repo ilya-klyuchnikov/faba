@@ -5,7 +5,7 @@ import org.objectweb.asm.tree.analysis.{BasicInterpreter, Frame, BasicValue}
 import org.objectweb.asm.tree.{MethodInsnNode, TypeInsnNode, JumpInsnNode, AbstractInsnNode}
 import org.objectweb.asm.Opcodes._
 
-import faba.analysis._
+import faba.analysis.{Utils => AnalysisUtils, _}
 import faba.cfg._
 import faba.data._
 import faba.engine._
@@ -93,46 +93,99 @@ object Result {
   }
 }
 
-object ParametersAnalysis {
-  import Analysis._
-  val myArray = new Array[Result](LimitReachedException.limit)
-  val myPending = new Array[PendingAction[Result]](LimitReachedException.limit)
-  var nullableExecute: Long = 0
-  var notNullExecute: Long = 0
+object NotNullInConstraint {
+  // (taken: Boolean, hasCompanions: Boolean)
+  val TAKEN = 1 // 1 << 0
+  val HAS_COMPANIONS = 2 //1 << 1
+
+  // (x != null) / (x instanceOf ..) was proceeded
+  def isTaken(constraint: Int) = (constraint & TAKEN) != 0
+
+  // some previous configuration is foo(param) -
+  // hasCompanions = true means that it is possible indirect dereference
+  def hasCompanions(constraint: Int) = (constraint & HAS_COMPANIONS) != 0
+}
+
+object NotNullInAnalysis {
+  // For inference of @NotNull parameters we need to combine information from all configurations,
+  // not just from leaf configurations.
+  // So we need to build and traverse graph of configurations in some tricky order.
+  // For this purpose we maintain "pending list" of what to do.
+
+  /**
+   * Element of pending list - pending action.
+   */
+  sealed trait PendingAction
+
+  /**
+   * "Forward step". Driving of current configuration.
+   * @param state state to process
+   *
+   * @see faba.parameters.NotNullInAnalysis#processState(faba.analysis.State)
+   */
+  case class ProceedState(state: State) extends PendingAction
+
+  /**
+   * "Combine step". Calculates "approximation" (see the paper) of behavior from some configuration.
+   * Given local delta and sub-sigmas, computes current sigma.
+   *
+   * A note about states:
+   * there is a micro optimization: driving of straight section/piece of graph of configurations without push/pop of actions.
+   * States are states/configurations from this straight section of a graph.
+   *
+   * @param states a list of states representing the straight section of a graph.
+   * @param subResult - local delta (see the paper), produced by driving of straight section.
+   * @param indices - indices of child states
+   */
+  case class MakeResult(states: List[State], subResult: Result, indices: List[Int]) extends PendingAction
+
+  /**
+   * Reusable pending list (pending stack) for push/pop actions during analyses.
+   * @see faba.parameters.NotNullInAnalysis#pending
+   */
+  val sharedPendingStack = new Array[PendingAction](LimitReachedException.limit)
+
+  /**
+   * Reusable storage of sub results during analyses.
+   * @see faba.parameters.NotNullInAnalysis#results
+   */
+  val sharedResults = new Array[Result](LimitReachedException.limit)
 }
 
 class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result] {
-  import Analysis._
+  import NotNullInAnalysis._
 
-  override val identity: Result = Identity
-  val results = ParametersAnalysis.myArray
-  val pending = ParametersAnalysis.myPending
+  val results = NotNullInAnalysis.sharedResults
+  val pending = NotNullInAnalysis.sharedPendingStack
 
-  override def combineResults(delta: Result, subResults: List[Result]): Result =
+  /**
+   *
+   * @param delta
+   * @param subResults
+   * @return
+   */
+  def combineResults(delta: Result, subResults: List[Result]): Result =
     Result.meet(delta, subResults.reduce(Result.join))
 
   override def mkEquation(result: Result): Equation[Key, Value] = result match {
-    case Identity | Return | Error => Equation(aKey, Final(Values.Top))
-    case NPE => Equation(aKey, Final(Values.NotNull))
+    case Identity | Return | Error =>
+      Equation(aKey, Final(Values.Top))
+    case NPE =>
+      Equation(aKey, Final(Values.NotNull))
     case ConditionalNPE(cnf) =>
       Equation(aKey, Pending(cnf.map(p => Component(Values.Top, p))))
   }
-
-  override def isEarlyResult(res: Result): Boolean =
-    false
 
   var npe = false
 
   private var pendingTop: Int = 0
 
-  @inline
-  final def pendingPush(action: PendingAction[Result]) {
+  final def pendingPush(action: PendingAction) {
     pending(pendingTop) = action
     pendingTop += 1
   }
 
-  @inline
-  final def pendingPop(): PendingAction[Result] = {
+  final def pendingPop(): PendingAction = {
     pendingTop -= 1
     pending(pendingTop)
   }
@@ -143,15 +196,10 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     while (pendingTop > 0 && earlyResult.isEmpty) pendingPop() match {
       case MakeResult(states, delta, subIndices) =>
         val result = combineResults(delta, subIndices.map(results))
-        if (isEarlyResult(result)) {
-          earlyResult = Some(result)
-        } else {
-          // updating all results
-          for (state <- states) {
-            val insnIndex = state.conf.insnIndex
-            results(state.index) = result
-            computed(insnIndex) = state :: computed(insnIndex)
-          }
+        for (state <- states) {
+          val insnIndex = state.conf.insnIndex
+          results(state.index) = result
+          computed(insnIndex) = state :: computed(insnIndex)
         }
       case ProceedState(state) =>
         processState(state)
@@ -164,10 +212,10 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
 
     var state = fState
     var states: List[State] = Nil
-    var subResult = identity
+    var subResult: Result = Identity
 
     while (true) {
-      computed(state.conf.insnIndex).find(prevState => stateEquiv(state, prevState)) match {
+      computed(state.conf.insnIndex).find(prevState => AnalysisUtils.stateEquiv(state, prevState)) match {
         case Some(ps) =>
           results(state.index) = results(ps.index)
           if (states.nonEmpty)
@@ -182,21 +230,19 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
       val insnIndex = conf.insnIndex
       val history = state.history
 
-      val fold = dfsTree.loopEnters(insnIndex) && history.exists(prevConf => confInstance(conf, prevConf))
+      val fold = dfsTree.loopEnters(insnIndex) && history.exists(prevConf => AnalysisUtils.isInstance(conf, prevConf))
 
       if (fold) {
-        results(stateIndex) = identity
+        results(stateIndex) = Identity
         computed(insnIndex) = state :: computed(insnIndex)
         if (states.nonEmpty)
           pendingPush(MakeResult(states, subResult, List(stateIndex)))
         return
       }
 
-      val taken = state.taken
       val frame = conf.frame
       val insnNode = methodNode.instructions.get(insnIndex)
       val nextHistory = if (dfsTree.loopEnters(insnIndex)) conf :: history else history
-      val hasCompanions = state.hasCompanions
       val (nextFrame, localSubResult) = execute(frame, insnNode)
       val notEmptySubResult = localSubResult != Identity
 
@@ -206,7 +252,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
       subResult = subResult2
 
       if (localSubResult == NPE) {
-        // npe was detected
+        // npe was detected, storing this fact for further analyses
         npe = true
         results(stateIndex) = NPE
         computed(insnIndex) = state :: computed(insnIndex)
@@ -214,9 +260,14 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
         return
       }
 
+      val constraint = state.constraint
+      // the constant will be inlined by javac
+      val companionsNow = if (localSubResult != Identity) 2 else 0
+      val constraint1 = constraint | companionsNow
+
       insnNode.getOpcode match {
         case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
-          if (!hasCompanions) {
+          if (!NotNullInConstraint.hasCompanions(constraint)) {
             earlyResult = Some(Return)
             return
           } else {
@@ -227,7 +278,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
               pendingPush(MakeResult(states, subResult, List(stateIndex)))
             return
           }
-        case ATHROW if taken =>
+        case ATHROW if NotNullInConstraint.isTaken(constraint) =>
           results(stateIndex) = NPE
           npe = true
           computed(insnIndex) = state :: computed(insnIndex)
@@ -242,22 +293,22 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
           return
         case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = insnIndex + 1
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
+          val nextState = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, constraint1 | 1)
           states = state :: states
           state = nextState
         case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
+          val nextState = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, constraint1 | 1)
           states = state :: states
           state = nextState
         case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
+          val nextState = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, constraint1 | 1)
           states = state :: states
           state = nextState
         case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
           val nextInsnIndex = insnIndex + 1
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, hasCompanions || notEmptySubResult)
+          val nextState = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, constraint1 | 1)
           states = state :: states
           state = nextState
         case _ =>
@@ -272,7 +323,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
               } else {
                 nextFrame
               }
-              State(mkId(), Conf(nextInsnIndex, nextFrame1), nextHistory, taken, hasCompanions || notEmptySubResult)
+              State(genId(), Conf(nextInsnIndex, nextFrame1), nextHistory, constraint1)
           }
           states = state :: states
           if (nextStates.size == 1 && noSwitch) {
@@ -290,45 +341,44 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
       (frame, Identity)
     case _ =>
-      ParametersAnalysis.notNullExecute += 1
       val nextFrame = new Frame(frame)
       NonNullInterpreter.reset()
       nextFrame.execute(insnNode, NonNullInterpreter)
       (nextFrame, NonNullInterpreter.getSubResult)
   }
-
 }
 
-// if everything is return, then parameter is nullable
+case class NullableInConstraint(taken: Boolean)
+
+object NullableInConstraint {
+  val TAKEN = 1
+  val NOT_TAKEN = 0
+}
+
+object NullableInAnalysis {
+  val sharedPendingStack = new Array[State](LimitReachedException.limit)
+}
+
 class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result] {
 
-  override val identity: Result = Identity
-  val pending = Analysis.ourPending
-
-  override def combineResults(delta: Result, subResults: List[Result]): Result =
-    Result.combineNullable(delta, subResults.reduce(Result.combineNullable))
+  val pending = NullableInAnalysis.sharedPendingStack
 
   override def mkEquation(result: Result): Equation[Key, Value] = result match {
-      case NPE => Equation(aKey, Final(Values.Top))
-      case Identity | Return | Error => Equation(aKey, Final(Values.Null))
-      case ConditionalNPE(cnf) =>
-        Equation(aKey, Pending(cnf.map(p => Component(Values.Top, p))))
-    }
+    case NPE => Equation(aKey, Final(Values.Top))
+    case Identity | Return | Error => Equation(aKey, Final(Values.Null))
+    case ConditionalNPE(cnf) =>
+      Equation(aKey, Pending(cnf.map(p => Component(Values.Top, p))))
+  }
 
-  override def isEarlyResult(res: Result): Boolean =
-    false
-
-  private var myResult = identity
+  private var myResult: Result = Identity
 
   private var pendingTop: Int = 0
 
-  @inline
   final def pendingPush(state: State) {
     pending(pendingTop) = state
     pendingTop += 1
   }
 
-  @inline
   final def pendingPop(): State = {
     pendingTop -= 1
     pending(pendingTop)
@@ -348,33 +398,31 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
     var state = fState
 
     while (true) {
-      computed(state.conf.insnIndex).find(prevState => stateEquiv(state, prevState)) match {
+      computed(state.conf.insnIndex).find(prevState => AnalysisUtils.stateEquiv(state, prevState)) match {
         case Some(ps) =>
           return
         case None =>
       }
 
-      val stateIndex = state.index
       val conf = state.conf
       val insnIndex = conf.insnIndex
       val history = state.history
 
       val isLoopEnter = dfsTree.loopEnters(insnIndex)
-      val fold = isLoopEnter && history.exists(prevConf => confInstance(conf, prevConf))
+      val fold = isLoopEnter && history.exists(prevConf => AnalysisUtils.isInstance(conf, prevConf))
 
       computed(insnIndex) = state :: computed(insnIndex)
 
-      if (fold) {
+      if (fold)
         return
-      }
 
-      val taken = state.taken
+      val taken = state.constraint
       val frame = conf.frame
       val insnNode = methodNode.instructions.get(insnIndex)
       val nextHistory = if (isLoopEnter) conf :: history else history
-      val (nextFrame, localSubResult, top) = execute(frame, insnNode)
+      val (nextFrame, localSubResult) = execute(frame, insnNode)
 
-      if (localSubResult == NPE || top) {
+      if (localSubResult == NPE) {
         earlyResult = Some(NPE)
         return
       }
@@ -389,23 +437,23 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
             return
           }
           return
-        case ATHROW if taken =>
+        case ATHROW if state.constraint == 1 =>
           earlyResult = Some(NPE)
           return
         case ATHROW =>
           return
         case IFNONNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = insnIndex + 1
-          state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          state = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, 1)
         case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          state = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, 1)
         case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          state = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, 1)
         case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
           val nextInsnIndex = insnIndex + 1
-          state = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          state = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, 1)
         case _ =>
           val nextInsnIndices = controlFlow.transitions(insnIndex)
           val nextStates = nextInsnIndices.map {
@@ -418,7 +466,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
               } else {
                 nextFrame
               }
-              State(mkId(), Conf(nextInsnIndex, nextFrame1), nextHistory, taken, false)
+              State(genId(), Conf(nextInsnIndex, nextFrame1), nextHistory, taken)
           }
           if (nextStates.size == 1) {
             state = nextStates.head
@@ -432,24 +480,20 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
 
   private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
-      (frame, Identity, false)
+      (frame, Identity)
     case _ =>
-      ParametersAnalysis.nullableExecute += 1
       val nextFrame = new Frame(frame)
       NullableInterpreter.reset()
       nextFrame.execute(insnNode, NullableInterpreter)
-      (nextFrame, NullableInterpreter.getSubResult, NullableInterpreter.top)
+      (nextFrame, NullableInterpreter.getSubResult)
   }
-
 }
 
 abstract class Interpreter extends BasicInterpreter {
-  var top = false
   val nullable: Boolean
   protected var _subResult: Result = Identity
   final def reset(): Unit = {
     _subResult = Identity
-    top = false
   }
 
   def combine(res1: Result, res2: Result): Result
@@ -505,7 +549,7 @@ abstract class Interpreter extends BasicInterpreter {
     if (nullable && opCode == INVOKEINTERFACE) {
       for (i <- shift until values.size()) {
         if (values.get(i).isInstanceOf[ParamValue]) {
-          top = true
+          _subResult = NPE
           return super.naryOperation(insn, values)
         }
       }

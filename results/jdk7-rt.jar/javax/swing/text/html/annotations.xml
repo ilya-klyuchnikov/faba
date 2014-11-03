@@ -141,11 +141,6 @@
   <item name="javax.swing.text.html.AccessibleHTML.ElementInfo void loadChildren(javax.swing.text.Element) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.swing.text.html.AccessibleHTML.HTMLAccessibleContext boolean contains(java.awt.Point)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.swing.text.html.AccessibleHTML.HTMLAccessibleContext java.awt.Dimension getSize()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -284,10 +279,11 @@
   <item name="javax.swing.text.html.AccessibleHTML.TableElementInfo.TableAccessibleContext TableAccessibleContext(javax.swing.text.html.AccessibleHTML.TableElementInfo, javax.swing.text.html.AccessibleHTML.ElementInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.swing.text.html.AccessibleHTML.TableElementInfo.TableAccessibleContext boolean contains(java.awt.Point)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
+  <item name="javax.swing.text.html.AccessibleHTML.TableElementInfo.TableAccessibleContext int[] getSelectedAccessibleColumns()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.text.html.AccessibleHTML.TableElementInfo.TableAccessibleContext int[] getSelectedAccessibleRows()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.AccessibleHTML.TableElementInfo.TableAccessibleContext java.awt.Dimension getSize()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -594,11 +590,6 @@
   <item name="javax.swing.text.html.AccessibleHTML.TextElementInfo.TextAccessibleContext TextAccessibleContext(javax.swing.text.html.AccessibleHTML.TextElementInfo, javax.swing.text.html.AccessibleHTML.ElementInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.swing.text.html.AccessibleHTML.TextElementInfo.TextAccessibleContext boolean contains(java.awt.Point)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.swing.text.html.AccessibleHTML.TextElementInfo.TextAccessibleContext java.awt.Dimension getSize()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -707,26 +698,17 @@
   <item name="javax.swing.text.html.BlockView boolean spanSetFromAttributes(int, javax.swing.SizeRequirements, javax.swing.text.html.CSS.LengthValue, javax.swing.text.html.CSS.LengthValue) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="javax.swing.text.html.BlockView boolean spanSetFromAttributes(int, javax.swing.SizeRequirements, javax.swing.text.html.CSS.LengthValue, javax.swing.text.html.CSS.LengthValue)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.swing.text.html.BlockView javax.swing.SizeRequirements calculateMajorAxisRequirements(int, javax.swing.SizeRequirements) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.BlockView javax.swing.SizeRequirements calculateMajorAxisRequirements(int, javax.swing.SizeRequirements)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.BlockView javax.swing.SizeRequirements calculateMinorAxisRequirements(int, javax.swing.SizeRequirements) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.BlockView javax.swing.SizeRequirements calculateMinorAxisRequirements(int, javax.swing.SizeRequirements)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.BlockView void changedUpdate(javax.swing.event.DocumentEvent, java.awt.Shape, javax.swing.text.ViewFactory) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -764,7 +746,7 @@
   </item>
   <item name="javax.swing.text.html.CSS boolean validTextAlignValue(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;null-&gt;true&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="javax.swing.text.html.CSS float getLength(javax.swing.text.AttributeSet, javax.swing.text.html.CSS.Attribute, javax.swing.text.html.StyleSheet) 0">
@@ -850,9 +832,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.CSS java.lang.Object cssValueToStyleConstantsValue(javax.swing.text.StyleConstants, java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.CSS java.lang.Object styleConstantsValueToCSSValue(javax.swing.text.StyleConstants, java.lang.Object)">
@@ -896,9 +875,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.CSS javax.swing.SizeRequirements calculateTiledRequirements(javax.swing.text.html.CSS.LayoutIterator, javax.swing.SizeRequirements)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.CSS javax.swing.text.AttributeSet translateHTMLToCSS(javax.swing.text.AttributeSet) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1045,6 +1022,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="javax.swing.text.html.CSS.BackgroundPosition java.lang.Object parseCssValue(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.text.html.CSS.BorderStyle BorderStyle()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1158,6 +1138,9 @@
   <item name="javax.swing.text.html.CSS.FontFamily java.lang.Object parseCssValue(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.swing.text.html.CSS.FontFamily java.lang.Object parseCssValue(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.text.html.CSS.FontFamily java.lang.Object toStyleConstants(javax.swing.text.StyleConstants, javax.swing.text.View) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1190,18 +1173,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.CSS.FontSize java.lang.Object parseCssValue(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.CSS.FontSize java.lang.Object parseHtmlValue(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.CSS.FontSize java.lang.Object parseHtmlValue(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.CSS.FontSize java.lang.Object toStyleConstants(javax.swing.text.StyleConstants, javax.swing.text.View) 0">
@@ -1398,9 +1375,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.CSS.StringValue java.lang.Object fromStyleConstants(javax.swing.text.StyleConstants, java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.CSS.StringValue java.lang.Object parseCssValue(java.lang.String)">
@@ -1419,6 +1393,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="javax.swing.text.html.CSSBorder int[] getWidths()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.CSSBorder java.awt.Color getAdjustedColor(java.awt.Color, double) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1540,9 +1517,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.CommentView.CommentBorder java.awt.Insets getBorderInsets(java.awt.Component, java.awt.Insets)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.CommentView.CommentBorder void paintBorder(java.awt.Component, java.awt.Graphics, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1643,6 +1618,12 @@
   <item name="javax.swing.text.html.FrameSetView int parseDigits(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.swing.text.html.FrameSetView java.lang.String[] parseRowColSpec(javax.swing.text.html.HTML.Attribute)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.text.html.FrameSetView javax.swing.SizeRequirements[] getChildRequests(int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.text.html.FrameSetView void layoutMajorAxis(int, int, int[], int[]) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1705,9 +1686,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.HRuleView java.awt.Shape modelToView(int, java.awt.Shape, javax.swing.text.Position.Bias)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.HRuleView javax.swing.text.AttributeSet getAttributes()">
@@ -1788,11 +1766,6 @@
   <item name="javax.swing.text.html.HTML.UnknownTag boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="javax.swing.text.html.HTML.UnknownTag boolean equals(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.swing.text.html.HTML.UnknownTag void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1844,6 +1817,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="javax.swing.text.html.HTMLDocument java.lang.String getDefaultStyleSheetType()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.text.html.HTMLDocument java.net.URL getBase()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1893,9 +1869,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.HTMLDocument javax.swing.text.Element getElement(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.HTMLDocument javax.swing.text.Element getElement(javax.swing.text.Element, java.lang.Object, java.lang.Object) 0">
@@ -1929,9 +1902,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.HTMLDocument javax.swing.text.html.Map getMap(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.HTMLDocument void access$200(javax.swing.text.html.HTMLDocument, javax.swing.text.AbstractDocument.DefaultDocumentEvent) 0">
@@ -2336,6 +2306,9 @@
       <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="javax.swing.text.html.HTMLEditorKit java.lang.Object clone()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.text.html.HTMLEditorKit java.lang.Object getAttrValue(javax.swing.text.AttributeSet, javax.swing.text.html.HTML.Attribute) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2351,6 +2324,9 @@
   <item name="javax.swing.text.html.HTMLEditorKit javax.accessibility.AccessibleContext getAccessibleContext()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.swing.text.html.HTMLEditorKit javax.swing.Action[] getActions()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.text.html.HTMLEditorKit javax.swing.text.Document createDefaultDocument()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2360,6 +2336,12 @@
     </annotation>
   </item>
   <item name="javax.swing.text.html.HTMLEditorKit javax.swing.text.html.HTMLEditorKit.Parser ensureParser(javax.swing.text.html.HTMLDocument) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.text.html.HTMLEditorKit javax.swing.text.html.HTMLEditorKit.Parser ensureParser(javax.swing.text.html.HTMLDocument)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.text.html.HTMLEditorKit javax.swing.text.html.StyleSheet getStyleSheet()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.HTMLEditorKit void createInputAttributes(javax.swing.text.Element, javax.swing.text.MutableAttributeSet) 0">
@@ -2471,9 +2453,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.HTMLEditorKit.HTMLFactory.BodyBlockView javax.swing.SizeRequirements calculateMajorAxisRequirements(int, javax.swing.SizeRequirements)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.HTMLEditorKit.HTMLFactory.BodyBlockView void componentHidden(java.awt.event.ComponentEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2520,7 +2500,13 @@
   <item name="javax.swing.text.html.HTMLEditorKit.HTMLTextAction javax.swing.text.Element[] getElementsAt(javax.swing.text.Element, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.swing.text.html.HTMLEditorKit.HTMLTextAction javax.swing.text.Element[] getElementsAt(javax.swing.text.Element, int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.text.html.HTMLEditorKit.HTMLTextAction javax.swing.text.Element[] getElementsAt(javax.swing.text.html.HTMLDocument, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.text.html.HTMLEditorKit.HTMLTextAction javax.swing.text.Element[] getElementsAt(javax.swing.text.html.HTMLDocument, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.HTMLEditorKit.HTMLTextAction javax.swing.text.html.HTMLDocument getHTMLDocument(javax.swing.JEditorPane) 0">
@@ -2543,7 +2529,7 @@
   </item>
   <item name="javax.swing.text.html.HTMLEditorKit.LinkController boolean doesElementContainLocation(javax.swing.JEditorPane, javax.swing.text.Element, int, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_,_,_-&gt;true;null,_,_,_,_-&gt;true&quot;"/>
+      <val val="&quot;_,null,_,_,_-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="javax.swing.text.html.HTMLEditorKit.LinkController java.lang.String getMapHREF(javax.swing.JEditorPane, javax.swing.text.html.HTMLDocument, javax.swing.text.Element, javax.swing.text.AttributeSet, int, int, int) 2">
@@ -2553,9 +2539,6 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.HTMLEditorKit.LinkController java.lang.String getMapHREF(javax.swing.JEditorPane, javax.swing.text.html.HTMLDocument, javax.swing.text.Element, javax.swing.text.AttributeSet, int, int, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_,_,_,_,_-&gt;null;null,_,_,_,_,_,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.HTMLEditorKit.LinkController javax.swing.event.HyperlinkEvent createHyperlinkEvent(javax.swing.JEditorPane, javax.swing.text.html.HTMLDocument, java.lang.String, javax.swing.text.AttributeSet, javax.swing.text.Element, java.awt.event.MouseEvent) 0">
@@ -2750,9 +2733,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.HTMLWriter javax.swing.text.AttributeSet convertToHTML(javax.swing.text.AttributeSet, javax.swing.text.MutableAttributeSet)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.HTMLWriter void addAttribute(javax.swing.text.MutableAttributeSet, java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2808,6 +2789,9 @@
     </annotation>
   </item>
   <item name="javax.swing.text.html.HiddenTagView java.awt.Component createComponent()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.text.html.HiddenTagView java.lang.String getRepresentedText()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.HiddenTagView javax.swing.text.JTextComponent getTextComponent()">
@@ -2964,9 +2948,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.ImageView java.awt.Shape modelToView(int, java.awt.Shape, javax.swing.text.Position.Bias)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.ImageView java.lang.String getToolTipText(float, float, java.awt.Shape) 2">
@@ -3145,7 +3126,12 @@
   </item>
   <item name="javax.swing.text.html.MinimalHTMLWriter java.lang.String addStyleName(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="javax.swing.text.html.MinimalHTMLWriter java.lang.String mapStyleName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="javax.swing.text.html.MinimalHTMLWriter void setFontMask(javax.swing.text.AttributeSet) 0">
@@ -3206,6 +3192,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.MuxingAttributeSet java.util.Enumeration getAttributeNames()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.text.html.MuxingAttributeSet javax.swing.text.AttributeSet copyAttributes()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.MuxingAttributeSet javax.swing.text.AttributeSet getResolveParent()">
@@ -3298,6 +3287,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="javax.swing.text.html.OptionListModel java.lang.Object clone()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.text.html.OptionListModel java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3312,16 +3304,14 @@
   <item name="javax.swing.text.html.ParagraphView javax.swing.SizeRequirements calculateMinorAxisRequirements(int, javax.swing.SizeRequirements) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.swing.text.html.ParagraphView javax.swing.SizeRequirements calculateMinorAxisRequirements(int, javax.swing.SizeRequirements)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.text.html.ParagraphView void paint(java.awt.Graphics, java.awt.Shape) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.ResourceLoader java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.swing.text.html.StyleSheet boolean addCSSAttributeFromHTML(javax.swing.text.MutableAttributeSet, javax.swing.text.html.CSS.Attribute, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="javax.swing.text.html.StyleSheet boolean isW3CLengthUnits()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -3360,9 +3350,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.StyleSheet java.lang.String cleanSelectorString(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.StyleSheet java.lang.String[] getSimpleSelectors(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3410,6 +3398,9 @@
       <val val="&quot;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="javax.swing.text.html.StyleSheet javax.swing.text.AttributeSet translateHTMLToCSS(javax.swing.text.AttributeSet)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.text.html.StyleSheet javax.swing.text.MutableAttributeSet createLargeAttributeSet(javax.swing.text.AttributeSet)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3443,10 +3434,19 @@
   <item name="javax.swing.text.html.StyleSheet javax.swing.text.Style getLinkedStyle(javax.swing.text.Style) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.swing.text.html.StyleSheet javax.swing.text.Style getResolvedStyle(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.text.html.StyleSheet javax.swing.text.Style getResolvedStyle(java.lang.String, java.util.Vector, javax.swing.text.html.HTML.Tag)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.text.html.StyleSheet javax.swing.text.Style getRule(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.StyleSheet javax.swing.text.Style getRule(javax.swing.text.html.HTML.Tag, javax.swing.text.Element) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.text.html.StyleSheet javax.swing.text.Style getRule(javax.swing.text.html.HTML.Tag, javax.swing.text.Element)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.StyleSheet javax.swing.text.StyleContext.SmallAttributeSet createSmallAttributeSet(javax.swing.text.AttributeSet) 0">
@@ -3570,6 +3570,9 @@
   <item name="javax.swing.text.html.StyleSheet.ListPainter java.lang.String formatAlphaNumerals(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.swing.text.html.StyleSheet.ListPainter java.lang.String formatRomanDigit(int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.text.html.StyleSheet.ListPainter javax.swing.text.html.CSS.Value getChildType(javax.swing.text.View) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3590,11 +3593,6 @@
   </item>
   <item name="javax.swing.text.html.StyleSheet.ResolvedStyle boolean matches(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="javax.swing.text.html.StyleSheet.ResolvedStyle boolean matches(java.lang.String, int, int, int, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_,_,_-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="javax.swing.text.html.StyleSheet.ResolvedStyle int boundedIndexOf(java.lang.String, char, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3707,11 +3705,6 @@
   <item name="javax.swing.text.html.StyleSheet.SmallConversionSet SmallConversionSet(javax.swing.text.html.StyleSheet, javax.swing.text.AttributeSet) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.swing.text.html.StyleSheet.SmallConversionSet boolean isDefined(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.swing.text.html.StyleSheet.ViewAttributeSet ViewAttributeSet(javax.swing.text.html.StyleSheet, javax.swing.text.View) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3778,17 +3771,13 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.TableView javax.swing.SizeRequirements calculateMajorAxisRequirements(int, javax.swing.SizeRequirements)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.TableView javax.swing.SizeRequirements calculateMinorAxisRequirements(int, javax.swing.SizeRequirements) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.TableView javax.swing.SizeRequirements calculateMinorAxisRequirements(int, javax.swing.SizeRequirements)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.TableView javax.swing.text.View create(javax.swing.text.Element) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3854,12 +3843,13 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.TableView.CellView javax.swing.SizeRequirements calculateMajorAxisRequirements(int, javax.swing.SizeRequirements)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.TableView.CellView javax.swing.SizeRequirements calculateMinorAxisRequirements(int, javax.swing.SizeRequirements) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.swing.text.html.TableView.CellView javax.swing.SizeRequirements calculateMinorAxisRequirements(int, javax.swing.SizeRequirements)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.TableView.CellView void layoutMajorAxis(int, int, int[], int[]) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3949,9 +3939,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.html.TableView.RowView javax.swing.SizeRequirements calculateMinorAxisRequirements(int, javax.swing.SizeRequirements)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null;_,null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.html.TableView.RowView javax.swing.text.AttributeSet getAttributes()">
     <annotation name="org.jetbrains.annotations.Contract">

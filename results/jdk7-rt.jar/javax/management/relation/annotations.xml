@@ -99,7 +99,7 @@
   </item>
   <item name="javax.management.relation.RelationNotification java.util.ArrayList&lt;javax.management.ObjectName&gt; safeGetObjectNameList(java.util.List&lt;javax.management.ObjectName&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -179,6 +179,9 @@
   <item name="javax.management.relation.RelationService java.lang.Object getRelation(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.relation.RelationService java.lang.Object getRelation(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.management.relation.RelationService java.lang.String getRelationTypeName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -212,7 +215,13 @@
   <item name="javax.management.relation.RelationService java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt; findReferencingRelations(javax.management.ObjectName, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.relation.RelationService java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt; findReferencingRelations(javax.management.ObjectName, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.management.relation.RelationService java.util.Map&lt;javax.management.ObjectName,java.util.List&lt;java.lang.String&gt;&gt; findAssociatedMBeans(javax.management.ObjectName, java.lang.String, java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.relation.RelationService java.util.Map&lt;javax.management.ObjectName,java.util.List&lt;java.lang.String&gt;&gt; findAssociatedMBeans(javax.management.ObjectName, java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.relation.RelationService java.util.Map&lt;javax.management.ObjectName,java.util.List&lt;java.lang.String&gt;&gt; getReferencedMBeans(java.lang.String) 0">
@@ -233,6 +242,9 @@
     </annotation>
   </item>
   <item name="javax.management.relation.RelationService javax.management.relation.RelationType getRelationType(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.relation.RelationService javax.management.relation.RelationType getRelationType(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.relation.RelationService javax.management.relation.RoleInfo getRoleInfo(java.lang.String, java.lang.String) 0">
@@ -430,6 +442,9 @@
   <item name="javax.management.relation.RelationSupport java.util.List&lt;javax.management.ObjectName&gt; getRole(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.relation.RelationSupport java.util.Map&lt;javax.management.ObjectName,java.util.List&lt;java.lang.String&gt;&gt; getReferencedMBeans()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.management.relation.RelationSupport javax.management.ObjectName getRelationServiceName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -542,6 +557,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.relation.RelationTypeSupport javax.management.relation.RoleInfo getRoleInfo(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.relation.RelationTypeSupport javax.management.relation.RoleInfo getRoleInfo(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.relation.RelationTypeSupport void addRoleInfo(javax.management.relation.RoleInfo) 0">
@@ -674,11 +692,6 @@
   <item name="javax.management.relation.RoleList RoleList(java.util.List&lt;javax.management.relation.Role&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.management.relation.RoleList boolean add(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;true;null-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.management.relation.RoleList boolean addAll(int, java.util.Collection&lt;?&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -690,11 +703,6 @@
   </item>
   <item name="javax.management.relation.RoleList boolean addAll(javax.management.relation.RoleList) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.management.relation.RoleList boolean addAll(javax.management.relation.RoleList)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;true&quot;"/>
-    </annotation>
   </item>
   <item name="javax.management.relation.RoleList boolean isTainted(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -785,11 +793,6 @@
   <item name="javax.management.relation.RoleUnresolvedList RoleUnresolvedList(java.util.List&lt;javax.management.relation.RoleUnresolved&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.management.relation.RoleUnresolvedList boolean add(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;true;null-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.management.relation.RoleUnresolvedList boolean addAll(int, java.util.Collection&lt;?&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -801,11 +804,6 @@
   </item>
   <item name="javax.management.relation.RoleUnresolvedList boolean addAll(javax.management.relation.RoleUnresolvedList) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.management.relation.RoleUnresolvedList boolean addAll(javax.management.relation.RoleUnresolvedList)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;true&quot;"/>
-    </annotation>
   </item>
   <item name="javax.management.relation.RoleUnresolvedList boolean isTainted(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

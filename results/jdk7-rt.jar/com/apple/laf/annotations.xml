@@ -13,11 +13,6 @@
   <item name="com.apple.laf.AquaBorder boolean isFocused(java.awt.Component) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.apple.laf.AquaBorder boolean isFocused(java.awt.Component)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="com.apple.laf.AquaBorder com.apple.laf.AquaBorder deriveBorderForSize(apple.laf.JRSUIConstants.Size)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -64,9 +59,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.apple.laf.AquaButtonBorder java.awt.Insets getBorderInsets(java.awt.Component)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaButtonBorder java.awt.Insets getContentInsets(javax.swing.AbstractButton, int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -206,6 +199,9 @@
       <val val="&quot;!null,_-&gt;!null&quot;"/>
     </annotation>
   </item>
+  <item name="com.apple.laf.AquaButtonExtendedTypes java.util.Map&lt;java.lang.String,com.apple.laf.AquaButtonExtendedTypes.TypeSpecifier&gt; getAllTypes()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.apple.laf.AquaButtonExtendedTypes javax.swing.border.Border getBorderForPosition(javax.swing.AbstractButton, java.lang.Object, java.lang.Object) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -216,6 +212,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="com.apple.laf.AquaButtonExtendedTypes.1 java.lang.Object getInstance()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.apple.laf.AquaButtonExtendedTypes.1 java.util.Map&lt;java.lang.String,com.apple.laf.AquaButtonExtendedTypes.TypeSpecifier&gt; getInstance()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaButtonExtendedTypes.6 void patchUp(com.apple.laf.AquaUtilControlSize.SizeDescriptor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -366,11 +368,6 @@
   </item>
   <item name="com.apple.laf.AquaButtonUI boolean setButtonType(javax.swing.AbstractButton, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="com.apple.laf.AquaButtonUI boolean setButtonType(javax.swing.AbstractButton, java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="com.apple.laf.AquaButtonUI boolean shouldInstallHierListener(javax.swing.AbstractButton) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -538,6 +535,9 @@
   <item name="com.apple.laf.AquaComboBoxButton void doRendererPaint(java.awt.Graphics, javax.swing.ButtonModel, boolean, java.awt.Insets, int, int, int, int) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.apple.laf.AquaComboBoxPopup java.awt.Dimension getBestPopupSizeForRowCount(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.apple.laf.AquaComboBoxPopup java.awt.Rectangle adjustPopupAndGetBounds()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -572,9 +572,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.apple.laf.AquaComboBoxRendererInternal java.awt.Insets getInsets(java.awt.Insets)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaComboBoxRendererInternal void paintBorder(java.awt.Graphics) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1425,11 +1423,6 @@
   <item name="com.apple.laf.AquaFileChooserUI boolean isSelectableForMode(javax.swing.JFileChooser, java.io.File) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.apple.laf.AquaFileChooserUI boolean isSelectableForMode(javax.swing.JFileChooser, java.io.File)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="com.apple.laf.AquaFileChooserUI com.apple.laf.AquaFileChooserUI.DirectoryComboBoxModel createDirectoryComboBoxModel(javax.swing.JFileChooser) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1493,9 +1486,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.apple.laf.AquaFileChooserUI java.io.File makeFile(javax.swing.JFileChooser, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null;null,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.apple.laf.AquaFileChooserUI java.lang.String getDialogTitle(javax.swing.JFileChooser) 0">
@@ -1720,18 +1710,8 @@
   <item name="com.apple.laf.AquaFileChooserUI.CustomFilePanel boolean inOpenDirectoryMode(javax.swing.JFileChooser, java.io.File) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.apple.laf.AquaFileChooserUI.CustomFilePanel boolean inOpenDirectoryMode(javax.swing.JFileChooser, java.io.File)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="com.apple.laf.AquaFileChooserUI.CustomFilePanel boolean isSelectableInList(javax.swing.JFileChooser, java.io.File) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="com.apple.laf.AquaFileChooserUI.CustomFilePanel boolean isSelectableInList(javax.swing.JFileChooser, java.io.File)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="com.apple.laf.AquaFileChooserUI.CustomFilePanel void installPanel(javax.swing.JFileChooser, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1790,11 +1770,6 @@
   </item>
   <item name="com.apple.laf.AquaFileChooserUI.FCSubpanel boolean isSelectableInList(javax.swing.JFileChooser, java.io.File) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="com.apple.laf.AquaFileChooserUI.FCSubpanel boolean isSelectableInList(javax.swing.JFileChooser, java.io.File)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="com.apple.laf.AquaFileChooserUI.FCSubpanel int getApproveButtonMnemonic(javax.swing.JFileChooser) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1940,18 +1915,8 @@
   <item name="com.apple.laf.AquaFileChooserUI.OpenFilePanel boolean inOpenDirectoryMode(javax.swing.JFileChooser, java.io.File) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.apple.laf.AquaFileChooserUI.OpenFilePanel boolean inOpenDirectoryMode(javax.swing.JFileChooser, java.io.File)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="com.apple.laf.AquaFileChooserUI.OpenFilePanel boolean isSelectableInList(javax.swing.JFileChooser, java.io.File) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="com.apple.laf.AquaFileChooserUI.OpenFilePanel boolean isSelectableInList(javax.swing.JFileChooser, java.io.File)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false;null,_-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="com.apple.laf.AquaFileChooserUI.OpenFilePanel int getApproveButtonMnemonic(javax.swing.JFileChooser) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2129,7 +2094,13 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="com.apple.laf.AquaFileView com.apple.laf.AquaFileView.FileInfo getFileInfoFor(java.io.File)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.apple.laf.AquaFileView java.io.File resolveAlias(java.io.File) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.apple.laf.AquaFileView java.io.File resolveAlias(java.io.File)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaFileView java.lang.Boolean isTraversable(java.io.File) 0">
@@ -2158,6 +2129,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaFileView java.util.LinkedList&lt;java.lang.String&gt; getPathComponents(java.io.File) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.apple.laf.AquaFileView java.util.LinkedList&lt;java.lang.String&gt; getPathComponents(java.io.File)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaFileView.1 1()">
@@ -2958,11 +2932,6 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="com.apple.laf.AquaInternalFramePaneUI.Dock java.awt.Component add(java.awt.Component)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
-    </annotation>
-  </item>
   <item name="com.apple.laf.AquaInternalFramePaneUI.Dock java.awt.Insets getBorderInsets(java.awt.Component) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -3025,6 +2994,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="com.apple.laf.AquaInternalFrameUI java.awt.Dimension getPreferredSize(javax.swing.JComponent)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaInternalFrameUI javax.swing.ActionMap createActionMap()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3732,11 +3704,6 @@
   <item name="com.apple.laf.AquaInternalFrameUI.6.1 void initIconPainter(com.apple.laf.AquaPainter&lt;apple.laf.JRSUIState&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.apple.laf.AquaInternalFrameUI.AquaBorderListener boolean didForwardEventInternal(java.awt.event.MouseEvent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="com.apple.laf.AquaInternalFrameUI.AquaBorderListener boolean isEventInWindowShadow(java.awt.Point) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3795,9 +3762,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.apple.laf.AquaInternalFrameUI.ResizeBox java.awt.Component getComponentToForwardTo(java.awt.event.MouseEvent, java.awt.Point)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.apple.laf.AquaInternalFrameUI.ResizeBox void componentHidden(java.awt.event.ComponentEvent) 0">
@@ -3916,6 +3880,9 @@
     </annotation>
   </item>
   <item name="com.apple.laf.AquaLabelUI java.awt.Color getDisabledLabelColor(javax.swing.JLabel) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.apple.laf.AquaLabelUI java.awt.Color getDisabledLabelColor(javax.swing.JLabel)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaLabelUI javax.swing.plaf.ComponentUI createUI(javax.swing.JComponent) 0">
@@ -4077,9 +4044,6 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaMenuBarUI java.awt.Dimension getPreferredSize(javax.swing.JComponent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.apple.laf.AquaMenuBarUI javax.swing.plaf.ComponentUI createUI(javax.swing.JComponent) 0">
@@ -4564,14 +4528,23 @@
   <item name="com.apple.laf.AquaProgressBarUI java.awt.Dimension getMaximumSize(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.apple.laf.AquaProgressBarUI java.awt.Dimension getMaximumSize(javax.swing.JComponent)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.apple.laf.AquaProgressBarUI java.awt.Dimension getMinimumSize(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.apple.laf.AquaProgressBarUI java.awt.Dimension getMinimumSize(javax.swing.JComponent)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaProgressBarUI java.awt.Dimension getPreferredHorizontalSize(java.awt.FontMetrics)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaProgressBarUI java.awt.Dimension getPreferredSize(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.apple.laf.AquaProgressBarUI java.awt.Dimension getPreferredSize(javax.swing.JComponent)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaProgressBarUI java.awt.Dimension getPreferredVerticalSize(java.awt.FontMetrics)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -5446,6 +5419,9 @@
   <item name="com.apple.laf.AquaSpinnerUI javax.swing.ActionMap createActionMap()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.apple.laf.AquaSpinnerUI javax.swing.ActionMap getActionMap()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.apple.laf.AquaSpinnerUI javax.swing.InputMap getInputMap(int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -5991,9 +5967,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaTabbedPaneCopyFromBasicUI java.awt.Rectangle getTabBounds(int, java.awt.Rectangle)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaTabbedPaneCopyFromBasicUI java.awt.Rectangle getTabBounds(javax.swing.JTabbedPane, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -6023,6 +5997,12 @@
     </annotation>
   </item>
   <item name="com.apple.laf.AquaTabbedPaneCopyFromBasicUI java.util.Vector access$1900(com.apple.laf.AquaTabbedPaneCopyFromBasicUI) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.apple.laf.AquaTabbedPaneCopyFromBasicUI java.util.Vector access$1900(com.apple.laf.AquaTabbedPaneCopyFromBasicUI)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.apple.laf.AquaTabbedPaneCopyFromBasicUI java.util.Vector&lt;javax.swing.text.View&gt; createHTMLVector()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaTabbedPaneCopyFromBasicUI javax.swing.InputMap getInputMap(int)">
@@ -6220,6 +6200,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaTabbedPaneCopyFromBasicUI.Handler void stateChanged(javax.swing.event.ChangeEvent) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.apple.laf.AquaTabbedPaneCopyFromBasicUI.LazyActionMap javax.swing.ActionMap getActionMap(java.lang.Class&lt;com.apple.laf.AquaTabbedPaneCopyFromBasicUI&gt;, java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaTabbedPaneCopyFromBasicUI.LazyActionMap void installLazyActionMap(javax.swing.JComponent, java.lang.Class&lt;com.apple.laf.AquaTabbedPaneCopyFromBasicUI&gt;, java.lang.String) 0">
@@ -6602,9 +6585,6 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaTableHeaderUI com.apple.laf.AquaTableHeaderBorder getAquaBorderFrom(javax.swing.table.JTableHeader, javax.swing.table.TableColumn)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.apple.laf.AquaTableHeaderUI java.awt.Dimension createHeaderSizeAqua(long)">
@@ -6657,7 +6637,7 @@
   </item>
   <item name="com.apple.laf.AquaTableHeaderUI javax.swing.table.TableColumn getTableColumn(javax.swing.table.JTableHeader, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null;null,_-&gt;null&quot;"/>
+      <val val="&quot;_,null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -7090,9 +7070,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaToolBarUI.ToolBarBorder java.awt.Insets getBorderInsets(java.awt.Component, java.awt.Insets)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaToolBarUI.ToolBarBorder void fillHandle(java.awt.Graphics, int, int, int, int, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -7122,12 +7100,10 @@
   <item name="com.apple.laf.AquaTreeUI boolean isToggleSelectionEvent(java.awt.event.MouseEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.apple.laf.AquaTreeUI boolean isToggleSelectionEvent(java.awt.event.MouseEvent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="com.apple.laf.AquaTreeUI java.awt.Rectangle getPathArrowBounds(javax.swing.tree.TreePath) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.apple.laf.AquaTreeUI java.awt.Rectangle getPathArrowBounds(javax.swing.tree.TreePath)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaTreeUI java.awt.event.FocusListener createFocusListener()">
@@ -7394,9 +7370,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.apple.laf.AquaTreeUI javax.swing.tree.TreePath getClosestPathForLocation(javax.swing.JTree, int, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.apple.laf.AquaTreeUI void access$1600(com.apple.laf.AquaTreeUI, javax.swing.tree.TreePath) 0">
@@ -7580,9 +7553,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.apple.laf.AquaUtilControlSize.SizeVariant java.awt.Insets generateInsets(java.awt.Insets, int, int, int, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_,_-&gt;!null;null,_,_,_,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.AquaUtilControlSize.SizeVariant java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -7781,11 +7752,6 @@
   <item name="com.apple.laf.ImageCache.PixelCountSoftReference boolean equals(java.awt.GraphicsConfiguration, int, int, int, apple.laf.JRSUIState) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.apple.laf.ImageCache.PixelCountSoftReference boolean equals(java.awt.GraphicsConfiguration, int, int, int, apple.laf.JRSUIState)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,_,null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="com.apple.laf.ScreenMenu ScreenMenu(javax.swing.JMenu) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -7912,13 +7878,14 @@
   <item name="com.apple.laf.ScreenMenuBar com.apple.laf.ScreenMenu addSubmenu(javax.swing.JMenu) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.apple.laf.ScreenMenuBar com.apple.laf.ScreenMenu addSubmenu(javax.swing.JMenu)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.apple.laf.ScreenMenuBar java.awt.Menu add(java.awt.Menu, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.ScreenMenuBar java.awt.Menu add(java.awt.Menu, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.apple.laf.ScreenMenuBar void componentAdded(java.awt.event.ContainerEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

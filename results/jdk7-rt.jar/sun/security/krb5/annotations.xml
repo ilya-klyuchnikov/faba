@@ -70,6 +70,9 @@
   <item name="sun.security.krb5.Config java.lang.String checkRealm(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.krb5.Config java.lang.String find(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.krb5.Config java.lang.String findMacosConfigFile()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -80,9 +83,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.security.krb5.Config java.lang.String getDefault(java.lang.String, java.util.Hashtable)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.security.krb5.Config java.lang.String getJavaFileName()">
@@ -94,6 +94,12 @@
   <item name="sun.security.krb5.Config java.lang.String getKDCFromDNS(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.krb5.Config java.lang.String getNativeFileName()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.Config java.lang.String getRealmFromDNS()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.krb5.Config java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -104,6 +110,18 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.krb5.Config java.util.Hashtable&lt;java.lang.String,java.lang.Object&gt; parseStanzaTable(java.util.Vector&lt;java.lang.String&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.Config java.util.Hashtable&lt;java.lang.String,java.lang.Object&gt; parseStanzaTable(java.util.Vector&lt;java.lang.String&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.Config java.util.Hashtable&lt;java.lang.String,java.lang.String&gt; parseField(java.util.Vector&lt;java.lang.String&gt;, int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.Config java.util.Hashtable&lt;java.lang.String,java.util.Hashtable&lt;java.lang.String,java.util.Vector&lt;java.lang.String&gt;&gt;&gt; parseRealmField(java.util.Vector&lt;java.lang.String&gt;, int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.Config java.util.Hashtable&lt;java.lang.String,java.util.Vector&lt;java.lang.String&gt;&gt; parseRealmFieldEx(java.util.Vector&lt;java.lang.String&gt;, int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.krb5.Config java.util.Vector&lt;java.lang.String&gt; loadConfigFile(java.lang.String) 0">
@@ -415,6 +433,9 @@
   <item name="sun.security.krb5.EncryptionKey sun.security.krb5.EncryptionKey parse(sun.security.util.DerInputStream, byte, boolean)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.krb5.EncryptionKey sun.security.krb5.EncryptionKey[] acquireSecretKeys(char[], java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.krb5.EncryptionKey sun.security.krb5.EncryptionKey[] acquireSecretKeys(sun.security.krb5.PrincipalName, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -434,7 +455,7 @@
   </item>
   <item name="sun.security.krb5.KdcComm byte[] send(byte[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -443,7 +464,7 @@
   </item>
   <item name="sun.security.krb5.KdcComm byte[] send(byte[], boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -452,7 +473,7 @@
   </item>
   <item name="sun.security.krb5.KdcComm byte[] send(byte[], java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_-&gt;null;null,_,_-&gt;null&quot;"/>
+      <val val="&quot;null,_,_-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -686,6 +707,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.krb5.KrbAsReqBuilder KrbAsReqBuilder(sun.security.krb5.PrincipalName, javax.security.auth.kerberos.KeyTab) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.KrbAsReqBuilder sun.security.krb5.EncryptionKey[] getKeys(boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.krb5.KrbAsReqBuilder sun.security.krb5.KrbAsReq build(sun.security.krb5.EncryptionKey)">
@@ -1008,17 +1032,15 @@
   <item name="sun.security.krb5.PrincipalName boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.security.krb5.PrincipalName boolean equals(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.security.krb5.PrincipalName boolean equalsWithoutRealm(sun.security.krb5.PrincipalName)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;null-&gt;true&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="sun.security.krb5.PrincipalName boolean match(sun.security.krb5.PrincipalName) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.PrincipalName byte[][] toByteArray()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.krb5.PrincipalName int getNameType()">
@@ -1103,6 +1125,9 @@
   <item name="sun.security.krb5.Realm java.lang.String parseRealm(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.Realm java.lang.String parseRealm(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.krb5.Realm java.lang.String parseRealmAtSeparator(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1138,6 +1163,9 @@
   <item name="sun.security.krb5.Realm java.lang.String[] getRealmsList(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.Realm java.lang.String[] getRealmsList(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.krb5.Realm java.lang.String[] parseCapaths(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1145,6 +1173,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.krb5.Realm java.lang.String[] parseHierarchy(java.lang.String, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.Realm java.lang.String[] parseHierarchy(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.krb5.Realm sun.security.krb5.Realm parse(sun.security.util.DerInputStream, byte, boolean) 0">
@@ -1164,7 +1195,16 @@
   <item name="sun.security.krb5.SCDynamicStoreConfig java.util.Hashtable&lt;java.lang.String,java.lang.Object&gt; convertRealmConfigs(java.util.Hashtable&lt;java.lang.String,?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.krb5.SCDynamicStoreConfig java.util.Hashtable&lt;java.lang.String,java.lang.Object&gt; convertRealmConfigs(java.util.Hashtable&lt;java.lang.String,?&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.SCDynamicStoreConfig java.util.Hashtable&lt;java.lang.String,java.lang.Object&gt; getConfig()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.krb5.SCDynamicStoreConfig java.util.Vector&lt;java.lang.String&gt; unwrapHost(java.util.Collection&lt;java.util.Hashtable&lt;java.lang.String,java.lang.String&gt;&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.krb5.SCDynamicStoreConfig java.util.Vector&lt;java.lang.String&gt; unwrapHost(java.util.Collection&lt;java.util.Hashtable&lt;java.lang.String,java.lang.String&gt;&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.krb5.ServiceName ServiceName(java.lang.String) 0">

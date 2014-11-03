@@ -21,11 +21,6 @@
   <item name="sun.java2d.CRenderer boolean copyImage(sun.java2d.SunGraphics2D, java.awt.Image, int, int, java.awt.Color) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.java2d.CRenderer boolean copyImage(sun.java2d.SunGraphics2D, java.awt.Image, int, int, java.awt.Color)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_,_,_-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.java2d.CRenderer boolean copyImage(sun.java2d.SunGraphics2D, java.awt.Image, int, int, java.awt.Color, java.awt.image.ImageObserver) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -102,7 +97,7 @@
   </item>
   <item name="sun.java2d.CompositeCRenderer boolean blitImage(sun.java2d.SunGraphics2D, java.awt.Image, boolean, boolean, int, int, int, int, int, int, int, int, java.awt.Color)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_,_,_,_,_,_,_,_,_,_-&gt;true;_,!null,_,_,_,_,_,_,_,_,_,_,_-&gt;true;_,_,_,_,_,_,_,_,_,_,_,_,!null-&gt;true;_,_,_,_,_,_,_,_,_,_,_,_,null-&gt;true;_,null,_,_,_,_,_,_,_,_,_,_,_-&gt;true&quot;"/>
+      <val val="&quot;!null,_,_,_,_,_,_,_,_,_,_,_,_-&gt;true;_,!null,_,_,_,_,_,_,_,_,_,_,_-&gt;true;_,_,_,_,_,_,_,_,_,_,_,_,!null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.java2d.CompositeCRenderer java.awt.geom.Rectangle2D padBounds(sun.java2d.SunGraphics2D, java.awt.Shape) 0">
@@ -110,6 +105,9 @@
   </item>
   <item name="sun.java2d.CompositeCRenderer java.awt.geom.Rectangle2D padBounds(sun.java2d.SunGraphics2D, java.awt.Shape) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.java2d.CompositeCRenderer java.awt.geom.Rectangle2D padBounds(sun.java2d.SunGraphics2D, java.awt.Shape)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.CompositeCRenderer java.awt.image.BufferedImage getSurfacePixels(sun.java2d.SunGraphics2D, sun.java2d.OSXSurfaceData, int, int, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -331,9 +329,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.java2d.OSXOffScreenSurfaceData java.awt.image.BufferedImage copyArea(sun.java2d.SunGraphics2D, int, int, int, int, java.awt.image.BufferedImage)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,_,_,!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.OSXOffScreenSurfaceData java.lang.Object getLockObject()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -344,6 +340,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.OSXOffScreenSurfaceData sun.java2d.SurfaceData createData(java.awt.image.BufferedImage) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.OSXOffScreenSurfaceData sun.java2d.SurfaceData createData(java.awt.image.BufferedImage)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.OSXOffScreenSurfaceData sun.java2d.SurfaceData createData(java.awt.image.Raster, java.awt.image.ColorModel) 0">
@@ -794,17 +793,10 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.SunGraphics2D java.awt.Rectangle getClipBounds(java.awt.Rectangle)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.SunGraphics2D java.awt.Rectangle getImageRegion(java.awt.image.RenderedImage, sun.java2d.pipe.Region, java.awt.geom.AffineTransform, java.awt.geom.AffineTransform, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="sun.java2d.SunGraphics2D java.awt.Rectangle getImageRegion(java.awt.image.RenderedImage, sun.java2d.pipe.Region, java.awt.geom.AffineTransform, java.awt.geom.AffineTransform, int, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,_,null,_,_-&gt;!null;_,_,null,_,_,_-&gt;!null;_,null,_,_,_,_-&gt;!null&quot;"/>
-    </annotation>
   </item>
   <item name="sun.java2d.SunGraphics2D java.awt.Rectangle transformBounds(java.awt.Rectangle, java.awt.geom.AffineTransform) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -865,7 +857,7 @@
   </item>
   <item name="sun.java2d.SunGraphics2D java.awt.Shape transformShape(java.awt.geom.AffineTransform, java.awt.Shape)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null;null,_-&gt;null&quot;"/>
+      <val val="&quot;_,null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -920,9 +912,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.java2d.SunGraphics2D sun.java2d.loops.FontInfo checkFontInfo(sun.java2d.loops.FontInfo, java.awt.Font, java.awt.font.FontRenderContext)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.SunGraphics2D void addRenderingHints(java.util.Map&lt;?,?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1026,7 +1016,13 @@
   <item name="sun.java2d.SunGraphicsEnvironment java.awt.Graphics2D createGraphics(java.awt.image.BufferedImage)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.SunGraphicsEnvironment java.awt.GraphicsDevice[] getScreenDevices()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.java2d.SunGraphicsEnvironment java.awt.Rectangle getUsableBounds(java.awt.GraphicsDevice) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.SunGraphicsEnvironment java.awt.Rectangle getUsableBounds(java.awt.GraphicsDevice)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.SunGraphicsEnvironment.1 java.lang.Object run()">
@@ -1126,6 +1122,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.SurfaceData sun.java2d.loops.RenderLoops getRenderLoops(sun.java2d.SunGraphics2D) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.SurfaceData sun.java2d.loops.RenderLoops getRenderLoops(sun.java2d.SunGraphics2D)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.SurfaceData sun.java2d.loops.RenderLoops makeRenderLoops(sun.java2d.loops.SurfaceType, sun.java2d.loops.CompositeType, sun.java2d.loops.SurfaceType)">

@@ -73,11 +73,6 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
-  <item name="sun.security.util.BigInt boolean equals(sun.security.util.BigInt)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.security.util.BigInt java.lang.String hexify()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -103,6 +98,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="sun.security.util.BitArray boolean[] toBooleanArray()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.util.BitArray int hashCode()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -295,16 +293,6 @@
   <item name="sun.security.util.DerInputBuffer boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.security.util.DerInputBuffer boolean equals(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
-  <item name="sun.security.util.DerInputBuffer boolean equals(sun.security.util.DerInputBuffer)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.security.util.DerInputBuffer byte[] getBitString(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -325,6 +313,9 @@
   </item>
   <item name="sun.security.util.DerInputBuffer sun.security.util.BitArray getUnalignedBitString()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.util.DerInputBuffer sun.security.util.DerInputBuffer dup()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.util.DerInputStream DerInputStream(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -372,6 +363,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.util.DerInputStream sun.security.util.DerValue getDerValue()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.util.DerInputStream sun.security.util.DerValue[] readVector(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.util.DerInputStream sun.security.util.ObjectIdentifier getOID()">
@@ -487,16 +481,6 @@
   </item>
   <item name="sun.security.util.DerValue boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="sun.security.util.DerValue boolean equals(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
-  <item name="sun.security.util.DerValue boolean equals(sun.security.util.DerValue)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;true&quot;"/>
-    </annotation>
   </item>
   <item name="sun.security.util.DerValue boolean isApplication()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -650,9 +634,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.security.util.DisabledAlgorithmConstraints java.util.Set&lt;java.lang.String&gt; decomposes(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.util.DisabledAlgorithmConstraints.KeySizeConstraint KeySizeConstraint(sun.security.util.DisabledAlgorithmConstraints.KeySizeConstraint.Operator, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -808,6 +790,9 @@
   <item name="sun.security.util.MemoryCache java.lang.Object get(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.util.MemoryCache java.util.Map&lt;java.lang.Object,java.lang.Object&gt; getCachedEntries()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.util.MemoryCache sun.security.util.MemoryCache.CacheEntry newEntry(java.lang.Object, java.lang.Object, long, java.lang.ref.ReferenceQueue) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -932,6 +917,9 @@
   <item name="sun.security.util.ObjectIdentifier int[] toIntArray()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.util.ObjectIdentifier java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.util.ObjectIdentifier sun.security.util.ObjectIdentifier newInternal(int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -992,6 +980,11 @@
   <item name="sun.security.util.PathList java.lang.String appendPath(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.util.PathList java.lang.String appendPath(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.security.util.PathList java.net.URL fileToURL(java.io.File) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -999,6 +992,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.util.PathList java.net.URL[] pathToURLs(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.util.PathList java.net.URL[] pathToURLs(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.util.PolicyUtil PolicyUtil()">
@@ -1184,11 +1180,6 @@
   <item name="sun.security.util.SignatureFileVerifier boolean isBlockOrSF(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
-    </annotation>
-  </item>
-  <item name="sun.security.util.SignatureFileVerifier boolean isSubSet(java.security.CodeSigner[], java.security.CodeSigner[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.security.util.SignatureFileVerifier boolean matches(java.security.CodeSigner[], java.security.CodeSigner[], java.security.CodeSigner[]) 1">

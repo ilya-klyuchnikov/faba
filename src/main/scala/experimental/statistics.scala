@@ -72,7 +72,6 @@ object Statistics extends FabaProcessor {
     visited += key
     while (queue.nonEmpty) {
       val k = queue.dequeue()
-      // todo - more fine-grained handling of stable/unstable keys
       val deps = dependencies.getOrElse(k.mkStable, Set()) ++ dependencies.getOrElse(k.mkUnstable, Set())
       for (dk <- deps if !visited(dk)) {
         visited += dk

@@ -8,9 +8,6 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.AbstractExecutorService T invokeAny(java.util.Collection&lt;? extends java.util.concurrent.Callable&lt;T&gt;&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.concurrent.AbstractExecutorService T invokeAny(java.util.Collection&lt;? extends java.util.concurrent.Callable&lt;T&gt;&gt;, long, java.util.concurrent.TimeUnit) 0">
@@ -22,10 +19,16 @@
   <item name="java.util.concurrent.AbstractExecutorService java.util.List&lt;java.util.concurrent.Future&lt;T&gt;&gt; invokeAll(java.util.Collection&lt;? extends java.util.concurrent.Callable&lt;T&gt;&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.AbstractExecutorService java.util.List&lt;java.util.concurrent.Future&lt;T&gt;&gt; invokeAll(java.util.Collection&lt;? extends java.util.concurrent.Callable&lt;T&gt;&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.AbstractExecutorService java.util.List&lt;java.util.concurrent.Future&lt;T&gt;&gt; invokeAll(java.util.Collection&lt;? extends java.util.concurrent.Callable&lt;T&gt;&gt;, long, java.util.concurrent.TimeUnit) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.AbstractExecutorService java.util.List&lt;java.util.concurrent.Future&lt;T&gt;&gt; invokeAll(java.util.Collection&lt;? extends java.util.concurrent.Callable&lt;T&gt;&gt;, long, java.util.concurrent.TimeUnit) 2">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.AbstractExecutorService java.util.List&lt;java.util.concurrent.Future&lt;T&gt;&gt; invokeAll(java.util.Collection&lt;? extends java.util.concurrent.Callable&lt;T&gt;&gt;, long, java.util.concurrent.TimeUnit)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.AbstractExecutorService java.util.concurrent.Future&lt;?&gt; submit(java.lang.Runnable) 0">
@@ -79,16 +82,11 @@
   </item>
   <item name="java.util.concurrent.ArrayBlockingQueue boolean add(E)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;true;null-&gt;true&quot;"/>
+      <val val="&quot;!null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="java.util.concurrent.ArrayBlockingQueue boolean contains(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="java.util.concurrent.ArrayBlockingQueue boolean contains(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="java.util.concurrent.ArrayBlockingQueue boolean offer(E) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -101,11 +99,6 @@
   </item>
   <item name="java.util.concurrent.ArrayBlockingQueue boolean remove(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="java.util.concurrent.ArrayBlockingQueue boolean remove(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="java.util.concurrent.ArrayBlockingQueue int dec(int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -122,6 +115,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="java.util.concurrent.ArrayBlockingQueue java.lang.Object[] toArray()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ArrayBlockingQueue java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -197,11 +193,6 @@
   <item name="java.util.concurrent.ConcurrentHashMap boolean remove(java.lang.Object, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.util.concurrent.ConcurrentHashMap boolean remove(java.lang.Object, java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.util.concurrent.ConcurrentHashMap boolean replace(K, V, V) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -214,10 +205,19 @@
   <item name="java.util.concurrent.ConcurrentHashMap int hash(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.ConcurrentHashMap java.util.Collection&lt;V&gt; values()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.ConcurrentHashMap java.util.Enumeration&lt;K&gt; keys()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ConcurrentHashMap java.util.Enumeration&lt;V&gt; elements()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ConcurrentHashMap java.util.Set&lt;K&gt; keySet()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ConcurrentHashMap java.util.Set&lt;java.util.Map.Entry&lt;K,V&gt;&gt; entrySet()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ConcurrentHashMap java.util.concurrent.ConcurrentHashMap.HashEntry&lt;K,V&gt; entryAt(java.util.concurrent.ConcurrentHashMap.HashEntry&lt;K,V&gt;[], int) 0">
@@ -237,6 +237,9 @@
       <val val="&quot;null,_-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.concurrent.ConcurrentHashMap java.util.concurrent.ConcurrentHashMap.Segment&lt;K,V&gt; ensureSegment(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ConcurrentHashMap java.util.concurrent.ConcurrentHashMap.Segment&lt;K,V&gt; segmentAt(java.util.concurrent.ConcurrentHashMap.Segment&lt;K,V&gt;[], int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -297,6 +300,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="java.util.concurrent.ConcurrentHashMap.HashIterator java.util.concurrent.ConcurrentHashMap.HashEntry&lt;K,V&gt; nextEntry()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.ConcurrentHashMap.Holder Holder()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -332,6 +338,12 @@
   <item name="java.util.concurrent.ConcurrentLinkedDeque ConcurrentLinkedDeque(java.util.Collection&lt;? extends E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.ConcurrentLinkedDeque E getFirst()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ConcurrentLinkedDeque E getLast()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.ConcurrentLinkedDeque E peek()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -350,24 +362,23 @@
   <item name="java.util.concurrent.ConcurrentLinkedDeque E pollLast()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.concurrent.ConcurrentLinkedDeque E removeFirst()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ConcurrentLinkedDeque E removeLast()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.ConcurrentLinkedDeque E screenNullResult(E) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ConcurrentLinkedDeque E screenNullResult(E)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ConcurrentLinkedDeque boolean addAll(java.util.Collection&lt;? extends E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ConcurrentLinkedDeque boolean contains(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="java.util.concurrent.ConcurrentLinkedDeque boolean contains(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="java.util.concurrent.ConcurrentLinkedDeque boolean offerFirst(E) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -388,23 +399,22 @@
   <item name="java.util.concurrent.ConcurrentLinkedDeque boolean removeFirstOccurrence(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.util.concurrent.ConcurrentLinkedDeque boolean removeFirstOccurrence(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.util.concurrent.ConcurrentLinkedDeque boolean removeLastOccurrence(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.util.concurrent.ConcurrentLinkedDeque boolean removeLastOccurrence(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
+  <item name="java.util.concurrent.ConcurrentLinkedDeque java.util.ArrayList&lt;E&gt; toArrayList()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ConcurrentLinkedDeque java.util.Iterator&lt;E&gt; descendingIterator()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ConcurrentLinkedDeque java.util.Iterator&lt;E&gt; iterator()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ConcurrentLinkedDeque java.util.concurrent.ConcurrentLinkedDeque.Node&lt;E&gt; first()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ConcurrentLinkedDeque java.util.concurrent.ConcurrentLinkedDeque.Node&lt;E&gt; last()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ConcurrentLinkedDeque java.util.concurrent.ConcurrentLinkedDeque.Node&lt;E&gt; nextTerminator()">
@@ -459,6 +469,9 @@
   <item name="java.util.concurrent.ConcurrentLinkedDeque void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.ConcurrentLinkedDeque.AbstractItr E next()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.ConcurrentLinkedDeque.AbstractItr boolean hasNext()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -493,26 +506,16 @@
   <item name="java.util.concurrent.ConcurrentLinkedQueue boolean contains(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.util.concurrent.ConcurrentLinkedQueue boolean contains(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.util.concurrent.ConcurrentLinkedQueue boolean offer(E) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ConcurrentLinkedQueue boolean offer(E)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;true;null-&gt;true&quot;"/>
+      <val val="&quot;!null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="java.util.concurrent.ConcurrentLinkedQueue boolean remove(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="java.util.concurrent.ConcurrentLinkedQueue boolean remove(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="java.util.concurrent.ConcurrentLinkedQueue java.util.Iterator&lt;E&gt; iterator()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -650,11 +653,6 @@
   <item name="java.util.concurrent.ConcurrentSkipListMap boolean remove(java.lang.Object, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.util.concurrent.ConcurrentSkipListMap boolean remove(java.lang.Object, java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.util.concurrent.ConcurrentSkipListMap boolean replace(K, V, V) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -680,6 +678,9 @@
   <item name="java.util.concurrent.ConcurrentSkipListMap java.util.AbstractMap.SimpleImmutableEntry&lt;K,V&gt; getNear(K, int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.concurrent.ConcurrentSkipListMap java.util.Collection&lt;V&gt; values()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.ConcurrentSkipListMap java.util.Comparator&lt;? super K&gt; comparator()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -695,6 +696,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ConcurrentSkipListMap java.util.List&lt;E&gt; toList(java.util.Collection&lt;E&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ConcurrentSkipListMap java.util.List&lt;E&gt; toList(java.util.Collection&lt;E&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ConcurrentSkipListMap java.util.Map.Entry&lt;K,V&gt; ceilingEntry(K)">
@@ -727,6 +731,18 @@
   <item name="java.util.concurrent.ConcurrentSkipListMap java.util.Map.Entry&lt;K,V&gt; pollLastEntry()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.concurrent.ConcurrentSkipListMap java.util.NavigableSet&lt;K&gt; keySet()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ConcurrentSkipListMap java.util.NavigableSet&lt;K&gt; navigableKeySet()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ConcurrentSkipListMap java.util.Set&lt;java.util.Map.Entry&lt;K,V&gt;&gt; entrySet()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ConcurrentSkipListMap java.util.concurrent.ConcurrentNavigableMap&lt;K,V&gt; descendingMap()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.ConcurrentSkipListMap java.util.concurrent.ConcurrentNavigableMap&lt;K,V&gt; headMap(K, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -748,6 +764,9 @@
   <item name="java.util.concurrent.ConcurrentSkipListMap java.util.concurrent.ConcurrentNavigableMap&lt;K,V&gt; tailMap(K, boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.ConcurrentSkipListMap java.util.concurrent.ConcurrentSkipListMap&lt;K,V&gt; clone()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.ConcurrentSkipListMap java.util.concurrent.ConcurrentSkipListMap.Node&lt;K,V&gt; findFirst()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -764,9 +783,6 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ConcurrentSkipListMap java.util.concurrent.ConcurrentSkipListMap.Node&lt;K,V&gt; findNode(java.lang.Comparable&lt;? super K&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.concurrent.ConcurrentSkipListMap java.util.concurrent.ConcurrentSkipListMap.Node&lt;K,V&gt; findPredecessor(java.lang.Comparable&lt;? super K&gt;) 0">
@@ -822,11 +838,6 @@
   </item>
   <item name="java.util.concurrent.ConcurrentSkipListMap.Index boolean link(java.util.concurrent.ConcurrentSkipListMap.Index&lt;K,V&gt;, java.util.concurrent.ConcurrentSkipListMap.Index&lt;K,V&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="java.util.concurrent.ConcurrentSkipListMap.Index boolean unlink(java.util.concurrent.ConcurrentSkipListMap.Index&lt;K,V&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="java.util.concurrent.ConcurrentSkipListMap.Iter Iter(java.util.concurrent.ConcurrentSkipListMap) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -964,6 +975,9 @@
   <item name="java.util.concurrent.ConcurrentSkipListMap.SubMap boolean replace(K, V, V) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.ConcurrentSkipListMap.SubMap java.util.Collection&lt;V&gt; values()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.ConcurrentSkipListMap.SubMap java.util.Iterator&lt;K&gt; keyIterator()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1034,6 +1048,21 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ConcurrentSkipListMap.SubMap java.util.NavigableMap tailMap(java.lang.Object, boolean)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ConcurrentSkipListMap.SubMap java.util.NavigableSet&lt;K&gt; descendingKeySet()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ConcurrentSkipListMap.SubMap java.util.NavigableSet&lt;K&gt; keySet()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ConcurrentSkipListMap.SubMap java.util.NavigableSet&lt;K&gt; navigableKeySet()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ConcurrentSkipListMap.SubMap java.util.Set keySet()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ConcurrentSkipListMap.SubMap java.util.Set&lt;java.util.Map.Entry&lt;K,V&gt;&gt; entrySet()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ConcurrentSkipListMap.SubMap java.util.SortedMap headMap(java.lang.Object) 0">
@@ -1220,6 +1249,9 @@
   <item name="java.util.concurrent.ConcurrentSkipListSet java.util.NavigableSet&lt;E&gt; tailSet(E, boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.ConcurrentSkipListSet java.util.concurrent.ConcurrentSkipListSet&lt;E&gt; clone()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.CopyOnWriteArrayList CopyOnWriteArrayList(E[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1244,7 +1276,7 @@
   </item>
   <item name="java.util.concurrent.CopyOnWriteArrayList boolean add(E)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;true;null-&gt;true&quot;"/>
+      <val val="&quot;!null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="java.util.concurrent.CopyOnWriteArrayList boolean addAll(int, java.util.Collection&lt;? extends E&gt;) 1">
@@ -1293,6 +1325,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="java.util.concurrent.CopyOnWriteArrayList java.lang.Object clone()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.CopyOnWriteArrayList java.lang.Object[] getArray()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1404,7 +1439,7 @@
   </item>
   <item name="java.util.concurrent.DelayQueue boolean offer(E)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;true;null-&gt;true&quot;"/>
+      <val val="&quot;!null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="java.util.concurrent.DelayQueue boolean offer(E, long, java.util.concurrent.TimeUnit) 2">
@@ -1463,18 +1498,19 @@
   <item name="java.util.concurrent.Exchanger boolean tryCancel(java.util.concurrent.Exchanger.Node, java.util.concurrent.Exchanger.Slot) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.util.concurrent.Exchanger boolean tryCancel(java.util.concurrent.Exchanger.Node, java.util.concurrent.Exchanger.Slot)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.util.concurrent.Exchanger java.lang.Object await(java.util.concurrent.Exchanger.Node, java.util.concurrent.Exchanger.Slot) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.Exchanger java.lang.Object await(java.util.concurrent.Exchanger.Node, java.util.concurrent.Exchanger.Slot)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.Exchanger java.lang.Object awaitNanos(java.util.concurrent.Exchanger.Node, java.util.concurrent.Exchanger.Slot, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.Exchanger java.lang.Object spinWait(java.util.concurrent.Exchanger.Node, java.util.concurrent.Exchanger.Slot) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.Exchanger java.lang.Object spinWait(java.util.concurrent.Exchanger.Node, java.util.concurrent.Exchanger.Slot)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.Exchanger.Slot Slot()">
@@ -1716,11 +1752,6 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="java.util.concurrent.ForkJoinPool boolean scan(java.util.concurrent.ForkJoinWorkerThread, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.util.concurrent.ForkJoinPool boolean tryAwaitWork(java.util.concurrent.ForkJoinWorkerThread, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1768,6 +1799,9 @@
   <item name="java.util.concurrent.ForkJoinPool java.util.List&lt;java.util.concurrent.Future&lt;T&gt;&gt; invokeAll(java.util.Collection&lt;? extends java.util.concurrent.Callable&lt;T&gt;&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.ForkJoinPool java.util.List&lt;java.util.concurrent.Future&lt;T&gt;&gt; invokeAll(java.util.Collection&lt;? extends java.util.concurrent.Callable&lt;T&gt;&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.ForkJoinPool java.util.concurrent.ForkJoinPool.ForkJoinWorkerThreadFactory getFactory()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1778,11 +1812,6 @@
   </item>
   <item name="java.util.concurrent.ForkJoinPool java.util.concurrent.ForkJoinTask&lt;?&gt; submit(java.lang.Runnable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="java.util.concurrent.ForkJoinPool java.util.concurrent.ForkJoinTask&lt;?&gt; submit(java.lang.Runnable)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
   </item>
   <item name="java.util.concurrent.ForkJoinPool java.util.concurrent.ForkJoinTask&lt;T&gt; submit(java.lang.Runnable, T) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1800,9 +1829,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ForkJoinPool java.util.concurrent.ForkJoinTask&lt;T&gt; submit(java.util.concurrent.ForkJoinTask&lt;T&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ForkJoinPool java.util.concurrent.RunnableFuture&lt;T&gt; newTaskFor(java.lang.Runnable, T) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1975,11 +2002,6 @@
   <item name="java.util.concurrent.ForkJoinWorkerThread ForkJoinWorkerThread(java.util.concurrent.ForkJoinPool) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.util.concurrent.ForkJoinWorkerThread boolean helpJoinTask(java.util.concurrent.ForkJoinTask&lt;?&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.util.concurrent.ForkJoinWorkerThread boolean localHelpJoinTask(java.util.concurrent.ForkJoinTask&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2057,6 +2079,12 @@
   <item name="java.util.concurrent.FutureTask void removeWaiter(java.util.concurrent.FutureTask.WaitNode) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.concurrent.LinkedBlockingDeque E getFirst()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.LinkedBlockingDeque E getLast()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.LinkedBlockingDeque E peek()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2090,6 +2118,18 @@
   <item name="java.util.concurrent.LinkedBlockingDeque E pollLast(long, java.util.concurrent.TimeUnit)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.concurrent.LinkedBlockingDeque E removeFirst()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.LinkedBlockingDeque E removeLast()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.LinkedBlockingDeque E takeFirst()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.LinkedBlockingDeque E takeLast()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.LinkedBlockingDeque E unlinkFirst()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2102,6 +2142,9 @@
   <item name="java.util.concurrent.LinkedBlockingDeque T[] toArray(T[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.LinkedBlockingDeque T[] toArray(T[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.LinkedBlockingDeque boolean add(E)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;true;null-&gt;true&quot;"/>
@@ -2109,21 +2152,6 @@
   </item>
   <item name="java.util.concurrent.LinkedBlockingDeque boolean contains(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="java.util.concurrent.LinkedBlockingDeque boolean contains(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
-  <item name="java.util.concurrent.LinkedBlockingDeque boolean linkFirst(java.util.concurrent.LinkedBlockingDeque.Node&lt;E&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
-  <item name="java.util.concurrent.LinkedBlockingDeque boolean linkLast(java.util.concurrent.LinkedBlockingDeque.Node&lt;E&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="java.util.concurrent.LinkedBlockingDeque boolean offerFirst(E) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2146,20 +2174,13 @@
   <item name="java.util.concurrent.LinkedBlockingDeque boolean removeFirstOccurrence(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.util.concurrent.LinkedBlockingDeque boolean removeFirstOccurrence(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.util.concurrent.LinkedBlockingDeque boolean removeLastOccurrence(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.util.concurrent.LinkedBlockingDeque boolean removeLastOccurrence(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.util.concurrent.LinkedBlockingDeque int drainTo(java.util.Collection&lt;? super E&gt;, int) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.LinkedBlockingDeque java.lang.Object[] toArray()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.LinkedBlockingDeque java.lang.String toString()">
@@ -2259,13 +2280,11 @@
   <item name="java.util.concurrent.LinkedBlockingQueue T[] toArray(T[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.LinkedBlockingQueue T[] toArray(T[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.LinkedBlockingQueue boolean contains(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="java.util.concurrent.LinkedBlockingQueue boolean contains(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="java.util.concurrent.LinkedBlockingQueue boolean offer(E) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2279,11 +2298,6 @@
   <item name="java.util.concurrent.LinkedBlockingQueue boolean remove(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.util.concurrent.LinkedBlockingQueue boolean remove(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.util.concurrent.LinkedBlockingQueue int drainTo(java.util.Collection&lt;? super E&gt;, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2296,6 +2310,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="java.util.concurrent.LinkedBlockingQueue java.lang.Object[] toArray()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.LinkedBlockingQueue java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2368,6 +2385,9 @@
   <item name="java.util.concurrent.LinkedTransferQueue E poll(long, java.util.concurrent.TimeUnit) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.LinkedTransferQueue E take()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.LinkedTransferQueue LinkedTransferQueue()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -2380,11 +2400,6 @@
   </item>
   <item name="java.util.concurrent.LinkedTransferQueue boolean contains(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="java.util.concurrent.LinkedTransferQueue boolean contains(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="java.util.concurrent.LinkedTransferQueue boolean findAndRemove(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2599,6 +2614,9 @@
   <item name="java.util.concurrent.PriorityBlockingQueue E poll(long, java.util.concurrent.TimeUnit) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.PriorityBlockingQueue E take()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.PriorityBlockingQueue PriorityBlockingQueue(java.util.Collection&lt;? extends E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2741,6 +2759,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="java.util.concurrent.ScheduledThreadPoolExecutor java.util.List&lt;java.lang.Runnable&gt; shutdownNow()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ScheduledThreadPoolExecutor java.util.concurrent.BlockingQueue&lt;java.lang.Runnable&gt; getQueue()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2912,13 +2933,14 @@
   <item name="java.util.concurrent.SynchronousQueue E poll(long, java.util.concurrent.TimeUnit) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.SynchronousQueue E take()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.SynchronousQueue T[] toArray(T[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.SynchronousQueue T[] toArray(T[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.SynchronousQueue boolean contains(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -3075,13 +3097,14 @@
   <item name="java.util.concurrent.SynchronousQueue.TransferStack java.util.concurrent.SynchronousQueue.TransferStack.SNode awaitFulfill(java.util.concurrent.SynchronousQueue.TransferStack.SNode, boolean, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.SynchronousQueue.TransferStack java.util.concurrent.SynchronousQueue.TransferStack.SNode awaitFulfill(java.util.concurrent.SynchronousQueue.TransferStack.SNode, boolean, long)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.SynchronousQueue.TransferStack java.util.concurrent.SynchronousQueue.TransferStack.SNode snode(java.util.concurrent.SynchronousQueue.TransferStack.SNode, java.lang.Object, java.util.concurrent.SynchronousQueue.TransferStack.SNode, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.concurrent.SynchronousQueue.TransferStack java.util.concurrent.SynchronousQueue.TransferStack.SNode snode(java.util.concurrent.SynchronousQueue.TransferStack.SNode, java.lang.Object, java.util.concurrent.SynchronousQueue.TransferStack.SNode, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;!null;null,_,_,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.SynchronousQueue.TransferStack void clean(java.util.concurrent.SynchronousQueue.TransferStack.SNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3215,6 +3238,12 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.concurrent.ThreadPoolExecutor java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ThreadPoolExecutor java.util.List&lt;java.lang.Runnable&gt; drainQueue()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ThreadPoolExecutor java.util.List&lt;java.lang.Runnable&gt; shutdownNow()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ThreadPoolExecutor java.util.concurrent.BlockingQueue&lt;java.lang.Runnable&gt; getQueue()">

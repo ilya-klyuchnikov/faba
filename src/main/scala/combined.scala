@@ -1,6 +1,6 @@
 package faba.combined
 
-import faba.analysis.{NotNullValue, TrueValue, FalseValue}
+import faba.analysis.{AsmAbstractValue, NotNullValue, TrueValue, FalseValue}
 import faba.cfg.ControlFlowGraph
 import faba.data._
 import faba.engine._
@@ -17,11 +17,11 @@ import scala.collection.JavaConversions._
 trait Trackable {
   val origin: Int
 }
-case class TrackableCallValue(origin: Int, tp: Type, method: Method, stableCall: Boolean, args: List[_ <: BasicValue], callToThis: Boolean) extends BasicValue(tp) with Trackable
-case class NthParamValue(tp: Type, n: Int) extends BasicValue(tp)
-case class TrackableNullValue(origin: Int) extends BasicValue(Type.getObjectType("null")) with Trackable
-case class TrackableValue(origin: Int, tp: Type) extends BasicValue(tp) with Trackable
-case class ThisValue() extends BasicValue(Type.getObjectType("java/lang/Object"))
+@AsmAbstractValue case class TrackableCallValue(origin: Int, tp: Type, method: Method, stableCall: Boolean, args: List[_ <: BasicValue], callToThis: Boolean) extends BasicValue(tp) with Trackable
+@AsmAbstractValue case class NthParamValue(tp: Type, n: Int) extends BasicValue(tp)
+@AsmAbstractValue case class TrackableNullValue(origin: Int) extends BasicValue(Type.getObjectType("null")) with Trackable
+@AsmAbstractValue case class TrackableValue(origin: Int, tp: Type) extends BasicValue(tp) with Trackable
+@AsmAbstractValue case class ThisValue() extends BasicValue(Type.getObjectType("java/lang/Object"))
 
 // specialized class for analyzing methods without branching
 // this is a good tutorial example
@@ -105,6 +105,8 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
             Final(Values.False)
           case TrueValue() =>
             Final(Values.True)
+          case tr: Trackable if interpreter.dereferencedValues(tr.origin) =>
+            Final(Values.NotNull)
           case TrackableNullValue(_) =>
             Final(Values.Null)
           case NotNullValue(_) | ThisValue() =>
@@ -141,6 +143,8 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
             Final(Values.False)
           case TrueValue() =>
             Final(Values.True)
+          case tr: Trackable if interpreter.dereferencedValues(tr.origin) =>
+            Final(Values.NotNull)
           case TrackableNullValue(_) =>
             Final(Values.Null)
           case NotNullValue(_) | ThisValue() =>
@@ -226,7 +230,7 @@ class CombinedInterpreter(val insns: InsnList, arity: Int) extends BasicInterpre
   val dereferencedValues = new Array[Boolean](insns.size())
 
   @inline
-  def index(insn: AbstractInsnNode) = insns.indexOf(insn)
+  final def index(insn: AbstractInsnNode) = insns.indexOf(insn)
 
   def track(origin: Int, bv: BasicValue): TrackableValue =
     if (bv == null) null else TrackableValue(origin, bv.getType)

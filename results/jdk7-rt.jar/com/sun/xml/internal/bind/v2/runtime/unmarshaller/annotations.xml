@@ -30,6 +30,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.Base64Data java.lang.CharSequence subSequence(int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.Base64Data java.lang.String getMimeType()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -497,8 +500,9 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.StAXConnector java.lang.String fixNull(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;!null-&gt;!null;null-&gt;!null&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.StAXConnector java.lang.String getQName(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -538,16 +542,6 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.StAXStreamConnector StAXStreamConnector(javax.xml.stream.XMLStreamReader, com.sun.xml.internal.bind.v2.runtime.unmarshaller.XmlVisitor) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.StAXStreamConnector boolean checkImplementaionNameOfSjsxp(javax.xml.stream.XMLStreamReader)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
-  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.StAXStreamConnector boolean getBoolProp(javax.xml.stream.XMLStreamReader, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.StAXStreamConnector com.sun.xml.internal.bind.v2.runtime.unmarshaller.StAXConnector create(javax.xml.stream.XMLStreamReader, com.sun.xml.internal.bind.v2.runtime.unmarshaller.XmlVisitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -577,6 +571,9 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.StAXStreamConnector.1 java.lang.String getType(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.StAXStreamConnector.1 java.lang.String getURI(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.StAXStreamConnector.1 java.lang.String getValue(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -587,6 +584,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.StructureLoader java.util.Collection&lt;javax.xml.namespace.QName&gt; getExpectedAttributes()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.StructureLoader java.util.Collection&lt;javax.xml.namespace.QName&gt; getExpectedChildElements()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.StructureLoader void childElement(com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.State, com.sun.xml.internal.bind.v2.runtime.unmarshaller.TagName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -650,11 +653,6 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl boolean handleEvent(javax.xml.bind.ValidationEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl boolean needsInterning(org.xml.sax.XMLReader)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;true&quot;"/>
-    </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl com.sun.xml.internal.bind.v2.runtime.JaxBeanInfo&lt;T&gt; getBeanInfo(java.lang.Class&lt;T&gt;)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -788,9 +786,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader selectRootLoader(com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.State, com.sun.xml.internal.bind.v2.runtime.unmarshaller.TagName)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext com.sun.xml.internal.bind.v2.runtime.unmarshaller.LocatorEx getLocator()">
@@ -888,6 +883,15 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext java.lang.String resolveNamespacePrefix(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext java.lang.String[] getAllDeclaredPrefixes()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext java.lang.String[] getNewlyDeclaredPrefixes()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext java.lang.String[] getPrefixList(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext java.util.Collection&lt;javax.xml.namespace.QName&gt; getCurrentExpectedAttributes()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -898,6 +902,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext java.util.List&lt;java.lang.String&gt; getAllPrefixesInList(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext java.util.List&lt;java.lang.String&gt; getAllPrefixesInList(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext void access$000(com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext) 0">
@@ -939,6 +946,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.DefaultRootLoader java.util.Collection&lt;javax.xml.namespace.QName&gt; getExpectedChildElements()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.DefaultRootLoader void childElement(com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.State, com.sun.xml.internal.bind.v2.runtime.unmarshaller.TagName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

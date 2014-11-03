@@ -15,11 +15,6 @@
   <item name="javax.management.monitor.CounterMonitor boolean isComparableTypeValid(javax.management.ObjectName, java.lang.String, java.lang.Comparable&lt;?&gt;) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="javax.management.monitor.CounterMonitor boolean isComparableTypeValid(javax.management.ObjectName, java.lang.String, java.lang.Comparable&lt;?&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.management.monitor.CounterMonitor boolean isThresholdTypeValid(javax.management.ObjectName, java.lang.String, java.lang.Comparable&lt;?&gt;) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -157,26 +152,11 @@
   <item name="javax.management.monitor.GaugeMonitor boolean isComparableTypeValid(javax.management.ObjectName, java.lang.String, java.lang.Comparable&lt;?&gt;) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="javax.management.monitor.GaugeMonitor boolean isComparableTypeValid(javax.management.ObjectName, java.lang.String, java.lang.Comparable&lt;?&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.management.monitor.GaugeMonitor boolean isFirstGreaterThanLast(java.lang.Number, java.lang.Number, javax.management.monitor.Monitor.NumericalType) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.management.monitor.GaugeMonitor boolean isFirstGreaterThanLast(java.lang.Number, java.lang.Number, javax.management.monitor.Monitor.NumericalType)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_-&gt;false;null,_,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.management.monitor.GaugeMonitor boolean isFirstStrictlyGreaterThanLast(java.lang.Number, java.lang.Number, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="javax.management.monitor.GaugeMonitor boolean isFirstStrictlyGreaterThanLast(java.lang.Number, java.lang.Number, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null,_-&gt;false;null,_,_-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="javax.management.monitor.GaugeMonitor boolean isThresholdTypeValid(javax.management.ObjectName, java.lang.String, java.lang.Comparable&lt;?&gt;) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -297,11 +277,6 @@
       <val val="value=&quot;!null,_,_-&gt;true;_,!null,_-&gt;true;_,_,!null-&gt;true;_,_,null-&gt;true;_,null,_-&gt;true;null,_,_-&gt;true&quot;,pure=true"/>
     </annotation>
   </item>
-  <item name="javax.management.monitor.Monitor boolean isValidForType(java.lang.Object, java.lang.Class&lt;? extends java.lang.Number&gt;)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.management.monitor.Monitor int access$300()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -416,6 +391,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
     </annotation>
+  </item>
+  <item name="javax.management.monitor.Monitor javax.management.ObjectName[] getObservedObjects()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.monitor.Monitor javax.management.monitor.Monitor.ObservedObject createObservedObject(javax.management.ObjectName)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -577,7 +555,7 @@
   </item>
   <item name="javax.management.monitor.StringMonitor boolean isComparableTypeValid(javax.management.ObjectName, java.lang.String, java.lang.Comparable&lt;?&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;_,_,null-&gt;false&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="javax.management.monitor.StringMonitor java.lang.String getDerivedGauge()">

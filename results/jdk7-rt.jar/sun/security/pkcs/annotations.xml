@@ -144,6 +144,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="sun.security.pkcs.PKCS7 java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.pkcs.PKCS7 java.math.BigInteger getVersion()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -153,9 +156,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.security.pkcs.PKCS7 java.security.cert.X509Certificate getCertificate(java.math.BigInteger, sun.security.x509.X500Name)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null;null,_-&gt;null&quot;"/>
-    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.security.pkcs.PKCS7 java.security.cert.X509Certificate[] getCertificates()">
@@ -225,11 +225,6 @@
   </item>
   <item name="sun.security.pkcs.PKCS8Key java.security.PrivateKey buildPKCS8Key(sun.security.x509.AlgorithmId, byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="sun.security.pkcs.PKCS8Key java.security.PrivateKey buildPKCS8Key(sun.security.x509.AlgorithmId, byte[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;!null&quot;"/>
-    </annotation>
   </item>
   <item name="sun.security.pkcs.PKCS8Key java.security.PrivateKey parseKey(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -325,7 +320,13 @@
   <item name="sun.security.pkcs.PKCS9Attributes sun.security.pkcs.PKCS9Attribute getAttribute(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.pkcs.PKCS9Attributes sun.security.pkcs.PKCS9Attribute[] getAttributes()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.pkcs.PKCS9Attributes sun.security.util.DerEncoder[] castToDerEncoder(java.lang.Object[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.pkcs.PKCS9Attributes sun.security.util.DerEncoder[] castToDerEncoder(java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.pkcs.PKCS9Attributes void encode(byte, java.io.OutputStream) 1">
@@ -347,8 +348,9 @@
   </item>
   <item name="sun.security.pkcs.SignerInfo java.lang.String convertToStandardName(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;!null-&gt;!null&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.pkcs.SignerInfo java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>

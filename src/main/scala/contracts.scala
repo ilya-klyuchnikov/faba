@@ -1,27 +1,41 @@
 package faba.contracts
 
+import faba.asm.Origins
+
 import scala.annotation.switch
 
-import org.objectweb.asm.{Handle, Type}
+import org.objectweb.asm.{Opcodes, Handle, Type}
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.tree.analysis.{BasicValue, BasicInterpreter, Frame}
 import org.objectweb.asm.tree._
 
-import faba.analysis._
+import faba.analysis.{Utils => AnalysisUtils, _}
 import faba.cfg._
 import faba.data._
 import faba.engine._
 
-class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, resultOrigins: Array[Boolean], val stable: Boolean) extends Analysis[Result[Key, Value]] {
+object InOutAnalysis {
+  // Shared (between analysis runs) array/stack of pending states.
+  // Since:
+  //  1. We know upper bound of its size (LimitReachedException.limit)
+  //  2. There is not need to empty this array on each run (it is used as stack)
+  val sharedPendingStack = new Array[State](LimitReachedException.limit)
+}
 
-  val pending = Analysis.ourPending
+class InOutAnalysis(val richControlFlow: RichControlFlow,
+                    val direction: Direction,
+                    resultOrigins: Origins,
+                    val stable: Boolean) extends Analysis[Result[Key, Value]] {
+
   type MyResult = Result[Key, Value]
   implicit val contractsLattice = ELattice(Values.Bot, Values.Top)
-  // there is no need to generalize this (local var 0)
-  val generalizeShift =
-    if ((methodNode.access & ACC_STATIC) == 0) 1 else 0
 
-  override val identity = Final(Values.Bot)
+  val pendingStack = InOutAnalysis.sharedPendingStack
+
+  val nullAnalysis = direction match {
+    case InOut(_, Values.Null) => true
+    case _ => false
+  }
 
   private val interpreter = InOutInterpreter(direction, methodNode.instructions, resultOrigins)
   private val optIn: Option[Value] = direction match {
@@ -29,41 +43,46 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
     case _ => None
   }
 
-  override def combineResults(delta: MyResult, subResults: List[MyResult]): MyResult =
-    subResults.reduce(_ join _)
-
   override def mkEquation(result: MyResult): Equation[Key, Value] =
     Equation(aKey, result)
 
-  override def isEarlyResult(res: MyResult): Boolean = res match {
-    case Final(Values.Top) => true
-    case _                 => false
-  }
-
+  /**
+   *
+   */
   def checkEarlyResult(): Unit = myResult match {
     case Final(Values.Top) =>
       earlyResult = Some(myResult)
     case _ =>
   }
 
-  private var myResult: MyResult = identity
+  /**
+   * Result computed so far.
+   * Completion of the path in graph of configurations changes [[myResult]] in the following way:
+   *
+   * myResult = myResult join pathResult.
+   */
+  private var myResult: MyResult = Final(Values.Bot)
 
-  private var pendingTop: Int = 0
+  private var pendingStackTop: Int = 0
 
   final def pendingPush(st: State) {
-    pending(pendingTop) = st
-    pendingTop += 1
+    pendingStack(pendingStackTop) = st
+    pendingStackTop += 1
   }
 
   final def pendingPop(): State = {
-    pendingTop -= 1
-    pending(pendingTop)
+    pendingStackTop -= 1
+    pendingStack(pendingStackTop)
   }
 
   def analyze(): Equation[Key, Value] = {
+    // give up if we cannot encode constraints via integers
+    if (resultOrigins.size > 32)
+      return Equation(aKey, Final(Values.Top))
+
     pendingPush(createStartState())
 
-    while (pendingTop > 0 && earlyResult.isEmpty)
+    while (pendingStackTop > 0 && earlyResult.isEmpty)
       processState(pendingPop())
 
     mkEquation(earlyResult.getOrElse(myResult))
@@ -76,37 +95,37 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
 
     while (true) {
       // sharing
-      computed(state.conf.insnIndex).find(prevState => stateEquiv(state, prevState)) match {
+      computed(state.conf.insnIndex).find(prevState => AnalysisUtils.stateEquiv(state, prevState)) match {
         case Some(ps) =>
           // was computed before
           return
         case None =>
       }
 
-      val stateIndex = state.index
-      val preConf = state.conf
-      val insnIndex = preConf.insnIndex
+      val conf = state.conf
+      val insnIndex = conf.insnIndex
       val loopEnter = dfsTree.loopEnters(insnIndex)
       val history = state.history
 
-      val fold = loopEnter && history.exists(prevConf => confInstance(preConf, prevConf))
+      val fold = loopEnter && history.exists(prevConf => AnalysisUtils.isInstance(conf, prevConf))
 
       if (fold) {
         computed(insnIndex) = state :: computed(insnIndex)
         return
       }
 
-      val conf = if (loopEnter) generalize(preConf) else preConf
-
-      val taken = state.taken
       val frame = conf.frame
       val insnNode = methodNode.instructions.get(insnIndex)
       val nextHistory = if (loopEnter) conf :: history else history
       val nextFrame = execute(frame, insnNode)
 
-      if (interpreter.dereferenced) {
+      val dereferencedHere: Int = interpreter.dereferenced
+      val dereferenced = state.constraint | dereferencedHere
+
+      // executed only during null
+      if (nullAnalysis && interpreter.dereferencedParam) {
         computed(insnIndex) = state :: computed(insnIndex)
-        // enough to break this branch
+        // enough to break this branch - it will be bottom, will not contribute to the result
         return
       }
 
@@ -117,14 +136,18 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
               myResult = myResult join Final(Values.False)
             case TrueValue() =>
               myResult = myResult join Final(Values.True)
-            case NullValue() =>
-              myResult = myResult join Final(Values.Null)
             case NotNullValue(_) =>
               myResult = myResult join Final(Values.NotNull)
             case ParamValue(_) =>
               val InOut(_, in) = direction
               myResult = myResult join Final(in)
-            case CallResultValue(_, keys) =>
+            case tr: Trackable if (dereferenced & resultOrigins.instructionsMap(tr.origin)) != 0 =>
+              myResult = myResult join Final(Values.NotNull)
+            case NThParamValue(n, _) if (dereferenced & resultOrigins.parametersMap(n)) != 0 =>
+              myResult = myResult join Final(Values.NotNull)
+            case NullValue(_) =>
+              myResult = myResult join Final(Values.Null)
+            case CallResultValue(_, _, keys) =>
               myResult = myResult join Pending[Key, Value](Set(Component(Values.Top, keys)))
             case _ =>
               earlyResult = Some(Final(Values.Top))
@@ -143,7 +166,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             case InOut(_, Values.NotNull) =>
               methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           }
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          val nextState = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, dereferenced)
           states = state :: states
           state = nextState
         case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
@@ -153,19 +176,58 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
             case InOut(_, Values.NotNull) =>
               insnIndex + 1
           }
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          val nextState = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, dereferenced)
           states = state :: states
           state = nextState
+
+        case IFNONNULL if popValue(frame).isInstanceOf[NThParamValue] =>
+          val nullInsn = insnIndex + 1
+          val notNullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+          val n = popValue(frame).asInstanceOf[NThParamValue].n
+          val nullState = State(genId(), Conf(nullInsn, nextFrame), nextHistory, dereferenced)
+          val notNullState = State(genId(), Conf(notNullInsn, nextFrame), nextHistory, dereferenced | resultOrigins.parametersMap(n))
+          pendingPush(nullState)
+          pendingPush(notNullState)
+          return
+        case IFNONNULL if popValue(frame).isInstanceOf[Trackable] =>
+          val nullInsn = insnIndex + 1
+          val notNullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+          val orig = popValue(frame).asInstanceOf[Trackable].origin
+          val nullState = State(genId(), Conf(nullInsn, nextFrame), nextHistory, dereferenced)
+          val notNullState = State(genId(), Conf(notNullInsn, nextFrame), nextHistory, dereferenced | resultOrigins.instructionsMap(orig))
+          pendingPush(nullState)
+          pendingPush(notNullState)
+          return
+        case IFNULL if popValue(frame).isInstanceOf[NThParamValue] =>
+          val nullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+          val notNullInsn = insnIndex + 1
+          val n = popValue(frame).asInstanceOf[NThParamValue].n
+          val nullState = State(genId(), Conf(nullInsn, nextFrame), nextHistory, dereferenced)
+          val notNullState = State(genId(), Conf(notNullInsn, nextFrame), nextHistory, dereferenced | resultOrigins.parametersMap(n))
+          pendingPush(nullState)
+          pendingPush(notNullState)
+          return
+        case IFNULL if popValue(frame).isInstanceOf[Trackable] =>
+          val nullInsn = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+          val notNullInsn = insnIndex + 1
+          val orig = popValue(frame).asInstanceOf[Trackable].origin
+          val nullState = State(genId(), Conf(nullInsn, nextFrame), nextHistory, dereferenced)
+          val notNullState = State(genId(), Conf(notNullInsn, nextFrame), nextHistory, dereferenced | resultOrigins.instructionsMap(orig))
+          pendingPush(nullState)
+          pendingPush(notNullState)
+          return
+
         case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
           val nextInsnIndex =
             methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          val nextState = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, dereferenced)
           states = state :: states
           state = nextState
         case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
           val nextInsnIndex = insnIndex + 1
-          val nextState = State(mkId(), Conf(nextInsnIndex, nextFrame), nextHistory, true, false)
+          val nextState = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, dereferenced)
           state = nextState
+
         case _ =>
           // we touch this!
           computed(insnIndex) = state :: computed(insnIndex)
@@ -180,7 +242,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
               } else {
                 nextFrame
               }
-              State(mkId(), Conf(nextInsnIndex, nextFrame1), nextHistory, taken, false)
+              State(genId(), Conf(nextInsnIndex, nextFrame1), nextHistory, dereferenced)
           }
           states = state :: states
           if (nextStates.size == 1) {
@@ -195,56 +257,43 @@ class InOutAnalysis(val richControlFlow: RichControlFlow, val direction: Directi
 
   private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
-      interpreter.dereferenced = false
+      interpreter.reset()
       frame
     case _ =>
-      interpreter.dereferenced = false
+      interpreter.reset()
       val nextFrame = new Frame(frame)
       nextFrame.execute(insnNode, interpreter)
       nextFrame
   }
 
-  // in-place generalization
-  def generalize(conf: Conf): Conf = {
-    val frame = new Frame(conf.frame)
-    for (i <- generalizeShift until frame.getLocals) frame.getLocal(i) match {
-      case CallResultValue(tp, _) =>
-        frame.setLocal(i, new BasicValue(tp))
-      case TrueValue() =>
-        frame.setLocal(i, BasicValue.INT_VALUE)
-      case FalseValue() =>
-        frame.setLocal(i, BasicValue.INT_VALUE)
-      case NullValue() =>
-        frame.setLocal(i, BasicValue.UNINITIALIZED_VALUE)
-      case NotNullValue(tp) =>
-        frame.setLocal(i, new BasicValue(tp))
-      case _ =>
-    }
-
-    val stack = (0 until frame.getStackSize).map(frame.getStack)
-    frame.clearStack()
-
-    for (v <- stack) v match {
-      case CallResultValue(tp, _) =>
-        frame.push(new BasicValue(tp))
-      case TrueValue() =>
-        frame.push(BasicValue.INT_VALUE)
-      case FalseValue() =>
-        frame.push(BasicValue.INT_VALUE)
-      case NullValue() =>
-        frame.push(BasicValue.UNINITIALIZED_VALUE)
-      case NotNullValue(tp) =>
-        frame.push(new BasicValue(tp))
-      case _ =>
-        frame.push(v)
-    }
-    Conf(conf.insnIndex, frame)
-  }
+  /**
+   * Customized for tracking dereferencing of parameters which leak into result.
+   *
+   * @param i parameter's index
+   * @param tp parameter's type
+   * @return `NThParamValue(i, tp)` if parameter goes into result, calls `super` method otherwise.
+   */
+  override def createStartValueForParameter(i: Int, tp: Type): BasicValue =
+    if (resultOrigins.parameters(i)) NThParamValue(i, tp)
+    else super.createStartValueForParameter(i, tp)
 }
 
-case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins: Array[Boolean]) extends BasicInterpreter {
+case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins: Origins) extends BasicInterpreter {
+  val insnOrigins = resultOrigins.instructions
 
-  var dereferenced = false
+  def index(insn: AbstractInsnNode) =
+    insns.indexOf(insn)
+
+  // whether a null-param was dereferenced execution
+  // this flag is set ONLY for `null->?` analysis
+  var dereferencedParam = false
+  var dereferenced: Int = 0
+
+  def reset(): Unit = {
+    dereferencedParam = false
+    dereferenced = 0
+  }
+
   val nullAnalysis = direction match {
     case InOut(_, Values.Null) => true
     case _ => false
@@ -252,14 +301,16 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
 
   @switch
   override def newOperation(insn: AbstractInsnNode): BasicValue = {
-    val propagate_? = resultOrigins == null || resultOrigins(insns.indexOf(insn))
+    val propagate_? = insnOrigins(insns.indexOf(insn))
     insn.getOpcode match {
       case ICONST_0 if propagate_? =>
         FalseValue()
       case ICONST_1 if propagate_? =>
         TrueValue()
       case ACONST_NULL if propagate_? =>
-        NullValue()
+        NullValue(index(insn))
+      case GETSTATIC if propagate_? =>
+        TrackableBasicValue(index(insn), super.newOperation(insn).getType)
       case LDC if propagate_? =>
         insn.asInstanceOf[LdcInsnNode].cst match {
           case tp: Type if tp.getSort == Type.OBJECT || tp.getSort == Type.ARRAY =>
@@ -282,13 +333,43 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
 
   @switch
   override def unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue = {
-    val propagate_? = resultOrigins == null || resultOrigins(insns.indexOf(insn))
+    val propagate_? = insnOrigins(insns.indexOf(insn))
     insn.getOpcode match {
-      case GETFIELD | ARRAYLENGTH | MONITORENTER if nullAnalysis && value.isInstanceOf[ParamValue] =>
-        dereferenced = true
+      case GETFIELD =>
+        value match {
+          case ParamValue(_) =>
+            dereferencedParam = true
+          case NThParamValue(n, _) =>
+            dereferenced = resultOrigins.parametersMap(n)
+          case tr: Trackable =>
+            dereferenced = resultOrigins.instructionsMap(tr.origin)
+          case _ =>
+        }
+        if (propagate_?)
+          TrackableBasicValue(index(insn), super.unaryOperation(insn, value).getType)
+        else
+          super.unaryOperation(insn, value)
+      case ARRAYLENGTH | MONITORENTER =>
+        value match {
+          case ParamValue(_) =>
+            dereferencedParam = true
+          case NThParamValue(n, _) =>
+            dereferenced = resultOrigins.parametersMap(n)
+          case tr: Trackable =>
+            dereferenced = resultOrigins.instructionsMap(tr.origin)
+          case _ =>
+        }
         super.unaryOperation(insn, value)
-      case CHECKCAST if value.isInstanceOf[ParamValue] =>
-        new ParamValue(Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc))
+      case CHECKCAST =>
+        val tp = Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc)
+        value match {
+          case ParamValue(_) =>
+            new ParamValue(tp)
+          case tr: Trackable =>
+            tr.cast(to = tp)
+          case _ =>
+            newValue(tp)
+        }
       case INSTANCEOF if value.isInstanceOf[ParamValue] =>
         InstanceOfCheckValue()
       case NEWARRAY | ANEWARRAY if propagate_? =>
@@ -299,10 +380,32 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
   }
 
   override def binaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue): BasicValue = {
+    val propagate_? = insnOrigins(insns.indexOf(insn))
     insn.getOpcode match {
-      case IALOAD | LALOAD | FALOAD | DALOAD | AALOAD | BALOAD | CALOAD | SALOAD | PUTFIELD
-        if nullAnalysis && v1.isInstanceOf[ParamValue] =>
-          dereferenced = true
+      case AALOAD =>
+        v1 match {
+          case ParamValue(_) =>
+            dereferencedParam = true
+          case NThParamValue(n, _) =>
+            dereferenced = resultOrigins.parametersMap(n)
+          case tr: Trackable =>
+            dereferenced = resultOrigins.instructionsMap(tr.origin)
+          case _ =>
+        }
+        if (propagate_?)
+          TrackableBasicValue(index(insn), super.binaryOperation(insn, v1, v2).getType)
+        else
+          super.binaryOperation(insn, v1, v2)
+      case IALOAD | LALOAD | FALOAD | DALOAD | BALOAD | CALOAD | SALOAD | PUTFIELD =>
+        v1 match {
+          case ParamValue(_) =>
+            dereferencedParam = true
+          case NThParamValue(n, _) =>
+            dereferenced = resultOrigins.parametersMap(n)
+          case tr: Trackable =>
+            dereferenced = resultOrigins.instructionsMap(tr.origin)
+          case _ =>
+        }
       case _ =>
     }
     super.binaryOperation(insn, v1, v2)
@@ -310,22 +413,38 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
 
   override def ternaryOperation(insn: AbstractInsnNode, v1: BasicValue, v2: BasicValue, v3: BasicValue): BasicValue = {
     insn.getOpcode match {
-      case IASTORE | LASTORE | FASTORE | DASTORE | AASTORE | BASTORE | CASTORE | SASTORE
-        if nullAnalysis && v1.isInstanceOf[ParamValue] =>
-        dereferenced = true
+      case IASTORE | LASTORE | FASTORE | DASTORE | AASTORE | BASTORE | CASTORE | SASTORE =>
+        v1 match {
+          case ParamValue(_) =>
+            dereferencedParam = true
+          case NThParamValue(n, _) =>
+            dereferenced = resultOrigins.parametersMap(n)
+          case tr: Trackable =>
+            dereferenced = resultOrigins.instructionsMap(tr.origin)
+          case _ =>
+        }
       case _ =>
     }
-    super.ternaryOperation(insn, v1, v2, v3)
+    null
   }
 
   @switch
   override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
-    val propagate_? = resultOrigins == null || resultOrigins(insns.indexOf(insn))
+    val propagate_? = insnOrigins(insns.indexOf(insn))
     val opCode = insn.getOpcode
     val shift = if (opCode == INVOKESTATIC) 0 else 1
-    if ((opCode == INVOKESPECIAL || opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) && nullAnalysis && values.get(0).isInstanceOf[ParamValue]) {
-      dereferenced = true
-      return super.naryOperation(insn, values)
+    if (opCode == INVOKESPECIAL || opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) {
+      values.get(0) match {
+        case ParamValue(_) =>
+          dereferencedParam = true
+          if (nullAnalysis)
+            return super.naryOperation(insn, values)
+        case NThParamValue(n, _) =>
+          dereferenced = resultOrigins.parametersMap(n)
+        case tr: Trackable =>
+          dereferenced = resultOrigins.instructionsMap(tr.origin)
+        case _ =>
+      }
     }
     opCode match {
       case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE  if propagate_? =>
@@ -336,6 +455,7 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
         val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
         val isBooleanRetType = retType == Type.BOOLEAN_TYPE
         if (isRefRetType || isBooleanRetType)
+          // TODO - hack into parameters here
           direction match {
             case InOut(_, inValue) =>
               var keys = Set[Key]()
@@ -346,10 +466,10 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
               if (isRefRetType)
                 keys = keys + Key(method, Out, stable)
               if (keys.nonEmpty)
-                return CallResultValue(retType, keys)
+                return CallResultValue(index(insn), retType, keys)
             case _ =>
               if (isRefRetType)
-                return CallResultValue(retType, Set(Key(method, Out, stable)))
+                return CallResultValue(index(insn), retType, Set(Key(method, Out, stable)))
           }
         super.naryOperation(insn, values)
       case MULTIANEWARRAY if propagate_? =>

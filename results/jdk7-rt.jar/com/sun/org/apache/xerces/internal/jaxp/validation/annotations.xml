@@ -8,11 +8,6 @@
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.DOMResultAugmentor boolean processAttributePSVI(com.sun.org.apache.xerces.internal.dom.AttrImpl, com.sun.org.apache.xerces.internal.xs.AttributePSVI) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.DOMResultAugmentor boolean processAttributePSVI(com.sun.org.apache.xerces.internal.dom.AttrImpl, com.sun.org.apache.xerces.internal.xs.AttributePSVI)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.DOMResultAugmentor com.sun.org.apache.xerces.internal.xni.parser.XMLDocumentSource getDocumentSource()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -651,6 +646,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.JAXPValidationMessageFormatter java.lang.String formatMessage(java.util.Locale, java.lang.String, java.lang.Object[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null,_-&gt;!null;_,_,null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ReadOnlyGrammarPool void cacheGrammars(java.lang.String, com.sun.org.apache.xerces.internal.xni.grammars.Grammar[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1159,6 +1159,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.WeakReferenceXMLSchema com.sun.org.apache.xerces.internal.xni.grammars.XMLGrammarPool getGrammarPool()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.XMLSchema boolean isFullyComposed()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1225,6 +1228,12 @@
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.XMLSchemaValidatorComponentManager XMLSchemaValidatorComponentManager(com.sun.org.apache.xerces.internal.jaxp.validation.XSGrammarPoolContainer) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.XMLSchemaValidatorComponentManager com.sun.org.apache.xerces.internal.util.FeatureState getFeatureState(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.XMLSchemaValidatorComponentManager com.sun.org.apache.xerces.internal.util.PropertyState getPropertyState(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.XMLSchemaValidatorComponentManager java.util.Locale getLocale()">

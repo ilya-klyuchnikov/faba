@@ -16,6 +16,9 @@
   <item name="sun.rmi.transport.tcp.TCPChannel sun.rmi.transport.Connection createConnection()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.rmi.transport.tcp.TCPChannel sun.rmi.transport.Connection newConnection()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.rmi.transport.tcp.TCPChannel sun.rmi.transport.Endpoint getEndpoint()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -50,11 +53,6 @@
   </item>
   <item name="sun.rmi.transport.tcp.TCPEndpoint boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="sun.rmi.transport.tcp.TCPEndpoint boolean equals(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="sun.rmi.transport.tcp.TCPEndpoint int getListenPort()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -94,10 +92,19 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="sun.rmi.transport.tcp.TCPEndpoint java.util.Collection&lt;sun.rmi.transport.tcp.TCPTransport&gt; allKnownTransports()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.rmi.transport.tcp.TCPEndpoint sun.rmi.transport.Transport getInboundTransport()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="sun.rmi.transport.tcp.TCPEndpoint sun.rmi.transport.tcp.TCPEndpoint getLocalEndpoint(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.rmi.transport.tcp.TCPEndpoint sun.rmi.transport.tcp.TCPEndpoint getLocalEndpoint(int, java.rmi.server.RMIClientSocketFactory, java.rmi.server.RMIServerSocketFactory)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.rmi.transport.tcp.TCPEndpoint sun.rmi.transport.tcp.TCPEndpoint read(java.io.ObjectInput) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -155,11 +162,6 @@
   </item>
   <item name="sun.rmi.transport.tcp.TCPTransport sun.rmi.transport.tcp.TCPChannel getChannel(sun.rmi.transport.Endpoint) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="sun.rmi.transport.tcp.TCPTransport sun.rmi.transport.tcp.TCPChannel getChannel(sun.rmi.transport.Endpoint)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
   </item>
   <item name="sun.rmi.transport.tcp.TCPTransport sun.rmi.transport.tcp.TCPEndpoint access$000(sun.rmi.transport.tcp.TCPTransport) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

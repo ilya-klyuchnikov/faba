@@ -4,25 +4,24 @@ import _root_.java.io.{PrintWriter, File}
 import java.nio.file.attribute.BasicFileAttributes
 import java.nio.file._
 
-import faba.asm.ParamsValue
+import faba.asm.{Origins, ParamsValue}
 import org.objectweb.asm.tree.MethodNode
 
 import faba.cfg._
 import faba.data._
 import faba.engine._
 import faba.source._
-import faba.parameters.ParametersAnalysis
 import org.objectweb.asm.tree.analysis.Frame
 import scala.xml.PrettyPrinter
 import scala.collection.mutable.ListBuffer
 
 class MainProcessor extends FabaProcessor {
 
-  val notNullParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.NotNull, Values.Top))
-  val nullableParamsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Null, Values.Top))
-  val contractsSolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Bot, Values.Top))
-  val nullableResultSolver = new NullableResultSolver[Key, Values.Value](doNothing)(ELattice(Values.Bot, Values.Null))
-  val puritySolver = new Solver[Key, Values.Value](doNothing)(ELattice(Values.Pure, Values.Top))
+  val notNullParamsSolver = new Solver[Key, Values.Value](idle)(ELattice(Values.NotNull, Values.Top))
+  val nullableParamsSolver = new Solver[Key, Values.Value](idle)(ELattice(Values.Null, Values.Top))
+  val contractsSolver = new Solver[Key, Values.Value](idle)(ELattice(Values.Bot, Values.Top))
+  val nullableResultSolver = new NullableResultSolver[Key, Values.Value](idle)(ELattice(Values.Bot, Values.Null))
+  val puritySolver = new Solver[Key, Values.Value](idle)(ELattice(Values.Pure, Values.Top))
 
   var notNullParamsTime: Long = 0
   var nullableParamsTime: Long = 0
@@ -31,6 +30,22 @@ class MainProcessor extends FabaProcessor {
   var nullTime: Long = 0
   var notNullTime: Long = 0
   var purityTime: Long = 0
+
+  // Equations means that we get equations, not solutions as a result of analysis
+  var outTimeEquations: Long = 0
+  var nullTimeEquations: Long = 0
+  var notNullTimeEquations: Long = 0
+
+  // timeTop means that we get Final(Top) solution
+  var outTimeTop: Long = 0
+  var nullTimeTop: Long = 0
+  var notNullTimeTop: Long = 0
+
+  // timeNotNull means that we get Final(NotNull) solution
+  var outTimeNotNull : Long = 0
+  var nullTimeNotNull: Long = 0
+  var notNullTimeNotNull: Long = 0
+
   var cfgTime: Long = 0
   var resultOriginsTime: Long = 0
   var resultOriginsTime2: Long = 0
@@ -38,6 +53,11 @@ class MainProcessor extends FabaProcessor {
   var dfsTime: Long = 0
   var leakingParametersTime: Long = 0
   val processNullableParameters = true
+
+  // origins.size < 32
+  var smallOrigins: Long = 0
+  // origins.size >= 32
+  var largeOrigins: Long = 0
 
   override def buildCFG(className: String, methodNode: MethodNode, jsr: Boolean) = {
     val start = System.nanoTime()
@@ -50,6 +70,12 @@ class MainProcessor extends FabaProcessor {
     val start = System.nanoTime()
     val result = super.buildResultOrigins(className, methodNode, frames, graph)
     resultOriginsTime += System.nanoTime() - start
+    val originSize = result.instructions.count(x => x) + result.parameters.count(x => x)
+    if (originSize < 32)
+      smallOrigins += 1
+    else {
+      largeOrigins += 1
+    }
     result
   }
 
@@ -88,28 +114,61 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean) = {
+  override def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, i: Int, stable: Boolean) = {
     val start = System.nanoTime()
     val result = super.notNullContractEquation(richControlFlow, resultOrigins, i, stable)
-    notNullTime += System.nanoTime() - start
+    val delta = System.nanoTime() - start
+    notNullTime += delta
+    result.rhs match {
+      case Final(Values.Top) =>
+        notNullTimeTop += delta
+      case Final(Values.NotNull) =>
+        notNullTimeNotNull += delta
+      case Pending(_) =>
+        notNullTimeEquations += delta
+      case _ =>
+
+    }
     result
   }
 
-  override def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], i: Int, stable: Boolean) = {
+  override def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, i: Int, stable: Boolean) = {
     val start = System.nanoTime()
     val result = super.nullContractEquation(richControlFlow, resultOrigins, i, stable)
-    nullTime += System.nanoTime() - start
+    val delta = System.nanoTime() - start
+    nullTime += delta
+    result.rhs match {
+      case Final(Values.Top) =>
+        nullTimeTop += delta
+      case Final(Values.NotNull) =>
+        nullTimeNotNull += delta
+      case Pending(_) =>
+        nullTimeEquations += delta
+      case _ =>
+
+    }
     result
   }
 
-  override def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Array[Boolean], stable: Boolean) = {
+  override def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, stable: Boolean) = {
     val start = System.nanoTime()
     val result = super.outContractEquation(richControlFlow, resultOrigins, stable)
-    outTime += System.nanoTime() - start
+    val delta = System.nanoTime() - start
+    outTime += delta
+    result.rhs match {
+      case Final(Values.Top) =>
+        outTimeTop += delta
+      case Final(Values.NotNull) =>
+        outTimeNotNull += delta
+      case Pending(_) =>
+        outTimeEquations += delta
+      case _ =>
+
+    }
     result
   }
 
-  override def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, origins: Array[Boolean], stable: Boolean, jsr: Boolean) = {
+  override def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, origins: Origins, stable: Boolean, jsr: Boolean) = {
     val start = System.nanoTime()
     val result = super.nullableResultEquation(className, methodNode, method, origins, stable, jsr)
     nullableResultTime += System.nanoTime() - start
@@ -217,11 +276,24 @@ class MainProcessor extends FabaProcessor {
     println("INDEXING TIME")
     println(s"notNullParams  ${notNullParamsTime / 1000000} msec")
     println(s"nullableParams ${nullableParamsTime / 1000000} msec")
-    println(s"results        ${outTime    / 1000000} msec")
-    println(s"nullableRes    ${nullableResultTime / 1000000} msec")
-    println(s" null->...     ${nullTime / 1000000} msec")
-    println(s"!null->...     ${notNullTime / 1000000} msec")
+    println("====")
     println(s"pure=true      ${purityTime / 1000000} msec")
+    println(s"nullableRes    ${nullableResultTime / 1000000} msec")
+    println(s"results        ${outTime    / 1000000} msec")
+    println(s"results?       ${outTimeEquations    / 1000000} msec")
+    println(s"results+       ${outTimeTop    / 1000000} msec")
+    println(s"results!       ${outTimeNotNull    / 1000000} msec")
+    println("---")
+    println(s"null           ${nullTime / 1000000} msec")
+    println(s"null?          ${nullTimeEquations / 1000000} msec")
+    println(s"null+          ${nullTimeTop / 1000000} msec")
+    println(s"null!          ${nullTimeNotNull / 1000000} msec")
+    println("---")
+    println(s"!null          ${notNullTime / 1000000} msec")
+    println(s"!null?         ${notNullTimeEquations / 1000000} msec")
+    println(s"!null+         ${notNullTimeTop / 1000000} msec")
+    println(s"!null!         ${notNullTimeNotNull / 1000000} msec")
+    println("---")
     println("====")
     println(s"cfg            ${cfgTime / 1000000} msec")
     println(s"origins        ${resultOriginsTime / 1000000} msec")
@@ -230,8 +302,6 @@ class MainProcessor extends FabaProcessor {
     println(s"leakingParams  ${leakingParametersTime / 1000000} msec")
     println(s"simpleTime0    ${simpleTime / 1000000} msec")
     println(s"complexTime    ${complexTime / 1000000} msec")
-    println(s"${ParametersAnalysis.notNullExecute} @NotNull executes")
-    println(s"${ParametersAnalysis.nullableExecute} @Nullable executes")
     println("====")
     println(s"$simpleMethods  simple methods")
     println(s"$complexMethods complex methods")
@@ -241,6 +311,9 @@ class MainProcessor extends FabaProcessor {
     println("====")
     println(s"cycleTime        ${cycleTime / 1000000} msec")
     println(s"nonCycleTime     ${nonCycleTime / 1000000} msec")
+    println("====")
+    println(s"smallOrigins        $smallOrigins")
+    println(s"largeOrigins        $largeOrigins")
   }
 
   def process(source: Source): Annotations = {

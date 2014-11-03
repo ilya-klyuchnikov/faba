@@ -81,11 +81,6 @@
   <item name="com.sun.corba.se.impl.transport.CorbaContactInfoBase com.sun.corba.se.pept.protocol.MessageMediator finishCreatingMessageMediator(com.sun.corba.se.pept.broker.Broker, com.sun.corba.se.pept.transport.Connection, com.sun.corba.se.pept.protocol.MessageMediator) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.corba.se.impl.transport.CorbaContactInfoBase com.sun.corba.se.pept.protocol.MessageMediator finishCreatingMessageMediator(com.sun.corba.se.pept.broker.Broker, com.sun.corba.se.pept.transport.Connection, com.sun.corba.se.pept.protocol.MessageMediator)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,!null-&gt;!null&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.corba.se.impl.transport.CorbaContactInfoBase com.sun.corba.se.pept.transport.ContactInfoList getContactInfoList()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -138,11 +133,6 @@
   </item>
   <item name="com.sun.corba.se.impl.transport.CorbaContactInfoListIteratorImpl CorbaContactInfoListIteratorImpl(com.sun.corba.se.spi.orb.ORB, com.sun.corba.se.spi.transport.CorbaContactInfoList, com.sun.corba.se.pept.transport.ContactInfo, java.util.List) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="com.sun.corba.se.impl.transport.CorbaContactInfoListIteratorImpl boolean reportException(com.sun.corba.se.pept.transport.ContactInfo, java.lang.RuntimeException)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;false&quot;"/>
-    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.transport.CorbaContactInfoListIteratorImpl com.sun.corba.se.pept.transport.ContactInfoList getContactInfoList()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -282,6 +272,9 @@
   <item name="com.sun.corba.se.impl.transport.DefaultIORToSocketInfoImpl java.util.List getSocketInfo(com.sun.corba.se.spi.ior.IOR) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.transport.DefaultIORToSocketInfoImpl java.util.List getSocketInfo(com.sun.corba.se.spi.ior.IOR)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.transport.DefaultIORToSocketInfoImpl.1 int getPort()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -306,8 +299,14 @@
   <item name="com.sun.corba.se.impl.transport.DefaultSocketFactoryImpl java.net.ServerSocket createServerSocket(java.lang.String, java.net.InetSocketAddress) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.transport.DefaultSocketFactoryImpl java.net.ServerSocket createServerSocket(java.lang.String, java.net.InetSocketAddress)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.transport.DefaultSocketFactoryImpl java.net.Socket createSocket(java.lang.String, java.net.InetSocketAddress) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.DefaultSocketFactoryImpl java.net.Socket createSocket(java.lang.String, java.net.InetSocketAddress)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.transport.DefaultSocketFactoryImpl void setAcceptedSocketOptions(com.sun.corba.se.pept.transport.Acceptor, java.net.ServerSocket, java.net.Socket) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -643,11 +642,6 @@
   <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl SocketOrChannelConnectionImpl(com.sun.corba.se.spi.orb.ORB, com.sun.corba.se.spi.transport.CorbaContactInfo, java.lang.String, java.lang.String, int) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl boolean dispatch(com.sun.corba.se.spi.protocol.CorbaMessageMediator)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;true&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl boolean isPostInitialContexts()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -768,7 +762,13 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl java.nio.ByteBuffer read(int, int, int, long)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl java.nio.ByteBuffer read(java.nio.ByteBuffer, int, int, long) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl java.nio.ByteBuffer read(java.nio.ByteBuffer, int, int, long)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl java.nio.channels.SelectableChannel getChannel()">
@@ -829,7 +829,7 @@
   </item>
   <item name="com.sun.corba.se.impl.transport.SocketOrChannelContactInfoImpl boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.transport.SocketOrChannelContactInfoImpl boolean isConnectionBased()">

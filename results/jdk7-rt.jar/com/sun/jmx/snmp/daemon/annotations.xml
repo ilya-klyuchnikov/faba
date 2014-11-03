@@ -69,11 +69,6 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.CommunicatorServer javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
-    </annotation>
-  </item>
   <item name="com.sun.jmx.snmp.daemon.CommunicatorServer long getBindSleepTime()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -148,11 +143,6 @@
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, com.sun.jmx.snmp.SnmpOid[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, com.sun.jmx.snmp.SnmpOid[])">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null&quot;"/>
-    </annotation>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -284,6 +274,9 @@
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.String makeDebugTag()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.String[] getMibs()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Thread createMainThread()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -295,13 +288,11 @@
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.util.Vector snmpInformRequest(com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.util.Vector snmpInformRequest(com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null&quot;"/>
-    </annotation>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void createSnmpRequestHandler(com.sun.jmx.snmp.daemon.SnmpAdaptorServer, int, java.net.DatagramSocket, java.net.DatagramPacket, com.sun.jmx.snmp.daemon.SnmpMibTree, java.util.Vector, java.lang.Object, com.sun.jmx.snmp.SnmpPduFactory, com.sun.jmx.snmp.agent.SnmpUserDataFactory, javax.management.MBeanServer, javax.management.ObjectName) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -527,9 +518,6 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest java.lang.String snmpErrorToString(int)">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest java.lang.String statusDescription(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -620,9 +608,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpMibTree.TreeNode com.sun.jmx.snmp.daemon.SnmpMibTree.TreeNode retrieveMatchingBranch(long[], int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpMibTree.TreeNode void access$200(com.sun.jmx.snmp.daemon.SnmpMibTree.TreeNode, long[], int, com.sun.jmx.snmp.agent.SnmpMibAgent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -675,7 +661,13 @@
   <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduPacket makeGetBulkResponsePdu(com.sun.jmx.snmp.SnmpPduBulk, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduPacket makeGetBulkResponsePdu(com.sun.jmx.snmp.SnmpPduBulk, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduPacket makeGetSetResponsePdu(com.sun.jmx.snmp.SnmpPduRequest, java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduPacket makeGetSetResponsePdu(com.sun.jmx.snmp.SnmpPduRequest, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduPacket makeNoMibErrorPdu(com.sun.jmx.snmp.SnmpPduRequest, java.lang.Object) 0">
@@ -715,9 +707,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduPacket reduceResponsePdu(com.sun.jmx.snmp.SnmpPduPacket, com.sun.jmx.snmp.SnmpPduPacket, int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null,_-&gt;!null&quot;"/>
-    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduPacket turboProcessingGetSet(com.sun.jmx.snmp.SnmpPduRequest, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -735,6 +725,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduRequest newValidResponsePdu(com.sun.jmx.snmp.SnmpPduPacket, com.sun.jmx.snmp.SnmpVarBind[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpVarBind[] mergeBulkResponses(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler java.lang.String makeDebugTag()">
@@ -826,7 +819,7 @@
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpSubBulkRequestHandler com.sun.jmx.snmp.SnmpVarBind findVarBind(com.sun.jmx.snmp.SnmpVarBind, com.sun.jmx.snmp.SnmpVarBind)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,null-&gt;null;null,_-&gt;null&quot;"/>
+      <val val="&quot;!null,_-&gt;!null;_,null-&gt;null;null,_-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
