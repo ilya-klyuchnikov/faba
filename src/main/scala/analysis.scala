@@ -137,8 +137,8 @@ abstract class Analysis[Res] {
    * Generates new unique id.
    *
    * @return new unique id.
-   * @throws LimitReachedException if graph of configurations is too big.
    */
+  @throws[LimitReachedException]("when graph of configurations is too big")
   final def genId(): Int = {
     id += 1
     if (id > LimitReachedException.limit) throw new LimitReachedException
