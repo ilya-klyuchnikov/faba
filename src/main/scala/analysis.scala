@@ -104,14 +104,6 @@ abstract class Analysis[Res] {
   def mkEquation(result: Res): Equation[Key, Value]
 
   /**
-   * Utility method for creating start state
-   *
-   * @return start state for analysis
-   */
-  final def createStartState(): State =
-    State(0, Conf(0, createStartFrame()), Nil, 0)
-
-  /**
    * Bookkeeping of already analyzed states.
    * `computed(i)` is a set of already analyzed states having `state.conf.insnIndex = i`
    * (the key is insnIndex)
@@ -146,7 +138,22 @@ abstract class Analysis[Res] {
     id
   }
 
-  def createStartFrame(): Frame[BasicValue] = {
+  /**
+   * Utility method for creating start state for analysis.
+   *
+   * @return start state for analysis
+   */
+  final def createStartState(): State =
+    State(0, Conf(0, createStartFrame()), Nil, 0)
+
+  /**
+   * Creates start frame for analysis.
+   *
+   * @return start frame for analysis
+   * @see `createStartState`
+   * @see `createStartValueForParameter`
+   */
+  final def createStartFrame(): Frame[BasicValue] = {
     val frame = new Frame[BasicValue](methodNode.maxLocals, methodNode.maxStack)
     val returnType = Type.getReturnType(methodNode.desc)
     val returnValue = if (returnType == Type.VOID_TYPE) null else new BasicValue(returnType)
@@ -161,12 +168,10 @@ abstract class Analysis[Res] {
     }
     for (i <- 0 until args.size) {
       val value = direction match {
-        case InOut(`i`, _) =>
-          new ParamValue(args(i))
-        case In(`i`) =>
+        case InOut(`i`, _) | In(`i`) =>
           new ParamValue(args(i))
         case _ =>
-          new BasicValue(args(i))
+          createStartValueForParameter(i, args(i))
       }
       frame.setLocal(local, value)
       local += 1
@@ -182,6 +187,24 @@ abstract class Analysis[Res] {
     frame
   }
 
+  /**
+   * Creates initial value for parameter. Intended to be overridden/customized.
+   * The default implementation returns {{{BasicValue(tp)}}}.
+   *
+   * @param i parameter's index
+   * @param tp parameter's type
+   * @return Abstract value to be used as a starting point for analysis.
+   * @see `createStartFrame`
+   * @see `InOutAnalysis.createStartValueForParameter`
+   */
+  def createStartValueForParameter(i: Int, tp: Type): BasicValue =
+    new BasicValue(tp)
+
+  /**
+   *
+   * @param frame frame
+   * @return top of the stack of this frame
+   */
   final def popValue(frame: Frame[BasicValue]): BasicValue =
     frame.getStack(frame.getStackSize - 1)
 }
