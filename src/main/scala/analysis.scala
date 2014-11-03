@@ -7,26 +7,33 @@ import faba.cfg._
 import faba.data._
 import faba.engine._
 
+/**
+ * Marker annotation to denote data-class for some abstract value.
+ * The reason for this annotation is to ease navigation and understanding of code.
+ *
+ * FABA plugs into existing infrastructure of asm lib and extends
+ * [[org.objectweb.asm.tree.analysis.Value]] and [[org.objectweb.asm.tree.analysis.BasicValue]] classes.
+ */
+class AsmAbstractValue extends scala.annotation.StaticAnnotation
+
 trait Trackable {
   val origin: Int
   def cast(to: Type): BasicValue
 }
 
-case class ParamValue(tp: Type) extends BasicValue(tp)
-case class InstanceOfCheckValue() extends BasicValue(Type.INT_TYPE)
-case class NThParamValue(n: Int, tp: Type) extends BasicValue(tp)
-case class TrueValue() extends BasicValue(Type.INT_TYPE)
-
-case class FalseValue() extends BasicValue(Type.INT_TYPE)
-case class NotNullValue(tp: Type) extends BasicValue(tp)
-
-case class NullValue(origin: Int) extends BasicValue(Type.getObjectType("null")) with Trackable {
+@AsmAbstractValue case class ParamValue(tp: Type) extends BasicValue(tp)
+@AsmAbstractValue case class InstanceOfCheckValue() extends BasicValue(Type.INT_TYPE)
+@AsmAbstractValue case class NThParamValue(n: Int, tp: Type) extends BasicValue(tp)
+@AsmAbstractValue case class TrueValue() extends BasicValue(Type.INT_TYPE)
+@AsmAbstractValue case class FalseValue() extends BasicValue(Type.INT_TYPE)
+@AsmAbstractValue case class NotNullValue(tp: Type) extends BasicValue(tp)
+@AsmAbstractValue case class NullValue(origin: Int) extends BasicValue(Type.getObjectType("null")) with Trackable {
   override def cast(tp: Type) = this
 }
-case class CallResultValue(origin: Int, tp: Type, inters: Set[Key]) extends BasicValue(tp) with Trackable {
+@AsmAbstractValue case class CallResultValue(origin: Int, tp: Type, inters: Set[Key]) extends BasicValue(tp) with Trackable {
   override def cast(to: Type) = CallResultValue(origin, to, inters)
 }
-case class TrackableBasicValue(origin: Int, tp: Type) extends BasicValue(tp) with Trackable {
+@AsmAbstractValue case class TrackableBasicValue(origin: Int, tp: Type) extends BasicValue(tp) with Trackable {
   override def cast(to: Type) = TrackableBasicValue(origin, to)
 }
 

@@ -1,5 +1,6 @@
 package faba.asm
 
+import faba.analysis.AsmAbstractValue
 import faba.cfg.ControlFlowGraph
 import org.objectweb.asm.{Opcodes, Type}
 import org.objectweb.asm.tree.analysis.{Frame, SourceInterpreter, SourceValue, Value}
@@ -43,6 +44,10 @@ case class Origins(instructions: Array[Boolean], parameters: Array[Boolean]) {
 
 object OriginsAnalysis {
 
+  // Values to support backward analysis
+  @AsmAbstractValue case class LocalVarValue(slot: Int, _size: Int) extends SourceValue(_size, nullSet)
+  @AsmAbstractValue case class OnStackValue(slot: Int, _size: Int) extends SourceValue(_size, nullSet)
+
   /**
    * Location of a value inside a frame
    */
@@ -80,9 +85,6 @@ object OriginsAnalysis {
   }
 
   private val nullSet: java.util.Set[AbstractInsnNode] = null
-  // Values to support backward analysis
-  case class LocalVarValue(slot: Int, _size: Int) extends SourceValue(_size, nullSet)
-  case class OnStackValue(slot: Int, _size: Int) extends SourceValue(_size, nullSet)
 
   /**
    * Detects points (parameters ans instructions) where the result of the method was born.
