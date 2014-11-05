@@ -112,17 +112,27 @@ trait Trackable {
 }
 
 case class Conf(insnIndex: Int, frame: Frame[BasicValue]) {
-  lazy val _hashCode = {
+  // TODO - extract into analysis utils
+  val frameHashCode = {
     var result = 0
-    for (i <- 0 until frame.getLocals) {
+
+    var i = 0
+    var size = frame.getLocals
+    while (i < size) {
       result = result * 31 + frame.getLocal(i).getClass.hashCode()
+      i += 1
     }
-    for (i <- 0 until frame.getStackSize) {
+
+    i = 0
+    size = frame.getStackSize
+    while (i < size) {
       result = result * 31 + frame.getStack(i).getClass.hashCode()
+      i += 1
     }
+
     result
   }
-  override def hashCode() = _hashCode
+  override def hashCode() = frameHashCode
 }
 
 /**
