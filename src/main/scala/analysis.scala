@@ -10,29 +10,103 @@ import faba.engine._
 /**
  * Marker annotation to denote data-class for some abstract value.
  * The reason for this annotation is to ease navigation and understanding of code.
+ * Different values have different purposes and semantics explained in their documentation.
  *
  * FABA plugs into existing infrastructure of asm lib and extends
  * [[org.objectweb.asm.tree.analysis.Value]] and [[org.objectweb.asm.tree.analysis.BasicValue]] classes.
  */
 class AsmAbstractValue extends scala.annotation.StaticAnnotation
 
+/**
+ * Trait for trackable values. Trackable values hold information about at which instruction it was created.
+ * See `Trackable.origin` field.
+ */
 trait Trackable {
+  /**
+   * Instruction index at which a value was created
+   */
   val origin: Int
+
+  /**
+   * Casts a trackable value to a given type. This method is used to execute CHECKCAST bytecode instruction.
+   *
+   * @param to type to cast trackable value to
+   * @return the same (semantically) value, but casted to requested asm type
+   */
   def cast(to: Type): BasicValue
 }
 
+/**
+ * Abstract asm value for single parameter analyses (Parameter analysis and parameter->result analysis).
+ * These analyses are: `@Nullable` parameter, `@NotNull` parameter, `@Contract(null->)`, `@Contract(!null->)`
+ *
+ * @param tp type of parameter
+ */
 @AsmAbstractValue case class ParamValue(tp: Type) extends BasicValue(tp)
-@AsmAbstractValue case class InstanceOfCheckValue() extends BasicValue(Type.INT_TYPE)
+
+/**
+ * Abstract asm value to represent the result of `param instanceof SomeClass`.
+ */
+@AsmAbstractValue case class ParamInstanceOfCheckValue() extends BasicValue(Type.INT_TYPE)
+
+/**
+ * Abstract asm value to represent the value passed through nth parameter of a method.
+ * Used in `@NotNull` and `@Contract(...)` inference.
+ *
+ * @param n parameter's in the list of parameters
+ * @param tp parameter's type
+ * @see `faba.contracts.InOutAnalysis#createStartValueForParameter(int, org.objectweb.asm.Type)`
+ */
 @AsmAbstractValue case class NThParamValue(n: Int, tp: Type) extends BasicValue(tp)
+
+/**
+ * Abstract asm value for `true` boolean constant.
+ * Used for `@Contract(...->true|false)` inference
+ */
 @AsmAbstractValue case class TrueValue() extends BasicValue(Type.INT_TYPE)
+
+/**
+ * Abstract asm value for `false` boolean constant.
+ * Used for `@Contract(...->true|false)` inference
+ */
 @AsmAbstractValue case class FalseValue() extends BasicValue(Type.INT_TYPE)
+
+/**
+ * Abstract asm value for representing value that are known to be not null at analysis time.
+ * Such values appear for `NEW`, `NEWARRAY`, etc instructions and for `LDC` (load constant) instructions.
+ *
+ * @param tp asm type of value
+ */
 @AsmAbstractValue case class NotNullValue(tp: Type) extends BasicValue(tp)
+
+/**
+ * Abstract asm value for representing null values.
+ * See `notes/null-value.md` for explanation of non-trivial fact "why is origin for null values".
+ * @param origin instruction index at which a value was created
+ */
 @AsmAbstractValue case class NullValue(origin: Int) extends BasicValue(Type.getObjectType("null")) with Trackable {
   override def cast(tp: Type) = this
 }
+
+/**
+ * Abstract asm value for representing the result of method invocations.
+ *
+ * @param origin instruction index at which a value was created
+ * @param tp asm type of a value
+ * @param inters all valuable keys
+ */
 @AsmAbstractValue case class CallResultValue(origin: Int, tp: Type, inters: Set[Key]) extends BasicValue(tp) with Trackable {
   override def cast(to: Type) = CallResultValue(origin, to, inters)
 }
+
+/**
+ * Abstract asm value for representing values that we want to track to propagate nullity information.
+ * Used for representing the result of execution following bytecode instructions:
+ * `GETSTATIC`, `GETFIELD`, `AALOAD`.
+ *
+ * @param origin instruction index at which a value was created
+ * @param tp asm type of a value
+ */
 @AsmAbstractValue case class TrackableBasicValue(origin: Int, tp: Type) extends BasicValue(tp) with Trackable {
   override def cast(to: Type) = TrackableBasicValue(origin, to)
 }
@@ -241,8 +315,8 @@ object Utils {
       case _: ParamValue => true
       case _ => false
     }
-    case InstanceOfCheckValue() => curr match {
-      case InstanceOfCheckValue() => true
+    case ParamInstanceOfCheckValue() => curr match {
+      case ParamInstanceOfCheckValue() => true
       case _ => false
     }
     case TrueValue() => curr match {

@@ -217,13 +217,13 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
           pendingPush(notNullState)
           return
 
-        case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
+        case IFEQ if popValue(frame).isInstanceOf[ParamInstanceOfCheckValue] && optIn == Some(Values.Null) =>
           val nextInsnIndex =
             methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           val nextState = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, dereferenced)
           states = state :: states
           state = nextState
-        case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] && optIn == Some(Values.Null) =>
+        case IFNE if popValue(frame).isInstanceOf[ParamInstanceOfCheckValue] && optIn == Some(Values.Null) =>
           val nextInsnIndex = insnIndex + 1
           val nextState = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, dereferenced)
           state = nextState
@@ -371,7 +371,7 @@ case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins
             newValue(tp)
         }
       case INSTANCEOF if value.isInstanceOf[ParamValue] =>
-        InstanceOfCheckValue()
+        ParamInstanceOfCheckValue()
       case NEWARRAY | ANEWARRAY if propagate_? =>
         NotNullValue(super.unaryOperation(insn, value).getType)
       case _ =>

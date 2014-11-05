@@ -301,12 +301,12 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
           val nextState = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, constraint1 | 1)
           states = state :: states
           state = nextState
-        case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
+        case IFEQ if popValue(frame).isInstanceOf[ParamInstanceOfCheckValue] =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           val nextState = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, constraint1 | 1)
           states = state :: states
           state = nextState
-        case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
+        case IFNE if popValue(frame).isInstanceOf[ParamInstanceOfCheckValue] =>
           val nextInsnIndex = insnIndex + 1
           val nextState = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, constraint1 | 1)
           states = state :: states
@@ -448,10 +448,10 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
         case IFNULL if popValue(frame).isInstanceOf[ParamValue] =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           state = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, 1)
-        case IFEQ if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
+        case IFEQ if popValue(frame).isInstanceOf[ParamInstanceOfCheckValue] =>
           val nextInsnIndex = methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
           state = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, 1)
-        case IFNE if popValue(frame).isInstanceOf[InstanceOfCheckValue] =>
+        case IFNE if popValue(frame).isInstanceOf[ParamInstanceOfCheckValue] =>
           val nextInsnIndex = insnIndex + 1
           state = State(genId(), Conf(nextInsnIndex, nextFrame), nextHistory, 1)
         case _ =>
@@ -508,7 +508,7 @@ abstract class Interpreter extends BasicInterpreter {
       case CHECKCAST if value.isInstanceOf[ParamValue] =>
         return new ParamValue(Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc))
       case INSTANCEOF if value.isInstanceOf[ParamValue] =>
-        return InstanceOfCheckValue()
+        return ParamInstanceOfCheckValue()
       case _ =>
     }
     super.unaryOperation(insn, value)
