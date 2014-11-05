@@ -5,7 +5,7 @@ import org.objectweb.asm.tree.analysis.{BasicInterpreter, Frame, BasicValue}
 import org.objectweb.asm.tree.{MethodInsnNode, TypeInsnNode, JumpInsnNode, AbstractInsnNode}
 import org.objectweb.asm.Opcodes._
 
-import faba.analysis.{Utils => AnalysisUtils, _}
+import faba.analysis._
 import faba.cfg._
 import faba.data._
 import faba.engine._
@@ -209,6 +209,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
   }
 
   override def processState(fState: State): Unit = {
+    import AnalysisUtils.popValue
 
     var state = fState
     var states: List[State] = Nil
@@ -394,6 +395,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
   }
 
   override def processState(fState: State): Unit = {
+    import AnalysisUtils.popValue
 
     var state = fState
 

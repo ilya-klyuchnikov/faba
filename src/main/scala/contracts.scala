@@ -9,7 +9,7 @@ import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.tree.analysis.{BasicValue, BasicInterpreter, Frame}
 import org.objectweb.asm.tree._
 
-import faba.analysis.{Utils => AnalysisUtils, _}
+import faba.analysis._
 import faba.cfg._
 import faba.data._
 import faba.engine._
@@ -89,6 +89,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
   }
 
   override def processState(fState: State): Unit = {
+    import AnalysisUtils.popValue
 
     var state = fState
     var states: List[State] = Nil
