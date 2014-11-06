@@ -25,9 +25,9 @@ trait Trackable {
 
 // specialized class for analyzing methods without branching
 // this is a good tutorial example
-class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGraph) {
+class CombinedSingleAnalysis(val context: LiteContext) {
+  import context._
 
-  val methodNode = controlFlow.methodNode
   val interpreter = new CombinedInterpreter(methodNode.instructions, Type.getArgumentTypes(methodNode.desc).length)
   var returnValue: BasicValue = null
   var exception: Boolean = false
@@ -60,7 +60,7 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
     }
   }
 
-  def notNullParamEquation(i: Int, stable: Boolean): Equation[Key, Value] = {
+  def notNullParamEquation(i: Int): Equation[Key, Value] = {
     val key = Key(method, In(i), stable)
     val result: Result[Key, Value] =
       if (interpreter.dereferencedParams(i)) Final(Values.NotNull)
@@ -74,7 +74,7 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
     Equation(key, result)
   }
 
-  def nullableParamEquation(i: Int, stable: Boolean): Equation[Key, Value] = {
+  def nullableParamEquation(i: Int): Equation[Key, Value] = {
     val key = Key(method, In(i), stable)
     val result: Result[Key, Value] =
       if (interpreter.dereferencedParams(i) || interpreter.notNullableParams(i)) Final(Values.Top)
@@ -94,7 +94,7 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
     Equation(key, result)
   }
 
-  def contractEquation(paramIndex: Int, inValue: Value, stable: Boolean): Equation[Key, Value] = {
+  def contractEquation(paramIndex: Int, inValue: Value): Equation[Key, Value] = {
     val key = Key(method, InOut(paramIndex, inValue), stable)
     val result: Result[Key, Value] =
       if (exception || (inValue == Values.Null && interpreter.dereferencedParams(paramIndex)))
@@ -133,7 +133,7 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
     Equation(key, result)
   }
 
-  def outContractEquation(stable: Boolean): Equation[Key, Value] = {
+  def outContractEquation(): Equation[Key, Value] = {
     val key = Key(method, Out, stable)
     val result: Result[Key, Value] =
       if (exception) Final(Values.Bot)
@@ -159,7 +159,7 @@ class CombinedSingleAnalysis(val method: Method, val controlFlow: ControlFlowGra
     Equation(key, result)
   }
 
-  def nullableResultEquation(stable: Boolean): Equation[Key, Value] = {
+  def nullableResultEquation(): Equation[Key, Value] = {
     val key = Key(method, Out, stable)
     val result: Result[Key, Value] =
       if (exception) Final(Values.Bot)

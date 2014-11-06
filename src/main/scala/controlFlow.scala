@@ -122,7 +122,7 @@ private case class ControlFlowBuilder(className: String, methodNode: MethodNode)
 
   def buildCFG(): ControlFlowGraph = {
     if ((methodNode.access & (ACC_ABSTRACT | ACC_NATIVE)) == 0) analyze(methodNode)
-    ControlFlowGraph(className, methodNode, transitions.map(_.toList), errorTransitions, errors)
+    ControlFlowGraph(transitions.map(_.toList), errorTransitions, errors)
   }
 
   override protected def newControlFlowEdge(insn: Int, successor: Int) {
@@ -151,7 +151,7 @@ private case class LiteControlFlowBuilder(className: String, methodNode: MethodN
 
   def buildCFG(): ControlFlowGraph = {
     if ((methodNode.access & (ACC_ABSTRACT | ACC_NATIVE)) == 0) analyze(methodNode)
-    ControlFlowGraph(className, methodNode, transitions.map(_.toList), errorTransitions, errors)
+    ControlFlowGraph(transitions.map(_.toList), errorTransitions, errors)
   }
 
   override protected def newControlFlowEdge(insn: Int, successor: Int) {

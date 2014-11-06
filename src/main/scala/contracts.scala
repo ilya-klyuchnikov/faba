@@ -20,10 +20,11 @@ object InOutAnalysis {
   val sharedPendingStack = new Array[State](LimitReachedException.limit)
 }
 
-class InOutAnalysis(val richControlFlow: RichControlFlow,
+class InOutAnalysis(val context: Context,
                     val direction: Direction,
-                    resultOrigins: Origins,
-                    val stable: Boolean) extends Analysis[Result[Key, Value]] {
+                    resultOrigins: Origins) extends Analysis[Result[Key, Value]] {
+
+  import context._
 
   type MyResult = Result[Key, Value]
   implicit val contractsLattice = ELattice(Values.Bot, Values.Top)

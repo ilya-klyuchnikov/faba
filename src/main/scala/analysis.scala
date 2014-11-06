@@ -7,9 +7,7 @@ import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.analysis.{BasicValue, Frame}
 import org.objectweb.asm.{Opcodes, Type}
 
-case class ControlFlowGraph(className: String,
-                            methodNode: MethodNode,
-                            transitions: Array[List[Int]],
+case class ControlFlowGraph(transitions: Array[List[Int]],
                             errorTransitions: Set[(Int, Int)],
                             errors: Array[Boolean])
 
@@ -23,7 +21,32 @@ case class DFSTree(preOrder: Array[Int],
     preOrder(parent) <= preOrder(child) && postOrder(child) <= postOrder(parent)
 }
 
-case class RichControlFlow(controlFlow: ControlFlowGraph, dfsTree: DFSTree)
+/**
+ * Lite analysis context. Used for Lite combined analysis.
+ *
+ * @param method
+ * @param methodNode
+ * @param controlFlow
+ * @param stable
+ */
+case class LiteContext(method: Method,
+                       methodNode: MethodNode,
+                       controlFlow: ControlFlowGraph,
+                       stable: Boolean)
+
+/**
+ *
+ * @param method
+ * @param methodNode
+ * @param controlFlow
+ * @param stable
+ * @param dfsTree
+ */
+case class Context(method: Method,
+                   methodNode: MethodNode,
+                   controlFlow: ControlFlowGraph,
+                   stable: Boolean,
+                   dfsTree: DFSTree)
 
 /**
  * Marker annotation to denote data-class for some abstract value.
@@ -166,14 +189,11 @@ class LimitReachedException extends Exception("Limit reached exception")
  * @see `mkEquation(result: Res): Equation[Key, Value]`
  */
 abstract class Analysis[Res] {
-
-  val richControlFlow: RichControlFlow
+  val context: Context
   val direction: Direction
-  val stable: Boolean
-  val controlFlow = richControlFlow.controlFlow
-  val methodNode = controlFlow.methodNode
-  val method = Method(controlFlow.className, methodNode.name, methodNode.desc)
-  val dfsTree = richControlFlow.dfsTree
+
+  import context._
+
   val aKey = Key(method, direction, stable)
 
   /**
@@ -252,7 +272,7 @@ abstract class Analysis[Res] {
     val args = Type.getArgumentTypes(methodNode.desc)
     var local = 0
     if ((methodNode.access & Opcodes.ACC_STATIC) == 0) {
-      val basicValue = new NotNullValue(Type.getObjectType(controlFlow.className))
+      val basicValue = new NotNullValue(Type.getObjectType(method.internalClassName))
       frame.setLocal(local, basicValue)
       local += 1
     }

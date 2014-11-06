@@ -151,8 +151,9 @@ object NotNullInAnalysis {
   val sharedResults = new Array[Result](LimitReachedException.limit)
 }
 
-class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result] {
+class NotNullInAnalysis(val context: Context, val direction: Direction) extends Analysis[Result] {
   import faba.parameters.NotNullInAnalysis._
+  import context._
 
   val results = NotNullInAnalysis.sharedResults
   val pending = NotNullInAnalysis.sharedPendingStack
@@ -359,8 +360,9 @@ object NullableInAnalysis {
   val sharedPendingStack = new Array[State](LimitReachedException.limit)
 }
 
-class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result] {
+class NullableInAnalysis(val context: Context, val direction: Direction) extends Analysis[Result] {
 
+  import context._
   val pending = NullableInAnalysis.sharedPendingStack
 
   override def mkEquation(result: Result): Equation[Key, Value] = result match {

@@ -100,23 +100,23 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def notNullParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean) = {
+  override def notNullParamEquation(context: Context, i: Int) = {
     val start = System.nanoTime()
-    val result = super.notNullParamEquation(richControlFlow, i, stable)
+    val result = super.notNullParamEquation(context, i)
     notNullParamsTime += System.nanoTime() - start
     result
   }
 
-  override def nullableParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean) = {
+  override def nullableParamEquation(context: Context, i: Int) = {
     val start = System.nanoTime()
-    val result = super.nullableParamEquation(richControlFlow, i, stable)
+    val result = super.nullableParamEquation(context, i)
     nullableParamsTime += System.nanoTime() - start
     result
   }
 
-  override def notNullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, i: Int, stable: Boolean) = {
+  override def notNullContractEquation(context: Context, resultOrigins: Origins, i: Int) = {
     val start = System.nanoTime()
-    val result = super.notNullContractEquation(richControlFlow, resultOrigins, i, stable)
+    val result = super.notNullContractEquation(context, resultOrigins, i)
     val delta = System.nanoTime() - start
     notNullTime += delta
     result.rhs match {
@@ -132,9 +132,9 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def nullContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, i: Int, stable: Boolean) = {
+  override def nullContractEquation(context: Context, resultOrigins: Origins, i: Int) = {
     val start = System.nanoTime()
-    val result = super.nullContractEquation(richControlFlow, resultOrigins, i, stable)
+    val result = super.nullContractEquation(context, resultOrigins, i)
     val delta = System.nanoTime() - start
     nullTime += delta
     result.rhs match {
@@ -150,9 +150,9 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def outContractEquation(richControlFlow: RichControlFlow, resultOrigins: Origins, stable: Boolean) = {
+  override def outContractEquation(context: Context, resultOrigins: Origins) = {
     val start = System.nanoTime()
-    val result = super.outContractEquation(richControlFlow, resultOrigins, stable)
+    val result = super.outContractEquation(context, resultOrigins)
     val delta = System.nanoTime() - start
     outTime += delta
     result.rhs match {
