@@ -108,10 +108,10 @@ trait FabaProcessor extends Processor {
 
     if (graph.transitions.nonEmpty) {
       val dfs = buildDFSTree(graph.transitions)
-      val complex = dfs.back.nonEmpty || graph.transitions.exists(_.size > 1)
+      val complex = dfs.backEdges.nonEmpty || graph.transitions.exists(_.size > 1)
       val start = System.nanoTime()
       if (complex) {
-        val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
+        val reducible = dfs.backEdges.isEmpty || isReducible(graph, dfs)
         if (reducible) {
           handleComplexMethod(method, className, methodNode, dfs, argumentTypes, graph, isReferenceResult, isBooleanResult, stable, jsr)
           added = true
@@ -198,7 +198,7 @@ trait FabaProcessor extends Processor {
                           stable: Boolean,
                           jsr: Boolean) {
     val start = System.nanoTime()
-    val cycle = dfs.back.nonEmpty
+    val cycle = dfs.backEdges.nonEmpty
     // leaking params will be taken for
     lazy val leaking = leakingParameters(className, methodNode, jsr)
     lazy val resultOrigins = buildResultOrigins(className, methodNode, leaking.frames, graph)

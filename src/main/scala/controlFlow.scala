@@ -1,4 +1,4 @@
-package faba.controlFlow
+package faba
 
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.tree._
@@ -10,22 +10,21 @@ import scala.collection.mutable.ListBuffer
 import faba.asm._
 import faba.analysis._
 
-object `package` {
-
-  val MERGE_LIMIT = 100000
+package object controlFlow {
 
   def buildControlFlowGraph(className: String, methodNode: MethodNode, jsr: Boolean): ControlFlowGraph =
     if (jsr) ControlFlowBuilder(className, methodNode).buildCFG()
     else LiteControlFlowBuilder(className, methodNode).buildCFG()
+
+  private sealed trait Action
+  private case class MarkScanned(node: Int) extends Action
+  private case class ExamineEdge(from: Int, to: Int) extends Action
 
   // Graphs: Theory and Algorithms. by K. Thulasiraman , M. N. S. Swamy (1992)
   // 11.7.2 DFS of a directed graph
   def buildDFSTree(transitions: Array[List[Int]]): DFSTree = {
     type Edge = (Int, Int)
 
-    sealed trait Action
-    case class MarkScanned(node: Int) extends Action
-    case class ExamineEdge(from: Int, to: Int) extends Action
 
     var nonBack, back = HashSet[Edge]()
     // marked = entered
@@ -83,19 +82,19 @@ object `package` {
   def reducible(cfg: ControlFlowGraph, dfs: DFSTree): Boolean = {
     val size = cfg.transitions.length
 
-    val cycles2Node = Array.tabulate(size){i => mutable.HashSet[Int]()}
-    val nonCycles2Node = Array.tabulate(size){i => mutable.HashSet[Int]()}
+    val cycles2Node = Array.tabulate(size) { i => mutable.HashSet[Int]()}
+    val nonCycles2Node = Array.tabulate(size) { i => mutable.HashSet[Int]()}
     val collapsedTo = Array.tabulate[Int](size)(i => i)
 
-    for ((from, to) <- dfs.back) cycles2Node(to).add(from)
-    for ((from, to) <- dfs.nonBack) nonCycles2Node(to).add(from)
+    for ((from, to) <- dfs.backEdges) cycles2Node(to).add(from)
+    for ((from, to) <- dfs.spanningTree) nonCycles2Node(to).add(from)
 
     for (w <- (size - 1) to 0 by -1) {
       val seq: Seq[Int] = cycles2Node(w).toSeq
-      val p = mutable.HashSet[Int](seq:_*)
-      val queue = mutable.Queue[Int](seq:_*)
+      val p = mutable.HashSet[Int](seq: _*)
+      val queue = mutable.Queue[Int](seq: _*)
 
-      while(queue.nonEmpty) {
+      while (queue.nonEmpty) {
         val x = queue.dequeue()
         for (y <- nonCycles2Node(x)) {
           val y1 = collapsedTo(y)
@@ -110,63 +109,64 @@ object `package` {
 
     true
   }
-}
 
-private case class ControlFlowBuilder(className: String, methodNode: MethodNode) extends FramelessAnalyzer() {
-  val transitions =
-    Array.tabulate[ListBuffer[Int]](methodNode.instructions.size){i => new ListBuffer()}
-  val errors =
-    new Array[Boolean](methodNode.instructions.size())
-  var errorTransitions =
-    Set[(Int, Int)]()
+  private case class ControlFlowBuilder(className: String, methodNode: MethodNode) extends FramelessAnalyzer() {
+    val transitions =
+      Array.tabulate[ListBuffer[Int]](methodNode.instructions.size) { i => new ListBuffer()}
+    val errors =
+      new Array[Boolean](methodNode.instructions.size())
+    var errorTransitions =
+      Set[(Int, Int)]()
 
-  def buildCFG(): ControlFlowGraph = {
-    if ((methodNode.access & (ACC_ABSTRACT | ACC_NATIVE)) == 0) analyze(methodNode)
-    ControlFlowGraph(transitions.map(_.toList), errorTransitions, errors)
-  }
+    def buildCFG(): ControlFlowGraph = {
+      if ((methodNode.access & (ACC_ABSTRACT | ACC_NATIVE)) == 0) analyze(methodNode)
+      ControlFlowGraph(transitions.map(_.toList), errorTransitions, errors)
+    }
 
-  override protected def newControlFlowEdge(insn: Int, successor: Int) {
-    if (!transitions(insn).contains(successor)) {
-      transitions(insn) += successor
+    override protected def newControlFlowEdge(insn: Int, successor: Int) {
+      if (!transitions(insn).contains(successor)) {
+        transitions(insn) += successor
+      }
+    }
+
+    override def newControlFlowExceptionEdge(insn: Int, successor: Int) = {
+      if (!transitions(insn).contains(successor)) {
+        transitions(insn) += successor
+        errorTransitions = errorTransitions + (insn -> successor)
+        errors(successor) = true
+      }
+      true
     }
   }
 
-  override def newControlFlowExceptionEdge(insn: Int, successor: Int) = {
-    if (!transitions(insn).contains(successor)) {
-      transitions(insn) += successor
-      errorTransitions = errorTransitions + (insn -> successor)
-      errors(successor) = true
+  private case class LiteControlFlowBuilder(className: String, methodNode: MethodNode) extends LiteFramelessAnalyzer() {
+    val transitions =
+      Array.tabulate[ListBuffer[Int]](methodNode.instructions.size) { i => new ListBuffer()}
+    val errors =
+      new Array[Boolean](methodNode.instructions.size())
+    var errorTransitions =
+      Set[(Int, Int)]()
+
+    def buildCFG(): ControlFlowGraph = {
+      if ((methodNode.access & (ACC_ABSTRACT | ACC_NATIVE)) == 0) analyze(methodNode)
+      ControlFlowGraph(transitions.map(_.toList), errorTransitions, errors)
     }
-    true
-  }
-}
 
-private case class LiteControlFlowBuilder(className: String, methodNode: MethodNode) extends LiteFramelessAnalyzer() {
-  val transitions =
-    Array.tabulate[ListBuffer[Int]](methodNode.instructions.size){i => new ListBuffer()}
-  val errors =
-    new Array[Boolean](methodNode.instructions.size())
-  var errorTransitions =
-    Set[(Int, Int)]()
+    override protected def newControlFlowEdge(insn: Int, successor: Int) {
+      if (!transitions(insn).contains(successor)) {
+        transitions(insn) += successor
+      }
+    }
 
-  def buildCFG(): ControlFlowGraph = {
-    if ((methodNode.access & (ACC_ABSTRACT | ACC_NATIVE)) == 0) analyze(methodNode)
-    ControlFlowGraph(transitions.map(_.toList), errorTransitions, errors)
-  }
-
-  override protected def newControlFlowEdge(insn: Int, successor: Int) {
-    if (!transitions(insn).contains(successor)) {
-      transitions(insn) += successor
+    override def newControlFlowExceptionEdge(insn: Int, successor: Int) = {
+      if (!transitions(insn).contains(successor)) {
+        transitions(insn) += successor
+        errorTransitions = errorTransitions + (insn -> successor)
+        errors(successor) = true
+      }
+      true
     }
   }
 
-  override def newControlFlowExceptionEdge(insn: Int, successor: Int) = {
-    if (!transitions(insn).contains(successor)) {
-      transitions(insn) += successor
-      errorTransitions = errorTransitions + (insn -> successor)
-      errors(successor) = true
-    }
-    true
-  }
 }
 

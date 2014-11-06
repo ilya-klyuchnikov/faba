@@ -7,14 +7,36 @@ import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.analysis.{BasicValue, Frame}
 import org.objectweb.asm.{Opcodes, Type}
 
+/**
+ * Control flow graph for a method's bytecode.
+ *
+ * @param transitions transitions(i) contains vertices reachable from i in one step
+ * @param errorTransitions if (i -> j) is in errorTransitions,
+ *                         then this transition corresponds to the enter into catch block
+ * @param errors starts of catch blocks
+ */
 case class ControlFlowGraph(transitions: Array[List[Int]],
                             errorTransitions: Set[(Int, Int)],
                             errors: Array[Boolean])
 
+/**
+ * Output of a depth-first search of a control flow graph.
+ * See [[http://en.wikipedia.org/wiki/Depth-first_search Depth-first search]].
+ *
+ * DFSTree is used for: testing reducibility of a graph, minimizing histories during analysis
+ * (only loop enters are added to the history).
+ *
+ * @param preOrder preOrder list
+ * @param postOrder postOrder list
+ * @param spanningTree spanning edges (= tree edges)
+ * @param backEdges back edges
+ * @param loopEnters loopEnters(i) means that the ith node is an enter into the loop
+ *
+ */
 case class DFSTree(preOrder: Array[Int],
                    postOrder: Array[Int],
-                   nonBack: Set[(Int, Int)],
-                   back: Set[(Int, Int)],
+                   spanningTree: Set[(Int, Int)],
+                   backEdges: Set[(Int, Int)],
                    loopEnters: Array[Boolean]) {
 
   def isDescendant(child: Int, parent: Int): Boolean =
@@ -24,10 +46,10 @@ case class DFSTree(preOrder: Array[Int],
 /**
  * Lite analysis context. Used for Lite combined analysis.
  *
- * @param method
- * @param methodNode
- * @param controlFlow
- * @param stable
+ * @param method method identifier
+ * @param methodNode method's bytecode
+ * @param controlFlow a control flow graph of the method's bytecode
+ * @param stable true if a method cannot be overridden
  */
 case class LiteContext(method: Method,
                        methodNode: MethodNode,
@@ -35,12 +57,13 @@ case class LiteContext(method: Method,
                        stable: Boolean)
 
 /**
+ * Analysis context. Used in complex analyses.
  *
- * @param method
- * @param methodNode
- * @param controlFlow
- * @param stable
- * @param dfsTree
+ * @param method method identifier
+ * @param methodNode method's bytecode
+ * @param controlFlow a control flow graph of the method's bytecode
+ * @param stable true if a method cannot be overridden
+ * @param dfsTree method's depths-first search tree
  */
 case class Context(method: Method,
                    methodNode: MethodNode,
