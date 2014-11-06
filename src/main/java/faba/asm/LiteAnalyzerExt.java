@@ -27,6 +27,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 package faba.asm;
 
 import org.objectweb.asm.Opcodes;
@@ -38,8 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Extended version of {@link org.objectweb.asm.tree.analysis.Analyzer}.
- * It handles frames <b>and</b> additional user info.
+ * Fusion of {@link faba.asm.LiteAnalyzer} and {@link faba.asm.AnalyzerExt}.
  */
 public class LiteAnalyzerExt<V extends Value, Data, MyInterpreter extends Interpreter<V> & InterpreterExt<Data>> implements Opcodes {
 

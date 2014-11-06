@@ -27,6 +27,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 package faba.asm;
 
 import org.objectweb.asm.Opcodes;
@@ -42,6 +43,7 @@ import java.util.Map;
 /**
  * Extended version of {@link org.objectweb.asm.tree.analysis.Analyzer}.
  * It handles frames <b>and</b> additional user info.
+ * Used in NullableResultAnalysis, Data is a set of constraints (dereferenced values).
  */
 public class AnalyzerExt<V extends Value, Data, MyInterpreter extends Interpreter<V> & InterpreterExt<Data>> implements Opcodes {
 
