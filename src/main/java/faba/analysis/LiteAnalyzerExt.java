@@ -28,7 +28,7 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package faba.asm;
+package faba.analysis;
 
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -39,30 +39,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Specialized lite version of {@link org.objectweb.asm.tree.analysis.Analyzer}.
- * No processing of Subroutines. May be used for methods without JSR/RET instructions.
+ * Fusion of {@link faba.analysis.LiteAnalyzer} and {@link faba.analysis.AnalyzerExt}.
  */
-public class LiteAnalyzer<V extends Value> implements Opcodes {
+public class LiteAnalyzerExt<V extends Value, Data, MyInterpreter extends Interpreter<V> & InterpreterExt<Data>> implements Opcodes {
 
-    private final Interpreter<V> interpreter;
-
+    private final MyInterpreter interpreter;
     private Frame<V>[] frames;
-
     private boolean[] queued;
-
     private int[] queue;
-
     private int top;
 
-    public LiteAnalyzer(final Interpreter<V> interpreter) {
+    public Data[] getData() {
+        return data;
+    }
+
+    private Data[] data;
+
+    public LiteAnalyzerExt(final MyInterpreter interpreter, Data[] data, Data startData) {
         this.interpreter = interpreter;
+        this.data = data;
+        if (data.length > 0) {
+            data[0] = startData;
+        }
     }
 
     public Frame<V>[] analyze(final String owner, final MethodNode m) throws AnalyzerException {
-        if ((m.access & (ACC_ABSTRACT | ACC_NATIVE)) != 0 || m.instructions.size() == 0) {
+        if ((m.access & (ACC_ABSTRACT | ACC_NATIVE)) != 0) {
             frames = (Frame<V>[]) new Frame<?>[0];
             return frames;
         }
+
+        final V refV = (V) BasicValue.REFERENCE_VALUE;
+
         int n = m.instructions.size();
         InsnList insns = m.instructions;
         List<TryCatchBlockNode>[] handlers = (List<TryCatchBlockNode>[]) new List<?>[n];
@@ -87,8 +95,8 @@ public class LiteAnalyzer<V extends Value> implements Opcodes {
         }
 
         // initializes the data structures for the control flow analysis
-        Frame<V> current = new Frame<V>(m.maxLocals, m.maxStack);
-        Frame<V> handler = new Frame<V>(m.maxLocals, m.maxStack);
+        Frame<V> current = newFrame(m.maxLocals, m.maxStack);
+        Frame<V> handler = newFrame(m.maxLocals, m.maxStack);
         current.setReturn(interpreter.newValue(Type.getReturnType(m.desc)));
         Type[] args = Type.getArgumentTypes(m.desc);
         int local = 0;
@@ -105,6 +113,8 @@ public class LiteAnalyzer<V extends Value> implements Opcodes {
         while (local < m.maxLocals) {
             current.setLocal(local++, interpreter.newValue(null));
         }
+
+        interpreter.init(data[0]);
         merge(0, current);
 
         // control flow analysis
@@ -120,8 +130,11 @@ public class LiteAnalyzer<V extends Value> implements Opcodes {
                 int insnType = insnNode.getType();
 
                 if (insnType == AbstractInsnNode.LABEL || insnType == AbstractInsnNode.LINE || insnType == AbstractInsnNode.FRAME) {
+                    interpreter.init(data[insn]);
                     merge(insn + 1, f);
                 } else {
+                    // delta
+                    interpreter.init(data[insn]);
                     current.init(f).execute(insnNode, interpreter);
 
                     if (insnNode instanceof JumpInsnNode) {
@@ -149,7 +162,8 @@ public class LiteAnalyzer<V extends Value> implements Opcodes {
                             jump = insns.indexOf(label);
                             merge(jump, current);
                         }
-                    } else if (insnOpcode != ATHROW && (insnOpcode < IRETURN || insnOpcode > RETURN)) {
+                    } else if (insnOpcode != ATHROW
+                            && (insnOpcode < IRETURN || insnOpcode > RETURN)) {
                         merge(insn + 1, current);
                     }
                 }
@@ -158,21 +172,15 @@ public class LiteAnalyzer<V extends Value> implements Opcodes {
                 if (insnHandlers != null) {
                     for (int i = 0; i < insnHandlers.size(); ++i) {
                         TryCatchBlockNode tcb = insnHandlers.get(i);
-                        Type type;
-                        if (tcb.type == null) {
-                            type = Type.getObjectType("java/lang/Throwable");
-                        } else {
-                            type = Type.getObjectType(tcb.type);
-                        }
                         int jump = insns.indexOf(tcb.handler);
                         handler.init(f);
                         handler.clearStack();
-                        handler.push(interpreter.newValue(type));
+                        handler.push(refV);
                         merge(jump, handler);
                     }
                 }
             } catch (AnalyzerException e) {
-                throw new AnalyzerException(e.node, "Error at instruction "  + insn + ": " + e.getMessage(), e);
+                throw new AnalyzerException(e.node, "Error at instruction " + insn + ": " + e.getMessage(), e);
             } catch (Exception e) {
                 throw new AnalyzerException(insnNode, "Error at instruction " + insn + ": " + e.getMessage(), e);
             }
@@ -181,36 +189,46 @@ public class LiteAnalyzer<V extends Value> implements Opcodes {
         return frames;
     }
 
-    /**
-     * Returns the symbolic stack frame for each instruction of the last
-     * recently analyzed method.
-     *
-     * @return the symbolic state of the execution stack frame at each bytecode
-     *         instruction of the method. The size of the returned array is
-     *         equal to the number of instructions (and labels) of the method. A
-     *         given frame is <tt>null</tt> if the corresponding instruction
-     *         cannot be reached, or if an error occured during the analysis of
-     *         the method.
-     */
     public Frame<V>[] getFrames() {
         return frames;
     }
+
+    protected Frame<V> newFrame(final int nLocals, final int nStack) {
+        return new Frame<V>(nLocals, nStack);
+    }
+
+    protected Frame<V> newFrame(final Frame<? extends V> src) {
+        return new Frame<V>(src);
+    }
+
+    // -------------------------------------------------------------------------
 
     private void merge(final int insn, final Frame<V> frame) throws AnalyzerException {
         Frame<V> oldFrame = frames[insn];
         boolean changes;
 
         if (oldFrame == null) {
-            frames[insn] = new Frame<V>(frame);
+            frames[insn] = newFrame(frame);
             changes = true;
         } else {
             changes = oldFrame.merge(frame, interpreter);
         }
+
+        Data oldData = data[insn];
+        Data newData = interpreter.getAfterData(insn);
+
+        if (oldData == null) {
+            data[insn] = newData;
+            changes = true;
+        } else if (newData != null) {
+            Data mergedData = interpreter.merge(oldData, newData);
+            data[insn] = mergedData;
+            changes |= !oldData.equals(mergedData);
+        }
+
         if (changes && !queued[insn]) {
             queued[insn] = true;
             queue[top++] = insn;
         }
     }
-
 }
-

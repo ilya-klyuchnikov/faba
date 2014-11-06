@@ -2,7 +2,7 @@ package faba.test
 
 import annotations._
 import data.Data02
-import faba.asm.LeakingParameters
+import faba.analysis.leakingParameters._
 import faba.data._
 import org.objectweb.asm._
 import org.objectweb.asm.tree.MethodNode

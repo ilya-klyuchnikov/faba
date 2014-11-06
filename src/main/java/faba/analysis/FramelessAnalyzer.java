@@ -28,12 +28,11 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package faba.asm;
+package faba.analysis;
 
 import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.*;
-import org.objectweb.asm.tree.analysis.*;
+import org.objectweb.asm.tree.analysis.AnalyzerException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,57 +40,31 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Extended version of {@link org.objectweb.asm.tree.analysis.Analyzer}.
- * It handles frames <b>and</b> additional user info.
- * Used in NullableResultAnalysis, Data is a set of constraints (dereferenced values).
+ * Specialized lite version of {@link org.objectweb.asm.tree.analysis.Analyzer}.
+ * Used to build control flow graph.
+ * Calculation of fix-point of frames is removed, since frames are not needed to build control flow graph.
+ * So, the main point here is handling of subroutines (jsr) and try-catch-finally blocks.
  */
-public class AnalyzerExt<V extends Value, Data, MyInterpreter extends Interpreter<V> & InterpreterExt<Data>> implements Opcodes {
-
-    private final MyInterpreter interpreter;
-
+public class FramelessAnalyzer implements Opcodes {
     private int n;
-
     private InsnList insns;
-
     private List<TryCatchBlockNode>[] handlers;
-
-    private Frame<V>[] frames;
-
     private Subroutine[] subroutines;
+    protected boolean[] wasQueued;
+    protected boolean[] queued;
+    protected int[] queue;
+    protected int top;
 
-    private boolean[] queued;
-
-    private int[] queue;
-
-    private int top;
-
-    public Data[] getData() {
-        return data;
-    }
-
-    private Data[] data;
-
-    public AnalyzerExt(final MyInterpreter interpreter, Data[] data, Data startData) {
-        this.interpreter = interpreter;
-        this.data = data;
-        if (data.length > 0) {
-            data[0] = startData;
-        }
-    }
-
-    public Frame<V>[] analyze(final String owner, final MethodNode m) throws AnalyzerException {
-        if ((m.access & (ACC_ABSTRACT | ACC_NATIVE)) != 0) {
-            frames = (Frame<V>[]) new Frame<?>[0];
-            return frames;
-        }
-        final V refV = (V) BasicValue.REFERENCE_VALUE;
-
+    public void analyze(final MethodNode m) throws AnalyzerException {
         n = m.instructions.size();
+        if ((m.access & (ACC_ABSTRACT | ACC_NATIVE)) != 0 || n == 0) {
+            return;
+        }
         insns = m.instructions;
         handlers = (List<TryCatchBlockNode>[]) new List<?>[n];
-        frames = (Frame<V>[]) new Frame<?>[n];
         subroutines = new Subroutine[n];
         queued = new boolean[n];
+        wasQueued = new boolean[n];
         queue = new int[n];
         top = 0;
 
@@ -114,6 +87,7 @@ public class AnalyzerExt<V extends Value, Data, MyInterpreter extends Interprete
         Subroutine main = new Subroutine(null, m.maxLocals, null);
         List<AbstractInsnNode> subroutineCalls = new ArrayList<AbstractInsnNode>();
         Map<LabelNode, Subroutine> subroutineHeads = new HashMap<LabelNode, Subroutine>();
+
         findSubroutine(0, main, subroutineCalls);
         while (!subroutineCalls.isEmpty()) {
             JumpInsnNode jsr = (JumpInsnNode) subroutineCalls.remove(0);
@@ -132,35 +106,10 @@ public class AnalyzerExt<V extends Value, Data, MyInterpreter extends Interprete
             }
         }
 
-        // initializes the data structures for the control flow analysis
-        Frame<V> current = newFrame(m.maxLocals, m.maxStack);
-        Frame<V> handler = newFrame(m.maxLocals, m.maxStack);
-        current.setReturn(interpreter.newValue(Type.getReturnType(m.desc)));
-        Type[] args = Type.getArgumentTypes(m.desc);
-        int local = 0;
-        if ((m.access & ACC_STATIC) == 0) {
-            Type ctype = Type.getObjectType(owner);
-            current.setLocal(local++, interpreter.newValue(ctype));
-        }
-        for (int i = 0; i < args.length; ++i) {
-            current.setLocal(local++, interpreter.newValue(args[i]));
-            if (args[i].getSize() == 2) {
-                current.setLocal(local++, interpreter.newValue(null));
-            }
-        }
-        while (local < m.maxLocals) {
-            current.setLocal(local++, interpreter.newValue(null));
-        }
-
-        interpreter.init(data[0]);
-        merge(0, current, null);
-
-        init(owner, m);
-
+        merge(0, null);
         // control flow analysis
         while (top > 0) {
             int insn = queue[--top];
-            Frame<V> f = frames[insn];
             Subroutine subroutine = subroutines[insn];
             queued[insn] = false;
 
@@ -170,65 +119,56 @@ public class AnalyzerExt<V extends Value, Data, MyInterpreter extends Interprete
                 int insnOpcode = insnNode.getOpcode();
                 int insnType = insnNode.getType();
 
-                if (insnType == AbstractInsnNode.LABEL
-                        || insnType == AbstractInsnNode.LINE
-                        || insnType == AbstractInsnNode.FRAME) {
-                    interpreter.init(data[insn]);
-                    merge(insn + 1, f, subroutine);
+                if (insnType == AbstractInsnNode.LABEL || insnType == AbstractInsnNode.LINE || insnType == AbstractInsnNode.FRAME) {
+                    merge(insn + 1, subroutine);
                     newControlFlowEdge(insn, insn + 1);
                 } else {
-                    // delta
-                    interpreter.init(data[insn]);
-                    current.init(f).execute(insnNode, interpreter);
                     subroutine = subroutine == null ? null : subroutine.copy();
 
                     if (insnNode instanceof JumpInsnNode) {
                         JumpInsnNode j = (JumpInsnNode) insnNode;
                         if (insnOpcode != GOTO && insnOpcode != JSR) {
-                            merge(insn + 1, current, subroutine);
+                            merge(insn + 1, subroutine);
                             newControlFlowEdge(insn, insn + 1);
                         }
                         int jump = insns.indexOf(j.label);
                         if (insnOpcode == JSR) {
-                            merge(jump, current, new Subroutine(j.label,
-                                    m.maxLocals, j));
+                            merge(jump, new Subroutine(j.label, m.maxLocals, j));
                         } else {
-                            merge(jump, current, subroutine);
+                            merge(jump, subroutine);
                         }
                         newControlFlowEdge(insn, jump);
                     } else if (insnNode instanceof LookupSwitchInsnNode) {
                         LookupSwitchInsnNode lsi = (LookupSwitchInsnNode) insnNode;
                         int jump = insns.indexOf(lsi.dflt);
-                        merge(jump, current, subroutine);
+                        merge(jump, subroutine);
                         newControlFlowEdge(insn, jump);
                         for (int j = 0; j < lsi.labels.size(); ++j) {
                             LabelNode label = lsi.labels.get(j);
                             jump = insns.indexOf(label);
-                            merge(jump, current, subroutine);
+                            merge(jump, subroutine);
                             newControlFlowEdge(insn, jump);
                         }
                     } else if (insnNode instanceof TableSwitchInsnNode) {
                         TableSwitchInsnNode tsi = (TableSwitchInsnNode) insnNode;
                         int jump = insns.indexOf(tsi.dflt);
-                        merge(jump, current, subroutine);
+                        merge(jump, subroutine);
                         newControlFlowEdge(insn, jump);
                         for (int j = 0; j < tsi.labels.size(); ++j) {
                             LabelNode label = tsi.labels.get(j);
                             jump = insns.indexOf(label);
-                            merge(jump, current, subroutine);
+                            merge(jump, subroutine);
                             newControlFlowEdge(insn, jump);
                         }
                     } else if (insnOpcode == RET) {
                         if (subroutine == null) {
-                            throw new AnalyzerException(insnNode,
-                                    "RET instruction outside of a sub routine");
+                            throw new AnalyzerException(insnNode, "RET instruction outside of a sub routine");
                         }
                         for (int i = 0; i < subroutine.callers.size(); ++i) {
                             JumpInsnNode caller = subroutine.callers.get(i);
                             int call = insns.indexOf(caller);
-                            if (frames[call] != null) {
-                                merge(call + 1, frames[call], current,
-                                        subroutines[call], subroutine.access);
+                            if (wasQueued[call]) {
+                                merge(call + 1, subroutines[call], subroutine.access);
                                 newControlFlowEdge(insn, call + 1);
                             }
                         }
@@ -247,22 +187,16 @@ public class AnalyzerExt<V extends Value, Data, MyInterpreter extends Interprete
                                 subroutine.access[var] = true;
                             }
                         }
-                        merge(insn + 1, current, subroutine);
+                        merge(insn + 1, subroutine);
                         newControlFlowEdge(insn, insn + 1);
                     }
                 }
 
                 List<TryCatchBlockNode> insnHandlers = handlers[insn];
                 if (insnHandlers != null) {
-                    for (int i = 0; i < insnHandlers.size(); ++i) {
-                        TryCatchBlockNode tcb = insnHandlers.get(i);
-                        int jump = insns.indexOf(tcb.handler);
-                        if (newControlFlowExceptionEdge(insn, tcb)) {
-                            handler.init(f);
-                            handler.clearStack();
-                            handler.push(refV);
-                            merge(jump, handler, subroutine);
-                        }
+                    for (TryCatchBlockNode tcb : insnHandlers) {
+                        newControlFlowExceptionEdge(insn, tcb);
+                        merge(insns.indexOf(tcb.handler), subroutine);
                     }
                 }
             } catch (AnalyzerException e) {
@@ -273,16 +207,13 @@ public class AnalyzerExt<V extends Value, Data, MyInterpreter extends Interprete
                         + insn + ": " + e.getMessage(), e);
             }
         }
-
-        return frames;
     }
 
-    private void findSubroutine(int insn, final Subroutine sub,
+    protected void findSubroutine(int insn, final Subroutine sub,
                                 final List<AbstractInsnNode> calls) throws AnalyzerException {
         while (true) {
             if (insn < 0 || insn >= n) {
-                throw new AnalyzerException(null,
-                        "Execution can fall off end of the code");
+                throw new AnalyzerException(null, "Execution can fall off end of the code");
             }
             if (subroutines[insn] != null) {
                 return;
@@ -343,51 +274,25 @@ public class AnalyzerExt<V extends Value, Data, MyInterpreter extends Interprete
         }
     }
 
-    public Frame<V>[] getFrames() {
-        return frames;
-    }
+    protected void newControlFlowEdge(final int insn, final int successor) {}
 
-    public List<TryCatchBlockNode> getHandlers(final int insn) {
-        return handlers[insn];
-    }
-
-    protected void init(String owner, MethodNode m) throws AnalyzerException {
-    }
-
-    protected Frame<V> newFrame(final int nLocals, final int nStack) {
-        return new Frame<V>(nLocals, nStack);
-    }
-
-    protected Frame<V> newFrame(final Frame<? extends V> src) {
-        return new Frame<V>(src);
-    }
-
-    protected void newControlFlowEdge(final int insn, final int successor) {
-    }
-
-    protected boolean newControlFlowExceptionEdge(final int insn,
-                                                  final int successor) {
+    protected boolean newControlFlowExceptionEdge(final int insn, final int successor) {
         return true;
     }
 
-    protected boolean newControlFlowExceptionEdge(final int insn,
-                                                  final TryCatchBlockNode tcb) {
+    protected boolean newControlFlowExceptionEdge(final int insn, final TryCatchBlockNode tcb) {
         return newControlFlowExceptionEdge(insn, insns.indexOf(tcb.handler));
     }
 
     // -------------------------------------------------------------------------
 
-    private void merge(final int insn, final Frame<V> frame,
-                       final Subroutine subroutine) throws AnalyzerException {
-        Frame<V> oldFrame = frames[insn];
+    protected void merge(final int insn, final Subroutine subroutine) throws AnalyzerException {
         Subroutine oldSubroutine = subroutines[insn];
-        boolean changes;
+        boolean changes = false;
 
-        if (oldFrame == null) {
-            frames[insn] = newFrame(frame);
+        if (!wasQueued[insn]) {
+            wasQueued[insn] = true;
             changes = true;
-        } else {
-            changes = oldFrame.merge(frame, interpreter);
         }
 
         if (oldSubroutine == null) {
@@ -404,54 +309,20 @@ public class AnalyzerExt<V extends Value, Data, MyInterpreter extends Interprete
             queued[insn] = true;
             queue[top++] = insn;
         }
-
-        // delta
-        mergeData(insn, interpreter);
     }
 
-    private void merge(final int insn, final Frame<V> beforeJSR,
-                       final Frame<V> afterRET, final Subroutine subroutineBeforeJSR,
-                       final boolean[] access) throws AnalyzerException {
-        Frame<V> oldFrame = frames[insn];
+    protected void merge(final int insn, final Subroutine subroutineBeforeJSR, final boolean[] access) throws AnalyzerException {
         Subroutine oldSubroutine = subroutines[insn];
-        boolean changes;
+        boolean changes = false;
 
-        afterRET.merge(beforeJSR, access);
-
-        if (oldFrame == null) {
-            frames[insn] = newFrame(afterRET);
+        if (!wasQueued[insn]) {
+            wasQueued[insn] = true;
             changes = true;
-        } else {
-            changes = oldFrame.merge(afterRET, interpreter);
         }
 
         if (oldSubroutine != null && subroutineBeforeJSR != null) {
             changes |= oldSubroutine.merge(subroutineBeforeJSR);
         }
-        if (changes && !queued[insn]) {
-            queued[insn] = true;
-            queue[top++] = insn;
-        }
-
-        // delta
-        mergeData(insn, interpreter);
-    }
-
-    private void mergeData(int insn, MyInterpreter interpreter) {
-        boolean changes = false;
-
-        Data oldData = data[insn];
-        Data newData = interpreter.getAfterData(insn);
-
-        if (oldData == null) {
-            data[insn] = newData;
-            changes = true;
-        } else if (newData != null) {
-            Data mergedData = interpreter.merge(oldData, newData);
-            data[insn] = mergedData;
-            changes = !oldData.equals(mergedData);
-        }
-
         if (changes && !queued[insn]) {
             queued[insn] = true;
             queue[top++] = insn;

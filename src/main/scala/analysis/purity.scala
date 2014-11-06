@@ -1,4 +1,4 @@
-package faba.asm
+package faba.analysis.purity
 
 import faba.data._
 import faba.engine._

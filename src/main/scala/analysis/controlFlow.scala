@@ -1,4 +1,4 @@
-package faba
+package faba.analysis
 
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.tree._
@@ -7,7 +7,6 @@ import scala.collection.immutable.HashSet
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
-import faba.asm._
 import faba.analysis._
 
 package object controlFlow {

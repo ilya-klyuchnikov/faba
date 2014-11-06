@@ -1,7 +1,6 @@
 package faba.engine
 
-import faba.analysis.LimitReachedException
-import faba.data.PolymorphicId
+import faba.data._
 
 import scala.collection.mutable
 

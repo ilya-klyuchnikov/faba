@@ -52,6 +52,14 @@ object `package` {
   type Value = Values.Value
 }
 
+object LimitReachedException {
+  // elementary steps limit
+  val limit = 1 << 15
+}
+
+class LimitReachedException extends Exception("Limit reached exception")
+
+
 case class Annotations(notNulls: Set[Key], contracts: Map[Key, String])
 
 object Utils {

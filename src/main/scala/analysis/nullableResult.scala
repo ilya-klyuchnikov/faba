@@ -1,7 +1,7 @@
-package faba.asm.nullableResult
+package faba.analysis.nullableResult
 
 import faba.analysis.AsmAbstractValue
-import faba.asm.{AnalyzerExt, InterpreterExt, LiteAnalyzerExt}
+import faba.analysis.{AnalyzerExt, InterpreterExt, LiteAnalyzerExt}
 import faba.data._
 import faba.engine._
 

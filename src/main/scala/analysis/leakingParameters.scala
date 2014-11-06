@@ -1,6 +1,6 @@
-package faba.asm
+package faba.analysis.leakingParameters
 
-import faba.analysis.AsmAbstractValue
+import faba.analysis._
 
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.Type
@@ -56,7 +56,7 @@ class ParametersUsage(m: MethodNode) extends Interpreter[ParamsValue](ASM5) {
     // hack for analyzer
     if (range.contains(called)) {
       if (tp eq Type.VOID_TYPE) return null
-      if (Utils.isReferenceType(tp)) {
+      if (AsmUtils.isReferenceType(tp)) {
         if (tp.getSize == 1) ParamsValue(Set(called - shift), 1)
         else ParamsValue(Set(called - shift), 2)
       } else {
@@ -78,7 +78,7 @@ class ParametersUsage(m: MethodNode) extends Interpreter[ParamsValue](ASM5) {
         val cst = insn.asInstanceOf[LdcInsnNode].cst
         if (cst.isInstanceOf[Long] || cst.isInstanceOf[Double]) val2 else val1
       case GETSTATIC =>
-        if (Utils.getSizeFast(insn.asInstanceOf[FieldInsnNode].desc) == 1) val1 else val2
+        if (AsmUtils.getSizeFast(insn.asInstanceOf[FieldInsnNode].desc) == 1) val1 else val2
       case _ =>
         val1
     }
@@ -97,9 +97,9 @@ class ParametersUsage(m: MethodNode) extends Interpreter[ParamsValue](ASM5) {
       case MULTIANEWARRAY =>
         val1
       case INVOKEDYNAMIC =>
-        if (Utils.getReturnSizeFast(insn.asInstanceOf[InvokeDynamicInsnNode].desc) == 1) val1 else val2
+        if (AsmUtils.getReturnSizeFast(insn.asInstanceOf[InvokeDynamicInsnNode].desc) == 1) val1 else val2
       case _ =>
-        if (Utils.getReturnSizeFast(insn.asInstanceOf[MethodInsnNode].desc) == 1) val1 else val2
+        if (AsmUtils.getReturnSizeFast(insn.asInstanceOf[MethodInsnNode].desc) == 1) val1 else val2
     }
 
   override def unaryOperation(insn: AbstractInsnNode, value: ParamsValue): ParamsValue =
@@ -107,7 +107,7 @@ class ParametersUsage(m: MethodNode) extends Interpreter[ParamsValue](ASM5) {
       case LNEG | DNEG | I2L | I2D | L2D | F2L | F2D | D2L =>
         val2
       case GETFIELD =>
-        if (Utils.getSizeFast(insn.asInstanceOf[FieldInsnNode].desc) == 1) val1 else val2
+        if (AsmUtils.getSizeFast(insn.asInstanceOf[FieldInsnNode].desc) == 1) val1 else val2
       case CHECKCAST =>
         ParamsValue(value.params, 1)
       case _ =>

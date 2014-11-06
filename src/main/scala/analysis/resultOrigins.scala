@@ -1,4 +1,4 @@
-package faba.asm
+package faba.analysis.resultOrigins
 
 import faba.analysis._
 

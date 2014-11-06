@@ -1,7 +1,7 @@
-package faba.contracts
+package faba.analysis.result
 
 import faba.analysis._
-import faba.asm.Origins
+import faba.analysis.resultOrigins._
 import faba.data._
 import faba.engine._
 
@@ -22,7 +22,7 @@ object InOutAnalysis {
 
 class InOutAnalysis(val context: Context,
                     val direction: Direction,
-                    resultOrigins: Origins) extends Analysis[Result[Key, Value]] {
+                    resultOrigins: Origins) extends StagedScAnalysis[Result[Key, Value]] {
 
   import context._
 

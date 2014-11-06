@@ -1,13 +1,17 @@
 package faba
 
 import faba.analysis._
-import faba.asm._
-import faba.asm.nullableResult.NullableResultAnalysis
-import faba.combined.CombinedSingleAnalysis
-import faba.contracts._
+import faba.analysis.leakingParameters._
+import faba.analysis.nullableResult._
+import faba.analysis.parameters._
+import faba.analysis.purity._
+import faba.analysis.result._
+import faba.analysis.resultInfluence._
+import faba.analysis.resultOrigins._
+import faba.analysis.combined._
+
 import faba.data._
 import faba.engine._
-import faba.parameters._
 import faba.source._
 
 import org.objectweb.asm.Opcodes._
@@ -321,7 +325,7 @@ trait FabaProcessor extends Processor {
     PurityAnalysis.analyze(method, methodNode, stable)
 
   def notNullParamEquation(context: Context, i: Int): (Equation[Key, Value], Boolean) = {
-    val analyser = new NotNullInAnalysis(context, In(i))
+    val analyser = new NotNullParameterAnalysis(context, In(i))
     try {
       val eq = analyser.analyze()
       (eq, analyser.npe)
@@ -332,7 +336,7 @@ trait FabaProcessor extends Processor {
   }
 
   def nullableParamEquation(context: Context, i: Int): Equation[Key, Value] = {
-    val analyser = new NullableInAnalysis(context, In(i))
+    val analyser = new NullableParameterAnalysis(context, In(i))
     try {
       analyser.analyze()
     } catch {

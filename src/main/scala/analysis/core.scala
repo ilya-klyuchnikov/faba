@@ -193,15 +193,8 @@ case class Conf(insnIndex: Int, frame: Frame[BasicValue]) {
  */
 case class State(index: Int, conf: Conf, history: List[Conf], constraint: Int)
 
-object LimitReachedException {
-  // elementary steps limit
-  val limit = 1 << 15
-}
-
-class LimitReachedException extends Exception("Limit reached exception")
-
 /**
- * Skeleton for implementing analysis via exploration of graph of configurations.
+ * Skeleton for implementing staged analysis via exploration of graph of configurations.
  * All analyses are implemented by following scenario:
  *
  * During construction of a graph of configurations, some internal result `Res` is constructed.
@@ -211,7 +204,7 @@ class LimitReachedException extends Exception("Limit reached exception")
  *
  * @see `mkEquation(result: Res): Equation[Key, Value]`
  */
-abstract class Analysis[Res] {
+abstract class StagedScAnalysis[Res] {
   val context: Context
   val direction: Direction
 
@@ -251,8 +244,8 @@ abstract class Analysis[Res] {
    * `earlyResult` is checked at each step of analysis.
    *
    * @see [[faba.contracts.InOutAnalysis#analyze()]]
-   * @see [[faba.parameters.NotNullInAnalysis.analyze()]]
-   * @see [[faba.parameters.NullableInAnalysis.analyze()]]
+   * @see [[faba.parameters.NotNullParameterAnalysis.analyze()]]
+   * @see [[faba.parameters.NullableParameterAnalysis.analyze()]]
    */
   var earlyResult: Option[Res] = None
 

@@ -1,11 +1,12 @@
 package faba
 
-import _root_.java.io.{File, PrintWriter}
+import java.io.{File, PrintWriter}
 import java.nio.file._
 import java.nio.file.attribute.BasicFileAttributes
 
 import faba.analysis._
-import faba.asm.{Origins, ParamsValue}
+import faba.analysis.leakingParameters._
+import faba.analysis.resultOrigins._
 import faba.data._
 import faba.engine._
 import faba.source._

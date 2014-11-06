@@ -1,4 +1,4 @@
-package faba.combined
+package faba.analysis.combined
 
 import faba.analysis._
 import faba.data._

@@ -1,4 +1,7 @@
-package faba.asm
+package faba.analysis.resultInfluence
+
+import faba.analysis.leakingParameters._
+import faba.analysis.resultOrigins._
 
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.Type

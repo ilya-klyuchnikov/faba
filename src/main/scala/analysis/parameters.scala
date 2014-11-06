@@ -1,4 +1,4 @@
-package faba.parameters
+package faba.analysis.parameters
 
 import faba.analysis._
 import faba.data._
@@ -92,7 +92,7 @@ object Result {
   }
 }
 
-object NotNullInConstraint {
+object NotNullParameterConstraint {
   // (taken: Boolean, hasCompanions: Boolean)
   val TAKEN = 1 // 1 << 0
   val HAS_COMPANIONS = 2 //1 << 1
@@ -105,7 +105,7 @@ object NotNullInConstraint {
   def hasCompanions(constraint: Int) = (constraint & HAS_COMPANIONS) != 0
 }
 
-object NotNullInAnalysis {
+object NotNullParameterAnalysis {
   // For inference of @NotNull parameters we need to combine information from all configurations,
   // not just from leaf configurations.
   // So we need to build and traverse graph of configurations in some tricky order.
@@ -151,12 +151,12 @@ object NotNullInAnalysis {
   val sharedResults = new Array[Result](LimitReachedException.limit)
 }
 
-class NotNullInAnalysis(val context: Context, val direction: Direction) extends Analysis[Result] {
-  import faba.parameters.NotNullInAnalysis._
+class NotNullParameterAnalysis(val context: Context, val direction: Direction) extends StagedScAnalysis[Result] {
+  import NotNullParameterAnalysis._
   import context._
 
-  val results = NotNullInAnalysis.sharedResults
-  val pending = NotNullInAnalysis.sharedPendingStack
+  val results = NotNullParameterAnalysis.sharedResults
+  val pending = NotNullParameterAnalysis.sharedPendingStack
 
   /**
    *
@@ -268,7 +268,7 @@ class NotNullInAnalysis(val context: Context, val direction: Direction) extends 
 
       insnNode.getOpcode match {
         case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
-          if (!NotNullInConstraint.hasCompanions(constraint)) {
+          if (!NotNullParameterConstraint.hasCompanions(constraint)) {
             earlyResult = Some(Return)
             return
           } else {
@@ -279,7 +279,7 @@ class NotNullInAnalysis(val context: Context, val direction: Direction) extends 
               pendingPush(MakeResult(states, subResult, List(stateIndex)))
             return
           }
-        case ATHROW if NotNullInConstraint.isTaken(constraint) =>
+        case ATHROW if NotNullParameterConstraint.isTaken(constraint) =>
           results(stateIndex) = NPE
           npe = true
           computed(insnIndex) = state :: computed(insnIndex)
@@ -349,21 +349,19 @@ class NotNullInAnalysis(val context: Context, val direction: Direction) extends 
   }
 }
 
-case class NullableInConstraint(taken: Boolean)
-
-object NullableInConstraint {
+object NullableParameterConstraint {
   val TAKEN = 1
   val NOT_TAKEN = 0
 }
 
-object NullableInAnalysis {
+object NullableParameterAnalysis {
   val sharedPendingStack = new Array[State](LimitReachedException.limit)
 }
 
-class NullableInAnalysis(val context: Context, val direction: Direction) extends Analysis[Result] {
+class NullableParameterAnalysis(val context: Context, val direction: Direction) extends StagedScAnalysis[Result] {
 
   import context._
-  val pending = NullableInAnalysis.sharedPendingStack
+  val pending = NullableParameterAnalysis.sharedPendingStack
 
   override def mkEquation(result: Result): Equation[Key, Value] = result match {
     case NPE => Equation(aKey, Final(Values.Top))

@@ -1,8 +1,11 @@
-package faba.asm
+package faba.analysis
 
 import org.objectweb.asm.Type
 
-object Utils {
+/**
+ * Asm utilities (for performance).
+ */
+object AsmUtils {
   def isReferenceType(tp: Type): Boolean = {
     val sort = tp.getSort
     sort == Type.OBJECT || sort == Type.ARRAY
