@@ -1,7 +1,5 @@
 package faba.data
 
-import faba.engine.StableAwareId
-
 import org.objectweb.asm.signature.{SignatureReader, SignatureVisitor}
 import org.objectweb.asm.{Opcodes, Type}
 
@@ -26,7 +24,13 @@ case class In(paramIndex: Int) extends Direction
 case class InOut(paramIndex: Int, in: Value) extends Direction
 case object Out extends Direction
 
-case class Key(method: Method, direction: Direction, stable: Boolean) extends StableAwareId[Key] {
+trait PolymorphicId[Id] {
+  val stable: Boolean
+  def mkUnstable: Id
+  def mkStable: Id
+}
+
+case class Key(method: Method, direction: Direction, stable: Boolean) extends PolymorphicId[Key] {
   override def toString = direction match {
     case Out => s"$method"
     case In(index) => s"$method #$index"

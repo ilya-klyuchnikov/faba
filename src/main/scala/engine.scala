@@ -1,6 +1,7 @@
 package faba.engine
 
 import faba.analysis.LimitReachedException
+import faba.data.PolymorphicId
 
 import scala.collection.mutable
 
@@ -82,13 +83,7 @@ case class Pending[Id, Val](delta: SoP[Id, Val]) extends Result[Id, Val] {
 
 case class Equation[Id, Val](id: Id, rhs: Result[Id, Val])
 
-trait StableAwareId[K] {
-  val stable: Boolean
-  def mkUnstable: K
-  def mkStable: K
-}
-
-class Solver[K <: StableAwareId[K], V](val doNothing: Boolean)(implicit lattice: Lattice[V]) {
+class Solver[K <: PolymorphicId[K], V](val doNothing: Boolean)(implicit lattice: Lattice[V]) {
 
   type Solution = (K, V)
   val top = lattice.top
@@ -174,7 +169,7 @@ class Solver[K <: StableAwareId[K], V](val doNothing: Boolean)(implicit lattice:
 
 }
 
-class NullableResultSolver[K <: StableAwareId[K], V](doNothing: Boolean)(implicit lattice: Lattice[V])
+class NullableResultSolver[K <: PolymorphicId[K], V](doNothing: Boolean)(implicit lattice: Lattice[V])
   extends Solver[K, V](doNothing)(lattice) {
   override def mkUnstableValue(v: V) = bot
 }
