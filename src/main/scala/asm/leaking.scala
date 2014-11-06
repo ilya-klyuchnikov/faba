@@ -1,6 +1,7 @@
 package faba.asm
 
 import faba.analysis.AsmAbstractValue
+
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree._

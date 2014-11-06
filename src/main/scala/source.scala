@@ -1,12 +1,12 @@
 package faba.source
 
+import java.io.{File, FileInputStream}
+import java.util.jar.JarFile
+
 import org.objectweb.asm._
 
-import scala.language.existentials
 import scala.collection.JavaConverters._
-
-import java.io.{FileInputStream, File}
-import java.util.jar.JarFile
+import scala.language.existentials
 
 sealed trait Source {
   def process(processor: Processor): Unit

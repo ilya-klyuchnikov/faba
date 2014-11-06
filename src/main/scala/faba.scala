@@ -1,22 +1,21 @@
 package faba
 
-import faba.analysis.LimitReachedException
+import faba.analysis._
+import faba.asm._
 import faba.asm.nullableResult.NullableResultAnalysis
 import faba.combined.CombinedSingleAnalysis
+import faba.contracts._
+import faba.data._
+import faba.engine._
+import faba.parameters._
+import faba.source._
+
+import org.objectweb.asm.Opcodes._
 import org.objectweb.asm._
 import org.objectweb.asm.tree.MethodNode
-import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.tree.analysis.{Frame, Value => ASMValue}
 
 import scala.language.existentials
-
-import faba.asm._
-import faba.cfg._
-import faba.data._
-import faba.contracts._
-import faba.parameters._
-import faba.engine._
-import faba.source._
 
 /**
  * Default faba processor. A lot of fine-grained method to override.
@@ -286,17 +285,17 @@ trait FabaProcessor extends Processor {
   }
 
   def buildCFG(className: String, methodNode: MethodNode, jsr: Boolean): ControlFlowGraph =
-    cfg.buildControlFlowGraph(className, methodNode, jsr)
+    controlFlow.buildControlFlowGraph(className, methodNode, jsr)
 
   // build other result origins
   def buildResultOrigins(className: String, methodNode: MethodNode, frames: Array[Frame[ParamsValue]], graph: ControlFlowGraph): Origins =
     OriginsAnalysis.resultOrigins(frames.asInstanceOf[Array[Frame[ASMValue]]], methodNode, graph)
 
   def buildDFSTree(transitions: Array[List[Int]]): DFSTree =
-    cfg.buildDFSTree(transitions)
+    controlFlow.buildDFSTree(transitions)
 
   def isReducible(graph: ControlFlowGraph, dfs: DFSTree): Boolean =
-    cfg.reducible(graph, dfs)
+    controlFlow.reducible(graph, dfs)
 
   def purityEquation(method: Method, methodNode: MethodNode, stable: Boolean): Equation[Key, Value] =
     PurityAnalysis.analyze(method, methodNode, stable)

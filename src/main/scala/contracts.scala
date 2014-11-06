@@ -1,18 +1,16 @@
 package faba.contracts
 
-import faba.asm.Origins
-
-import scala.annotation.switch
-
-import org.objectweb.asm.{Opcodes, Handle, Type}
-import org.objectweb.asm.Opcodes._
-import org.objectweb.asm.tree.analysis.{BasicValue, BasicInterpreter, Frame}
-import org.objectweb.asm.tree._
-
 import faba.analysis._
-import faba.cfg._
+import faba.asm.Origins
 import faba.data._
 import faba.engine._
+
+import org.objectweb.asm.Opcodes._
+import org.objectweb.asm.tree._
+import org.objectweb.asm.tree.analysis.{BasicInterpreter, BasicValue, Frame}
+import org.objectweb.asm.{Handle, Type}
+
+import scala.annotation.switch
 
 object InOutAnalysis {
   // Shared (between analysis runs) array/stack of pending states.
@@ -89,7 +87,7 @@ class InOutAnalysis(val richControlFlow: RichControlFlow,
   }
 
   override def processState(fState: State): Unit = {
-    import AnalysisUtils.popValue
+    import faba.analysis.AnalysisUtils.popValue
 
     var state = fState
     var states: List[State] = Nil

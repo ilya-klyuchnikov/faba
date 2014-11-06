@@ -1,10 +1,10 @@
 package faba.asm
 
 import faba.data._
-import faba.data.{Key, Method}
-import faba.engine.{Component, Pending, Final, Equation}
-import org.objectweb.asm.tree.{MethodInsnNode, MethodNode}
+import faba.engine._
+
 import org.objectweb.asm.Opcodes._
+import org.objectweb.asm.tree.{MethodInsnNode, MethodNode}
 
 import scala.annotation.switch
 

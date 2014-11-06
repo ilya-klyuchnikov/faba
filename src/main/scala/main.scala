@@ -1,19 +1,19 @@
 package faba
 
-import _root_.java.io.{PrintWriter, File}
-import java.nio.file.attribute.BasicFileAttributes
+import _root_.java.io.{File, PrintWriter}
 import java.nio.file._
+import java.nio.file.attribute.BasicFileAttributes
 
+import faba.analysis._
 import faba.asm.{Origins, ParamsValue}
-import org.objectweb.asm.tree.MethodNode
-
-import faba.cfg._
 import faba.data._
 import faba.engine._
 import faba.source._
+import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.analysis.Frame
-import scala.xml.PrettyPrinter
+
 import scala.collection.mutable.ListBuffer
+import scala.xml.PrettyPrinter
 
 class MainProcessor extends FabaProcessor {
 

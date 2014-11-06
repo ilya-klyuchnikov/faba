@@ -1,15 +1,14 @@
-package faba.cfg
+package faba.controlFlow
 
 import org.objectweb.asm.Opcodes._
-import org.objectweb.asm.Type
 import org.objectweb.asm.tree._
-import org.objectweb.asm.tree.analysis._
 
 import scala.collection.immutable.HashSet
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
 import faba.asm._
+import faba.analysis._
 
 object `package` {
 
@@ -113,14 +112,6 @@ object `package` {
   }
 }
 
-case class ControlFlowGraph(className: String,
-                            methodNode: MethodNode,
-                            transitions: Array[List[Int]],
-                            errorTransitions: Set[(Int, Int)],
-                            errors: Array[Boolean])
-
-case class RichControlFlow(controlFlow: ControlFlowGraph, dfsTree: DFSTree)
-
 private case class ControlFlowBuilder(className: String, methodNode: MethodNode) extends FramelessAnalyzer() {
   val transitions =
     Array.tabulate[ListBuffer[Int]](methodNode.instructions.size){i => new ListBuffer()}
@@ -179,14 +170,3 @@ private case class LiteControlFlowBuilder(className: String, methodNode: MethodN
   }
 }
 
-
-case class DFSTree(preOrder: Array[Int],
-                   postOrder: Array[Int],
-                   nonBack: Set[(Int, Int)],
-                   back: Set[(Int, Int)],
-                   loopEnters: Array[Boolean]) {
-
-  def isDescendant(child: Int, parent: Int): Boolean =
-    preOrder(parent) <= preOrder(child) && postOrder(child) <= postOrder(parent)
-
-}

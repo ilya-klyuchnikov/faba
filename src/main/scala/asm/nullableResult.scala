@@ -1,12 +1,13 @@
 package faba.asm.nullableResult
 
 import faba.analysis.AsmAbstractValue
-import faba.asm.{LiteAnalyzerExt, InterpreterExt, AnalyzerExt}
+import faba.asm.{AnalyzerExt, InterpreterExt, LiteAnalyzerExt}
 import faba.data._
 import faba.engine._
+
 import org.objectweb.asm.Opcodes._
-import org.objectweb.asm.tree.analysis.{Frame, BasicInterpreter, BasicValue}
 import org.objectweb.asm.tree._
+import org.objectweb.asm.tree.analysis.{BasicInterpreter, BasicValue, Frame}
 import org.objectweb.asm.{Opcodes, Type}
 
 // this is significant to set magic type because of BasicObject#equals

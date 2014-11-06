@@ -1,11 +1,29 @@
 package faba.analysis
 
+import faba.data._
+import faba.engine._
+
+import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.analysis.{BasicValue, Frame}
 import org.objectweb.asm.{Opcodes, Type}
 
-import faba.cfg._
-import faba.data._
-import faba.engine._
+case class ControlFlowGraph(className: String,
+                            methodNode: MethodNode,
+                            transitions: Array[List[Int]],
+                            errorTransitions: Set[(Int, Int)],
+                            errors: Array[Boolean])
+
+case class DFSTree(preOrder: Array[Int],
+                   postOrder: Array[Int],
+                   nonBack: Set[(Int, Int)],
+                   back: Set[(Int, Int)],
+                   loopEnters: Array[Boolean]) {
+
+  def isDescendant(child: Int, parent: Int): Boolean =
+    preOrder(parent) <= preOrder(child) && postOrder(child) <= postOrder(parent)
+}
+
+case class RichControlFlow(controlFlow: ControlFlowGraph, dfsTree: DFSTree)
 
 /**
  * Marker annotation to denote data-class for some abstract value.

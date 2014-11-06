@@ -1,9 +1,9 @@
 package faba.combined
 
-import faba.analysis.{AsmAbstractValue, NotNullValue, TrueValue, FalseValue}
-import faba.cfg.ControlFlowGraph
+import faba.analysis._
 import faba.data._
 import faba.engine._
+
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.tree._
 import org.objectweb.asm.{Handle, Opcodes, Type}

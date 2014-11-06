@@ -2,8 +2,8 @@ package faba.asm
 
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.Type
-import org.objectweb.asm.tree.{AbstractInsnNode, MethodNode}
 import org.objectweb.asm.tree.analysis.{Frame, Interpreter}
+import org.objectweb.asm.tree.{AbstractInsnNode, MethodNode}
 
 object ResultInfluence {
   def analyze(methodNode: MethodNode, leaking: LeakingParameters, origins: Origins): Array[Boolean] = {
@@ -34,7 +34,6 @@ object ResultInfluence {
 }
 
 class ResultInfluenceInterpreter(val result: Array[Boolean]) extends Interpreter[ParamsValue](ASM5) {
-  import scala.collection.JavaConversions._
   val val1 = ParamsValue(Set(), 1)
 
   override def newValue(`type`: Type) = ???

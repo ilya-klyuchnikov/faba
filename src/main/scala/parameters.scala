@@ -1,14 +1,13 @@
 package faba.parameters
 
-import org.objectweb.asm.Type
-import org.objectweb.asm.tree.analysis.{BasicInterpreter, Frame, BasicValue}
-import org.objectweb.asm.tree.{MethodInsnNode, TypeInsnNode, JumpInsnNode, AbstractInsnNode}
-import org.objectweb.asm.Opcodes._
-
 import faba.analysis._
-import faba.cfg._
 import faba.data._
 import faba.engine._
+
+import org.objectweb.asm.Opcodes._
+import org.objectweb.asm.Type
+import org.objectweb.asm.tree.analysis.{BasicInterpreter, BasicValue, Frame}
+import org.objectweb.asm.tree.{AbstractInsnNode, JumpInsnNode, MethodInsnNode, TypeInsnNode}
 
 object `package` {
 
@@ -153,7 +152,7 @@ object NotNullInAnalysis {
 }
 
 class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Direction, val stable: Boolean) extends Analysis[Result] {
-  import NotNullInAnalysis._
+  import faba.parameters.NotNullInAnalysis._
 
   val results = NotNullInAnalysis.sharedResults
   val pending = NotNullInAnalysis.sharedPendingStack
@@ -209,7 +208,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
   }
 
   override def processState(fState: State): Unit = {
-    import AnalysisUtils.popValue
+    import faba.analysis.AnalysisUtils.popValue
 
     var state = fState
     var states: List[State] = Nil
@@ -395,7 +394,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
   }
 
   override def processState(fState: State): Unit = {
-    import AnalysisUtils.popValue
+    import faba.analysis.AnalysisUtils.popValue
 
     var state = fState
 

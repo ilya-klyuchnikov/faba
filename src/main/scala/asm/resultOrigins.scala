@@ -1,10 +1,10 @@
 package faba.asm
 
-import faba.analysis.AsmAbstractValue
-import faba.cfg.ControlFlowGraph
-import org.objectweb.asm.{Opcodes, Type}
+import faba.analysis._
+
 import org.objectweb.asm.tree.analysis.{Frame, SourceInterpreter, SourceValue, Value}
-import org.objectweb.asm.tree.{IincInsnNode, VarInsnNode, MethodNode, AbstractInsnNode}
+import org.objectweb.asm.tree.{AbstractInsnNode, IincInsnNode, MethodNode, VarInsnNode}
+import org.objectweb.asm.{Opcodes, Type}
 
 import scala.collection.mutable
 

@@ -1,13 +1,14 @@
 package faba.data
 
 import faba.engine.StableAwareId
-import org.objectweb.asm.signature.{SignatureVisitor, SignatureReader}
+
+import org.objectweb.asm.signature.{SignatureReader, SignatureVisitor}
+import org.objectweb.asm.{Opcodes, Type}
+
+import scala.collection.immutable.Iterable
+import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 import scala.xml.Elem
-
-import org.objectweb.asm.{Opcodes, Type}
-import scala.collection.mutable
-import scala.collection.immutable.Iterable
 
 case class Method(internalClassName: String, methodName: String, methodDesc: String) {
   override def toString =
