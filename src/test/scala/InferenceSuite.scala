@@ -1,7 +1,7 @@
 package faba.test
 
 import annotations._
-import data.Data01
+import data.InferenceData
 
 import org.objectweb.asm._
 import org.scalatest.{Matchers, FunSuite}
@@ -13,8 +13,8 @@ import faba.source.ClassSource
 // TODO - it is for stable keys only for now
 class InferenceSuite extends FunSuite with Matchers {
 
-  test("ParametersData.class") {
-    checkInference(classOf[Data01])
+  test("InferenceData.class") {
+    checkInference(classOf[InferenceData])
   }
 
   def checkInference(classes: Class[_]*) {

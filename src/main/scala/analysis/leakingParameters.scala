@@ -9,6 +9,30 @@ import org.objectweb.asm.tree.analysis.{Analyzer, Frame, Interpreter, Value}
 
 import scala.collection.JavaConversions._
 
+/**
+ * Approximation of parameters usage.
+ *
+ * `parameter(i) = true` means that the result of method execution depends on a given parameter
+ * in the following sense:
+ * - parameter may be dereferences (thus, passing null to this parameter may produce NPE)
+ * - parameter may be returned from the method
+ * - branching in the method depends on this parameter
+ *
+ * if parameter(i) = false, then `@NotNull` parameter analysis for this parameter will produce no positive result.
+ * if parameter(i) = false, then ResultAnalysis depending on this parameter will produce the same result as
+ * ResultAnalysis for the whole method.
+ *
+ * if nullableParameters(i) = false, then passing `null` to this parameter is OK (will be no NPE)
+ * if nullableParameters(i) = true, then it is worth to perform `@Nullable` result analysis
+ *
+ * @param frames fixed point of frames
+ * @param parameters `parameter(i) = true` means that it is worth to perform `@NotNull` parameter analysis
+ *                   and "null|!null->?" `@Contract` analysis.
+ *                   `parameter(i) = false` means that `@NotNull` parameter analysis will not infer `@NotNull` for given parameter
+ * @param nullableParameters `nullableParameter(i) = true` means that is worth to perform `@Nullable` parameter analysis
+ *                           `nullableParameter(i) = false` means that `@Nullable` it is OK to pass `null` to this parameter
+ * @param splittingParameters `splittingParameter(i) = true` means that there is branching performed on this parameter
+ */
 case class LeakingParameters(frames: Array[Frame[ParamsValue]],
                              parameters: Array[Boolean],
                              nullableParameters: Array[Boolean],
@@ -17,8 +41,8 @@ case class LeakingParameters(frames: Array[Frame[ParamsValue]],
 object LeakingParameters {
   def build(className: String, methodNode: MethodNode, jsr: Boolean): LeakingParameters = {
     val frames =
-      if (jsr) new Analyzer(new ParametersUsage(methodNode)).analyze(className, methodNode)
-      else new LiteAnalyzer(new ParametersUsage(methodNode)).analyze(className, methodNode)
+      if (jsr) new Analyzer(new ParametersUsageInterpreter(methodNode)).analyze(className, methodNode)
+      else new LiteAnalyzer(new ParametersUsageInterpreter(methodNode)).analyze(className, methodNode)
     val insns = methodNode.instructions
     val collector = new LeakingParametersCollector(methodNode)
     for (i <- 0 until frames.length) {
@@ -38,9 +62,12 @@ object LeakingParameters {
   override def getSize: Int = size
 }
 
-// tracks flow of parameters into values of frame
-// value has the super-set of all possible parameters coming into it
-class ParametersUsage(m: MethodNode) extends Interpreter[ParamsValue](ASM5) {
+/**
+ * For all positions (instruction + slot in a frame) calculates the super-set
+ * of all possible parameters coming into this place (value = ParamsValue)
+ * @param m bytecode of the method
+ */
+class ParametersUsageInterpreter(m: MethodNode) extends Interpreter[ParamsValue](ASM5) {
   val val1 = ParamsValue(Set(), 1)
   val val2 = ParamsValue(Set(), 2)
   var called = -1
@@ -132,7 +159,12 @@ class ParametersUsage(m: MethodNode) extends Interpreter[ParamsValue](ASM5) {
   }
 }
 
-class LeakingParametersCollector(m: MethodNode) extends ParametersUsage(m) {
+/**
+ * This collector (re-)executes instructions over fixpoint of ParamsValue
+ * and populates `parameters`, `nullableParameters` and `splittingParameters`
+ * @param m bytecode of the method
+ */
+class LeakingParametersCollector(m: MethodNode) extends ParametersUsageInterpreter(m) {
   val arity = Type.getArgumentTypes(m.desc).length
   val parameters = new Array[Boolean](arity)
   val nullableParameters = new Array[Boolean](arity)

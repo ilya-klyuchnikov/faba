@@ -7,8 +7,6 @@ import scala.collection.immutable.HashSet
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
-import faba.analysis._
-
 package object controlFlow {
 
   def buildControlFlowGraph(className: String, methodNode: MethodNode, jsr: Boolean): ControlFlowGraph =
@@ -109,6 +107,12 @@ package object controlFlow {
     true
   }
 
+  /**
+   * General case control flow builder. Should be used for methods with JSR/RET instructions.
+   *
+   * @param className asm name of owner class
+   * @param methodNode bytecode of the method
+   */
   private case class ControlFlowBuilder(className: String, methodNode: MethodNode) extends FramelessAnalyzer() {
     val transitions =
       Array.tabulate[ListBuffer[Int]](methodNode.instructions.size) { i => new ListBuffer()}
@@ -138,6 +142,12 @@ package object controlFlow {
     }
   }
 
+  /**
+   * Control flow builder to be used for methods without JST/RET instructions
+   *
+   * @param className asm name of owner class
+   * @param methodNode bytecode of the method
+   */
   private case class LiteControlFlowBuilder(className: String, methodNode: MethodNode) extends LiteFramelessAnalyzer() {
     val transitions =
       Array.tabulate[ListBuffer[Int]](methodNode.instructions.size) { i => new ListBuffer()}

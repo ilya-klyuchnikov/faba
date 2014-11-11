@@ -12,7 +12,7 @@ import org.objectweb.asm.{Handle, Type}
 
 import scala.annotation.switch
 
-object InOutAnalysis {
+object ResultAnalysis {
   // Shared (between analysis runs) array/stack of pending states.
   // Since:
   //  1. We know upper bound of its size (LimitReachedException.limit)
@@ -20,7 +20,7 @@ object InOutAnalysis {
   val sharedPendingStack = new Array[State](LimitReachedException.limit)
 }
 
-class InOutAnalysis(val context: Context,
+class ResultAnalysis(val context: Context,
                     val direction: Direction,
                     resultOrigins: Origins) extends StagedScAnalysis[Result[Key, Value]] {
 
@@ -29,14 +29,14 @@ class InOutAnalysis(val context: Context,
   type MyResult = Result[Key, Value]
   implicit val contractsLattice = ELattice(Values.Bot, Values.Top)
 
-  val pendingStack = InOutAnalysis.sharedPendingStack
+  val pendingStack = ResultAnalysis.sharedPendingStack
 
   val nullAnalysis = direction match {
     case InOut(_, Values.Null) => true
     case _ => false
   }
 
-  private val interpreter = InOutInterpreter(direction, methodNode.instructions, resultOrigins)
+  private val interpreter = ResultInterpreter(direction, methodNode.instructions, resultOrigins)
   private val optIn: Option[Value] = direction match {
     case InOut(_, in) => Some(in)
     case _ => None
@@ -278,7 +278,7 @@ class InOutAnalysis(val context: Context,
     else super.createStartValueForParameter(i, tp)
 }
 
-case class InOutInterpreter(direction: Direction, insns: InsnList, resultOrigins: Origins) extends BasicInterpreter {
+case class ResultInterpreter(direction: Direction, insns: InsnList, resultOrigins: Origins) extends BasicInterpreter {
   val insnOrigins = resultOrigins.instructions
 
   def index(insn: AbstractInsnNode) =

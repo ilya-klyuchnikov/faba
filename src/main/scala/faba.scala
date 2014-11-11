@@ -22,7 +22,7 @@ import org.objectweb.asm.tree.analysis.{Frame, Value => ASMValue}
 import scala.language.existentials
 
 /**
- * Context to memoize not expensive (to some extend) computations.
+ * Context to memoize expensive (to some extend) computations.
  *
  * @param referenceResult true if the method type is reference
  * @param booleanResult true if the method type is boolean
@@ -203,11 +203,10 @@ trait FabaProcessor extends Processor {
                           jsr: Boolean) {
     val start = System.nanoTime()
     val cycle = dfs.backEdges.nonEmpty
-    // leaking params will be taken for
+    // leaking params will be taken for further decisions
     lazy val leaking = leakingParameters(className, methodNode, jsr)
     lazy val resultOrigins = buildResultOrigins(className, methodNode, leaking.frames, graph)
-    lazy val influence = ResultInfluence.analyze(methodNode, leaking, resultOrigins)
-
+    lazy val parameterToResult = ParameterToResultFlow.analyze(methodNode, leaking, resultOrigins)
     val context =  Context(method, methodNode, graph, stable, dfs)
 
     // todo - do we need equations for boolean results?
@@ -222,7 +221,6 @@ trait FabaProcessor extends Processor {
       val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
 
       if (isReferenceArg) {
-
         // have we discovered that param is @NotNull now?
         var notNullParam = false
         // an execution path was discovered at which this param is dereferenced
@@ -259,7 +257,7 @@ trait FabaProcessor extends Processor {
         // [[[ contract analysis
         if (isReferenceResult || isBooleanResult) {
           if (stable) {
-            val paramInfluence = leaking.splittingParameters(i) || influence(i)
+            val paramInfluence = leaking.splittingParameters(i) || parameterToResult(i)
             // result may depend on a parameter
             if (leaking.parameters(i)) {
               val unconditionalDereference = dereferenceFound && !leaking.splittingParameters(i) && !resultOrigins.parameters(i)
@@ -346,7 +344,7 @@ trait FabaProcessor extends Processor {
   }
 
   def notNullContractEquation(context: Context, resultOrigins: Origins, i: Int): Equation[Key, Value] = {
-    val analyser = new InOutAnalysis(context, InOut(i, Values.NotNull), resultOrigins)
+    val analyser = new ResultAnalysis(context, InOut(i, Values.NotNull), resultOrigins)
     try {
       analyser.analyze()
     } catch {
@@ -356,7 +354,7 @@ trait FabaProcessor extends Processor {
   }
 
   def nullContractEquation(context: Context, resultOrigins: Origins, i: Int): Equation[Key, Value] = {
-    val analyser = new InOutAnalysis(context, InOut(i, Values.Null), resultOrigins)
+    val analyser = new ResultAnalysis(context, InOut(i, Values.Null), resultOrigins)
     try {
       analyser.analyze()
     } catch {
@@ -366,7 +364,7 @@ trait FabaProcessor extends Processor {
   }
 
   def outContractEquation(context: Context, resultOrigins: Origins): Equation[Key, Value] = {
-    val analyser = new InOutAnalysis(context, Out, resultOrigins)
+    val analyser = new ResultAnalysis(context, Out, resultOrigins)
     try {
       analyser.analyze()
     } catch {
