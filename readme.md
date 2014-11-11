@@ -47,6 +47,7 @@
       It is likely that indexing and inference will be 2-3 times slower.
     * Deeper inference of purity.
       It requires an effect system under the hood (`@Pure`, `@Read`, `@Write`, `@LocalEffect`).
+    * Handling nullity of fields (at least `static final` and `final`).
 
 ## How to run
 
