@@ -58,6 +58,7 @@ public class LiteAnalyzer<V extends Value> implements Opcodes {
         this.interpreter = interpreter;
     }
 
+    @SuppressWarnings("unchecked")
     public Frame<V>[] analyze(final String owner, final MethodNode m) throws AnalyzerException {
         if ((m.access & (ACC_ABSTRACT | ACC_NATIVE)) != 0 || m.instructions.size() == 0) {
             frames = (Frame<V>[]) new Frame<?>[0];

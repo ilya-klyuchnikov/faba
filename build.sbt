@@ -16,6 +16,8 @@ scalacOptions += "-feature"
 
 scalacOptions += "-Yinline-warnings"
 
+javacOptions += "-Xlint:unchecked"
+
 fork := true
 
 //javaOptions in run += "-Xmx128M"

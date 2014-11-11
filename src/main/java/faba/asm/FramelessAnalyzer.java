@@ -55,6 +55,7 @@ public class FramelessAnalyzer implements Opcodes {
     protected int[] queue;
     protected int top;
 
+    @SuppressWarnings("unchecked")
     public void analyze(final MethodNode m) throws AnalyzerException {
         n = m.instructions.size();
         if ((m.access & (ACC_ABSTRACT | ACC_NATIVE)) != 0 || n == 0) {
