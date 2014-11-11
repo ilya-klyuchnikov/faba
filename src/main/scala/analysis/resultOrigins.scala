@@ -129,7 +129,7 @@ object OriginsAnalysis {
             if (visited.add(insnLoc))
               queue.push(insnLoc)
           }
-          if (previousInsns.isEmpty && insnIndex == 0) {
+          if (insnIndex == 0) {
             loc match {
               case LocalVarLocation(i) if (i >= shift) && (i - shift < arity) =>
                 // result came from some parameter, logging it
