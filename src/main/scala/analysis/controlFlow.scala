@@ -1,5 +1,7 @@
 package faba.analysis
 
+import faba.asm._
+
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.tree._
 

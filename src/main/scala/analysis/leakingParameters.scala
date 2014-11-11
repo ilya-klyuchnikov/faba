@@ -1,6 +1,7 @@
 package faba.analysis.leakingParameters
 
 import faba.analysis._
+import faba.asm._
 
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.Type

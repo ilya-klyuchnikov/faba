@@ -1,6 +1,4 @@
-package faba.analysis;
-
-// calculate additional state
+package faba.asm;
 
 /**
  * Trait for an interpreter (to be mixed with {@link org.objectweb.asm.tree.analysis.Interpreter})

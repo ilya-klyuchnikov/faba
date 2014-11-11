@@ -28,61 +28,39 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package faba.analysis;
+package faba.asm;
 
-import org.objectweb.asm.tree.JumpInsnNode;
-import org.objectweb.asm.tree.LabelNode;
+import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.analysis.AnalyzerException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Copy of {@link org.objectweb.asm.tree.analysis.Subroutine}.
+ * Fusion of {@link faba.asm.LiteAnalyzer} and {@link faba.asm.FramelessAnalyzer}
  */
-public class Subroutine {
+public class LiteFramelessAnalyzer extends FramelessAnalyzer {
 
-    LabelNode start;
-    boolean[] access;
-    List<JumpInsnNode> callers;
-
-    private Subroutine() {
+    @Override
+    protected void findSubroutine(int insn, Subroutine sub, List<AbstractInsnNode> calls) throws AnalyzerException {
     }
 
-    Subroutine(final LabelNode start, final int maxLocals,
-               final JumpInsnNode caller) {
-        this.start = start;
-        this.access = new boolean[maxLocals];
-        this.callers = new ArrayList<JumpInsnNode>();
-        callers.add(caller);
-    }
-
-    public Subroutine copy() {
-        Subroutine result = new Subroutine();
-        result.start = start;
-        result.access = new boolean[access.length];
-        System.arraycopy(access, 0, result.access, 0, access.length);
-        result.callers = new ArrayList<JumpInsnNode>(callers);
-        return result;
-    }
-
-    public boolean merge(final Subroutine subroutine) throws AnalyzerException {
-        boolean changes = false;
-        for (int i = 0; i < access.length; ++i) {
-            if (subroutine.access[i] && !access[i]) {
-                access[i] = true;
-                changes = true;
+    protected void merge(final int insn, final Subroutine subroutine) throws AnalyzerException {
+        if (!wasQueued[insn]) {
+            wasQueued[insn] = true;
+            if (!queued[insn]) {
+                queued[insn] = true;
+                queue[top++] = insn;
             }
         }
-        if (subroutine.start == start) {
-            for (int i = 0; i < subroutine.callers.size(); ++i) {
-                JumpInsnNode caller = subroutine.callers.get(i);
-                if (!callers.contains(caller)) {
-                    callers.add(caller);
-                    changes = true;
-                }
+    }
+
+    protected void merge(final int insn, final Subroutine subroutineBeforeJSR, final boolean[] access) throws AnalyzerException {
+        if (!wasQueued[insn]) {
+            wasQueued[insn] = true;
+            if (!queued[insn]) {
+                queued[insn] = true;
+                queue[top++] = insn;
             }
         }
-        return changes;
     }
 }
