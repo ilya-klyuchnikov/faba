@@ -265,12 +265,13 @@ trait FabaProcessor extends Processor {
               if (notNullParam) {
                 handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Bot)))
               } else if (unconditionalDereference) {
-                handleNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
+                // there is __some__ unconditional dereference, but parameter is not null
+                handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
               } else if (paramInfluence) {
                 handleNullContractEquation(nullContractEquation(context, resultOrigins, i))
               } else {
                 // no influence - result is the same as the main equation
-                handleNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
+                handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
               }
               // ]]] null->... analysis
 
