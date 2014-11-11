@@ -17,7 +17,7 @@ object ResultAnalysis {
   // Since:
   //  1. We know upper bound of its size (LimitReachedException.limit)
   //  2. There is not need to empty this array on each run (it is used as stack)
-  val sharedPendingStack = new Array[State](LimitReachedException.limit)
+  val sharedPendingStack = new Array[State](stepsLimit)
 }
 
 class ResultAnalysis(val context: Context,

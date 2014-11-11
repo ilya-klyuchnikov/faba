@@ -243,9 +243,9 @@ abstract class StagedScAnalysis[Res] {
    * If such situation is encountered, `earlyResult` may be set to `Some(result)`.
    * `earlyResult` is checked at each step of analysis.
    *
-   * @see [[faba.contracts.InOutAnalysis#analyze()]]
-   * @see [[faba.parameters.NotNullParameterAnalysis.analyze()]]
-   * @see [[faba.parameters.NullableParameterAnalysis.analyze()]]
+   * @see [[faba.analysis.result.ResultAnalysis#analyze()]]
+   * @see [[faba.analysis.parameters.NotNullParameterAnalysis#analyze()]]
+   * @see [[faba.analysis.parameters.NullableParameterAnalysis#analyze()]]
    */
   var earlyResult: Option[Res] = None
 
@@ -260,7 +260,7 @@ abstract class StagedScAnalysis[Res] {
   @throws[LimitReachedException]("when graph of configurations is too big")
   final def genId(): Int = {
     id += 1
-    if (id > LimitReachedException.limit) throw new LimitReachedException
+    if (id > stepsLimit) throw new LimitReachedException
     id
   }
 

@@ -321,7 +321,7 @@ class MainProcessor extends FabaProcessor {
     source.process(this)
     val solutions: Map[Key, Values.Value] =
       (notNullParamsSolver.solve() ++ contractsSolver.solve()).filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
-    data.Utils.toAnnotations(solutions)
+    AnnotationsUtil.toAnnotations(solutions)
   }
 }
 

@@ -142,13 +142,13 @@ object NotNullParameterAnalysis {
    * Reusable pending list (pending stack) for push/pop actions during analyses.
    * @see faba.parameters.NotNullInAnalysis#pending
    */
-  val sharedPendingStack = new Array[PendingAction](LimitReachedException.limit)
+  val sharedPendingStack = new Array[PendingAction](stepsLimit)
 
   /**
    * Reusable storage of sub results during analyses.
    * @see faba.parameters.NotNullInAnalysis#results
    */
-  val sharedResults = new Array[Result](LimitReachedException.limit)
+  val sharedResults = new Array[Result](stepsLimit)
 }
 
 class NotNullParameterAnalysis(val context: Context, val direction: Direction) extends StagedScAnalysis[Result] {
@@ -355,7 +355,7 @@ object NullableParameterConstraint {
 }
 
 object NullableParameterAnalysis {
-  val sharedPendingStack = new Array[State](LimitReachedException.limit)
+  val sharedPendingStack = new Array[State](stepsLimit)
 }
 
 class NullableParameterAnalysis(val context: Context, val direction: Direction) extends StagedScAnalysis[Result] {

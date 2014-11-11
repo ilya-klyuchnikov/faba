@@ -8,6 +8,14 @@ import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 import scala.xml.Elem
 
+/**
+ * Case class to uniquely identify java methods in bytecode (part of `faba.data.Key`)
+ *
+ * @param internalClassName the name of the class owning this method in asm format
+ *                          (org.objectweb.asm.tree.ClassNode#name)
+ * @param methodName method name (org.objectweb.asm.tree.MethodNode#name)
+ * @param methodDesc method descriptor in asm format (see org.objectweb.asm.tree.MethodNode#desc)
+ */
 case class Method(internalClassName: String, methodName: String, methodDesc: String) {
   override def toString =
     s"$internalClassName $methodName$methodDesc"
@@ -19,17 +27,78 @@ case class Method(internalClassName: String, methodName: String, methodDesc: Str
     }
 }
 
+/**
+ * Additional information about method. Used for dumping inferred annotations into
+ * IDEA external annotations format.
+ * @param signature corresponds to `org.objectweb.asm.tree.MethodNode#signature`
+ * @param access corresponds to `org.objectweb.asm.tree.MethodNode#access`
+ */
+case class MethodExtra(signature: Option[String], access: Int)
+
+/**
+ * Direction of analysis (part of `faba.data.Key`)
+ */
 sealed trait Direction
+/**
+ * `In(i)` direction of analysis = analysis of the i-th parameter (for `@NotNull` and `@Nullable`).
+ * @param paramIndex index of a parameter being analyzed.
+ */
 case class In(paramIndex: Int) extends Direction
-case class InOut(paramIndex: Int, in: Value) extends Direction
+
+/**
+ * `Out` direction of analysis = analysis of the method's result (`@NotNull`, `@Nullable` or pure).
+ */
 case object Out extends Direction
 
+/**
+ * `InOut(i, v)` = analysis of the method's result assuming that a value `v` is passed into the i-th parameter.
+ * Used for denoting inference of `@Contract` clauses. For example, for method `Object foo(Object o1, Object o2)`
+ * inference of the clause `@Contract("null,_->null")` will use `InOut(0, Values.Null)` direction.
+ * @param paramIndex index of a parameter in question
+ * @param in value passed into this parameter
+ */
+case class InOut(paramIndex: Int, in: Value) extends Direction
+
+/**
+ * Trait to abstract `stable` aspect of `faba.data.Key`.
+ * Because of `PolymorphicId`, `faba.engine.Solver` is quite generic (knows nothing about `faba.data.Key`).
+ *
+ * @tparam Id id of an entity
+ * @see [[faba.data.Key#stable]]
+ */
 trait PolymorphicId[Id] {
+  /**
+   * Whether this id stable (= effectively final).
+   */
   val stable: Boolean
+
+  /**
+   * Converts current id into a stable one.
+   * @return unstable id
+   */
   def mkUnstable: Id
+
+  /**
+   * Converts current id into a unstable one.
+   * @return stable id
+   */
   def mkStable: Id
 }
 
+/**
+ * Analysis key. Used to uniquely identify ids (variables) in equations.
+ * @note `NotNull`, `Nullable` and purity result analyses will have the same key for the same method.
+ *       `NotNull` and `Nullable` parameter analyses will have the same key for the same method.
+ *       However, this is not a problem since `NotNull` and `Nullable` equations are put into different solvers.
+ *       It is possible, that later key will be extended with "analysis coordinate" as well (as in IDEA).
+ *
+ * @param method method id (method coordinate)
+ * @param direction direction coordinate
+ * @param stable stability coordinate (virtual/final method).
+ *               `stable` flag is used at declaration site and call site.
+ *               `stable=true` at declaration site means that a method is effectively final.
+ *               `stable=true` at call site means that a call to this method is not virtual.
+ */
 case class Key(method: Method, direction: Direction, stable: Boolean) extends PolymorphicId[Key] {
   override def toString = direction match {
     case Out => s"$method"
@@ -38,31 +107,45 @@ case class Key(method: Method, direction: Direction, stable: Boolean) extends Po
   }
 
   override def mkUnstable =
-    if (!stable) this else Key(method, direction, false)
+    if (!stable) this else Key(method, direction, stable = false)
 
   override def mkStable =
-    if (stable) this else Key(method, direction, true)
+    if (stable) this else Key(method, direction, stable = true)
 }
 
+/**
+ * Enumeration to represent abstract values for result of analyses.
+ * Interpretation of these values may be specific to an analysis.
+ */
 object Values extends Enumeration {
   val Bot, NotNull, Null, True, False, Pure, Top = Value
 }
 
 object `package` {
   type Value = Values.Value
+  /**
+   * To limit long analysis by the number of elementary operations.
+   */
+  val stepsLimit = 1 << 15
 }
 
-object LimitReachedException {
-  // elementary steps limit
-  val limit = 1 << 15
-}
-
+/**
+ * Exception is thrown when analysis is trying to perform
+ * more elementary steps then [[faba.data.LimitReachedException#limit]].
+ */
 class LimitReachedException extends Exception("Limit reached exception")
 
-
+/**
+ * Auxiliary data structure to support testing.
+ * @param notNulls keys of methods and parameters inferred to be `@NotNull`
+ * @param contracts map of `methodKey->contractString`
+ */
 case class Annotations(notNulls: Set[Key], contracts: Map[Key, String])
 
-object Utils {
+/**
+ * Utility to transform solutions into annotations.
+ */
+object AnnotationsUtil {
 
   def toAnnotations(solutions: Iterable[(Key, Value)]): Annotations = {
     val inOuts = mutable.HashMap[Method, List[(InOut, Value)]]()
@@ -81,7 +164,7 @@ object Utils {
       }
     }
     for ((method, inOuts) <- inOuts) {
-      val key = Key(method, Out, true)
+      val key = Key(method, Out, stable = true)
       val arity = Type.getArgumentTypes(method.methodDesc).size
       val contractValues = inOuts.map { case (InOut(i, inValue), outValue) =>
         (0 until arity).map { j =>
@@ -103,8 +186,9 @@ object Utils {
 
 }
 
-case class MethodExtra(signature: Option[String], access: Int)
-
+/**
+ * Utility to dump solutions of equations in the format of IDEA external annotations.
+ */
 object XmlUtils {
 
   val REGEX_PATTERN = "(?<=[^\\$\\.])\\${1}(?=[^\\$])".r // disallow .$ or $$
@@ -186,7 +270,7 @@ object XmlUtils {
           // (but we may output @Contract(pure=true) part of contract annotation)
           Some(contract.clauses.map { case (InOut(i, inValue), outValue) =>
             (0 until arity).map { j =>
-              if (i == j) Utils.contractValueString(inValue) else "_" }.mkString("", ",", s"->${Utils.contractValueString(outValue)}")
+              if (i == j) AnnotationsUtil.contractValueString(inValue) else "_" }.mkString("", ",", s"->${AnnotationsUtil.contractValueString(outValue)}")
           }.sorted.mkString("\"", ";", "\""))
         else None
 
