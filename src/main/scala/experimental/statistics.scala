@@ -50,7 +50,7 @@ object Statistics extends FabaProcessor {
     eq.rhs match {
       case Pending(sop) =>
         eqs += 1
-        dependencies(key) = dependencies.getOrElse(key, Set()) ++ sop.flatMap(_.ids)
+        dependencies(key) = dependencies.getOrElse(key, Set()) ++ sop.flatMap(_.elems)
       case Final(_) =>
         eqs += 1
         //cardinalities(0) += 1

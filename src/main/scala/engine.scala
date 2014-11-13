@@ -5,49 +5,102 @@ import faba.data.{LimitReachedException, PolymorphicId}
 import scala.collection.mutable
 
 object `package` {
-  implicit class LatticeOps[Val](x: Val)(implicit l: Lattice[Val]) {
-    @inline def &(y: Val): Val =
-      l.meet(x, y)
 
-    @inline def meet(y: Val): Val =
-      l.meet(x, y)
+  /**
+   * The central data of FABA. Equation represents a staged result of analysis.
+   *
+   * @param id left hand side of the equation (variable)
+   * @param rhs right hand side of the equation: answer (faba.engine.Final) or expression (faba.engine.Pending)
+   * @tparam K type of identifiers (variables, keys)
+   * @tparam V type of values (answers)
+   */
+  case class Equation[K, V](id: K, rhs: Result[K, V])
 
-    @inline def |(y: Val): Val =
-      l.join(x, y)
+  /**
+   * Canonical representations of "lattice expressions".
+   * In a sense, it is disjunctive normal form (http://en.wikipedia.org/wiki/Disjunctive_normal_form)
+   * == OR of ANDs == sum of products == JOIN of MEETs.
+   * Solver is designed to work with such expressions
+   *
+   * @tparam K type of identifiers (variables, keys)
+   * @tparam V type of values (answers)
+   * @see [[faba.engine.Pending#expression]]
+   */
+  type SumOfProducts[K, V] = Set[Product[K, V]]
 
-    @inline def join(y: Val): Val =
-      l.join(x, y)
+  /**
+   * Product (meet) of lattice elements (= AND = MEET)
+   *
+   * @param upperBound the upper bound of product, used by solver during applying substitutions
+   * @param elems elements of this product
+   * @tparam K type of identifiers (variables, keys)
+   * @tparam V type of values (answers)
+   */
+  case class Product[K, V](upperBound: V, elems: Set[K])
+
+  /**
+   * Right hand side of an equation
+   * @tparam K type of identifiers (variables, keys)
+   * @tparam V type of values (answers)
+   */
+  sealed trait Result[+K, V]
+
+  /**
+   * "Answer", solution
+   * @param value solution per se
+   * @tparam V type of values (answers)
+   */
+  case class Final[V](value: V) extends Result[Nothing, V]
+
+  /**
+   * Right hand side of an equation, not a final answer.
+   *
+   * @param expression expression per se
+   * @tparam K type of identifiers (variables, keys)
+   * @tparam V type of values (answers)
+   */
+  case class Pending[K, V](expression: SumOfProducts[K, V]) extends Result[K, V] {
+    if (expression.map(_.elems.size).sum > 30) throw new LimitReachedException
   }
 
-  // sum of products
-  type SoP[K, V] = Set[Component[K, V]]
-
-  implicit class ResultOps[Id, Val](r1: Result[Id, Val])(implicit l: Lattice[Val]) {
-    val top: Val = l.top
-    @inline def join(r2: Result[Id, Val]): Result[Id, Val] = (r1, r2) match {
+  /**
+   * Utility to join results. Used by ResultAnalysis to combined partials solutions.
+   * @param l lattice
+   * @tparam K type of identifiers (variables, keys)
+   * @tparam V type of values (answers)
+   */
+  case class ResultUtils[K, V](l: Lattice[V]) {
+    val top: V = l.top
+    def join(r1: Result[K, V], r2: Result[K, V]): Result[K, V] = (r1, r2) match {
       case (Final(`top`), _) =>
         Final(`top`)
       case (_, Final(`top`)) =>
         Final(`top`)
       case (Final(v1), Final(v2)) =>
-        Final(v1 join v2)
+        Final(l.join(v1, v2))
       case (Final(v1), Pending(comps2)) =>
-        Pending(comps2 + Component(v1, Set()))
+        Pending(comps2 + Product(v1, Set()))
       case (Pending(comps1), Final(v2)) =>
-        Pending(comps1 + Component(v2, Set()))
+        Pending(comps1 + Product(v2, Set()))
       case (Pending(comps1), Pending(comps2)) =>
         Pending(comps1 union comps2)
     }
   }
 }
 
-// complete finite lattice
-trait Lattice[T] {
-  val top: T
-  val bot: T
+/**
+ * Lattice for values. All equations are over lattices with `meet` and `join` operations.
+ *
+ * @param bot bottom of the lattice (lower bound)
+ * @param top top of the lattice (upper bound)
+ * @tparam V type of values in the lattice
+ */
+case class Lattice[V](bot: V, top: V) {
 
-  // |,  union
-  final def join(x: T, y: T): T =
+  /**
+   * Join operation (http://en.wikipedia.org/wiki/Join_and_meet)
+   */
+  final def join(x: V, y: V): V =
     (x, y) match {
       case (`bot`, _) => y
       case (_, `bot`) => x
@@ -56,8 +109,10 @@ trait Lattice[T] {
       case _ => if (equiv(x, y)) x else top
     }
 
-  // &, intersection
-  final def meet(x: T, y: T): T =
+  /**
+   * Meet operation (http://en.wikipedia.org/wiki/Join_and_meet)
+   */
+  final def meet(x: V, y: V): V =
     (x, y) match {
       case (`top`, _) => y
       case (_, `top`) => x
@@ -66,49 +121,46 @@ trait Lattice[T] {
       case _ => if (equiv(x, y)) x else bot
     }
 
-  final def equiv(x: T, y: T): Boolean =
+  /**
+   * equivalence = equality here
+   */
+  final def equiv(x: V, y: V): Boolean =
     x == y
 }
 
-case class ELattice[E](bot: E, top: E) extends Lattice[E]
-
-case class Component[Id, V](v: V, ids: Set[Id])
-
-sealed trait Result[+Id, Val]
-case class Final[Val](value: Val) extends Result[Nothing, Val]
-case class Pending[Id, Val](delta: SoP[Id, Val]) extends Result[Id, Val] {
-  if (delta.map(_.ids.size).sum > 30) throw new LimitReachedException
-}
-
-case class Equation[Id, Val](id: Id, rhs: Result[Id, Val])
-
-class Solver[K <: PolymorphicId[K], V](val doNothing: Boolean)(implicit lattice: Lattice[V]) {
+/**
+ * Solver of equations over lattices. Solving is performed simply by substitution.
+ *
+ * @param idleMode solver in idle mode does nothing
+ * @param lattice lattice to use for solving (bot, top, meet, join)
+ * @tparam K type of identifiers (variables, keys)
+ * @tparam V type of values in the lattice
+ */
+class Solver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice: Lattice[V]) {
 
   type Solution = (K, V)
-  val top = lattice.top
-  val bot = lattice.bot
+  import lattice._
 
   private val dependencies = mutable.HashMap[K, Set[K]]()
   private val pending = mutable.HashMap[K, Pending[K, V]]()
   private val moving = mutable.Queue[Solution]()
   private var solved = Map[K, V]()
 
-  def this(equations: List[Equation[K, V]])(implicit lattice: Lattice[V]) {
-    this(false)
+  // for testing
+  def this(equations: List[Equation[K, V]], lattice: Lattice[V]) {
+    this(false, lattice)
     equations.foreach(addEquation)
   }
 
   def addEquation(equation: Equation[K, V]): Unit =
-    if (doNothing) return
-    else
-    equation.rhs match {
+    if (!idleMode) equation.rhs match {
       case Final(value) =>
         moving enqueue (equation.id -> value)
       case Pending(sum) => normalize(sum) match {
         case Final(value) =>
           moving enqueue (equation.id -> value)
         case p@Pending(comps) =>
-          for (trigger <- comps.map(_.ids).flatten) {
+          for (trigger <- comps.map(_.elems).flatten) {
             dependencies(trigger) = dependencies.getOrElse(trigger, Set()) + equation.id
           }
           pending(equation.id) = p
@@ -137,10 +189,6 @@ class Solver[K <: PolymorphicId[K], V](val doNothing: Boolean)(implicit lattice:
       }
     }
 
-    /*
-    for ((id, _) <- pending)
-      solved = solved + (id -> top)
-    */
     pending.clear()
     solved
   }
@@ -149,17 +197,17 @@ class Solver[K <: PolymorphicId[K], V](val doNothing: Boolean)(implicit lattice:
 
   private def substitute(pending: Pending[K, V], id: K, value: V): Result[K, V] = {
 
-    val sum = pending.delta.map { prod =>
-      if (prod.ids(id)) Component(value & prod.v, prod.ids - id) else prod
+    val sum = pending.expression.map { prod =>
+      if (prod.elems(id)) Product(meet(value, prod.upperBound), prod.elems - id) else prod
     }
     normalize(sum)
   }
 
-  private def normalize(sum: SoP[K, V]): Result[K, V] = {
+  private def normalize(sum: SumOfProducts[K, V]): Result[K, V] = {
     var acc = bot
     var computableNow = true
-    for (Component(v, prod) <- sum )
-      if (prod.isEmpty || v == bot) acc = acc | v
+    for (Product(v, prod) <- sum )
+      if (prod.isEmpty || v == bot) acc = join(acc, v)
       else computableNow = false
 
     if (acc == top || computableNow) Final(acc)
@@ -168,7 +216,7 @@ class Solver[K <: PolymorphicId[K], V](val doNothing: Boolean)(implicit lattice:
 
 }
 
-class NullableResultSolver[K <: PolymorphicId[K], V](doNothing: Boolean)(implicit lattice: Lattice[V])
-  extends Solver[K, V](doNothing)(lattice) {
-  override def mkUnstableValue(v: V) = bot
+class NullableResultSolver[K <: PolymorphicId[K], V](idle: Boolean, lattice: Lattice[V])
+  extends Solver[K, V](idle, lattice) {
+  override def mkUnstableValue(v: V) = lattice.bot
 }

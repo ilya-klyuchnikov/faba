@@ -173,7 +173,7 @@ class NotNullParameterAnalysis(val context: Context, val direction: Direction) e
     case NPE =>
       Equation(aKey, Final(Values.NotNull))
     case ConditionalNPE(cnf) =>
-      Equation(aKey, Pending(cnf.map(p => Component(Values.Top, p))))
+      Equation(aKey, Pending(cnf.map(p => Product(Values.Top, p))))
   }
 
   var npe = false
@@ -367,7 +367,7 @@ class NullableParameterAnalysis(val context: Context, val direction: Direction) 
     case NPE => Equation(aKey, Final(Values.Top))
     case Identity | Return | Error => Equation(aKey, Final(Values.Null))
     case ConditionalNPE(cnf) =>
-      Equation(aKey, Pending(cnf.map(p => Component(Values.Top, p))))
+      Equation(aKey, Pending(cnf.map(p => Product(Values.Top, p))))
   }
 
   private var myResult: Result = Identity

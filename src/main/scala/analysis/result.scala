@@ -27,7 +27,8 @@ class ResultAnalysis(val context: Context,
   import context._
 
   type MyResult = Result[Key, Value]
-  implicit val contractsLattice = ELattice(Values.Bot, Values.Top)
+  val contractsLattice = Lattice(Values.Bot, Values.Top)
+  val resultUtils = ResultUtils[Key, Value](contractsLattice)
 
   val pendingStack = ResultAnalysis.sharedPendingStack
 
@@ -133,22 +134,22 @@ class ResultAnalysis(val context: Context,
         case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
           popValue(frame) match {
             case FalseValue() =>
-              myResult = myResult join Final(Values.False)
+              myResult = resultUtils.join(myResult, Final(Values.False))
             case TrueValue() =>
-              myResult = myResult join Final(Values.True)
+              myResult = resultUtils.join(myResult, Final(Values.True))
             case NotNullValue(_) =>
-              myResult = myResult join Final(Values.NotNull)
+              myResult = resultUtils.join(myResult, Final(Values.NotNull))
             case ParamValue(_) =>
               val InOut(_, in) = direction
-              myResult = myResult join Final(in)
+              myResult = resultUtils.join(myResult, Final(in))
             case tr: Trackable if (dereferenced & resultOrigins.instructionsMap(tr.origin)) != 0 =>
-              myResult = myResult join Final(Values.NotNull)
+              myResult = resultUtils.join(myResult, Final(Values.NotNull))
             case NThParamValue(n, _) if (dereferenced & resultOrigins.parametersMap(n)) != 0 =>
-              myResult = myResult join Final(Values.NotNull)
+              myResult = resultUtils.join(myResult, Final(Values.NotNull))
             case NullValue(_) =>
-              myResult = myResult join Final(Values.Null)
+              myResult = resultUtils.join(myResult, Final(Values.Null))
             case CallResultValue(_, _, keys) =>
-              myResult = myResult join Pending[Key, Value](Set(Component(Values.Top, keys)))
+              myResult = resultUtils.join(myResult, Pending[Key, Value](Set(Product(Values.Top, keys))))
             case _ =>
               earlyResult = Some(Final(Values.Top))
               return

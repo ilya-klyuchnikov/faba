@@ -8,49 +8,50 @@ import faba.data._
 
 class engineSpec extends FunSuite with TableDrivenPropertyChecks {
 
-  case class Utils[Id, Val:Lattice]() {
-    val top = implicitly[Lattice[Val]].top
-    val bot = implicitly[Lattice[Val]].bot
+  case class Utils[K, V:Lattice]() {
+    val lattice = implicitly[Lattice[V]]
+    val top = implicitly[Lattice[V]].top
+    val bot = implicitly[Lattice[V]].bot
 
-    def substitute(rhs: Result[Id, Val], solution: Map[Id, Val]): Val = rhs match {
+    def substitute(rhs: Result[K, V], solution: Map[K, V]): V = rhs match {
       case Final(value) =>
         value
       case Pending(sop) =>
-        sop.map(_.ids.map(solution).reduce(_ & _)).reduce(_ | _)
+        sop.map(_.elems.map(solution).reduce(lattice.meet)).reduce(lattice.join)
     }
 
-    implicit class SolutionOps(solution: Map[Id, Val]) {
-      def validFor_?(equations: List[Equation[Id, Val]]): Boolean =
+    implicit class SolutionOps(solution: Map[K, V]) {
+      def validFor_?(equations: List[Equation[K, V]]): Boolean =
         equations.forall { case Equation(lhs, rhs) => solution(lhs) == substitute(rhs, solution)}
     }
 
-    implicit class IdOps(i: Id) {
-      def :=(v: Val): Equation[Id, Val] =
+    implicit class IdOps(i: K) {
+      def :=(v: V): Equation[K, V] =
         Equation(i, Final(v))
-      def :=(s: Set[Set[Id]]): Equation[Id, Val] =
-        Equation(i, Pending(s.map(Component(top, _))))
-      def :=(s: Set[Id])(implicit x: String = null): Equation[Id, Val] =
-        Equation(i, Pending(Set(Component(top, s))))
+      def :=(s: Set[Set[K]]): Equation[K, V] =
+        Equation(i, Pending(s.map(Product(top, _))))
+      def :=(s: Set[K])(implicit x: String = null): Equation[K, V] =
+        Equation(i, Pending(Set(Product(top, s))))
     }
 
-    implicit class IdSetOps(s: Set[Id]) {
+    implicit class IdSetOps(s: Set[K]) {
       // union
-      def U(i: Set[Id]): Set[Set[Id]] = Set(s, i)
+      def U(i: Set[K]): Set[Set[K]] = Set(s, i)
     }
 
-    implicit class IdSetSetOps(s: Set[Set[Id]]) {
+    implicit class IdSetSetOps(s: Set[Set[K]]) {
       // union
-      def U(t: Set[Id]): Set[Set[Id]] = s + t
+      def U(t: Set[K]): Set[Set[K]] = s + t
     }
 
     // intersection
-    def I(ids: Id*): Set[Id] = Set(ids:_*)
+    def I(ids: K*): Set[K] = Set(ids:_*)
 
-    def pretty(eq: Equation[Id, Val]): String = eq.rhs match {
+    def pretty(eq: Equation[K, V]): String = eq.rhs match {
       case Final(v) =>
         s"${eq.id} := $v;"
       case Pending(sop) =>
-        s"${eq.id} := ${sop.map(_.ids.mkString("(", " & ", ")")).mkString(" | ")};"
+        s"${eq.id} := ${sop.map(_.elems.mkString("(", " & ", ")")).mkString(" | ")};"
     }
 
   }
@@ -62,7 +63,7 @@ class engineSpec extends FunSuite with TableDrivenPropertyChecks {
   }
 
   type Id = Wrapper
-  implicit val lattice = ELattice(Values.Bot, Values.Top)
+  implicit val lattice = Lattice(Values.Bot, Values.Top)
   val valuesUtils = Utils[Id, Values.Value]()
   import Values._
   import valuesUtils._
@@ -93,7 +94,7 @@ class engineSpec extends FunSuite with TableDrivenPropertyChecks {
       )
 
     forAll(equationSets) { equations =>
-      val solution = new Solver(equations).solve()
+      val solution = new Solver(equations, lattice).solve()
       info(s"equations: ${equations.map(pretty).mkString(" ")}")
       info(s"solution : ${solution}")
       assert(solution validFor_? equations, "invalid solution")
@@ -129,7 +130,7 @@ class engineSpec extends FunSuite with TableDrivenPropertyChecks {
       )
 
     forAll(equationSets) { equations =>
-      val solution = new Solver(equations).solve()
+      val solution = new Solver(equations, lattice).solve()
       info(s"equations: ${equations.map(pretty).mkString(" ")}")
       info(s"solution : ${solution}")
       assert(solution validFor_? equations, "invalid solution")

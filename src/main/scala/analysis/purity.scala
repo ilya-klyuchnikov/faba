@@ -64,6 +64,6 @@ object PurityAnalysis {
     if (calls.isEmpty)
       Equation(aKey, finalPure)
     else
-      Equation(aKey, Pending(calls.map(k => Component(Values.Top, Set(k)))))
+      Equation(aKey, Pending(calls.map(k => Product(Values.Top, Set(k)))))
   }
 }

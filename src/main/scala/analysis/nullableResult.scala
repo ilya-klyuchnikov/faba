@@ -79,7 +79,7 @@ object NullableResultAnalysis {
     case LabeledNull(_) =>
       Final(Values.Null)
     case Calls(keys) =>
-      Pending[Key, Value](keys map { k => Component(Values.Null, Set(k)) })
+      Pending[Key, Value](keys map { k => Product(Values.Null, Set(k)) })
     case _ =>
       Final(Values.Bot)
   }

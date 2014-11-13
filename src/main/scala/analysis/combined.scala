@@ -69,7 +69,7 @@ class CombinedSingleAnalysis(val context: LiteContext) {
         if (used.isEmpty)
           Final(Values.Top)
         else
-          Pending[Key, Value](Set(Component(Values.Top, used)))
+          Pending[Key, Value](Set(Product(Values.Top, used)))
       }
     Equation(key, result)
   }
@@ -87,7 +87,7 @@ class CombinedSingleAnalysis(val context: LiteContext) {
             if (calls.isEmpty)
               Final(Values.Null)
             else
-              Pending[Key, Value](calls.map(k => Component(Values.Top, Set(k))))
+              Pending[Key, Value](calls.map(k => Product(Values.Top, Set(k))))
         }
 
       }
@@ -123,7 +123,7 @@ class CombinedSingleAnalysis(val context: LiteContext) {
               keys += Key(m, Out, stableCall)
             }
             if (keys.nonEmpty)
-              Pending[Key, Value](Set(Component(Values.Top, keys)))
+              Pending[Key, Value](Set(Product(Values.Top, keys)))
             else
               Final(Values.Top)
           case _ =>
@@ -151,7 +151,7 @@ class CombinedSingleAnalysis(val context: LiteContext) {
             Final(Values.NotNull)
           case TrackableCallValue(_, _, m, stableCall, args, _) =>
             val callKey = Key(m, Out, stableCall)
-            Pending[Key, Value](Set(Component(Values.Top, Set(callKey))))
+            Pending[Key, Value](Set(Product(Values.Top, Set(callKey))))
           case _ =>
             Final(Values.Top)
         }
@@ -170,7 +170,7 @@ class CombinedSingleAnalysis(val context: LiteContext) {
           case TrackableCallValue(_, _, m, stableCall, args, callToThis) =>
             // it was not dereferenced,
             val callKey = Key(m, Out, stableCall || callToThis)
-            Pending[Key, Value](Set(Component(Values.Null, Set(callKey))))
+            Pending[Key, Value](Set(Product(Values.Null, Set(callKey))))
           case TrackableNullValue(_) =>
             // it was not dereferenced
             Final(Values.Null)
