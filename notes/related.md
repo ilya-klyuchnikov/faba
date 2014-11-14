@@ -16,7 +16,8 @@
 * <http://www.eecs.ucf.edu/~leavens/JML//index.shtml> - JML, java modeling language
 * <http://www.hpl.hp.com/downloads/crl/jtk/> - Java Programming Toolkit Source Release from HP
 * <http://www.cs.umd.edu/projects/PL/jqual/> - Type qualifier inference for Java
-* <https://www.cs.purdue.edu/homes/hosking/bloat/> - BLOAT 
+* <https://www.cs.purdue.edu/homes/hosking/bloat/> - BLOAT
 The Bytecode-Level Optimizer and Analysis Tool
 * <http://www.cs.ucla.edu/~todd/research/pub.php?id=toplas10>, <http://javacop.sourceforge.net/> - JavaCOP: Pluggable type system for Java
 * <http://www.cs.ucla.edu/~todd/research/udte.html> - User-Defined Type Extensions
+* <http://secure-software-engineering.github.io/SPLlift/> - Highly efficient inter-procedural data-flow analysis for software product lines
