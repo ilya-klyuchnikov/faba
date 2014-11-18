@@ -22,7 +22,7 @@ object ResultAnalysis {
 
 class ResultAnalysis(val context: Context,
                     val direction: Direction,
-                    resultOrigins: Origins) extends StagedScAnalysis[Result[Key, Value]] {
+                    resultOrigins: Origins) extends StagedScAnalysis[Values.Top.type] {
 
   import context._
 
@@ -43,15 +43,15 @@ class ResultAnalysis(val context: Context,
     case _ => None
   }
 
-  override def mkEquation(result: MyResult): Equation[Key, Value] =
-    Equation(aKey, result)
+  override def mkEquation(result: Values.Top.type): Equation[Key, Value] =
+    Equation(aKey, Final(Values.Top))
 
   /**
    *
    */
   def checkEarlyResult(): Unit = myResult match {
     case Final(Values.Top) =>
-      earlyResult = Some(myResult)
+      earlyResult = Some(Values.Top)
     case _ =>
   }
 
@@ -85,7 +85,10 @@ class ResultAnalysis(val context: Context,
     while (pendingStackTop > 0 && earlyResult.isEmpty)
       processState(pendingPop())
 
-    mkEquation(earlyResult.getOrElse(myResult))
+    earlyResult match {
+      case Some(r) => mkEquation(r)
+      case None => Equation(aKey, myResult)
+    }
   }
 
   override def processState(fState: State): Unit = {
@@ -151,7 +154,7 @@ class ResultAnalysis(val context: Context,
             case CallResultValue(_, _, keys) =>
               myResult = resultUtils.join(myResult, Pending[Key, Value](Set(Product(Values.Top, keys))))
             case _ =>
-              earlyResult = Some(Final(Values.Top))
+              earlyResult = Some(Values.Top)
               return
           }
           computed(insnIndex) = state :: computed(insnIndex)
