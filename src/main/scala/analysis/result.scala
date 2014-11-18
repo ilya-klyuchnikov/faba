@@ -43,9 +43,6 @@ class ResultAnalysis(val context: Context,
     case _ => None
   }
 
-  override def earlyEquation(): Equation[Key, Value] =
-    Equation(aKey, Final(Values.Top))
-
   def checkEarlyResult(): Unit =
     myResult == Final(Values.Top)
 

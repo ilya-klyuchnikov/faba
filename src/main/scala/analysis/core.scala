@@ -215,7 +215,8 @@ abstract class StagedScAnalysis {
    * Constructs a negative equation for an early result.
    * @return negative equation for an early result
    */
-  def earlyEquation(): Equation[Key, Value]
+  def earlyEquation(): Equation[Key, Value] =
+    Equation(aKey, Final(Values.Top))
 
   /**
    * Bookkeeping of already analyzed states.

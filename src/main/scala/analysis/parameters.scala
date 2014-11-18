@@ -245,9 +245,6 @@ class NotNullParameterAnalysis(val context: Context, val direction: Direction) e
   def combineResults(delta: StepsResult, subResults: List[ExecutionResult]): ExecutionResult =
     ExecutionResult.meet(delta, subResults.reduce(ExecutionResult.join))
 
-  override def earlyEquation(): Equation[Key, Value] =
-    Equation(aKey, Final(Values.Top))
-
   var npe = false
 
   private var pendingTop: Int = 0
@@ -444,9 +441,6 @@ class NullableParameterAnalysis(val context: Context, val direction: Direction) 
 
   import context._
   val pending = NullableParameterAnalysis.sharedPendingStack
-
-  override def earlyEquation(): Equation[Key, Value] =
-    Equation(aKey, Final(Values.Top))
 
   private var leakedParameters: Set[Key] = Set()
 
