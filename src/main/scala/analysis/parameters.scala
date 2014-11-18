@@ -7,50 +7,78 @@ import faba.engine._
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.analysis.{BasicInterpreter, BasicValue, Frame}
-import org.objectweb.asm.tree.{AbstractInsnNode, JumpInsnNode, MethodInsnNode, TypeInsnNode}
-
-sealed trait Result
+import org.objectweb.asm.tree._
 
 /**
- * Nothing interested detected
+ * Approximation of a method execution (subgraph of a graph of configurations)
+ * for @NotNull parameter analysis.
  */
-case object Identity extends Result
+sealed trait ExecutionResult {
+  def toResult: Result[Key, Value]
+}
 
 /**
- * Cycle detected
+ * Approximation of a number of steps of a method execution
+ * (subpath of a graph of configurations, this subpath does NOT include leaves)
+ * for @NotNull parameter analysis.
  */
-case object Cycle extends Result
+sealed trait StepsResult
 
 /**
- * Exception is thrown, but not because of NPE
+ * Cycle in the program (fold in a graph of configurations).
  */
-case object Error extends Result
+case object Cycle extends ExecutionResult {
+  override def toResult: Result[Key, Value] =
+    Final(Values.Top)
+}
 
 /**
- * Execution reaches return instruction without any (detected) possibility of NPE.
+ * An error (not caused by null value of the parameter)
  */
-case object Return extends Result
+case object Error extends ExecutionResult {
+  override def toResult: Result[Key, Value] =
+    Final(Values.Top)
+}
+
+/**
+ *  Execution reaches RETURN instruction without any chance to produce NPE.
+ */
+case object Return extends ExecutionResult {
+  override def toResult: Result[Key, Value] =
+    Final(Values.Top)
+}
+
+/**
+ * This approximation is NPE if formula results in @NotNull.
+ *
+ * @param sop SumOfProduct formula of dependencies.
+ */
+case class ConditionalNPE(sop: ExecutionResult.SoP) extends ExecutionResult with StepsResult {
+  if (sop.map(_.size).sum > 30) throw new LimitReachedException
+
+  override def toResult: Result[Key, Value] =
+    Pending(sop.map(p => Product(Values.Top, p)))
+}
 
 /**
  * Error caused by null-value of the parameter.
  * Dereferencing error or an assertion.
  */
-case object NPE extends Result
+case object NPE extends ExecutionResult with StepsResult {
+  override def toResult: Result[Key, Value] =
+    Final(Values.NotNull)
+}
 
 /**
- * The approximation is NPE if `sop` formula results into `NPE`.
- *
- * @param sop SumOfProduct formula of dependencies.
+ * Steps without any chance to produce NPE.
  */
-case class ConditionalNPE(sop: Result.SoP) extends Result {
-  if (sop.map(_.size).sum > 30) throw new LimitReachedException
-}
+case object Identity extends StepsResult
 
 object ConditionalNPE {
   def apply(passing: Key): ConditionalNPE = ConditionalNPE(Set(Set(passing)))
 }
 
-object Result {
+object ExecutionResult {
 
   // pure version of sum of products
   type SoP = Set[Set[Key]]
@@ -79,9 +107,9 @@ object Result {
    * @param r2 approximation on the right path of execution
    * @return sound joined approximation
    */
-  def join(r1: Result, r2: Result): Result = (r1, r2) match {
-    case (Error|Identity|Cycle, _) => r2
-    case (_, Error|Identity|Cycle) => r1
+  def join(r1: ExecutionResult, r2: ExecutionResult): ExecutionResult = (r1, r2) match {
+    case (Error|Cycle, _) => r2
+    case (_, Error|Cycle) => r1
     case (Return, _) => Return
     case (_, Return) => Return
     case (NPE, NPE) => NPE
@@ -102,18 +130,12 @@ object Result {
    * @param res approximation for a complete sub-graph or also for "delta"
    * @return
    */
-  def meet(delta: Result, res: Result): Result = (delta, res) match {
-    // impossible cases first
-    // delta may be only: NPE, ERROR, Identity, ConditionalNPE(_),
-    // res cannot be Identity
-    case (Return|Cycle, _) => sys.error(s"Impossible delta: $delta")
-    case (_, Identity) => sys.error("Identity cannot be a result")
+  def meet(delta: StepsResult, res: ExecutionResult): ExecutionResult = (delta, res) match {
     case (NPE, _) => NPE
     case (_, NPE) => NPE
-    case (Error, _) => Error
     case (_, Error) => Error
     case (Identity, _) => res
-    case (_, Return) => delta
+    case (delta: ConditionalNPE, Return) => delta
     // current compromise between "complexity" of the method and "the profit of more complex method"
     // the only `@NotNull` that will not be inferred in this case is
     // data.InferenceData.compromise - this is pathological example
@@ -140,7 +162,7 @@ object Result {
    * @param effect approximation for the second subpath
    * @return
    */
-  def subMeet(delta: Result, effect: StepEffect): Result = (delta, effect) match {
+  def subMeet(delta: StepsResult, effect: InstructionEffect): StepsResult = (delta, effect) match {
     case (_, NoEffect) =>
       delta
     case (_, NpeEffect) =>
@@ -151,7 +173,6 @@ object Result {
       ConditionalNPE(Set(product))
     case (ConditionalNPE(sop), LeakingEffect(product)) =>
       ConditionalNPE(SoP.meet(sop, Set(product)))
-    case (Cycle | Error | Return, _) => sys.error(s"Impossible delta: $delta")
   }
 }
 
@@ -199,7 +220,7 @@ object NotNullParameterAnalysis {
    * @param subResult - local delta (see the paper), produced by driving of straight section.
    * @param indices - indices of child states
    */
-  case class MakeResult(states: List[State], subResult: Result, indices: List[Int]) extends PendingAction
+  case class MakeResult(states: List[State], subResult: StepsResult, indices: List[Int]) extends PendingAction
 
   /**
    * Reusable pending list (pending stack) for push/pop actions during analyses.
@@ -211,27 +232,21 @@ object NotNullParameterAnalysis {
    * Reusable storage of sub results during analyses.
    * @see faba.parameters.NotNullInAnalysis#results
    */
-  val sharedResults = new Array[Result](stepsLimit)
+  val sharedResults = new Array[ExecutionResult](stepsLimit)
 }
 
-class NotNullParameterAnalysis(val context: Context, val direction: Direction) extends StagedScAnalysis[Result] {
+class NotNullParameterAnalysis(val context: Context, val direction: Direction) extends StagedScAnalysis[Return.type] {
   import NotNullParameterAnalysis._
   import context._
 
   val results = NotNullParameterAnalysis.sharedResults
   val pending = NotNullParameterAnalysis.sharedPendingStack
 
-  def combineResults(delta: Result, subResults: List[Result]): Result =
-    Result.meet(delta, subResults.reduce(Result.join))
+  def combineResults(delta: StepsResult, subResults: List[ExecutionResult]): ExecutionResult =
+    ExecutionResult.meet(delta, subResults.reduce(ExecutionResult.join))
 
-  override def mkEquation(result: Result): Equation[Key, Value] = result match {
-    case Identity | Return | Error | Cycle =>
-      Equation(aKey, Final(Values.Top))
-    case NPE =>
-      Equation(aKey, Final(Values.NotNull))
-    case ConditionalNPE(cnf) =>
-      Equation(aKey, Pending(cnf.map(p => Product(Values.Top, p))))
-  }
+  override def mkEquation(ret: Return.type): Equation[Key, Value] =
+    Equation(aKey, Final(Values.Top))
 
   var npe = false
 
@@ -262,7 +277,12 @@ class NotNullParameterAnalysis(val context: Context, val direction: Direction) e
         processState(state)
     }
 
-    mkEquation(earlyResult.getOrElse(results(0)))
+    earlyResult match {
+      case Some(ret) =>
+        mkEquation(ret)
+      case None =>
+        Equation(aKey, results(0).toResult)
+    }
   }
 
   override def processState(fState: State): Unit = {
@@ -270,7 +290,7 @@ class NotNullParameterAnalysis(val context: Context, val direction: Direction) e
 
     var state = fState
     var states: List[State] = Nil
-    var subResult: Result = Identity
+    var subResult: StepsResult = Identity
 
     while (true) {
       computed(state.conf.insnIndex).find(prevState => AnalysisUtils.stateEquiv(state, prevState)) match {
@@ -304,7 +324,7 @@ class NotNullParameterAnalysis(val context: Context, val direction: Direction) e
       val (nextFrame, localEffect) = execute(frame, insnNode)
 
       // local "summing"
-      val subResult2 = Result.subMeet(subResult, localEffect)
+      val subResult2 = ExecutionResult.subMeet(subResult, localEffect)
       // if there was a switch in "current subresult" we need explicitly mark this
       val noSwitch = subResult == subResult2
       subResult = subResult2
@@ -397,7 +417,7 @@ class NotNullParameterAnalysis(val context: Context, val direction: Direction) e
     }
   }
 
-  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode): (Frame[BasicValue], StepEffect) = insnNode.getType match {
+  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode): (Frame[BasicValue], InstructionEffect) = insnNode.getType match {
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
       (frame, NoEffect)
     case _ =>
@@ -553,7 +573,7 @@ class NullableParameterAnalysis(val context: Context, val direction: Direction) 
   }
 
   // TODO - move into interpreter
-  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode): (Frame[BasicValue], StepEffect) = insnNode.getType match {
+  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode): (Frame[BasicValue], InstructionEffect) = insnNode.getType match {
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
       (frame, NoEffect)
     case _ =>
@@ -564,26 +584,40 @@ class NullableParameterAnalysis(val context: Context, val direction: Direction) 
   }
 }
 
-sealed trait StepEffect
-case object NoEffect extends StepEffect
-case object NpeEffect extends StepEffect
-case class LeakingEffect(keys: Set[Key]) extends StepEffect
+/**
+ * Effect of executing a single bytecode instruction.
+ * Used for @NotNull parameter analysis and @Nullable parameter analysis.
+ * Instruction effects have some subtle differences for @NotNull and @Nullable analyses.
+ */
+sealed trait InstructionEffect
 
 /**
- *
- * The side effect of each step is one of the:
- * 1. Nothing
- * 2. NPE
- * 3. Leaking of a parameter to some call
+ * Nothing interested happens for parameter analysis.
  */
+case object NoEffect extends InstructionEffect
+
+/**
+ * Execution result in NPE (with different semantics):
+ * 1. Real NPE for @NotNull parameter analysis
+ * 2. Real NPE or possible NPE (storing result somewhere) for @Nullable parameter analysis.
+ */
+case object NpeEffect extends InstructionEffect
+
+/**
+ * During execution of an instruction a parameter became an argument of other call.
+ *
+ * @param keys parameters (of other methods) to which a parameter in question is passed (leaked)
+ */
+case class LeakingEffect(keys: Set[Key]) extends InstructionEffect
+
 abstract class Interpreter extends BasicInterpreter {
   val nullable: Boolean
-  protected var _subResult: StepEffect = NoEffect
+  protected var _subResult: InstructionEffect = NoEffect
   final def reset(): Unit = {
     _subResult = NoEffect
   }
 
-  def combine(res1: StepEffect, res2: StepEffect): StepEffect = (res1, res2) match {
+  def combine(res1: InstructionEffect, res2: InstructionEffect): InstructionEffect = (res1, res2) match {
     case (NoEffect, _) => res2
     case (_, NoEffect) => res1
     case (NpeEffect, _) => NpeEffect
@@ -591,7 +625,7 @@ abstract class Interpreter extends BasicInterpreter {
     case (LeakingEffect(keys1), LeakingEffect(keys2)) => LeakingEffect(keys1 ++ keys2)
   }
 
-  def getSubResult: StepEffect =
+  def getSubResult: InstructionEffect =
     _subResult
 
   final override def unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue = {
