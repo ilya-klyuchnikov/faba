@@ -235,7 +235,7 @@ object NotNullParameterAnalysis {
   val sharedResults = new Array[ExecutionResult](stepsLimit)
 }
 
-class NotNullParameterAnalysis(val context: Context, val direction: Direction) extends StagedScAnalysis[Return.type] {
+class NotNullParameterAnalysis(val context: Context, val direction: Direction) extends StagedScAnalysis {
   import NotNullParameterAnalysis._
   import context._
 
@@ -245,7 +245,7 @@ class NotNullParameterAnalysis(val context: Context, val direction: Direction) e
   def combineResults(delta: StepsResult, subResults: List[ExecutionResult]): ExecutionResult =
     ExecutionResult.meet(delta, subResults.reduce(ExecutionResult.join))
 
-  override def mkEquation(ret: Return.type): Equation[Key, Value] =
+  override def earlyEquation(): Equation[Key, Value] =
     Equation(aKey, Final(Values.Top))
 
   var npe = false
@@ -265,7 +265,7 @@ class NotNullParameterAnalysis(val context: Context, val direction: Direction) e
   def analyze(): Equation[Key, Value] = {
     pendingPush(ProceedState(createStartState()))
 
-    while (pendingTop > 0 && earlyResult.isEmpty) pendingPop() match {
+    while (pendingTop > 0 && !earlyResult) pendingPop() match {
       case MakeResult(states, delta, subIndices) =>
         val result = combineResults(delta, subIndices.map(results))
         for (state <- states) {
@@ -277,12 +277,10 @@ class NotNullParameterAnalysis(val context: Context, val direction: Direction) e
         processState(state)
     }
 
-    earlyResult match {
-      case Some(ret) =>
-        mkEquation(ret)
-      case None =>
-        Equation(aKey, results(0).toResult)
-    }
+    if (earlyResult)
+      earlyEquation()
+    else
+      Equation(aKey, results(0).toResult)
   }
 
   override def processState(fState: State): Unit = {
@@ -348,7 +346,7 @@ class NotNullParameterAnalysis(val context: Context, val direction: Direction) e
       insnNode.getOpcode match {
         case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
           if (!NotNullParameterConstraint.hasCompanions(constraint)) {
-            earlyResult = Some(Return)
+            earlyResult = true
             return
           } else {
             results(stateIndex) = Return
@@ -442,12 +440,12 @@ object NullableParameterAnalysis {
  * @param context context of analysis
  * @param direction direction (In(i))
  */
-class NullableParameterAnalysis(val context: Context, val direction: Direction) extends StagedScAnalysis[NPE.type] {
+class NullableParameterAnalysis(val context: Context, val direction: Direction) extends StagedScAnalysis {
 
   import context._
   val pending = NullableParameterAnalysis.sharedPendingStack
 
-  override def mkEquation(npe: NPE.type): Equation[Key, Value] =
+  override def earlyEquation(): Equation[Key, Value] =
     Equation(aKey, Final(Values.Top))
 
   private var leakedParameters: Set[Key] = Set()
@@ -467,20 +465,16 @@ class NullableParameterAnalysis(val context: Context, val direction: Direction) 
   def analyze(): Equation[Key, Value] = {
     pendingPush(createStartState())
 
-    while (pendingTop > 0 && earlyResult.isEmpty)
+    while (pendingTop > 0 && !earlyResult)
       processState(pendingPop())
 
-    // either NPE was detected or some parameters leaked
-    earlyResult match {
-      case Some(npe) =>
-        mkEquation(npe)
-      case None =>
-        // no parameter leaked ==> @Nullable
-        if (leakedParameters.isEmpty)
-          Equation(aKey, Final(Values.Null))
-        else
-          Equation(aKey, Pending(leakedParameters.map(key => Product(Values.Top, Set(key)))))
-    }
+    if (earlyResult)
+      earlyEquation()
+    else if (leakedParameters.isEmpty)
+      // no parameter leaked ==> @Nullable
+      Equation(aKey, Final(Values.Null))
+    else
+      Equation(aKey, Pending(leakedParameters.map(key => Product(Values.Top, Set(key)))))
   }
 
   override def processState(fState: State): Unit = {
@@ -516,7 +510,7 @@ class NullableParameterAnalysis(val context: Context, val direction: Direction) 
 
       localSubResult match {
         case NpeEffect =>
-          earlyResult = Some(NPE)
+          earlyResult = true
           return
         case LeakingEffect(keys) =>
           leakedParameters = leakedParameters ++ keys
@@ -527,12 +521,12 @@ class NullableParameterAnalysis(val context: Context, val direction: Direction) 
       insnNode.getOpcode match {
         case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
           if (insnNode.getOpcode == ARETURN && popValue(frame).isInstanceOf[ParamValue]) {
-            earlyResult = Some(NPE)
+            earlyResult = true
             return
           }
           return
         case ATHROW if state.constraint == 1 =>
-          earlyResult = Some(NPE)
+          earlyResult = true
           return
         case ATHROW =>
           return

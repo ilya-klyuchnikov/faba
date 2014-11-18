@@ -195,16 +195,8 @@ case class State(index: Int, conf: Conf, history: List[Conf], constraint: Int)
 
 /**
  * Skeleton for implementing staged analysis via exploration of graph of configurations.
- * All analyses are implemented by following scenario:
- *
- * During construction of a graph of configurations, some internal result `Res` is constructed.
- * Then this internal `Res` is translated into equation.
- *
- * @tparam Res internal Result of analysis.
- *
- * @see `mkEquation(result: Res): Equation[Key, Value]`
  */
-abstract class StagedScAnalysis[Res] {
+abstract class StagedScAnalysis {
   val context: Context
   val direction: Direction
 
@@ -220,14 +212,10 @@ abstract class StagedScAnalysis[Res] {
   def processState(state: State): Unit
 
   /**
-   * Transforms an internal result of analysis into a corresponding equation.
-   * When exploration of a graph of configurations is finished,
-   * this method is called to gen an equation.
-   *
-   * @param result internal result
-   * @return
+   * Constructs a negative equation for an early result.
+   * @return negative equation for an early result
    */
-  def mkEquation(result: Res): Equation[Key, Value]
+  def earlyEquation(): Equation[Key, Value]
 
   /**
    * Bookkeeping of already analyzed states.
@@ -238,16 +226,16 @@ abstract class StagedScAnalysis[Res] {
 
   /**
    * Part of analysis state.
-   * Quite often during analysis it is possible to identify the result of analysis
+   * Quite often during analysis it is possible to identify the negative result of analysis
    * without processing the whole graph of configurations.
-   * If such situation is encountered, `earlyResult` may be set to `Some(result)`.
+   * If such situation is encountered, `earlyResult` may be set to `true`.
    * `earlyResult` is checked at each step of analysis.
    *
    * @see [[faba.analysis.result.ResultAnalysis#analyze()]]
    * @see [[faba.analysis.parameters.NotNullParameterAnalysis#analyze()]]
    * @see [[faba.analysis.parameters.NullableParameterAnalysis#analyze()]]
    */
-  var earlyResult: Option[Res] = None
+  var earlyResult: Boolean = false
 
   // internal counter for creating monotone ids
   private var id = 0
