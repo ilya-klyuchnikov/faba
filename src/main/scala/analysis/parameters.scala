@@ -9,29 +9,40 @@ import org.objectweb.asm.Type
 import org.objectweb.asm.tree.analysis.{BasicInterpreter, BasicValue, Frame}
 import org.objectweb.asm.tree.{AbstractInsnNode, JumpInsnNode, MethodInsnNode, TypeInsnNode}
 
-object `package` {
-
-  type SoP = Set[Set[Key]]
-
-  implicit class SopOps(val sop1: SoP) {
-    def join(sop2: SoP): SoP =
-      sop1 ++ sop2
-
-    def meet(sop2: SoP): SoP =
-      for {
-        prod1 <- sop1
-        prod2 <- sop2
-      } yield prod1 ++ prod2
-  }
-
-}
-
 sealed trait Result
+
+/**
+ * Nothing interested detected
+ */
 case object Identity extends Result
+
+/**
+ * Cycle detected
+ */
+case object Cycle extends Result
+
+/**
+ * Exception is thrown, but not because of NPE
+ */
 case object Error extends Result
+
+/**
+ * Execution reaches return instruction without any (detected) possibility of NPE.
+ */
 case object Return extends Result
+
+/**
+ * Error caused by null-value of the parameter.
+ * Dereferencing error or an assertion.
+ */
 case object NPE extends Result
-case class ConditionalNPE(sop: SoP) extends Result {
+
+/**
+ * The approximation is NPE if `sop` formula results into `NPE`.
+ *
+ * @param sop SumOfProduct formula of dependencies.
+ */
+case class ConditionalNPE(sop: Result.SoP) extends Result {
   if (sop.map(_.size).sum > 30) throw new LimitReachedException
 }
 
@@ -41,54 +52,106 @@ object ConditionalNPE {
 
 object Result {
 
+  // pure version of sum of products
+  type SoP = Set[Set[Key]]
+
+  object SoP {
+    def join(sop1: SoP, sop2: SoP) =
+      sop1 ++ sop2
+
+    def meet(sop1: SoP, sop2: SoP) =
+      for {
+        prod1 <- sop1
+        prod2 <- sop2
+      } yield prod1 ++ prod2
+  }
+
+  /**
+   * Joins approximations of two paths of executions (for `@NotNull` parameter inference)
+   *
+   *     joined
+   *       / \
+   *      r1 r2
+   *
+   * `r1` and `r2` correspond to "complete" "sub-graphs"
+   *
+   * @param r1 approximation on the left path of execution
+   * @param r2 approximation on the right path of execution
+   * @return sound joined approximation
+   */
   def join(r1: Result, r2: Result): Result = (r1, r2) match {
-    case (Error, _) => r2
-    case (_, Error) => r1
-    case (Identity, _) => r2
-    case (_, Identity) => r1
+    case (Error|Identity|Cycle, _) => r2
+    case (_, Error|Identity|Cycle) => r1
     case (Return, _) => Return
     case (_, Return) => Return
     case (NPE, NPE) => NPE
     case (NPE, r2: ConditionalNPE) => r2
     case (r1: ConditionalNPE, NPE) => r1
-    case (ConditionalNPE(e1), ConditionalNPE(e2)) => ConditionalNPE(e1 join e2)
+    case (ConditionalNPE(e1), ConditionalNPE(e2)) => ConditionalNPE(SoP.join(e1, e2))
   }
 
-  def combineNullable(r1: Result, r2: Result): Result = (r1, r2) match {
-    case (Error, _) => r2
-    case (_, Error) => r1
-    case (Identity, _) => r2
-    case (_, Identity) => r1
-    case (Return, _) => r2
-    case (_, Return) => r1
-    case (NPE, _) => NPE
-    case (_, NPE) => NPE
-    case (ConditionalNPE(e1), ConditionalNPE(e2)) => ConditionalNPE(e1 join e2)
-  }
-
-  def meet(r1: Result, r2: Result): Result = (r1, r2) match {
-    case (Identity, _) => r2
-    case (Return, _) => r2
-    case (_, Return) => r1
-    case (NPE, _) => NPE
-    case (_, NPE) => NPE
-    case (Error, _) => Error
-    case (_, Error) => Error
-    // Oops - cycle dominates
-    case (_, Identity) => Identity
-    case (ConditionalNPE(e1), ConditionalNPE(e2)) => ConditionalNPE(e1 meet e2)
-  }
-
-  def subMeet(r1: Result, r2: Result): Result = (r1, r2) match {
-    case (Identity, _) => r2
-    case (_, Identity) => r1
-    case (Return, _) => r2
-    case (_, Return) => r1
+  /**
+   *
+   * Combines approximation of a subpath and approximation of a complete subgraph.
+   *
+   * delta --|
+   * |       | meet
+   * res ----|
+   *
+   * @param delta approximation for a number steps "before"
+   * @param res approximation for a complete sub-graph or also for "delta"
+   * @return
+   */
+  def meet(delta: Result, res: Result): Result = (delta, res) match {
+    // impossible cases first
+    // delta may be only: NPE, ERROR, Identity, ConditionalNPE(_),
+    // res cannot be Identity
+    case (Return|Cycle, _) => sys.error(s"Impossible delta: $delta")
+    case (_, Identity) => sys.error("Identity cannot be a result")
     case (NPE, _) => NPE
     case (_, NPE) => NPE
     case (Error, _) => Error
     case (_, Error) => Error
-    case (ConditionalNPE(e1), ConditionalNPE(e2)) => ConditionalNPE(e1 meet e2)
+    case (Identity, _) => res
+    case (_, Return) => delta
+    // current compromise between "complexity" of the method and "the profit of more complex method"
+    // the only `@NotNull` that will not be inferred in this case is
+    // data.InferenceData.compromise - this is pathological example
+    // Also, this works for the formula "there should be at leas one finite path".
+    case (ConditionalNPE(_), Cycle) => Cycle
+    case (ConditionalNPE(e1), ConditionalNPE(e2)) => ConditionalNPE(SoP.meet(e1, e2))
+  }
+
+
+  /**
+   *
+   * Combines approximation of two subpaths. Note that delta2 corresponds to
+   * a subpath, not to a complete subgraph. Used for combining local results of @NotNull parameter analysis.
+   *
+   * delta1 ----|
+   * |          | subMeet
+   * delta2 ----|
+   * |
+   * delta3
+   * |
+   * ...
+   *
+   * @param delta approximation for the first subpath
+   * @param effect approximation for the second subpath
+   * @return
+   */
+  def subMeet(delta: Result, effect: StepEffect): Result = (delta, effect) match {
+    case (_, NoEffect) =>
+      delta
+    case (_, NpeEffect) =>
+      NPE
+    case (NPE, _) =>
+      NPE
+    case (Identity, LeakingEffect(product)) =>
+      ConditionalNPE(Set(product))
+    case (ConditionalNPE(sop), LeakingEffect(product)) =>
+      ConditionalNPE(SoP.meet(sop, Set(product)))
+    case (Cycle | Error | Return, _) => sys.error(s"Impossible delta: $delta")
   }
 }
 
@@ -158,17 +221,11 @@ class NotNullParameterAnalysis(val context: Context, val direction: Direction) e
   val results = NotNullParameterAnalysis.sharedResults
   val pending = NotNullParameterAnalysis.sharedPendingStack
 
-  /**
-   *
-   * @param delta
-   * @param subResults
-   * @return
-   */
   def combineResults(delta: Result, subResults: List[Result]): Result =
     Result.meet(delta, subResults.reduce(Result.join))
 
   override def mkEquation(result: Result): Equation[Key, Value] = result match {
-    case Identity | Return | Error =>
+    case Identity | Return | Error | Cycle =>
       Equation(aKey, Final(Values.Top))
     case NPE =>
       Equation(aKey, Final(Values.NotNull))
@@ -234,7 +291,7 @@ class NotNullParameterAnalysis(val context: Context, val direction: Direction) e
       val fold = dfsTree.loopEnters(insnIndex) && history.exists(prevConf => AnalysisUtils.isInstance(conf, prevConf))
 
       if (fold) {
-        results(stateIndex) = Identity
+        results(stateIndex) = Cycle
         computed(insnIndex) = state :: computed(insnIndex)
         if (states.nonEmpty)
           pendingPush(MakeResult(states, subResult, List(stateIndex)))
@@ -244,15 +301,15 @@ class NotNullParameterAnalysis(val context: Context, val direction: Direction) e
       val frame = conf.frame
       val insnNode = methodNode.instructions.get(insnIndex)
       val nextHistory = if (dfsTree.loopEnters(insnIndex)) conf :: history else history
-      val (nextFrame, localSubResult) = execute(frame, insnNode)
-      val notEmptySubResult = localSubResult != Identity
+      val (nextFrame, localEffect) = execute(frame, insnNode)
 
       // local "summing"
-      val subResult2 = Result.subMeet(subResult, localSubResult)
+      val subResult2 = Result.subMeet(subResult, localEffect)
+      // if there was a switch in "current subresult" we need explicitly mark this
       val noSwitch = subResult == subResult2
       subResult = subResult2
 
-      if (localSubResult == NPE) {
+      if (localEffect == NpeEffect) {
         // npe was detected, storing this fact for further analyses
         npe = true
         results(stateIndex) = NPE
@@ -262,9 +319,11 @@ class NotNullParameterAnalysis(val context: Context, val direction: Direction) e
       }
 
       val constraint = state.constraint
-      // the constant will be inlined by javac
-      val companionsNow = if (localSubResult != Identity) 2 else 0
-      val constraint1 = constraint | companionsNow
+
+      val companionsNow =
+        if (localEffect != NoEffect) NotNullParameterConstraint.HAS_COMPANIONS else 0
+      val constraint1 =
+        constraint | companionsNow
 
       insnNode.getOpcode match {
         case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
@@ -338,9 +397,9 @@ class NotNullParameterAnalysis(val context: Context, val direction: Direction) e
     }
   }
 
-  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
+  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode): (Frame[BasicValue], StepEffect) = insnNode.getType match {
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
-      (frame, Identity)
+      (frame, NoEffect)
     case _ =>
       val nextFrame = new Frame(frame)
       NonNullInterpreter.reset()
@@ -358,19 +417,20 @@ object NullableParameterAnalysis {
   val sharedPendingStack = new Array[State](stepsLimit)
 }
 
-class NullableParameterAnalysis(val context: Context, val direction: Direction) extends StagedScAnalysis[Result] {
+/**
+ *
+ * @param context context of analysis
+ * @param direction direction (In(i))
+ */
+class NullableParameterAnalysis(val context: Context, val direction: Direction) extends StagedScAnalysis[NPE.type] {
 
   import context._
   val pending = NullableParameterAnalysis.sharedPendingStack
 
-  override def mkEquation(result: Result): Equation[Key, Value] = result match {
-    case NPE => Equation(aKey, Final(Values.Top))
-    case Identity | Return | Error => Equation(aKey, Final(Values.Null))
-    case ConditionalNPE(cnf) =>
-      Equation(aKey, Pending(cnf.map(p => Product(Values.Top, p))))
-  }
+  override def mkEquation(npe: NPE.type): Equation[Key, Value] =
+    Equation(aKey, Final(Values.Top))
 
-  private var myResult: Result = Identity
+  private var leakedParameters: Set[Key] = Set()
 
   private var pendingTop: Int = 0
 
@@ -390,7 +450,17 @@ class NullableParameterAnalysis(val context: Context, val direction: Direction) 
     while (pendingTop > 0 && earlyResult.isEmpty)
       processState(pendingPop())
 
-    mkEquation(earlyResult.getOrElse(myResult))
+    // either NPE was detected or some parameters leaked
+    earlyResult match {
+      case Some(npe) =>
+        mkEquation(npe)
+      case None =>
+        // no parameter leaked ==> @Nullable
+        if (leakedParameters.isEmpty)
+          Equation(aKey, Final(Values.Null))
+        else
+          Equation(aKey, Pending(leakedParameters.map(key => Product(Values.Top, Set(key)))))
+    }
   }
 
   override def processState(fState: State): Unit = {
@@ -415,6 +485,7 @@ class NullableParameterAnalysis(val context: Context, val direction: Direction) 
       computed(insnIndex) = state :: computed(insnIndex)
 
       if (fold)
+        // Identity, changes nothing
         return
 
       val taken = state.constraint
@@ -423,13 +494,15 @@ class NullableParameterAnalysis(val context: Context, val direction: Direction) 
       val nextHistory = if (isLoopEnter) conf :: history else history
       val (nextFrame, localSubResult) = execute(frame, insnNode)
 
-      if (localSubResult == NPE) {
-        earlyResult = Some(NPE)
-        return
+      localSubResult match {
+        case NpeEffect =>
+          earlyResult = Some(NPE)
+          return
+        case LeakingEffect(keys) =>
+          leakedParameters = leakedParameters ++ keys
+        case NoEffect => //
+          // nothing
       }
-
-      if (localSubResult.isInstanceOf[ConditionalNPE])
-        myResult = Result.combineNullable(myResult, localSubResult)
 
       insnNode.getOpcode match {
         case ARETURN | IRETURN | LRETURN | FRETURN | DRETURN | RETURN =>
@@ -479,9 +552,10 @@ class NullableParameterAnalysis(val context: Context, val direction: Direction) 
     }
   }
 
-  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
+  // TODO - move into interpreter
+  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode): (Frame[BasicValue], StepEffect) = insnNode.getType match {
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
-      (frame, Identity)
+      (frame, NoEffect)
     case _ =>
       val nextFrame = new Frame(frame)
       NullableInterpreter.reset()
@@ -490,22 +564,40 @@ class NullableParameterAnalysis(val context: Context, val direction: Direction) 
   }
 }
 
+sealed trait StepEffect
+case object NoEffect extends StepEffect
+case object NpeEffect extends StepEffect
+case class LeakingEffect(keys: Set[Key]) extends StepEffect
+
+/**
+ *
+ * The side effect of each step is one of the:
+ * 1. Nothing
+ * 2. NPE
+ * 3. Leaking of a parameter to some call
+ */
 abstract class Interpreter extends BasicInterpreter {
   val nullable: Boolean
-  protected var _subResult: Result = Identity
+  protected var _subResult: StepEffect = NoEffect
   final def reset(): Unit = {
-    _subResult = Identity
+    _subResult = NoEffect
   }
 
-  def combine(res1: Result, res2: Result): Result
+  def combine(res1: StepEffect, res2: StepEffect): StepEffect = (res1, res2) match {
+    case (NoEffect, _) => res2
+    case (_, NoEffect) => res1
+    case (NpeEffect, _) => NpeEffect
+    case (_, NpeEffect) => NpeEffect
+    case (LeakingEffect(keys1), LeakingEffect(keys2)) => LeakingEffect(keys1 ++ keys2)
+  }
 
-  def getSubResult: Result =
+  def getSubResult: StepEffect =
     _subResult
 
   final override def unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue = {
     insn.getOpcode match {
       case GETFIELD | ARRAYLENGTH | MONITORENTER if value.isInstanceOf[ParamValue] =>
-        _subResult = NPE
+        _subResult = NpeEffect
       case CHECKCAST if value.isInstanceOf[ParamValue] =>
         return new ParamValue(Type.getObjectType(insn.asInstanceOf[TypeInsnNode].desc))
       case INSTANCEOF if value.isInstanceOf[ParamValue] =>
@@ -519,9 +611,9 @@ abstract class Interpreter extends BasicInterpreter {
     insn.getOpcode match {
       case PUTFIELD
         if v1.isInstanceOf[ParamValue] || (nullable && v2.isInstanceOf[ParamValue]) =>
-        _subResult = NPE
+        _subResult = NpeEffect
       case IALOAD | LALOAD | FALOAD | DALOAD | AALOAD | BALOAD | CALOAD | SALOAD if v1.isInstanceOf[ParamValue] =>
-        _subResult = NPE
+        _subResult = NpeEffect
       case _ =>
     }
     super.binaryOperation(insn, v1, v2)
@@ -531,10 +623,10 @@ abstract class Interpreter extends BasicInterpreter {
     insn.getOpcode match {
       case IASTORE | LASTORE | FASTORE | DASTORE | BASTORE | CASTORE | SASTORE
         if v1.isInstanceOf[ParamValue] =>
-        _subResult = NPE
+        _subResult = NpeEffect
       case AASTORE
         if v1.isInstanceOf[ParamValue] || (nullable && v3.isInstanceOf[ParamValue]) =>
-        _subResult = NPE
+        _subResult = NpeEffect
       case _ =>
     }
     super.ternaryOperation(insn, v1, v2, v3)
@@ -545,12 +637,12 @@ abstract class Interpreter extends BasicInterpreter {
     val static = opCode == INVOKESTATIC
     val shift = if (static) 0 else 1
     if ((opCode == INVOKESPECIAL || opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) && values.get(0).isInstanceOf[ParamValue]) {
-      _subResult = NPE
+      _subResult = NpeEffect
     }
     if (nullable && opCode == INVOKEINTERFACE) {
       for (i <- shift until values.size()) {
         if (values.get(i).isInstanceOf[ParamValue]) {
-          _subResult = NPE
+          _subResult = NpeEffect
           return super.naryOperation(insn, values)
         }
       }
@@ -563,7 +655,7 @@ abstract class Interpreter extends BasicInterpreter {
         for (i <- shift until values.size()) {
           if (values.get(i).isInstanceOf[ParamValue]) {
             val method = Method(mNode.owner, mNode.name, mNode.desc)
-            _subResult = combine(_subResult, ConditionalNPE(Key(method, In(i - shift), stable)))
+            _subResult = combine(_subResult, LeakingEffect(Set(Key(method, In(i - shift), stable))))
           }
         }
       case _ =>
@@ -574,11 +666,8 @@ abstract class Interpreter extends BasicInterpreter {
 
 object NonNullInterpreter extends Interpreter {
   override val nullable = false
-  override def combine(res1: Result, res2: Result): Result = Result.meet(res1, res2)
-
 }
 
 object NullableInterpreter extends Interpreter {
   override val nullable = true
-  override def combine(res1: Result, res2: Result): Result = Result.join(res1, res2)
 }

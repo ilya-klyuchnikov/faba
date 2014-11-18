@@ -140,14 +140,14 @@ class LimitReachedException extends Exception("Limit reached exception")
  * @param notNulls keys of methods and parameters inferred to be `@NotNull`
  * @param contracts map of `methodKey->contractString`
  */
-case class Annotations(notNulls: Set[Key], contracts: Map[Key, String])
+case class Annotations(notNulls: Set[Key], nullable: Set[Key], contracts: Map[Key, String])
 
 /**
  * Utility to transform solutions into annotations.
  */
 object AnnotationsUtil {
 
-  def toAnnotations(solutions: Iterable[(Key, Value)]): Annotations = {
+  def toAnnotations(solutions: Iterable[(Key, Value)], nullableParams: Set[Key]): Annotations = {
     val inOuts = mutable.HashMap[Method, List[(InOut, Value)]]()
     var notNulls = Set[Key]()
     var contracts = Map[Key, String]()
@@ -172,7 +172,8 @@ object AnnotationsUtil {
       }.sorted.mkString(";")
       contracts = contracts + (key -> contractValues)
     }
-    Annotations(notNulls, contracts)
+
+    Annotations(notNulls, nullableParams, contracts)
   }
 
   def contractValueString(v: Value): String = v match {

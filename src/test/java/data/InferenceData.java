@@ -2,6 +2,7 @@ package data;
 
 import annotations.ExpectContract;
 import annotations.ExpectNotNull;
+import annotations.ExpectNullable;
 
 public class InferenceData {
 
@@ -15,7 +16,7 @@ public class InferenceData {
         else s(o, o);
     }
 
-    static void s(@ExpectNotNull Object o1, Object o2) {
+    static void s(@ExpectNotNull Object o1, @ExpectNullable Object o2) {
         t(o1);
         v(o2);
     }
@@ -25,7 +26,7 @@ public class InferenceData {
     }
 
 
-    static void v(Object o) {
+    static void v(@ExpectNullable Object o) {
 
     }
 
@@ -33,4 +34,18 @@ public class InferenceData {
     static Object id(Object o) {
         return o;
     }
+
+    // we do not expect not null here
+    public static void notNullCompromise(Object o) {
+        while (true) {
+            t(o);
+        }
+    }
+
+    public static void nullableCompromise(@ExpectNullable Object o1, @ExpectNullable Object o2) {
+        while (true) {
+            v(o1);
+        }
+    }
+
 }
