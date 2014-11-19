@@ -57,7 +57,7 @@ object Statistics extends FabaProcessor {
     }
   }
 
-  override def handleHierarchy(access: Int, thisName: String, superName: String) {
+  override def handleClassHierarchy(access: Int, thisName: String, superName: String) {
     // class, not an interface
     if (superName != null && (access & Opcodes.ACC_INTERFACE) == 0) {
       hierarchy(superName) = hierarchy.getOrElse(thisName, Set()) + thisName

@@ -199,6 +199,9 @@ class MainProcessor extends FabaProcessor {
     contractsSolver.addEquation(eq)
   override def handleNullableResultEquation(eq: Equation[Key, Value]): Unit =
     nullableResultSolver.addEquation(eq)
+  override def handleMethodCoordinates(methodCoordinates: MethodCoordinates): Unit = {
+
+  }
 
   def printToFile(f: File)(op: PrintWriter => Unit) {
     if (f.getParentFile != null)

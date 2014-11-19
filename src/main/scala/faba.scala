@@ -55,24 +55,33 @@ trait FabaProcessor extends Processor {
   var complexMethods: Long = 0
   var simpleMethods: Long = 0
 
-  def handleHierarchy(access: Int, thisName: String, superName: String) {}
-
   override def processClass(classReader: ClassReader): Unit =
     classReader.accept(new ClassVisitor(ASM5) {
       var stableClass = false
+      var className: String = _
+      var classAccess: Int = _
+      var superName: String = _
+      var interfaces: List[String] = Nil
+
       override def visit(version: Int, access: Int, name: String, signature: String, superName: String, interfaces: Array[String]) {
         // or there are no subclasses??
-        stableClass = (access & ACC_FINAL) != 0
+        this.stableClass = (access & ACC_FINAL) != 0
+        this.classAccess = access
+        this.className = name
+        this.superName = superName
+        this.interfaces = interfaces.toList
         super.visit(version, access, name, signature, superName, interfaces)
-        handleHierarchy(access, classReader.getClassName, superName)
+        handleClassHierarchy(access, classReader.getClassName, superName)
       }
 
       override def visitMethod(access: Int, name: String, desc: String, signature: String, exceptions: Array[String]) = {
         val node = new MethodNode(ASM5, access, name, desc, signature, exceptions)
+
         new MethodVisitor(ASM5, node) {
           var jsr = false
           override def visitEnd(): Unit = {
             super.visitEnd()
+            handleMethodCoordinates(MethodCoordinates(classAccess, className, superName, interfaces, access, name, desc))
             processMethod(classReader.getClassName, node, stableClass, jsr)
           }
 
@@ -310,6 +319,9 @@ trait FabaProcessor extends Processor {
   def buildCFG(className: String, methodNode: MethodNode, jsr: Boolean): ControlFlowGraph =
     controlFlow.buildControlFlowGraph(className, methodNode, jsr)
 
+  def leakingParameters(className: String, methodNode: MethodNode, jsr: Boolean) =
+    LeakingParameters.build(className, methodNode, jsr)
+
   // build other result origins
   def buildResultOrigins(className: String, methodNode: MethodNode, frames: Array[Frame[ParamsValue]], graph: ControlFlowGraph): Origins =
     OriginsAnalysis.resultOrigins(frames.asInstanceOf[Array[Frame[ASMValue]]], methodNode, graph)
@@ -385,6 +397,18 @@ trait FabaProcessor extends Processor {
   def handleOutContractEquation(eq: Equation[Key, Value]): Unit = ()
   def handleNullableResultEquation(eq: Equation[Key, Value]): Unit = ()
 
-  def leakingParameters(className: String, methodNode: MethodNode, jsr: Boolean) =
-    LeakingParameters.build(className, methodNode, jsr)
+  /**
+   * Used in faba.experimental.Statistics.
+   * @param access    (org.objectweb.asm.tree.ClassNode#access)
+   * @param thisName  (org.objectweb.asm.tree.ClassNode#name)
+   * @param superName (org.objectweb.asm.tree.ClassNode#superName)
+   */
+  def handleClassHierarchy(access: Int, thisName: String, superName: String) {}
+
+  /**
+   * Handle all information about method for inference with hierarchy.
+   * @param methodCoordinates
+   */
+  def handleMethodCoordinates(methodCoordinates: MethodCoordinates): Unit = ()
+
 }

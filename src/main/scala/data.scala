@@ -28,6 +28,28 @@ case class Method(internalClassName: String, methodName: String, methodDesc: Str
 }
 
 /**
+ * Information about method for inference with hierarchy.
+ * Fields are in the same order as in `org.objectweb.asm.tree.ClassNode`
+ * and `org.objectweb.asm.tree.MethodNode`
+ *
+ * @param classAccess  (org.objectweb.asm.tree.ClassNode#access)
+ * @param className    (org.objectweb.asm.tree.ClassNode#name)
+ * @param superName    (org.objectweb.asm.tree.ClassNode#superName)
+ * @param interfaces   (org.objectweb.asm.tree.ClassNode#interfaces)
+ * @param methodAccess (org.objectweb.asm.tree.MethodNode#access)
+ * @param methodName   (org.objectweb.asm.tree.MethodNode#name)
+ * @param methodDesc   (org.objectweb.asm.tree.MethodNode#desc)
+ *
+ */
+case class MethodCoordinates(classAccess: Int,
+                             className: String,
+                             superName: String,
+                             interfaces: List[String],
+                             methodAccess: Int,
+                             methodName: String,
+                             methodDesc: String)
+
+/**
  * Additional information about method. Used for dumping inferred annotations into
  * IDEA external annotations format.
  * @param signature corresponds to `org.objectweb.asm.tree.MethodNode#signature`
