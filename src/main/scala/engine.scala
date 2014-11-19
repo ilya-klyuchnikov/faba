@@ -138,12 +138,15 @@ case class Lattice[V](bot: V, top: V) {
  */
 class Solver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice: Lattice[V]) {
 
-  type Solution = (K, V)
+  type Binding = (K, V)
   import lattice._
 
+  // k -> (equations dependent on k)
   private val dependencies = mutable.HashMap[K, Set[K]]()
+  // queue of solutions
+  private val moving = mutable.Queue[Binding]()
+  // not solved yet equations
   private val pending = mutable.HashMap[K, Pending[K, V]]()
-  private val moving = mutable.Queue[Solution]()
   private var solved = Map[K, V]()
 
   // for testing
@@ -152,6 +155,14 @@ class Solver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice: Latti
     equations.foreach(addEquation)
   }
 
+  /**
+   * Adds an equation to current solver.
+   * Implementation note: if the equation is just a binding,
+   * it is added to `moving` queue; otherwise, dependencies graph is built
+   * and equation is added to `pending` map.
+   *
+   * @param equation equation to add
+   */
   def addEquation(equation: Equation[K, V]): Unit =
     if (!idleMode) equation.rhs match {
       case Final(value) =>
@@ -167,25 +178,38 @@ class Solver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice: Latti
       }
     }
 
+  /**
+   * Solves all equations by substitution.
+   * Implementation note: the solver processes `moving` queue step by step
+   * and reduces `pending` map (substituting solution into it) in the same time.
+   *
+   * @return solution for all added equations.
+   */
   def solve(): Map[K, V] = {
     while (moving.nonEmpty) {
+      // moving to solutions
       val (ident, value) = moving.dequeue()
       solved = solved + (ident -> value)
 
-      val toPropagate: List[(K, V)] =
-        if (ident.stable)
-          List((ident, value), (ident.mkUnstable, value))
-        else
-          List((ident.mkStable, value), (ident, mkUnstableValue(value)))
+      // binding for stable (non-virtual calls)
+      val stableCallBinding: Binding =
+        (ident.mkStable, value)
+      // binding for virtual call  
+      val virtualCallBinding: Binding =
+        (ident.mkUnstable, if (ident.stable) value else mkUnstableValue(value))
 
       for {
-        (pId, pValue) <- toPropagate
-        dIds <- dependencies.remove(pId)
-        dId <- dIds
-        pend <- pending.remove(dId)
-      } substitute(pend, pId, pValue) match {
-        case Final(v) => moving enqueue (dId -> v)
-        case p@Pending(_) => pending(dId) = p
+        // binding
+        (id, value) <- List(stableCallBinding, virtualCallBinding)
+        // get and remove dependency edge
+        dependentIds <- dependencies.remove(id)
+        pendingId <- dependentIds
+        pendingRhs <- pending.remove(pendingId)
+      } substitute(pendingRhs, id, value) match {
+        // substitution leads to answer
+        case Final(v) => moving enqueue (pendingId -> v)
+        // substitution only simplifies pendingRhs
+        case p@Pending(_) => pending(pendingId) = p
       }
     }
 
@@ -193,10 +217,15 @@ class Solver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice: Latti
     solved
   }
 
+  /**
+   * Sound approximation for virtual calls.
+   *
+   * @param v stable value
+   * @return value to be used for virtual calls
+   */
   def mkUnstableValue(v: V) = top
 
   private def substitute(pending: Pending[K, V], id: K, value: V): Result[K, V] = {
-
     val sum = pending.expression.map { prod =>
       if (prod.elems(id)) Product(meet(value, prod.upperBound), prod.elems - id) else prod
     }
