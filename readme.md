@@ -48,6 +48,8 @@
     * Deeper inference of purity.
       It requires an effect system under the hood (`@Pure`, `@Read`, `@Write`, `@LocalEffect`).
     * Handling nullity of fields (at least `static final` and `final`).
+* __What is the license?__
+    * [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
 
 ## How to run
 
