@@ -57,7 +57,7 @@ object Statistics extends FabaProcessor {
     }
   }
 
-  override def handleClassHierarchy(access: Int, thisName: String, superName: String) {
+  override def handleClassHierarchy(access: Int, thisName: String, superName: String, interfaces: Array[String]) {
     // class, not an interface
     if (superName != null && (access & Opcodes.ACC_INTERFACE) == 0) {
       hierarchy(superName) = hierarchy.getOrElse(thisName, Set()) + thisName
@@ -84,6 +84,7 @@ object Statistics extends FabaProcessor {
     visited
   }
 
+  // calculate all inheritors of a given class
   def allInheritors(className: String): Set[String] = {
     var visited = Set[String]()
     val queue = mutable.Queue[String]()

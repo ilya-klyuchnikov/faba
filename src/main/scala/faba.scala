@@ -71,7 +71,7 @@ trait FabaProcessor extends Processor {
         this.superName = superName
         this.interfaces = interfaces.toList
         super.visit(version, access, name, signature, superName, interfaces)
-        handleClassHierarchy(access, classReader.getClassName, superName)
+        handleClassHierarchy(access, classReader.getClassName, superName, interfaces)
       }
 
       override def visitMethod(access: Int, name: String, desc: String, signature: String, exceptions: Array[String]) = {
@@ -403,7 +403,7 @@ trait FabaProcessor extends Processor {
    * @param thisName  (org.objectweb.asm.tree.ClassNode#name)
    * @param superName (org.objectweb.asm.tree.ClassNode#superName)
    */
-  def handleClassHierarchy(access: Int, thisName: String, superName: String) {}
+  def handleClassHierarchy(access: Int, thisName: String, superName: String, interfaces: Array[String]) {}
 
   /**
    * Handle all information about method for inference with hierarchy.
