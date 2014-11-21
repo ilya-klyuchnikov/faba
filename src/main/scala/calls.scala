@@ -2,6 +2,11 @@ package faba.calls
 
 import faba.data.Method
 
+import scala.annotation.tailrec
+import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
+
+// class info got at indexing phase
 case class ClassInfo(access: Int, name: String, superName: String, interfaces: List[String])
 
 /**
@@ -11,6 +16,9 @@ case class ClassInfo(access: Int, name: String, superName: String, interfaces: L
 class CallResolver {
 
   var indexing = true
+
+  // information collected during indexing
+  private val classInfos = mutable.HashMap[String, ClassInfo]()
 
   /**
    * Calculates all concrete inheritors of this class.
@@ -54,13 +62,43 @@ class CallResolver {
    */
   def addInfo(classInfo: ClassInfo) {
     require(indexing, "addInfo may be")
-    ???
+    classInfos.update(classInfo.name, classInfo)
   }
 
   /**
    * Build hierarchy info. Call this method when indexing is completed.
    *
+   * It materializes all classes and methods.
+   * Builds the "hierarchy line" of classes for each class,
+   * Builds the set of interface a class implements for each class.
    */
-  def buildHierarchy(): Unit = ???
+  def buildHierarchy() {
+    indexing = false
+  }
+
+  /**
+   * Builds a hierarchy of parents for a class in a linear order (not including class itself).
+   *
+   * @param className class for which hierarchy is built
+   * @param acc alreadhy built hierarchy
+   * @return hierarchy of the class
+   */
+  @tailrec
+  private def hierarchy(className: String, acc: ListBuffer[String] = ListBuffer()): List[String] = {
+    classInfos.get(className) match {
+      case None =>
+        println(s"warning: $className is referenced, but not found")
+        acc.toList
+      case Some(classInfo) =>
+        val superName = classInfo.superName
+        if (superName == null)
+          acc.toList
+        else {
+          acc += superName
+          hierarchy(superName, acc)
+        }
+
+    }
+  }
 
 }
