@@ -17,6 +17,16 @@ import scala.collection.mutable.ListBuffer
 case class ClassInfo(access: Int, name: String, superName: String, interfaces: List[String])
 
 /**
+ * Declaration site method info available at indexing phase.
+ *
+ * @param classInfo info of class owner
+ * @param access    (org.objectweb.asm.tree.ClassNode#access)
+ * @param name      (org.objectweb.asm.tree.ClassNode#name)
+ * @param desc      (org.objectweb.asm.tree.ClassNode#desc)
+ */
+case class MethodInfo(classInfo: ClassInfo, access: Int, name: String, desc: String)
+
+/**
  * Aggregated class info after resolve.
  *
  * @param classInfo     class info before resolve

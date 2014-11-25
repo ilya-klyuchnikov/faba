@@ -7,9 +7,11 @@ import java.nio.file.attribute.BasicFileAttributes
 import faba.analysis._
 import faba.analysis.leakingParameters._
 import faba.analysis.resultOrigins._
+import faba.calls._
 import faba.data._
 import faba.engine._
 import faba.source._
+
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.analysis.Frame
 
@@ -199,8 +201,13 @@ class MainProcessor extends FabaProcessor {
     contractsSolver.addEquation(eq)
   override def handleNullableResultEquation(eq: Equation[Key, Value]): Unit =
     nullableResultSolver.addEquation(eq)
-  override def handleMethodCoordinates(methodCoordinates: MethodCoordinates): Unit = {
 
+  override def mapClassInfo(classInfo: ClassInfo): Unit = {
+    // TODO
+  }
+
+  override def mapMethodInfo(methodInfo: MethodInfo) {
+    // TODO
   }
 
   def printToFile(f: File)(op: PrintWriter => Unit) {

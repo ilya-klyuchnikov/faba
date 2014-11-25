@@ -59,20 +59,13 @@ trait FabaProcessor extends Processor {
   override def processClass(classReader: ClassReader): Unit =
     classReader.accept(new ClassVisitor(ASM5) {
       var stableClass = false
-      var className: String = _
-      var classAccess: Int = _
-      var superName: String = _
-      var interfaces: List[String] = Nil
+      var classInfo: ClassInfo = _
 
       override def visit(version: Int, access: Int, name: String, signature: String, superName: String, interfaces: Array[String]) {
-        // or there are no subclasses??
-        this.stableClass = (access & ACC_FINAL) != 0
-        this.classAccess = access
-        this.className = name
-        this.superName = superName
-        this.interfaces = interfaces.toList
+        stableClass = (access & ACC_FINAL) != 0
+        classInfo = ClassInfo(access, classReader.getClassName, superName, interfaces.toList)
         super.visit(version, access, name, signature, superName, interfaces)
-        mapClassInfo(ClassInfo(access, classReader.getClassName, superName, interfaces.toList))
+        mapClassInfo(this.classInfo)
       }
 
       override def visitMethod(access: Int, name: String, desc: String, signature: String, exceptions: Array[String]) = {
@@ -82,7 +75,7 @@ trait FabaProcessor extends Processor {
           var jsr = false
           override def visitEnd(): Unit = {
             super.visitEnd()
-            handleMethodCoordinates(MethodCoordinates(classAccess, className, superName, interfaces, access, name, desc))
+            mapMethodInfo(MethodInfo(classInfo, access, name, desc))
             processMethod(classReader.getClassName, node, stableClass, jsr)
           }
 
@@ -405,9 +398,9 @@ trait FabaProcessor extends Processor {
   def mapClassInfo(classInfo: ClassInfo) {}
 
   /**
-   * Handle all information about method for inference with hierarchy.
-   * @param methodCoordinates
+   *
+   * @param methodInfo method info available at index ("map") phase
    */
-  def handleMethodCoordinates(methodCoordinates: MethodCoordinates): Unit = ()
+  def mapMethodInfo(methodInfo: MethodInfo) {}
 
 }
