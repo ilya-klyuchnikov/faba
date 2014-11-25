@@ -6,10 +6,11 @@ import java.nio.file.attribute.BasicFileAttributes
 import java.util.Date
 
 import faba.FabaProcessor
+
+import faba.calls._
 import faba.data._
 import faba.engine._
 import faba.source.{MixedSource, JarFileSource, Source}
-import org.objectweb.asm.Opcodes
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable
@@ -57,11 +58,9 @@ object Statistics extends FabaProcessor {
     }
   }
 
-  override def handleClassHierarchy(access: Int, thisName: String, superName: String, interfaces: Array[String]) {
-    // class, not an interface
-    if (superName != null && (access & Opcodes.ACC_INTERFACE) == 0) {
-      hierarchy(superName) = hierarchy.getOrElse(thisName, Set()) + thisName
-    }
+  override def mapClassInfo(classInfo: ClassInfo) {
+    if (classInfo.superName != null && CallUtils.notInterface(classInfo.access))
+      hierarchy(classInfo.superName) = hierarchy.getOrElse(classInfo.name, Set()) + classInfo.name
   }
 
   def allDependencies(key: Key): Set[Key] = {

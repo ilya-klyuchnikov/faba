@@ -10,6 +10,7 @@ import faba.analysis.resultInfluence._
 import faba.analysis.resultOrigins._
 import faba.analysis.combined._
 
+import faba.calls._
 import faba.data._
 import faba.engine._
 import faba.source._
@@ -71,7 +72,7 @@ trait FabaProcessor extends Processor {
         this.superName = superName
         this.interfaces = interfaces.toList
         super.visit(version, access, name, signature, superName, interfaces)
-        handleClassHierarchy(access, classReader.getClassName, superName, interfaces)
+        mapClassInfo(ClassInfo(access, classReader.getClassName, superName, interfaces.toList))
       }
 
       override def visitMethod(access: Int, name: String, desc: String, signature: String, exceptions: Array[String]) = {
@@ -398,12 +399,10 @@ trait FabaProcessor extends Processor {
   def handleNullableResultEquation(eq: Equation[Key, Value]): Unit = ()
 
   /**
-   * Used in faba.experimental.Statistics.
-   * @param access    (org.objectweb.asm.tree.ClassNode#access)
-   * @param thisName  (org.objectweb.asm.tree.ClassNode#name)
-   * @param superName (org.objectweb.asm.tree.ClassNode#superName)
+   *
+   * @param classInfo class info available at index ("map") phase
    */
-  def handleClassHierarchy(access: Int, thisName: String, superName: String, interfaces: Array[String]) {}
+  def mapClassInfo(classInfo: ClassInfo) {}
 
   /**
    * Handle all information about method for inference with hierarchy.
