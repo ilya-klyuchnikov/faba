@@ -20,11 +20,11 @@ import scala.xml.PrettyPrinter
 
 class MainProcessor extends FabaProcessor {
 
-  val notNullParamsSolver = new Solver[Key, Values.Value](idle, Lattice(Values.NotNull, Values.Top))
-  val nullableParamsSolver = new Solver[Key, Values.Value](idle, Lattice(Values.Null, Values.Top))
-  val contractsSolver = new Solver[Key, Values.Value](idle, Lattice(Values.Bot, Values.Top))
-  val nullableResultSolver = new NullableResultSolver[Key, Values.Value](idle, Lattice(Values.Bot, Values.Null))
-  val puritySolver = new Solver[Key, Values.Value](idle, Lattice(Values.Pure, Values.Top))
+  val notNullParamsSolver = new SimpleSolver[Key, Values.Value](idle, Lattice(Values.NotNull, Values.Top))
+  val nullableParamsSolver = new SimpleSolver[Key, Values.Value](idle, Lattice(Values.Null, Values.Top))
+  val contractsSolver = new SimpleSolver[Key, Values.Value](idle, Lattice(Values.Bot, Values.Top))
+  val nullableResultSolver = new NullableResultSimpleSolver[Key, Values.Value](idle, Lattice(Values.Bot, Values.Null))
+  val puritySolver = new SimpleSolver[Key, Values.Value](idle, Lattice(Values.Pure, Values.Top))
 
   var notNullParamsTime: Long = 0
   var nullableParamsTime: Long = 0

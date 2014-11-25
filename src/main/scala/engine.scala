@@ -136,7 +136,7 @@ case class Lattice[V](bot: V, top: V) {
  * @tparam K type of identifiers (variables, keys)
  * @tparam V type of values in the lattice
  */
-class Solver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice: Lattice[V]) {
+class SimpleSolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice: Lattice[V]) {
 
   type Binding = (K, V)
   import lattice._
@@ -245,7 +245,7 @@ class Solver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice: Latti
 
 }
 
-class NullableResultSolver[K <: PolymorphicId[K], V](idle: Boolean, lattice: Lattice[V])
-  extends Solver[K, V](idle, lattice) {
+class NullableResultSimpleSolver[K <: PolymorphicId[K], V](idle: Boolean, lattice: Lattice[V])
+  extends SimpleSolver[K, V](idle, lattice) {
   override def mkUnstableValue(v: V) = lattice.bot
 }
