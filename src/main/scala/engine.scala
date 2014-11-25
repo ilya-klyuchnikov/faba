@@ -128,6 +128,30 @@ case class Lattice[V](bot: V, top: V) {
     x == y
 }
 
+trait Solver[K <: PolymorphicId[K], V] {
+  val idleMode: Boolean
+  val lattice: Lattice[V]
+  import lattice._
+
+  def substitute(pending: Pending[K, V], id: K, value: V): Result[K, V] = {
+    val sum = pending.expression.map { prod =>
+      if (prod.elems(id)) Product(meet(value, prod.upperBound), prod.elems - id) else prod
+    }
+    normalize(sum)
+  }
+
+  def normalize(sum: SumOfProducts[K, V]): Result[K, V] = {
+    var acc = bot
+    var computableNow = true
+    for (Product(v, prod) <- sum )
+      if (prod.isEmpty || v == bot) acc = join(acc, v)
+      else computableNow = false
+
+    if (acc == top || computableNow) Final(acc)
+    else Pending(sum)
+  }
+}
+
 /**
  * Solver of equations over lattices. Solving is performed simply by substitution.
  *
@@ -136,7 +160,7 @@ case class Lattice[V](bot: V, top: V) {
  * @tparam K type of identifiers (variables, keys)
  * @tparam V type of values in the lattice
  */
-class SimpleSolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice: Lattice[V]) {
+class SimpleSolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice: Lattice[V]) extends Solver[K, V] {
 
   type Binding = (K, V)
   import lattice._
@@ -224,24 +248,6 @@ class SimpleSolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice:
    * @return value to be used for virtual calls
    */
   def mkUnstableValue(v: V) = top
-
-  private def substitute(pending: Pending[K, V], id: K, value: V): Result[K, V] = {
-    val sum = pending.expression.map { prod =>
-      if (prod.elems(id)) Product(meet(value, prod.upperBound), prod.elems - id) else prod
-    }
-    normalize(sum)
-  }
-
-  private def normalize(sum: SumOfProducts[K, V]): Result[K, V] = {
-    var acc = bot
-    var computableNow = true
-    for (Product(v, prod) <- sum )
-      if (prod.isEmpty || v == bot) acc = join(acc, v)
-      else computableNow = false
-
-    if (acc == top || computableNow) Final(acc)
-    else Pending(sum)
-  }
 
 }
 
