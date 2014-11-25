@@ -85,6 +85,13 @@ trait PolymorphicId[Id] {
   def mkStable: Id
 }
 
+object ResolveDirection extends Enumeration {
+  // INVOKESTATIC, INVOKESPECIAL
+  val Upward = Value
+  // INVOKEINTERFACE, INVOKEVIRTUAL
+  val Downward = Value
+}
+
 /**
  * Analysis key. Used to uniquely identify ids (variables) in equations.
  * @note `NotNull`, `Nullable` and purity result analyses will have the same key for the same method.

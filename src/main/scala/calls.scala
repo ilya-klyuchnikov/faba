@@ -1,6 +1,7 @@
 package faba.calls
 
-import faba.data.Method
+import faba.data._
+
 import org.objectweb.asm.Opcodes
 
 import scala.annotation.tailrec
@@ -46,7 +47,7 @@ class CallResolver {
   // declarations of methods for a class
   private val classMethods = mutable.HashMap[String, mutable.Set[MethodInfo]]()
   // encountered calls
-  private val methodUsages = mutable.Set[Method]()
+  private val methodUsages = mutable.Set[Key]()
   // resolved class info
   private val resolved = mutable.HashMap[String, ResolvedClassInfo]()
 
@@ -103,8 +104,8 @@ class CallResolver {
     classMethods(methodInfo.classInfo.name) += methodInfo
   }
 
-  def addMethodUsage(method: Method) {
-    methodUsages += method
+  def addMethodUsage(key: Key) {
+    methodUsages += key
   }
 
   /**

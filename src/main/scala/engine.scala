@@ -167,7 +167,7 @@ class SimpleSolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice:
 
   // k -> (equations dependent on k)
   private val dependencies = mutable.HashMap[K, Set[K]]()
-  // queue of solutions
+  // queue of solutions to process
   private val moving = mutable.Queue[Binding]()
   // not solved yet equations
   private val pending = mutable.HashMap[K, Pending[K, V]]()
@@ -254,4 +254,34 @@ class SimpleSolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice:
 class NullableResultSimpleSolver[K <: PolymorphicId[K], V](idle: Boolean, lattice: Lattice[V])
   extends SimpleSolver[K, V](idle, lattice) {
   override def mkUnstableValue(v: V) = lattice.bot
+}
+
+class StagedHierarchySolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice: Lattice[V]) extends Solver[K, V] {
+  type Binding = (K, V)
+  import lattice._
+
+  // equations added at the first stage of indexing
+  private val equations1 = mutable.Queue[Equation[K, V]]()
+
+  // k -> (equations dependent on k)
+  private val dependencies2 = mutable.HashMap[K, Set[K]]()
+  // queue of solutions
+  private val moving2 = mutable.Queue[Binding]()
+  // not solved yet equations
+  private val pending2 = mutable.HashMap[K, Pending[K, V]]()
+
+  private var solved = Map[K, V]()
+
+  // stage ONE - adding equations
+  def addEquation1(equation: Equation[K, V]): Unit =
+    if (!idleMode)
+      equations1.enqueue(equation)
+
+  def getCalls(equation: Equation[K, V]): Set[K] =
+    equation.rhs match {
+      case Final(_) =>
+        Set()
+      case Pending(sop) =>
+        sop.map(_.elems).flatten.toSet
+    }
 }

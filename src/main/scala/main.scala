@@ -20,7 +20,9 @@ import scala.xml.PrettyPrinter
 
 class MainProcessor extends FabaProcessor {
 
+  val notNullParamsCallsResolver = new CallResolver()
   val notNullParamsSolver = new SimpleSolver[Key, Values.Value](idle, Lattice(Values.NotNull, Values.Top))
+  val notNullParamsSolver2 = new StagedHierarchySolver[Key, Values.Value](idle, Lattice(Values.NotNull, Values.Top))
   val nullableParamsSolver = new SimpleSolver[Key, Values.Value](idle, Lattice(Values.Null, Values.Top))
   val contractsSolver = new SimpleSolver[Key, Values.Value](idle, Lattice(Values.Bot, Values.Top))
   val nullableResultSolver = new NullableResultSimpleSolver[Key, Values.Value](idle, Lattice(Values.Bot, Values.Null))
@@ -187,8 +189,13 @@ class MainProcessor extends FabaProcessor {
 
   override def handlePurityEquation(eq: Equation[Key, Value]): Unit =
     puritySolver.addEquation(eq)
-  override def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit =
+
+  override def handleNotNullParamEquation(eq: Equation[Key, Value]) {
     notNullParamsSolver.addEquation(eq)
+    notNullParamsSolver2.addEquation1(eq)
+    notNullParamsSolver2.getCalls(eq).foreach(notNullParamsCallsResolver.addMethodUsage)
+  }
+
   override def handleNullableParamEquation(eq: Equation[Key, Value]): Unit = {
     if (processNullableParameters)
       nullableParamsSolver.addEquation(eq)
