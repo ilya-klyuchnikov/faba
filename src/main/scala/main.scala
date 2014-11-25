@@ -210,11 +210,11 @@ class MainProcessor extends FabaProcessor {
     nullableResultSolver.addEquation(eq)
 
   override def mapClassInfo(classInfo: ClassInfo): Unit = {
-    // TODO
+    notNullParamsCallsResolver.addClassDeclaration(classInfo)
   }
 
   override def mapMethodInfo(methodInfo: MethodInfo) {
-    // TODO
+    notNullParamsCallsResolver.addMethodDeclaration(methodInfo)
   }
 
   def printToFile(f: File)(op: PrintWriter => Unit) {
@@ -235,8 +235,11 @@ class MainProcessor extends FabaProcessor {
     println("solving ...")
     if (outDir != null) {
       notNullParamsCallsResolver.resolveHierarchy()
+      val resolveMap = notNullParamsCallsResolver.resolveCalls()
+      notNullParamsSolver2.bind(resolveMap)
 
-      val notNullParams = notNullParamsSolver.solve().filterNot(p => p._2 == Values.Top)
+      // val notNullParams = notNullParamsSolver.solve().filterNot(p => p._2 == Values.Top)
+      val notNullParams = notNullParamsSolver2.solve().filter(p => p._1.stable && p._2 != Values.Top)
       val nullableParams = nullableParamsSolver.solve().filterNot(p => p._2 == Values.Top)
       val contracts = contractsSolver.solve()
       val nullableResults = nullableResultSolver.solve().filter(p => p._2 == Values.Null)

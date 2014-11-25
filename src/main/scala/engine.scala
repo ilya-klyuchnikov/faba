@@ -1,6 +1,6 @@
 package faba.engine
 
-import faba.data.{ResolveDirection, LimitReachedException, PolymorphicId}
+import faba.data._
 
 import scala.collection.mutable
 
@@ -260,22 +260,15 @@ class StagedHierarchySolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val
   type Binding = (K, V)
   import lattice._
 
-  // equations added at the first stage of indexing
-  private val equations1 = mutable.Queue[Equation[K, V]]()
-
   // k -> (equations dependent on k)
-  private val dependencies2 = mutable.HashMap[K, Set[K]]()
-  // queue of solutions
-  private val moving2 = mutable.Queue[Binding]()
+  private val dependencies = mutable.HashMap[K, Set[K]]()
+  // queue of solutions to process
+  private val moving = mutable.Queue[Binding]()
   // not solved yet equations
-  private val pending2 = mutable.HashMap[K, Pending[K, V]]()
-
+  private val pending = mutable.HashMap[K, Pending[K, V]]()
   private var solved = Map[K, V]()
 
-  // stage ONE - adding equations
-  def addEquation1(equation: Equation[K, V]): Unit =
-    if (!idleMode)
-      equations1.enqueue(equation)
+  private var added = mutable.Set[K]()
 
   def getCalls(equation: Equation[K, V]): Set[K] =
     equation.rhs match {
@@ -284,4 +277,93 @@ class StagedHierarchySolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val
       case Pending(sop) =>
         sop.map(_.elems).flatten.toSet
     }
+
+  // stage ONE - adding equations,
+  // this is about UPWARD keys on the left
+  def addEquation1(equation: Equation[K, V]): Unit = {
+    val id = equation.id.mkStable
+    added += id
+    if (!idleMode) equation.rhs match {
+      case Final(value) =>
+        moving enqueue (id -> value)
+      case Pending(sum) => normalize(sum) match {
+        case Final(value) =>
+          moving enqueue (id -> value)
+        case p@Pending(comps) =>
+          for (trigger <- comps.map(_.elems).flatten) {
+            dependencies(trigger) = dependencies.getOrElse(trigger, Set()) + id
+          }
+          pending(id) = p
+      }
+    }
+  }
+
+  def addEquation2(equation: Equation[K, V]): Unit = {
+    val id = equation.id
+    if (!idleMode) equation.rhs match {
+      case Final(value) =>
+        moving enqueue (equation.id -> value)
+      case Pending(sum) => normalize(sum) match {
+        case Final(value) =>
+          moving enqueue (equation.id -> value)
+        case p@Pending(comps) =>
+          for (trigger <- comps.map(_.elems).flatten) {
+            dependencies(trigger) = dependencies.getOrElse(trigger, Set()) + equation.id
+          }
+          pending(equation.id) = p
+      }
+    }
+  }
+
+
+  // stage TWO - adding equations,
+  // this is about UPWARD keys on the left absent from indexing phase
+  // and about DOWNWARD keys on the left
+  def bind(resolveMap: Map[K, Set[K]]): Unit = {
+    println("=======")
+    println("BINDING")
+    println("=======")
+    for ((call, resolveInfo) <- resolveMap) {
+
+      if (resolveInfo == Set(call)) {
+        // nothing - method is resolved to itself
+      }
+      else if (resolveInfo.isEmpty) {
+        //if (added.contains(call)) println(s"contains TOP call: $call")
+        addEquation2(Equation(call, Final(lattice.top)))
+      }
+      else {
+        //if (added.contains(call)) println(s"contains non-TOP call: $call")
+        val sop: SumOfProducts[K, V] = resolveInfo.map(k => Product(lattice.top, Set(k)))
+        addEquation2(Equation(call, Pending(sop)))
+      }
+    }
+  }
+
+  // the difference is that we substitute only stable versions.
+  def solve(): Map[K, V] = {
+    while (moving.nonEmpty) {
+      // moving to solutions
+      val (id, value) = moving.dequeue()
+      solved = solved + (id -> value)
+
+      //val id = ident.mkStable
+      // binding for virtual call
+
+      for {
+        // get and remove dependency edge
+        dependentIds <- dependencies.remove(id)
+        pendingId <- dependentIds
+        pendingRhs <- pending.remove(pendingId)
+      } substitute(pendingRhs, id, value) match {
+        // substitution leads to answer
+        case Final(v) => moving enqueue (pendingId -> v)
+        // substitution only simplifies pendingRhs
+        case p@Pending(_) => pending(pendingId) = p
+      }
+    }
+
+    pending.clear()
+    solved
+  }
 }

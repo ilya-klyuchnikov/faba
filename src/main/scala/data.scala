@@ -102,6 +102,9 @@ object ResolveDirection extends Enumeration {
  * @param resolveDirection stability coordinate (virtual/final method).
  */
 case class Key(method: Method, direction: Direction, resolveDirection: ResolveDirection.Value) extends PolymorphicId[Key] {
+  val stable =
+    resolveDirection == ResolveDirection.Upward
+
   override def toString = direction match {
     case Out => s"$method"
     case In(index) => s"$method #$index"

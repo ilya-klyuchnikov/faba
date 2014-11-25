@@ -15,7 +15,9 @@ import scala.collection.mutable.ListBuffer
  * @param superName  (org.objectweb.asm.tree.ClassNode#superName)
  * @param interfaces (org.objectweb.asm.tree.ClassNode#interfaces)
  */
-case class ClassInfo(access: Int, name: String, superName: String, interfaces: List[String])
+case class ClassInfo(access: Int, name: String, superName: String, interfaces: List[String]) {
+  val stable = (access & Opcodes.ACC_FINAL) != 0
+}
 
 /**
  * Declaration site method info available at indexing phase.
@@ -121,6 +123,38 @@ class CallResolver {
       resolved.update(className, ResolvedClassInfo(classInfo, hierarchy(className), allInterfaces(className)))
   }
 
+  def resolveCalls(): Map[Key, Set[Key]] = {
+    var result = Map[Key, Set[Key]]()
+    for (call <- calls) {
+      val method = call.method
+      val ownerName = method.internalClassName
+      val resolved: Set[Key] = classInfos.get(ownerName) match {
+        case None =>
+          //println(s"warning {faba.calls.CallResolver.resolveCalls}: $call is not resolved")
+          Set()
+        case Some(ownerInfo) =>
+          // invokestatic
+          if (call.resolveDirection == ResolveDirection.Upward) Set(call)
+          else if (isStableMethod(ownerInfo, call)) Set(call.mkStable)
+          else Set()
+      }
+      result += (call -> resolved)
+    }
+    result
+  }
+
+  private def isStableMethod(owner: ClassInfo, key: Key): Boolean = {
+    import Opcodes._
+    val call = key.method
+
+    val acc = findMethodDeclaration(key.method, classMethods.getOrElse(owner.name, Set())).map(_.access).getOrElse({/*println(s"xxx: $key");*/ 0})
+
+    owner.stable || (call.methodName == "<init>") || (acc & ACC_FINAL) != 0 || (acc & ACC_PRIVATE) != 0 || (acc & ACC_STATIC) != 0
+  }
+
+  def findMethodDeclaration(call: Method, candidates: Iterable[MethodInfo]): Option[MethodInfo] =
+    candidates.find{info => info.name == call.methodName && info.desc == call.methodDesc}
+
   /**
    * Builds a hierarchy of parents for a class in a linear order (not including class itself).
    *
@@ -132,7 +166,7 @@ class CallResolver {
     def _hierarchy(name: String, acc: ListBuffer[String] = ListBuffer()): List[String] = {
       classInfos.get(name) match {
         case None =>
-          println(s"warning: $name is referenced, but not found")
+          //println(s"warning {faba.calls.CallResolver.hierarchy}: $name is referenced, but not found")
           acc.toList
         case Some(classInfo) =>
           val superName = classInfo.superName
@@ -162,7 +196,7 @@ class CallResolver {
         case Some(name) =>
           classInfos.get(name) match {
             case None =>
-              println(s"warning: $name is referenced, but not found")
+              //println(s"warning {faba.calls.CallResolver.allInterfaces}: $name is referenced, but not found")
               acc
             case Some(classInfo) =>
               val interfaces = classInfo.interfaces.toSet
