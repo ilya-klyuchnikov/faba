@@ -193,7 +193,7 @@ class MainProcessor extends FabaProcessor {
   override def handleNotNullParamEquation(eq: Equation[Key, Value]) {
     notNullParamsSolver.addEquation(eq)
     notNullParamsSolver2.addEquation1(eq)
-    notNullParamsSolver2.getCalls(eq).foreach(notNullParamsCallsResolver.addMethodUsage)
+    notNullParamsSolver2.getCalls(eq).foreach(notNullParamsCallsResolver.addCall)
   }
 
   override def handleNullableParamEquation(eq: Equation[Key, Value]): Unit = {
@@ -234,6 +234,8 @@ class MainProcessor extends FabaProcessor {
 
     println("solving ...")
     if (outDir != null) {
+      notNullParamsCallsResolver.resolveHierarchy()
+
       val notNullParams = notNullParamsSolver.solve().filterNot(p => p._2 == Values.Top)
       val nullableParams = nullableParamsSolver.solve().filterNot(p => p._2 == Values.Top)
       val contracts = contractsSolver.solve()

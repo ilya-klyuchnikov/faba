@@ -47,7 +47,7 @@ class CallResolver {
   // declarations of methods for a class
   private val classMethods = mutable.HashMap[String, mutable.Set[MethodInfo]]()
   // encountered calls
-  private val methodUsages = mutable.Set[Key]()
+  private val calls = mutable.Set[Key]()
   // resolved class info
   private val resolved = mutable.HashMap[String, ResolvedClassInfo]()
 
@@ -91,7 +91,7 @@ class CallResolver {
    * Add class info.
    * @param classInfo info from indexing phase
    */
-  def addClassInfo(classInfo: ClassInfo) {
+  def addClassDeclaration(classInfo: ClassInfo) {
     classInfos.update(classInfo.name, classInfo)
     classMethods.update(classInfo.name, mutable.Set[MethodInfo]())
   }
@@ -100,12 +100,12 @@ class CallResolver {
    * Adds method info
    * @param methodInfo info from indexing phase
    */
-  def addMethodInfo(methodInfo: MethodInfo) {
+  def addMethodDeclaration(methodInfo: MethodInfo) {
     classMethods(methodInfo.classInfo.name) += methodInfo
   }
 
-  def addMethodUsage(key: Key) {
-    methodUsages += key
+  def addCall(key: Key) {
+    calls += key
   }
 
   /**
@@ -115,8 +115,8 @@ class CallResolver {
    * Builds the "hierarchy line" of classes for each class,
    * Builds the set of interface a class implements for each class.
    */
-  def resolve() {
-    // building resolve info only for classes (not interfaces)
+  def resolveHierarchy() {
+    // building class hierarchy
     for ((className, classInfo) <- classInfos if CallUtils.notInterface(classInfo.access))
       resolved.update(className, ResolvedClassInfo(classInfo, hierarchy(className), allInterfaces(className)))
   }
