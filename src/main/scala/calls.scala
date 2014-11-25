@@ -41,10 +41,13 @@ case class ResolvedClassInfo(classInfo: ClassInfo, hierarchyLine: List[String], 
  */
 class CallResolver {
 
-  var indexing = true
-
   // information collected during indexing
   private val classInfos = mutable.HashMap[String, ClassInfo]()
+  // declarations of methods for a class
+  private val classMethods = mutable.HashMap[String, mutable.Set[MethodInfo]]()
+  // encountered calls
+  private val methodUsages = mutable.Set[Method]()
+  // resolved class info
   private val resolved = mutable.HashMap[String, ResolvedClassInfo]()
 
   /**
@@ -85,11 +88,23 @@ class CallResolver {
 
   /**
    * Add class info.
-   * @param classInfo info from indexing
+   * @param classInfo info from indexing phase
    */
-  def addInfo(classInfo: ClassInfo) {
-    require(indexing, "addInfo may be")
+  def addClassInfo(classInfo: ClassInfo) {
     classInfos.update(classInfo.name, classInfo)
+    classMethods.update(classInfo.name, mutable.Set[MethodInfo]())
+  }
+
+  /**
+   * Adds method info
+   * @param methodInfo info from indexing phase
+   */
+  def addMethodInfo(methodInfo: MethodInfo) {
+    classMethods(methodInfo.classInfo.name) += methodInfo
+  }
+
+  def addMethodUsage(method: Method) {
+    methodUsages += method
   }
 
   /**
@@ -100,7 +115,6 @@ class CallResolver {
    * Builds the set of interface a class implements for each class.
    */
   def resolve() {
-    indexing = false
     // building resolve info only for classes (not interfaces)
     for ((className, classInfo) <- classInfos if CallUtils.notInterface(classInfo.access))
       resolved.update(className, ResolvedClassInfo(classInfo, hierarchy(className), allInterfaces(className)))
