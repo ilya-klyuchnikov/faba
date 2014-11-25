@@ -1,6 +1,7 @@
 package faba.analysis.combined
 
 import faba.analysis._
+import faba.calls.CallUtils
 import faba.data._
 import faba.engine._
 
@@ -17,7 +18,7 @@ import scala.collection.JavaConversions._
 trait Trackable {
   val origin: Int
 }
-@AsmAbstractValue case class TrackableCallValue(origin: Int, tp: Type, method: Method, stableCall: Boolean, args: List[_ <: BasicValue], callToThis: Boolean) extends BasicValue(tp) with Trackable
+@AsmAbstractValue case class TrackableCallValue(origin: Int, tp: Type, method: Method, resolveDirection: ResolveDirection.Value, args: List[_ <: BasicValue], callToThis: Boolean) extends BasicValue(tp) with Trackable
 @AsmAbstractValue case class NthParamValue(tp: Type, n: Int) extends BasicValue(tp)
 @AsmAbstractValue case class TrackableNullValue(origin: Int) extends BasicValue(Type.getObjectType("null")) with Trackable
 @AsmAbstractValue case class TrackableValue(origin: Int, tp: Type) extends BasicValue(tp) with Trackable
@@ -61,7 +62,7 @@ class CombinedSingleAnalysis(val context: LiteContext) {
   }
 
   def notNullParamEquation(i: Int): Equation[Key, Value] = {
-    val key = Key(method, In(i), stable)
+    val key = Key(method, In(i), resolveDirection)
     val result: Result[Key, Value] =
       if (interpreter.dereferencedParams(i)) Final(Values.NotNull)
       else {
@@ -75,7 +76,7 @@ class CombinedSingleAnalysis(val context: LiteContext) {
   }
 
   def nullableParamEquation(i: Int): Equation[Key, Value] = {
-    val key = Key(method, In(i), stable)
+    val key = Key(method, In(i), resolveDirection)
     val result: Result[Key, Value] =
       if (interpreter.dereferencedParams(i) || interpreter.notNullableParams(i)) Final(Values.Top)
       else {
@@ -95,7 +96,7 @@ class CombinedSingleAnalysis(val context: LiteContext) {
   }
 
   def contractEquation(paramIndex: Int, inValue: Value): Equation[Key, Value] = {
-    val key = Key(method, InOut(paramIndex, inValue), stable)
+    val key = Key(method, InOut(paramIndex, inValue), resolveDirection)
     val result: Result[Key, Value] =
       if (exception || (inValue == Values.Null && interpreter.dereferencedParams(paramIndex)))
         Final(Values.Bot)
@@ -134,7 +135,7 @@ class CombinedSingleAnalysis(val context: LiteContext) {
   }
 
   def outContractEquation(): Equation[Key, Value] = {
-    val key = Key(method, Out, stable)
+    val key = Key(method, Out, resolveDirection)
     val result: Result[Key, Value] =
       if (exception) Final(Values.Bot)
       else {
@@ -160,16 +161,16 @@ class CombinedSingleAnalysis(val context: LiteContext) {
   }
 
   def nullableResultEquation(): Equation[Key, Value] = {
-    val key = Key(method, Out, stable)
+    val key = Key(method, Out, resolveDirection)
     val result: Result[Key, Value] =
       if (exception) Final(Values.Bot)
       else {
         returnValue match {
           case tr: Trackable if interpreter.dereferencedValues(tr.origin) =>
             Final(Values.Bot)
-          case TrackableCallValue(_, _, m, stableCall, args, callToThis) =>
-            // it was not dereferenced,
-            val callKey = Key(m, Out, stableCall || callToThis)
+          case TrackableCallValue(_, _, m, resolveDir, args, callToThis) =>
+            // TODO: when all solvers are refactored to 2-stage analysis, remove this specialization
+            val callKey = Key(m, Out, CallUtils.specializeCallResolveDirection(resolveDir, callToThis))
             Pending[Key, Value](Set(Product(Values.Null, Set(callKey))))
           case TrackableNullValue(_) =>
             // it was not dereferenced
@@ -353,7 +354,7 @@ class CombinedInterpreter(val insns: InsnList, arity: Int) extends BasicInterpre
     (opCode: @switch) match {
       // catching implicit dereferences
       case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE =>
-        val stable = opCode == INVOKESTATIC || opCode == INVOKESPECIAL
+        val resolveDirection = CallUtils.callResolveDirection(opCode)
         val mNode = insn.asInstanceOf[MethodInsnNode]
         val retType = Type.getReturnType(mNode.desc)
         val method = Method(mNode.owner, mNode.name, mNode.desc)
@@ -366,14 +367,14 @@ class CombinedInterpreter(val insns: InsnList, arity: Int) extends BasicInterpre
               }
               else {
                 val npKeys = parameterFlow.getOrElse(np.n, Set())
-                val key = Key(method, In(i - shift), stable)
+                val key = Key(method, In(i - shift), resolveDirection)
                 parameterFlow = parameterFlow.updated(np.n, npKeys + key)
               }
             case _ =>
           }
         }
         val callToThis = (opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) && values.get(0).isInstanceOf[ThisValue]
-        TrackableCallValue(origin, retType, method, stable, values.drop(shift).toList, callToThis)
+        TrackableCallValue(origin, retType, method, resolveDirection, values.drop(shift).toList, callToThis)
       case MULTIANEWARRAY =>
         NotNullValue(super.naryOperation(insn, values).getType)
       case _ =>

@@ -2,6 +2,7 @@ package faba.analysis.nullableResult
 
 import faba.analysis.AsmAbstractValue
 import faba.asm._
+import faba.calls.CallUtils
 import faba.data._
 import faba.engine._
 
@@ -190,11 +191,10 @@ case class NullableResultInterpreter(insns: InsnList, origins: Array[Boolean]) e
     }
     opCode match {
       case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL if origins(insns.indexOf(insn)) =>
-        val stable =
-          (opCode == INVOKESTATIC) || (opCode == INVOKESPECIAL)
+        val resolveDir = CallUtils.callResolveDirection(opCode)
         val mNode = insn.asInstanceOf[MethodInsnNode]
         val method = Method(mNode.owner, mNode.name, mNode.desc)
-        return Calls(Set(Key(method, Out, stable)))
+        return Calls(Set(Key(method, Out, resolveDir)))
       case _ =>
     }
     super.naryOperation(insn, values)

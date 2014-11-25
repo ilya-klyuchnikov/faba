@@ -1,6 +1,7 @@
 package faba.analysis.parameters
 
 import faba.analysis._
+import faba.calls.CallUtils
 import faba.data._
 import faba.engine._
 
@@ -672,12 +673,12 @@ abstract class Interpreter extends BasicInterpreter {
     }
     opCode match {
       case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL =>
-        val stable = opCode == INVOKESTATIC || opCode == INVOKESPECIAL
+        val resolveDir = CallUtils.callResolveDirection(opCode)
         val mNode = insn.asInstanceOf[MethodInsnNode]
         for (i <- shift until values.size()) {
           if (values.get(i).isInstanceOf[ParamValue]) {
             val method = Method(mNode.owner, mNode.name, mNode.desc)
-            _subResult = combine(_subResult, LeakingEffect(Set(Key(method, In(i - shift), stable))))
+            _subResult = combine(_subResult, LeakingEffect(Set(Key(method, In(i - shift), resolveDir))))
           }
         }
       case _ =>

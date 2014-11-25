@@ -98,9 +98,9 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def purityEquation(method: Method, methodNode: MethodNode, stable: Boolean) = {
+  override def purityEquation(method: Method, methodNode: MethodNode, resolveDirection: ResolveDirection.Value) = {
     val start = System.nanoTime()
-    val result = super.purityEquation(method, methodNode, stable)
+    val result = super.purityEquation(method, methodNode, resolveDirection)
     purityTime += System.nanoTime() - start
     result
   }
@@ -173,9 +173,9 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, origins: Origins, stable: Boolean, jsr: Boolean) = {
+  override def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, origins: Origins, resolveDirection: ResolveDirection.Value, jsr: Boolean) = {
     val start = System.nanoTime()
-    val result = super.nullableResultEquation(className, methodNode, method, origins, stable, jsr)
+    val result = super.nullableResultEquation(className, methodNode, method, origins, resolveDirection, jsr)
     nullableResultTime += System.nanoTime() - start
     result
   }

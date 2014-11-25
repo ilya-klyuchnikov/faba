@@ -100,11 +100,12 @@ trait FabaProcessor extends Processor {
     val acc = methodNode.access
     val stable = stableClass || (methodNode.name == "<init>") ||
       (acc & ACC_FINAL) != 0 || (acc & ACC_PRIVATE) != 0 || (acc & ACC_STATIC) != 0
+    val resolveDirection = if (stable) ResolveDirection.Upward else ResolveDirection.Downward
 
     if (!idle)
       extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
 
-    handlePurityEquation(purityEquation(method, methodNode, stable))
+    handlePurityEquation(purityEquation(method, methodNode, resolveDirection))
 
     if (argumentTypes.length == 0 && !(isReferenceResult || isBooleanResult)) {
       return
@@ -120,11 +121,11 @@ trait FabaProcessor extends Processor {
       if (complex) {
         val reducible = dfs.backEdges.isEmpty || isReducible(graph, dfs)
         if (reducible) {
-          handleComplexMethod(method, className, methodNode, dfs, argumentTypes, graph, isReferenceResult, isBooleanResult, stable, jsr)
+          handleComplexMethod(method, className, methodNode, dfs, argumentTypes, graph, isReferenceResult, isBooleanResult, resolveDirection, jsr)
           added = true
         }
       } else {
-        val context = LiteContext(method, methodNode, graph, stable)
+        val context = LiteContext(method, methodNode, graph, resolveDirection)
         val extraContext = ExtraContext(isReferenceResult, isBooleanResult, argumentTypes)
         handleSimpleMethod(context, extraContext)
         added = true
@@ -147,16 +148,16 @@ trait FabaProcessor extends Processor {
         val argSort = argType.getSort
         val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
         if (isReferenceArg) {
-          handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
+          handleNotNullParamEquation(Equation(Key(method, In(i), resolveDirection), Final(Values.Top)))
           if (isReferenceResult || isBooleanResult) {
-            handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Top)))
-            handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), Final(Values.Top)))
+            handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), resolveDirection), Final(Values.Top)))
+            handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), resolveDirection), Final(Values.Top)))
           }
         }
       }
       if (isReferenceResult) {
-        handleOutContractEquation(Equation(Key(method, Out, stable), Final(Values.Top)))
-        handleNullableResultEquation(Equation(Key(method, Out, stable), Final(Values.Bot)))
+        handleOutContractEquation(Equation(Key(method, Out, resolveDirection), Final(Values.Top)))
+        handleNullableResultEquation(Equation(Key(method, Out, resolveDirection), Final(Values.Bot)))
       }
     }
   }
@@ -202,7 +203,7 @@ trait FabaProcessor extends Processor {
                           graph: ControlFlowGraph,
                           isReferenceResult: Boolean,
                           isBooleanResult: Boolean,
-                          stable: Boolean,
+                          resolveDirection: ResolveDirection.Value,
                           jsr: Boolean) {
     val start = System.nanoTime()
     val cycle = dfs.backEdges.nonEmpty
@@ -210,13 +211,13 @@ trait FabaProcessor extends Processor {
     lazy val leaking = leakingParameters(className, methodNode, jsr)
     lazy val resultOrigins = buildResultOrigins(className, methodNode, leaking.frames, graph)
     lazy val parameterToResult = ParameterToResultFlow.analyze(methodNode, leaking, resultOrigins)
-    val context =  Context(method, methodNode, graph, stable, dfs)
+    val context =  Context(method, methodNode, graph, resolveDirection, dfs)
 
     // todo - do we need equations for boolean results?
     lazy val resultEquation: Equation[Key, Value] = outContractEquation(context, resultOrigins)
     if (isReferenceResult) {
       handleOutContractEquation(resultEquation)
-      handleNullableResultEquation(nullableResultEquation(className, methodNode, method, resultOrigins, stable, jsr))
+      handleNullableResultEquation(nullableResultEquation(className, methodNode, method, resultOrigins, resolveDirection, jsr))
     }
     for (i <- argumentTypes.indices) {
       val argType = argumentTypes(i)
@@ -239,11 +240,11 @@ trait FabaProcessor extends Processor {
           handleNotNullParamEquation(notNullParamEq)
         }
         else
-          handleNotNullParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
+          handleNotNullParamEquation(Equation(Key(method, In(i), resolveDirection), Final(Values.Top)))
 
         if (leaking.nullableParameters(i)) {
           if (dereferenceFound) {
-            handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Top)))
+            handleNullableParamEquation(Equation(Key(method, In(i), resolveDirection), Final(Values.Top)))
           }
           else {
             val nullableParamEq = nullableParamEquation(context, i)
@@ -254,27 +255,27 @@ trait FabaProcessor extends Processor {
           }
         }
         else
-          handleNullableParamEquation(Equation(Key(method, In(i), stable), Final(Values.Null)))
+          handleNullableParamEquation(Equation(Key(method, In(i), resolveDirection), Final(Values.Null)))
         // ]]] parameter analysis
 
         // [[[ contract analysis
         if (isReferenceResult || isBooleanResult) {
-          if (stable) {
+          if (resolveDirection == ResolveDirection.Upward) {
             val paramInfluence = leaking.splittingParameters(i) || parameterToResult(i)
             // result may depend on a parameter
             if (leaking.parameters(i)) {
               val unconditionalDereference = dereferenceFound && !leaking.splittingParameters(i) && !resultOrigins.parameters(i)
               // [[[ null->... analysis
               if (notNullParam) {
-                handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Bot)))
+                handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), resolveDirection), Final(Values.Bot)))
               } else if (unconditionalDereference) {
                 // there is __some__ unconditional dereference, but parameter is not null
-                handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
+                handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), resolveDirection), resultEquation.rhs))
               } else if (paramInfluence) {
                 handleNullContractEquation(nullContractEquation(context, resultOrigins, i))
               } else {
                 // no influence - result is the same as the main equation
-                handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
+                handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), resolveDirection), resultEquation.rhs))
               }
               // ]]] null->... analysis
 
@@ -282,18 +283,18 @@ trait FabaProcessor extends Processor {
               if (paramInfluence) {
                 handleNotNullContractEquation(notNullContractEquation(context, resultOrigins, i))
               } else {
-                handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
+                handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), resolveDirection), resultEquation.rhs))
               }
             }
             // not leaking - approximating it by out equation
             else {
-              handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
-              handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
+              handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), resolveDirection), resultEquation.rhs))
+              handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), resolveDirection), resultEquation.rhs))
             }
           }
           else {
-            handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Top)))
-            handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))
+            handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), resolveDirection), Final(Values.Top)))
+            handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), resolveDirection), resultEquation.rhs))
           }
         }
         // ]]] contract analysis
@@ -326,8 +327,8 @@ trait FabaProcessor extends Processor {
   def isReducible(graph: ControlFlowGraph, dfs: DFSTree): Boolean =
     controlFlow.reducible(graph, dfs)
 
-  def purityEquation(method: Method, methodNode: MethodNode, stable: Boolean): Equation[Key, Value] =
-    PurityAnalysis.analyze(method, methodNode, stable)
+  def purityEquation(method: Method, methodNode: MethodNode, resolveDirection: ResolveDirection.Value): Equation[Key, Value] =
+    PurityAnalysis.analyze(method, methodNode, resolveDirection)
 
   def notNullParamEquation(context: Context, i: Int): (Equation[Key, Value], Boolean) = {
     val analyser = new NotNullParameterAnalysis(context, In(i))
@@ -380,8 +381,8 @@ trait FabaProcessor extends Processor {
     }
   }
 
-  def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, origins: Origins, stable: Boolean, jsr: Boolean): Equation[Key, Value] =
-    Equation(Key(method, Out, stable), NullableResultAnalysis.analyze(className, methodNode, origins.instructions, jsr))
+  def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, origins: Origins, resolveDirection: ResolveDirection.Value, jsr: Boolean): Equation[Key, Value] =
+    Equation(Key(method, Out, resolveDirection), NullableResultAnalysis.analyze(className, methodNode, origins.instructions, jsr))
 
   def handlePurityEquation(eq: Equation[Key, Value]): Unit = ()
   def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit = ()

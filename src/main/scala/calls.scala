@@ -178,10 +178,22 @@ class CallResolver {
  * Helper methods
  */
 object CallUtils {
+  import Opcodes._
+
   /**
    * True if a class not an interface.
    * @param access (org.objectweb.asm.tree.ClassNode#access)
    */
   def notInterface(access: Int) =
-    (access & Opcodes.ACC_INTERFACE) == 0
+    (access & ACC_INTERFACE) == 0
+
+  def callResolveDirection(opCode: Int) = opCode match {
+    case INVOKEINTERFACE | INVOKEVIRTUAL =>
+      ResolveDirection.Downward
+    case INVOKESTATIC | INVOKESPECIAL =>
+      ResolveDirection.Upward
+  }
+
+  def specializeCallResolveDirection(resolveDirection: ResolveDirection.Value, callToThis: Boolean) =
+    if (callToThis) ResolveDirection.Upward else resolveDirection
 }

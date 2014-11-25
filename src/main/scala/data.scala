@@ -67,10 +67,8 @@ case class InOut(paramIndex: Int, in: Value) extends Direction
  * @see [[faba.data.Key#stable]]
  */
 trait PolymorphicId[Id] {
-  /**
-   * Whether this id stable (= effectively final).
-   */
-  val stable: Boolean
+
+  val resolveDirection: ResolveDirection.Value
 
   /**
    * Converts current id into a stable one.
@@ -101,23 +99,22 @@ object ResolveDirection extends Enumeration {
  *
  * @param method method id (method coordinate)
  * @param direction direction coordinate
- * @param stable stability coordinate (virtual/final method).
- *               `stable` flag is used at declaration site and call site.
- *               `stable=true` at declaration site means that a method is effectively final.
- *               `stable=true` at call site means that a call to this method is not virtual.
+ * @param resolveDirection stability coordinate (virtual/final method).
  */
-case class Key(method: Method, direction: Direction, stable: Boolean) extends PolymorphicId[Key] {
+case class Key(method: Method, direction: Direction, resolveDirection: ResolveDirection.Value) extends PolymorphicId[Key] {
   override def toString = direction match {
     case Out => s"$method"
     case In(index) => s"$method #$index"
     case InOut(index, v) => s"$method #$index #$v"
   }
 
+  // TODO - more clear name like "changeDirection"
   override def mkUnstable =
-    if (!stable) this else Key(method, direction, stable = false)
+    Key(method, direction, resolveDirection = ResolveDirection.Downward)
 
+  // TODO - more clear name like "changeDirection"
   override def mkStable =
-    if (stable) this else Key(method, direction, stable = true)
+    Key(method, direction, resolveDirection = ResolveDirection.Upward)
 }
 
 /**
@@ -171,7 +168,7 @@ object AnnotationsUtil {
       }
     }
     for ((method, inOuts) <- inOuts) {
-      val key = Key(method, Out, stable = true)
+      val key = Key(method, Out, ResolveDirection.Upward)
       val arity = Type.getArgumentTypes(method.methodDesc).size
       val contractValues = inOuts.map { case (InOut(i, inValue), outValue) =>
         (0 until arity).map { j =>

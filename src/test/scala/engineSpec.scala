@@ -57,7 +57,7 @@ class engineSpec extends FunSuite with TableDrivenPropertyChecks {
   }
 
   case class Wrapper(s: Symbol) extends PolymorphicId[Wrapper] {
-    override val stable: Boolean = true
+    override val resolveDirection = ResolveDirection.Upward
     override def mkStable: Wrapper = this
     override def mkUnstable: Wrapper = this
   }

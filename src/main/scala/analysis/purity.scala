@@ -1,5 +1,6 @@
 package faba.analysis.purity
 
+import faba.calls.CallUtils
 import faba.data._
 import faba.engine._
 
@@ -35,8 +36,8 @@ object PurityAnalysis {
 
   val unAnalyzable = ACC_ABSTRACT | ACC_NATIVE | ACC_INTERFACE
 
-  def analyze(method: Method, methodNode: MethodNode, stable: Boolean): Equation[Key, Value] = {
-    val aKey = new Key(method, Out, stable)
+  def analyze(method: Method, methodNode: MethodNode, resolveDirection: ResolveDirection.Value): Equation[Key, Value] = {
+    val aKey = new Key(method, Out, resolveDirection)
 
     if ((methodNode.access & unAnalyzable) != 0)
       return Equation(aKey, finalTop)
@@ -46,17 +47,16 @@ object PurityAnalysis {
 
     for (i <- 0 until insns.size()) {
       val insn = insns.get(i)
-      (insn.getOpcode: @switch) match {
+      val opCode = insn.getOpcode
+      (opCode: @switch) match {
+        // TODO - INVOKEINTERFACE - later
         case PUTFIELD | PUTSTATIC |
              IASTORE | LASTORE | FASTORE | DASTORE | AASTORE | BASTORE | CASTORE | SASTORE |
              INVOKEDYNAMIC | INVOKEINTERFACE =>
           return Equation(aKey, finalTop)
-        case INVOKESPECIAL | INVOKESTATIC =>
+        case INVOKESPECIAL | INVOKESTATIC | INVOKEVIRTUAL =>
           val mNode = insn.asInstanceOf[MethodInsnNode]
-          calls += Key(Method(mNode.owner, mNode.name, mNode.desc), Out, stable = true)
-        case INVOKEVIRTUAL =>
-          val mNode = insn.asInstanceOf[MethodInsnNode]
-          calls += Key(Method(mNode.owner, mNode.name, mNode.desc), Out, stable = false)
+          calls += Key(Method(mNode.owner, mNode.name, mNode.desc), Out, CallUtils.callResolveDirection(opCode))
         case _ =>
 
       }

@@ -2,6 +2,7 @@ package faba.analysis.result
 
 import faba.analysis._
 import faba.analysis.resultOrigins._
+import faba.calls.CallUtils
 import faba.data._
 import faba.engine._
 
@@ -449,23 +450,25 @@ case class ResultInterpreter(direction: Direction, insns: InsnList, resultOrigin
         val retType = Type.getReturnType(mNode.desc)
         val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
         val isBooleanRetType = retType == Type.BOOLEAN_TYPE
-        if (isRefRetType || isBooleanRetType)
+        if (isRefRetType || isBooleanRetType) {
+          val resolveDir = CallUtils.callResolveDirection(opCode)
           // TODO - hack into parameters here
           direction match {
             case InOut(_, inValue) =>
               var keys = Set[Key]()
               for (i <- shift until values.size()) {
                 if (values.get(i).isInstanceOf[ParamValue])
-                  keys = keys + Key(method, InOut(i - shift, inValue), stable)
+                  keys = keys + Key(method, InOut(i - shift, inValue), resolveDir)
               }
               if (isRefRetType)
-                keys = keys + Key(method, Out, stable)
+                keys = keys + Key(method, Out, resolveDir)
               if (keys.nonEmpty)
                 return CallResultValue(index(insn), retType, keys)
             case _ =>
               if (isRefRetType)
-                return CallResultValue(index(insn), retType, Set(Key(method, Out, stable)))
+                return CallResultValue(index(insn), retType, Set(Key(method, Out, resolveDir)))
           }
+        }
         super.naryOperation(insn, values)
       case MULTIANEWARRAY if propagate_? =>
         NotNullValue(super.naryOperation(insn, values).getType)

@@ -26,20 +26,20 @@ class InferenceSuite extends FunSuite with Matchers {
 
         val notNull = anns.exists(_.annotationType == classOf[ExpectNotNull])
         assert(
-          annotations.notNulls.contains(Key(method, In(i), stable = true)) == notNull,
+          annotations.notNulls.contains(Key(method, In(i), ResolveDirection.Upward)) == notNull,
           s"@NotNull'$jClass $jMethod #$i'"
         )
 
         val expectedNullable = anns.exists(_.annotationType == classOf[ExpectNullable])
-        val actualNullable: Boolean = annotations.nullable.contains(Key(method, In(i), stable = true))
+        val actualNullable: Boolean = annotations.nullable.contains(Key(method, In(i), ResolveDirection.Upward))
         assert(
           actualNullable == expectedNullable,
           s"'$jClass $jMethod #$i': ${describeSimpleMismatch(expectedNullable, actualNullable, "@Nullable")}"
         )
       }
 
-      annotations.notNulls(Key(method, Out, stable = true)) should equal (jMethod.getAnnotation(classOf[ExpectNotNull]) != null)
-      annotations.contracts.get(Key(method, Out, stable = true)) should equal (Option(jMethod.getAnnotation(classOf[ExpectContract])).map(_.value))
+      annotations.notNulls(Key(method, Out, ResolveDirection.Upward)) should equal (jMethod.getAnnotation(classOf[ExpectNotNull]) != null)
+      annotations.contracts.get(Key(method, Out, ResolveDirection.Upward)) should equal (Option(jMethod.getAnnotation(classOf[ExpectContract])).map(_.value))
     }
   }
 

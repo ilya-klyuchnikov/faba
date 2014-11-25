@@ -126,7 +126,9 @@ object Statistics extends FabaProcessor {
           val method = k.method
           val thisClassName = method.internalClassName
           val ks = (allInheritors(thisClassName) + thisClassName).flatMap {
-            cn => k.copy(method = method.copy(internalClassName = cn), stable = true) :: k.copy(method = method.copy(internalClassName = cn), stable = false) :: Nil
+            cn =>
+              k.copy(method = method.copy(internalClassName = cn), resolveDirection = ResolveDirection.Upward) ::
+              k.copy(method = method.copy(internalClassName = cn), resolveDirection = ResolveDirection.Downward) :: Nil
           }
           val allDeps: Set[Key] = ks.flatMap(allDependencies)
           val cardinality = allDeps.size
@@ -148,7 +150,9 @@ object Statistics extends FabaProcessor {
       val method = k.method
       val thisClassName = method.internalClassName
       val ks = (allInheritors(thisClassName) + thisClassName).flatMap {
-        cn => k.copy(method = method.copy(internalClassName = cn), stable = true) :: k.copy(method = method.copy(internalClassName = cn), stable = false) :: Nil
+        cn =>
+          k.copy(method = method.copy(internalClassName = cn), resolveDirection = ResolveDirection.Upward) ::
+          k.copy(method = method.copy(internalClassName = cn), resolveDirection = ResolveDirection.Downward) :: Nil
       }
       val simpleDeps = allDependencies(k)
       val allDeps: Set[Key] = ks.flatMap(allDependencies)

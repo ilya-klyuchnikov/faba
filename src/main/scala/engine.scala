@@ -1,6 +1,6 @@
 package faba.engine
 
-import faba.data.{LimitReachedException, PolymorphicId}
+import faba.data.{ResolveDirection, LimitReachedException, PolymorphicId}
 
 import scala.collection.mutable
 
@@ -220,7 +220,7 @@ class SimpleSolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice:
         (ident.mkStable, value)
       // binding for virtual call  
       val virtualCallBinding: Binding =
-        (ident.mkUnstable, if (ident.stable) value else mkUnstableValue(value))
+        (ident.mkUnstable, if (ident.resolveDirection == ResolveDirection.Upward) value else mkUnstableValue(value))
 
       for {
         // binding
