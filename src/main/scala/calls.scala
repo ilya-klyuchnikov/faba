@@ -1,5 +1,7 @@
 package faba.calls
 
+import java.util.Date
+
 import faba.data._
 
 import org.objectweb.asm.Opcodes
@@ -54,14 +56,20 @@ class CallResolver {
   private val resolved = mutable.HashMap[String, ResolvedClassInfo]()
 
   /**
-   * Calculates all concrete inheritors of this class.
-   * Includes class itself (if it is concrete).
+   * Calculates all class inheritors of this class.
+   * Includes class itself.
+   * Doesn't include interfaces for now.
    *
    * @param className org.objectweb.asm.tree.ClassNode#name
    * @return all concrete inheritors
    */
-  private def allConcreteInheritors(className: String): Set[String] = ???
-
+  private def children(className: String): Set[ResolvedClassInfo] = {
+    // TODO - cache it or build a map during resolve
+    var classes = Set[ResolvedClassInfo]()
+    for ((_, info) <- resolved if info.hierarchyLine.contains(className))
+      classes = classes + info
+    classes
+  }
 
   /**
    * Used for resolving INVOKESTATIC and INVOKESPECIAL
@@ -72,7 +80,18 @@ class CallResolver {
     for {
       ownerResolveInfo <- resolved.get(method.internalClassName)
       candidateOwner <- ownerResolveInfo.hierarchyLine
-    } {
+    } classMethods.get(candidateOwner) match {
+      case None =>
+        return None
+      case Some(methods) =>
+        for {found <- findMethodDeclaration(method, methods)}
+          return Some(convertToMethod(found))
+    }
+    None
+  }
+
+  def resolveUpward(method: Method, ownerResolveInfo: ResolvedClassInfo): Option[Method] = {
+    for {candidateOwner <- ownerResolveInfo.hierarchyLine}
       classMethods.get(candidateOwner) match {
         case None =>
           return None
@@ -80,7 +99,6 @@ class CallResolver {
           for {found <- findMethodDeclaration(method, methods)}
             return Some(convertToMethod(found))
       }
-    }
     None
   }
 
@@ -92,12 +110,13 @@ class CallResolver {
    * @param method method invoked via INVOKEINTERFACE and INVOKEVIRTUAL instruction
    * @return all concrete method that can be called in run time
    */
-  def resolveDownward(method: Method): Set[Method] = ???
-    /*
-    allConcreteInheritors(method.internalClassName).map {
-      concreteClass => resolveUpward(method.copy(internalClassName = concreteClass))
-    }*/
-
+  def resolveDownward(method: Method): Set[Method] = {
+    var resolvedMethods = Set[Method]()
+    for {implementation <- children(method.internalClassName)
+         resolvedMethod <- resolveUpward(method, implementation)}
+      resolvedMethods = resolvedMethods + resolvedMethod
+    resolvedMethods
+  }
 
   /**
    * Add class info.
@@ -134,22 +153,24 @@ class CallResolver {
   }
 
   def resolveCalls(): Map[Key, Set[Key]] = {
+    println(s"${new Date()} RESOLVE START")
     var result = Map[Key, Set[Key]]()
     for (call <- calls) {
       val method = call.method
       val ownerName = method.internalClassName
-      val resolved: Set[Key] = classInfos.get(ownerName) match {
+      val resolved: Set[Method] = classInfos.get(ownerName) match {
         case None =>
           //println(s"warning {faba.calls.CallResolver.resolveCalls}: $call is not resolved")
           Set()
         case Some(ownerInfo) =>
           if (call.resolveDirection == ResolveDirection.Upward)
-            resolveUpward(call.method).map(m => call.copy(method = m)).toSet
-          else if (isStableMethod(ownerInfo, call)) Set(call.mkStable)
-          else Set()
+            resolveUpward(call.method).toSet
+          else
+            resolveDownward(method)
       }
-      result += (call -> resolved)
+      result += (call -> resolved.map(m => call.copy(method = m, resolveDirection = ResolveDirection.Upward)))
     }
+    println(s"${new Date()} RESOLVE END")
     result
   }
 
