@@ -62,31 +62,41 @@ class CallResolver {
    */
   private def allConcreteInheritors(className: String): Set[String] = ???
 
-  /**
-   * Resolves a method for a class in which given method should definitely exist
-   *
-   * @param method method invoked via INVOKESTATIC or INVOKESPECIAL instruction
-   * @return resolved method
-   */
-  private def resolveConcrete(method: Method): Method = ???
 
   /**
    * Used for resolving INVOKESTATIC and INVOKESPECIAL
    * @param method method invoked via INVOKESTATIC or INVOKESPECIAL instruction
    * @return concrete method or None if method is not implemented yet in hierarchy
    */
-  def resolveBottomUp(method: Method): Method =
-    resolveConcrete(method)
+  def resolveUpward(method: Method): Option[Method] = {
+    for {
+      ownerResolveInfo <- resolved.get(method.internalClassName)
+      candidateOwner <- ownerResolveInfo.hierarchyLine
+    } {
+      classMethods.get(candidateOwner) match {
+        case None =>
+          return None
+        case Some(methods) =>
+          for {found <- findMethodDeclaration(method, methods)}
+            return Some(convertToMethod(found))
+      }
+    }
+    None
+  }
+
+  def convertToMethod(methodInfo: MethodInfo): Method =
+    Method(methodInfo.classInfo.name, methodInfo.name, methodInfo.desc)
 
   /**
    * Used for resolving of INVOKEINTERFACE and INVOKEVIRTUAL
    * @param method method invoked via INVOKEINTERFACE and INVOKEVIRTUAL instruction
    * @return all concrete method that can be called in run time
    */
-  def resolveTopDown(method: Method): Set[Method] =
+  def resolveDownward(method: Method): Set[Method] = ???
+    /*
     allConcreteInheritors(method.internalClassName).map {
-      concreteClass => resolveConcrete(method.copy(internalClassName = concreteClass))
-    }
+      concreteClass => resolveUpward(method.copy(internalClassName = concreteClass))
+    }*/
 
 
   /**
@@ -133,8 +143,8 @@ class CallResolver {
           //println(s"warning {faba.calls.CallResolver.resolveCalls}: $call is not resolved")
           Set()
         case Some(ownerInfo) =>
-          // invokestatic
-          if (call.resolveDirection == ResolveDirection.Upward) Set(call)
+          if (call.resolveDirection == ResolveDirection.Upward)
+            resolveUpward(call.method).map(m => call.copy(method = m)).toSet
           else if (isStableMethod(ownerInfo, call)) Set(call.mkStable)
           else Set()
       }
@@ -146,39 +156,35 @@ class CallResolver {
   private def isStableMethod(owner: ClassInfo, key: Key): Boolean = {
     import Opcodes._
     val call = key.method
-
     val acc = findMethodDeclaration(key.method, classMethods.getOrElse(owner.name, Set())).map(_.access).getOrElse({/*println(s"xxx: $key");*/ 0})
-
     owner.stable || (call.methodName == "<init>") || (acc & ACC_FINAL) != 0 || (acc & ACC_PRIVATE) != 0 || (acc & ACC_STATIC) != 0
   }
 
-  def findMethodDeclaration(call: Method, candidates: Iterable[MethodInfo]): Option[MethodInfo] =
-    candidates.find{info => info.name == call.methodName && info.desc == call.methodDesc}
+  private def findMethodDeclaration(call: Method, candidates: Iterable[MethodInfo]): Option[MethodInfo] =
+    candidates.find {info => info.name == call.methodName && info.desc == call.methodDesc}
 
   /**
-   * Builds a hierarchy of parents for a class in a linear order (not including class itself).
+   * Builds a hierarchy of parents for a class in a linear order.
    *
    * @param className class for which hierarchy is built
    * @return hierarchy of the class
    */
   private def hierarchy(className: String): List[String] = {
     @tailrec
-    def _hierarchy(name: String, acc: ListBuffer[String] = ListBuffer()): List[String] = {
-      classInfos.get(name) match {
-        case None =>
-          //println(s"warning {faba.calls.CallResolver.hierarchy}: $name is referenced, but not found")
+    def _hierarchy(name: String, acc: ListBuffer[String]): List[String] = classInfos.get(name) match {
+      case None =>
+        //println(s"warning {faba.calls.CallResolver.hierarchy}: $name is referenced, but not found")
+        acc.toList
+      case Some(classInfo) =>
+        val superName = classInfo.superName
+        if (superName == null)
           acc.toList
-        case Some(classInfo) =>
-          val superName = classInfo.superName
-          if (superName == null)
-            acc.toList
-          else {
-            acc += superName
-            _hierarchy(superName, acc)
-          }
-      }
+        else {
+          acc += superName
+          _hierarchy(superName, acc)
+        }
     }
-    _hierarchy(className)
+    _hierarchy(className, ListBuffer(className))
   }
 
   /**
