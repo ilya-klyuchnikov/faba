@@ -672,7 +672,7 @@ abstract class Interpreter extends BasicInterpreter {
       return super.naryOperation(insn, values)
     }
     opCode match {
-      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL =>
+      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE =>
         val resolveDir = CallUtils.callResolveDirection(opCode)
         val mNode = insn.asInstanceOf[MethodInsnNode]
         for (i <- shift until values.size()) {
