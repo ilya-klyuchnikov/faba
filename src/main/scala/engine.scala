@@ -218,7 +218,7 @@ class SimpleSolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice:
       // binding for stable (non-virtual calls)
       val stableCallBinding: Binding =
         (ident.mkStable, value)
-      // binding for virtual call  
+      // binding for virtual call
       val virtualCallBinding: Binding =
         (ident.mkUnstable, if (ident.resolveDirection == ResolveDirection.Upward) value else mkUnstableValue(value))
 
@@ -258,7 +258,6 @@ class NullableResultSimpleSolver[K <: PolymorphicId[K], V](idle: Boolean, lattic
 
 class StagedHierarchySolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice: Lattice[V]) extends Solver[K, V] {
   type Binding = (K, V)
-  import lattice._
 
   // k -> (equations dependent on k)
   private val dependencies = mutable.HashMap[K, Set[K]]()
@@ -268,7 +267,8 @@ class StagedHierarchySolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val
   private val pending = mutable.HashMap[K, Pending[K, V]]()
   private var solved = Map[K, V]()
 
-  private var added = mutable.Set[K]()
+  // keys added at indexing phase
+  private val keys = mutable.Set[K]()
 
   def getCalls(equation: Equation[K, V]): Set[K] =
     equation.rhs match {
@@ -282,7 +282,7 @@ class StagedHierarchySolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val
   // this is about UPWARD keys on the left
   def addEquation1(equation: Equation[K, V]): Unit = {
     val id = equation.id.mkStable
-    added += id
+    keys += id
     if (!idleMode) equation.rhs match {
       case Final(value) =>
         moving enqueue (id -> value)
@@ -320,11 +320,7 @@ class StagedHierarchySolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val
   // this is about UPWARD keys on the left absent from indexing phase
   // and about DOWNWARD keys on the left
   def bind(resolveMap: Map[K, Set[K]]): Unit = {
-    println("=======")
-    println("BINDING")
-    println("=======")
     for ((call, resolveInfo) <- resolveMap) {
-
       if (resolveInfo == Set(call)) {
         // nothing - method is resolved to itself
       }
@@ -340,16 +336,13 @@ class StagedHierarchySolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val
     }
   }
 
-  // the difference is that we substitute only stable versions.
   def solve(): Map[K, V] = {
     while (moving.nonEmpty) {
       // moving to solutions
       val (id, value) = moving.dequeue()
-      solved = solved + (id -> value)
-
-      //val id = ident.mkStable
-      // binding for virtual call
-
+      // adding to solution only indexed keys
+      if (keys(id))
+        solved = solved + (id -> value)
       for {
         // get and remove dependency edge
         dependentIds <- dependencies.remove(id)
