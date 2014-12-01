@@ -152,6 +152,12 @@ class CallResolver {
       resolved.update(className, ResolvedClassInfo(classInfo, hierarchy(className), allInterfaces(className)))
   }
 
+  /**
+   * Traverses all calls in RHS of equations and resolve them into a set of concrete calls
+   * assuming that the world is closed.
+   *
+   * @return mapping of calls into existing Upward Keys
+   */
   def resolveCalls(): Map[Key, Set[Key]] = {
     println(s"${new Date()} RESOLVE START")
     var result = Map[Key, Set[Key]]()
