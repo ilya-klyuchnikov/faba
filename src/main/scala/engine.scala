@@ -267,8 +267,10 @@ class StagedHierarchySolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val
   private val pending = mutable.HashMap[K, Pending[K, V]]()
   private var solved = Map[K, V]()
 
-  // keys added at indexing phase
+  // "api keys", external keys
   private val keys = mutable.Set[K]()
+  // key that are already added to this solver, to prevent duplicates
+  private val added = mutable.Set[K]()
 
   def getCalls(equation: Equation[K, V]): Set[K] =
     equation.rhs match {
@@ -280,7 +282,8 @@ class StagedHierarchySolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val
 
   // stage ONE - adding equations,
   // this is about UPWARD keys on the left
-  def addEquation1(equation: Equation[K, V]): Unit = {
+  // equation describing method behavior
+  def addMethodEquation(equation: Equation[K, V]): Unit = {
     val id = equation.id.mkStable
     keys += id
     if (!idleMode) equation.rhs match {
@@ -298,8 +301,11 @@ class StagedHierarchySolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val
     }
   }
 
-  def addEquation2(equation: Equation[K, V]): Unit = {
+  private def addCallEquation(equation: Equation[K, V]): Unit = {
     val id = equation.id
+    // some equations may be passed several times
+    if (added(id)) return
+    added += id
     if (!idleMode) equation.rhs match {
       case Final(value) =>
         moving enqueue (equation.id -> value)
@@ -315,23 +321,27 @@ class StagedHierarchySolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val
     }
   }
 
-
-  // stage TWO - adding equations,
-  // this is about UPWARD keys on the left absent from indexing phase
-  // and about DOWNWARD keys on the left
-  def bind(resolveMap: Map[K, Set[K]]): Unit = {
+  /**
+   * Adds to the system equations got from the second stage - equations about resolution of calls.
+   *
+   * @param resolveMap a map from call keys to "concrete", method keys
+   * @param apiKeys keys for which solutions should be written to the external world
+   */
+  def bindCalls(resolveMap: Map[K, Set[K]], apiKeys: Set[K]): Unit = {
+    // stage TWO - adding equations,
+    // this is about UPWARD keys on the left absent from indexing phase
+    // and about DOWNWARD keys on the left
+    keys ++= apiKeys
     for ((call, resolveInfo) <- resolveMap) {
       if (resolveInfo == Set(call)) {
         // nothing - method is resolved to itself
       }
       else if (resolveInfo.isEmpty) {
-        //if (added.contains(call)) println(s"contains TOP call: $call")
-        addEquation2(Equation(call, Final(lattice.top)))
+        addCallEquation(Equation(call, Final(lattice.top)))
       }
       else {
-        //if (added.contains(call)) println(s"contains non-TOP call: $call")
         val sop: SumOfProducts[K, V] = resolveInfo.map(k => Product(lattice.top, Set(k)))
-        addEquation2(Equation(call, Pending(sop)))
+        addCallEquation(Equation(call, Pending(sop)))
       }
     }
   }

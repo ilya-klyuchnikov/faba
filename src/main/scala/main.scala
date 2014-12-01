@@ -192,7 +192,7 @@ class MainProcessor extends FabaProcessor {
 
   override def handleNotNullParamEquation(eq: Equation[Key, Value]) {
     notNullParamsSolver.addEquation(eq)
-    notNullParamsSolver2.addEquation1(eq)
+    notNullParamsSolver2.addMethodEquation(eq)
     notNullParamsSolver2.getCalls(eq).foreach(notNullParamsCallsResolver.addCall)
   }
 
@@ -236,7 +236,7 @@ class MainProcessor extends FabaProcessor {
     if (outDir != null) {
       notNullParamsCallsResolver.resolveHierarchy()
       val resolveMap = notNullParamsCallsResolver.resolveCalls()
-      notNullParamsSolver2.bind(resolveMap)
+      notNullParamsSolver2.bindCalls(resolveMap, Set())
 
       // val notNullParams = notNullParamsSolver.solve().filterNot(p => p._2 == Values.Top)
       val notNullParams = notNullParamsSolver2.solve().filter(p => p._1.stable && p._2 != Values.Top)
