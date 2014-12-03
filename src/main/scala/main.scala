@@ -188,26 +188,24 @@ class MainProcessor extends FabaProcessor {
   }
 
   override def handlePurityEquation(eq: Equation[Key, Value]): Unit =
-    puritySolver.addEquation(eq)
+    () //puritySolver.addEquation(eq)
 
   override def handleNotNullParamEquation(eq: Equation[Key, Value]) {
-    notNullParamsSolver.addEquation(eq)
+    //notNullParamsSolver.addEquation(eq)
     notNullParamsSolver2.addMethodEquation(eq)
     notNullParamsSolver2.getCalls(eq).foreach(notNullParamsCallsResolver.addCall)
   }
 
-  override def handleNullableParamEquation(eq: Equation[Key, Value]): Unit = {
-    if (processNullableParameters)
-      nullableParamsSolver.addEquation(eq)
-  }
+  override def handleNullableParamEquation(eq: Equation[Key, Value]): Unit =
+    () // if (processNullableParameters) nullableParamsSolver.addEquation(eq)
   override def handleNotNullContractEquation(eq: Equation[Key, Value]): Unit =
-    contractsSolver.addEquation(eq)
+    () //contractsSolver.addEquation(eq)
   override def handleNullContractEquation(eq: Equation[Key, Value]): Unit =
-    contractsSolver.addEquation(eq)
+    () //contractsSolver.addEquation(eq)
   override def handleOutContractEquation(eq: Equation[Key, Value]): Unit =
-    contractsSolver.addEquation(eq)
+    () //contractsSolver.addEquation(eq)
   override def handleNullableResultEquation(eq: Equation[Key, Value]): Unit =
-    nullableResultSolver.addEquation(eq)
+    () //nullableResultSolver.addEquation(eq)
 
   override def mapClassInfo(classInfo: ClassInfo): Unit = {
     notNullParamsCallsResolver.addClassDeclaration(classInfo)

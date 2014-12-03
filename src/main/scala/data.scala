@@ -329,7 +329,8 @@ object XmlUtils {
       case ResolveDirection.Upward =>
         rawKey
       case ResolveDirection.Downward =>
-        s"virtual $rawKey"
+        //s"virtual $rawKey"
+        rawKey
     }
   }
 
