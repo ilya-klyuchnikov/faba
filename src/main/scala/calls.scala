@@ -66,7 +66,7 @@ class CallResolver {
   private def children(className: String): Set[ResolvedClassInfo] = {
     // TODO - cache it or build a map during resolve
     var classes = Set[ResolvedClassInfo]()
-    for ((_, info) <- resolved if info.hierarchyLine.contains(className))
+    for ((_, info) <- resolved if info.hierarchyLine.contains(className) || info.interfaces.contains(className))
       classes = classes + info
     classes
   }
