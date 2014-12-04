@@ -29,6 +29,9 @@
   <item name="sun.security.provider.certpath.BasicChecker java.security.PublicKey makeInheritedParamsKey(java.security.PublicKey, java.security.PublicKey) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.security.provider.certpath.BasicChecker void check(java.security.cert.Certificate, java.util.Collection&lt;java.lang.String&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.certpath.BasicChecker void check(java.security.cert.Certificate, java.util.Collection&lt;java.lang.String&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -41,10 +44,16 @@
   <item name="sun.security.provider.certpath.BasicChecker void verifyTimestamp(java.security.cert.X509Certificate, java.util.Date) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.provider.certpath.BasicChecker void verifyTimestamp(java.security.cert.X509Certificate, java.util.Date) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.certpath.Builder Builder(java.security.cert.PKIXBuilderParameters, javax.security.auth.x500.X500Principal) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.Builder boolean addMatchingCerts(java.security.cert.X509CertSelector, java.util.Collection&lt;java.security.cert.CertStore&gt;, java.util.Collection&lt;java.security.cert.X509Certificate&gt;, boolean) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.security.provider.certpath.Builder boolean addMatchingCerts(java.security.cert.X509CertSelector, java.util.Collection&lt;java.security.cert.CertStore&gt;, java.util.Collection&lt;java.security.cert.X509Certificate&gt;, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.Builder boolean isLocalCertStore(java.security.cert.CertStore) 0">
@@ -56,6 +65,18 @@
   <item name="sun.security.provider.certpath.Builder int hops(sun.security.x509.GeneralNameInterface, sun.security.x509.GeneralNameInterface, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual sun.security.provider.certpath.Builder java.util.Collection&lt;java.security.cert.X509Certificate&gt; getMatchingCerts(sun.security.provider.certpath.State, java.util.List&lt;java.security.cert.CertStore&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual sun.security.provider.certpath.Builder void addCertToPath(java.security.cert.X509Certificate, java.util.LinkedList&lt;java.security.cert.X509Certificate&gt;) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual sun.security.provider.certpath.Builder void removeFinalCertFromPath(java.util.LinkedList&lt;java.security.cert.X509Certificate&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual sun.security.provider.certpath.Builder void verifyCert(java.security.cert.X509Certificate, sun.security.provider.certpath.State, java.util.List&lt;java.security.cert.X509Certificate&gt;) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.certpath.CertId CertId(java.security.cert.X509Certificate, sun.security.x509.SerialNumber) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -63,6 +84,24 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.CertId void encode(sun.security.util.DerOutputStream) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.security.provider.certpath.CertId void encode(sun.security.util.DerOutputStream) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual sun.security.provider.certpath.CertPathHelper void implSetDateAndTime(java.security.cert.X509CRLSelector, java.util.Date, long) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual sun.security.provider.certpath.CertPathHelper void implSetPathToNames(java.security.cert.X509CertSelector, java.util.Set&lt;sun.security.x509.GeneralNameInterface&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.provider.certpath.CertPathHelper void setDateAndTime(java.security.cert.X509CRLSelector, java.util.Date, long) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.provider.certpath.CertPathHelper void setPathToNames(java.security.cert.X509CertSelector, java.util.Set&lt;sun.security.x509.GeneralNameInterface&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual sun.security.provider.certpath.CertStoreHelper java.security.cert.CertStore getCertStore(java.net.URI) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.CollectionCertStore CollectionCertStore(java.security.cert.CertStoreParameters) 0">
@@ -83,6 +122,9 @@
   <item name="sun.security.provider.certpath.CrlRevocationChecker boolean certCanSignCrl(java.security.cert.X509Certificate) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.security.provider.certpath.CrlRevocationChecker boolean check(java.security.cert.X509Certificate, java.security.PublicKey, boolean) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.certpath.CrlRevocationChecker boolean check(java.security.cert.X509Certificate, java.security.PublicKey, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -90,6 +132,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.CrlRevocationChecker void check(java.security.cert.Certificate, java.util.Collection&lt;java.lang.String&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.security.provider.certpath.CrlRevocationChecker void check(java.security.cert.Certificate, java.util.Collection&lt;java.lang.String&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.CrlRevocationChecker void verifyWithSeparateSigningKey(java.security.cert.X509Certificate, java.security.PublicKey, boolean, java.util.Set&lt;java.security.cert.X509Certificate&gt;) 0">
@@ -131,6 +176,12 @@
   <item name="sun.security.provider.certpath.ForwardBuilder java.util.Collection&lt;java.security.cert.X509Certificate&gt; getMatchingCerts(sun.security.provider.certpath.State, java.util.List&lt;java.security.cert.CertStore&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.security.provider.certpath.ForwardBuilder java.util.Collection&lt;java.security.cert.X509Certificate&gt; getMatchingCerts(sun.security.provider.certpath.State, java.util.List&lt;java.security.cert.CertStore&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.security.provider.certpath.ForwardBuilder void addCertToPath(java.security.cert.X509Certificate, java.util.LinkedList&lt;java.security.cert.X509Certificate&gt;) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.certpath.ForwardBuilder void addCertToPath(java.security.cert.X509Certificate, java.util.LinkedList&lt;java.security.cert.X509Certificate&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -143,13 +194,25 @@
   <item name="sun.security.provider.certpath.ForwardBuilder void removeFinalCertFromPath(java.util.LinkedList&lt;java.security.cert.X509Certificate&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.security.provider.certpath.ForwardBuilder void removeFinalCertFromPath(java.util.LinkedList&lt;java.security.cert.X509Certificate&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.certpath.ForwardBuilder void verifyCert(java.security.cert.X509Certificate, sun.security.provider.certpath.State, java.util.List&lt;java.security.cert.X509Certificate&gt;) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.security.provider.certpath.ForwardBuilder void verifyCert(java.security.cert.X509Certificate, sun.security.provider.certpath.State, java.util.List&lt;java.security.cert.X509Certificate&gt;) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.security.provider.certpath.ForwardBuilder.PKIXCertComparator int compare(java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.ForwardBuilder.PKIXCertComparator int compare(java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.ForwardBuilder.PKIXCertComparator int compare(java.security.cert.X509Certificate, java.security.cert.X509Certificate) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.security.provider.certpath.ForwardBuilder.PKIXCertComparator int compare(java.security.cert.X509Certificate, java.security.cert.X509Certificate) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.IndexedCollectionCertStore IndexedCollectionCertStore(java.security.cert.CertStoreParameters) 0">
@@ -218,7 +281,13 @@
   <item name="sun.security.provider.certpath.OCSPResponse.SingleResponse sun.security.provider.certpath.CertId access$100(sun.security.provider.certpath.OCSPResponse.SingleResponse) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.security.provider.certpath.PKIXCertPathValidator java.security.cert.CertPathValidatorResult engineValidate(java.security.cert.CertPath, java.security.cert.CertPathParameters) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.certpath.PKIXCertPathValidator java.security.cert.CertPathValidatorResult engineValidate(java.security.cert.CertPath, java.security.cert.CertPathParameters) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.security.provider.certpath.PKIXCertPathValidator java.security.cert.CertPathValidatorResult engineValidate(java.security.cert.CertPath, java.security.cert.CertPathParameters) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.PKIXCertPathValidator java.security.cert.CertPathValidatorResult engineValidate(java.security.cert.CertPath, java.security.cert.CertPathParameters) 1">
@@ -234,6 +303,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.PKIXCertPathValidator void populateVariables(java.security.cert.PKIXParameters) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.security.provider.certpath.PKIXMasterCertPathValidator void validate(java.security.cert.CertPath, java.util.List&lt;java.security.cert.X509Certificate&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.PKIXMasterCertPathValidator void validate(java.security.cert.CertPath, java.util.List&lt;java.security.cert.X509Certificate&gt;) 1">
@@ -284,7 +356,13 @@
   <item name="sun.security.provider.certpath.ReverseBuilder boolean isPathCompleted(java.security.cert.X509Certificate) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.security.provider.certpath.ReverseBuilder boolean isPathCompleted(java.security.cert.X509Certificate) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.certpath.ReverseBuilder java.util.Collection&lt;java.security.cert.X509Certificate&gt; getMatchingCACerts(sun.security.provider.certpath.ReverseState, java.util.List&lt;java.security.cert.CertStore&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.security.provider.certpath.ReverseBuilder java.util.Collection&lt;java.security.cert.X509Certificate&gt; getMatchingCerts(sun.security.provider.certpath.State, java.util.List&lt;java.security.cert.CertStore&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.ReverseBuilder java.util.Collection&lt;java.security.cert.X509Certificate&gt; getMatchingCerts(sun.security.provider.certpath.State, java.util.List&lt;java.security.cert.CertStore&gt;) 0">
@@ -293,13 +371,25 @@
   <item name="sun.security.provider.certpath.ReverseBuilder java.util.Collection&lt;java.security.cert.X509Certificate&gt; getMatchingEECerts(sun.security.provider.certpath.ReverseState, java.util.List&lt;java.security.cert.CertStore&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.security.provider.certpath.ReverseBuilder void addCertToPath(java.security.cert.X509Certificate, java.util.LinkedList&lt;java.security.cert.X509Certificate&gt;) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.certpath.ReverseBuilder void addCertToPath(java.security.cert.X509Certificate, java.util.LinkedList&lt;java.security.cert.X509Certificate&gt;) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.security.provider.certpath.ReverseBuilder void removeFinalCertFromPath(java.util.LinkedList&lt;java.security.cert.X509Certificate&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.ReverseBuilder void removeFinalCertFromPath(java.util.LinkedList&lt;java.security.cert.X509Certificate&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.security.provider.certpath.ReverseBuilder void verifyCert(java.security.cert.X509Certificate, sun.security.provider.certpath.State, java.util.List&lt;java.security.cert.X509Certificate&gt;) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.certpath.ReverseBuilder void verifyCert(java.security.cert.X509Certificate, sun.security.provider.certpath.State, java.util.List&lt;java.security.cert.X509Certificate&gt;) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.security.provider.certpath.ReverseBuilder.PKIXCertComparator int compare(java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.ReverseBuilder.PKIXCertComparator int compare(java.lang.Object, java.lang.Object) 0">
@@ -308,7 +398,13 @@
   <item name="sun.security.provider.certpath.ReverseBuilder.PKIXCertComparator int compare(java.security.cert.X509Certificate, java.security.cert.X509Certificate) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.security.provider.certpath.ReverseBuilder.PKIXCertComparator int compare(java.security.cert.X509Certificate, java.security.cert.X509Certificate) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.certpath.ReverseState void updateState(java.security.cert.TrustAnchor) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.security.provider.certpath.ReverseState void updateState(java.security.cert.TrustAnchor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.SunCertPathBuilder boolean anchorIsTarget(java.security.cert.TrustAnchor, java.security.cert.X509CertSelector) 0">
@@ -354,6 +450,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.SunCertPathBuilder.CertStoreComparator int compare(java.lang.Object, java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.security.provider.certpath.SunCertPathBuilder.CertStoreComparator int compare(java.lang.Object, java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.security.provider.certpath.SunCertPathBuilder.CertStoreComparator int compare(java.security.cert.CertStore, java.security.cert.CertStore) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.certpath.SunCertPathBuilder.CertStoreComparator int compare(java.security.cert.CertStore, java.security.cert.CertStore) 0">
