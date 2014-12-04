@@ -11,6 +11,7 @@ import faba.calls._
 import faba.data._
 import faba.engine._
 import faba.source._
+import org.objectweb.asm.Type
 
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.analysis.Frame
@@ -222,6 +223,21 @@ class MainProcessor extends FabaProcessor {
     try { op(p) } finally { p.close() }
   }
 
+  // todo - this is tmp solution
+  def mkNotNullParamEquation(from: Method, to: Set[Method]): Map[Key, Set[Key]] = {
+    var result = Map[Key, Set[Key]]()
+    val parameterTypes = Type.getArgumentTypes(from.methodDesc)
+    for (i <- parameterTypes.indices) {
+      val argSort = parameterTypes(i).getSort
+      val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
+      if (isReferenceArg) {
+        val fromKey = Key(from, In(i), ResolveDirection.Downward)
+        result += (fromKey -> to.map(m => Key(m, In(i), ResolveDirection.Upward)))
+      }
+    }
+    result
+  }
+
   def process(source: Source, outDir: String) {
     val pp = new PrettyPrinter(1000, 2)
     val sep = File.separatorChar
@@ -234,10 +250,18 @@ class MainProcessor extends FabaProcessor {
     if (outDir != null) {
       notNullParamsCallsResolver.resolveHierarchy()
       val resolveMap = notNullParamsCallsResolver.resolveCalls()
+      // handling of calls
       notNullParamsSolver2.bindCalls(resolveMap, Set())
+      // handling of virtual methods
+      val overridableMap = notNullParamsCallsResolver.bindOverridableMethods()
+
+      for {(from, to) <- overridableMap} {
+        val map = mkNotNullParamEquation(from, to)
+        notNullParamsSolver2.bindCalls(map, map.keys.toSet)
+      }
 
       // val notNullParams = notNullParamsSolver.solve().filterNot(p => p._2 == Values.Top)
-      val notNullParams = notNullParamsSolver2.solve().filter(p => p._1.stable && p._2 != Values.Top)
+      val notNullParams = notNullParamsSolver2.solve().filter(p => p._2 != Values.Top)
       val nullableParams = nullableParamsSolver.solve().filterNot(p => p._2 == Values.Top)
       val contracts = contractsSolver.solve()
       val nullableResults = nullableResultSolver.solve().filter(p => p._2 == Values.Null)
@@ -337,10 +361,23 @@ class MainProcessor extends FabaProcessor {
     println(s"largeOrigins        $largeOrigins")
   }
 
+  // for testing - processing parameters only
   def process(source: Source): Annotations = {
     source.process(this)
+    notNullParamsCallsResolver.resolveHierarchy()
+    val resolveMap = notNullParamsCallsResolver.resolveCalls()
+    // handling of calls
+    notNullParamsSolver2.bindCalls(resolveMap, Set())
+    // handling of virtual methods
+    val overridableMap = notNullParamsCallsResolver.bindOverridableMethods()
+
+    for {(from, to) <- overridableMap} {
+      val map = mkNotNullParamEquation(from, to)
+      notNullParamsSolver2.bindCalls(map, map.keys.toSet)
+    }
+
     val solutions01: Map[Key, Values.Value] =
-      (notNullParamsSolver.solve() ++ contractsSolver.solve()).filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
+      (notNullParamsSolver2.solve() ++ contractsSolver.solve()).filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
     val nullableSolutions =
       nullableParamsSolver.solve().filter(p => p._2 == Values.Null).keys.toSet
     AnnotationsUtil.toAnnotations(solutions01, nullableSolutions)
