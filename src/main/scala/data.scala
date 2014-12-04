@@ -329,12 +329,18 @@ object XmlUtils {
       case ResolveDirection.Upward =>
         rawKey
       case ResolveDirection.Downward =>
-        s"virtual $rawKey"
+        val access = if ((extra.access & Opcodes.ACC_ABSTRACT) != 0) "abstract " else ""
+        s"${access}virtual $rawKey"
     }
   }
 
   def realKey(keyString: String) =
-    if (keyString.startsWith("virtual ")) keyString.substring("virtual ".length) else keyString
+    if (keyString.startsWith("virtual "))
+      keyString.substring("virtual ".length)
+    else if (keyString.startsWith("abstract virtual "))
+      keyString.substring("abstract virtual ".length)
+    else
+      keyString
 
   private def returnType(method: Method, extra: MethodExtra): String =
     extra.signature match {
