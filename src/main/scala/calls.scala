@@ -180,11 +180,38 @@ class CallResolver {
     result
   }
 
-  private def isStableMethod(owner: ClassInfo, key: Key): Boolean = {
+  /**
+   * Traverses all hierarchy and for each overridable (non stable methods) constructs a set of concrete method it may resolve in runtime.
+   * @return a map from overridable methods to a set of concrete methods
+   */
+  def bindOverridableMethods(): Map[Method, Set[Method]] = {
+    println(s"${new Date()} BIND OVERRIDABLE START")
+    var result = Map[Method, Set[Method]]()
+    val size = classMethods.size
+    var processed = 0
+    for {(className, methodInfos) <- classMethods } {
+      processed += 1
+      println(s"$processed/$size")
+      for {methodInfo <- methodInfos if !isStableMethodInfo(classInfos(className), methodInfo)} {
+        val method = Method(className, methodInfo.name, methodInfo.desc)
+        val resolved = resolveDownward(method)
+        result += (method -> resolved)
+      }
+    }
+    println(s"${new Date()} BIND OVERRIDABLE END")
+    result
+  }
+
+  private def isStableMethod(owner: ClassInfo, method: Method): Boolean = {
     import Opcodes._
-    val call = key.method
-    val acc = findMethodDeclaration(key.method, classMethods.getOrElse(owner.name, Set())).map(_.access).getOrElse({/*println(s"xxx: $key");*/ 0})
-    owner.stable || (call.methodName == "<init>") || (acc & ACC_FINAL) != 0 || (acc & ACC_PRIVATE) != 0 || (acc & ACC_STATIC) != 0
+    val acc = findMethodDeclaration(method, classMethods.getOrElse(owner.name, Set())).map(_.access).getOrElse({/*println(s"xxx: $key");*/ 0})
+    owner.stable || (method.methodName == "<init>") || (acc & ACC_FINAL) != 0 || (acc & ACC_PRIVATE) != 0 || (acc & ACC_STATIC) != 0
+  }
+
+  private def isStableMethodInfo(owner: ClassInfo, method: MethodInfo): Boolean = {
+    import Opcodes._
+    val acc = method.access
+    owner.stable || (method.name == "<init>") || (acc & ACC_FINAL) != 0 || (acc & ACC_PRIVATE) != 0 || (acc & ACC_STATIC) != 0
   }
 
   private def findMethodDeclaration(call: Method, candidates: Iterable[MethodInfo]): Option[MethodInfo] =
