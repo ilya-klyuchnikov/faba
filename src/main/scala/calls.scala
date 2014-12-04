@@ -84,7 +84,7 @@ class CallResolver {
       case None =>
         return None
       case Some(methods) =>
-        for {found <- findMethodDeclaration(method, methods)}
+        for {found <- findNotAbstractMethodDeclaration(method, methods)}
           return Some(convertToMethod(found))
     }
     None
@@ -96,7 +96,7 @@ class CallResolver {
         case None =>
           return None
         case Some(methods) =>
-          for {found <- findMethodDeclaration(method, methods)}
+          for {found <- findNotAbstractMethodDeclaration(method, methods)}
             return Some(convertToMethod(found))
       }
     None
@@ -204,9 +204,12 @@ class CallResolver {
 
   private def isStableMethod(owner: ClassInfo, method: Method): Boolean = {
     import Opcodes._
-    val acc = findMethodDeclaration(method, classMethods.getOrElse(owner.name, Set())).map(_.access).getOrElse({/*println(s"xxx: $key");*/ 0})
+    val acc = findNotAbstractMethodDeclaration(method, classMethods.getOrElse(owner.name, Set())).map(_.access).getOrElse({/*println(s"xxx: $key");*/ 0})
     owner.stable || (method.methodName == "<init>") || (acc & ACC_FINAL) != 0 || (acc & ACC_PRIVATE) != 0 || (acc & ACC_STATIC) != 0
   }
+
+  private def isNotAbstractMethod(method: MethodInfo): Boolean =
+    (method.access & Opcodes.ACC_ABSTRACT) == 0
 
   private def isStableMethodInfo(owner: ClassInfo, method: MethodInfo): Boolean = {
     import Opcodes._
@@ -214,8 +217,8 @@ class CallResolver {
     owner.stable || (method.name == "<init>") || (acc & ACC_FINAL) != 0 || (acc & ACC_PRIVATE) != 0 || (acc & ACC_STATIC) != 0
   }
 
-  private def findMethodDeclaration(call: Method, candidates: Iterable[MethodInfo]): Option[MethodInfo] =
-    candidates.find {info => info.name == call.methodName && info.desc == call.methodDesc}
+  private def findNotAbstractMethodDeclaration(call: Method, candidates: Iterable[MethodInfo]): Option[MethodInfo] =
+    candidates.find {info => isNotAbstractMethod(info) && info.name == call.methodName && info.desc == call.methodDesc}
 
   /**
    * Builds a hierarchy of parents for a class in a linear order.
