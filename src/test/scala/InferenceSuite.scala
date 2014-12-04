@@ -23,23 +23,28 @@ class InferenceSuite extends FunSuite with Matchers {
       val method = Method(Type.getType(jClass).getInternalName, jMethod.getName, Type.getMethodDescriptor(jMethod))
 
       for {(anns, i) <- jMethod.getParameterAnnotations.zipWithIndex} {
-
-        val notNull = anns.exists(_.annotationType == classOf[ExpectNotNull])
+        val expected = anns.exists(_.annotationType == classOf[ExpectNotNull])
+        val actual = annotations.notNulls.contains(Key(method, In(i), ResolveDirection.Upward))
+        val expectedString = if (expected) "@NotNull" else "null"
+        val actualString = if (actual) "@NotNull" else "null"
         assert(
-          annotations.notNulls.contains(Key(method, In(i), ResolveDirection.Upward)) == notNull,
-          s"@NotNull'$jClass $jMethod #$i'"
+          actual == expected,
+          s"@NotNull'$jClass $jMethod #$i' expected: $expectedString, actual: $actualString"
         )
 
+        /*
         val expectedNullable = anns.exists(_.annotationType == classOf[ExpectNullable])
         val actualNullable: Boolean = annotations.nullable.contains(Key(method, In(i), ResolveDirection.Upward))
         assert(
           actualNullable == expectedNullable,
           s"'$jClass $jMethod #$i': ${describeSimpleMismatch(expectedNullable, actualNullable, "@Nullable")}"
-        )
+        )*/
       }
 
+      /*
       annotations.notNulls(Key(method, Out, ResolveDirection.Upward)) should equal (jMethod.getAnnotation(classOf[ExpectNotNull]) != null)
       annotations.contracts.get(Key(method, Out, ResolveDirection.Upward)) should equal (Option(jMethod.getAnnotation(classOf[ExpectContract])).map(_.value))
+      */
     }
   }
 
