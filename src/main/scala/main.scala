@@ -225,8 +225,7 @@ class MainProcessor extends FabaProcessor {
     try { op(p) } finally { p.close() }
   }
 
-  // todo - this is tmp solution
-  def mkNotNullParamEquation(from: Method, to: Set[Method]): Map[Key, Set[Key]] = {
+  def mkOverridableNotNullParamEquation(from: Method, to: Set[Method]): Map[Key, Set[Key]] = {
     var result = Map[Key, Set[Key]]()
     val parameterTypes = Type.getArgumentTypes(from.methodDesc)
     for (i <- parameterTypes.indices) {
@@ -256,9 +255,8 @@ class MainProcessor extends FabaProcessor {
       notNullParamsSolver.bindCalls(resolveMap, Set())
       // handling of virtual methods
       val overridableMap = notNullParamsCallsResolver.bindOverridableMethods()
-
       for {(from, to) <- overridableMap} {
-        val map = mkNotNullParamEquation(from, to)
+        val map = mkOverridableNotNullParamEquation(from, to)
         notNullParamsSolver.bindCalls(map, map.keys.toSet)
       }
 
@@ -374,7 +372,7 @@ class MainProcessor extends FabaProcessor {
     val overridableMap = notNullParamsCallsResolver.bindOverridableMethods()
 
     for {(from, to) <- overridableMap} {
-      val map = mkNotNullParamEquation(from, to)
+      val map = mkOverridableNotNullParamEquation(from, to)
       notNullParamsSolver.bindCalls(map, map.keys.toSet)
     }
 
