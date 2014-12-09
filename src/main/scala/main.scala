@@ -248,7 +248,7 @@ class MainProcessor extends FabaProcessor {
 
     println("solving ...")
     if (outDir != null) {
-      notNullParamsCallsResolver.resolveHierarchy()
+      notNullParamsCallsResolver.buildClassHierarchy()
       val resolveMap = notNullParamsCallsResolver.resolveCalls()
       // handling of calls
       notNullParamsSolver2.bindCalls(resolveMap, Set())
@@ -364,7 +364,7 @@ class MainProcessor extends FabaProcessor {
   // for testing - processing parameters only
   def process(source: Source): Annotations = {
     source.process(this)
-    notNullParamsCallsResolver.resolveHierarchy()
+    notNullParamsCallsResolver.buildClassHierarchy()
     val resolveMap = notNullParamsCallsResolver.resolveCalls()
     // handling of calls
     notNullParamsSolver2.bindCalls(resolveMap, Set())

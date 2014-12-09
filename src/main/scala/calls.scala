@@ -7,6 +7,7 @@ import faba.data._
 import org.objectweb.asm.Opcodes
 
 import scala.annotation.tailrec
+import scala.collection.immutable.Queue
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
@@ -18,7 +19,8 @@ import scala.collection.mutable.ListBuffer
  * @param interfaces (org.objectweb.asm.tree.ClassNode#interfaces)
  */
 case class ClassInfo(access: Int, name: String, superName: String, interfaces: List[String]) {
-  val stable = (access & Opcodes.ACC_FINAL) != 0
+  // whether a class is an interface
+  def interface_? = (access & Opcodes.ACC_INTERFACE) != 0
 }
 
 /**
@@ -55,20 +57,31 @@ class CallResolver {
   // resolved class info
   private val resolved = mutable.HashMap[String, ResolvedClassInfo]()
 
+  // fqn -> set of inheritors (for classes) / set of implementors (for interfaces)
+  private var childrenMap = Map[String, Set[String]]()
+
   /**
-   * Calculates all class inheritors of this class.
-   * Includes class itself.
-   * Doesn't include interfaces for now.
-   *
+   * calculates all class inheritors of this class/interface
    * @param className org.objectweb.asm.tree.ClassNode#name
-   * @return all concrete inheritors
+   * @return all inheritors
    */
-  private def children(className: String): Set[ResolvedClassInfo] = {
-    // TODO - cache it or build a map during resolve
-    var classes = Set[ResolvedClassInfo]()
-    for ((_, info) <- resolved if info.hierarchyLine.contains(className) || info.interfaces.contains(className))
-      classes = classes + info
-    classes
+  private def inheritors(className: String): Set[String] = {
+    @tailrec
+    def _inheritors(queue: Queue[String], queued: Set[String], acc: Set[String]): Set[String] = {
+      if (queue.isEmpty)
+        acc
+      else {
+        var queued1 = queued
+        var (current, queue1) = queue.dequeue
+        for {child <- childrenMap.getOrElse(current, Set()) if !queued(child)} {
+          queued1 = queued1 + child
+          queue1 = queue1.enqueue(child)
+        }
+        _inheritors(queue1, queued1, acc + current)
+      }
+
+    }
+    _inheritors(Queue(className), Set(className), Set())
   }
 
   /**
@@ -84,19 +97,20 @@ class CallResolver {
       case None =>
         return None
       case Some(methods) =>
-        for {found <- findNotAbstractMethodDeclaration(method, methods)}
+        for {found <- findConcreteMethodDeclaration(method, methods)}
           return Some(convertToMethod(found))
     }
     None
   }
 
+  // O(n), n - number of the methods in the hierarchy
   def resolveUpward(method: Method, ownerResolveInfo: ResolvedClassInfo): Option[Method] = {
     for {candidateOwner <- ownerResolveInfo.hierarchyLine}
       classMethods.get(candidateOwner) match {
         case None =>
           return None
         case Some(methods) =>
-          for {found <- findNotAbstractMethodDeclaration(method, methods)}
+          for {found <- findConcreteMethodDeclaration(method, methods)}
             return Some(convertToMethod(found))
       }
     None
@@ -112,9 +126,11 @@ class CallResolver {
    */
   def resolveDownward(method: Method): Set[Method] = {
     var resolvedMethods = Set[Method]()
-    for {implementation <- children(method.internalClassName)
-         resolvedMethod <- resolveUpward(method, implementation)}
-      resolvedMethods = resolvedMethods + resolvedMethod
+    for {
+      implementationName <- inheritors(method.internalClassName)
+      implementation <- resolved.get(implementationName)
+      resolvedMethod <- resolveUpward(method, implementation)
+    } resolvedMethods = resolvedMethods + resolvedMethod
     resolvedMethods
   }
 
@@ -146,10 +162,20 @@ class CallResolver {
    * Builds the "hierarchy line" of classes for each class,
    * Builds the set of interface a class implements for each class.
    */
-  def resolveHierarchy() {
-    // building class hierarchy
-    for ((className, classInfo) <- classInfos if CallUtils.notInterface(classInfo.access))
-      resolved.update(className, ResolvedClassInfo(classInfo, hierarchy(className), allInterfaces(className)))
+  def buildClassHierarchy() {
+    println(s"${new Date()} buildClassHierarchy START")
+    for ((className, classInfo) <- classInfos) {
+      if (CallUtils.notInterface(classInfo.access))
+        resolved.update(className, ResolvedClassInfo(classInfo, hierarchy(className), allInterfaces(className)))
+
+      val superName: String =
+        if (classInfo.interface_?) null else classInfo.superName
+      if (superName != null)
+        childrenMap += superName -> (childrenMap.getOrElse(superName, Set()) + classInfo.name)
+      for (interfaceName <- classInfo.interfaces)
+        childrenMap += interfaceName -> (childrenMap.getOrElse(interfaceName, Set()) + classInfo.name)
+    }
+    println(s"${new Date()} buildClassHierarchy END")
   }
 
   /**
@@ -159,7 +185,8 @@ class CallResolver {
    * @return mapping of calls into existing Upward Keys
    */
   def resolveCalls(): Map[Key, Set[Key]] = {
-    println(s"${new Date()} RESOLVE START")
+    // TODO - a cache should be built at this stage
+    println(s"${new Date()} RESOLVE calls START")
     var result = Map[Key, Set[Key]]()
     for (call <- calls) {
       val method = call.method
@@ -176,23 +203,29 @@ class CallResolver {
       }
       result += (call -> resolved.map(m => call.copy(method = m, resolveDirection = ResolveDirection.Upward)))
     }
-    println(s"${new Date()} RESOLVE END")
+    println(s"${new Date()} RESOLVE calls END")
     result
   }
 
   /**
    * Traverses all hierarchy and for each overridable (non stable methods) constructs a set of concrete method it may resolve in runtime.
+   * During this stage a set of different caches are built.
    * @return a map from overridable methods to a set of concrete methods
    */
   def bindOverridableMethods(): Map[Method, Set[Method]] = {
+    // TODO - a cache should be built at this stage
+    // this should be called first (before resolve calls)
     println(s"${new Date()} BIND OVERRIDABLE START")
     var result = Map[Method, Set[Method]]()
     val size = classMethods.size
     var processed = 0
     for {(className, methodInfos) <- classMethods } {
-      processed += 1
-      println(s"$processed/$size")
-      for {methodInfo <- methodInfos if !isStableMethodInfo(classInfos(className), methodInfo)} {
+      //processed += 1
+      //println(s"$processed/$size")
+      for {
+        // TODO - should be linear
+        methodInfo <- methodInfos if !isStableMethod(methodInfo)
+      } {
         val method = Method(className, methodInfo.name, methodInfo.desc)
         val resolved = resolveDownward(method)
         result += (method -> resolved)
@@ -202,22 +235,21 @@ class CallResolver {
     result
   }
 
-  private def isStableMethod(owner: ClassInfo, method: Method): Boolean = {
-    import Opcodes._
-    val acc = findNotAbstractMethodDeclaration(method, classMethods.getOrElse(owner.name, Set())).map(_.access).getOrElse({/*println(s"xxx: $key");*/ 0})
-    owner.stable || (method.methodName == "<init>") || (acc & ACC_FINAL) != 0 || (acc & ACC_PRIVATE) != 0 || (acc & ACC_STATIC) != 0
-  }
-
   private def isNotAbstractMethod(method: MethodInfo): Boolean =
     (method.access & Opcodes.ACC_ABSTRACT) == 0
 
-  private def isStableMethodInfo(owner: ClassInfo, method: MethodInfo): Boolean = {
+  private def isStableMethod(method: MethodInfo): Boolean = {
     import Opcodes._
-    val acc = method.access
-    owner.stable || (method.name == "<init>") || (acc & ACC_FINAL) != 0 || (acc & ACC_PRIVATE) != 0 || (acc & ACC_STATIC) != 0
+    val methodAcc = method.access
+    val classAcc = method.classInfo.access
+    (classAcc & Opcodes.ACC_FINAL) != 0 ||
+      (method.name == "<init>") ||
+      (methodAcc & ACC_FINAL) != 0 ||
+      (methodAcc & ACC_PRIVATE) != 0 ||
+      (methodAcc & ACC_STATIC) != 0
   }
 
-  private def findNotAbstractMethodDeclaration(call: Method, candidates: Iterable[MethodInfo]): Option[MethodInfo] =
+  private def findConcreteMethodDeclaration(call: Method, candidates: Iterable[MethodInfo]): Option[MethodInfo] =
     candidates.find {info => isNotAbstractMethod(info) && info.name == call.methodName && info.desc == call.methodDesc}
 
   /**
