@@ -36,8 +36,8 @@ object PurityAnalysis {
 
   val unAnalyzable = ACC_ABSTRACT | ACC_NATIVE | ACC_INTERFACE
 
-  def analyze(method: Method, methodNode: MethodNode, resolveDirection: ResolveDirection.Value): Equation[Key, Value] = {
-    val aKey = new Key(method, Out, resolveDirection)
+  def analyze(method: Method, methodNode: MethodNode): Equation[Key, Value] = {
+    val aKey = new Key(method, Out, ResolveDirection.Upward)
 
     if ((methodNode.access & unAnalyzable) != 0)
       return Equation(aKey, finalTop)

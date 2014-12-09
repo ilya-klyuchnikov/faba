@@ -33,6 +33,7 @@ class ResultAnalysis(val context: Context,
 
   val pendingStack = ResultAnalysis.sharedPendingStack
 
+  // null->... analysis is performed
   val nullAnalysis = direction match {
     case InOut(_, Values.Null) => true
     case _ => false
@@ -281,7 +282,9 @@ case class ResultInterpreter(direction: Direction, insns: InsnList, resultOrigin
     insns.indexOf(insn)
 
   // whether a null-param was dereferenced execution
-  // this flag is set ONLY for `null->?` analysis
+  // this flag is used ONLY for `null->?` analysis
+  // dereferencedParam = true if passing null to this param
+  // will cause NPE on _some_ branch of execution
   var dereferencedParam = false
   var dereferenced: Int = 0
 
@@ -444,10 +447,10 @@ case class ResultInterpreter(direction: Direction, insns: InsnList, resultOrigin
     }
     opCode match {
       case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE  if propagate_? =>
-        val stable = opCode == INVOKESTATIC || opCode == INVOKESPECIAL
         val mNode = insn.asInstanceOf[MethodInsnNode]
         val method = Method(mNode.owner, mNode.name, mNode.desc)
         val retType = Type.getReturnType(mNode.desc)
+        // TODO - extract isRefRetType/isBooleanRetType into utility methods
         val isRefRetType = retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY
         val isBooleanRetType = retType == Type.BOOLEAN_TYPE
         if (isRefRetType || isBooleanRetType) {

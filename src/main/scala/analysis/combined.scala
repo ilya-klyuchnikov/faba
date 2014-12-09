@@ -62,7 +62,7 @@ class CombinedSingleAnalysis(val context: LiteContext) {
   }
 
   def notNullParamEquation(i: Int): Equation[Key, Value] = {
-    val key = Key(method, In(i), resolveDirection)
+    val key = Key(method, In(i), ResolveDirection.Upward)
     val result: Result[Key, Value] =
       if (interpreter.dereferencedParams(i)) Final(Values.NotNull)
       else {
@@ -76,7 +76,7 @@ class CombinedSingleAnalysis(val context: LiteContext) {
   }
 
   def nullableParamEquation(i: Int): Equation[Key, Value] = {
-    val key = Key(method, In(i), resolveDirection)
+    val key = Key(method, In(i), ResolveDirection.Upward)
     val result: Result[Key, Value] =
       if (interpreter.dereferencedParams(i) || interpreter.notNullableParams(i)) Final(Values.Top)
       else {
@@ -96,7 +96,7 @@ class CombinedSingleAnalysis(val context: LiteContext) {
   }
 
   def contractEquation(paramIndex: Int, inValue: Value): Equation[Key, Value] = {
-    val key = Key(method, InOut(paramIndex, inValue), resolveDirection)
+    val key = Key(method, InOut(paramIndex, inValue), ResolveDirection.Upward)
     val result: Result[Key, Value] =
       if (exception || (inValue == Values.Null && interpreter.dereferencedParams(paramIndex)))
         Final(Values.Bot)
@@ -135,7 +135,7 @@ class CombinedSingleAnalysis(val context: LiteContext) {
   }
 
   def outContractEquation(): Equation[Key, Value] = {
-    val key = Key(method, Out, resolveDirection)
+    val key = Key(method, Out, ResolveDirection.Upward)
     val result: Result[Key, Value] =
       if (exception) Final(Values.Bot)
       else {
@@ -161,7 +161,7 @@ class CombinedSingleAnalysis(val context: LiteContext) {
   }
 
   def nullableResultEquation(): Equation[Key, Value] = {
-    val key = Key(method, Out, resolveDirection)
+    val key = Key(method, Out, ResolveDirection.Upward)
     val result: Result[Key, Value] =
       if (exception) Final(Values.Bot)
       else {

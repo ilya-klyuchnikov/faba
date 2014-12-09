@@ -49,12 +49,10 @@ case class DFSTree(preOrder: Array[Int],
  * @param method method identifier
  * @param methodNode method's bytecode
  * @param controlFlow a control flow graph of the method's bytecode
- * @param resolveDirection resolve direction
  */
 case class LiteContext(method: Method,
                        methodNode: MethodNode,
-                       controlFlow: ControlFlowGraph,
-                       resolveDirection: ResolveDirection.Value)
+                       controlFlow: ControlFlowGraph)
 
 /**
  * Analysis context. Used in complex analyses.
@@ -62,13 +60,11 @@ case class LiteContext(method: Method,
  * @param method method identifier
  * @param methodNode method's bytecode
  * @param controlFlow a control flow graph of the method's bytecode
- * @param resolveDirection resolve direction
  * @param dfsTree method's depths-first search tree
  */
 case class Context(method: Method,
                    methodNode: MethodNode,
                    controlFlow: ControlFlowGraph,
-                   resolveDirection: ResolveDirection.Value,
                    dfsTree: DFSTree)
 
 /**
@@ -201,8 +197,8 @@ abstract class StagedScAnalysis {
   val direction: Direction
 
   import context._
-
-  val aKey = Key(method, direction, resolveDirection)
+  // specification (index) equation is valid for Upward resolve direction only
+  val aKey = Key(method, direction, ResolveDirection.Upward)
 
   /**
    * Performs one step of analysis. The implied result of this method is side-effect.

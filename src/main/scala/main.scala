@@ -19,6 +19,9 @@ import org.objectweb.asm.tree.analysis.Frame
 import scala.collection.mutable.ListBuffer
 import scala.xml.PrettyPrinter
 
+// TODO - current phase is migration to hierarchy support,
+// after this migration is done there should be exactly one call resolver for all solvers
+// the caveat: think how to handle calls
 class MainProcessor extends FabaProcessor {
 
   val notNullParamsCallsResolver = new CallResolver()
@@ -98,9 +101,9 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def purityEquation(method: Method, methodNode: MethodNode, resolveDirection: ResolveDirection.Value) = {
+  override def purityEquation(method: Method, methodNode: MethodNode) = {
     val start = System.nanoTime()
-    val result = super.purityEquation(method, methodNode, resolveDirection)
+    val result = super.purityEquation(method, methodNode)
     purityTime += System.nanoTime() - start
     result
   }
@@ -173,9 +176,9 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, origins: Origins, resolveDirection: ResolveDirection.Value, jsr: Boolean) = {
+  override def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, origins: Origins, jsr: Boolean) = {
     val start = System.nanoTime()
-    val result = super.nullableResultEquation(className, methodNode, method, origins, resolveDirection, jsr)
+    val result = super.nullableResultEquation(className, methodNode, method, origins, jsr)
     nullableResultTime += System.nanoTime() - start
     result
   }
