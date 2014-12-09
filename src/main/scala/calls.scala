@@ -216,7 +216,7 @@ class CallResolver {
     println(s"${new Date()} BIND OVERRIDABLE START")
     var result = Map[Method, Set[Method]]()
     for {(className, methodInfos) <- classMethods } {
-      for {methodInfo <- methodInfos if !isOverridableMethod(methodInfo)} {
+      for {methodInfo <- methodInfos if isEffectivelyOverridableMethod(methodInfo)} {
         val method = Method(className, methodInfo.name, methodInfo.desc)
         val resolved = resolveDownward(method)
         result += (method -> resolved)
@@ -229,17 +229,14 @@ class CallResolver {
   private def isNotAbstractMethod(method: MethodInfo): Boolean =
     (method.access & Opcodes.ACC_ABSTRACT) == 0
 
-  // TODO - currently this is "effectively" overridable
-  // TODO - migrate to "invoked via virtual" call
-  private def isOverridableMethod(method: MethodInfo): Boolean = {
+  private def isEffectivelyOverridableMethod(method: MethodInfo): Boolean = {
     import Opcodes._
     val methodAcc = method.access
-    val classAcc = method.classInfo.access
-    (classAcc & Opcodes.ACC_FINAL) != 0 ||
-      (method.name == "<init>") ||
-      (methodAcc & ACC_FINAL) != 0 ||
-      (methodAcc & ACC_PRIVATE) != 0 ||
-      (methodAcc & ACC_STATIC) != 0
+    (method.name != "<init>") &&
+      (methodAcc & ACC_PRIVATE) == 0 &&
+      (methodAcc & ACC_STATIC) == 0 &&
+      (methodAcc & ACC_FINAL) == 0 &&
+      (method.classInfo.access & ACC_FINAL) == 0
   }
 
   private def findConcreteMethodDeclaration(call: Method, candidates: Iterable[MethodInfo]): Option[MethodInfo] =
