@@ -213,19 +213,10 @@ class CallResolver {
    * @return a map from overridable methods to a set of concrete methods
    */
   def bindOverridableMethods(): Map[Method, Set[Method]] = {
-    // TODO - a cache should be built at this stage
-    // this should be called first (before resolve calls)
     println(s"${new Date()} BIND OVERRIDABLE START")
     var result = Map[Method, Set[Method]]()
-    val size = classMethods.size
-    var processed = 0
     for {(className, methodInfos) <- classMethods } {
-      //processed += 1
-      //println(s"$processed/$size")
-      for {
-        // TODO - should be linear
-        methodInfo <- methodInfos if !isStableMethod(methodInfo)
-      } {
+      for {methodInfo <- methodInfos if !isOverridableMethod(methodInfo)} {
         val method = Method(className, methodInfo.name, methodInfo.desc)
         val resolved = resolveDownward(method)
         result += (method -> resolved)
@@ -238,7 +229,9 @@ class CallResolver {
   private def isNotAbstractMethod(method: MethodInfo): Boolean =
     (method.access & Opcodes.ACC_ABSTRACT) == 0
 
-  private def isStableMethod(method: MethodInfo): Boolean = {
+  // TODO - currently this is "effectively" overridable
+  // TODO - migrate to "invoked via virtual" call
+  private def isOverridableMethod(method: MethodInfo): Boolean = {
     import Opcodes._
     val methodAcc = method.access
     val classAcc = method.classInfo.access
