@@ -341,6 +341,10 @@ class MainProcessor extends FabaProcessor {
       // purity resolver
       purityCallsResolver.buildClassHierarchy()
       puritySolver.bindCalls(purityCallsResolver.resolveCalls(), Set())
+      for {(from, to) <- purityCallsResolver.bindOverridableMethods()} {
+        val map = mkOverridableOutEquation(from, to)
+        puritySolver.bindCalls(map, map.keys.toSet)
+      }
 
       // solving everything
       val notNullParams = notNullParamsSolver.solve().filter(p => p._2 != Values.Top)
