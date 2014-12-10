@@ -152,6 +152,7 @@ trait Solver[K <: PolymorphicId[K], V] {
   }
 }
 
+// TODO - migrate everything to StagedSolver
 /**
  * Solver of equations over lattices. Solving is performed simply by substitution.
  *
@@ -256,7 +257,9 @@ class NullableResultSimpleSolver[K <: PolymorphicId[K], V](idle: Boolean, lattic
   override def mkUnstableValue(v: V) = lattice.bot
 }
 
-class StagedHierarchySolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice: Lattice[V]) extends Solver[K, V] {
+class StagedHierarchySolver[K <: PolymorphicId[K], V](val idleMode: Boolean,
+                                                      val lattice: Lattice[V],
+                                                      val defaultResolveValue: V) extends Solver[K, V] {
   type Binding = (K, V)
 
   // k -> (equations dependent on k)
@@ -332,18 +335,17 @@ class StagedHierarchySolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val
     // this is about UPWARD keys on the left absent from indexing phase
     // and about DOWNWARD keys on the left
     keys ++= apiKeys
-    for ((call, resolveInfo) <- resolveMap) {
+    for ((call, resolveInfo) <- resolveMap)
       if (resolveInfo == Set(call)) {
         // nothing - method is resolved to itself
       }
       else if (resolveInfo.isEmpty) {
-        addCallEquation(Equation(call, Final(lattice.top)))
+        addCallEquation(Equation(call, Final(defaultResolveValue)))
       }
       else {
         val sop: SumOfProducts[K, V] = resolveInfo.map(k => Product(lattice.top, Set(k)))
         addCallEquation(Equation(call, Pending(sop)))
       }
-    }
   }
 
   def solve(): Map[K, V] = {

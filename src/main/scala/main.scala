@@ -25,13 +25,33 @@ import scala.xml.PrettyPrinter
 class MainProcessor extends FabaProcessor {
 
   val notNullParamsCallsResolver = new CallResolver()
-  val notNullParamsSolver = new StagedHierarchySolver[Key, Values.Value](idle, Lattice(Values.NotNull, Values.Top))
-  val nullableParamsSolver = new SimpleSolver[Key, Values.Value](idle, Lattice(Values.Null, Values.Top))
+  val notNullParamsSolver =
+    new StagedHierarchySolver[Key, Values.Value](idle, Lattice(Values.NotNull, Values.Top), Values.Top)
+
+  val nullableParamsCallResolver = new CallResolver()
+  val nullableParamsSolver =
+    new StagedHierarchySolver[Key, Values.Value](idle, Lattice(Values.Null, Values.Top), Values.Top)
 
   val contractsCallsResolver = new CallResolver()
-  val contractsSolver = new StagedHierarchySolver[Key, Values.Value](idle, Lattice(Values.Bot, Values.Top))
-  val nullableResultSolver = new NullableResultSimpleSolver[Key, Values.Value](idle, Lattice(Values.Bot, Values.Null))
-  val puritySolver = new SimpleSolver[Key, Values.Value](idle, Lattice(Values.Pure, Values.Top))
+  val contractsSolver =
+    new StagedHierarchySolver[Key, Values.Value](idle, Lattice(Values.Bot, Values.Top), Values.Top)
+
+  val nullableResultCallsResolver = new CallResolver()
+  // note that defaultResolveValue is bottom here!!
+  val nullableResultSolver =
+    new StagedHierarchySolver[Key, Values.Value](idle, Lattice(Values.Bot, Values.Null), Values.Bot)
+
+  val purityCallsResolver = new CallResolver()
+  val puritySolver =
+    new StagedHierarchySolver[Key, Values.Value](idle, Lattice(Values.Pure, Values.Top), Values.Top)
+
+  val resolvers = List(
+    notNullParamsCallsResolver,
+    nullableParamsCallResolver,
+    contractsCallsResolver,
+    nullableResultCallsResolver,
+    purityCallsResolver
+  )
 
   var notNullParamsTime: Long = 0
   var nullableParamsTime: Long = 0
@@ -192,43 +212,49 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def handlePurityEquation(eq: Equation[Key, Value]): Unit =
-    () //puritySolver.addEquation(eq)
+  override def handlePurityEquation(eq: Equation[Key, Value]) {
+    puritySolver.addMethodEquation(eq)
+    puritySolver.getCalls(eq).foreach(purityCallsResolver.addCall)
+  }
 
   override def handleNotNullParamEquation(eq: Equation[Key, Value]) {
-    //notNullParamsSolver.addMethodEquation(eq)
-    //notNullParamsSolver.getCalls(eq).foreach(notNullParamsCallsResolver.addCall)
+    notNullParamsSolver.addMethodEquation(eq)
+    notNullParamsSolver.getCalls(eq).foreach(notNullParamsCallsResolver.addCall)
   }
 
-  override def handleNullableParamEquation(eq: Equation[Key, Value]): Unit =
-    () // if (processNullableParameters) nullableParamsSolver.addEquation(eq)
+  override def handleNullableParamEquation(eq: Equation[Key, Value]) {
+    if (processNullableParameters) {
+      nullableParamsSolver.addMethodEquation(eq)
+      nullableParamsSolver.getCalls(eq).foreach(nullableParamsCallResolver.addCall)
+    }
+  }
 
-  override def handleNotNullContractEquation(eq: Equation[Key, Value]): Unit = {
+  override def handleNotNullContractEquation(eq: Equation[Key, Value]) {
     contractsSolver.addMethodEquation(eq)
     contractsSolver.getCalls(eq).foreach(contractsCallsResolver.addCall)
   }
 
-  override def handleNullContractEquation(eq: Equation[Key, Value]): Unit = {
+  override def handleNullContractEquation(eq: Equation[Key, Value]) {
     contractsSolver.addMethodEquation(eq)
     contractsSolver.getCalls(eq).foreach(contractsCallsResolver.addCall)
   }
 
-  override def handleOutContractEquation(eq: Equation[Key, Value]): Unit = {
+  override def handleOutContractEquation(eq: Equation[Key, Value]) {
     contractsSolver.addMethodEquation(eq)
     contractsSolver.getCalls(eq).foreach(contractsCallsResolver.addCall)
   }
 
-  override def handleNullableResultEquation(eq: Equation[Key, Value]): Unit =
-    () //nullableResultSolver.addEquation(eq)
+  override def handleNullableResultEquation(eq: Equation[Key, Value]) {
+    nullableResultSolver.addMethodEquation(eq)
+    nullableResultSolver.getCalls(eq).foreach(nullableResultCallsResolver.addCall)
+  }
 
-  override def mapClassInfo(classInfo: ClassInfo): Unit = {
-    notNullParamsCallsResolver.addClassDeclaration(classInfo)
-    contractsCallsResolver.addClassDeclaration(classInfo)
+  override def mapClassInfo(classInfo: ClassInfo) {
+    resolvers.foreach(_.addClassDeclaration(classInfo))
   }
 
   override def mapMethodInfo(methodInfo: MethodInfo) {
-    notNullParamsCallsResolver.addMethodDeclaration(methodInfo)
-    contractsCallsResolver.addMethodDeclaration(methodInfo)
+    resolvers.foreach(_.addMethodDeclaration(methodInfo))
   }
 
   def printToFile(f: File)(op: PrintWriter => Unit) {
@@ -266,15 +292,30 @@ class MainProcessor extends FabaProcessor {
       notNullParamsCallsResolver.buildClassHierarchy()
       // handling of calls
       notNullParamsSolver.bindCalls(notNullParamsCallsResolver.resolveCalls(), Set())
+
+      /*
       // handling of overridable methods
       for {(from, to) <- notNullParamsCallsResolver.bindOverridableMethods()} {
         val map = mkOverridableNotNullParamEquation(from, to)
         notNullParamsSolver.bindCalls(map, map.keys.toSet)
       }
+      */
+
+      // handling nullableParams
+      nullableParamsCallResolver.buildClassHierarchy()
+      nullableParamsSolver.bindCalls(nullableParamsCallResolver.resolveCalls(), Set())
 
       // handling hierarchy for Result analysis
       contractsCallsResolver.buildClassHierarchy()
       contractsSolver.bindCalls(contractsCallsResolver.resolveCalls(), Set())
+
+      // nullable Result
+      nullableResultCallsResolver.buildClassHierarchy()
+      nullableResultSolver.bindCalls(nullableResultCallsResolver.resolveCalls(), Set())
+
+      // purity resolver
+      purityCallsResolver.buildClassHierarchy()
+      puritySolver.bindCalls(purityCallsResolver.resolveCalls(), Set())
 
       // solving everything
       val notNullParams = notNullParamsSolver.solve().filter(p => p._2 != Values.Top)
