@@ -685,6 +685,21 @@
   <item name="abstract virtual javax.xml.bind.DatatypeConverterInterface int parseUnsignedShort(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.bind.DatatypeConverterInterface java.lang.String parseAnySimpleType(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.xml.bind.DatatypeConverterInterface java.lang.String parseString(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.xml.bind.DatatypeConverterInterface java.lang.String printAnySimpleType(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual javax.xml.bind.DatatypeConverterInterface java.lang.String printBase64Binary(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -692,6 +707,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.xml.bind.DatatypeConverterInterface java.lang.String printBoolean(boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.xml.bind.DatatypeConverterInterface java.lang.String printByte(byte)">
@@ -741,6 +759,11 @@
   </item>
   <item name="abstract virtual javax.xml.bind.DatatypeConverterInterface java.lang.String printShort(short)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.bind.DatatypeConverterInterface java.lang.String printString(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual javax.xml.bind.DatatypeConverterInterface java.lang.String printTime(java.util.Calendar)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -946,6 +969,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.xml.bind.JAXBElement T getValue()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.xml.bind.JAXBElement boolean isGlobalScope()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -961,12 +989,27 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.xml.bind.JAXBElement java.lang.Class getScope()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.xml.bind.JAXBElement java.lang.Class&lt;T&gt; getDeclaredType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.xml.bind.JAXBElement java.lang.Class&lt;T&gt; getDeclaredType()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="javax.xml.bind.JAXBElement javax.xml.namespace.QName getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.xml.bind.JAXBElement javax.xml.namespace.QName getName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -981,7 +1024,22 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.xml.bind.JAXBException java.lang.String getErrorCode()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.xml.bind.JAXBException java.lang.Throwable getCause()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.xml.bind.JAXBException java.lang.Throwable getCause()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.xml.bind.JAXBException java.lang.Throwable getLinkedException()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1003,6 +1061,11 @@
   </item>
   <item name="javax.xml.bind.JAXBPermission JAXBPermission(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.bind.Marshaller javax.xml.bind.ValidationEventHandler getEventHandler()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual javax.xml.bind.Marshaller org.w3c.dom.Node getNode(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1110,12 +1173,22 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.xml.bind.TypeConstraintException java.lang.String getErrorCode()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.xml.bind.TypeConstraintException java.lang.String getErrorCode()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="javax.xml.bind.TypeConstraintException java.lang.Throwable getLinkedException()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.xml.bind.TypeConstraintException java.lang.Throwable getLinkedException()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1194,6 +1267,36 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.xml.bind.Unmarshaller.Listener void beforeUnmarshal(java.lang.Object, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.xml.bind.ValidationEvent java.lang.String getMessage()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.xml.bind.ValidationEvent java.lang.Throwable getLinkedException()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.xml.bind.ValidationEvent javax.xml.bind.ValidationEventLocator getLocator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.xml.bind.ValidationEventLocator java.lang.Object getObject()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.xml.bind.ValidationEventLocator java.net.URL getURL()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.xml.bind.ValidationEventLocator org.w3c.dom.Node getNode()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>

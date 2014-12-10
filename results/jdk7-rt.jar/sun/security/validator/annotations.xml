@@ -185,6 +185,11 @@
   <item name="sun.security.validator.Validator java.security.cert.X509Certificate[] validate(java.security.cert.X509Certificate[], java.util.Collection&lt;java.security.cert.X509Certificate&gt;, java.security.AlgorithmConstraints, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual sun.security.validator.Validator java.util.Collection&lt;java.security.cert.X509Certificate&gt; getTrustedCertificates()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.security.validator.Validator sun.security.validator.Validator getInstance(java.lang.String, java.lang.String, java.security.KeyStore) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -212,7 +217,17 @@
   <item name="sun.security.validator.Validator sun.security.validator.Validator getInstance(java.lang.String, java.lang.String, java.util.Collection&lt;java.security.cert.X509Certificate&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.security.validator.ValidatorException java.lang.Object getErrorType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.security.validator.ValidatorException java.lang.Object getErrorType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.security.validator.ValidatorException java.security.cert.X509Certificate getErrorCertificate()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>

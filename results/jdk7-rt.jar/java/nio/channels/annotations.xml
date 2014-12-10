@@ -466,6 +466,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.nio.channels.FileChannel.MapMode java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.nio.channels.FileLock boolean isShared()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -480,6 +485,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.channels.FileLock java.nio.channels.Channel acquiredBy()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.nio.channels.FileLock java.nio.channels.Channel acquiredBy()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -511,6 +521,21 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual java.nio.channels.MembershipKey java.net.InetAddress group()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual java.nio.channels.MembershipKey java.net.InetAddress sourceAddress()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual java.nio.channels.MembershipKey java.net.NetworkInterface networkInterface()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual java.nio.channels.MembershipKey java.nio.channels.MembershipKey block(java.net.InetAddress)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -519,6 +544,11 @@
   </item>
   <item name="abstract virtual java.nio.channels.MembershipKey java.nio.channels.MembershipKey unblock(java.net.InetAddress)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.nio.channels.MembershipKey java.nio.channels.MulticastChannel channel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual java.nio.channels.MulticastChannel java.nio.channels.MembershipKey join(java.net.InetAddress, java.net.NetworkInterface) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -547,6 +577,11 @@
   <item name="abstract virtual java.nio.channels.NetworkChannel java.nio.channels.NetworkChannel setOption(java.net.SocketOption&lt;T&gt;, T)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.nio.channels.NetworkChannel java.util.Set&lt;java.net.SocketOption&lt;?&gt;&gt; supportedOptions()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.nio.channels.Pipe Pipe()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -554,6 +589,16 @@
   </item>
   <item name="java.nio.channels.Pipe java.nio.channels.Pipe open()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.nio.channels.Pipe java.nio.channels.Pipe.SinkChannel sink()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual java.nio.channels.Pipe java.nio.channels.Pipe.SourceChannel source()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.nio.channels.Pipe.SinkChannel int validOps()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -571,11 +616,21 @@
   <item name="abstract virtual java.nio.channels.ScatteringByteChannel long read(java.nio.ByteBuffer[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.nio.channels.SelectableChannel java.lang.Object blockingLock()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual java.nio.channels.SelectableChannel java.nio.channels.SelectableChannel configureBlocking(boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual java.nio.channels.SelectableChannel java.nio.channels.SelectionKey keyFor(java.nio.channels.Selector) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual java.nio.channels.SelectableChannel java.nio.channels.SelectionKey keyFor(java.nio.channels.Selector)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.nio.channels.SelectableChannel java.nio.channels.SelectionKey register(java.nio.channels.Selector, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -583,13 +638,28 @@
   <item name="abstract virtual java.nio.channels.SelectableChannel java.nio.channels.SelectionKey register(java.nio.channels.Selector, int, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.nio.channels.SelectableChannel java.nio.channels.spi.SelectorProvider provider()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.nio.channels.SelectionKey java.lang.Object attachment()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual java.nio.channels.SelectionKey java.nio.channels.SelectableChannel channel()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="abstract virtual java.nio.channels.SelectionKey java.nio.channels.SelectionKey interestOps(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.nio.channels.SelectionKey java.nio.channels.Selector selector()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.nio.channels.Selector Selector()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -601,6 +671,11 @@
   </item>
   <item name="abstract virtual java.nio.channels.Selector java.nio.channels.Selector wakeup()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.nio.channels.Selector java.nio.channels.spi.SelectorProvider provider()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.nio.channels.ServerSocketChannel int validOps()">
     <annotation name="org.jetbrains.annotations.Contract">

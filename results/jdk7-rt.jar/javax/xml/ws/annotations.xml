@@ -5,6 +5,21 @@
   <item name="abstract virtual javax.xml.ws.BindingProvider T getEndpointReference(java.lang.Class&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.ws.BindingProvider java.util.Map&lt;java.lang.String,java.lang.Object&gt; getRequestContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.xml.ws.BindingProvider java.util.Map&lt;java.lang.String,java.lang.Object&gt; getResponseContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.xml.ws.BindingProvider javax.xml.ws.Binding getBinding()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual javax.xml.ws.Dispatch java.util.concurrent.Future&lt;?&gt; invokeAsync(T, javax.xml.ws.AsyncHandler&lt;T&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -22,8 +37,28 @@
   <item name="abstract virtual javax.xml.ws.Endpoint T getEndpointReference(java.lang.Class&lt;T&gt;, org.w3c.dom.Element...) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual javax.xml.ws.Endpoint java.lang.Object getImplementor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.xml.ws.Endpoint java.util.List&lt;javax.xml.transform.Source&gt; getMetadata()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual javax.xml.ws.Endpoint java.util.Map&lt;java.lang.String,java.lang.Object&gt; getProperties()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.ws.Endpoint java.util.concurrent.Executor getExecutor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.xml.ws.Endpoint javax.xml.ws.Binding getBinding()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.xml.ws.Endpoint javax.xml.ws.Endpoint create(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -130,6 +165,11 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.ws.Response java.util.Map&lt;java.lang.String,java.lang.Object&gt; getContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.xml.ws.Service Service(java.net.URL, javax.xml.namespace.QName) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -213,7 +253,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.xml.ws.Service java.util.concurrent.Executor getExecutor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.xml.ws.Service javax.xml.namespace.QName getServiceName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.xml.ws.Service javax.xml.namespace.QName getServiceName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -344,6 +394,9 @@
     </annotation>
   </item>
   <item name="abstract virtual javax.xml.ws.WebServiceFeature java.lang.String getID()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.xml.ws.WebServicePermission WebServicePermission(java.lang.String) 0">

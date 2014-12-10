@@ -41,6 +41,11 @@
   <item name="com.sun.xml.internal.ws.api.BindingID com.sun.xml.internal.ws.api.BindingID.SOAPHTTPImpl customize(java.lang.String, com.sun.xml.internal.ws.api.BindingID.SOAPHTTPImpl)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.xml.internal.ws.api.BindingID com.sun.xml.internal.ws.api.SOAPVersion getSOAPVersion()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.api.BindingID com.sun.xml.internal.ws.api.WSBinding createBinding()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -73,13 +78,16 @@
       <val val="value=&quot;_,!null-&gt;!null;_,null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
-  <item name="com.sun.xml.internal.ws.api.BindingID java.lang.String getTransport()">
+  <item name="virtual com.sun.xml.internal.ws.api.BindingID java.lang.String getTransport()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.xml.internal.ws.api.BindingID java.lang.String getTransport()">
+  <item name="com.sun.xml.internal.ws.api.BindingID java.lang.String getTransport()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.BindingID.1 com.sun.xml.internal.ws.api.pipe.Codec createEncoder(com.sun.xml.internal.ws.api.WSBinding)">
@@ -94,6 +102,16 @@
     </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.api.BindingID.Impl com.sun.xml.internal.ws.api.SOAPVersion getSOAPVersion()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.xml.internal.ws.api.BindingID.Impl com.sun.xml.internal.ws.api.SOAPVersion getSOAPVersion()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.xml.internal.ws.api.BindingID.Impl java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -170,6 +188,11 @@
   <item name="com.sun.xml.internal.ws.api.PropertySet boolean supports(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual com.sun.xml.internal.ws.api.PropertySet com.sun.xml.internal.ws.api.PropertySet.PropertyMap getPropertyMap()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.api.PropertySet java.lang.Object get(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -188,7 +211,17 @@
   <item name="com.sun.xml.internal.ws.api.PropertySet.1 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.xml.internal.ws.api.PropertySet.2 java.util.Set&lt;java.util.Map.Entry&lt;java.lang.String,java.lang.Object&gt;&gt; entrySet()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.api.PropertySet.2 java.util.Set&lt;java.util.Map.Entry&lt;java.lang.String,java.lang.Object&gt;&gt; entrySet()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.xml.internal.ws.api.PropertySet.Accessor java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -253,6 +286,21 @@
   <item name="abstract virtual com.sun.xml.internal.ws.api.WSBinding boolean isFeatureEnabled(java.lang.Class&lt;? extends javax.xml.ws.WebServiceFeature&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.xml.internal.ws.api.WSBinding com.sun.xml.internal.ws.api.BindingID getBindingId()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.xml.internal.ws.api.WSBinding com.sun.xml.internal.ws.api.SOAPVersion getSOAPVersion()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.xml.internal.ws.api.WSBinding com.sun.xml.internal.ws.api.WSFeatureList getFeatures()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual com.sun.xml.internal.ws.api.WSFeatureList F get(java.lang.Class&lt;F&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -296,6 +344,11 @@
   </item>
   <item name="com.sun.xml.internal.ws.api.WSService com.sun.xml.internal.ws.api.WSService create(javax.xml.namespace.QName)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.xml.internal.ws.api.WSService com.sun.xml.internal.ws.api.server.Container getContainer()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual com.sun.xml.internal.ws.api.WSService javax.xml.ws.Dispatch&lt;T&gt; createDispatch(javax.xml.namespace.QName, com.sun.xml.internal.ws.api.addressing.WSEndpointReference, java.lang.Class&lt;T&gt;, javax.xml.ws.Service.Mode, javax.xml.ws.WebServiceFeature...) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>

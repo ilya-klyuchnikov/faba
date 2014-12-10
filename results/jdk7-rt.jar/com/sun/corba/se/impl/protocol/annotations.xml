@@ -13,6 +13,11 @@
   <item name="com.sun.corba.se.impl.protocol.BootstrapServerRequestDispatcher com.sun.corba.se.spi.ior.IOR locate(com.sun.corba.se.spi.ior.ObjectKey) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.BootstrapServerRequestDispatcher com.sun.corba.se.spi.ior.IOR locate(com.sun.corba.se.spi.ior.ObjectKey)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.protocol.BootstrapServerRequestDispatcher com.sun.corba.se.spi.ior.IOR locate(com.sun.corba.se.spi.ior.ObjectKey)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
@@ -80,12 +85,22 @@
   <item name="virtual com.sun.corba.se.impl.protocol.CorbaClientDelegateImpl boolean is_local(org.omg.CORBA.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaClientDelegateImpl com.sun.corba.se.pept.broker.Broker getBroker()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaClientDelegateImpl com.sun.corba.se.pept.broker.Broker getBroker()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaClientDelegateImpl com.sun.corba.se.pept.transport.ContactInfoList getContactInfoList()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaClientDelegateImpl com.sun.corba.se.pept.transport.ContactInfoList getContactInfoList()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -134,9 +149,19 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaClientDelegateImpl org.omg.CORBA.ORB orb(org.omg.CORBA.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaClientDelegateImpl org.omg.CORBA.Object duplicate(org.omg.CORBA.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;!null;null-&gt;null&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaClientDelegateImpl org.omg.CORBA.Object duplicate(org.omg.CORBA.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="virtual com.sun.corba.se.impl.protocol.CorbaClientDelegateImpl org.omg.CORBA.Request create_request(org.omg.CORBA.Object, org.omg.CORBA.Context, java.lang.String, org.omg.CORBA.NVList, org.omg.CORBA.NamedValue) 3">
@@ -381,7 +406,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaInvocationInfo com.sun.corba.se.pept.protocol.ClientRequestDispatcher getClientRequestDispatcher()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaInvocationInfo com.sun.corba.se.pept.protocol.MessageMediator getMessageMediator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaInvocationInfo com.sun.corba.se.pept.protocol.MessageMediator getMessageMediator()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -392,6 +427,11 @@
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaInvocationInfo java.util.Iterator getContactInfoListIterator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaInvocationInfo java.util.Iterator getContactInfoListIterator()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -493,6 +533,16 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.impl.protocol.giopmsgheaders.LocateReplyMessage getLocateReplyHeader()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.impl.protocol.giopmsgheaders.Message getDispatchHeader()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.impl.protocol.giopmsgheaders.Message getDispatchHeader()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -503,12 +553,32 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.impl.protocol.giopmsgheaders.ReplyMessage getReplyHeader()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.impl.protocol.giopmsgheaders.RequestMessage getRequestHeader()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.impl.protocol.giopmsgheaders.RequestMessage getRequestHeader()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.pept.broker.Broker getBroker()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.pept.broker.Broker getBroker()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.pept.encoding.InputObject getInputObject()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -526,7 +596,22 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.pept.encoding.OutputObject getOutputObject()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.pept.transport.Connection getConnection()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.pept.transport.Connection getConnection()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.pept.transport.ContactInfo getContactInfo()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -537,6 +622,16 @@
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.spi.ior.IOR getForwardedIOR()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.spi.ior.IOR getForwardedIOR()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.spi.ior.iiop.GIOPVersion getGIOPVersion()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -679,9 +774,22 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.spi.protocol.CorbaProtocolHandler getProtocolHandler()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.spi.servicecontext.ServiceContexts getReplyServiceContexts()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.spi.servicecontext.ServiceContexts getReplyServiceContexts()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl com.sun.corba.se.spi.servicecontext.ServiceContexts getRequestServiceContexts()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -727,6 +835,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl java.lang.String getOperationName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl java.lang.String opAndId(com.sun.corba.se.spi.protocol.CorbaMessageMediator) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -738,6 +851,11 @@
   </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl java.lang.String opAndId(com.sun.corba.se.spi.protocol.CorbaMessageMediator)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl java.nio.ByteBuffer getDispatchBuffer()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl java.nio.ByteBuffer getDispatchBuffer()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1120,6 +1238,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual com.sun.corba.se.impl.protocol.GetInterface java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.protocol.INSServerRequestDispatcher INSServerRequestDispatcher(com.sun.corba.se.spi.orb.ORB) 0">
@@ -1214,6 +1335,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual com.sun.corba.se.impl.protocol.IsA java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.protocol.JIDLLocalCRDImpl JIDLLocalCRDImpl(com.sun.corba.se.spi.orb.ORB, int, com.sun.corba.se.spi.ior.IOR) 0">
@@ -1295,6 +1419,11 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.corba.se.impl.protocol.LocalClientRequestDispatcherBase byte[] getObjectId()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.LocalClientRequestDispatcherBase byte[] getObjectId()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1382,13 +1511,16 @@
   <item name="virtual com.sun.corba.se.impl.protocol.NonExistent com.sun.corba.se.spi.protocol.CorbaMessageMediator invoke(java.lang.Object, com.sun.corba.se.spi.protocol.CorbaMessageMediator, byte[], com.sun.corba.se.spi.oa.ObjectAdapter)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.corba.se.impl.protocol.NonExistent java.lang.String getName()">
+  <item name="virtual com.sun.corba.se.impl.protocol.NonExistent java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.corba.se.impl.protocol.NonExistent java.lang.String getName()">
+  <item name="com.sun.corba.se.impl.protocol.NonExistent java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.protocol.NotExistent NotExistent()">
@@ -1403,6 +1535,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual com.sun.corba.se.impl.protocol.NotExistent java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.protocol.NotLocalLocalCRDImpl NotLocalLocalCRDImpl()">
@@ -1449,6 +1584,11 @@
   </item>
   <item name="virtual com.sun.corba.se.impl.protocol.NotLocalLocalCRDImpl org.omg.CORBA.portable.ServantObject servant_preinvoke(org.omg.CORBA.Object, java.lang.String, java.lang.Class) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.NotLocalLocalCRDImpl org.omg.CORBA.portable.ServantObject servant_preinvoke(org.omg.CORBA.Object, java.lang.String, java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.protocol.NotLocalLocalCRDImpl org.omg.CORBA.portable.ServantObject servant_preinvoke(org.omg.CORBA.Object, java.lang.String, java.lang.Class)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1513,6 +1653,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.RequestDispatcherRegistryImpl java.util.Set getObjectAdapterFactories()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.protocol.ServantCacheLocalCRDBase ServantCacheLocalCRDBase(com.sun.corba.se.spi.orb.ORB, int, com.sun.corba.se.spi.ior.IOR) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1567,6 +1712,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual com.sun.corba.se.impl.protocol.SpecialMethod java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
 </root>

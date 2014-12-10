@@ -91,6 +91,11 @@
   <item name="java.util.jar.Attributes.Name boolean isValid(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual java.util.jar.Attributes.Name java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.util.jar.Attributes.Name java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -285,6 +290,11 @@
     </annotation>
   </item>
   <item name="java.util.jar.JarInputStream java.util.jar.Manifest getManifest()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.util.jar.JarInputStream java.util.jar.Manifest getManifest()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -620,7 +630,17 @@
   <item name="java.util.jar.Manifest java.lang.String parseName(byte[], int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.util.jar.Manifest java.util.Map&lt;java.lang.String,java.util.jar.Attributes&gt; getEntries()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.util.jar.Manifest java.util.Map&lt;java.lang.String,java.util.jar.Attributes&gt; getEntries()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.util.jar.Manifest java.util.jar.Attributes getMainAttributes()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -647,11 +667,21 @@
   <item name="java.util.jar.Pack200 java.lang.Object newInstance(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual java.util.jar.Pack200.Packer java.util.SortedMap&lt;java.lang.String,java.lang.String&gt; properties()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual java.util.jar.Pack200.Packer void pack(java.util.jar.JarFile, java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual java.util.jar.Pack200.Packer void pack(java.util.jar.JarInputStream, java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.util.jar.Pack200.Unpacker java.util.SortedMap&lt;java.lang.String,java.lang.String&gt; properties()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual java.util.jar.Pack200.Unpacker void unpack(java.io.File, java.util.jar.JarOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

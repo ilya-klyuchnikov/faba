@@ -490,7 +490,17 @@
   <item name="sun.nio.ch.DatagramChannelImpl int write(java.nio.ByteBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.nio.ch.DatagramChannelImpl java.io.FileDescriptor getFD()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.DatagramChannelImpl java.io.FileDescriptor getFD()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.nio.ch.DatagramChannelImpl java.net.SocketAddress localAddress()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -508,6 +518,11 @@
   </item>
   <item name="sun.nio.ch.DatagramChannelImpl java.net.SocketAddress receive(java.nio.ByteBuffer)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.nio.ch.DatagramChannelImpl java.net.SocketAddress remoteAddress()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.DatagramChannelImpl java.net.SocketAddress remoteAddress()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -708,6 +723,11 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.nio.ch.DatagramSocketAdaptor java.nio.channels.DatagramChannel getChannel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.DatagramSocketAdaptor java.nio.channels.DatagramChannel getChannel()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -877,6 +897,16 @@
   <item name="sun.nio.ch.DefaultSelectorProvider java.nio.channels.spi.SelectorProvider create()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual sun.nio.ch.DirectBuffer java.lang.Object attachment()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual sun.nio.ch.DirectBuffer sun.misc.Cleaner cleaner()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.EPoll EPoll()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -958,6 +988,11 @@
     </annotation>
   </item>
   <item name="sun.nio.ch.EPollPort.Event sun.nio.ch.Port.PollableChannel channel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.nio.ch.EPollPort.Event sun.nio.ch.Port.PollableChannel channel()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1197,6 +1232,11 @@
   <item name="sun.nio.ch.FileLockTable sun.nio.ch.FileLockTable newSharedFileLockTable(java.nio.channels.Channel, java.io.FileDescriptor)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual sun.nio.ch.Groupable sun.nio.ch.AsynchronousChannelGroupImpl group()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.IOStatus IOStatus()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1263,12 +1303,22 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.nio.ch.IOVecWrapper java.nio.ByteBuffer getBuffer(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.IOVecWrapper java.nio.ByteBuffer getBuffer(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="sun.nio.ch.IOVecWrapper java.nio.ByteBuffer getShadow(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.nio.ch.IOVecWrapper java.nio.ByteBuffer getShadow(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1339,6 +1389,11 @@
   <item name="virtual sun.nio.ch.InheritedChannel.InheritedDatagramChannelImpl int write(java.nio.ByteBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.nio.ch.InheritedChannel.InheritedDatagramChannelImpl java.io.FileDescriptor getFD()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.InheritedChannel.InheritedDatagramChannelImpl java.io.FileDescriptor getFD()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1352,6 +1407,11 @@
   </item>
   <item name="sun.nio.ch.InheritedChannel.InheritedDatagramChannelImpl java.lang.Object getOption(java.net.SocketOption)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.nio.ch.InheritedChannel.InheritedDatagramChannelImpl java.net.SocketAddress localAddress()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.InheritedChannel.InheritedDatagramChannelImpl java.net.SocketAddress localAddress()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1368,6 +1428,11 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.InheritedChannel.InheritedDatagramChannelImpl java.net.SocketAddress remoteAddress()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.nio.ch.InheritedChannel.InheritedDatagramChannelImpl java.net.SocketAddress remoteAddress()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1484,6 +1549,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.nio.ch.InheritedChannel.InheritedServerSocketChannelImpl java.io.FileDescriptor getFD()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.InheritedChannel.InheritedServerSocketChannelImpl java.io.FileDescriptor getFD()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1500,6 +1570,11 @@
   </item>
   <item name="virtual sun.nio.ch.InheritedChannel.InheritedServerSocketChannelImpl java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.nio.ch.InheritedChannel.InheritedServerSocketChannelImpl java.net.InetSocketAddress localAddress()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.InheritedChannel.InheritedServerSocketChannelImpl java.net.InetSocketAddress localAddress()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1600,6 +1675,11 @@
   <item name="sun.nio.ch.InheritedChannel.InheritedSocketChannelImpl int write(java.nio.ByteBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.nio.ch.InheritedChannel.InheritedSocketChannelImpl java.io.FileDescriptor getFD()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.InheritedChannel.InheritedSocketChannelImpl java.io.FileDescriptor getFD()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1618,6 +1698,16 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.InheritedChannel.InheritedSocketChannelImpl java.net.InetSocketAddress localAddress()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.nio.ch.InheritedChannel.InheritedSocketChannelImpl java.net.InetSocketAddress localAddress()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.nio.ch.InheritedChannel.InheritedSocketChannelImpl java.net.SocketAddress remoteAddress()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1759,6 +1849,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.nio.ch.Invoker.GroupAndInvokeCount sun.nio.ch.AsynchronousChannelGroupImpl group()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.KQueue KQueue()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1846,6 +1941,11 @@
     </annotation>
   </item>
   <item name="sun.nio.ch.KQueuePort.Event sun.nio.ch.Port.PollableChannel channel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.nio.ch.KQueuePort.Event sun.nio.ch.Port.PollableChannel channel()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1953,12 +2053,27 @@
   <item name="virtual sun.nio.ch.MembershipKeyImpl java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.nio.ch.MembershipKeyImpl java.net.InetAddress group()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.MembershipKeyImpl java.net.InetAddress group()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="sun.nio.ch.MembershipKeyImpl java.net.InetAddress sourceAddress()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.nio.ch.MembershipKeyImpl java.net.InetAddress sourceAddress()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.nio.ch.MembershipKeyImpl java.net.NetworkInterface networkInterface()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1986,6 +2101,11 @@
   <item name="sun.nio.ch.MembershipKeyImpl java.nio.channels.MembershipKey unblock(java.net.InetAddress)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.nio.ch.MembershipKeyImpl java.nio.channels.MulticastChannel channel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.MembershipKeyImpl java.nio.channels.MulticastChannel channel()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -2006,12 +2126,22 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.nio.ch.MembershipKeyImpl.Type6 byte[] groupAddress()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.MembershipKeyImpl.Type6 byte[] groupAddress()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="sun.nio.ch.MembershipKeyImpl.Type6 byte[] source()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.nio.ch.MembershipKeyImpl.Type6 byte[] source()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -2279,7 +2409,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.nio.ch.PipeImpl java.nio.channels.Pipe.SinkChannel sink()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.PipeImpl java.nio.channels.Pipe.SourceChannel source()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.nio.ch.PipeImpl java.nio.channels.Pipe.SourceChannel source()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -2397,6 +2537,11 @@
   <item name="abstract virtual sun.nio.ch.SelChImpl boolean translateAndUpdateReadyOps(int, sun.nio.ch.SelectionKeyImpl) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual sun.nio.ch.SelChImpl java.io.FileDescriptor getFD()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual sun.nio.ch.SelChImpl void translateAndSetInterestOps(int, sun.nio.ch.SelectionKeyImpl) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2411,6 +2556,11 @@
     </annotation>
   </item>
   <item name="sun.nio.ch.SelectionKeyImpl int nioReadyOps()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.nio.ch.SelectionKeyImpl java.nio.channels.SelectableChannel channel()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -2433,6 +2583,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.SelectionKeyImpl java.nio.channels.Selector selector()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.nio.ch.SelectionKeyImpl java.nio.channels.Selector selector()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -2523,6 +2678,11 @@
   <item name="sun.nio.ch.ServerSocketAdaptor java.net.Socket accept()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.nio.ch.ServerSocketAdaptor java.nio.channels.ServerSocketChannel getChannel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.ServerSocketAdaptor java.nio.channels.ServerSocketChannel getChannel()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -2579,11 +2739,21 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.nio.ch.ServerSocketChannelImpl java.io.FileDescriptor getFD()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.ServerSocketChannelImpl java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual sun.nio.ch.ServerSocketChannelImpl java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.nio.ch.ServerSocketChannelImpl java.net.InetSocketAddress localAddress()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.ServerSocketChannelImpl java.net.InetSocketAddress localAddress()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2680,6 +2850,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.nio.ch.SharedFileLockTable.FileLockReference sun.nio.ch.FileKey fileKey()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.SimpleAsynchronousFileChannelImpl java.nio.channels.AsynchronousFileChannel open(java.io.FileDescriptor, boolean, boolean, sun.nio.ch.ThreadPool) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2771,6 +2946,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.nio.ch.SinkChannelImpl java.io.FileDescriptor getFD()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.SinkChannelImpl long write(java.nio.ByteBuffer[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2843,6 +3023,11 @@
   <item name="sun.nio.ch.SocketAdaptor java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.nio.ch.SocketAdaptor java.net.InetAddress getInetAddress()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.SocketAdaptor java.net.InetAddress getInetAddress()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -2851,6 +3036,11 @@
   </item>
   <item name="sun.nio.ch.SocketAdaptor java.net.Socket create(sun.nio.ch.SocketChannelImpl)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.nio.ch.SocketAdaptor java.nio.channels.SocketChannel getChannel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.SocketAdaptor java.nio.channels.SocketChannel getChannel()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2983,6 +3173,11 @@
   <item name="sun.nio.ch.SocketChannelImpl int write(java.nio.ByteBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.nio.ch.SocketChannelImpl java.io.FileDescriptor getFD()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.SocketChannelImpl java.io.FileDescriptor getFD()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -2995,6 +3190,16 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.SocketChannelImpl java.net.InetSocketAddress localAddress()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.nio.ch.SocketChannelImpl java.net.InetSocketAddress localAddress()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.nio.ch.SocketChannelImpl java.net.SocketAddress remoteAddress()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -3224,6 +3429,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.nio.ch.SourceChannelImpl java.io.FileDescriptor getFD()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.SourceChannelImpl java.io.FileDescriptor getFD()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -3258,6 +3468,11 @@
     </annotation>
   </item>
   <item name="sun.nio.ch.ThreadPool java.util.concurrent.ExecutorService executor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.nio.ch.ThreadPool java.util.concurrent.ExecutorService executor()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -3314,6 +3529,11 @@
       <val val="&quot;_,!null-&gt;null;_,null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.nio.ch.UnixAsynchronousServerSocketChannelImpl sun.nio.ch.AsynchronousChannelGroupImpl group()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.UnixAsynchronousServerSocketChannelImpl sun.nio.ch.AsynchronousChannelGroupImpl group()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -3411,6 +3631,11 @@
       <val val="&quot;_,_,!null-&gt;null;_,_,null-&gt;!null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.nio.ch.UnixAsynchronousSocketChannelImpl sun.nio.ch.AsynchronousChannelGroupImpl group()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.UnixAsynchronousSocketChannelImpl sun.nio.ch.AsynchronousChannelGroupImpl group()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -3543,6 +3768,11 @@
   </item>
   <item name="sun.nio.ch.Util.SelectorWrapper SelectorWrapper(java.nio.channels.Selector, sun.nio.ch.Util.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.nio.ch.Util.SelectorWrapper java.nio.channels.Selector get()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.Util.SelectorWrapper java.nio.channels.Selector get()">
     <annotation name="org.jetbrains.annotations.Contract">

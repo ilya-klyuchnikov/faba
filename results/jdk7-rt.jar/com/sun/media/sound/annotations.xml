@@ -248,6 +248,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual com.sun.media.sound.AbstractMidiDeviceProvider com.sun.media.sound.AbstractMidiDeviceProvider.Info[] getInfoCache()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual com.sun.media.sound.AbstractMidiDeviceProvider javax.sound.midi.MidiDevice createDevice(com.sun.media.sound.AbstractMidiDeviceProvider.Info) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -256,6 +261,11 @@
   </item>
   <item name="com.sun.media.sound.AbstractMidiDeviceProvider javax.sound.midi.MidiDevice.Info[] getDeviceInfo()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.media.sound.AbstractMidiDeviceProvider javax.sound.midi.MidiDevice[] getDeviceCache()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual com.sun.media.sound.AbstractMidiDeviceProvider void setDeviceCache(javax.sound.midi.MidiDevice[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1151,6 +1161,11 @@
   <item name="com.sun.media.sound.AudioFloatFormatConverter.AudioFloatInputStreamChannelMixer AudioFloatInputStreamChannelMixer(com.sun.media.sound.AudioFloatInputStream, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.media.sound.AudioFloatFormatConverter.AudioFloatInputStreamChannelMixer javax.sound.sampled.AudioFormat getFormat()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.AudioFloatFormatConverter.AudioFloatInputStreamChannelMixer javax.sound.sampled.AudioFormat getFormat()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1163,6 +1178,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.media.sound.AudioFloatFormatConverter.AudioFloatInputStreamResampler int available()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.media.sound.AudioFloatFormatConverter.AudioFloatInputStreamResampler javax.sound.sampled.AudioFormat getFormat()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1230,6 +1250,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.media.sound.AudioFloatInputStream.BytaArrayAudioFloatInputStream javax.sound.sampled.AudioFormat getFormat()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.AudioFloatInputStream.BytaArrayAudioFloatInputStream long getFrameLength()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1248,6 +1273,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.media.sound.AudioFloatInputStream.DirectAudioFloatInputStream javax.sound.sampled.AudioFormat getFormat()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.AudioFloatInputStream.DirectAudioFloatInputStream long getFrameLength()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1258,6 +1288,11 @@
   </item>
   <item name="abstract virtual com.sun.media.sound.AudioSynthesizer com.sun.media.sound.AudioSynthesizerPropertyInfo[] getPropertyInfo(java.util.Map&lt;java.lang.String,java.lang.Object&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.media.sound.AudioSynthesizer javax.sound.sampled.AudioFormat getFormat()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual com.sun.media.sound.AudioSynthesizer javax.sound.sampled.AudioInputStream openStream(javax.sound.sampled.AudioFormat, java.util.Map&lt;java.lang.String,java.lang.Object&gt;) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1758,6 +1793,11 @@
     </annotation>
   </item>
   <item name="com.sun.media.sound.DirectAudioDevice void implStop()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.media.sound.DirectAudioDevice.DirectBAOS byte[] getInternalBuffer()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -2323,6 +2363,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.media.sound.EventDispatcher.ClipInfo com.sun.media.sound.AutoClosingClip getClip()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.EventDispatcher.ClipInfo com.sun.media.sound.AutoClosingClip getClip()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -2341,7 +2386,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.media.sound.EventDispatcher.EventInfo java.lang.Object getEvent()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.EventDispatcher.EventInfo java.lang.Object getListener(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.media.sound.EventDispatcher.EventInfo java.lang.Object getListener(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -2510,6 +2565,11 @@
     </annotation>
   </item>
   <item name="com.sun.media.sound.JavaSoundAudioClip.DirectBAOS byte[] getInternalBuffer()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.media.sound.JavaSoundAudioClip.DirectBAOS byte[] getInternalBuffer()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -2910,11 +2970,21 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.media.sound.ModelAbstractOscillator java.lang.String getVendor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.ModelAbstractOscillator java.lang.String getVendor()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.media.sound.ModelAbstractOscillator java.lang.String getVersion()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.media.sound.ModelAbstractOscillator java.lang.String getVersion()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2942,6 +3012,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.media.sound.ModelAbstractOscillator javax.sound.midi.MidiChannel getChannel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="virtual com.sun.media.sound.ModelAbstractOscillator javax.sound.midi.Patch getPatch()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2954,16 +3029,24 @@
   <item name="com.sun.media.sound.ModelAbstractOscillator javax.sound.midi.Soundbank getSoundBank()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.media.sound.ModelAbstractOscillator javax.sound.midi.SoundbankResource[] getResources()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.media.sound.ModelAbstractOscillator javax.sound.midi.SoundbankResource[] getResources()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.media.sound.ModelAbstractOscillator javax.sound.midi.SoundbankResource[] getResources()">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="com.sun.media.sound.ModelAbstractOscillator javax.sound.midi.VoiceStatus getVoice()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.media.sound.ModelAbstractOscillator javax.sound.midi.VoiceStatus getVoice()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -4277,7 +4360,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.media.sound.SF2Region java.util.List&lt;com.sun.media.sound.SF2Modulator&gt; getModulators()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.SF2Region java.util.Map&lt;java.lang.Integer,java.lang.Short&gt; getGenerators()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.media.sound.SF2Region java.util.Map&lt;java.lang.Integer,java.lang.Short&gt; getGenerators()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -4508,6 +4601,11 @@
   <item name="com.sun.media.sound.SimpleInstrument com.sun.media.sound.ModelPerformer[] getPerformers()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.media.sound.SimpleInstrument java.lang.Object getData()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.SimpleInstrument java.lang.Object getData()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -4515,6 +4613,11 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.media.sound.SimpleInstrument java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.media.sound.SimpleInstrument java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -4568,6 +4671,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.media.sound.SimpleSoundbank java.lang.String getDescription()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.SimpleSoundbank java.lang.String getDescription()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -4578,12 +4686,27 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.media.sound.SimpleSoundbank java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.SimpleSoundbank java.lang.String getVendor()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.media.sound.SimpleSoundbank java.lang.String getVendor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.SimpleSoundbank java.lang.String getVersion()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.media.sound.SimpleSoundbank java.lang.String getVersion()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -4827,6 +4950,11 @@
   <item name="com.sun.media.sound.SoftChannel.MidiControlObject double[] get(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.media.sound.SoftChannel.MidiControlObject double[] get(int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.SoftChannel.MidiControlObject double[] get(int, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;_,null-&gt;null&quot;,pure=true"/>
@@ -4972,6 +5100,11 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.media.sound.SoftJitterCorrector.JitterStream byte[] nextWriteBuffer()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.media.sound.SoftJitterCorrector.JitterStream byte[] nextWriteBuffer()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -5164,6 +5297,11 @@
   </item>
   <item name="com.sun.media.sound.SoftMainMixer.1 double[] get(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.media.sound.SoftMainMixer.1 double[] get(int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.media.sound.SoftMainMixer.1 double[] get(int, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -6238,6 +6376,11 @@
   <item name="com.sun.media.sound.SoftVoice.1 double[] get(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.media.sound.SoftVoice.1 double[] get(int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.SoftVoice.1 double[] get(int, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;_,null-&gt;null&quot;,pure=true"/>
@@ -6249,6 +6392,11 @@
   </item>
   <item name="virtual com.sun.media.sound.SoftVoice.2 double[] get(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.media.sound.SoftVoice.2 double[] get(int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.media.sound.SoftVoice.2 double[] get(int, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -6262,6 +6410,11 @@
   <item name="virtual com.sun.media.sound.SoftVoice.3 double[] get(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.media.sound.SoftVoice.3 double[] get(int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.media.sound.SoftVoice.3 double[] get(int, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;_,null-&gt;null&quot;,pure=true"/>
@@ -6273,6 +6426,11 @@
   </item>
   <item name="virtual com.sun.media.sound.SoftVoice.4 double[] get(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.media.sound.SoftVoice.4 double[] get(int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.media.sound.SoftVoice.4 double[] get(int, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">

@@ -17,6 +17,11 @@
   <item name="com.sun.corba.se.spi.orb.ORB com.sun.corba.se.spi.presentation.rmi.PresentationManager setupPresentationManager()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORB com.sun.corba.se.spi.protocol.PIHandler getPIHandler()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.spi.orb.ORB java.util.logging.Logger getCORBALogger(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -60,8 +65,113 @@
   <item name="abstract virtual com.sun.corba.se.spi.orb.ORBConfigurator void configure(com.sun.corba.se.spi.orb.DataCollector, com.sun.corba.se.spi.orb.ORB) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData com.sun.corba.se.impl.encoding.CodeSetComponentInfo getCodeSetComponentInfo()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData com.sun.corba.se.impl.legacy.connection.USLPort[] getUserSpecifiedListenPorts()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData com.sun.corba.se.pept.transport.Acceptor[] getAcceptors()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData com.sun.corba.se.spi.ior.iiop.GIOPVersion getGIOPVersion()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData com.sun.corba.se.spi.legacy.connection.ORBSocketFactory getLegacySocketFactory()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData com.sun.corba.se.spi.orb.StringPair[] getORBInitialReferences()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData com.sun.corba.se.spi.transport.CorbaContactInfoListFactory getCorbaContactInfoListFactory()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData com.sun.corba.se.spi.transport.IIOPPrimaryToContactInfo getIIOPPrimaryToContactInfo()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData com.sun.corba.se.spi.transport.IORToSocketInfo getIORToSocketInfo()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData com.sun.corba.se.spi.transport.ORBSocketFactory getSocketFactory()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData com.sun.corba.se.spi.transport.ReadTimeouts getTransportTCPReadTimeouts()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData int getGIOPBuffMgrStrategy(com.sun.corba.se.spi.ior.iiop.GIOPVersion) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData java.lang.Class getBadServerIdHandler()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData java.lang.String acceptorSocketType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData java.lang.String connectionSocketType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData java.lang.String getListenOnAllInterfaces()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData java.lang.String getORBDefaultInitialReference()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData java.lang.String getORBId()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData java.lang.String getORBInitialHost()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData java.lang.String getORBServerHost()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData java.lang.String[] getORBDebugFlags()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ORBData org.omg.PortableInterceptor.ORBInitializer[] getORBInitializers()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual com.sun.corba.se.spi.orb.ORBVersion boolean lessThan(com.sun.corba.se.spi.orb.ORBVersion) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -271,6 +381,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.BooleanAction java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.spi.orb.OperationFactory.ClassAction ClassAction()">
@@ -292,13 +405,16 @@
   <item name="com.sun.corba.se.spi.orb.OperationFactory.ClassAction java.lang.Object operate(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.corba.se.spi.orb.OperationFactory.ClassAction java.lang.String toString()">
+  <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.ClassAction java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.ClassAction java.lang.String toString()">
+  <item name="com.sun.corba.se.spi.orb.OperationFactory.ClassAction java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.spi.orb.OperationFactory.ComposeAction java.lang.Object operate(java.lang.Object)">
@@ -335,13 +451,16 @@
   <item name="com.sun.corba.se.spi.orb.OperationFactory.ConvertIntegerToShort java.lang.Object operate(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.corba.se.spi.orb.OperationFactory.ConvertIntegerToShort java.lang.String toString()">
+  <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.ConvertIntegerToShort java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.ConvertIntegerToShort java.lang.String toString()">
+  <item name="com.sun.corba.se.spi.orb.OperationFactory.ConvertIntegerToShort java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.spi.orb.OperationFactory.IdentityAction IdentityAction()">
@@ -357,18 +476,26 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.IdentityAction java.lang.Object operate(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.spi.orb.OperationFactory.IdentityAction java.lang.Object operate(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;!null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
-  <item name="com.sun.corba.se.spi.orb.OperationFactory.IdentityAction java.lang.String toString()">
+  <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.IdentityAction java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.IdentityAction java.lang.String toString()">
+  <item name="com.sun.corba.se.spi.orb.OperationFactory.IdentityAction java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.IndexAction java.lang.Object operate(java.lang.Object) 0">
@@ -408,13 +535,16 @@
   <item name="com.sun.corba.se.spi.orb.OperationFactory.IntegerAction java.lang.Object operate(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.corba.se.spi.orb.OperationFactory.IntegerAction java.lang.String toString()">
+  <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.IntegerAction java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.IntegerAction java.lang.String toString()">
+  <item name="com.sun.corba.se.spi.orb.OperationFactory.IntegerAction java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.spi.orb.OperationFactory.IntegerRangeAction java.lang.Object operate(java.lang.Object) 0">
@@ -548,18 +678,26 @@
   <item name="com.sun.corba.se.spi.orb.OperationFactory.SetFlagAction java.lang.Object operate(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.SetFlagAction java.lang.Object operate(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.spi.orb.OperationFactory.SetFlagAction java.lang.Object operate(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="com.sun.corba.se.spi.orb.OperationFactory.SetFlagAction java.lang.String toString()">
+  <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.SetFlagAction java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.SetFlagAction java.lang.String toString()">
+  <item name="com.sun.corba.se.spi.orb.OperationFactory.SetFlagAction java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.spi.orb.OperationFactory.StringAction StringAction()">
@@ -580,13 +718,21 @@
       <val val="value=&quot;!null-&gt;!null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
-  <item name="com.sun.corba.se.spi.orb.OperationFactory.StringAction java.lang.String toString()">
+  <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.StringAction java.lang.Object operate(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.StringAction java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.StringAction java.lang.String toString()">
+  <item name="com.sun.corba.se.spi.orb.OperationFactory.StringAction java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.spi.orb.OperationFactory.SuffixAction SuffixAction()">
@@ -608,13 +754,16 @@
   <item name="com.sun.corba.se.spi.orb.OperationFactory.SuffixAction java.lang.Object operate(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.corba.se.spi.orb.OperationFactory.SuffixAction java.lang.String toString()">
+  <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.SuffixAction java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.SuffixAction java.lang.String toString()">
+  <item name="com.sun.corba.se.spi.orb.OperationFactory.SuffixAction java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.spi.orb.OperationFactory.URLAction URLAction()">
@@ -649,6 +798,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.URLAction java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.spi.orb.OperationFactory.ValueAction ValueAction()">
@@ -670,14 +822,42 @@
   <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.ValueAction java.lang.Object operate(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.ValueAction java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.spi.orb.OperationFactory.ValueAction java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.corba.se.spi.orb.OperationFactory.ValueAction java.lang.String toString()">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ParserData com.sun.corba.se.spi.orb.Operation getOperation()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ParserData java.lang.Object getDefaultValue()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ParserData java.lang.Object getTestValue()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ParserData java.lang.String getFieldName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.orb.ParserData java.lang.String getPropertyName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual com.sun.corba.se.spi.orb.ParserData void addToParser(com.sun.corba.se.spi.orb.PropertyParser) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -829,6 +1009,16 @@
     </annotation>
   </item>
   <item name="com.sun.corba.se.spi.orb.StringPair java.lang.String getFirst()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.spi.orb.StringPair java.lang.String getFirst()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.spi.orb.StringPair java.lang.String getSecond()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>

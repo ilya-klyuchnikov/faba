@@ -41,6 +41,11 @@
   <item name="abstract virtual javax.sound.midi.MidiDevice java.util.List&lt;javax.sound.midi.Transmitter&gt; getTransmitters()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.sound.midi.MidiDevice javax.sound.midi.MidiDevice.Info getDeviceInfo()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual javax.sound.midi.MidiDevice javax.sound.midi.Receiver getReceiver()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -80,7 +85,22 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual javax.sound.midi.MidiDeviceReceiver javax.sound.midi.MidiDevice getMidiDevice()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.sound.midi.MidiDeviceTransmitter javax.sound.midi.MidiDevice getMidiDevice()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.sound.midi.MidiEvent javax.sound.midi.MidiMessage getMessage()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.sound.midi.MidiEvent javax.sound.midi.MidiMessage getMessage()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -300,13 +320,16 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="javax.sound.midi.Sequence javax.sound.midi.Patch[] getPatchList()">
+  <item name="virtual javax.sound.midi.Sequence javax.sound.midi.Patch[] getPatchList()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual javax.sound.midi.Sequence javax.sound.midi.Patch[] getPatchList()">
+  <item name="javax.sound.midi.Sequence javax.sound.midi.Patch[] getPatchList()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual javax.sound.midi.Sequence javax.sound.midi.Track createTrack()">
@@ -317,6 +340,21 @@
   </item>
   <item name="abstract virtual javax.sound.midi.Sequencer int[] addControllerEventListener(javax.sound.midi.ControllerEventListener, int[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.sound.midi.Sequencer javax.sound.midi.Sequence getSequence()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.sound.midi.Sequencer javax.sound.midi.Sequencer.SyncMode getMasterSyncMode()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.sound.midi.Sequencer javax.sound.midi.Sequencer.SyncMode getSlaveSyncMode()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual javax.sound.midi.Sequencer javax.sound.midi.Sequencer.SyncMode[] getMasterSyncModes()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -375,15 +413,35 @@
   <item name="javax.sound.midi.ShortMessage java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.sound.midi.Soundbank java.lang.String getVendor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual javax.sound.midi.Soundbank javax.sound.midi.Instrument getInstrument(javax.sound.midi.Patch) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.sound.midi.SoundbankResource java.lang.Class&lt;?&gt; getDataClass()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.sound.midi.SoundbankResource java.lang.Class&lt;?&gt; getDataClass()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.sound.midi.SoundbankResource java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.sound.midi.SoundbankResource java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.sound.midi.SoundbankResource javax.sound.midi.Soundbank getSoundbank()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>

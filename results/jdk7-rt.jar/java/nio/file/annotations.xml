@@ -79,6 +79,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual java.nio.file.FileSystem java.lang.String getSeparator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual java.nio.file.FileSystem java.nio.file.Path getPath(java.lang.String, java.lang.String...) 1">
@@ -96,7 +99,27 @@
   <item name="abstract virtual java.nio.file.FileSystem java.nio.file.WatchService newWatchService()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.nio.file.FileSystem java.nio.file.attribute.UserPrincipalLookupService getUserPrincipalLookupService()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual java.nio.file.FileSystem java.nio.file.spi.FileSystemProvider provider()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual java.nio.file.FileSystem java.util.Set&lt;java.lang.String&gt; supportedFileAttributeViews()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.nio.file.FileSystemException java.lang.String getFile()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.nio.file.FileSystemException java.lang.String getFile()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -106,7 +129,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.nio.file.FileSystemException java.lang.String getOtherFile()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.nio.file.FileSystemException java.lang.String getReason()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.nio.file.FileSystemException java.lang.String getReason()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -157,7 +190,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.nio.file.FileTreeWalker.AncestorDirectory java.lang.Object fileKey()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.nio.file.FileTreeWalker.AncestorDirectory java.nio.file.Path file()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.nio.file.FileTreeWalker.AncestorDirectory java.nio.file.Path file()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -678,11 +721,21 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.nio.file.InvalidPathException java.lang.String getInput()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.nio.file.InvalidPathException java.lang.String getMessage()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual java.nio.file.InvalidPathException java.lang.String getMessage()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual java.nio.file.InvalidPathException java.lang.String getReason()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.nio.file.InvalidPathException java.lang.String getReason()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -719,8 +772,18 @@
   <item name="abstract virtual java.nio.file.Path java.net.URI toUri()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.nio.file.Path java.nio.file.FileSystem getFileSystem()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual java.nio.file.Path java.nio.file.Path getName(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.nio.file.Path java.nio.file.Path getRoot()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual java.nio.file.Path java.nio.file.Path relativize(java.nio.file.Path) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -886,12 +949,27 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.nio.file.StandardWatchEventKinds.StdWatchEventKind java.lang.Class&lt;T&gt; type()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.nio.file.StandardWatchEventKinds.StdWatchEventKind java.lang.String name()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.nio.file.StandardWatchEventKinds.StdWatchEventKind java.lang.String name()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.nio.file.StandardWatchEventKinds.StdWatchEventKind java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.nio.file.StandardWatchEventKinds.StdWatchEventKind java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -920,6 +998,36 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.file.TempFileHelper.PosixPermissions PosixPermissions()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual java.nio.file.WatchEvent T context()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual java.nio.file.WatchEvent java.nio.file.WatchEvent.Kind&lt;T&gt; kind()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual java.nio.file.WatchEvent.Kind java.lang.Class&lt;T&gt; type()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual java.nio.file.WatchEvent.Kind java.lang.String name()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual java.nio.file.WatchEvent.Modifier java.lang.String name()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual java.nio.file.WatchKey java.nio.file.Watchable watchable()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>

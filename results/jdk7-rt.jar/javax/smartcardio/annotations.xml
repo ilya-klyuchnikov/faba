@@ -35,6 +35,11 @@
   <item name="abstract virtual javax.smartcardio.Card java.lang.String getProtocol()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.smartcardio.Card javax.smartcardio.ATR getATR()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual javax.smartcardio.Card javax.smartcardio.CardChannel openLogicalChannel()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -48,6 +53,11 @@
   </item>
   <item name="abstract virtual javax.smartcardio.CardChannel int transmit(java.nio.ByteBuffer, java.nio.ByteBuffer) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.smartcardio.CardChannel javax.smartcardio.Card getCard()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual javax.smartcardio.CardChannel javax.smartcardio.ResponseAPDU transmit(javax.smartcardio.CommandAPDU) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -96,6 +106,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.smartcardio.CardTerminal CardTerminal()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.smartcardio.CardTerminal java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -296,6 +311,11 @@
     </annotation>
   </item>
   <item name="javax.smartcardio.TerminalFactorySpi TerminalFactorySpi()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.smartcardio.TerminalFactorySpi javax.smartcardio.CardTerminals engineTerminals()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>

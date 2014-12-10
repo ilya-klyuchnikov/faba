@@ -2,8 +2,18 @@
   <item name="abstract virtual sun.rmi.transport.Channel sun.rmi.transport.Connection newConnection()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual sun.rmi.transport.Channel sun.rmi.transport.Endpoint getEndpoint()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual sun.rmi.transport.Channel void free(sun.rmi.transport.Connection, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual sun.rmi.transport.Connection sun.rmi.transport.Channel getChannel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="virtual sun.rmi.transport.ConnectionInputStream void saveRef(sun.rmi.transport.LiveRef) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -20,6 +30,11 @@
     </annotation>
   </item>
   <item name="sun.rmi.transport.ConnectionOutputStream sun.rmi.transport.DGCAckHandler getDGCAckHandler()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.rmi.transport.ConnectionOutputStream sun.rmi.transport.DGCAckHandler getDGCAckHandler()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -166,8 +181,18 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.rmi.transport.DGCClient.EndpointEntry.RefEntry sun.rmi.transport.LiveRef getRef()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.rmi.transport.DGCClient.EndpointEntry.RefEntry.PhantomLiveRef PhantomLiveRef(sun.rmi.transport.DGCClient.EndpointEntry.RefEntry, sun.rmi.transport.LiveRef) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.rmi.transport.DGCClient.EndpointEntry.RefEntry.PhantomLiveRef sun.rmi.transport.DGCClient.EndpointEntry.RefEntry getRefEntry()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="sun.rmi.transport.DGCClient.EndpointEntry.RefEntry.PhantomLiveRef sun.rmi.transport.DGCClient.EndpointEntry.RefEntry getRefEntry()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -232,6 +257,11 @@
   <item name="sun.rmi.transport.DGCImpl_Skel void dispatch(java.rmi.Remote, java.rmi.server.RemoteCall, int, long) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual sun.rmi.transport.Endpoint sun.rmi.transport.Transport getInboundTransport()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual sun.rmi.transport.Endpoint void exportObject(sun.rmi.transport.Target) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -273,6 +303,11 @@
   <item name="virtual sun.rmi.transport.LiveRef java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.rmi.transport.LiveRef java.rmi.server.ObjID getObjID()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.rmi.transport.LiveRef java.rmi.server.ObjID getObjID()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -283,12 +318,27 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.rmi.transport.LiveRef java.rmi.server.RMIClientSocketFactory getClientSocketFactory()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.rmi.transport.LiveRef java.rmi.server.RMIServerSocketFactory getServerSocketFactory()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.rmi.transport.LiveRef java.rmi.server.RMIServerSocketFactory getServerSocketFactory()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.rmi.transport.LiveRef sun.rmi.transport.Endpoint getEndpoint()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.rmi.transport.LiveRef sun.rmi.transport.Endpoint getEndpoint()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -388,6 +438,16 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.rmi.transport.StreamRemoteCall java.lang.Exception getServerException()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.rmi.transport.StreamRemoteCall java.lang.Exception getServerException()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.rmi.transport.StreamRemoteCall sun.rmi.transport.Connection getConnection()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>

@@ -9,6 +9,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual javax.net.ssl.DefaultSSLServerSocketFactory java.lang.String[] getDefaultCipherSuites()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.net.ssl.DefaultSSLServerSocketFactory java.lang.String[] getSupportedCipherSuites()">
@@ -18,6 +21,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual javax.net.ssl.DefaultSSLServerSocketFactory java.lang.String[] getSupportedCipherSuites()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual javax.net.ssl.DefaultSSLServerSocketFactory java.net.ServerSocket createServerSocket(int, int, java.net.InetAddress) 2">
@@ -33,15 +39,21 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual javax.net.ssl.DefaultSSLSocketFactory java.lang.String[] getDefaultCipherSuites()">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="javax.net.ssl.DefaultSSLSocketFactory java.lang.String[] getSupportedCipherSuites()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual javax.net.ssl.DefaultSSLSocketFactory java.lang.String[] getSupportedCipherSuites()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.net.ssl.DefaultSSLSocketFactory java.lang.String[] getSupportedCipherSuites()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.net.ssl.DefaultSSLSocketFactory java.net.Socket createSocket(java.lang.String, int) 0">
@@ -106,7 +118,17 @@
   <item name="javax.net.ssl.HandshakeCompletedEvent java.security.Principal getPeerPrincipal()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.net.ssl.HandshakeCompletedEvent javax.net.ssl.SSLSession getSession()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.net.ssl.HandshakeCompletedEvent javax.net.ssl.SSLSession getSession()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.net.ssl.HandshakeCompletedEvent javax.net.ssl.SSLSocket getSocket()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -133,7 +155,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.net.ssl.HttpsURLConnection javax.net.ssl.HostnameVerifier getHostnameVerifier()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.net.ssl.HttpsURLConnection javax.net.ssl.HostnameVerifier getHostnameVerifier()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.net.ssl.HttpsURLConnection javax.net.ssl.SSLSocketFactory getSSLSocketFactory()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -235,6 +267,11 @@
   <item name="javax.net.ssl.KeyStoreBuilderParameters KeyStoreBuilderParameters(java.util.List&lt;java.security.KeyStore.Builder&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.net.ssl.KeyStoreBuilderParameters java.util.List&lt;java.security.KeyStore.Builder&gt; getParameters()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.net.ssl.KeyStoreBuilderParameters java.util.List&lt;java.security.KeyStore.Builder&gt; getParameters()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -297,6 +334,11 @@
     </annotation>
   </item>
   <item name="javax.net.ssl.SSLEngine java.lang.String getPeerHost()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.net.ssl.SSLEngine java.lang.String getPeerHost()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -386,6 +428,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.net.ssl.SSLParameters java.lang.String getEndpointIdentificationAlgorithm()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.net.ssl.SSLParameters java.lang.String[] clone(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -400,6 +447,11 @@
   </item>
   <item name="javax.net.ssl.SSLParameters java.lang.String[] getProtocols()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.net.ssl.SSLParameters java.security.AlgorithmConstraints getAlgorithmConstraints()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.net.ssl.SSLParameters java.security.AlgorithmConstraints getAlgorithmConstraints()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -448,15 +500,31 @@
     </annotation>
   </item>
   <item name="abstract virtual javax.net.ssl.SSLServerSocketFactory java.lang.String[] getDefaultCipherSuites()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.net.ssl.SSLServerSocketFactory java.lang.String[] getSupportedCipherSuites()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.net.ssl.SSLSessionBindingEvent SSLSessionBindingEvent(javax.net.ssl.SSLSession, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.net.ssl.SSLSessionBindingEvent java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.net.ssl.SSLSessionBindingEvent java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.net.ssl.SSLSessionBindingEvent javax.net.ssl.SSLSession getSession()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -502,9 +570,15 @@
     </annotation>
   </item>
   <item name="abstract virtual javax.net.ssl.SSLSocketFactory java.lang.String[] getDefaultCipherSuites()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.net.ssl.SSLSocketFactory java.lang.String[] getSupportedCipherSuites()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.net.ssl.SSLSocketFactory java.net.Socket createSocket(java.net.Socket, java.lang.String, int, boolean) 0">
@@ -580,6 +654,11 @@
   <item name="virtual javax.net.ssl.X509ExtendedKeyManager java.lang.String chooseEngineClientAlias(java.lang.String[], java.security.Principal[], javax.net.ssl.SSLEngine) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.net.ssl.X509ExtendedKeyManager java.lang.String chooseEngineClientAlias(java.lang.String[], java.security.Principal[], javax.net.ssl.SSLEngine)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.net.ssl.X509ExtendedKeyManager java.lang.String chooseEngineClientAlias(java.lang.String[], java.security.Principal[], javax.net.ssl.SSLEngine)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_,_-&gt;null;_,!null,_-&gt;null;_,_,!null-&gt;null;_,_,null-&gt;null;_,null,_-&gt;null;null,_,_-&gt;null&quot;,pure=true"/>
@@ -603,6 +682,11 @@
   </item>
   <item name="virtual javax.net.ssl.X509ExtendedKeyManager java.lang.String chooseEngineServerAlias(java.lang.String, java.security.Principal[], javax.net.ssl.SSLEngine) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.net.ssl.X509ExtendedKeyManager java.lang.String chooseEngineServerAlias(java.lang.String, java.security.Principal[], javax.net.ssl.SSLEngine)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.net.ssl.X509ExtendedKeyManager java.lang.String chooseEngineServerAlias(java.lang.String, java.security.Principal[], javax.net.ssl.SSLEngine)">
     <annotation name="org.jetbrains.annotations.Contract">

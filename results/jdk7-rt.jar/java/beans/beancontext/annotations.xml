@@ -20,6 +20,11 @@
   <item name="abstract virtual java.beans.beancontext.BeanContext void removeBeanContextMembershipListener(java.beans.beancontext.BeanContextMembershipListener) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.beans.beancontext.BeanContextChild java.beans.beancontext.BeanContext getBeanContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual java.beans.beancontext.BeanContextChild void addVetoableChangeListener(java.lang.String, java.beans.VetoableChangeListener) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -46,12 +51,22 @@
       <val val="value=&quot;!null-&gt;true;null-&gt;true&quot;,pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.beans.beancontext.BeanContextChildSupport java.beans.beancontext.BeanContext getBeanContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.beans.beancontext.BeanContextChildSupport java.beans.beancontext.BeanContext getBeanContext()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="java.beans.beancontext.BeanContextChildSupport java.beans.beancontext.BeanContextChild getBeanContextChildPeer()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.beans.beancontext.BeanContextChildSupport java.beans.beancontext.BeanContextChild getBeanContextChildPeer()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -125,6 +140,16 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.beans.beancontext.BeanContextEvent java.beans.beancontext.BeanContext getBeanContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.beans.beancontext.BeanContextEvent java.beans.beancontext.BeanContext getPropagatedFrom()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.beans.beancontext.BeanContextEvent java.beans.beancontext.BeanContext getPropagatedFrom()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -145,7 +170,17 @@
   <item name="java.beans.beancontext.BeanContextServiceAvailableEvent BeanContextServiceAvailableEvent(java.beans.beancontext.BeanContextServices, java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual java.beans.beancontext.BeanContextServiceAvailableEvent java.beans.beancontext.BeanContextServices getSourceAsBeanContextServices()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.beans.beancontext.BeanContextServiceAvailableEvent java.beans.beancontext.BeanContextServices getSourceAsBeanContextServices()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.beans.beancontext.BeanContextServiceAvailableEvent java.lang.Class getServiceClass()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -169,7 +204,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.beans.beancontext.BeanContextServiceRevokedEvent java.beans.beancontext.BeanContextServices getSourceAsBeanContextServices()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.beans.beancontext.BeanContextServiceRevokedEvent java.beans.beancontext.BeanContextServices getSourceAsBeanContextServices()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.beans.beancontext.BeanContextServiceRevokedEvent java.lang.Class getServiceClass()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -276,6 +321,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.beancontext.BeanContextServicesSupport java.beans.beancontext.BeanContextServices getBeanContextServicesPeer()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.beans.beancontext.BeanContextServicesSupport java.beans.beancontext.BeanContextServices getBeanContextServicesPeer()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -454,12 +504,27 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceClassRef java.beans.beancontext.BeanContextServiceProvider getDelegateProvider()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceClassRef java.beans.beancontext.BeanContextServiceProvider getServiceProvider()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceClassRef java.beans.beancontext.BeanContextServiceProvider getServiceProvider()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceClassRef java.lang.Class getServiceClass()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceClassRef java.lang.Class getServiceClass()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -471,6 +536,11 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceRef boolean isDelegated()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceRef java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceClassRef getServiceClassRef()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -497,6 +567,11 @@
   </item>
   <item name="java.beans.beancontext.BeanContextServicesSupport.BCSSServiceProvider BCSSServiceProvider(java.lang.Class, java.beans.beancontext.BeanContextServiceProvider) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.beans.beancontext.BeanContextServicesSupport.BCSSServiceProvider java.beans.beancontext.BeanContextServiceProvider getServiceProvider()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.beans.beancontext.BeanContextServicesSupport.BCSSServiceProvider java.beans.beancontext.BeanContextServiceProvider getServiceProvider()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -646,6 +721,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.beans.beancontext.BeanContextSupport java.beans.beancontext.BeanContext getBeanContextPeer()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.beans.beancontext.BeanContextSupport java.beans.beancontext.BeanContextChild getChildBeanContextChild(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
@@ -711,6 +791,11 @@
   </item>
   <item name="java.beans.beancontext.BeanContextSupport java.util.Iterator iterator()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual java.beans.beancontext.BeanContextSupport java.util.Locale getLocale()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.beans.beancontext.BeanContextSupport java.util.Locale getLocale()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -831,12 +916,22 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.beans.beancontext.BeanContextSupport.BCSChild java.lang.Object getChild()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.beans.beancontext.BeanContextSupport.BCSChild java.lang.Object getChild()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="java.beans.beancontext.BeanContextSupport.BCSChild java.lang.Object getProxyPeer()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.beans.beancontext.BeanContextSupport.BCSChild java.lang.Object getProxyPeer()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>

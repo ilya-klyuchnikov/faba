@@ -31,6 +31,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.AbstractDocument javax.swing.text.DocumentFilter getDocumentFilter()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.AbstractDocument javax.swing.text.DocumentFilter getDocumentFilter()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -60,7 +65,17 @@
   <item name="virtual javax.swing.text.AbstractDocument javax.swing.text.Element createLeafElement(javax.swing.text.Element, javax.swing.text.AttributeSet, int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.swing.text.AbstractDocument javax.swing.text.Element getBidiRootElement()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.AbstractDocument javax.swing.text.Element getBidiRootElement()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.swing.text.AbstractDocument javax.swing.text.Element getDefaultRootElement()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -197,21 +212,44 @@
   <item name="javax.swing.text.AbstractDocument.AbstractElement java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.swing.text.AbstractDocument.AbstractElement javax.swing.text.AttributeSet getAttributes()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.text.AbstractDocument.AbstractElement javax.swing.text.AttributeSet getAttributes()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual javax.swing.text.AbstractDocument.AbstractElement javax.swing.text.AttributeSet getAttributes()">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
+  <item name="virtual javax.swing.text.AbstractDocument.AbstractElement javax.swing.text.Document getDocument()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.swing.text.AbstractDocument.AbstractElement javax.swing.text.Document getDocument()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual javax.swing.text.AbstractDocument.AbstractElement javax.swing.text.Element getElement(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.AbstractDocument.AbstractElement javax.swing.text.Element getParentElement()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.AbstractDocument.AbstractElement javax.swing.text.Element getParentElement()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.AbstractDocument.AbstractElement javax.swing.tree.TreeNode getChildAt(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -222,6 +260,11 @@
     </annotation>
   </item>
   <item name="javax.swing.text.AbstractDocument.AbstractElement javax.swing.tree.TreeNode getParent()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.AbstractDocument.AbstractElement javax.swing.tree.TreeNode getParent()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -256,6 +299,11 @@
   <item name="abstract virtual javax.swing.text.AbstractDocument.AttributeContext javax.swing.text.AttributeSet addAttributes(javax.swing.text.AttributeSet, javax.swing.text.AttributeSet)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.swing.text.AbstractDocument.AttributeContext javax.swing.text.AttributeSet getEmptySet()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual javax.swing.text.AbstractDocument.AttributeContext javax.swing.text.AttributeSet removeAttribute(javax.swing.text.AttributeSet, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -277,13 +325,16 @@
   <item name="javax.swing.text.AbstractDocument.BidiElement BidiElement(javax.swing.text.AbstractDocument, javax.swing.text.Element, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.swing.text.AbstractDocument.BidiElement java.lang.String getName()">
+  <item name="virtual javax.swing.text.AbstractDocument.BidiElement java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual javax.swing.text.AbstractDocument.BidiElement java.lang.String getName()">
+  <item name="javax.swing.text.AbstractDocument.BidiElement java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.AbstractDocument.BidiRootElement BidiRootElement(javax.swing.text.AbstractDocument) 0">
@@ -296,6 +347,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual javax.swing.text.AbstractDocument.BidiRootElement java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.AbstractDocument.BranchElement BranchElement(javax.swing.text.AbstractDocument, javax.swing.text.Element, javax.swing.text.AttributeSet) 0">
@@ -330,6 +384,11 @@
   </item>
   <item name="javax.swing.text.AbstractDocument.BranchElement java.util.Enumeration children()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.swing.text.AbstractDocument.BranchElement javax.swing.text.Element getElement(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.swing.text.AbstractDocument.BranchElement javax.swing.text.Element getElement(int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -416,6 +475,16 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.AbstractDocument.DefaultDocumentEvent javax.swing.event.DocumentEvent.EventType getType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.AbstractDocument.DefaultDocumentEvent javax.swing.text.Document getDocument()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.AbstractDocument.DefaultDocumentEvent javax.swing.text.Document getDocument()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -423,6 +492,11 @@
   </item>
   <item name="javax.swing.text.AbstractDocument.DefaultFilterBypass DefaultFilterBypass(javax.swing.text.AbstractDocument, javax.swing.text.AbstractDocument.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.swing.text.AbstractDocument.DefaultFilterBypass javax.swing.text.Document getDocument()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.swing.text.AbstractDocument.DefaultFilterBypass javax.swing.text.Document getDocument()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -463,12 +537,27 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.AbstractDocument.ElementEdit javax.swing.text.Element getElement()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.AbstractDocument.ElementEdit javax.swing.text.Element[] getChildrenAdded()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.AbstractDocument.ElementEdit javax.swing.text.Element[] getChildrenAdded()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="javax.swing.text.AbstractDocument.ElementEdit javax.swing.text.Element[] getChildrenRemoved()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.AbstractDocument.ElementEdit javax.swing.text.Element[] getChildrenRemoved()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -518,11 +607,21 @@
   <item name="virtual javax.swing.text.AbstractDocument.LeafElement java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.swing.text.AbstractDocument.LeafElement java.util.Enumeration children()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.AbstractDocument.LeafElement java.util.Enumeration children()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.swing.text.AbstractDocument.LeafElement javax.swing.text.Element getElement(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.swing.text.AbstractDocument.LeafElement javax.swing.text.Element getElement(int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -552,6 +651,11 @@
   <item name="javax.swing.text.AbstractDocument.UndoRedoDocumentEvent javax.swing.event.DocumentEvent.ElementChange getChange(javax.swing.text.Element)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.swing.text.AbstractDocument.UndoRedoDocumentEvent javax.swing.event.DocumentEvent.EventType getType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.AbstractDocument.UndoRedoDocumentEvent javax.swing.event.DocumentEvent.EventType getType()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -562,7 +666,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.AbstractDocument.UndoRedoDocumentEvent javax.swing.text.AbstractDocument.DefaultDocumentEvent getSource()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.AbstractDocument.UndoRedoDocumentEvent javax.swing.text.Document getDocument()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.AbstractDocument.UndoRedoDocumentEvent javax.swing.text.Document getDocument()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -635,7 +749,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.AbstractWriter java.io.Writer getWriter()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.AbstractWriter java.lang.String getLineSeparator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.AbstractWriter java.lang.String getLineSeparator()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -652,7 +776,17 @@
   <item name="virtual javax.swing.text.AbstractWriter java.lang.String getText(javax.swing.text.Element)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.swing.text.AbstractWriter javax.swing.text.Document getDocument()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.AbstractWriter javax.swing.text.Document getDocument()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.AbstractWriter javax.swing.text.ElementIterator getElementIterator()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -908,6 +1042,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.AsyncBoxView.ChildState javax.swing.text.View getChildView()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.BadLocationException int offsetRequested()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1063,6 +1202,11 @@
   <item name="virtual javax.swing.text.BoxView void replace(int, int, javax.swing.text.View[]) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual javax.swing.text.Caret java.awt.Point getMagicCaretPosition()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual javax.swing.text.Caret void addChangeListener(javax.swing.event.ChangeListener) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1081,6 +1225,11 @@
     </annotation>
   </item>
   <item name="javax.swing.text.ChangedCharSetException java.lang.String getCharSetSpec()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.ChangedCharSetException java.lang.String getCharSetSpec()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1188,6 +1337,11 @@
   </item>
   <item name="javax.swing.text.CompositeView java.awt.Shape modelToView(int, javax.swing.text.Position.Bias, int, javax.swing.text.Position.Bias, java.awt.Shape)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.swing.text.CompositeView javax.swing.text.View getView(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.swing.text.CompositeView javax.swing.text.View getView(int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1365,6 +1519,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.DefaultCaret java.awt.Point getMagicCaretPosition()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.DefaultCaret java.awt.datatransfer.Clipboard getSystemSelection()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1394,7 +1553,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.DefaultCaret javax.swing.text.Position.Bias getDotBias()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.DefaultCaret javax.swing.text.Position.Bias getMarkBias()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.DefaultCaret javax.swing.text.Position.Bias getMarkBias()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1534,6 +1703,11 @@
   <item name="javax.swing.text.DefaultCaret.DefaultFilterBypass DefaultFilterBypass(javax.swing.text.DefaultCaret, javax.swing.text.DefaultCaret.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.swing.text.DefaultCaret.DefaultFilterBypass javax.swing.text.Caret getCaret()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.DefaultCaret.DefaultFilterBypass javax.swing.text.Caret getCaret()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1593,9 +1767,17 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual javax.swing.text.DefaultEditorKit java.lang.String getContentType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.DefaultEditorKit javax.swing.Action[] getActions()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.DefaultEditorKit javax.swing.text.Caret createCaret()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1617,6 +1799,11 @@
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.swing.text.DefaultEditorKit javax.swing.text.ViewFactory getViewFactory()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.swing.text.DefaultEditorKit javax.swing.text.ViewFactory getViewFactory()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1890,6 +2077,11 @@
   <item name="virtual javax.swing.text.DefaultFormatter int getNextVisualPositionFrom(javax.swing.text.JTextComponent, int, javax.swing.text.Position.Bias, int, javax.swing.text.Position.Bias[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.swing.text.DefaultFormatter java.lang.Class&lt;?&gt; getValueClass()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.DefaultFormatter java.lang.Class&lt;?&gt; getValueClass()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -2017,7 +2209,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.DefaultFormatterFactory javax.swing.JFormattedTextField.AbstractFormatter getDefaultFormatter()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.DefaultFormatterFactory javax.swing.JFormattedTextField.AbstractFormatter getDefaultFormatter()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.DefaultFormatterFactory javax.swing.JFormattedTextField.AbstractFormatter getDisplayFormatter()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -2028,6 +2230,11 @@
     </annotation>
   </item>
   <item name="javax.swing.text.DefaultFormatterFactory javax.swing.JFormattedTextField.AbstractFormatter getEditFormatter()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.DefaultFormatterFactory javax.swing.JFormattedTextField.AbstractFormatter getEditFormatter()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -2043,6 +2250,11 @@
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.swing.text.DefaultFormatterFactory javax.swing.JFormattedTextField.AbstractFormatter getNullFormatter()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.swing.text.DefaultFormatterFactory javax.swing.JFormattedTextField.AbstractFormatter getNullFormatter()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2091,6 +2303,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.DefaultHighlighter.DefaultHighlightPainter java.awt.Color getColor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.DefaultHighlighter.DefaultHighlightPainter java.awt.Shape paintLayer(java.awt.Graphics, int, int, java.awt.Shape, javax.swing.text.JTextComponent, javax.swing.text.View) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2120,6 +2337,11 @@
     </annotation>
   </item>
   <item name="javax.swing.text.DefaultHighlighter.HighlightInfo javax.swing.text.Highlighter.HighlightPainter getPainter()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.DefaultHighlighter.HighlightInfo javax.swing.text.Highlighter.HighlightPainter getPainter()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -2200,6 +2422,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.DefaultStyledDocument javax.swing.text.Element getDefaultRootElement()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.DefaultStyledDocument javax.swing.text.Element getDefaultRootElement()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -2320,6 +2547,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.DefaultStyledDocument.AbstractChangeHandler.DocReference javax.swing.event.ChangeListener getListener()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.DefaultStyledDocument.AttributeUndoableEdit AttributeUndoableEdit(javax.swing.text.Element, javax.swing.text.AttributeSet, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2371,6 +2603,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.DefaultStyledDocument.ElementBuffer javax.swing.text.Element getRootElement()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.DefaultStyledDocument.ElementBuffer javax.swing.text.Element getRootElement()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -2458,6 +2695,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.DefaultStyledDocument.ElementSpec char[] getArray()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.DefaultStyledDocument.ElementSpec int getLength()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -2479,6 +2721,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.DefaultStyledDocument.ElementSpec javax.swing.text.AttributeSet getAttributes()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.DefaultStyledDocument.ElementSpec short getDirection()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -2492,13 +2739,16 @@
   <item name="javax.swing.text.DefaultStyledDocument.SectionElement SectionElement(javax.swing.text.DefaultStyledDocument) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.swing.text.DefaultStyledDocument.SectionElement java.lang.String getName()">
+  <item name="virtual javax.swing.text.DefaultStyledDocument.SectionElement java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual javax.swing.text.DefaultStyledDocument.SectionElement java.lang.String getName()">
+  <item name="javax.swing.text.DefaultStyledDocument.SectionElement java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual javax.swing.text.DefaultStyledDocument.StyleChangeHandler void fireStateChanged(javax.swing.text.DefaultStyledDocument, javax.swing.event.ChangeEvent) 0">
@@ -2530,6 +2780,11 @@
   </item>
   <item name="abstract virtual javax.swing.text.Document java.lang.String getText(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.swing.text.Document javax.swing.text.Element getDefaultRootElement()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual javax.swing.text.Document javax.swing.text.Element[] getRootElements()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2589,6 +2844,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual javax.swing.text.DocumentFilter.FilterBypass javax.swing.text.Document getDocument()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual javax.swing.text.DocumentFilter.FilterBypass void insertString(int, java.lang.String, javax.swing.text.AttributeSet) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2610,10 +2870,23 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual javax.swing.text.EditorKit java.lang.String getContentType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.swing.text.EditorKit javax.swing.text.Caret createCaret()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual javax.swing.text.EditorKit javax.swing.text.Document createDefaultDocument()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.swing.text.EditorKit javax.swing.text.ViewFactory getViewFactory()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.swing.text.EditorKit void deinstall(javax.swing.JEditorPane) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2641,7 +2914,25 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.swing.text.Element javax.swing.text.AttributeSet getAttributes()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.swing.text.Element javax.swing.text.Document getDocument()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.swing.text.Element javax.swing.text.Element getElement(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.swing.text.Element javax.swing.text.Element getParentElement()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.swing.text.ElementIterator ElementIterator(javax.swing.text.Document) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2882,6 +3173,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.FlowView.FlowStrategy javax.swing.text.View getLogicalView(javax.swing.text.FlowView)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="virtual javax.swing.text.FlowView.FlowStrategy void addDamage(javax.swing.text.FlowView, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2988,6 +3284,11 @@
   <item name="javax.swing.text.FlowView.LogicalView javax.swing.text.View getViewAtPoint(int, int, java.awt.Rectangle) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.swing.text.FlowView.LogicalView javax.swing.text.View getViewAtPoint(int, int, java.awt.Rectangle)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.FlowView.LogicalView javax.swing.text.View getViewAtPoint(int, int, java.awt.Rectangle)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;_,_,!null-&gt;null;_,_,null-&gt;null&quot;,pure=true"/>
@@ -3078,6 +3379,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual javax.swing.text.GapContent java.lang.Object allocateArray(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual javax.swing.text.GapContent java.lang.String getString(int, int)">
@@ -3160,16 +3464,24 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.GapContent.MarkVector java.lang.Object allocateArray(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.text.GapContent.MarkVector java.lang.Object allocateArray(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual javax.swing.text.GapContent.MarkVector java.lang.Object allocateArray(int)">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="javax.swing.text.GapContent.MarkVector javax.swing.text.GapContent.MarkData elementAt(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.GapContent.MarkVector javax.swing.text.GapContent.MarkData elementAt(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -3207,6 +3519,9 @@
     </annotation>
   </item>
   <item name="abstract virtual javax.swing.text.GapVector java.lang.Object allocateArray(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.GapVector java.lang.Object getArray()">
@@ -3432,6 +3747,11 @@
   <item name="javax.swing.text.GlyphPainter2 javax.swing.text.GlyphView.GlyphPainter getPainter(javax.swing.text.GlyphView, int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.swing.text.GlyphPainter2 javax.swing.text.GlyphView.GlyphPainter getPainter(javax.swing.text.GlyphView, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.GlyphPainter2 javax.swing.text.GlyphView.GlyphPainter getPainter(javax.swing.text.GlyphView, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_,_-&gt;null;null,_,_-&gt;null&quot;,pure=true"/>
@@ -3495,12 +3815,22 @@
   <item name="javax.swing.text.GlyphView java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.swing.text.GlyphView javax.swing.text.GlyphView.GlyphPainter getGlyphPainter()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.GlyphView javax.swing.text.GlyphView.GlyphPainter getGlyphPainter()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="javax.swing.text.GlyphView javax.swing.text.TabExpander getTabExpander()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.GlyphView javax.swing.text.TabExpander getTabExpander()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -3630,6 +3960,11 @@
   <item name="virtual javax.swing.text.GlyphView.GlyphPainter javax.swing.text.GlyphView.GlyphPainter getPainter(javax.swing.text.GlyphView, int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.swing.text.GlyphView.GlyphPainter javax.swing.text.GlyphView.GlyphPainter getPainter(javax.swing.text.GlyphView, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.GlyphView.GlyphPainter javax.swing.text.GlyphView.GlyphPainter getPainter(javax.swing.text.GlyphView, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -3647,6 +3982,11 @@
   </item>
   <item name="abstract virtual javax.swing.text.Highlighter void removeHighlight(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.swing.text.Highlighter.Highlight javax.swing.text.Highlighter.HighlightPainter getPainter()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual javax.swing.text.Highlighter.HighlightPainter void paint(java.awt.Graphics, int, int, java.awt.Shape, javax.swing.text.JTextComponent) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3754,12 +4094,22 @@
   <item name="javax.swing.text.InternationalFormatter int getFieldTypeCountTo(java.lang.Object, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.swing.text.InternationalFormatter java.lang.Comparable getMaximum()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.InternationalFormatter java.lang.Comparable getMaximum()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="javax.swing.text.InternationalFormatter java.lang.Comparable getMinimum()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.InternationalFormatter java.lang.Comparable getMinimum()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -3821,7 +4171,17 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.swing.text.InternationalFormatter java.text.AttributedCharacterIterator getIterator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.InternationalFormatter java.text.AttributedCharacterIterator getIterator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.InternationalFormatter java.text.Format getFormat()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -3951,12 +4311,32 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.JTextComponent java.awt.Color getCaretColor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.JTextComponent java.awt.Color getDisabledTextColor()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.JTextComponent java.awt.Color getDisabledTextColor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.JTextComponent java.awt.Color getSelectedTextColor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.JTextComponent java.awt.Color getSelectedTextColor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.JTextComponent java.awt.Color getSelectionColor()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -3967,6 +4347,11 @@
     </annotation>
   </item>
   <item name="javax.swing.text.JTextComponent java.awt.Insets getMargin()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.JTextComponent java.awt.Insets getMargin()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -4033,7 +4418,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.JTextComponent javax.swing.plaf.TextUI getUI()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.JTextComponent javax.swing.text.Caret getCaret()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.JTextComponent javax.swing.text.Caret getCaret()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -4047,6 +4442,16 @@
     </annotation>
   </item>
   <item name="javax.swing.text.JTextComponent javax.swing.text.Document getDocument()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.JTextComponent javax.swing.text.Document getDocument()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.JTextComponent javax.swing.text.Highlighter getHighlighter()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -4081,10 +4486,20 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.JTextComponent javax.swing.text.Keymap getKeymap()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.JTextComponent javax.swing.text.Keymap removeKeymap(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.swing.text.JTextComponent javax.swing.text.NavigationFilter getNavigationFilter()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.JTextComponent javax.swing.text.NavigationFilter getNavigationFilter()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -4293,13 +4708,22 @@
   <item name="javax.swing.text.JTextComponent.AccessibleJTextComponent java.lang.String getTextRange(int, int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.swing.text.JTextComponent.AccessibleJTextComponent javax.accessibility.AccessibleAction getAccessibleAction()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.swing.text.JTextComponent.AccessibleJTextComponent javax.accessibility.AccessibleAction getAccessibleAction()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual javax.swing.text.JTextComponent.AccessibleJTextComponent javax.accessibility.AccessibleAction getAccessibleAction()">
+  <item name="virtual javax.swing.text.JTextComponent.AccessibleJTextComponent javax.accessibility.AccessibleEditableText getAccessibleEditableText()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.JTextComponent.AccessibleJTextComponent javax.accessibility.AccessibleEditableText getAccessibleEditableText()">
@@ -4308,8 +4732,10 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual javax.swing.text.JTextComponent.AccessibleJTextComponent javax.accessibility.AccessibleEditableText getAccessibleEditableText()">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
+  <item name="virtual javax.swing.text.JTextComponent.AccessibleJTextComponent javax.accessibility.AccessibleRole getAccessibleRole()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.swing.text.JTextComponent.AccessibleJTextComponent javax.accessibility.AccessibleRole getAccessibleRole()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -4415,6 +4841,11 @@
   <item name="javax.swing.text.JTextComponent.DefaultKeymap boolean isLocallyDefined(javax.swing.KeyStroke) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.swing.text.JTextComponent.DefaultKeymap java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.JTextComponent.DefaultKeymap java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -4458,6 +4889,11 @@
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.swing.text.JTextComponent.DefaultKeymap javax.swing.text.Keymap getResolveParent()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.swing.text.JTextComponent.DefaultKeymap javax.swing.text.Keymap getResolveParent()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -4695,6 +5131,11 @@
   <item name="abstract virtual javax.swing.text.Keymap boolean isLocallyDefined(javax.swing.KeyStroke) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.swing.text.Keymap java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual javax.swing.text.Keymap javax.swing.Action getAction(javax.swing.KeyStroke) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -4706,6 +5147,11 @@
   </item>
   <item name="abstract virtual javax.swing.text.Keymap javax.swing.KeyStroke[] getKeyStrokesForAction(javax.swing.Action) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.swing.text.Keymap javax.swing.text.Keymap getResolveParent()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual javax.swing.text.Keymap void addActionForKeyStroke(javax.swing.KeyStroke, javax.swing.Action) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -4813,7 +5259,17 @@
   <item name="javax.swing.text.MaskFormatter java.lang.Object stringToValue(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.swing.text.MaskFormatter java.lang.String getInvalidCharacters()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.MaskFormatter java.lang.String getInvalidCharacters()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.MaskFormatter java.lang.String getMask()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -4823,7 +5279,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.MaskFormatter java.lang.String getPlaceholder()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.MaskFormatter java.lang.String getPlaceholder()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.MaskFormatter java.lang.String getValidCharacters()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -5005,6 +5471,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.NavigationFilter.FilterBypass FilterBypass()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual javax.swing.text.NavigationFilter.FilterBypass javax.swing.text.Caret getCaret()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -5254,6 +5725,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.PlainDocument javax.swing.text.Element getDefaultRootElement()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.PlainDocument javax.swing.text.Element getDefaultRootElement()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -5639,6 +6115,11 @@
   <item name="javax.swing.text.SimpleAttributeSet.EmptyAttributeSet java.lang.Object getAttribute(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.swing.text.SimpleAttributeSet.EmptyAttributeSet java.lang.Object getAttribute(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.SimpleAttributeSet.EmptyAttributeSet java.lang.Object getAttribute(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
@@ -5650,6 +6131,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.SimpleAttributeSet.EmptyAttributeSet java.util.Enumeration getAttributeNames()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.SimpleAttributeSet.EmptyAttributeSet javax.swing.text.AttributeSet copyAttributes()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -5657,7 +6143,15 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual javax.swing.text.SimpleAttributeSet.EmptyAttributeSet javax.swing.text.AttributeSet copyAttributes()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.swing.text.SimpleAttributeSet.EmptyAttributeSet javax.swing.text.AttributeSet getResolveParent()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.swing.text.SimpleAttributeSet.EmptyAttributeSet javax.swing.text.AttributeSet getResolveParent()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -5784,6 +6278,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.StyleConstants java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.StyleConstants java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -5959,6 +6458,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.StyleContext javax.swing.text.AttributeSet getEmptySet()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.StyleContext javax.swing.text.AttributeSet getEmptySet()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -6279,6 +6783,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual javax.swing.text.StyleContext.SmallAttributeSet java.lang.Object clone()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.StyleContext.SmallAttributeSet java.lang.Object getLocalAttribute(java.lang.Object)">
@@ -6303,7 +6810,15 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual javax.swing.text.StyleContext.SmallAttributeSet javax.swing.text.AttributeSet copyAttributes()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.swing.text.StyleContext.SmallAttributeSet javax.swing.text.AttributeSet getResolveParent()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.swing.text.StyleContext.SmallAttributeSet javax.swing.text.AttributeSet getResolveParent()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -6360,12 +6875,22 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.swing.text.StyledEditorKit javax.swing.text.Element getCharacterAttributeRun()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.StyledEditorKit javax.swing.text.MutableAttributeSet getInputAttributes()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="javax.swing.text.StyledEditorKit javax.swing.text.ViewFactory getViewFactory()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.StyledEditorKit javax.swing.text.ViewFactory getViewFactory()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -6393,6 +6918,11 @@
   </item>
   <item name="javax.swing.text.StyledEditorKit.1 java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.swing.text.StyledEditorKit.1 javax.swing.text.AttributeSet getResolveParent()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.swing.text.StyledEditorKit.1 javax.swing.text.AttributeSet getResolveParent()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -6531,6 +7061,11 @@
   </item>
   <item name="virtual javax.swing.text.TabSet java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.swing.text.TabSet javax.swing.text.TabStop getTabAfter(float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.swing.text.TabSet javax.swing.text.TabStop getTabAfter(float)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -6871,12 +7406,22 @@
   <item name="virtual javax.swing.text.TextLayoutStrategy.AttributedSegment java.util.Map&lt;java.text.AttributedCharacterIterator.Attribute,java.lang.Object&gt; getAttributes()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.swing.text.TextLayoutStrategy.AttributedSegment java.util.Set&lt;java.text.AttributedCharacterIterator.Attribute&gt; getAllAttributeKeys()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.TextLayoutStrategy.AttributedSegment java.util.Set&lt;java.text.AttributedCharacterIterator.Attribute&gt; getAllAttributeKeys()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="javax.swing.text.TextLayoutStrategy.AttributedSegment javax.swing.text.View getView()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.swing.text.TextLayoutStrategy.AttributedSegment javax.swing.text.View getView()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -7178,6 +7723,11 @@
   </item>
   <item name="virtual javax.swing.text.View javax.swing.text.View createFragment(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.swing.text.View javax.swing.text.View getParent()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="javax.swing.text.View javax.swing.text.View getParent()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -7576,6 +8126,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual javax.swing.text.ZoneView.Zone javax.swing.text.AttributeSet getAttributes()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.ZoneView.Zone void loadChildren(javax.swing.text.ViewFactory) 0">

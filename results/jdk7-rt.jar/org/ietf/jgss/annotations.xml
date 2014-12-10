@@ -19,6 +19,11 @@
   <item name="org.ietf.jgss.ChannelBinding byte[] getApplicationData()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual org.ietf.jgss.ChannelBinding java.net.InetAddress getAcceptorAddress()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="org.ietf.jgss.ChannelBinding java.net.InetAddress getAcceptorAddress()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -29,11 +34,21 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual org.ietf.jgss.ChannelBinding java.net.InetAddress getInitiatorAddress()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual org.ietf.jgss.GSSContext byte[] acceptSecContext(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual org.ietf.jgss.GSSContext byte[] initSecContext(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.ietf.jgss.GSSContext org.ietf.jgss.Oid getMech()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual org.ietf.jgss.GSSCredential boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -61,7 +76,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual org.ietf.jgss.GSSException java.lang.String getMajorString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="org.ietf.jgss.GSSException java.lang.String getMinorString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual org.ietf.jgss.GSSException java.lang.String getMinorString()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -164,8 +189,18 @@
   <item name="abstract virtual org.ietf.jgss.GSSName byte[] export()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual org.ietf.jgss.GSSName java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual org.ietf.jgss.GSSName org.ietf.jgss.GSSName canonicalize(org.ietf.jgss.Oid) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual org.ietf.jgss.GSSName org.ietf.jgss.Oid getStringNameType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="org.ietf.jgss.MessageProp boolean getPrivacy()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -198,6 +233,11 @@
     </annotation>
   </item>
   <item name="org.ietf.jgss.MessageProp int getQOP()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual org.ietf.jgss.MessageProp java.lang.String getMinorString()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>

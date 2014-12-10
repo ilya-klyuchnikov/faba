@@ -260,6 +260,11 @@
   <item name="com.sun.corba.se.impl.protocol.giopmsgheaders.LocateReplyMessage_1_2 void write(org.omg.CORBA.portable.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.corba.se.impl.protocol.giopmsgheaders.LocateReplyOrReplyMessage com.sun.corba.se.spi.ior.IOR getIOR()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.protocol.giopmsgheaders.LocateRequestMessage_1_0 int getRequestId()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -304,6 +309,16 @@
   </item>
   <item name="abstract virtual com.sun.corba.se.impl.protocol.giopmsgheaders.Message com.sun.corba.se.impl.protocol.giopmsgheaders.FragmentMessage createFragmentMessage()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.impl.protocol.giopmsgheaders.Message com.sun.corba.se.spi.ior.iiop.GIOPVersion getGIOPVersion()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.impl.protocol.giopmsgheaders.Message java.nio.ByteBuffer getByteBuffer()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual com.sun.corba.se.impl.protocol.giopmsgheaders.Message void callback(com.sun.corba.se.impl.protocol.giopmsgheaders.MessageHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -446,6 +461,11 @@
   <item name="com.sun.corba.se.impl.protocol.giopmsgheaders.MessageBase java.lang.String typeToString(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.giopmsgheaders.MessageBase java.nio.ByteBuffer getByteBuffer()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.protocol.giopmsgheaders.MessageBase java.nio.ByteBuffer getByteBuffer()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -489,6 +509,11 @@
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.protocol.giopmsgheaders.Message_1_0 com.sun.corba.se.spi.ior.iiop.GIOPVersion getGIOPVersion()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.giopmsgheaders.Message_1_0 com.sun.corba.se.spi.ior.iiop.GIOPVersion getGIOPVersion()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -539,6 +564,11 @@
   <item name="virtual com.sun.corba.se.impl.protocol.giopmsgheaders.Message_1_1 com.sun.corba.se.impl.protocol.giopmsgheaders.FragmentMessage createFragmentMessage()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.protocol.giopmsgheaders.Message_1_1 com.sun.corba.se.spi.ior.iiop.GIOPVersion getGIOPVersion()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.protocol.giopmsgheaders.Message_1_1 com.sun.corba.se.spi.ior.iiop.GIOPVersion getGIOPVersion()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -585,6 +615,11 @@
   </item>
   <item name="com.sun.corba.se.impl.protocol.giopmsgheaders.Message_1_2 void write(org.omg.CORBA.portable.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.impl.protocol.giopmsgheaders.ReplyMessage com.sun.corba.se.spi.servicecontext.ServiceContexts getServiceContexts()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.protocol.giopmsgheaders.ReplyMessage_1_0 ReplyMessage_1_0(com.sun.corba.se.spi.orb.ORB) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -714,6 +749,26 @@
   </item>
   <item name="com.sun.corba.se.impl.protocol.giopmsgheaders.ReplyMessage_1_2 void write(org.omg.CORBA.portable.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.impl.protocol.giopmsgheaders.RequestMessage byte[] getReserved()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.impl.protocol.giopmsgheaders.RequestMessage com.sun.corba.se.spi.servicecontext.ServiceContexts getServiceContexts()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.impl.protocol.giopmsgheaders.RequestMessage java.lang.String getOperation()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.impl.protocol.giopmsgheaders.RequestMessage org.omg.CORBA.Principal getPrincipal()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.protocol.giopmsgheaders.RequestMessage_1_0 boolean isResponseExpected()">
     <annotation name="org.jetbrains.annotations.Contract">

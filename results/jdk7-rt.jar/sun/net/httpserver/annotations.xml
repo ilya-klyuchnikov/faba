@@ -6,6 +6,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual sun.net.httpserver.AuthFilter java.lang.String description()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.net.httpserver.AuthFilter void consumeInput(com.sun.net.httpserver.HttpExchange) 0">
@@ -95,7 +98,17 @@
   <item name="sun.net.httpserver.ExchangeImpl com.sun.net.httpserver.Headers getRequestHeaders()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.net.httpserver.ExchangeImpl com.sun.net.httpserver.Headers getResponseHeaders()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.ExchangeImpl com.sun.net.httpserver.Headers getResponseHeaders()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.ExchangeImpl com.sun.net.httpserver.HttpPrincipal getPrincipal()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -122,6 +135,11 @@
   <item name="virtual sun.net.httpserver.ExchangeImpl java.lang.String getProtocol()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.net.httpserver.ExchangeImpl java.lang.String getRequestMethod()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.ExchangeImpl java.lang.String getRequestMethod()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -138,6 +156,11 @@
   </item>
   <item name="virtual sun.net.httpserver.ExchangeImpl java.net.InetSocketAddress getRemoteAddress()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.net.httpserver.ExchangeImpl java.net.URI getRequestURI()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="sun.net.httpserver.ExchangeImpl java.net.URI getRequestURI()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -160,7 +183,22 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.net.httpserver.ExchangeImpl sun.net.httpserver.HttpConnection getConnection()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.ExchangeImpl sun.net.httpserver.HttpContextImpl getHttpContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.ExchangeImpl sun.net.httpserver.HttpContextImpl getHttpContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.ExchangeImpl sun.net.httpserver.LeftOverInputStream getOriginalInputStream()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -171,6 +209,11 @@
     </annotation>
   </item>
   <item name="sun.net.httpserver.ExchangeImpl sun.net.httpserver.ServerImpl getServerImpl()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.ExchangeImpl sun.net.httpserver.ServerImpl getServerImpl()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -234,12 +277,27 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.net.httpserver.HttpConnection java.io.InputStream getInputStream()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.HttpConnection java.io.OutputStream getRawOutputStream()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.HttpConnection java.io.OutputStream getRawOutputStream()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="sun.net.httpserver.HttpConnection java.lang.String getProtocol()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.HttpConnection java.lang.String getProtocol()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -252,12 +310,32 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.net.httpserver.HttpConnection java.nio.channels.SelectionKey getSelectionKey()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.HttpConnection java.nio.channels.SocketChannel getChannel()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.net.httpserver.HttpConnection java.nio.channels.SocketChannel getChannel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.HttpConnection javax.net.ssl.SSLContext getSSLContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.HttpConnection javax.net.ssl.SSLContext getSSLContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.HttpConnection javax.net.ssl.SSLEngine getSSLEngine()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -272,7 +350,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.net.httpserver.HttpConnection sun.net.httpserver.HttpConnection.State getState()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.HttpConnection sun.net.httpserver.HttpContextImpl getHttpContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.HttpConnection sun.net.httpserver.HttpContextImpl getHttpContext()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -289,6 +377,11 @@
   <item name="sun.net.httpserver.HttpContextImpl HttpContextImpl(java.lang.String, java.lang.String, com.sun.net.httpserver.HttpHandler, sun.net.httpserver.ServerImpl) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.net.httpserver.HttpContextImpl com.sun.net.httpserver.Authenticator getAuthenticator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.HttpContextImpl com.sun.net.httpserver.Authenticator getAuthenticator()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -299,12 +392,32 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.net.httpserver.HttpContextImpl com.sun.net.httpserver.HttpHandler getHandler()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.HttpContextImpl com.sun.net.httpserver.HttpServer getServer()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.HttpContextImpl com.sun.net.httpserver.HttpServer getServer()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.net.httpserver.HttpContextImpl java.lang.String getPath()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.HttpContextImpl java.lang.String getPath()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.HttpContextImpl java.lang.String getProtocol()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -319,7 +432,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.net.httpserver.HttpContextImpl java.util.List&lt;com.sun.net.httpserver.Filter&gt; getFilters()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.HttpContextImpl java.util.List&lt;com.sun.net.httpserver.Filter&gt; getSystemFilters()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.HttpContextImpl java.util.List&lt;com.sun.net.httpserver.Filter&gt; getSystemFilters()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -329,7 +452,22 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.net.httpserver.HttpContextImpl java.util.Map&lt;java.lang.String,java.lang.Object&gt; getAttributes()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.HttpContextImpl java.util.logging.Logger getLogger()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.HttpContextImpl java.util.logging.Logger getLogger()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.HttpContextImpl sun.net.httpserver.ServerImpl getServerImpl()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -356,7 +494,22 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.net.httpserver.HttpExchangeImpl com.sun.net.httpserver.Headers getResponseHeaders()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.HttpExchangeImpl com.sun.net.httpserver.HttpContext getHttpContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.HttpExchangeImpl com.sun.net.httpserver.HttpContext getHttpContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.HttpExchangeImpl com.sun.net.httpserver.HttpPrincipal getPrincipal()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -383,6 +536,11 @@
   <item name="sun.net.httpserver.HttpExchangeImpl java.lang.String getProtocol()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.net.httpserver.HttpExchangeImpl java.lang.String getRequestMethod()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.HttpExchangeImpl java.lang.String getRequestMethod()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -400,7 +558,17 @@
   <item name="virtual sun.net.httpserver.HttpExchangeImpl java.net.InetSocketAddress getRemoteAddress()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.net.httpserver.HttpExchangeImpl java.net.URI getRequestURI()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.HttpExchangeImpl java.net.URI getRequestURI()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.HttpExchangeImpl sun.net.httpserver.ExchangeImpl getExchangeImpl()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -411,6 +579,11 @@
     </annotation>
   </item>
   <item name="sun.net.httpserver.HttpExchangeImpl sun.net.httpserver.HttpContextImpl getHttpContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.HttpExchangeImpl sun.net.httpserver.HttpContextImpl getHttpContext()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -462,6 +635,11 @@
   </item>
   <item name="virtual sun.net.httpserver.HttpServerImpl com.sun.net.httpserver.HttpContext createContext(java.lang.String, com.sun.net.httpserver.HttpHandler)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.net.httpserver.HttpServerImpl java.util.concurrent.Executor getExecutor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="sun.net.httpserver.HttpServerImpl java.util.concurrent.Executor getExecutor()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -527,12 +705,27 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.net.httpserver.HttpsExchangeImpl com.sun.net.httpserver.Headers getResponseHeaders()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.HttpsExchangeImpl com.sun.net.httpserver.HttpContext getHttpContext()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.net.httpserver.HttpsExchangeImpl com.sun.net.httpserver.HttpContext getHttpContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.HttpsExchangeImpl com.sun.net.httpserver.HttpPrincipal getPrincipal()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.HttpsExchangeImpl com.sun.net.httpserver.HttpPrincipal getPrincipal()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -559,6 +752,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.net.httpserver.HttpsExchangeImpl java.lang.String getRequestMethod()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.HttpsExchangeImpl java.net.InetSocketAddress getLocalAddress()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -576,6 +774,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.net.httpserver.HttpsExchangeImpl java.net.URI getRequestURI()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.HttpsExchangeImpl javax.net.ssl.SSLSession getSSLSession()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -584,7 +787,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.net.httpserver.HttpsExchangeImpl sun.net.httpserver.ExchangeImpl getExchangeImpl()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.HttpsExchangeImpl sun.net.httpserver.HttpContextImpl getHttpContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.HttpsExchangeImpl sun.net.httpserver.HttpContextImpl getHttpContext()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -637,7 +850,17 @@
   <item name="virtual sun.net.httpserver.HttpsServerImpl com.sun.net.httpserver.HttpContext createContext(java.lang.String, com.sun.net.httpserver.HttpHandler)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.net.httpserver.HttpsServerImpl com.sun.net.httpserver.HttpsConfigurator getHttpsConfigurator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.HttpsServerImpl com.sun.net.httpserver.HttpsConfigurator getHttpsConfigurator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.HttpsServerImpl java.util.concurrent.Executor getExecutor()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -724,6 +947,16 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.net.httpserver.Request java.io.InputStream inputStream()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.Request java.io.OutputStream outputStream()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.Request java.io.OutputStream outputStream()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -733,6 +966,11 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.net.httpserver.Request java.lang.String requestLine()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.Request java.lang.String requestLine()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -806,6 +1044,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.net.httpserver.SSLStreams javax.net.ssl.SSLEngine getSSLEngine()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.SSLStreams javax.net.ssl.SSLEngine getSSLEngine()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -900,12 +1143,27 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.net.httpserver.SSLStreams.Parameters com.sun.net.httpserver.HttpsConfigurator getHttpsConfigurator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.SSLStreams.Parameters java.net.InetSocketAddress getClientAddress()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.net.httpserver.SSLStreams.Parameters java.net.InetSocketAddress getClientAddress()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.SSLStreams.Parameters javax.net.ssl.SSLParameters getSSLParameters()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.SSLStreams.Parameters javax.net.ssl.SSLParameters getSSLParameters()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1012,12 +1270,22 @@
   <item name="sun.net.httpserver.ServerImpl boolean access$302(sun.net.httpserver.ServerImpl, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.net.httpserver.ServerImpl com.sun.net.httpserver.HttpServer getWrapper()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.ServerImpl com.sun.net.httpserver.HttpServer getWrapper()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="sun.net.httpserver.ServerImpl com.sun.net.httpserver.HttpsConfigurator getHttpsConfigurator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.ServerImpl com.sun.net.httpserver.HttpsConfigurator getHttpsConfigurator()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1050,6 +1318,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.net.httpserver.ServerImpl java.nio.channels.Selector access$700(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.ServerImpl java.nio.channels.Selector getSelector()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1128,10 +1401,20 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.net.httpserver.ServerImpl java.util.concurrent.Executor getExecutor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.ServerImpl java.util.logging.Logger access$600(sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.net.httpserver.ServerImpl java.util.logging.Logger access$600(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.net.httpserver.ServerImpl java.util.logging.Logger getLogger()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>

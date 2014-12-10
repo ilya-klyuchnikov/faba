@@ -30,6 +30,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.net.httpserver.Authenticator.Success com.sun.net.httpserver.HttpPrincipal getPrincipal()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.net.httpserver.Base64 Base64()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -91,12 +96,20 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.net.httpserver.BasicAuthenticator java.lang.String getRealm()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.net.httpserver.Filter Filter()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="abstract virtual com.sun.net.httpserver.Filter java.lang.String description()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.net.httpserver.Filter.Chain Chain(java.util.List&lt;com.sun.net.httpserver.Filter&gt;, com.sun.net.httpserver.HttpHandler) 0">
@@ -191,6 +204,36 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpContext com.sun.net.httpserver.Authenticator getAuthenticator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpContext com.sun.net.httpserver.HttpHandler getHandler()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpContext com.sun.net.httpserver.HttpServer getServer()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpContext java.lang.String getPath()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpContext java.util.List&lt;com.sun.net.httpserver.Filter&gt; getFilters()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpContext java.util.Map&lt;java.lang.String,java.lang.Object&gt; getAttributes()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual com.sun.net.httpserver.HttpContext void setHandler(com.sun.net.httpserver.HttpHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -202,17 +245,42 @@
   <item name="abstract virtual com.sun.net.httpserver.HttpExchange com.sun.net.httpserver.Headers getRequestHeaders()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpExchange com.sun.net.httpserver.Headers getResponseHeaders()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpExchange com.sun.net.httpserver.HttpContext getHttpContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpExchange com.sun.net.httpserver.HttpPrincipal getPrincipal()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual com.sun.net.httpserver.HttpExchange java.lang.Object getAttribute(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual com.sun.net.httpserver.HttpExchange java.lang.String getProtocol()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpExchange java.lang.String getRequestMethod()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual com.sun.net.httpserver.HttpExchange java.net.InetSocketAddress getLocalAddress()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual com.sun.net.httpserver.HttpExchange java.net.InetSocketAddress getRemoteAddress()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpExchange java.net.URI getRequestURI()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual com.sun.net.httpserver.HttpExchange void setAttribute(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -240,6 +308,11 @@
       <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.net.httpserver.HttpPrincipal java.lang.String getName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.net.httpserver.HttpPrincipal java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -250,7 +323,22 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.net.httpserver.HttpPrincipal java.lang.String getRealm()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.net.httpserver.HttpPrincipal java.lang.String getUsername()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.net.httpserver.HttpPrincipal java.lang.String getUsername()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.net.httpserver.HttpPrincipal java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -286,6 +374,11 @@
   <item name="com.sun.net.httpserver.HttpServer com.sun.net.httpserver.HttpServer create(java.net.InetSocketAddress, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpServer java.util.concurrent.Executor getExecutor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual com.sun.net.httpserver.HttpServer void bind(java.net.InetSocketAddress, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -299,6 +392,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.net.httpserver.HttpsConfigurator javax.net.ssl.SSLContext getSSLContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.net.httpserver.HttpsConfigurator javax.net.ssl.SSLContext getSSLContext()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -329,11 +427,21 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpsParameters com.sun.net.httpserver.HttpsConfigurator getHttpsConfigurator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.net.httpserver.HttpsParameters java.lang.String[] getCipherSuites()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.net.httpserver.HttpsParameters java.lang.String[] getProtocols()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpsParameters java.net.InetSocketAddress getClientAddress()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.net.httpserver.HttpsParameters void setCipherSuites(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -348,6 +456,11 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.net.httpserver.HttpsServer HttpsServer()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpsServer com.sun.net.httpserver.HttpsConfigurator getHttpsConfigurator()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>

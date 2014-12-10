@@ -109,6 +109,11 @@
   <item name="virtual com.sun.xml.internal.stream.buffer.sax.SAXBufferCreator org.xml.sax.InputSource resolveEntity(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.xml.internal.stream.buffer.sax.SAXBufferCreator org.xml.sax.InputSource resolveEntity(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.stream.buffer.sax.SAXBufferCreator org.xml.sax.InputSource resolveEntity(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;,pure=true"/>
@@ -353,6 +358,11 @@
   <item name="virtual com.sun.xml.internal.stream.buffer.sax.SAXBufferProcessor java.lang.Object getProperty(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.xml.internal.stream.buffer.sax.SAXBufferProcessor org.xml.sax.ContentHandler getContentHandler()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.stream.buffer.sax.SAXBufferProcessor org.xml.sax.ContentHandler getContentHandler()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -363,7 +373,22 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.xml.internal.stream.buffer.sax.SAXBufferProcessor org.xml.sax.DTDHandler getDTDHandler()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.xml.internal.stream.buffer.sax.SAXBufferProcessor org.xml.sax.EntityResolver getEntityResolver()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.stream.buffer.sax.SAXBufferProcessor org.xml.sax.EntityResolver getEntityResolver()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.xml.internal.stream.buffer.sax.SAXBufferProcessor org.xml.sax.ErrorHandler getErrorHandler()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -375,6 +400,11 @@
   </item>
   <item name="com.sun.xml.internal.stream.buffer.sax.SAXBufferProcessor org.xml.sax.SAXParseException reportFatalError(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.xml.internal.stream.buffer.sax.SAXBufferProcessor org.xml.sax.ext.LexicalHandler getLexicalHandler()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.stream.buffer.sax.SAXBufferProcessor org.xml.sax.ext.LexicalHandler getLexicalHandler()">
     <annotation name="org.jetbrains.annotations.Contract">

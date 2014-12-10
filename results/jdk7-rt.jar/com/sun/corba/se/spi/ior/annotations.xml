@@ -22,6 +22,16 @@
   <item name="abstract virtual com.sun.corba.se.spi.ior.IOR com.sun.corba.se.spi.ior.iiop.IIOPProfile getProfile()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.IOR com.sun.corba.se.spi.orb.ORB getORB()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.IOR java.lang.String getTypeId()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual com.sun.corba.se.spi.ior.IOR java.lang.String stringify()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -142,6 +152,11 @@
   <item name="abstract virtual com.sun.corba.se.spi.ior.IORFactory com.sun.corba.se.spi.ior.IOR makeIOR(com.sun.corba.se.spi.orb.ORB, java.lang.String, com.sun.corba.se.spi.ior.ObjectId)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.IORTemplate com.sun.corba.se.spi.ior.ObjectKeyTemplate getObjectKeyTemplate()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual com.sun.corba.se.spi.ior.IORTemplate java.util.Iterator iteratorById(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -179,8 +194,23 @@
   <item name="abstract virtual com.sun.corba.se.spi.ior.IdentifiableFactoryFinder void registerFactory(com.sun.corba.se.spi.ior.IdentifiableFactory) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.ObjectId byte[] getId()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual com.sun.corba.se.spi.ior.ObjectKey byte[] getBytes(org.omg.CORBA.ORB)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.ObjectKey com.sun.corba.se.spi.ior.ObjectId getId()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.ObjectKey com.sun.corba.se.spi.ior.ObjectKeyTemplate getTemplate()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual com.sun.corba.se.spi.ior.ObjectKeyFactory com.sun.corba.se.spi.ior.ObjectKey create(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -219,6 +249,21 @@
   </item>
   <item name="abstract virtual com.sun.corba.se.spi.ior.TaggedProfile boolean isEquivalent(com.sun.corba.se.spi.ior.TaggedProfile) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.TaggedProfile com.sun.corba.se.spi.ior.ObjectId getObjectId()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.TaggedProfile com.sun.corba.se.spi.ior.ObjectKeyTemplate getObjectKeyTemplate()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.TaggedProfile com.sun.corba.se.spi.ior.TaggedProfileTemplate getTaggedProfileTemplate()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual com.sun.corba.se.spi.ior.TaggedProfile org.omg.IOP.TaggedProfile getIOPProfile()">
     <annotation name="org.jetbrains.annotations.NotNull"/>

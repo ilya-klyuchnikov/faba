@@ -31,6 +31,51 @@
   <item name="abstract virtual com.sun.org.apache.xml.internal.dtm.DTM int getAttributeNode(int, java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual com.sun.org.apache.xml.internal.dtm.DTM java.lang.String getDocumentBaseURI()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.org.apache.xml.internal.dtm.DTM java.lang.String getDocumentEncoding(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.org.apache.xml.internal.dtm.DTM java.lang.String getDocumentStandalone(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.org.apache.xml.internal.dtm.DTM java.lang.String getDocumentSystemIdentifier(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.org.apache.xml.internal.dtm.DTM java.lang.String getDocumentVersion(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.org.apache.xml.internal.dtm.DTM org.xml.sax.DTDHandler getDTDHandler()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.org.apache.xml.internal.dtm.DTM org.xml.sax.EntityResolver getEntityResolver()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.org.apache.xml.internal.dtm.DTM org.xml.sax.ErrorHandler getErrorHandler()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.org.apache.xml.internal.dtm.DTM org.xml.sax.ext.DeclHandler getDeclHandler()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual com.sun.org.apache.xml.internal.dtm.DTM void appendTextChild(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -75,6 +120,11 @@
   <item name="com.sun.org.apache.xml.internal.dtm.DTMException java.lang.String getMessageAndLocation()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.dtm.DTMException java.lang.Throwable getCause()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.dtm.DTMException java.lang.Throwable getCause()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -86,11 +136,21 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.dtm.DTMException java.lang.Throwable getException()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.dtm.DTMException java.lang.Throwable initCause(java.lang.Throwable)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.dtm.DTMException java.lang.Throwable initCause(java.lang.Throwable)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.dtm.DTMException javax.xml.transform.SourceLocator getLocator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.dtm.DTMException javax.xml.transform.SourceLocator getLocator()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -111,6 +171,11 @@
   </item>
   <item name="abstract virtual com.sun.org.apache.xml.internal.dtm.DTMIterator com.sun.org.apache.xml.internal.dtm.DTMIterator cloneWithReset()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.org.apache.xml.internal.dtm.DTMIterator com.sun.org.apache.xml.internal.dtm.DTMManager getDTMManager()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.dtm.DTMManager boolean getIncremental()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -133,6 +198,11 @@
   <item name="com.sun.org.apache.xml.internal.dtm.DTMManager com.sun.org.apache.xml.internal.dtm.DTMManager newInstance(com.sun.org.apache.xml.internal.utils.XMLStringFactory, boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.dtm.DTMManager com.sun.org.apache.xml.internal.utils.XMLStringFactory getXMLStringFactory()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.dtm.DTMManager com.sun.org.apache.xml.internal.utils.XMLStringFactory getXMLStringFactory()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -149,6 +219,11 @@
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.dtm.DTMManager.ConfigurationError java.lang.Exception getException()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.dtm.DTMManager.ConfigurationError java.lang.Exception getException()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>

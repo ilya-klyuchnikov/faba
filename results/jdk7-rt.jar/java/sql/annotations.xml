@@ -17,6 +17,11 @@
   <item name="abstract virtual java.sql.Array java.lang.Object getArray(long, int, java.util.Map&lt;java.lang.String,java.lang.Class&lt;?&gt;&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.sql.Array java.lang.String getBaseTypeName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual java.sql.Array java.sql.ResultSet getResultSet(java.util.Map&lt;java.lang.String,java.lang.Class&lt;?&gt;&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -240,6 +245,11 @@
   <item name="abstract virtual java.sql.Ref java.lang.Object getObject(java.util.Map&lt;java.lang.String,java.lang.Class&lt;?&gt;&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.sql.Ref java.lang.String getBaseTypeName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual java.sql.ResultSet T getObject(int, java.lang.Class&lt;T&gt;) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -431,6 +441,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.sql.SQLClientInfoException java.util.Map&lt;java.lang.String,java.sql.ClientInfoStatus&gt; getFailedProperties()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.sql.SQLException int getErrorCode()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -441,7 +456,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.sql.SQLException java.lang.String getSQLState()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.sql.SQLException java.sql.SQLException getNextException()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.sql.SQLException java.sql.SQLException getNextException()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -490,8 +515,23 @@
   <item name="java.sql.SQLPermission SQLPermission(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual java.sql.Struct java.lang.Object[] getAttributes()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual java.sql.Struct java.lang.Object[] getAttributes(java.util.Map&lt;java.lang.String,java.lang.Class&lt;?&gt;&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual java.sql.Struct java.lang.Object[] getAttributes(java.util.Map&lt;java.lang.String,java.lang.Class&lt;?&gt;&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual java.sql.Struct java.lang.String getSQLTypeName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="virtual java.sql.Time java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>

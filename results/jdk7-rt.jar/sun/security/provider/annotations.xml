@@ -60,6 +60,11 @@
   <item name="sun.security.provider.DSA java.lang.Object engineGetParameter(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.security.provider.DSA java.lang.Object engineGetParameter(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.security.provider.DSA java.lang.Object engineGetParameter(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -484,6 +489,11 @@
   </item>
   <item name="sun.security.provider.DSAPublicKey java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.security.provider.DSAPublicKey java.math.BigInteger getY()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="sun.security.provider.DSAPublicKey java.math.BigInteger getY()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1064,6 +1074,16 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.security.provider.PolicyFile.PolicyEntry java.security.CodeSource getCodeSource()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.security.provider.PolicyFile.PolicyEntry java.util.List&lt;sun.security.provider.PolicyParser.PrincipalEntry&gt; getPrincipals()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.security.provider.PolicyFile.PolicyEntry java.util.List&lt;sun.security.provider.PolicyParser.PrincipalEntry&gt; getPrincipals()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1092,16 +1112,29 @@
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.security.provider.PolicyFile.SelfPermission java.lang.String getActions()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.provider.PolicyFile.SelfPermission java.lang.String getActions()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual sun.security.provider.PolicyFile.SelfPermission java.lang.String getActions()">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
+  <item name="virtual sun.security.provider.PolicyFile.SelfPermission java.lang.String getSelfActions()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="sun.security.provider.PolicyFile.SelfPermission java.lang.String getSelfActions()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.security.provider.PolicyFile.SelfPermission java.lang.String getSelfName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1116,11 +1149,21 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.security.provider.PolicyFile.SelfPermission java.lang.String getSelfType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="virtual sun.security.provider.PolicyFile.SelfPermission java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.provider.PolicyFile.SelfPermission java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.security.provider.PolicyFile.SelfPermission java.security.cert.Certificate[] getCerts()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="sun.security.provider.PolicyFile.SelfPermission java.security.cert.Certificate[] getCerts()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1151,6 +1194,16 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.security.provider.PolicyParser java.lang.String getKeyStoreProvider()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.security.provider.PolicyParser java.lang.String getKeyStoreProvider()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.security.provider.PolicyParser java.lang.String getKeyStoreType()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1264,6 +1317,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.security.provider.PolicyParser.ParsingException java.lang.String getLocalizedMessage()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.security.provider.PolicyParser.PermissionEntry PermissionEntry()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1303,12 +1361,27 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.security.provider.PolicyParser.PrincipalEntry java.lang.String getDisplayClass()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.security.provider.PolicyParser.PrincipalEntry java.lang.String getDisplayClass()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.security.provider.PolicyParser.PrincipalEntry java.lang.String getPrincipalClass()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.security.provider.PolicyParser.PrincipalEntry java.lang.String getPrincipalClass()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.security.provider.PolicyParser.PrincipalEntry java.lang.String getPrincipalName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
