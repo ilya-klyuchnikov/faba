@@ -40,6 +40,9 @@
   <item name="abstract virtual javax.xml.bind.Binder void marshal(java.lang.Object, XmlNode) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.bind.Binder void setEventHandler(javax.xml.bind.ValidationEventHandler) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="abstract virtual javax.xml.bind.Binder void setProperty(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -649,6 +652,9 @@
   <item name="javax.xml.bind.DatatypeConverterImpl.CalendarFormatter void formatYear(java.util.Calendar, java.lang.StringBuilder) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.bind.DatatypeConverterInterface boolean parseBoolean(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="abstract virtual javax.xml.bind.DatatypeConverterInterface byte parseByte(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -806,6 +812,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.xml.bind.JAXBContext javax.xml.bind.Binder&lt;T&gt; createBinder(java.lang.Class&lt;T&gt;) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.xml.bind.JAXBContext javax.xml.bind.Binder&lt;T&gt; createBinder(java.lang.Class&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -947,8 +956,14 @@
   <item name="abstract virtual javax.xml.bind.Marshaller void marshal(java.lang.Object, org.xml.sax.ContentHandler) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.bind.Marshaller void setAdapter(java.lang.Class&lt;A&gt;, A) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="abstract virtual javax.xml.bind.Marshaller void setAdapter(javax.xml.bind.annotation.adapters.XmlAdapter) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.bind.Marshaller void setEventHandler(javax.xml.bind.ValidationEventHandler) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual javax.xml.bind.Marshaller void setProperty(java.lang.String, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -958,6 +973,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.xml.bind.Marshaller.Listener void afterMarshal(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.xml.bind.Marshaller.Listener void afterMarshal(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -965,6 +983,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual javax.xml.bind.Marshaller.Listener void beforeMarshal(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.xml.bind.Marshaller.Listener void beforeMarshal(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1036,8 +1057,14 @@
   <item name="abstract virtual javax.xml.bind.Unmarshaller java.lang.Object unmarshal(org.xml.sax.InputSource) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.bind.Unmarshaller void setAdapter(java.lang.Class&lt;A&gt;, A) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="abstract virtual javax.xml.bind.Unmarshaller void setAdapter(javax.xml.bind.annotation.adapters.XmlAdapter) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.bind.Unmarshaller void setEventHandler(javax.xml.bind.ValidationEventHandler) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual javax.xml.bind.Unmarshaller void setProperty(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1050,7 +1077,13 @@
   <item name="javax.xml.bind.Unmarshaller.Listener void afterUnmarshal(java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.xml.bind.Unmarshaller.Listener void afterUnmarshal(java.lang.Object, java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.xml.bind.Unmarshaller.Listener void afterUnmarshal(java.lang.Object, java.lang.Object) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.xml.bind.Unmarshaller.Listener void afterUnmarshal(java.lang.Object, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.xml.bind.Unmarshaller.Listener void afterUnmarshal(java.lang.Object, java.lang.Object)">
@@ -1059,6 +1092,12 @@
     </annotation>
   </item>
   <item name="javax.xml.bind.Unmarshaller.Listener void beforeUnmarshal(java.lang.Object, java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.xml.bind.Unmarshaller.Listener void beforeUnmarshal(java.lang.Object, java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.xml.bind.Unmarshaller.Listener void beforeUnmarshal(java.lang.Object, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.xml.bind.Unmarshaller.Listener void beforeUnmarshal(java.lang.Object, java.lang.Object) 1">

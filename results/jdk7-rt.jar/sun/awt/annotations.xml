@@ -192,6 +192,9 @@
   <item name="abstract virtual sun.awt.AWTAccessor.ComponentAccessor void setPeer(java.awt.Component, java.awt.peer.ComponentPeer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual sun.awt.AWTAccessor.ComponentAccessor void setRequestFocusController(sun.awt.RequestFocusController) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="abstract virtual sun.awt.AWTAccessor.ComponentAccessor void setSize(java.awt.Component, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -210,6 +213,9 @@
   <item name="abstract virtual sun.awt.AWTAccessor.DefaultKeyboardFocusManagerAccessor void consumeNextKeyTyped(java.awt.DefaultKeyboardFocusManager, java.awt.event.KeyEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual sun.awt.AWTAccessor.DefaultKeyboardFocusManagerAccessor void consumeNextKeyTyped(java.awt.DefaultKeyboardFocusManager, java.awt.event.KeyEvent) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="abstract virtual sun.awt.AWTAccessor.EventQueueAccessor boolean isDispatchThreadImpl(java.awt.EventQueue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -224,6 +230,9 @@
   </item>
   <item name="abstract virtual sun.awt.AWTAccessor.EventQueueAccessor void removeSourceEvents(java.awt.EventQueue, java.lang.Object, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual sun.awt.AWTAccessor.EventQueueAccessor void removeSourceEvents(java.awt.EventQueue, java.lang.Object, boolean) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual sun.awt.AWTAccessor.EventQueueAccessor void wakeup(java.awt.EventQueue, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -260,6 +269,9 @@
   </item>
   <item name="abstract virtual sun.awt.AWTAccessor.KeyboardFocusManagerAccessor java.awt.KeyboardFocusManager getCurrentKeyboardFocusManager(sun.awt.AppContext) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual sun.awt.AWTAccessor.KeyboardFocusManagerAccessor void setMostRecentFocusOwner(java.awt.Window, java.awt.Component) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual sun.awt.AWTAccessor.MenuAccessor java.util.Vector getItems(java.awt.Menu) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -302,6 +314,9 @@
   </item>
   <item name="abstract virtual sun.awt.AWTAccessor.ScrollPaneAdjustableAccessor void setTypedValue(java.awt.ScrollPaneAdjustable, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual sun.awt.AWTAccessor.SequencedEventAccessor boolean isSequencedEvent(java.awt.AWTEvent) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual sun.awt.AWTAccessor.SequencedEventAccessor java.awt.AWTEvent getNested(java.awt.AWTEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -423,6 +438,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.AWTCharset.Encoder boolean isLegalReplacement(byte[]) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.AWTCharset.Encoder boolean isLegalReplacement(byte[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.AWTCharset.Encoder boolean isLegalReplacement(byte[])">
@@ -810,6 +828,9 @@
   <item name="sun.awt.CGraphicsConfig long createBackBuffer(sun.lwawt.macosx.CPlatformView, int, java.awt.BufferCapabilities) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.CGraphicsConfig long createBackBuffer(sun.lwawt.macosx.CPlatformView, int, java.awt.BufferCapabilities) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.CGraphicsConfig long createBackBuffer(sun.lwawt.macosx.CPlatformView, int, java.awt.BufferCapabilities) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -834,6 +855,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.CGraphicsConfig void flip(sun.lwawt.macosx.CPlatformView, java.awt.Component, java.awt.image.VolatileImage, int, int, int, int, java.awt.BufferCapabilities.FlipContents) 7">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.CGraphicsConfig void flip(sun.lwawt.macosx.CPlatformView, java.awt.Component, java.awt.image.VolatileImage, int, int, int, int, java.awt.BufferCapabilities.FlipContents) 7">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.CGraphicsDevice boolean isDisplayChangeSupported()">
@@ -937,11 +961,17 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual sun.awt.ComponentFactory java.awt.peer.RobotPeer createRobot(java.awt.Robot, java.awt.GraphicsDevice) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.CustomCursor CustomCursor(java.awt.Image, java.awt.Point, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.CustomCursor CustomCursor(java.awt.Image, java.awt.Point, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual sun.awt.CustomCursor void createNativeCursor(java.awt.Image, int[], int, int, int, int) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual sun.awt.CustomCursor void createNativeCursor(java.awt.Image, int[], int, int, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1041,6 +1071,9 @@
   <item name="sun.awt.EmbeddedFrame void addTraversingOutListeners(java.awt.KeyboardFocusManager) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.awt.EmbeddedFrame void notifyModalBlocked(java.awt.Dialog, boolean) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.EmbeddedFrame void notifyModalBlocked(java.awt.Dialog, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1055,6 +1088,12 @@
   <item name="virtual sun.awt.EmbeddedFrame void propertyChange(java.beans.PropertyChangeEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual sun.awt.EmbeddedFrame void registerAccelerator(java.awt.AWTKeyStroke) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.EmbeddedFrame void remove(java.awt.MenuComponent) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.EmbeddedFrame void remove(java.awt.MenuComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1066,6 +1105,9 @@
   <item name="sun.awt.EmbeddedFrame void removeTraversingOutListeners(java.awt.KeyboardFocusManager) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.awt.EmbeddedFrame void setIconImage(java.awt.Image) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.EmbeddedFrame void setIconImage(java.awt.Image) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1074,6 +1116,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.awt.EmbeddedFrame void setIconImages(java.util.List&lt;? extends java.awt.Image&gt;) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.EmbeddedFrame void setIconImages(java.util.List&lt;? extends java.awt.Image&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1081,6 +1126,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual sun.awt.EmbeddedFrame void setMenuBar(java.awt.MenuBar) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.EmbeddedFrame void setMenuBar(java.awt.MenuBar) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1096,6 +1144,9 @@
     </annotation>
   </item>
   <item name="sun.awt.EmbeddedFrame void setTitle(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.EmbeddedFrame void setTitle(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.EmbeddedFrame void setTitle(java.lang.String)">
@@ -1117,6 +1168,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="abstract virtual sun.awt.EmbeddedFrame void unregisterAccelerator(java.awt.AWTKeyStroke) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.EmbeddedFrame.NullEmbeddedFramePeer NullEmbeddedFramePeer()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1165,6 +1219,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.awt.EmbeddedFrame.NullEmbeddedFramePeer void setIconImage(java.awt.Image) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.EmbeddedFrame.NullEmbeddedFramePeer void setIconImage(java.awt.Image) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1172,6 +1229,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual sun.awt.EmbeddedFrame.NullEmbeddedFramePeer void setMaximizedBounds(java.awt.Rectangle) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.EmbeddedFrame.NullEmbeddedFramePeer void setMaximizedBounds(java.awt.Rectangle) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1181,6 +1241,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.awt.EmbeddedFrame.NullEmbeddedFramePeer void setMenuBar(java.awt.MenuBar) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.EmbeddedFrame.NullEmbeddedFramePeer void setMenuBar(java.awt.MenuBar) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1188,6 +1251,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual sun.awt.EmbeddedFrame.NullEmbeddedFramePeer void setModalBlocked(java.awt.Dialog, boolean) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.EmbeddedFrame.NullEmbeddedFramePeer void setModalBlocked(java.awt.Dialog, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1218,6 +1284,9 @@
     </annotation>
   </item>
   <item name="sun.awt.EmbeddedFrame.NullEmbeddedFramePeer void setTitle(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.EmbeddedFrame.NullEmbeddedFramePeer void setTitle(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.EmbeddedFrame.NullEmbeddedFramePeer void setTitle(java.lang.String)">
@@ -1298,10 +1367,16 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.awt.FocusingTextField boolean gotFocus(java.awt.Event, java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.FocusingTextField boolean gotFocus(java.awt.Event, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.FocusingTextField boolean gotFocus(java.awt.Event, java.lang.Object) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.FocusingTextField boolean gotFocus(java.awt.Event, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.FocusingTextField boolean gotFocus(java.awt.Event, java.lang.Object)">
@@ -1310,6 +1385,12 @@
     </annotation>
   </item>
   <item name="sun.awt.FocusingTextField boolean lostFocus(java.awt.Event, java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.FocusingTextField boolean lostFocus(java.awt.Event, java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.FocusingTextField boolean lostFocus(java.awt.Event, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.FocusingTextField boolean lostFocus(java.awt.Event, java.lang.Object) 1">
@@ -1407,6 +1488,9 @@
   <item name="sun.awt.FontConfiguration java.lang.String getComponentFontName(short)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual sun.awt.FontConfiguration java.lang.String getEncoding(java.lang.String, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.FontConfiguration java.lang.String getExtraFontPath()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1443,6 +1527,9 @@
   <item name="sun.awt.FontConfiguration java.lang.String makeAWTFontName(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.FontConfiguration java.lang.String makeAWTFontName(java.lang.String, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.FontConfiguration java.lang.String makeAWTFontName(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;!null;null,_-&gt;null&quot;,pure=true"/>
@@ -1473,6 +1560,9 @@
   </item>
   <item name="virtual sun.awt.FontConfiguration java.lang.String[] split(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual sun.awt.FontConfiguration java.nio.charset.Charset getDefaultFontCharset(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.FontConfiguration java.nio.charset.CharsetEncoder getFontCharsetEncoder(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1715,6 +1805,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.awt.FontConfiguration void getInstalledFallbackFonts(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.FontConfiguration void getInstalledFallbackFonts(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1813,6 +1906,9 @@
   <item name="sun.awt.GlobalCursorManager void access$000(sun.awt.GlobalCursorManager, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual sun.awt.GlobalCursorManager void setCursor(java.awt.Component, java.awt.Cursor, boolean) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="virtual sun.awt.GlobalCursorManager void updateCursorImmediately(java.awt.event.InputEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1820,6 +1916,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.GlobalCursorManager void updateCursorLater(java.awt.Component) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.GlobalCursorManager void updateCursorLater(java.awt.Component) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.GlobalCursorManager void updateCursorOutOfJava()">
@@ -1830,16 +1929,31 @@
   <item name="sun.awt.GlobalCursorManager.NativeUpdater void postIfNotPending(java.awt.Component, java.awt.event.InvocationEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.GlobalCursorManager.NativeUpdater void postIfNotPending(java.awt.Component, java.awt.event.InvocationEvent) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener) 4">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener)">
@@ -1853,6 +1967,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.awt.HToolkit boolean isModalExclusionTypeSupported(java.awt.Dialog.ModalExclusionType) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit boolean isModalExclusionTypeSupported(java.awt.Dialog.ModalExclusionType) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1860,6 +1977,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual sun.awt.HToolkit boolean isModalityTypeSupported(java.awt.Dialog.ModalityType) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HToolkit boolean isModalityTypeSupported(java.awt.Dialog.ModalityType) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1902,10 +2022,22 @@
   <item name="sun.awt.HToolkit java.awt.Cursor createCustomCursor(java.awt.Image, java.awt.Point, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HToolkit java.awt.Cursor createCustomCursor(java.awt.Image, java.awt.Point, java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit java.awt.Cursor createCustomCursor(java.awt.Image, java.awt.Point, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit java.awt.Cursor createCustomCursor(java.awt.Image, java.awt.Point, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HToolkit java.awt.Cursor createCustomCursor(java.awt.Image, java.awt.Point, java.lang.String) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit java.awt.Cursor createCustomCursor(java.awt.Image, java.awt.Point, java.lang.String) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit java.awt.Insets getScreenInsets(java.awt.GraphicsConfiguration) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HToolkit java.awt.Insets getScreenInsets(java.awt.GraphicsConfiguration) 0">
@@ -1917,13 +2049,22 @@
   <item name="virtual sun.awt.HToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.awt.JobAttributes, java.awt.PageAttributes) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.awt.HToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.awt.JobAttributes, java.awt.PageAttributes) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.awt.JobAttributes, java.awt.PageAttributes) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.awt.JobAttributes, java.awt.PageAttributes) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.awt.JobAttributes, java.awt.PageAttributes) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.awt.JobAttributes, java.awt.PageAttributes) 3">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.awt.JobAttributes, java.awt.PageAttributes) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="virtual sun.awt.HToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.util.Properties) 0">
@@ -1935,10 +2076,19 @@
   <item name="sun.awt.HToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.util.Properties) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.util.Properties) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.util.Properties) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.util.Properties) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HToolkit java.awt.dnd.peer.DragSourceContextPeer createDragSourceContextPeer(java.awt.dnd.DragGestureEvent) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit java.awt.dnd.peer.DragSourceContextPeer createDragSourceContextPeer(java.awt.dnd.DragGestureEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HToolkit java.awt.im.spi.InputMethodDescriptor getInputMethodAdapterDescriptor()">
@@ -1946,10 +2096,19 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.ButtonPeer createButton(java.awt.Button) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit java.awt.peer.ButtonPeer createButton(java.awt.Button) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.CheckboxMenuItemPeer createCheckboxMenuItem(java.awt.CheckboxMenuItem) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit java.awt.peer.CheckboxMenuItemPeer createCheckboxMenuItem(java.awt.CheckboxMenuItem) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.CheckboxPeer createCheckbox(java.awt.Checkbox) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HToolkit java.awt.peer.CheckboxPeer createCheckbox(java.awt.Checkbox) 0">
@@ -1958,13 +2117,28 @@
   <item name="sun.awt.HToolkit java.awt.peer.ChoicePeer createChoice(java.awt.Choice) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.ChoicePeer createChoice(java.awt.Choice) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.DesktopPeer createDesktopPeer(java.awt.Desktop) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit java.awt.peer.DesktopPeer createDesktopPeer(java.awt.Desktop) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.DialogPeer createDialog(java.awt.Dialog) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HToolkit java.awt.peer.DialogPeer createDialog(java.awt.Dialog) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HToolkit java.awt.peer.FileDialogPeer createFileDialog(java.awt.FileDialog) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.FileDialogPeer createFileDialog(java.awt.FileDialog) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.FontPeer getFontPeer(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HToolkit java.awt.peer.FontPeer getFontPeer(java.lang.String, int) 0">
@@ -1975,6 +2149,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.FramePeer createFrame(java.awt.Frame) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit java.awt.peer.FramePeer createFrame(java.awt.Frame) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1983,10 +2160,19 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.LabelPeer createLabel(java.awt.Label) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit java.awt.peer.LabelPeer createLabel(java.awt.Label) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.ListPeer createList(java.awt.List) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit java.awt.peer.ListPeer createList(java.awt.List) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.MenuBarPeer createMenuBar(java.awt.MenuBar) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HToolkit java.awt.peer.MenuBarPeer createMenuBar(java.awt.MenuBar) 0">
@@ -1995,13 +2181,28 @@
   <item name="sun.awt.HToolkit java.awt.peer.MenuItemPeer createMenuItem(java.awt.MenuItem) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.MenuItemPeer createMenuItem(java.awt.MenuItem) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.MenuPeer createMenu(java.awt.Menu) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit java.awt.peer.MenuPeer createMenu(java.awt.Menu) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.PopupMenuPeer createPopupMenu(java.awt.PopupMenu) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HToolkit java.awt.peer.PopupMenuPeer createPopupMenu(java.awt.PopupMenu) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.RobotPeer createRobot(java.awt.Robot, java.awt.GraphicsDevice) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit java.awt.peer.RobotPeer createRobot(java.awt.Robot, java.awt.GraphicsDevice) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.RobotPeer createRobot(java.awt.Robot, java.awt.GraphicsDevice) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HToolkit java.awt.peer.RobotPeer createRobot(java.awt.Robot, java.awt.GraphicsDevice) 1">
@@ -2010,7 +2211,16 @@
   <item name="sun.awt.HToolkit java.awt.peer.ScrollPanePeer createScrollPane(java.awt.ScrollPane) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.ScrollPanePeer createScrollPane(java.awt.ScrollPane) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit java.awt.peer.ScrollbarPeer createScrollbar(java.awt.Scrollbar) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.ScrollbarPeer createScrollbar(java.awt.Scrollbar) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.SystemTrayPeer createSystemTray(java.awt.SystemTray) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HToolkit java.awt.peer.SystemTrayPeer createSystemTray(java.awt.SystemTray) 0">
@@ -2019,16 +2229,34 @@
   <item name="sun.awt.HToolkit java.awt.peer.TextAreaPeer createTextArea(java.awt.TextArea) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.TextAreaPeer createTextArea(java.awt.TextArea) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit java.awt.peer.TextFieldPeer createTextField(java.awt.TextField) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.TextFieldPeer createTextField(java.awt.TextField) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.TrayIconPeer createTrayIcon(java.awt.TrayIcon) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HToolkit java.awt.peer.TrayIconPeer createTrayIcon(java.awt.TrayIcon) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HToolkit java.awt.peer.WindowPeer createWindow(java.awt.Window) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit java.awt.peer.WindowPeer createWindow(java.awt.Window) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HToolkit java.util.Map mapInputMethodHighlight(java.awt.im.InputMethodHighlight) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit java.util.Map mapInputMethodHighlight(java.awt.im.InputMethodHighlight) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HToolkit void grab(java.awt.Window) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HToolkit void grab(java.awt.Window) 0">
@@ -2042,10 +2270,16 @@
   <item name="sun.awt.HToolkit void loadSystemColors(int[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HToolkit void loadSystemColors(int[]) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HToolkit void sync()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual sun.awt.HToolkit void ungrab(java.awt.Window) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HToolkit void ungrab(java.awt.Window) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2099,13 +2333,25 @@
   <item name="sun.awt.HeadlessToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HeadlessToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HeadlessToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HeadlessToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HeadlessToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener) 4">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener)">
@@ -2127,10 +2373,16 @@
   <item name="sun.awt.HeadlessToolkit boolean isModalExclusionTypeSupported(java.awt.Dialog.ModalExclusionType) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HeadlessToolkit boolean isModalExclusionTypeSupported(java.awt.Dialog.ModalExclusionType) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HeadlessToolkit boolean isModalExclusionTypeSupported(java.awt.Dialog.ModalExclusionType)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit boolean isModalityTypeSupported(java.awt.Dialog.ModalityType) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit boolean isModalityTypeSupported(java.awt.Dialog.ModalityType) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2145,7 +2397,13 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.Cursor createCustomCursor(java.awt.Image, java.awt.Point, java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HeadlessToolkit java.awt.Cursor createCustomCursor(java.awt.Image, java.awt.Point, java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.Cursor createCustomCursor(java.awt.Image, java.awt.Point, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit java.awt.Cursor createCustomCursor(java.awt.Image, java.awt.Point, java.lang.String) 1">
@@ -2154,7 +2412,13 @@
   <item name="sun.awt.HeadlessToolkit java.awt.Cursor createCustomCursor(java.awt.Image, java.awt.Point, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.Cursor createCustomCursor(java.awt.Image, java.awt.Point, java.lang.String) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HeadlessToolkit java.awt.Insets getScreenInsets(java.awt.GraphicsConfiguration) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.Insets getScreenInsets(java.awt.GraphicsConfiguration) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="virtual sun.awt.HeadlessToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.awt.JobAttributes, java.awt.PageAttributes) 0">
@@ -2166,10 +2430,19 @@
   <item name="sun.awt.HeadlessToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.awt.JobAttributes, java.awt.PageAttributes) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.awt.JobAttributes, java.awt.PageAttributes) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.awt.JobAttributes, java.awt.PageAttributes) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HeadlessToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.awt.JobAttributes, java.awt.PageAttributes) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.awt.JobAttributes, java.awt.PageAttributes) 3">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.awt.JobAttributes, java.awt.PageAttributes) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="virtual sun.awt.HeadlessToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.util.Properties) 0">
@@ -2181,7 +2454,13 @@
   <item name="sun.awt.HeadlessToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.util.Properties) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.util.Properties) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HeadlessToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.util.Properties) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.PrintJob getPrintJob(java.awt.Frame, java.lang.String, java.util.Properties) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit java.awt.Toolkit getUnderlyingToolkit()">
@@ -2189,19 +2468,37 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.dnd.peer.DragSourceContextPeer createDragSourceContextPeer(java.awt.dnd.DragGestureEvent) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HeadlessToolkit java.awt.dnd.peer.DragSourceContextPeer createDragSourceContextPeer(java.awt.dnd.DragGestureEvent) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.ButtonPeer createButton(java.awt.Button) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit java.awt.peer.ButtonPeer createButton(java.awt.Button) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.CanvasPeer createCanvas(java.awt.Canvas) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HeadlessToolkit java.awt.peer.CanvasPeer createCanvas(java.awt.Canvas) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.CheckboxMenuItemPeer createCheckboxMenuItem(java.awt.CheckboxMenuItem) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit java.awt.peer.CheckboxMenuItemPeer createCheckboxMenuItem(java.awt.CheckboxMenuItem) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.CheckboxPeer createCheckbox(java.awt.Checkbox) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HeadlessToolkit java.awt.peer.CheckboxPeer createCheckbox(java.awt.Checkbox) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.ChoicePeer createChoice(java.awt.Choice) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit java.awt.peer.ChoicePeer createChoice(java.awt.Choice) 0">
@@ -2210,7 +2507,16 @@
   <item name="sun.awt.HeadlessToolkit java.awt.peer.DesktopPeer createDesktopPeer(java.awt.Desktop) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.DesktopPeer createDesktopPeer(java.awt.Desktop) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.DialogPeer createDialog(java.awt.Dialog) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HeadlessToolkit java.awt.peer.DialogPeer createDialog(java.awt.Dialog) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.FileDialogPeer createFileDialog(java.awt.FileDialog) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit java.awt.peer.FileDialogPeer createFileDialog(java.awt.FileDialog) 0">
@@ -2222,6 +2528,9 @@
   <item name="sun.awt.HeadlessToolkit java.awt.peer.FramePeer createFrame(java.awt.Frame) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.FramePeer createFrame(java.awt.Frame) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HeadlessToolkit java.awt.peer.KeyboardFocusManagerPeer getKeyboardFocusManagerPeer()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -2230,10 +2539,22 @@
   <item name="sun.awt.HeadlessToolkit java.awt.peer.LabelPeer createLabel(java.awt.Label) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.LabelPeer createLabel(java.awt.Label) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.ListPeer createList(java.awt.List) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HeadlessToolkit java.awt.peer.ListPeer createList(java.awt.List) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit java.awt.peer.MenuBarPeer createMenuBar(java.awt.MenuBar) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.MenuBarPeer createMenuBar(java.awt.MenuBar) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.MenuItemPeer createMenuItem(java.awt.MenuItem) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit java.awt.peer.MenuItemPeer createMenuItem(java.awt.MenuItem) 0">
@@ -2242,10 +2563,22 @@
   <item name="sun.awt.HeadlessToolkit java.awt.peer.MenuPeer createMenu(java.awt.Menu) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.MenuPeer createMenu(java.awt.Menu) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.PanelPeer createPanel(java.awt.Panel) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HeadlessToolkit java.awt.peer.PanelPeer createPanel(java.awt.Panel) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit java.awt.peer.PopupMenuPeer createPopupMenu(java.awt.PopupMenu) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.PopupMenuPeer createPopupMenu(java.awt.PopupMenu) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.RobotPeer createRobot(java.awt.Robot, java.awt.GraphicsDevice) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit java.awt.peer.RobotPeer createRobot(java.awt.Robot, java.awt.GraphicsDevice) 0">
@@ -2254,7 +2587,16 @@
   <item name="sun.awt.HeadlessToolkit java.awt.peer.RobotPeer createRobot(java.awt.Robot, java.awt.GraphicsDevice) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.RobotPeer createRobot(java.awt.Robot, java.awt.GraphicsDevice) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.ScrollPanePeer createScrollPane(java.awt.ScrollPane) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HeadlessToolkit java.awt.peer.ScrollPanePeer createScrollPane(java.awt.ScrollPane) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.ScrollbarPeer createScrollbar(java.awt.Scrollbar) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit java.awt.peer.ScrollbarPeer createScrollbar(java.awt.Scrollbar) 0">
@@ -2263,7 +2605,16 @@
   <item name="sun.awt.HeadlessToolkit java.awt.peer.SystemTrayPeer createSystemTray(java.awt.SystemTray) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.SystemTrayPeer createSystemTray(java.awt.SystemTray) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.TextAreaPeer createTextArea(java.awt.TextArea) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HeadlessToolkit java.awt.peer.TextAreaPeer createTextArea(java.awt.TextArea) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.TextFieldPeer createTextField(java.awt.TextField) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit java.awt.peer.TextFieldPeer createTextField(java.awt.TextField) 0">
@@ -2272,13 +2623,25 @@
   <item name="sun.awt.HeadlessToolkit java.awt.peer.TrayIconPeer createTrayIcon(java.awt.TrayIcon) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.TrayIconPeer createTrayIcon(java.awt.TrayIcon) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HeadlessToolkit java.awt.peer.WindowPeer createWindow(java.awt.Window) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.awt.peer.WindowPeer createWindow(java.awt.Window) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit java.util.Map mapInputMethodHighlight(java.awt.im.InputMethodHighlight) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit java.util.Map mapInputMethodHighlight(java.awt.im.InputMethodHighlight) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit void loadSystemColors(int[]) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit void loadSystemColors(int[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit void sync()">
@@ -2348,7 +2711,13 @@
   <item name="sun.awt.HorizBagLayout java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.awt.HorizBagLayout void addLayoutComponent(java.lang.String, java.awt.Component) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.HorizBagLayout void addLayoutComponent(java.lang.String, java.awt.Component) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HorizBagLayout void addLayoutComponent(java.lang.String, java.awt.Component) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HorizBagLayout void addLayoutComponent(java.lang.String, java.awt.Component) 1">
@@ -2364,6 +2733,9 @@
   </item>
   <item name="sun.awt.HorizBagLayout void layoutContainer(java.awt.Container) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.awt.HorizBagLayout void removeLayoutComponent(java.awt.Component) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HorizBagLayout void removeLayoutComponent(java.awt.Component) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2426,6 +2798,9 @@
   <item name="sun.awt.IconInfo long[] intArrayToLongArray(int[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual sun.awt.InputMethodSupport java.awt.Window createInputMethodWindow(java.lang.String, sun.awt.im.InputContext) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.KeyboardFocusManagerPeerImpl KeyboardFocusManagerPeerImpl()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -2443,6 +2818,9 @@
     </annotation>
   </item>
   <item name="sun.awt.KeyboardFocusManagerPeerImpl void clearGlobalFocusOwner(java.awt.Window) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.KeyboardFocusManagerPeerImpl void clearGlobalFocusOwner(java.awt.Window) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.ModalityEvent ModalityEvent(java.lang.Object, sun.awt.ModalityListener, int) 0">
@@ -2467,6 +2845,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual sun.awt.NullComponentPeer boolean handleEvent(java.awt.Event) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.NullComponentPeer boolean handleEvent(java.awt.Event) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2504,6 +2885,12 @@
   <item name="sun.awt.NullComponentPeer boolean prepareImage(java.awt.Image, int, int, java.awt.image.ImageObserver) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.NullComponentPeer boolean prepareImage(java.awt.Image, int, int, java.awt.image.ImageObserver) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.NullComponentPeer boolean prepareImage(java.awt.Image, int, int, java.awt.image.ImageObserver) 3">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.NullComponentPeer boolean prepareImage(java.awt.Image, int, int, java.awt.image.ImageObserver) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2512,7 +2899,13 @@
       <val val="value=&quot;!null,_,_,_-&gt;false;_,_,_,!null-&gt;false;_,_,_,null-&gt;false;null,_,_,_-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.awt.NullComponentPeer boolean requestFocus(java.awt.Component, boolean, boolean, long, sun.awt.CausedFocusEvent.Cause) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.NullComponentPeer boolean requestFocus(java.awt.Component, boolean, boolean, long, sun.awt.CausedFocusEvent.Cause) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.NullComponentPeer boolean requestFocus(java.awt.Component, boolean, boolean, long, sun.awt.CausedFocusEvent.Cause) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.NullComponentPeer boolean requestFocus(java.awt.Component, boolean, boolean, long, sun.awt.CausedFocusEvent.Cause) 4">
@@ -2522,6 +2915,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_,_,_,_-&gt;false;_,_,_,_,!null-&gt;false;_,_,_,_,null-&gt;false;null,_,_,_,_-&gt;false&quot;,pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual sun.awt.NullComponentPeer boolean updateGraphicsData(java.awt.GraphicsConfiguration) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.NullComponentPeer boolean updateGraphicsData(java.awt.GraphicsConfiguration) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2534,7 +2930,13 @@
   <item name="sun.awt.NullComponentPeer int checkImage(java.awt.Image, int, int, java.awt.image.ImageObserver) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.NullComponentPeer int checkImage(java.awt.Image, int, int, java.awt.image.ImageObserver) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.NullComponentPeer int checkImage(java.awt.Image, int, int, java.awt.image.ImageObserver) 3">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.NullComponentPeer int checkImage(java.awt.Image, int, int, java.awt.image.ImageObserver) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.NullComponentPeer int checkImage(java.awt.Image, int, int, java.awt.image.ImageObserver)">
@@ -2553,6 +2955,9 @@
   </item>
   <item name="sun.awt.NullComponentPeer java.awt.Dimension preferredSize()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.awt.NullComponentPeer java.awt.FontMetrics getFontMetrics(java.awt.Font) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.NullComponentPeer java.awt.FontMetrics getFontMetrics(java.awt.Font) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2587,6 +2992,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.NullComponentPeer java.awt.Image createImage(java.awt.image.ImageProducer) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.NullComponentPeer java.awt.Image createImage(java.awt.image.ImageProducer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.NullComponentPeer java.awt.Image createImage(java.awt.image.ImageProducer)">
@@ -2628,6 +3036,9 @@
   <item name="sun.awt.NullComponentPeer void applyShape(sun.java2d.pipe.Region) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.NullComponentPeer void applyShape(sun.java2d.pipe.Region) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.NullComponentPeer void applyShape(sun.java2d.pipe.Region)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -2646,12 +3057,18 @@
   <item name="sun.awt.NullComponentPeer void coalescePaintEvent(java.awt.event.PaintEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.NullComponentPeer void coalescePaintEvent(java.awt.event.PaintEvent) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.NullComponentPeer void coalescePaintEvent(java.awt.event.PaintEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="sun.awt.NullComponentPeer void createBuffers(int, java.awt.BufferCapabilities) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.NullComponentPeer void createBuffers(int, java.awt.BufferCapabilities) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.NullComponentPeer void destroyBuffers()">
@@ -2687,7 +3104,13 @@
   <item name="sun.awt.NullComponentPeer void flip(int, int, int, int, java.awt.BufferCapabilities.FlipContents) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.NullComponentPeer void flip(int, int, int, int, java.awt.BufferCapabilities.FlipContents) 4">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.NullComponentPeer void handleEvent(java.awt.AWTEvent) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.NullComponentPeer void handleEvent(java.awt.AWTEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.NullComponentPeer void handleEvent(java.awt.AWTEvent)">
@@ -2708,10 +3131,16 @@
   <item name="sun.awt.NullComponentPeer void paint(java.awt.Graphics) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.NullComponentPeer void paint(java.awt.Graphics) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.NullComponentPeer void paint(java.awt.Graphics)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual sun.awt.NullComponentPeer void print(java.awt.Graphics) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.NullComponentPeer void print(java.awt.Graphics) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2729,12 +3158,18 @@
   <item name="sun.awt.NullComponentPeer void reparent(java.awt.peer.ContainerPeer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.NullComponentPeer void reparent(java.awt.peer.ContainerPeer) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.NullComponentPeer void reshape(int, int, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="sun.awt.NullComponentPeer void setBackground(java.awt.Color) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.NullComponentPeer void setBackground(java.awt.Color) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.NullComponentPeer void setBackground(java.awt.Color)">
@@ -2750,6 +3185,9 @@
   <item name="sun.awt.NullComponentPeer void setCursor(java.awt.Cursor) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.NullComponentPeer void setCursor(java.awt.Cursor) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.NullComponentPeer void setCursor(java.awt.Cursor)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -2759,6 +3197,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual sun.awt.NullComponentPeer void setFont(java.awt.Font) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.NullComponentPeer void setFont(java.awt.Font) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2771,6 +3212,9 @@
   <item name="sun.awt.NullComponentPeer void setForeground(java.awt.Color) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.NullComponentPeer void setForeground(java.awt.Color) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.NullComponentPeer void setForeground(java.awt.Color)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -2780,6 +3224,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual sun.awt.NullComponentPeer void setZOrder(java.awt.peer.ComponentPeer) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.NullComponentPeer void setZOrder(java.awt.peer.ComponentPeer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2818,6 +3265,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.OSInfo.WindowsVersion boolean equals(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.OSInfo.WindowsVersion boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.OSInfo.WindowsVersion boolean equals(java.lang.Object)">
@@ -2900,6 +3350,9 @@
   <item name="sun.awt.PaintEventDispatcher boolean queueSurfaceDataReplacing(java.awt.Component, java.lang.Runnable) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.PaintEventDispatcher boolean queueSurfaceDataReplacing(java.awt.Component, java.lang.Runnable) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.PaintEventDispatcher boolean queueSurfaceDataReplacing(java.awt.Component, java.lang.Runnable) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2907,6 +3360,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;false;_,!null-&gt;false;_,null-&gt;false;null,_-&gt;false&quot;,pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual sun.awt.PaintEventDispatcher boolean shouldDoNativeBackgroundErase(java.awt.Component) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.PaintEventDispatcher boolean shouldDoNativeBackgroundErase(java.awt.Component) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2938,6 +3394,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual sun.awt.PeerEvent sun.awt.PeerEvent coalesceEvents(sun.awt.PeerEvent) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.PeerEvent sun.awt.PeerEvent coalesceEvents(sun.awt.PeerEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -3034,10 +3493,25 @@
   <item name="sun.awt.RepaintArea void add(java.awt.Rectangle, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.awt.RepaintArea void paintComponent(java.awt.Component, java.awt.Graphics) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.RepaintArea void paintComponent(java.awt.Component, java.awt.Graphics) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.RepaintArea void updateComponent(java.awt.Component, java.awt.Graphics) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.RepaintArea void updateComponent(java.awt.Component, java.awt.Graphics) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual sun.awt.RequestFocusController boolean acceptRequestFocus(java.awt.Component, java.awt.Component, boolean, boolean, sun.awt.CausedFocusEvent.Cause) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual sun.awt.RequestFocusController boolean acceptRequestFocus(java.awt.Component, java.awt.Component, boolean, boolean, sun.awt.CausedFocusEvent.Cause) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual sun.awt.RequestFocusController boolean acceptRequestFocus(java.awt.Component, java.awt.Component, boolean, boolean, sun.awt.CausedFocusEvent.Cause) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.ScrollPaneWheelScroller ScrollPaneWheelScroller()">
@@ -3119,6 +3593,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual sun.awt.SunHints.Key boolean isCompatibleValue(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.SunHints.Key boolean isCompatibleValue(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -3241,12 +3718,18 @@
   <item name="sun.awt.SunToolkit boolean isModalExclusionTypeSupported(java.awt.Dialog.ModalExclusionType) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.SunToolkit boolean isModalExclusionTypeSupported(java.awt.Dialog.ModalExclusionType) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.SunToolkit boolean isModalExclusionTypeSupported(java.awt.Dialog.ModalExclusionType)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="sun.awt.SunToolkit boolean isModalityTypeSupported(java.awt.Dialog.ModalityType) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.SunToolkit boolean isModalityTypeSupported(java.awt.Dialog.ModalityType) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.SunToolkit boolean isModalityTypeSupported(java.awt.Dialog.ModalityType)">
@@ -3268,6 +3751,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual sun.awt.SunToolkit boolean isTranslucencyCapable(java.awt.GraphicsConfiguration) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.SunToolkit boolean isTranslucencyCapable(java.awt.GraphicsConfiguration) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -3302,7 +3788,13 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.awt.SunToolkit boolean prepareImage(java.awt.Image, int, int, java.awt.image.ImageObserver) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.SunToolkit boolean prepareImage(java.awt.Image, int, int, java.awt.image.ImageObserver) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.SunToolkit boolean prepareImage(java.awt.Image, int, int, java.awt.image.ImageObserver) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.SunToolkit boolean prepareImage(java.awt.Image, int, int, java.awt.image.ImageObserver) 3">
@@ -3326,10 +3818,16 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.awt.SunToolkit int checkImage(java.awt.Image, int, int, java.awt.image.ImageObserver) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.SunToolkit int checkImage(java.awt.Image, int, int, java.awt.image.ImageObserver) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.SunToolkit int checkImage(java.awt.Image, int, int, java.awt.image.ImageObserver) 3">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.SunToolkit int checkImage(java.awt.Image, int, int, java.awt.image.ImageObserver) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.SunToolkit int getFocusAcceleratorKeyMask()">
@@ -3403,6 +3901,9 @@
   <item name="sun.awt.SunToolkit java.awt.Window createInputMethodWindow(java.lang.String, sun.awt.im.InputContext) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.SunToolkit java.awt.Window createInputMethodWindow(java.lang.String, sun.awt.im.InputContext) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.SunToolkit java.awt.Window createInputMethodWindow(java.lang.String, sun.awt.im.InputContext)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3421,6 +3922,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.SunToolkit java.awt.peer.PanelPeer createPanel(java.awt.Panel) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual sun.awt.SunToolkit java.awt.peer.RobotPeer createRobot(java.awt.Robot, java.awt.GraphicsDevice) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.SunToolkit java.lang.Object access$000(sun.awt.SunToolkit) 0">
@@ -3529,6 +4033,9 @@
   <item name="sun.awt.SunToolkit void removeModalityListener(sun.awt.ModalityListener) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.SunToolkit void removeModalityListener(sun.awt.ModalityListener) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.SunToolkit void setDataTransfererClassName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -3563,6 +4070,9 @@
   <item name="sun.awt.SunToolkit.3 3(sun.awt.SunToolkit, java.lang.Object, java.lang.Runnable, long, long) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.awt.SunToolkit.ModalityListenerList void remove(sun.awt.ModalityListener) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.SunToolkit.ModalityListenerList void remove(sun.awt.ModalityListener) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -3570,6 +4080,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.awt.Symbol boolean contains(java.nio.charset.Charset) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.Symbol boolean contains(java.nio.charset.Charset) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.Symbol boolean contains(java.nio.charset.Charset)">
@@ -3584,6 +4097,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual sun.awt.Symbol.Encoder boolean isLegalReplacement(byte[]) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.Symbol.Encoder boolean isLegalReplacement(byte[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -3701,7 +4217,13 @@
   <item name="sun.awt.VerticalBagLayout java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.awt.VerticalBagLayout void addLayoutComponent(java.lang.String, java.awt.Component) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.VerticalBagLayout void addLayoutComponent(java.lang.String, java.awt.Component) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.VerticalBagLayout void addLayoutComponent(java.lang.String, java.awt.Component) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.VerticalBagLayout void addLayoutComponent(java.lang.String, java.awt.Component) 1">
@@ -3721,6 +4243,9 @@
   <item name="sun.awt.VerticalBagLayout void removeLayoutComponent(java.awt.Component) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.VerticalBagLayout void removeLayoutComponent(java.awt.Component) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.VerticalBagLayout void removeLayoutComponent(java.awt.Component)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -3731,6 +4256,15 @@
   </item>
   <item name="sun.awt.X11CustomCursor X11CustomCursor(java.awt.Image, java.awt.Point, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual sun.awt.X11CustomCursor void createCursor(byte[], byte[], int, int, int, int, int, int) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual sun.awt.X11CustomCursor void createCursor(byte[], byte[], int, int, int, int, int, int) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.X11CustomCursor void createNativeCursor(java.awt.Image, int[], int, int, int, int) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11CustomCursor void createNativeCursor(java.awt.Image, int[], int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -3787,6 +4321,9 @@
     </annotation>
   </item>
   <item name="sun.awt.X11FontManager java.lang.String[] getNativeNames(java.lang.String, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.X11FontManager java.lang.String[] getNativeNames(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11FontManager java.lang.String[] getNativeNames(java.lang.String, java.lang.String)">
@@ -3933,6 +4470,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11GraphicsConfig void flip(sun.awt.X11ComponentPeer, java.awt.Component, java.awt.image.VolatileImage, int, int, int, int, java.awt.BufferCapabilities.FlipContents) 7">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.X11GraphicsConfig void flip(sun.awt.X11ComponentPeer, java.awt.Component, java.awt.image.VolatileImage, int, int, int, int, java.awt.BufferCapabilities.FlipContents) 7">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11GraphicsDevice int getScreen()">
@@ -4114,13 +4654,25 @@
   <item name="sun.awt.X11InputMethod void dispatchCommittedText(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.X11InputMethod void dispatchCommittedText(java.lang.String, long) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.X11InputMethod void dispatchCommittedText(java.lang.String, long) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.X11InputMethod void dispatchComposedText(java.lang.String, int[], int, int, int, long) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11InputMethod void dispatchComposedText(java.lang.String, int[], int, int, int, long) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11InputMethod void dispatchComposedText(java.lang.String, int[], int, int, int, long) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.X11InputMethod void dispatchComposedText(java.lang.String, int[], int, int, int, long) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.X11InputMethod void dispatchEvent(java.awt.AWTEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11InputMethod void dispatchEvent(java.awt.AWTEvent) 0">
@@ -4139,7 +4691,13 @@
   <item name="sun.awt.X11InputMethod void setAWTFocussedComponent(java.awt.Component) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.X11InputMethod void setAWTFocussedComponent(java.awt.Component) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.X11InputMethod void setCharacterSubsets(java.lang.Character.Subset[]) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.X11InputMethod void setCharacterSubsets(java.lang.Character.Subset[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11InputMethod void setCharacterSubsets(java.lang.Character.Subset[])">
@@ -4154,6 +4712,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="abstract virtual sun.awt.X11InputMethod void setXICFocus(java.awt.peer.ComponentPeer, boolean, boolean) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11InputMethod.IntBuffer int getOffset()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -4174,6 +4735,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.awt.X11InputMethodDescriptor java.awt.Image getInputMethodIcon(java.util.Locale) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.awt.X11InputMethodDescriptor java.awt.Image getInputMethodIcon(java.util.Locale) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -4184,6 +4748,12 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11InputMethodDescriptor java.lang.String getInputMethodDisplayName(java.util.Locale, java.util.Locale) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.X11InputMethodDescriptor java.lang.String getInputMethodDisplayName(java.util.Locale, java.util.Locale) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.X11InputMethodDescriptor java.lang.String getInputMethodDisplayName(java.util.Locale, java.util.Locale) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.X11InputMethodDescriptor java.lang.String getInputMethodDisplayName(java.util.Locale, java.util.Locale) 1">

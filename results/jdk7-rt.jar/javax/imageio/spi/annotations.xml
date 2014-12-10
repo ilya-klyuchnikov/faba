@@ -31,6 +31,9 @@
   <item name="javax.imageio.spi.IIOServiceProvider IIOServiceProvider(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.imageio.spi.IIOServiceProvider java.lang.String getDescription(java.util.Locale) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.imageio.spi.IIOServiceProvider java.lang.String getVendorName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -41,10 +44,16 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.imageio.spi.IIOServiceProvider void onDeregistration(javax.imageio.spi.ServiceRegistry, java.lang.Class&lt;?&gt;) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.imageio.spi.IIOServiceProvider void onDeregistration(javax.imageio.spi.ServiceRegistry, java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.imageio.spi.IIOServiceProvider void onDeregistration(javax.imageio.spi.ServiceRegistry, java.lang.Class&lt;?&gt;) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.imageio.spi.IIOServiceProvider void onDeregistration(javax.imageio.spi.ServiceRegistry, java.lang.Class&lt;?&gt;) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.imageio.spi.IIOServiceProvider void onDeregistration(javax.imageio.spi.ServiceRegistry, java.lang.Class&lt;?&gt;)">
@@ -55,7 +64,13 @@
   <item name="javax.imageio.spi.IIOServiceProvider void onRegistration(javax.imageio.spi.ServiceRegistry, java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.imageio.spi.IIOServiceProvider void onRegistration(javax.imageio.spi.ServiceRegistry, java.lang.Class&lt;?&gt;) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.imageio.spi.IIOServiceProvider void onRegistration(javax.imageio.spi.ServiceRegistry, java.lang.Class&lt;?&gt;) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.imageio.spi.IIOServiceProvider void onRegistration(javax.imageio.spi.ServiceRegistry, java.lang.Class&lt;?&gt;) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.imageio.spi.IIOServiceProvider void onRegistration(javax.imageio.spi.ServiceRegistry, java.lang.Class&lt;?&gt;)">
@@ -98,6 +113,9 @@
   <item name="abstract virtual javax.imageio.spi.ImageInputStreamSpi javax.imageio.stream.ImageInputStream createInputStreamInstance(java.lang.Object, boolean, java.io.File) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.imageio.spi.ImageInputStreamSpi javax.imageio.stream.ImageInputStream createInputStreamInstance(java.lang.Object, boolean, java.io.File) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.imageio.spi.ImageOutputStreamSpi ImageOutputStreamSpi()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -132,6 +150,9 @@
   </item>
   <item name="abstract virtual javax.imageio.spi.ImageOutputStreamSpi javax.imageio.stream.ImageOutputStream createOutputStreamInstance(java.lang.Object, boolean, java.io.File) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.imageio.spi.ImageOutputStreamSpi javax.imageio.stream.ImageOutputStream createOutputStreamInstance(java.lang.Object, boolean, java.io.File) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.imageio.spi.ImageReaderSpi ImageReaderSpi(java.lang.String, java.lang.String, java.lang.String[], java.lang.String[], java.lang.String[], java.lang.String, java.lang.Class[], java.lang.String[], boolean, java.lang.String, java.lang.String, java.lang.String[], java.lang.String[], boolean, java.lang.String, java.lang.String, java.lang.String[], java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -169,6 +190,9 @@
   <item name="javax.imageio.spi.ImageReaderSpi ImageReaderSpi(java.lang.String, java.lang.String, java.lang.String[], java.lang.String[], java.lang.String[], java.lang.String, java.lang.Class[], java.lang.String[], boolean, java.lang.String, java.lang.String, java.lang.String[], java.lang.String[], boolean, java.lang.String, java.lang.String, java.lang.String[], java.lang.String[]) 7">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual javax.imageio.spi.ImageReaderSpi boolean canDecodeInput(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="virtual javax.imageio.spi.ImageReaderSpi boolean isOwnReader(javax.imageio.ImageReader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -180,6 +204,9 @@
   </item>
   <item name="javax.imageio.spi.ImageReaderSpi javax.imageio.ImageReader createReaderInstance()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.imageio.spi.ImageReaderSpi javax.imageio.ImageReader createReaderInstance(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.imageio.spi.ImageReaderWriterSpi ImageReaderWriterSpi(java.lang.String, java.lang.String, java.lang.String[], java.lang.String[], java.lang.String[], java.lang.String, boolean, java.lang.String, java.lang.String, java.lang.String[], java.lang.String[], boolean, java.lang.String, java.lang.String, java.lang.String[], java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -339,11 +366,26 @@
   <item name="javax.imageio.spi.ImageWriterSpi javax.imageio.ImageWriter createWriterInstance()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.imageio.spi.ImageWriterSpi javax.imageio.ImageWriter createWriterInstance(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.imageio.spi.PartialOrderIterator PartialOrderIterator(java.util.Iterator) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.imageio.spi.PartiallyOrderedSet java.util.Iterator iterator()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.imageio.spi.RegisterableService void onDeregistration(javax.imageio.spi.ServiceRegistry, java.lang.Class&lt;?&gt;) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.imageio.spi.RegisterableService void onDeregistration(javax.imageio.spi.ServiceRegistry, java.lang.Class&lt;?&gt;) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.imageio.spi.RegisterableService void onRegistration(javax.imageio.spi.ServiceRegistry, java.lang.Class&lt;?&gt;) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.imageio.spi.RegisterableService void onRegistration(javax.imageio.spi.ServiceRegistry, java.lang.Class&lt;?&gt;) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.imageio.spi.ServiceRegistry ServiceRegistry(java.util.Iterator&lt;java.lang.Class&lt;?&gt;&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

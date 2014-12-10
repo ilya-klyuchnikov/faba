@@ -242,11 +242,20 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual com.sun.media.sound.AbstractMidiDeviceProvider javax.sound.midi.MidiDevice createDevice(com.sun.media.sound.AbstractMidiDeviceProvider.Info) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="com.sun.media.sound.AbstractMidiDeviceProvider javax.sound.midi.MidiDevice getDevice(javax.sound.midi.MidiDevice.Info) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.media.sound.AbstractMidiDeviceProvider javax.sound.midi.MidiDevice.Info[] getDeviceInfo()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.media.sound.AbstractMidiDeviceProvider void setDeviceCache(javax.sound.midi.MidiDevice[]) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual com.sun.media.sound.AbstractMidiDeviceProvider void setInfoCache(com.sun.media.sound.AbstractMidiDeviceProvider.Info[]) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.media.sound.AbstractMidiDeviceProvider.Info boolean equalStrings(com.sun.media.sound.AbstractMidiDeviceProvider.Info) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -271,6 +280,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;false;null,_-&gt;false&quot;,pure=true"/>
     </annotation>
+  </item>
+  <item name="abstract virtual com.sun.media.sound.AbstractMixer int getMaxLines(javax.sound.sampled.Line.Info) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.media.sound.AbstractMixer javax.sound.sampled.Line.Info getLineInfo(javax.sound.sampled.Line.Info) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1235,6 +1247,15 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual com.sun.media.sound.AudioSynthesizer com.sun.media.sound.AudioSynthesizerPropertyInfo[] getPropertyInfo(java.util.Map&lt;java.lang.String,java.lang.Object&gt;) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual com.sun.media.sound.AudioSynthesizer javax.sound.sampled.AudioInputStream openStream(javax.sound.sampled.AudioFormat, java.util.Map&lt;java.lang.String,java.lang.Object&gt;) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual com.sun.media.sound.AudioSynthesizer void open(javax.sound.sampled.SourceDataLine, java.util.Map&lt;java.lang.String,java.lang.Object&gt;) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="com.sun.media.sound.DLSInstrument byte[] getGuid()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1639,6 +1660,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual com.sun.media.sound.DLSSoundbank.DLSID boolean equals(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.media.sound.DLSSoundbank.DLSID boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2860,6 +2884,9 @@
   <item name="com.sun.media.sound.ModelAbstractOscillator int read(float[][], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.media.sound.ModelAbstractOscillator int read(float[][], int, int) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="com.sun.media.sound.ModelAbstractOscillator int read(float[][], int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -4013,6 +4040,9 @@
   <item name="com.sun.media.sound.RealTimeSequencer.DataPump void sendNoteOffIfOn(javax.sound.midi.Track, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.media.sound.RealTimeSequencer.DataPump void setSequence(javax.sound.midi.Sequence) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="com.sun.media.sound.RealTimeSequencer.DataPump void setSequence(javax.sound.midi.Sequence) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -4554,7 +4584,13 @@
   <item name="com.sun.media.sound.SoftAbstractResampler.ModelAbstractResamplerStream void noteOn(javax.sound.midi.MidiChannel, javax.sound.midi.VoiceStatus, int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.media.sound.SoftAbstractResampler.ModelAbstractResamplerStream void noteOn(javax.sound.midi.MidiChannel, javax.sound.midi.VoiceStatus, int, int) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="com.sun.media.sound.SoftAbstractResampler.ModelAbstractResamplerStream void noteOn(javax.sound.midi.MidiChannel, javax.sound.midi.VoiceStatus, int, int) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.media.sound.SoftAbstractResampler.ModelAbstractResamplerStream void noteOn(javax.sound.midi.MidiChannel, javax.sound.midi.VoiceStatus, int, int) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.media.sound.SoftAbstractResampler.ModelAbstractResamplerStream void noteOn(javax.sound.midi.MidiChannel, javax.sound.midi.VoiceStatus, int, int)">
@@ -4698,6 +4734,9 @@
   <item name="com.sun.media.sound.SoftChannel void mapPolyPressureToDestination(int[], int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.media.sound.SoftChannel.1 double[] get(int, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="com.sun.media.sound.SoftChannel.1 double[] get(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -4710,10 +4749,16 @@
   <item name="com.sun.media.sound.SoftChannel.2 double[] get(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.media.sound.SoftChannel.2 double[] get(int, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="com.sun.media.sound.SoftChannel.2 double[] get(int, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.media.sound.SoftChannel.3 double[] get(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.media.sound.SoftChannel.3 double[] get(int, java.lang.String) 1">
@@ -4726,6 +4771,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.media.sound.SoftChannel.MidiControlObject MidiControlObject(com.sun.media.sound.SoftChannel, com.sun.media.sound.SoftChannel.1) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.media.sound.SoftChannel.MidiControlObject double[] get(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.media.sound.SoftChannel.MidiControlObject double[] get(int, java.lang.String) 1">
@@ -4754,6 +4802,9 @@
   <item name="com.sun.media.sound.SoftChorus.LFODelay void processMix(float[], float[], float[]) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.media.sound.SoftChorus.LFODelay void processMix(float[], float[], float[]) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="com.sun.media.sound.SoftChorus.LFODelay void processReplace(float[], float[], float[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -4778,6 +4829,9 @@
   <item name="com.sun.media.sound.SoftChorus.VariableDelay void processMix(float[], float[], float[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.media.sound.SoftChorus.VariableDelay void processMix(float[], float[], float[]) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="com.sun.media.sound.SoftChorus.VariableDelay void processMix(float[], float[], float[]) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -4798,6 +4852,9 @@
   </item>
   <item name="com.sun.media.sound.SoftChorus.VariableDelay void processReplace(float[], float[], float[]) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.media.sound.SoftControl double[] get(int, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.media.sound.SoftCubicResampler SoftCubicResampler()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -5053,6 +5110,9 @@
   </item>
   <item name="com.sun.media.sound.SoftMainMixer void processSystemExclusiveMessage(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.media.sound.SoftMainMixer.1 double[] get(int, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.media.sound.SoftMainMixer.1 double[] get(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -5700,6 +5760,9 @@
   <item name="com.sun.media.sound.SoftPointResampler void interpolate(float[], float[], float, float[], float, float[], int[], int) 6">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.media.sound.SoftProcess double[] get(int, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="abstract virtual com.sun.media.sound.SoftProcess void init(com.sun.media.sound.SoftSynthesizer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -6112,6 +6175,9 @@
   <item name="com.sun.media.sound.SoftVoice void mixAudioStream(com.sun.media.sound.SoftAudioBuffer, com.sun.media.sound.SoftAudioBuffer, com.sun.media.sound.SoftAudioBuffer, float, float) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.media.sound.SoftVoice.1 double[] get(int, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="com.sun.media.sound.SoftVoice.1 double[] get(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -6124,6 +6190,9 @@
   <item name="com.sun.media.sound.SoftVoice.2 double[] get(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.media.sound.SoftVoice.2 double[] get(int, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="com.sun.media.sound.SoftVoice.2 double[] get(int, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;_,null-&gt;null&quot;,pure=true"/>
@@ -6133,6 +6202,9 @@
   <item name="com.sun.media.sound.SoftVoice.3 double[] get(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.media.sound.SoftVoice.3 double[] get(int, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="com.sun.media.sound.SoftVoice.3 double[] get(int, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;_,null-&gt;null&quot;,pure=true"/>
@@ -6140,6 +6212,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.media.sound.SoftVoice.4 double[] get(int, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.media.sound.SoftVoice.4 double[] get(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.media.sound.SoftVoice.4 double[] get(int, java.lang.String)">
@@ -6298,11 +6373,17 @@
   <item name="abstract virtual com.sun.media.sound.SunFileWriter int write(javax.sound.sampled.AudioInputStream, javax.sound.sampled.AudioFileFormat.Type, java.io.File) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.media.sound.SunFileWriter int write(javax.sound.sampled.AudioInputStream, javax.sound.sampled.AudioFileFormat.Type, java.io.File) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="abstract virtual com.sun.media.sound.SunFileWriter int write(javax.sound.sampled.AudioInputStream, javax.sound.sampled.AudioFileFormat.Type, java.io.File) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual com.sun.media.sound.SunFileWriter int write(javax.sound.sampled.AudioInputStream, javax.sound.sampled.AudioFileFormat.Type, java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.media.sound.SunFileWriter int write(javax.sound.sampled.AudioInputStream, javax.sound.sampled.AudioFileFormat.Type, java.io.OutputStream) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.media.sound.SunFileWriter javax.sound.sampled.AudioFileFormat.Type[] getAudioFileTypes()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -6528,6 +6609,9 @@
     </annotation>
   </item>
   <item name="com.sun.media.sound.WaveExtensibleFileReader.GUID boolean equals(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.media.sound.WaveExtensibleFileReader.GUID boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.media.sound.WaveExtensibleFileReader.GUID boolean equals(java.lang.Object)">

@@ -13,8 +13,14 @@
   <item name="javax.xml.soap.AttachmentPart java.lang.String getContentType()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual javax.xml.soap.AttachmentPart java.lang.String[] getMimeHeader(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="abstract virtual javax.xml.soap.AttachmentPart void addMimeHeader(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.AttachmentPart void removeMimeHeader(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual javax.xml.soap.AttachmentPart void setDataHandler(javax.activation.DataHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -83,6 +89,9 @@
   <item name="javax.xml.soap.MimeHeaders java.lang.String[] getHeader(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.xml.soap.MimeHeaders java.lang.String[] getHeader(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.xml.soap.MimeHeaders java.lang.String[] getHeader(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -110,6 +119,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.xml.soap.MimeHeaders void removeHeader(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.xml.soap.MimeHeaders void removeHeader(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="virtual javax.xml.soap.MimeHeaders void setHeader(java.lang.String, java.lang.String) 0">
@@ -172,6 +184,9 @@
   <item name="abstract virtual javax.xml.soap.SOAPElement java.lang.String getAttributeValue(javax.xml.soap.Name) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.soap.SOAPElement java.lang.String getNamespaceURI(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="abstract virtual javax.xml.soap.SOAPElement java.util.Iterator getChildElements(javax.xml.namespace.QName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -189,6 +204,21 @@
   </item>
   <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.soap.SOAPElement addAttribute(javax.xml.soap.Name, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.soap.SOAPElement addChildElement(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.soap.SOAPElement addChildElement(java.lang.String, java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.soap.SOAPElement addChildElement(java.lang.String, java.lang.String, java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.soap.SOAPElement addChildElement(java.lang.String, java.lang.String, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.soap.SOAPElement addChildElement(java.lang.String, java.lang.String, java.lang.String) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.soap.SOAPElement addChildElement(javax.xml.namespace.QName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -217,6 +247,9 @@
   <item name="javax.xml.soap.SOAPElementFactory javax.xml.soap.SOAPElement create(java.lang.String, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.xml.soap.SOAPElementFactory javax.xml.soap.SOAPElement create(java.lang.String, java.lang.String, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.xml.soap.SOAPElementFactory javax.xml.soap.SOAPElement create(java.lang.String, java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -234,6 +267,15 @@
   </item>
   <item name="javax.xml.soap.SOAPElementFactory javax.xml.soap.SOAPElementFactory newInstance()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPEnvelope javax.xml.soap.Name createName(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPEnvelope javax.xml.soap.Name createName(java.lang.String, java.lang.String, java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPEnvelope javax.xml.soap.Name createName(java.lang.String, java.lang.String, java.lang.String) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.xml.soap.SOAPException SOAPException(java.lang.Throwable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -260,17 +302,29 @@
   <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.Name createName(java.lang.String, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.Name createName(java.lang.String, java.lang.String, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.Name createName(java.lang.String, java.lang.String, java.lang.String) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.SOAPElement createElement(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.SOAPElement createElement(java.lang.String, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.SOAPElement createElement(java.lang.String, java.lang.String, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.xml.soap.SOAPFactory javax.xml.soap.SOAPElement createElement(javax.xml.namespace.QName) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.SOAPElement createElement(javax.xml.soap.Name) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.xml.soap.SOAPFactory javax.xml.soap.SOAPElement createElement(org.w3c.dom.Element) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.xml.soap.SOAPFactory javax.xml.soap.SOAPElement createElement(org.w3c.dom.Element) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -280,6 +334,12 @@
   </item>
   <item name="javax.xml.soap.SOAPFactory javax.xml.soap.SOAPFactory newInstance(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPFault java.lang.String getFaultReasonText(java.util.Locale) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPFault void appendFaultSubcode(javax.xml.namespace.QName) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual javax.xml.soap.SOAPFault void setFaultCode(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -295,6 +355,9 @@
   </item>
   <item name="abstract virtual javax.xml.soap.SOAPHeader java.util.Iterator examineHeaderElements(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPHeader java.util.Iterator examineMustUnderstandHeaderElements(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual javax.xml.soap.SOAPHeader java.util.Iterator extractHeaderElements(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -351,8 +414,14 @@
   <item name="javax.xml.soap.SOAPPart java.lang.String getContentLocation()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual javax.xml.soap.SOAPPart java.lang.String[] getMimeHeader(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="abstract virtual javax.xml.soap.SOAPPart void addMimeHeader(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPPart void removeMimeHeader(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual javax.xml.soap.SOAPPart void setContent(javax.xml.transform.Source) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
