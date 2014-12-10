@@ -64,6 +64,9 @@
   <item name="java.util.concurrent.locks.AbstractQueuedSynchronizer java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual java.util.concurrent.locks.AbstractQueuedSynchronizer java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.locks.AbstractQueuedSynchronizer java.lang.Thread fullGetFirstQueuedThread()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -160,6 +163,9 @@
   <item name="abstract virtual java.util.concurrent.locks.Lock boolean tryLock(long, java.util.concurrent.TimeUnit) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.util.concurrent.locks.Lock java.util.concurrent.locks.Condition newCondition()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.locks.LockSupport LockSupport()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -209,6 +215,9 @@
   <item name="virtual java.util.concurrent.locks.ReentrantLock int getWaitQueueLength(java.util.concurrent.locks.Condition) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual java.util.concurrent.locks.ReentrantLock java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.locks.ReentrantLock java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -216,6 +225,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantLock java.util.Collection&lt;java.lang.Thread&gt; getQueuedThreads()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual java.util.concurrent.locks.ReentrantLock java.util.Collection&lt;java.lang.Thread&gt; getQueuedThreads()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual java.util.concurrent.locks.ReentrantLock java.util.Collection&lt;java.lang.Thread&gt; getWaitingThreads(java.util.concurrent.locks.Condition) 0">
@@ -227,7 +239,13 @@
   <item name="java.util.concurrent.locks.ReentrantLock java.util.Collection&lt;java.lang.Thread&gt; getWaitingThreads(java.util.concurrent.locks.Condition)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual java.util.concurrent.locks.ReentrantLock java.util.Collection&lt;java.lang.Thread&gt; getWaitingThreads(java.util.concurrent.locks.Condition)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.locks.ReentrantLock java.util.concurrent.locks.Condition newCondition()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual java.util.concurrent.locks.ReentrantLock java.util.concurrent.locks.Condition newCondition()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantLock.Sync boolean isLocked()">
@@ -284,16 +302,28 @@
   <item name="virtual java.util.concurrent.locks.ReentrantReadWriteLock int getWaitQueueLength(java.util.concurrent.locks.Condition) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual java.util.concurrent.locks.ReentrantReadWriteLock java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock java.lang.Thread getOwner()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.util.concurrent.locks.ReentrantReadWriteLock java.util.Collection&lt;java.lang.Thread&gt; getQueuedReaderThreads()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock java.util.Collection&lt;java.lang.Thread&gt; getQueuedReaderThreads()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock java.util.Collection&lt;java.lang.Thread&gt; getQueuedThreads()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual java.util.concurrent.locks.ReentrantReadWriteLock java.util.Collection&lt;java.lang.Thread&gt; getQueuedThreads()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual java.util.concurrent.locks.ReentrantReadWriteLock java.util.Collection&lt;java.lang.Thread&gt; getQueuedWriterThreads()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock java.util.Collection&lt;java.lang.Thread&gt; getQueuedWriterThreads()">
@@ -306,6 +336,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock java.util.Collection&lt;java.lang.Thread&gt; getWaitingThreads(java.util.concurrent.locks.Condition)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual java.util.concurrent.locks.ReentrantReadWriteLock java.util.Collection&lt;java.lang.Thread&gt; getWaitingThreads(java.util.concurrent.locks.Condition)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock java.util.concurrent.locks.Lock readLock()">
@@ -345,6 +378,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock boolean tryLock(long, java.util.concurrent.TimeUnit) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock java.lang.String toString()">
@@ -402,10 +438,16 @@
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock boolean tryLock(long, java.util.concurrent.TimeUnit) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock java.util.concurrent.locks.Condition newCondition()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock java.util.concurrent.locks.Condition newCondition()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
 </root>
