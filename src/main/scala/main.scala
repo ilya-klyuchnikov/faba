@@ -264,7 +264,13 @@ class MainProcessor extends FabaProcessor {
     try { op(p) } finally { p.close() }
   }
 
-  def mkOverridableNotNullParamEquation(from: Method, to: Set[Method]): Map[Key, Set[Key]] = {
+  /**
+   *
+   * @param from an overridable method
+   * @param to a set of concrete methods `from` is resolved to
+   * @return additional equations for a solver
+   */
+  def mkOverridableParamEquation(from: Method, to: Set[Method]): Map[Key, Set[Key]] = { // TODO - extract this logic
     var result = Map[Key, Set[Key]]()
     val parameterTypes = Type.getArgumentTypes(from.methodDesc)
     for (i <- parameterTypes.indices) {
@@ -292,17 +298,20 @@ class MainProcessor extends FabaProcessor {
       notNullParamsCallsResolver.buildClassHierarchy()
       // handling of calls
       notNullParamsSolver.bindCalls(notNullParamsCallsResolver.resolveCalls(), Set())
-
-
-      // handling of overridable methods
+      // handling of overridable methods for @NotNull parameters
       for {(from, to) <- notNullParamsCallsResolver.bindOverridableMethods()} {
-        val map = mkOverridableNotNullParamEquation(from, to)
+        val map = mkOverridableParamEquation(from, to)
         notNullParamsSolver.bindCalls(map, map.keys.toSet)
       }
 
       // handling nullableParams
       nullableParamsCallResolver.buildClassHierarchy()
       nullableParamsSolver.bindCalls(nullableParamsCallResolver.resolveCalls(), Set())
+      // handling of overridable methods for @Nullable parameters
+      for {(from, to) <- nullableParamsCallResolver.bindOverridableMethods()} {
+        val map = mkOverridableParamEquation(from, to)
+        nullableParamsSolver.bindCalls(map, map.keys.toSet)
+      }
 
       // handling hierarchy for Result analysis
       contractsCallsResolver.buildClassHierarchy()
@@ -428,7 +437,7 @@ class MainProcessor extends FabaProcessor {
     val overridableMap = notNullParamsCallsResolver.bindOverridableMethods()
 
     for {(from, to) <- overridableMap} {
-      val map = mkOverridableNotNullParamEquation(from, to)
+      val map = mkOverridableParamEquation(from, to)
       notNullParamsSolver.bindCalls(map, map.keys.toSet)
     }
 
