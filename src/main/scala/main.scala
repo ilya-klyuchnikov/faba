@@ -270,7 +270,7 @@ class MainProcessor extends FabaProcessor {
    * @param to a set of concrete methods `from` is resolved to
    * @return additional equations for a solver
    */
-  def mkOverridableParamEquation(from: Method, to: Set[Method]): Map[Key, Set[Key]] = { // TODO - extract this logic
+  def mkOverridableInEquation(from: Method, to: Set[Method]): Map[Key, Set[Key]] = { // TODO - extract this logic
     var result = Map[Key, Set[Key]]()
     val parameterTypes = Type.getArgumentTypes(from.methodDesc)
     for (i <- parameterTypes.indices) {
@@ -282,6 +282,18 @@ class MainProcessor extends FabaProcessor {
       }
     }
     result
+  }
+
+  def mkOverridableOutEquation(from: Method, to: Set[Method]): Map[Key, Set[Key]] = { // TODO - extract this logic
+    val resultType = Type.getReturnType(from.methodDesc)
+    val resultSort = resultType.getSort
+    val isReferenceResult = resultSort == Type.OBJECT || resultSort == Type.ARRAY
+    if (isReferenceResult)
+      Map[Key, Set[Key]](
+        Key(from, Out, ResolveDirection.Downward) -> to.map(m => Key(m, Out, ResolveDirection.Upward))
+      )
+    else
+      Map[Key, Set[Key]]()
   }
 
   def process(source: Source, outDir: String) {
@@ -300,7 +312,7 @@ class MainProcessor extends FabaProcessor {
       notNullParamsSolver.bindCalls(notNullParamsCallsResolver.resolveCalls(), Set())
       // handling of overridable methods for @NotNull parameters
       for {(from, to) <- notNullParamsCallsResolver.bindOverridableMethods()} {
-        val map = mkOverridableParamEquation(from, to)
+        val map = mkOverridableInEquation(from, to)
         notNullParamsSolver.bindCalls(map, map.keys.toSet)
       }
 
@@ -309,13 +321,18 @@ class MainProcessor extends FabaProcessor {
       nullableParamsSolver.bindCalls(nullableParamsCallResolver.resolveCalls(), Set())
       // handling of overridable methods for @Nullable parameters
       for {(from, to) <- nullableParamsCallResolver.bindOverridableMethods()} {
-        val map = mkOverridableParamEquation(from, to)
+        val map = mkOverridableInEquation(from, to)
         nullableParamsSolver.bindCalls(map, map.keys.toSet)
       }
 
       // handling hierarchy for Result analysis
       contractsCallsResolver.buildClassHierarchy()
       contractsSolver.bindCalls(contractsCallsResolver.resolveCalls(), Set())
+      // handling of overridable methods for Result analysis
+      for {(from, to) <- contractsCallsResolver.bindOverridableMethods()} {
+        val map = mkOverridableOutEquation(from, to)
+        contractsSolver.bindCalls(map, map.keys.toSet)
+      }
 
       // nullable Result
       nullableResultCallsResolver.buildClassHierarchy()
@@ -437,7 +454,7 @@ class MainProcessor extends FabaProcessor {
     val overridableMap = notNullParamsCallsResolver.bindOverridableMethods()
 
     for {(from, to) <- overridableMap} {
-      val map = mkOverridableParamEquation(from, to)
+      val map = mkOverridableInEquation(from, to)
       notNullParamsSolver.bindCalls(map, map.keys.toSet)
     }
 
