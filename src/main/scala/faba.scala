@@ -101,7 +101,7 @@ trait FabaProcessor extends Processor {
     if (!idle)
       extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
 
-    handlePurityEquation(purityEquation(method, methodNode))
+    purityEquation(method, methodNode).foreach(handlePurityEquation)
 
     if (argumentTypes.length == 0 && !(isReferenceResult || isBooleanResult)) {
       return
@@ -317,7 +317,7 @@ trait FabaProcessor extends Processor {
   def isReducible(graph: ControlFlowGraph, dfs: DFSTree): Boolean =
     controlFlow.reducible(graph, dfs)
 
-  def purityEquation(method: Method, methodNode: MethodNode): Equation[Key, Value] =
+  def purityEquation(method: Method, methodNode: MethodNode): Option[Equation[Key, Value]] =
     PurityAnalysis.analyze(method, methodNode)
 
   def notNullParamEquation(context: Context, i: Int): (Equation[Key, Value], Boolean) = {

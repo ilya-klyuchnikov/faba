@@ -25,10 +25,9 @@ import scala.annotation.switch
  * <li>CASTORE</li>
  * <li>SASTORE</li>
  * <li>INVOKEDYNAMIC</li>
- * <li>INVOKEINTERFACE</li>
  * </ul>
  *
- * - Nested calls (via INVOKESPECIAL, INVOKESTATIC, INVOKEVIRTUAL) are processed by transitivity.
+ * - Nested calls (via INVOKESPECIAL, INVOKESTATIC, INVOKEVIRTUAL, INVOKEINTERFACE) are processed by transitivity.
  */
 object PurityAnalysis {
   val finalTop = new Final(Values.Top)
@@ -36,11 +35,14 @@ object PurityAnalysis {
 
   val unAnalyzable = ACC_ABSTRACT | ACC_NATIVE | ACC_INTERFACE
 
-  def analyze(method: Method, methodNode: MethodNode): Equation[Key, Value] = {
+  def analyze(method: Method, methodNode: MethodNode): Option[Equation[Key, Value]] = {
     val aKey = new Key(method, Out, ResolveDirection.Upward)
 
-    if ((methodNode.access & unAnalyzable) != 0)
-      return Equation(aKey, finalTop)
+    if ((methodNode.access & ACC_NATIVE) != 0)
+      return Some(Equation(aKey, finalTop))
+
+    if ((methodNode.access & ACC_ABSTRACT) != 0)
+      return None
 
     var calls: Set[Key] = Set()
     val insns = methodNode.instructions
@@ -49,12 +51,11 @@ object PurityAnalysis {
       val insn = insns.get(i)
       val opCode = insn.getOpcode
       (opCode: @switch) match {
-        // TODO - INVOKEINTERFACE - later
         case PUTFIELD | PUTSTATIC |
              IASTORE | LASTORE | FASTORE | DASTORE | AASTORE | BASTORE | CASTORE | SASTORE |
-             INVOKEDYNAMIC | INVOKEINTERFACE =>
-          return Equation(aKey, finalTop)
-        case INVOKESPECIAL | INVOKESTATIC | INVOKEVIRTUAL =>
+             INVOKEDYNAMIC =>
+          return Some(Equation(aKey, finalTop))
+        case INVOKESPECIAL | INVOKESTATIC | INVOKEVIRTUAL | INVOKEINTERFACE =>
           val mNode = insn.asInstanceOf[MethodInsnNode]
           calls += Key(Method(mNode.owner, mNode.name, mNode.desc), Out, CallUtils.callResolveDirection(opCode))
         case _ =>
@@ -62,8 +63,8 @@ object PurityAnalysis {
       }
     }
     if (calls.isEmpty)
-      Equation(aKey, finalPure)
+      Some(Equation(aKey, finalPure))
     else
-      Equation(aKey, Pending(calls.map(k => Product(Values.Top, Set(k)))))
+      Some(Equation(aKey, Pending(calls.map(k => Product(Values.Top, Set(k))))))
   }
 }
