@@ -662,15 +662,6 @@ abstract class Interpreter extends BasicInterpreter {
     if ((opCode == INVOKESPECIAL || opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) && values.get(0).isInstanceOf[ParamValue]) {
       _subResult = NpeEffect
     }
-    if (nullable && opCode == INVOKEINTERFACE) {
-      for (i <- shift until values.size()) {
-        if (values.get(i).isInstanceOf[ParamValue]) {
-          _subResult = NpeEffect
-          return super.naryOperation(insn, values)
-        }
-      }
-      return super.naryOperation(insn, values)
-    }
     opCode match {
       case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE =>
         val resolveDir = CallUtils.callResolveDirection(opCode)
