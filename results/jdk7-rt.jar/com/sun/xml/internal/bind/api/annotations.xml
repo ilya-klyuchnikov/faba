@@ -2,6 +2,11 @@
   <item name="com.sun.xml.internal.bind.api.Bridge T exit(T, javax.xml.bind.Unmarshaller) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.api.Bridge T exit(T, javax.xml.bind.Unmarshaller)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.bind.api.Bridge T unmarshal(com.sun.xml.internal.bind.api.BridgeContext, java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -13,6 +18,11 @@
   </item>
   <item name="com.sun.xml.internal.bind.api.Bridge T unmarshal(com.sun.xml.internal.bind.api.BridgeContext, org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.api.Bridge com.sun.xml.internal.bind.api.JAXBRIContext getContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.api.Bridge void marshal(com.sun.xml.internal.bind.api.BridgeContext, T, java.io.OutputStream, javax.xml.namespace.NamespaceContext) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -44,6 +54,44 @@
   <item name="abstract virtual com.sun.xml.internal.bind.api.Bridge void marshal(javax.xml.bind.Marshaller, T, org.xml.sax.ContentHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.api.BridgeContext BridgeContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.bind.api.ClassResolver ClassResolver()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.bind.api.CompositeStructure CompositeStructure()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.bind.api.JAXBRIContext JAXBRIContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.bind.api.JAXBRIContext com.sun.xml.internal.bind.api.JAXBRIContext newInstance(java.lang.Class[], java.util.Collection&lt;com.sun.xml.internal.bind.api.TypeReference&gt;, java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.api.JAXBRIContext com.sun.xml.internal.bind.api.JAXBRIContext newInstance(java.lang.Class[], java.util.Collection&lt;com.sun.xml.internal.bind.api.TypeReference&gt;, java.util.Map&lt;java.lang.Class,java.lang.Class&gt;, java.lang.String, boolean, com.sun.xml.internal.bind.v2.model.annotation.RuntimeAnnotationReader)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.api.JAXBRIContext com.sun.xml.internal.bind.api.JAXBRIContext newInstance(java.lang.Class[], java.util.Collection&lt;com.sun.xml.internal.bind.api.TypeReference&gt;, java.util.Map&lt;java.lang.Class,java.lang.Class&gt;, java.lang.String, boolean, com.sun.xml.internal.bind.v2.model.annotation.RuntimeAnnotationReader, boolean, boolean, boolean, boolean)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.api.JAXBRIContext java.lang.String mangleNameToClassName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.api.JAXBRIContext java.lang.String mangleNameToPropertyName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.api.JAXBRIContext java.lang.String mangleNameToVariableName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.bind.api.JAXBRIContext java.lang.reflect.Type getBaseType(java.lang.reflect.Type, java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -56,6 +104,20 @@
   <item name="abstract virtual com.sun.xml.internal.bind.api.JAXBRIContext void generateEpisode(javax.xml.transform.Result) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.api.Messages java.lang.String format(java.lang.Object...)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.api.Messages java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.api.RawAccessor RawAccessor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.bind.api.TypeReference A get(java.lang.Class&lt;A&gt;)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="com.sun.xml.internal.bind.api.TypeReference TypeReference(javax.xml.namespace.QName, java.lang.reflect.Type, java.lang.annotation.Annotation...) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -63,6 +125,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.api.TypeReference TypeReference(javax.xml.namespace.QName, java.lang.reflect.Type, java.lang.annotation.Annotation...) 2">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.api.TypeReference com.sun.xml.internal.bind.api.TypeReference toItemType()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
 </root>
