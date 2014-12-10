@@ -293,13 +293,12 @@ class MainProcessor extends FabaProcessor {
       // handling of calls
       notNullParamsSolver.bindCalls(notNullParamsCallsResolver.resolveCalls(), Set())
 
-      /*
+
       // handling of overridable methods
       for {(from, to) <- notNullParamsCallsResolver.bindOverridableMethods()} {
         val map = mkOverridableNotNullParamEquation(from, to)
         notNullParamsSolver.bindCalls(map, map.keys.toSet)
       }
-      */
 
       // handling nullableParams
       nullableParamsCallResolver.buildClassHierarchy()
