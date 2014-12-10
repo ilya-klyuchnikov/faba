@@ -29,6 +29,18 @@
   <item name="java.beans.beancontext.BeanContextServicesSupport boolean hasService(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport java.beans.beancontext.BeanContextServicesListener getChildBeanContextServicesListener(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="value=&quot;null-&gt;null&quot;,pure=true"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport java.beans.beancontext.BeanContextServicesSupport.BCSSServiceProvider createBCSSServiceProvider(java.lang.Class, java.beans.beancontext.BeanContextServiceProvider)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport java.beans.beancontext.BeanContextSupport.BCSChild createBCSChild(java.lang.Object, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="virtual java.beans.beancontext.BeanContextServicesSupport java.lang.Object getService(java.beans.beancontext.BeanContextChild, java.lang.Object, java.lang.Class, java.lang.Object, java.beans.beancontext.BeanContextServiceRevokedListener) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -53,6 +65,15 @@
   <item name="virtual java.beans.beancontext.BeanContextServicesSupport java.lang.Object getService(java.beans.beancontext.BeanContextChild, java.lang.Object, java.lang.Class, java.lang.Object, java.beans.beancontext.BeanContextServiceRevokedListener) 4">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport java.lang.Object getService(java.beans.beancontext.BeanContextChild, java.lang.Object, java.lang.Class, java.lang.Object, java.beans.beancontext.BeanContextServiceRevokedListener)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport java.util.Iterator getCurrentServiceClasses()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport java.util.Iterator getCurrentServiceSelectors(java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.beans.beancontext.BeanContextServicesSupport void addBeanContextServicesListener(java.beans.beancontext.BeanContextServicesListener) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -70,6 +91,9 @@
   </item>
   <item name="virtual java.beans.beancontext.BeanContextServicesSupport void bcsPreSerializationHook(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport void childJustRemovedHook(java.lang.Object, java.beans.beancontext.BeanContextSupport.BCSChild) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="virtual java.beans.beancontext.BeanContextServicesSupport void childJustRemovedHook(java.lang.Object, java.beans.beancontext.BeanContextSupport.BCSChild) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -130,5 +154,67 @@
   </item>
   <item name="java.beans.beancontext.BeanContextServicesSupport void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport.BCSSChild void usingService(java.lang.Object, java.lang.Object, java.lang.Class, java.beans.beancontext.BeanContextServiceProvider, boolean, java.beans.beancontext.BeanContextServiceRevokedListener) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceClassRef boolean isDelegated()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceClassRef boolean isEmpty()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceClassRef int getDelegateRefs()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceClassRef int getRefs()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceClassRef int getServiceRefs()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceClassRef java.beans.beancontext.BeanContextServiceProvider getDelegateProvider()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceClassRef java.beans.beancontext.BeanContextServiceProvider getServiceProvider()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceClassRef java.lang.Class getServiceClass()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceClassRef void addRequestor(java.lang.Object, java.beans.beancontext.BeanContextServiceRevokedListener) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceClassRef void removeRequestor(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceClassRef void verifyRequestor(java.lang.Object, java.beans.beancontext.BeanContextServiceRevokedListener) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceRef boolean isDelegated()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceRef java.beans.beancontext.BeanContextServicesSupport.BCSSChild.BCSSCServiceClassRef getServiceClassRef()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
 </root>
