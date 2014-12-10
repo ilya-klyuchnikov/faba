@@ -7,6 +7,9 @@
   <item name="abstract virtual com.sun.net.httpserver.Authenticator com.sun.net.httpserver.Authenticator.Result authenticate(com.sun.net.httpserver.HttpExchange) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.net.httpserver.Authenticator com.sun.net.httpserver.Authenticator.Result authenticate(com.sun.net.httpserver.HttpExchange)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.net.httpserver.Authenticator.Failure int getResponseCode()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -80,6 +83,9 @@
   <item name="com.sun.net.httpserver.BasicAuthenticator com.sun.net.httpserver.Authenticator.Result authenticate(com.sun.net.httpserver.HttpExchange)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.net.httpserver.BasicAuthenticator com.sun.net.httpserver.Authenticator.Result authenticate(com.sun.net.httpserver.HttpExchange)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.net.httpserver.BasicAuthenticator java.lang.String getRealm()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -89,6 +95,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="abstract virtual com.sun.net.httpserver.Filter java.lang.String description()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.net.httpserver.Filter.Chain Chain(java.util.List&lt;com.sun.net.httpserver.Filter&gt;, com.sun.net.httpserver.HttpHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -141,6 +150,9 @@
   <item name="com.sun.net.httpserver.Headers java.util.Collection&lt;java.util.List&lt;java.lang.String&gt;&gt; values()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.net.httpserver.Headers java.util.Collection&lt;java.util.List&lt;java.lang.String&gt;&gt; values()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.net.httpserver.Headers java.util.List&lt;java.lang.String&gt; get(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -153,10 +165,16 @@
   <item name="com.sun.net.httpserver.Headers java.util.List&lt;java.lang.String&gt; remove(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.net.httpserver.Headers java.util.Set&lt;java.lang.String&gt; keySet()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.net.httpserver.Headers java.util.Set&lt;java.lang.String&gt; keySet()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.net.httpserver.Headers java.util.Set&lt;java.util.Map.Entry&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt;&gt; entrySet()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.net.httpserver.Headers java.util.Set&lt;java.util.Map.Entry&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt;&gt; entrySet()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual com.sun.net.httpserver.Headers void add(java.lang.String, java.lang.String) 0">
@@ -181,7 +199,19 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpExchange com.sun.net.httpserver.Headers getRequestHeaders()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual com.sun.net.httpserver.HttpExchange java.lang.Object getAttribute(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpExchange java.lang.String getProtocol()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpExchange java.net.InetSocketAddress getLocalAddress()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpExchange java.net.InetSocketAddress getRemoteAddress()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual com.sun.net.httpserver.HttpExchange void setAttribute(java.lang.String, java.lang.Object) 0">
@@ -238,10 +268,16 @@
   <item name="abstract virtual com.sun.net.httpserver.HttpServer com.sun.net.httpserver.HttpContext createContext(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpServer com.sun.net.httpserver.HttpContext createContext(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual com.sun.net.httpserver.HttpServer com.sun.net.httpserver.HttpContext createContext(java.lang.String, com.sun.net.httpserver.HttpHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual com.sun.net.httpserver.HttpServer com.sun.net.httpserver.HttpContext createContext(java.lang.String, com.sun.net.httpserver.HttpHandler) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.net.httpserver.HttpServer com.sun.net.httpserver.HttpContext createContext(java.lang.String, com.sun.net.httpserver.HttpHandler)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.net.httpserver.HttpServer com.sun.net.httpserver.HttpServer create()">

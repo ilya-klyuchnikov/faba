@@ -5,6 +5,12 @@
   <item name="abstract virtual javax.xml.ws.BindingProvider T getEndpointReference(java.lang.Class&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.ws.Dispatch java.util.concurrent.Future&lt;?&gt; invokeAsync(T, javax.xml.ws.AsyncHandler&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.ws.Dispatch javax.xml.ws.Response&lt;T&gt; invokeAsync(T)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.xml.ws.Endpoint Endpoint()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -15,6 +21,9 @@
   </item>
   <item name="abstract virtual javax.xml.ws.Endpoint T getEndpointReference(java.lang.Class&lt;T&gt;, org.w3c.dom.Element...) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.xml.ws.Endpoint java.util.Map&lt;java.lang.String,java.lang.Object&gt; getProperties()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.xml.ws.Endpoint javax.xml.ws.Endpoint create(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -93,6 +102,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.xml.ws.EndpointReference java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.xml.ws.EndpointReference java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.xml.ws.EndpointReference void writeTo(javax.xml.transform.Result) 0">
@@ -206,6 +218,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.xml.ws.Service javax.xml.ws.Dispatch&lt;T&gt; createDispatch(javax.xml.namespace.QName, java.lang.Class&lt;T&gt;, javax.xml.ws.Service.Mode)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.xml.ws.Service javax.xml.ws.Dispatch&lt;T&gt; createDispatch(javax.xml.namespace.QName, java.lang.Class&lt;T&gt;, javax.xml.ws.Service.Mode)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -214,6 +229,9 @@
   </item>
   <item name="javax.xml.ws.Service javax.xml.ws.Dispatch&lt;T&gt; createDispatch(javax.xml.namespace.QName, java.lang.Class&lt;T&gt;, javax.xml.ws.Service.Mode, javax.xml.ws.WebServiceFeature...) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.xml.ws.Service javax.xml.ws.Dispatch&lt;T&gt; createDispatch(javax.xml.namespace.QName, java.lang.Class&lt;T&gt;, javax.xml.ws.Service.Mode, javax.xml.ws.WebServiceFeature...)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.xml.ws.Service javax.xml.ws.Dispatch&lt;T&gt; createDispatch(javax.xml.namespace.QName, java.lang.Class&lt;T&gt;, javax.xml.ws.Service.Mode, javax.xml.ws.WebServiceFeature...)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -233,7 +251,13 @@
   <item name="javax.xml.ws.Service javax.xml.ws.Dispatch&lt;T&gt; createDispatch(javax.xml.ws.EndpointReference, java.lang.Class&lt;T&gt;, javax.xml.ws.Service.Mode, javax.xml.ws.WebServiceFeature...)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.xml.ws.Service javax.xml.ws.Dispatch&lt;T&gt; createDispatch(javax.xml.ws.EndpointReference, java.lang.Class&lt;T&gt;, javax.xml.ws.Service.Mode, javax.xml.ws.WebServiceFeature...)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.xml.ws.Service javax.xml.ws.Dispatch&lt;java.lang.Object&gt; createDispatch(javax.xml.namespace.QName, javax.xml.bind.JAXBContext, javax.xml.ws.Service.Mode)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.xml.ws.Service javax.xml.ws.Dispatch&lt;java.lang.Object&gt; createDispatch(javax.xml.namespace.QName, javax.xml.bind.JAXBContext, javax.xml.ws.Service.Mode)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.xml.ws.Service javax.xml.ws.Dispatch&lt;java.lang.Object&gt; createDispatch(javax.xml.namespace.QName, javax.xml.bind.JAXBContext, javax.xml.ws.Service.Mode, javax.xml.ws.WebServiceFeature...) 3">
@@ -241,6 +265,9 @@
   </item>
   <item name="virtual javax.xml.ws.Service javax.xml.ws.Dispatch&lt;java.lang.Object&gt; createDispatch(javax.xml.namespace.QName, javax.xml.bind.JAXBContext, javax.xml.ws.Service.Mode, javax.xml.ws.WebServiceFeature...) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.xml.ws.Service javax.xml.ws.Dispatch&lt;java.lang.Object&gt; createDispatch(javax.xml.namespace.QName, javax.xml.bind.JAXBContext, javax.xml.ws.Service.Mode, javax.xml.ws.WebServiceFeature...)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.xml.ws.Service javax.xml.ws.Dispatch&lt;java.lang.Object&gt; createDispatch(javax.xml.namespace.QName, javax.xml.bind.JAXBContext, javax.xml.ws.Service.Mode, javax.xml.ws.WebServiceFeature...)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -256,6 +283,9 @@
   </item>
   <item name="virtual javax.xml.ws.Service javax.xml.ws.Dispatch&lt;java.lang.Object&gt; createDispatch(javax.xml.ws.EndpointReference, javax.xml.bind.JAXBContext, javax.xml.ws.Service.Mode, javax.xml.ws.WebServiceFeature...) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.xml.ws.Service javax.xml.ws.Dispatch&lt;java.lang.Object&gt; createDispatch(javax.xml.ws.EndpointReference, javax.xml.bind.JAXBContext, javax.xml.ws.Service.Mode, javax.xml.ws.WebServiceFeature...)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.xml.ws.Service javax.xml.ws.Dispatch&lt;java.lang.Object&gt; createDispatch(javax.xml.ws.EndpointReference, javax.xml.bind.JAXBContext, javax.xml.ws.Service.Mode, javax.xml.ws.WebServiceFeature...)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -305,10 +335,16 @@
   <item name="abstract virtual javax.xml.ws.WebServiceContext javax.xml.ws.EndpointReference getEndpointReference(org.w3c.dom.Element...) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual javax.xml.ws.WebServiceContext javax.xml.ws.handler.MessageContext getMessageContext()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.xml.ws.WebServiceFeature boolean isEnabled()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="abstract virtual javax.xml.ws.WebServiceFeature java.lang.String getID()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.xml.ws.WebServicePermission WebServicePermission(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

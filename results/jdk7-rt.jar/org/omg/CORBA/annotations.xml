@@ -302,6 +302,12 @@
   <item name="org.omg.CORBA.CurrentHolder void _write(org.omg.CORBA.portable.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual org.omg.CORBA.DataInputStream org.omg.CORBA.Any read_any()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.DataInputStream org.omg.CORBA.TypeCode read_TypeCode()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual org.omg.CORBA.DataInputStream void read_any_array(org.omg.CORBA.AnySeqHolder, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -850,6 +856,15 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual org.omg.CORBA.NVList org.omg.CORBA.NamedValue add(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.NVList org.omg.CORBA.NamedValue add_item(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.NVList org.omg.CORBA.NamedValue add_value(java.lang.String, org.omg.CORBA.Any, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="org.omg.CORBA.NameValuePair NameValuePair()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -908,6 +923,15 @@
   <item name="abstract virtual org.omg.CORBA.ORB java.lang.String object_to_string(org.omg.CORBA.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual org.omg.CORBA.ORB java.lang.String object_to_string(org.omg.CORBA.Object)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.Any create_any()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.ContextList create_context_list()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="virtual org.omg.CORBA.ORB org.omg.CORBA.DynAny create_basic_dyn_any(org.omg.CORBA.TypeCode) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -950,6 +974,18 @@
   <item name="virtual org.omg.CORBA.ORB org.omg.CORBA.DynUnion create_dyn_union(org.omg.CORBA.TypeCode) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.Environment create_environment()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.ExceptionList create_exception_list()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.NVList create_list(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.NamedValue create_named_value(java.lang.String, org.omg.CORBA.Any, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="org.omg.CORBA.ORB org.omg.CORBA.ORB init(java.applet.Applet, java.util.Properties) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -959,8 +995,14 @@
   <item name="org.omg.CORBA.ORB org.omg.CORBA.ORB init(java.lang.String[], java.util.Properties)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.Object resolve_initial_references(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="org.omg.CORBA.ORB org.omg.CORBA.Policy create_policy(int, org.omg.CORBA.Any) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.Request get_next_response()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_abstract_interface_tc(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -968,14 +1010,56 @@
   <item name="org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_abstract_interface_tc(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_abstract_interface_tc(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_alias_tc(java.lang.String, java.lang.String, org.omg.CORBA.TypeCode)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_array_tc(int, org.omg.CORBA.TypeCode)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_enum_tc(java.lang.String, java.lang.String, java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_exception_tc(java.lang.String, java.lang.String, org.omg.CORBA.StructMember[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_fixed_tc(short, short)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_interface_tc(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_native_tc(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_native_tc(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_native_tc(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_recursive_sequence_tc(int, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_recursive_tc(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_recursive_tc(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_sequence_tc(int, org.omg.CORBA.TypeCode)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_string_tc(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_struct_tc(java.lang.String, java.lang.String, org.omg.CORBA.StructMember[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_union_tc(java.lang.String, java.lang.String, org.omg.CORBA.TypeCode, org.omg.CORBA.UnionMember[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_value_box_tc(java.lang.String, java.lang.String, org.omg.CORBA.TypeCode) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -985,6 +1069,9 @@
   </item>
   <item name="org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_value_box_tc(java.lang.String, java.lang.String, org.omg.CORBA.TypeCode) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_value_box_tc(java.lang.String, java.lang.String, org.omg.CORBA.TypeCode)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_value_tc(java.lang.String, java.lang.String, short, org.omg.CORBA.TypeCode, org.omg.CORBA.ValueMember[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1000,6 +1087,12 @@
   </item>
   <item name="org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_value_tc(java.lang.String, java.lang.String, short, org.omg.CORBA.TypeCode, org.omg.CORBA.ValueMember[]) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_value_tc(java.lang.String, java.lang.String, short, org.omg.CORBA.TypeCode, org.omg.CORBA.ValueMember[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.TypeCode create_wstring_tc(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual org.omg.CORBA.ORB org.omg.CORBA.TypeCode get_primitive_tc(org.omg.CORBA.TCKind) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1025,6 +1118,9 @@
   <item name="abstract virtual org.omg.CORBA.Object org.omg.CORBA.Request _create_request(org.omg.CORBA.Context, java.lang.String, org.omg.CORBA.NVList, org.omg.CORBA.NamedValue) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual org.omg.CORBA.Object org.omg.CORBA.Request _create_request(org.omg.CORBA.Context, java.lang.String, org.omg.CORBA.NVList, org.omg.CORBA.NamedValue)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual org.omg.CORBA.Object org.omg.CORBA.Request _create_request(org.omg.CORBA.Context, java.lang.String, org.omg.CORBA.NVList, org.omg.CORBA.NamedValue, org.omg.CORBA.ExceptionList, org.omg.CORBA.ContextList) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1033,6 +1129,12 @@
   </item>
   <item name="abstract virtual org.omg.CORBA.Object org.omg.CORBA.Request _create_request(org.omg.CORBA.Context, java.lang.String, org.omg.CORBA.NVList, org.omg.CORBA.NamedValue, org.omg.CORBA.ExceptionList, org.omg.CORBA.ContextList) 5">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.Object org.omg.CORBA.Request _create_request(org.omg.CORBA.Context, java.lang.String, org.omg.CORBA.NVList, org.omg.CORBA.NamedValue, org.omg.CORBA.ExceptionList, org.omg.CORBA.ContextList)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.Object org.omg.CORBA.Request _request(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.omg.CORBA.ObjectHelper ObjectHelper()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1708,6 +1810,9 @@
   <item name="org.omg.CORBA.StructMemberHelper void write(org.omg.CORBA.portable.OutputStream, org.omg.CORBA.StructMember) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual org.omg.CORBA.SystemException java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="org.omg.CORBA.SystemException java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1720,6 +1825,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="abstract virtual org.omg.CORBA.TypeCode org.omg.CORBA.TypeCode get_compact_typecode()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.omg.CORBA.TypeCodeHolder TypeCodeHolder()">
     <annotation name="org.jetbrains.annotations.Contract">

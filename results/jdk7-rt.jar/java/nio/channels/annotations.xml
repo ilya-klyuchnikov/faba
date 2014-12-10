@@ -57,6 +57,9 @@
   <item name="java.nio.channels.AsynchronousFileChannel java.nio.channels.AsynchronousFileChannel open(java.nio.file.Path, java.util.Set&lt;? extends java.nio.file.OpenOption&gt;, java.util.concurrent.ExecutorService, java.nio.file.attribute.FileAttribute&lt;?&gt;...)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual java.nio.channels.AsynchronousFileChannel java.nio.channels.AsynchronousFileChannel truncate(long)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual java.nio.channels.AsynchronousFileChannel java.util.concurrent.Future&lt;java.lang.Integer&gt; read(java.nio.ByteBuffer, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -78,6 +81,9 @@
   <item name="java.nio.channels.AsynchronousServerSocketChannel java.nio.channels.AsynchronousServerSocketChannel bind(java.net.SocketAddress)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.nio.channels.AsynchronousServerSocketChannel java.nio.channels.AsynchronousServerSocketChannel bind(java.net.SocketAddress, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.nio.channels.AsynchronousServerSocketChannel java.nio.channels.AsynchronousServerSocketChannel open()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -91,6 +97,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual java.nio.channels.AsynchronousServerSocketChannel java.nio.channels.AsynchronousServerSocketChannel setOption(java.net.SocketOption&lt;T&gt;, T) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.nio.channels.AsynchronousServerSocketChannel java.nio.channels.AsynchronousServerSocketChannel setOption(java.net.SocketOption&lt;T&gt;, T)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual java.nio.channels.AsynchronousServerSocketChannel java.nio.channels.NetworkChannel bind(java.net.SocketAddress)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.channels.AsynchronousServerSocketChannel java.nio.channels.NetworkChannel bind(java.net.SocketAddress)">
@@ -111,12 +123,18 @@
   <item name="java.nio.channels.AsynchronousServerSocketChannel java.nio.channels.NetworkChannel setOption(java.net.SocketOption, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual java.nio.channels.AsynchronousServerSocketChannel java.nio.channels.NetworkChannel setOption(java.net.SocketOption, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.nio.channels.AsynchronousServerSocketChannel java.nio.channels.spi.AsynchronousChannelProvider provider()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="abstract virtual java.nio.channels.AsynchronousServerSocketChannel void accept(A, java.nio.channels.CompletionHandler&lt;java.nio.channels.AsynchronousSocketChannel,? super A&gt;) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.nio.channels.AsynchronousSocketChannel java.nio.channels.AsynchronousSocketChannel bind(java.net.SocketAddress)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.channels.AsynchronousSocketChannel java.nio.channels.AsynchronousSocketChannel open()">
@@ -134,7 +152,19 @@
   <item name="abstract virtual java.nio.channels.AsynchronousSocketChannel java.nio.channels.AsynchronousSocketChannel setOption(java.net.SocketOption&lt;T&gt;, T) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.nio.channels.AsynchronousSocketChannel java.nio.channels.AsynchronousSocketChannel setOption(java.net.SocketOption&lt;T&gt;, T)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.nio.channels.AsynchronousSocketChannel java.nio.channels.AsynchronousSocketChannel shutdownInput()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.nio.channels.AsynchronousSocketChannel java.nio.channels.AsynchronousSocketChannel shutdownOutput()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.nio.channels.AsynchronousSocketChannel java.nio.channels.NetworkChannel bind(java.net.SocketAddress)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual java.nio.channels.AsynchronousSocketChannel java.nio.channels.NetworkChannel bind(java.net.SocketAddress)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.channels.AsynchronousSocketChannel java.nio.channels.NetworkChannel setOption(java.net.SocketOption, java.lang.Object) 0">
@@ -147,6 +177,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.channels.AsynchronousSocketChannel java.nio.channels.NetworkChannel setOption(java.net.SocketOption, java.lang.Object) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual java.nio.channels.AsynchronousSocketChannel java.nio.channels.NetworkChannel setOption(java.net.SocketOption, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.channels.AsynchronousSocketChannel java.nio.channels.NetworkChannel setOption(java.net.SocketOption, java.lang.Object)">
@@ -332,7 +365,16 @@
   <item name="abstract virtual java.nio.channels.DatagramChannel java.net.SocketAddress receive(java.nio.ByteBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.nio.channels.DatagramChannel java.nio.channels.DatagramChannel bind(java.net.SocketAddress)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual java.nio.channels.DatagramChannel java.nio.channels.DatagramChannel connect(java.net.SocketAddress) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.nio.channels.DatagramChannel java.nio.channels.DatagramChannel connect(java.net.SocketAddress)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.nio.channels.DatagramChannel java.nio.channels.DatagramChannel disconnect()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.channels.DatagramChannel java.nio.channels.DatagramChannel open()">
@@ -344,6 +386,12 @@
   <item name="abstract virtual java.nio.channels.DatagramChannel java.nio.channels.DatagramChannel setOption(java.net.SocketOption&lt;T&gt;, T) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.nio.channels.DatagramChannel java.nio.channels.DatagramChannel setOption(java.net.SocketOption&lt;T&gt;, T)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual java.nio.channels.DatagramChannel java.nio.channels.NetworkChannel bind(java.net.SocketAddress)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.nio.channels.DatagramChannel java.nio.channels.NetworkChannel bind(java.net.SocketAddress)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -351,6 +399,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.channels.DatagramChannel java.nio.channels.NetworkChannel setOption(java.net.SocketOption, java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual java.nio.channels.DatagramChannel java.nio.channels.NetworkChannel setOption(java.net.SocketOption, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.channels.DatagramChannel java.nio.channels.NetworkChannel setOption(java.net.SocketOption, java.lang.Object)">
@@ -460,10 +511,19 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual java.nio.channels.MembershipKey java.nio.channels.MembershipKey block(java.net.InetAddress)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual java.nio.channels.MembershipKey java.nio.channels.MembershipKey unblock(java.net.InetAddress) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.nio.channels.MembershipKey java.nio.channels.MembershipKey unblock(java.net.InetAddress)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual java.nio.channels.MulticastChannel java.nio.channels.MembershipKey join(java.net.InetAddress, java.net.NetworkInterface) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.nio.channels.MulticastChannel java.nio.channels.MembershipKey join(java.net.InetAddress, java.net.NetworkInterface)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual java.nio.channels.MulticastChannel java.nio.channels.MembershipKey join(java.net.InetAddress, java.net.NetworkInterface, java.net.InetAddress) 0">
@@ -472,10 +532,19 @@
   <item name="abstract virtual java.nio.channels.MulticastChannel java.nio.channels.MembershipKey join(java.net.InetAddress, java.net.NetworkInterface, java.net.InetAddress) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.nio.channels.MulticastChannel java.nio.channels.MembershipKey join(java.net.InetAddress, java.net.NetworkInterface, java.net.InetAddress)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual java.nio.channels.NetworkChannel T getOption(java.net.SocketOption&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.nio.channels.NetworkChannel java.nio.channels.NetworkChannel bind(java.net.SocketAddress)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual java.nio.channels.NetworkChannel java.nio.channels.NetworkChannel setOption(java.net.SocketOption&lt;T&gt;, T) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.nio.channels.NetworkChannel java.nio.channels.NetworkChannel setOption(java.net.SocketOption&lt;T&gt;, T)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.channels.Pipe Pipe()">
@@ -502,16 +571,25 @@
   <item name="abstract virtual java.nio.channels.ScatteringByteChannel long read(java.nio.ByteBuffer[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.nio.channels.SelectableChannel java.nio.channels.SelectableChannel configureBlocking(boolean)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual java.nio.channels.SelectableChannel java.nio.channels.SelectionKey keyFor(java.nio.channels.Selector) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.nio.channels.SelectableChannel java.nio.channels.SelectionKey register(java.nio.channels.Selector, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.nio.channels.SelectableChannel java.nio.channels.SelectionKey register(java.nio.channels.Selector, int, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.nio.channels.SelectionKey java.lang.Object attachment()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="abstract virtual java.nio.channels.SelectionKey java.nio.channels.SelectionKey interestOps(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.channels.Selector Selector()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -521,10 +599,16 @@
   <item name="java.nio.channels.Selector java.nio.channels.Selector open()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.nio.channels.Selector java.nio.channels.Selector wakeup()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.nio.channels.ServerSocketChannel int validOps()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual java.nio.channels.ServerSocketChannel java.nio.channels.NetworkChannel bind(java.net.SocketAddress)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.channels.ServerSocketChannel java.nio.channels.NetworkChannel bind(java.net.SocketAddress)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -541,10 +625,16 @@
   <item name="java.nio.channels.ServerSocketChannel java.nio.channels.NetworkChannel setOption(java.net.SocketOption, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual java.nio.channels.ServerSocketChannel java.nio.channels.NetworkChannel setOption(java.net.SocketOption, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.nio.channels.ServerSocketChannel java.nio.channels.NetworkChannel setOption(java.net.SocketOption, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.channels.ServerSocketChannel java.nio.channels.ServerSocketChannel bind(java.net.SocketAddress)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.nio.channels.ServerSocketChannel java.nio.channels.ServerSocketChannel bind(java.net.SocketAddress, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.channels.ServerSocketChannel java.nio.channels.ServerSocketChannel open()">
@@ -554,6 +644,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual java.nio.channels.ServerSocketChannel java.nio.channels.ServerSocketChannel setOption(java.net.SocketOption&lt;T&gt;, T) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.nio.channels.ServerSocketChannel java.nio.channels.ServerSocketChannel setOption(java.net.SocketOption&lt;T&gt;, T)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual java.nio.channels.SocketChannel boolean connect(java.net.SocketAddress) 0">
@@ -570,6 +663,9 @@
   <item name="abstract virtual java.nio.channels.SocketChannel int write(java.nio.ByteBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual java.nio.channels.SocketChannel java.nio.channels.NetworkChannel bind(java.net.SocketAddress)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.nio.channels.SocketChannel java.nio.channels.NetworkChannel bind(java.net.SocketAddress)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -582,6 +678,12 @@
   <item name="java.nio.channels.SocketChannel java.nio.channels.NetworkChannel setOption(java.net.SocketOption, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual java.nio.channels.SocketChannel java.nio.channels.NetworkChannel setOption(java.net.SocketOption, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.nio.channels.SocketChannel java.nio.channels.SocketChannel bind(java.net.SocketAddress)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.nio.channels.SocketChannel java.nio.channels.SocketChannel open()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -592,6 +694,15 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual java.nio.channels.SocketChannel java.nio.channels.SocketChannel setOption(java.net.SocketOption&lt;T&gt;, T) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.nio.channels.SocketChannel java.nio.channels.SocketChannel setOption(java.net.SocketOption&lt;T&gt;, T)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.nio.channels.SocketChannel java.nio.channels.SocketChannel shutdownInput()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.nio.channels.SocketChannel java.nio.channels.SocketChannel shutdownOutput()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.channels.SocketChannel long read(java.nio.ByteBuffer[]) 0">

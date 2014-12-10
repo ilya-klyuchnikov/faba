@@ -4,6 +4,12 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual javax.xml.soap.AttachmentPart byte[] getRawContentBytes()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.AttachmentPart java.io.InputStream getBase64Content()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.xml.soap.AttachmentPart java.lang.String getContentId()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -15,6 +21,15 @@
   </item>
   <item name="abstract virtual javax.xml.soap.AttachmentPart java.lang.String[] getMimeHeader(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.AttachmentPart java.util.Iterator getAllMimeHeaders()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.AttachmentPart java.util.Iterator getMatchingMimeHeaders(java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.AttachmentPart java.util.Iterator getNonMatchingMimeHeaders(java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.xml.soap.AttachmentPart void addMimeHeader(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -32,6 +47,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.xml.soap.AttachmentPart void setRawContentBytes(byte[], int, int, java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.Detail java.util.Iterator getDetailEntries()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.xml.soap.Detail javax.xml.soap.DetailEntry addDetailEntry(javax.xml.namespace.QName) 0">
@@ -76,6 +94,12 @@
   <item name="javax.xml.soap.MessageFactory javax.xml.soap.MessageFactory newInstance(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.soap.MessageFactory javax.xml.soap.SOAPMessage createMessage()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.MessageFactory javax.xml.soap.SOAPMessage createMessage(javax.xml.soap.MimeHeaders, java.io.InputStream)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.xml.soap.MimeHeader java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -98,7 +122,16 @@
   <item name="javax.xml.soap.MimeHeaders java.util.Iterator getAllHeaders()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.xml.soap.MimeHeaders java.util.Iterator getAllHeaders()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.xml.soap.MimeHeaders java.util.Iterator getMatchingHeaders(java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.xml.soap.MimeHeaders java.util.Iterator getMatchingHeaders(java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.xml.soap.MimeHeaders java.util.Iterator getNonMatchingHeaders(java.lang.String[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.xml.soap.MimeHeaders java.util.Iterator getNonMatchingHeaders(java.lang.String[])">
@@ -144,16 +177,43 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual javax.xml.soap.SAAJMetaFactory javax.xml.soap.MessageFactory newMessageFactory(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SAAJMetaFactory javax.xml.soap.SOAPFactory newSOAPFactory(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.xml.soap.SAAJResult SAAJResult(javax.xml.soap.SOAPMessage) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.xml.soap.SOAPBody javax.xml.soap.SOAPBodyElement addBodyElement(javax.xml.namespace.QName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.soap.SOAPBody javax.xml.soap.SOAPBodyElement addBodyElement(javax.xml.namespace.QName)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual javax.xml.soap.SOAPBody javax.xml.soap.SOAPBodyElement addBodyElement(javax.xml.soap.Name) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.soap.SOAPBody javax.xml.soap.SOAPBodyElement addBodyElement(javax.xml.soap.Name)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual javax.xml.soap.SOAPBody javax.xml.soap.SOAPBodyElement addDocument(org.w3c.dom.Document) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPBody javax.xml.soap.SOAPFault addFault(javax.xml.namespace.QName, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPBody javax.xml.soap.SOAPFault addFault(javax.xml.namespace.QName, java.lang.String, java.util.Locale)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPBody javax.xml.soap.SOAPFault addFault(javax.xml.soap.Name, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPBody javax.xml.soap.SOAPFault addFault(javax.xml.soap.Name, java.lang.String, java.util.Locale)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPBody org.w3c.dom.Document extractContentAsDocument()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.xml.soap.SOAPConnection SOAPConnection()">
@@ -172,6 +232,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual javax.xml.soap.SOAPConnectionFactory javax.xml.soap.SOAPConnection createConnection()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual javax.xml.soap.SOAPElement boolean removeAttribute(javax.xml.namespace.QName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -187,10 +250,31 @@
   <item name="abstract virtual javax.xml.soap.SOAPElement java.lang.String getNamespaceURI(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual javax.xml.soap.SOAPElement java.util.Iterator getAllAttributes()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPElement java.util.Iterator getAllAttributesAsQNames()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPElement java.util.Iterator getChildElements()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual javax.xml.soap.SOAPElement java.util.Iterator getChildElements(javax.xml.namespace.QName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.soap.SOAPElement java.util.Iterator getChildElements(javax.xml.namespace.QName)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual javax.xml.soap.SOAPElement java.util.Iterator getChildElements(javax.xml.soap.Name) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPElement java.util.Iterator getChildElements(javax.xml.soap.Name)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPElement java.util.Iterator getNamespacePrefixes()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPElement java.util.Iterator getVisibleNamespacePrefixes()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.namespace.QName createQName(java.lang.String, java.lang.String) 0">
@@ -199,10 +283,22 @@
   <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.namespace.QName createQName(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.namespace.QName createQName(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.soap.Name getElementName()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.soap.SOAPElement addAttribute(javax.xml.namespace.QName, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.soap.SOAPElement addAttribute(javax.xml.namespace.QName, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.soap.SOAPElement addAttribute(javax.xml.soap.Name, java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.soap.SOAPElement addAttribute(javax.xml.soap.Name, java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.soap.SOAPElement addChildElement(java.lang.String) 0">
@@ -229,6 +325,12 @@
   <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.soap.SOAPElement addNamespaceDeclaration(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.soap.SOAPElement addNamespaceDeclaration(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.soap.SOAPElement addTextNode(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual javax.xml.soap.SOAPElement javax.xml.soap.SOAPElement setElementQName(javax.xml.namespace.QName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -236,6 +338,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.xml.soap.SOAPElementFactory javax.xml.soap.SOAPElement create(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.xml.soap.SOAPElementFactory javax.xml.soap.SOAPElement create(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.xml.soap.SOAPElementFactory javax.xml.soap.SOAPElement create(java.lang.String)">
@@ -256,10 +361,16 @@
   <item name="javax.xml.soap.SOAPElementFactory javax.xml.soap.SOAPElement create(java.lang.String, java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.xml.soap.SOAPElementFactory javax.xml.soap.SOAPElement create(java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.xml.soap.SOAPElementFactory javax.xml.soap.SOAPElement create(javax.xml.soap.Name) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual javax.xml.soap.SOAPElementFactory javax.xml.soap.SOAPElement create(javax.xml.soap.Name) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.xml.soap.SOAPElementFactory javax.xml.soap.SOAPElement create(javax.xml.soap.Name)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.xml.soap.SOAPElementFactory javax.xml.soap.SOAPElement create(javax.xml.soap.Name)">
@@ -271,11 +382,20 @@
   <item name="abstract virtual javax.xml.soap.SOAPEnvelope javax.xml.soap.Name createName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual javax.xml.soap.SOAPEnvelope javax.xml.soap.Name createName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual javax.xml.soap.SOAPEnvelope javax.xml.soap.Name createName(java.lang.String, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual javax.xml.soap.SOAPEnvelope javax.xml.soap.Name createName(java.lang.String, java.lang.String, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPEnvelope javax.xml.soap.Name createName(java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPEnvelope javax.xml.soap.SOAPHeader addHeader()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.xml.soap.SOAPException SOAPException(java.lang.Throwable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -288,6 +408,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual javax.xml.soap.SOAPException java.lang.Throwable initCause(java.lang.Throwable)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.xml.soap.SOAPException java.lang.Throwable initCause(java.lang.Throwable)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -296,7 +419,13 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.Detail createDetail()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.Name createName(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.Name createName(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.Name createName(java.lang.String, java.lang.String, java.lang.String) 0">
@@ -308,7 +437,13 @@
   <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.Name createName(java.lang.String, java.lang.String, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.Name createName(java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.SOAPElement createElement(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.SOAPElement createElement(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.SOAPElement createElement(java.lang.String, java.lang.String, java.lang.String) 0">
@@ -317,10 +452,19 @@
   <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.SOAPElement createElement(java.lang.String, java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.SOAPElement createElement(java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.xml.soap.SOAPFactory javax.xml.soap.SOAPElement createElement(javax.xml.namespace.QName) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.xml.soap.SOAPFactory javax.xml.soap.SOAPElement createElement(javax.xml.namespace.QName)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.SOAPElement createElement(javax.xml.soap.Name) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.SOAPElement createElement(javax.xml.soap.Name)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual javax.xml.soap.SOAPFactory javax.xml.soap.SOAPElement createElement(org.w3c.dom.Element) 0">
@@ -335,8 +479,17 @@
   <item name="javax.xml.soap.SOAPFactory javax.xml.soap.SOAPFactory newInstance(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.SOAPFault createFault()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPFactory javax.xml.soap.SOAPFault createFault(java.lang.String, javax.xml.namespace.QName)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual javax.xml.soap.SOAPFault java.lang.String getFaultReasonText(java.util.Locale) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPFault java.util.Iterator getFaultSubcodes()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.xml.soap.SOAPFault void appendFaultSubcode(javax.xml.namespace.QName) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -365,7 +518,16 @@
   <item name="abstract virtual javax.xml.soap.SOAPHeader javax.xml.soap.SOAPHeaderElement addHeaderElement(javax.xml.namespace.QName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.soap.SOAPHeader javax.xml.soap.SOAPHeaderElement addHeaderElement(javax.xml.namespace.QName)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual javax.xml.soap.SOAPHeader javax.xml.soap.SOAPHeaderElement addHeaderElement(javax.xml.soap.Name) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPHeader javax.xml.soap.SOAPHeaderElement addHeaderElement(javax.xml.soap.Name)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPHeader javax.xml.soap.SOAPHeaderElement addNotUnderstoodHeaderElement(javax.xml.namespace.QName)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.xml.soap.SOAPHeader javax.xml.soap.SOAPHeaderElement addUpgradeHeaderElement(java.lang.String[]) 0">
@@ -382,7 +544,13 @@
   <item name="javax.xml.soap.SOAPMessage java.lang.Object getProperty(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual javax.xml.soap.SOAPMessage javax.xml.soap.AttachmentPart createAttachmentPart()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.xml.soap.SOAPMessage javax.xml.soap.AttachmentPart createAttachmentPart(java.lang.Object, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.xml.soap.SOAPMessage javax.xml.soap.AttachmentPart createAttachmentPart(java.lang.Object, java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.xml.soap.SOAPMessage javax.xml.soap.AttachmentPart createAttachmentPart(javax.activation.DataHandler) 0">
@@ -392,6 +560,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.xml.soap.SOAPMessage javax.xml.soap.AttachmentPart createAttachmentPart(javax.activation.DataHandler)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.xml.soap.SOAPMessage javax.xml.soap.AttachmentPart createAttachmentPart(javax.activation.DataHandler)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.xml.soap.SOAPMessage javax.xml.soap.AttachmentPart getAttachment(javax.xml.soap.SOAPElement) 0">
@@ -416,6 +587,15 @@
   </item>
   <item name="abstract virtual javax.xml.soap.SOAPPart java.lang.String[] getMimeHeader(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPPart java.util.Iterator getAllMimeHeaders()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPPart java.util.Iterator getMatchingMimeHeaders(java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.xml.soap.SOAPPart java.util.Iterator getNonMatchingMimeHeaders(java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.xml.soap.SOAPPart void addMimeHeader(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

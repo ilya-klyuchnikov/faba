@@ -37,6 +37,12 @@
   <item name="com.sun.corba.se.impl.encoding.BufferManagerFactory com.sun.corba.se.impl.encoding.BufferManagerWrite newBufferManagerWrite(int, byte, com.sun.corba.se.spi.orb.ORB)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.corba.se.impl.encoding.BufferManagerRead com.sun.corba.se.impl.encoding.ByteBufferWithInfo underflow(com.sun.corba.se.impl.encoding.ByteBufferWithInfo)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.impl.encoding.BufferManagerRead com.sun.corba.se.impl.encoding.MarkAndResetHandler getMarkAndResetHandler()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual com.sun.corba.se.impl.encoding.BufferManagerRead void init(com.sun.corba.se.impl.protocol.giopmsgheaders.Message) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -53,6 +59,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.BufferManagerReadGrow com.sun.corba.se.impl.encoding.MarkAndResetHandler getMarkAndResetHandler()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.BufferManagerReadGrow void cancelProcessing(int)">
@@ -113,6 +122,9 @@
   <item name="com.sun.corba.se.impl.encoding.BufferManagerReadStream BufferManagerReadStream(com.sun.corba.se.spi.orb.ORB) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.BufferManagerReadStream com.sun.corba.se.impl.encoding.ByteBufferWithInfo underflow(com.sun.corba.se.impl.encoding.ByteBufferWithInfo)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.BufferManagerReadStream com.sun.corba.se.impl.encoding.ByteBufferWithInfo underflow(com.sun.corba.se.impl.encoding.ByteBufferWithInfo)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -120,6 +132,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.BufferManagerReadStream com.sun.corba.se.impl.encoding.MarkAndResetHandler getMarkAndResetHandler()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.BufferManagerReadStream void dprint(java.lang.String) 0">
@@ -257,6 +272,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.ByteBufferWithInfo java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.ByteBufferWithInfo java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -289,10 +307,16 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDRInputObject com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter createCharBTCConverter()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputObject com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter createCharBTCConverter()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputObject com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter createWCharBTCConverter()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDRInputObject com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter createWCharBTCConverter()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputObject com.sun.corba.se.impl.protocol.giopmsgheaders.Message getMessageHeader()">
@@ -342,6 +366,12 @@
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter createCharBTCConverter()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDRInputStream com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter createCharBTCConverter()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.impl.encoding.CDRInputStream com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter createWCharBTCConverter()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream com.sun.corba.se.pept.protocol.MessageMediator getMessageMediator()">
@@ -506,11 +536,29 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual com.sun.corba.se.impl.encoding.CDRInputStreamBase com.sun.corba.se.impl.encoding.CDRInputStreamBase dup()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual com.sun.corba.se.impl.encoding.CDRInputStreamBase java.lang.Object read_abstract_interface(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual com.sun.corba.se.impl.encoding.CDRInputStreamBase java.math.BigDecimal read_fixed()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.impl.encoding.CDRInputStreamBase java.math.BigDecimal read_fixed(short, short)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.impl.encoding.CDRInputStreamBase org.omg.CORBA.Any read_any()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual com.sun.corba.se.impl.encoding.CDRInputStreamBase org.omg.CORBA.Object read_Object(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.impl.encoding.CDRInputStreamBase org.omg.CORBA.Principal read_Principal()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.impl.encoding.CDRInputStreamBase org.omg.CORBA.TypeCode read_TypeCode()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual com.sun.corba.se.impl.encoding.CDRInputStreamBase void init(org.omg.CORBA.ORB, java.nio.ByteBuffer, int, boolean, com.sun.corba.se.impl.encoding.BufferManagerRead) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -587,6 +635,9 @@
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_0 com.sun.corba.se.impl.encoding.CDRInputStreamBase dup()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDRInputStream_1_0 com.sun.corba.se.impl.encoding.CDRInputStreamBase dup()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_0 com.sun.corba.se.spi.ior.iiop.GIOPVersion getGIOPVersion()">
@@ -670,6 +721,9 @@
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_0 java.lang.Object createStreamMemento()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDRInputStream_1_0 java.lang.Object createStreamMemento()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_0 java.lang.Object readBoxedIDLEntity(java.lang.Class, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -709,16 +763,25 @@
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_0 java.lang.String read_wstring()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDRInputStream_1_0 java.lang.String read_wstring()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_0 java.lang.StringBuffer read_fixed_buffer()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_0 java.lang.String[] _truncatable_ids()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDRInputStream_1_0 java.math.BigDecimal read_fixed()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_0 java.math.BigDecimal read_fixed()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_0 java.math.BigDecimal read_fixed(short, short)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDRInputStream_1_0 java.math.BigDecimal read_fixed(short, short)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_0 java.nio.ByteBuffer getByteBuffer()">
@@ -728,6 +791,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_0 org.omg.CORBA.Any read_any()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDRInputStream_1_0 org.omg.CORBA.Any read_any()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_0 org.omg.CORBA.ORB orb()">
@@ -753,7 +819,13 @@
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_0 org.omg.CORBA.Object read_Object(java.lang.Class)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDRInputStream_1_0 org.omg.CORBA.Principal read_Principal()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_0 org.omg.CORBA.Principal read_Principal()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDRInputStream_1_0 org.omg.CORBA.TypeCode read_TypeCode()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_0 org.omg.CORBA.TypeCode read_TypeCode()">
@@ -870,6 +942,9 @@
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_0.1 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDRInputStream_1_0.1 java.lang.Object run()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_0.StreamMemento StreamMemento(com.sun.corba.se.impl.encoding.CDRInputStream_1_0) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -948,6 +1023,9 @@
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_1 com.sun.corba.se.impl.encoding.CDRInputStreamBase dup()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDRInputStream_1_1 com.sun.corba.se.impl.encoding.CDRInputStreamBase dup()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_1 com.sun.corba.se.spi.ior.iiop.GIOPVersion getGIOPVersion()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -959,6 +1037,12 @@
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_1 java.lang.Object createStreamMemento()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDRInputStream_1_1 java.lang.Object createStreamMemento()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDRInputStream_1_1 java.lang.String read_wstring()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_1 java.lang.String read_wstring()">
@@ -981,6 +1065,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDRInputStream_1_2 com.sun.corba.se.impl.encoding.CDRInputStreamBase dup()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_2 com.sun.corba.se.impl.encoding.CDRInputStreamBase dup()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -988,6 +1075,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDRInputStream_1_2 java.lang.String read_wstring()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStream_1_2 java.lang.String read_wstring()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1029,6 +1119,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDROutputObject com.sun.corba.se.impl.encoding.CodeSetConversion.CTBConverter createCharCTBConverter()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDROutputObject com.sun.corba.se.impl.encoding.CodeSetConversion.CTBConverter createCharCTBConverter()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDROutputObject com.sun.corba.se.impl.encoding.CodeSetConversion.CTBConverter createWCharCTBConverter()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDROutputObject com.sun.corba.se.impl.encoding.CodeSetConversion.CTBConverter createWCharCTBConverter()">
@@ -1085,7 +1181,13 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDROutputStream com.sun.corba.se.impl.encoding.CodeSetConversion.CTBConverter createCharCTBConverter()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.CDROutputStream com.sun.corba.se.impl.encoding.CodeSetConversion.CTBConverter createCharCTBConverter()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.impl.encoding.CDROutputStream com.sun.corba.se.impl.encoding.CodeSetConversion.CTBConverter createWCharCTBConverter()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDROutputStream com.sun.corba.se.pept.protocol.MessageMediator getMessageMediator()">
@@ -1180,6 +1282,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual com.sun.corba.se.impl.encoding.CDROutputStreamBase byte[] toByteArray()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual com.sun.corba.se.impl.encoding.CDROutputStreamBase void writeOctetSequenceTo(org.omg.CORBA.portable.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1239,6 +1344,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDROutputStream_1_0 byte[] toByteArray()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDROutputStream_1_0 byte[] toByteArray()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1524,6 +1632,9 @@
   <item name="com.sun.corba.se.impl.encoding.CDROutputStream_1_0 void write_wstring_array(java.lang.String[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CDROutputStream_1_0.1 java.lang.Object run()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.CDROutputStream_1_0.1 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1575,6 +1686,9 @@
   <item name="com.sun.corba.se.impl.encoding.CachedCodeBase com.sun.org.omg.CORBA.ValueDefPackage.FullValueDescription[] metas(java.lang.String[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CachedCodeBase com.sun.org.omg.CORBA.ValueDefPackage.FullValueDescription[] metas(java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="virtual com.sun.corba.se.impl.encoding.CachedCodeBase java.lang.String[] implementations(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1582,6 +1696,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CachedCodeBase java.lang.String[] implementations(java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CachedCodeBase java.lang.String[] implementations(java.lang.String[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CachedCodeBase void cleanCache(com.sun.corba.se.spi.orb.ORB) 0">
@@ -1598,6 +1715,9 @@
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CodeSetCache.1 java.lang.Object initialValue()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CodeSetCache.1 java.lang.Object initialValue()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CodeSetComponentInfo boolean equals(java.lang.Object) 0">
@@ -1718,6 +1838,9 @@
   <item name="com.sun.corba.se.impl.encoding.CodeSetConversion com.sun.corba.se.impl.encoding.CodeSetComponentInfo.CodeSetContext negotiate(com.sun.corba.se.impl.encoding.CodeSetComponentInfo, com.sun.corba.se.impl.encoding.CodeSetComponentInfo)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CodeSetConversion com.sun.corba.se.impl.encoding.CodeSetComponentInfo.CodeSetContext negotiate(com.sun.corba.se.impl.encoding.CodeSetComponentInfo, com.sun.corba.se.impl.encoding.CodeSetComponentInfo)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.CodeSetConversion com.sun.corba.se.impl.encoding.CodeSetConversion impl()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1732,6 +1855,12 @@
   <item name="com.sun.corba.se.impl.encoding.CodeSetConversion com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter getBTCConverter(com.sun.corba.se.impl.encoding.OSFCodeSetRegistry.Entry)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CodeSetConversion com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter getBTCConverter(com.sun.corba.se.impl.encoding.OSFCodeSetRegistry.Entry)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CodeSetConversion com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter getBTCConverter(com.sun.corba.se.impl.encoding.OSFCodeSetRegistry.Entry, boolean)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.CodeSetConversion com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter getBTCConverter(com.sun.corba.se.impl.encoding.OSFCodeSetRegistry.Entry, boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1741,7 +1870,13 @@
   <item name="virtual com.sun.corba.se.impl.encoding.CodeSetConversion com.sun.corba.se.impl.encoding.CodeSetConversion.CTBConverter getCTBConverter(com.sun.corba.se.impl.encoding.OSFCodeSetRegistry.Entry) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CodeSetConversion com.sun.corba.se.impl.encoding.CodeSetConversion.CTBConverter getCTBConverter(com.sun.corba.se.impl.encoding.OSFCodeSetRegistry.Entry)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.CodeSetConversion com.sun.corba.se.impl.encoding.CodeSetConversion.CTBConverter getCTBConverter(com.sun.corba.se.impl.encoding.OSFCodeSetRegistry.Entry)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CodeSetConversion com.sun.corba.se.impl.encoding.CodeSetConversion.CTBConverter getCTBConverter(com.sun.corba.se.impl.encoding.OSFCodeSetRegistry.Entry, boolean, boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CodeSetConversion com.sun.corba.se.impl.encoding.CodeSetConversion.CTBConverter getCTBConverter(com.sun.corba.se.impl.encoding.OSFCodeSetRegistry.Entry, boolean, boolean)">
@@ -1799,6 +1934,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.CodeSetConversion.JavaBTCConverter java.nio.charset.CharsetDecoder getConverter(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CodeSetConversion.JavaBTCConverter java.nio.charset.CharsetDecoder getConverter(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1900,10 +2038,19 @@
   <item name="com.sun.corba.se.impl.encoding.EncapsInputStream com.sun.corba.se.impl.encoding.CDRInputStream dup()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.EncapsInputStream com.sun.corba.se.impl.encoding.CDRInputStream dup()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.EncapsInputStream com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter createCharBTCConverter()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.EncapsInputStream com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter createCharBTCConverter()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.EncapsInputStream com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter createWCharBTCConverter()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.EncapsInputStream com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter createWCharBTCConverter()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.EncapsInputStream com.sun.org.omg.SendingContext.CodeBase getCodeBase()">
@@ -1932,7 +2079,16 @@
   <item name="com.sun.corba.se.impl.encoding.EncapsOutputStream com.sun.corba.se.impl.encoding.CodeSetConversion.CTBConverter createCharCTBConverter()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.EncapsOutputStream com.sun.corba.se.impl.encoding.CodeSetConversion.CTBConverter createCharCTBConverter()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.EncapsOutputStream com.sun.corba.se.impl.encoding.CodeSetConversion.CTBConverter createWCharCTBConverter()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.EncapsOutputStream com.sun.corba.se.impl.encoding.CodeSetConversion.CTBConverter createWCharCTBConverter()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.EncapsOutputStream org.omg.CORBA.portable.InputStream create_input_stream()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.EncapsOutputStream org.omg.CORBA.portable.InputStream create_input_stream()">
@@ -1949,6 +2105,9 @@
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.encoding.IDLJavaSerializationInputStream com.sun.corba.se.impl.encoding.CDRInputStreamBase dup()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.IDLJavaSerializationInputStream com.sun.corba.se.impl.encoding.CDRInputStreamBase dup()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.IDLJavaSerializationInputStream com.sun.corba.se.spi.ior.iiop.GIOPVersion getGIOPVersion()">
@@ -2011,10 +2170,19 @@
   <item name="com.sun.corba.se.impl.encoding.IDLJavaSerializationInputStream java.lang.StringBuffer read_fixed_buffer()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.IDLJavaSerializationInputStream java.math.BigDecimal read_fixed()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.IDLJavaSerializationInputStream java.math.BigDecimal read_fixed()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.IDLJavaSerializationInputStream java.math.BigDecimal read_fixed(short, short)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.IDLJavaSerializationInputStream java.math.BigDecimal read_fixed(short, short)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.IDLJavaSerializationInputStream org.omg.CORBA.Any read_any()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.IDLJavaSerializationInputStream org.omg.CORBA.Any read_any()">
@@ -2037,10 +2205,16 @@
   <item name="com.sun.corba.se.impl.encoding.IDLJavaSerializationInputStream org.omg.CORBA.Object read_Object(java.lang.Class)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.IDLJavaSerializationInputStream org.omg.CORBA.Principal read_Principal()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.IDLJavaSerializationInputStream org.omg.CORBA.Principal read_Principal()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.IDLJavaSerializationInputStream org.omg.CORBA.TypeCode read_TypeCode()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.IDLJavaSerializationInputStream org.omg.CORBA.TypeCode read_TypeCode()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual com.sun.corba.se.impl.encoding.IDLJavaSerializationInputStream void init(org.omg.CORBA.ORB, java.nio.ByteBuffer, int, boolean, com.sun.corba.se.impl.encoding.BufferManagerRead) 0">
@@ -2278,8 +2452,20 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual com.sun.corba.se.impl.encoding.MarshalInputStream org.omg.CORBA.Any read_any()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual com.sun.corba.se.impl.encoding.MarshalInputStream org.omg.CORBA.Object read_Object(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.impl.encoding.MarshalInputStream org.omg.CORBA.Principal read_Principal()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.impl.encoding.MarshalInputStream org.omg.CORBA.TypeCode read_TypeCode()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.impl.encoding.MarshalOutputStream byte[] toByteArray()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual com.sun.corba.se.impl.encoding.MarshalOutputStream void writeTo(java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2342,6 +2528,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.impl.encoding.RestorableInputStream java.lang.Object createStreamMemento()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual com.sun.corba.se.impl.encoding.RestorableInputStream void restoreInternalState(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2417,6 +2606,9 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.WrapperInputStream com.sun.corba.se.impl.encoding.TypeCodeReader getTopLevelStream()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.WrapperInputStream int available()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -2440,7 +2632,13 @@
   <item name="com.sun.corba.se.impl.encoding.WrapperInputStream java.lang.String read_string()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.WrapperInputStream java.math.BigDecimal read_fixed()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.WrapperInputStream java.math.BigDecimal read_fixed()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.WrapperInputStream org.omg.CORBA.Any read_any()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.WrapperInputStream org.omg.CORBA.Any read_any()">
@@ -2457,7 +2655,13 @@
   <item name="com.sun.corba.se.impl.encoding.WrapperInputStream org.omg.CORBA.Principal read_Principal()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.WrapperInputStream org.omg.CORBA.Principal read_Principal()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.WrapperInputStream org.omg.CORBA.TypeCode read_TypeCode()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.impl.encoding.WrapperInputStream org.omg.CORBA.TypeCode read_TypeCode()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.WrapperInputStream void setEnclosingInputStream(org.omg.CORBA_2_3.portable.InputStream) 0">

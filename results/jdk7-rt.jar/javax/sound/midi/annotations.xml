@@ -13,6 +13,9 @@
   <item name="javax.sound.midi.MetaMessage byte[] getData()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.sound.midi.MetaMessage byte[] getData()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.sound.midi.MetaMessage int getType()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -26,7 +29,22 @@
   <item name="javax.sound.midi.MetaMessage java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.sound.midi.MetaMessage java.lang.Object clone()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.sound.midi.MetaMessage void writeVarInt(byte[], int, long) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.sound.midi.MidiDevice java.util.List&lt;javax.sound.midi.Receiver&gt; getReceivers()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.sound.midi.MidiDevice java.util.List&lt;javax.sound.midi.Transmitter&gt; getTransmitters()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.sound.midi.MidiDevice javax.sound.midi.Receiver getReceiver()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.sound.midi.MidiDevice javax.sound.midi.Transmitter getTransmitter()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.sound.midi.MidiDevice.Info boolean equals(java.lang.Object) 0">
@@ -98,6 +116,9 @@
   <item name="javax.sound.midi.MidiFileFormat java.lang.Object getProperty(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.sound.midi.MidiFileFormat java.util.Map&lt;java.lang.String,java.lang.Object&gt; properties()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.sound.midi.MidiFileFormat java.util.Map&lt;java.lang.String,java.lang.Object&gt; properties()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -105,6 +126,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual javax.sound.midi.MidiMessage byte[] getMessage()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.sound.midi.MidiMessage byte[] getMessage()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -282,11 +306,23 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.sound.midi.Sequence javax.sound.midi.Patch[] getPatchList()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.sound.midi.Sequence javax.sound.midi.Track createTrack()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.sound.midi.Sequence javax.sound.midi.Track createTrack()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.sound.midi.Sequencer int[] addControllerEventListener(javax.sound.midi.ControllerEventListener, int[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.sound.midi.Sequencer javax.sound.midi.Sequencer.SyncMode[] getMasterSyncModes()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.sound.midi.Sequencer javax.sound.midi.Sequencer.SyncMode[] getSlaveSyncModes()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.sound.midi.Sequencer void recordDisable(javax.sound.midi.Track) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -375,6 +411,15 @@
   <item name="abstract virtual javax.sound.midi.Synthesizer boolean remapInstrument(javax.sound.midi.Instrument, javax.sound.midi.Instrument) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.sound.midi.Synthesizer javax.sound.midi.Instrument[] getLoadedInstruments()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.sound.midi.Synthesizer javax.sound.midi.MidiChannel[] getChannels()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.sound.midi.Synthesizer javax.sound.midi.VoiceStatus[] getVoiceStatus()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual javax.sound.midi.Synthesizer void unloadAllInstruments(javax.sound.midi.Soundbank) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -393,7 +438,13 @@
   <item name="javax.sound.midi.SysexMessage byte[] getData()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.sound.midi.SysexMessage byte[] getData()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.sound.midi.SysexMessage java.lang.Object clone()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.sound.midi.SysexMessage java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.sound.midi.SysexMessage void setMessage(byte[], int) 0">

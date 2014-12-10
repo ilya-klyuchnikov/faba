@@ -22,6 +22,12 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual javax.management.remote.JMXConnector javax.management.MBeanServerConnection getMBeanServerConnection()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.management.remote.JMXConnector javax.management.MBeanServerConnection getMBeanServerConnection(javax.security.auth.Subject)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual javax.management.remote.JMXConnector void addConnectionNotificationListener(javax.management.NotificationListener, javax.management.NotificationFilter, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -131,12 +137,18 @@
   <item name="abstract virtual javax.management.remote.JMXConnectorProvider javax.management.remote.JMXConnector newJMXConnector(javax.management.remote.JMXServiceURL, java.util.Map&lt;java.lang.String,?&gt;) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual javax.management.remote.JMXConnectorProvider javax.management.remote.JMXConnector newJMXConnector(javax.management.remote.JMXServiceURL, java.util.Map&lt;java.lang.String,?&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.management.remote.JMXConnectorServer java.lang.Object getNotificationSource()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="javax.management.remote.JMXConnectorServer javax.management.MBeanNotificationInfo[] getNotificationInfo()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.management.remote.JMXConnectorServer javax.management.MBeanNotificationInfo[] getNotificationInfo()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.remote.JMXConnectorServer javax.management.MBeanServer getMBeanServer()">
@@ -156,7 +168,13 @@
   <item name="virtual javax.management.remote.JMXConnectorServer javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.management.remote.JMXConnectorServer javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.management.remote.JMXConnectorServer javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.management.remote.JMXConnectorServer javax.management.remote.JMXConnector toJMXConnector(java.util.Map&lt;java.lang.String,?&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.remote.JMXConnectorServer javax.management.remote.JMXConnector toJMXConnector(java.util.Map&lt;java.lang.String,?&gt;)">
@@ -223,6 +241,12 @@
   <item name="javax.management.remote.JMXConnectorServerFactory javax.management.remote.JMXConnectorServer newJMXConnectorServer(javax.management.remote.JMXServiceURL, java.util.Map&lt;java.lang.String,?&gt;, javax.management.MBeanServer)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.management.remote.JMXConnectorServerMBean java.util.Map&lt;java.lang.String,?&gt; getAttributes()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.management.remote.JMXConnectorServerMBean javax.management.remote.JMXConnector toJMXConnector(java.util.Map&lt;java.lang.String,?&gt;)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual javax.management.remote.JMXConnectorServerMBean void setMBeanServerForwarder(javax.management.remote.MBeanServerForwarder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -231,6 +255,9 @@
   </item>
   <item name="abstract virtual javax.management.remote.JMXConnectorServerProvider javax.management.remote.JMXConnectorServer newJMXConnectorServer(javax.management.remote.JMXServiceURL, java.util.Map&lt;java.lang.String,?&gt;, javax.management.MBeanServer) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.management.remote.JMXConnectorServerProvider javax.management.remote.JMXConnectorServer newJMXConnectorServer(javax.management.remote.JMXServiceURL, java.util.Map&lt;java.lang.String,?&gt;, javax.management.MBeanServer)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.remote.JMXPrincipal JMXPrincipal(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -252,6 +279,9 @@
     </annotation>
   </item>
   <item name="javax.management.remote.JMXPrincipal java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.management.remote.JMXPrincipal java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.remote.JMXPrincipal void readObject(java.io.ObjectInputStream) 0">
@@ -350,6 +380,9 @@
   <item name="javax.management.remote.NotificationResult java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.management.remote.NotificationResult java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.management.remote.NotificationResult long getEarliestSequenceNumber()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -385,6 +418,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual javax.management.remote.TargetedNotification java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.remote.TargetedNotification java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>

@@ -57,6 +57,9 @@
   <item name="javax.sql.rowset.BaseRowSet java.lang.Object[] getParams()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.sql.rowset.BaseRowSet java.lang.Object[] getParams()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.sql.rowset.BaseRowSet java.lang.String getCommand()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -687,8 +690,20 @@
   <item name="javax.sql.rowset.BaseRowSet void setUsername(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual javax.sql.rowset.CachedRowSet javax.sql.rowset.CachedRowSet createCopy()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.sql.rowset.CachedRowSet javax.sql.rowset.CachedRowSet createCopyNoConstraints()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual javax.sql.rowset.CachedRowSet void rowSetPopulated(javax.sql.RowSetEvent, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.sql.rowset.JoinRowSet java.lang.String getWhereClause()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.sql.rowset.JoinRowSet java.lang.String[] getRowSetNames()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.sql.rowset.JoinRowSet void addRowSet(javax.sql.RowSet, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -709,6 +724,27 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.sql.rowset.JoinRowSet void addRowSet(javax.sql.rowset.Joinable) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.sql.rowset.Joinable int[] getMatchColumnIndexes()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.sql.rowset.Joinable java.lang.String[] getMatchColumnNames()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.sql.rowset.RowSetFactory javax.sql.rowset.CachedRowSet createCachedRowSet()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.sql.rowset.RowSetFactory javax.sql.rowset.FilteredRowSet createFilteredRowSet()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.sql.rowset.RowSetFactory javax.sql.rowset.JdbcRowSet createJdbcRowSet()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.sql.rowset.RowSetFactory javax.sql.rowset.JoinRowSet createJoinRowSet()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.sql.rowset.RowSetFactory javax.sql.rowset.WebRowSet createWebRowSet()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.sql.rowset.RowSetMetaDataImpl RowSetMetaDataImpl()">

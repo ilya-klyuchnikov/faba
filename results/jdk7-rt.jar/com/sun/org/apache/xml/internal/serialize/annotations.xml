@@ -7,6 +7,9 @@
   <item name="com.sun.org.apache.xml.internal.serialize.BaseMarkupSerializer com.sun.org.apache.xml.internal.serialize.DOMSerializer asDOMSerializer()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.serialize.BaseMarkupSerializer com.sun.org.apache.xml.internal.serialize.DOMSerializer asDOMSerializer()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.org.apache.xml.internal.serialize.BaseMarkupSerializer com.sun.org.apache.xml.internal.serialize.ElementState getElementState()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -15,10 +18,16 @@
   <item name="com.sun.org.apache.xml.internal.serialize.BaseMarkupSerializer java.lang.String getPrefix(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.serialize.BaseMarkupSerializer org.xml.sax.ContentHandler asContentHandler()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.org.apache.xml.internal.serialize.BaseMarkupSerializer org.xml.sax.ContentHandler asContentHandler()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.serialize.BaseMarkupSerializer org.xml.sax.DocumentHandler asDocumentHandler()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.serialize.BaseMarkupSerializer org.xml.sax.DocumentHandler asDocumentHandler()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.serialize.BaseMarkupSerializer void characters(java.lang.String) 0">
@@ -280,6 +289,9 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.serialize.DOMSerializerImpl org.w3c.dom.DOMConfiguration getDomConfig()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.org.apache.xml.internal.serialize.DOMSerializerImpl org.w3c.dom.ls.LSSerializerFilter getFilter()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -330,6 +342,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.serialize.EncodingInfo java.io.Writer getWriter(java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.serialize.EncodingInfo java.io.Writer getWriter(java.io.OutputStream)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.serialize.EncodingInfo java.lang.String getIANAName()">
@@ -422,6 +437,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.serialize.HTMLSerializer java.lang.String escapeURI(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.serialize.HTMLSerializer java.lang.String escapeURI(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.serialize.HTMLSerializer java.lang.String escapeURI(java.lang.String)">
@@ -831,16 +849,34 @@
   <item name="com.sun.org.apache.xml.internal.serialize.SecuritySupport.3 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.serialize.SecuritySupport.5 java.lang.Object run()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.org.apache.xml.internal.serialize.SecuritySupport.5 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.serialize.SecuritySupport.6 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.serialize.SecuritySupport.7 java.lang.Object run()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.org.apache.xml.internal.serialize.SecuritySupport.7 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.serialize.SecuritySupport.8 java.lang.Object run()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.serialize.SecuritySupport.8 java.lang.Object run()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.org.apache.xml.internal.serialize.Serializer com.sun.org.apache.xml.internal.serialize.DOMSerializer asDOMSerializer()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.org.apache.xml.internal.serialize.Serializer org.xml.sax.ContentHandler asContentHandler()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.org.apache.xml.internal.serialize.Serializer org.xml.sax.DocumentHandler asDocumentHandler()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual com.sun.org.apache.xml.internal.serialize.Serializer void setOutputByteStream(java.io.OutputStream) 0">
@@ -854,11 +890,20 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual com.sun.org.apache.xml.internal.serialize.SerializerFactory com.sun.org.apache.xml.internal.serialize.Serializer makeSerializer(com.sun.org.apache.xml.internal.serialize.OutputFormat)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual com.sun.org.apache.xml.internal.serialize.SerializerFactory com.sun.org.apache.xml.internal.serialize.Serializer makeSerializer(java.io.OutputStream, com.sun.org.apache.xml.internal.serialize.OutputFormat) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual com.sun.org.apache.xml.internal.serialize.SerializerFactory com.sun.org.apache.xml.internal.serialize.Serializer makeSerializer(java.io.OutputStream, com.sun.org.apache.xml.internal.serialize.OutputFormat)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual com.sun.org.apache.xml.internal.serialize.SerializerFactory com.sun.org.apache.xml.internal.serialize.Serializer makeSerializer(java.io.Writer, com.sun.org.apache.xml.internal.serialize.OutputFormat) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual com.sun.org.apache.xml.internal.serialize.SerializerFactory com.sun.org.apache.xml.internal.serialize.Serializer makeSerializer(java.io.Writer, com.sun.org.apache.xml.internal.serialize.OutputFormat)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.serialize.SerializerFactory com.sun.org.apache.xml.internal.serialize.SerializerFactory getSerializerFactory(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

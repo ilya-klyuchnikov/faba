@@ -8,12 +8,27 @@
   <item name="abstract virtual com.sun.corba.se.spi.ior.EncapsulationFactoryBase com.sun.corba.se.spi.ior.Identifiable readContents(org.omg.CORBA_2_3.portable.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.EncapsulationFactoryBase com.sun.corba.se.spi.ior.Identifiable readContents(org.omg.CORBA_2_3.portable.InputStream)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.spi.ior.EncapsulationFactoryBase int getId()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="abstract virtual com.sun.corba.se.spi.ior.IOR boolean isEquivalent(com.sun.corba.se.spi.ior.IOR) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.IOR com.sun.corba.se.spi.ior.iiop.IIOPProfile getProfile()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.IOR java.lang.String stringify()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.IOR java.util.Iterator iteratorById(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.IOR org.omg.IOP.IOR getIOPIOR()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.spi.ior.IORFactories IORFactories()">
@@ -124,6 +139,12 @@
   <item name="abstract virtual com.sun.corba.se.spi.ior.IORFactory com.sun.corba.se.spi.ior.IOR makeIOR(com.sun.corba.se.spi.orb.ORB, java.lang.String, com.sun.corba.se.spi.ior.ObjectId) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.IORFactory com.sun.corba.se.spi.ior.IOR makeIOR(com.sun.corba.se.spi.orb.ORB, java.lang.String, com.sun.corba.se.spi.ior.ObjectId)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.IORTemplate java.util.Iterator iteratorById(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.spi.ior.IdentifiableBase IdentifiableBase()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -133,6 +154,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.spi.ior.IdentifiableContainerBase java.util.Iterator iteratorById(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.spi.ior.IdentifiableContainerBase java.util.Iterator iteratorById(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.spi.ior.IdentifiableContainerBase.1 boolean hasNext()">
@@ -146,10 +170,25 @@
   <item name="abstract virtual com.sun.corba.se.spi.ior.IdentifiableFactory com.sun.corba.se.spi.ior.Identifiable create(org.omg.CORBA_2_3.portable.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.IdentifiableFactory com.sun.corba.se.spi.ior.Identifiable create(org.omg.CORBA_2_3.portable.InputStream)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.IdentifiableFactoryFinder com.sun.corba.se.spi.ior.Identifiable create(int, org.omg.CORBA_2_3.portable.InputStream)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual com.sun.corba.se.spi.ior.IdentifiableFactoryFinder void registerFactory(com.sun.corba.se.spi.ior.IdentifiableFactory) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.ObjectKey byte[] getBytes(org.omg.CORBA.ORB)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual com.sun.corba.se.spi.ior.ObjectKeyFactory com.sun.corba.se.spi.ior.ObjectKey create(byte[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.ObjectKeyFactory com.sun.corba.se.spi.ior.ObjectKey create(byte[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.ObjectKeyFactory com.sun.corba.se.spi.ior.ObjectKeyTemplate createTemplate(org.omg.CORBA_2_3.portable.InputStream)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual com.sun.corba.se.spi.ior.ObjectKeyTemplate com.sun.corba.se.spi.protocol.CorbaServerRequestDispatcher getServerRequestDispatcher(com.sun.corba.se.spi.orb.ORB, com.sun.corba.se.spi.ior.ObjectId) 0">
@@ -161,10 +200,16 @@
   <item name="abstract virtual com.sun.corba.se.spi.ior.ObjectKeyTemplate void write(com.sun.corba.se.spi.ior.ObjectId, org.omg.CORBA_2_3.portable.OutputStream) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.TaggedComponent org.omg.IOP.TaggedComponent getIOPComponent(org.omg.CORBA.ORB)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.corba.se.spi.ior.TaggedComponentBase TaggedComponentBase()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="virtual com.sun.corba.se.spi.ior.TaggedComponentBase org.omg.IOP.TaggedComponent getIOPComponent(org.omg.CORBA.ORB)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.spi.ior.TaggedComponentBase org.omg.IOP.TaggedComponent getIOPComponent(org.omg.CORBA.ORB)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -175,8 +220,20 @@
   <item name="abstract virtual com.sun.corba.se.spi.ior.TaggedProfile boolean isEquivalent(com.sun.corba.se.spi.ior.TaggedProfile) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.TaggedProfile org.omg.IOP.TaggedProfile getIOPProfile()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual com.sun.corba.se.spi.ior.TaggedProfileTemplate boolean isEquivalent(com.sun.corba.se.spi.ior.TaggedProfileTemplate) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.TaggedProfileTemplate com.sun.corba.se.spi.ior.TaggedProfile create(com.sun.corba.se.spi.ior.ObjectKeyTemplate, com.sun.corba.se.spi.ior.ObjectId)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.TaggedProfileTemplate java.util.Iterator iteratorById(int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.ior.TaggedProfileTemplate org.omg.IOP.TaggedComponent[] getIOPComponents(com.sun.corba.se.spi.orb.ORB, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual com.sun.corba.se.spi.ior.TaggedProfileTemplate void write(com.sun.corba.se.spi.ior.ObjectKeyTemplate, com.sun.corba.se.spi.ior.ObjectId, org.omg.CORBA_2_3.portable.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -188,6 +245,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.spi.ior.TaggedProfileTemplateBase org.omg.IOP.TaggedComponent[] getIOPComponents(com.sun.corba.se.spi.orb.ORB, int)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.corba.se.spi.ior.TaggedProfileTemplateBase org.omg.IOP.TaggedComponent[] getIOPComponents(com.sun.corba.se.spi.orb.ORB, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.spi.ior.TaggedProfileTemplateBase void write(org.omg.CORBA_2_3.portable.OutputStream) 0">

@@ -67,6 +67,9 @@
   <item name="abstract virtual javax.print.DocPrintJob void print(javax.print.Doc, javax.print.attribute.PrintRequestAttributeSet) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.print.FlavorException javax.print.DocFlavor[] getUnsupportedFlavors()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.print.MimeType MimeType(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -188,6 +191,9 @@
   <item name="javax.print.MimeType.ParameterMapEntrySet java.util.Iterator iterator()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.print.MimeType.ParameterMapEntrySet java.util.Iterator iterator()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.print.MimeType.ParameterMapEntrySetIterator ParameterMapEntrySetIterator(javax.print.MimeType, javax.print.MimeType.1) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -197,6 +203,9 @@
     </annotation>
   </item>
   <item name="javax.print.MimeType.ParameterMapEntrySetIterator java.lang.Object next()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.print.MimeType.ParameterMapEntrySetIterator java.lang.Object next()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.print.PrintService T getAttribute(java.lang.Class&lt;T&gt;) 0">
@@ -226,11 +235,17 @@
   <item name="abstract virtual javax.print.PrintService java.lang.Object getSupportedAttributeValues(java.lang.Class&lt;? extends javax.print.attribute.Attribute&gt;, javax.print.DocFlavor, javax.print.attribute.AttributeSet) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual javax.print.PrintService javax.print.DocPrintJob createPrintJob()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual javax.print.PrintService javax.print.attribute.AttributeSet getUnsupportedAttributes(javax.print.DocFlavor, javax.print.attribute.AttributeSet) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual javax.print.PrintService javax.print.attribute.AttributeSet getUnsupportedAttributes(javax.print.DocFlavor, javax.print.attribute.AttributeSet) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.print.PrintService javax.print.attribute.PrintServiceAttributeSet getAttributes()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.print.PrintServiceLookup PrintServiceLookup()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -269,6 +284,9 @@
   </item>
   <item name="abstract virtual javax.print.PrintServiceLookup javax.print.MultiDocPrintService[] getMultiDocPrintServices(javax.print.DocFlavor[], javax.print.attribute.AttributeSet) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.print.PrintServiceLookup javax.print.MultiDocPrintService[] getMultiDocPrintServices(javax.print.DocFlavor[], javax.print.attribute.AttributeSet)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.print.PrintServiceLookup javax.print.MultiDocPrintService[] lookupMultiDocPrintServices(javax.print.DocFlavor[], javax.print.attribute.AttributeSet) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -399,12 +417,18 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual javax.print.StreamPrintService java.lang.String getOutputFormat()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.print.StreamPrintServiceFactory StreamPrintServiceFactory()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="javax.print.StreamPrintServiceFactory boolean isMember(javax.print.DocFlavor, javax.print.DocFlavor[]) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.print.StreamPrintServiceFactory java.lang.String getOutputFormat()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.print.StreamPrintServiceFactory java.util.ArrayList getAllFactories()">
@@ -420,6 +444,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.print.StreamPrintServiceFactory java.util.ArrayList initListOfFactories()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.print.StreamPrintServiceFactory javax.print.DocFlavor[] getSupportedDocFlavors()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.print.StreamPrintServiceFactory javax.print.StreamPrintService getPrintService(java.io.OutputStream)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.print.StreamPrintServiceFactory javax.print.StreamPrintServiceFactory.Services getServices()">

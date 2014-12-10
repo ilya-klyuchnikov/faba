@@ -49,10 +49,19 @@
       <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.xml.internal.ws.api.pipe.ClientTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createDumpTube(java.lang.String, java.io.PrintStream, com.sun.xml.internal.ws.api.pipe.Tube)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.ws.api.pipe.ClientTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createDumpTube(java.lang.String, java.io.PrintStream, com.sun.xml.internal.ws.api.pipe.Tube)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.xml.internal.ws.api.pipe.ClientTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createHandlerTube(com.sun.xml.internal.ws.api.pipe.Tube)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.ws.api.pipe.ClientTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createHandlerTube(com.sun.xml.internal.ws.api.pipe.Tube)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.xml.internal.ws.api.pipe.ClientTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createTransportTube()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.pipe.ClientTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createTransportTube()">
@@ -78,6 +87,12 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual com.sun.xml.internal.ws.api.pipe.Codec com.sun.xml.internal.ws.api.pipe.Codec copy()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.xml.internal.ws.api.pipe.Codec com.sun.xml.internal.ws.api.pipe.ContentType encode(com.sun.xml.internal.ws.api.message.Packet, java.nio.channels.WritableByteChannel)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.ws.api.pipe.Codecs Codecs()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -98,10 +113,16 @@
   <item name="com.sun.xml.internal.ws.api.pipe.Codecs com.sun.xml.internal.ws.api.pipe.StreamSOAPCodec createSOAPEnvelopeXmlCodec(com.sun.xml.internal.ws.api.SOAPVersion)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.xml.internal.ws.api.pipe.Engine com.sun.xml.internal.ws.api.pipe.Fiber createFiber()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.ws.api.pipe.Engine com.sun.xml.internal.ws.api.pipe.Fiber createFiber()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.pipe.Engine.DaemonThreadFactory java.lang.Thread newThread(java.lang.Runnable)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.xml.internal.ws.api.pipe.Engine.DaemonThreadFactory java.lang.Thread newThread(java.lang.Runnable)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.pipe.Fiber boolean isAlive()">
@@ -197,6 +218,9 @@
   <item name="abstract virtual com.sun.xml.internal.ws.api.pipe.Pipe com.sun.xml.internal.ws.api.pipe.Pipe copy(com.sun.xml.internal.ws.api.pipe.PipeCloner) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.xml.internal.ws.api.pipe.Pipe com.sun.xml.internal.ws.api.pipe.Pipe copy(com.sun.xml.internal.ws.api.pipe.PipeCloner)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.ws.api.pipe.PipeCloner T copy(T)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -243,6 +267,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.xml.internal.ws.api.pipe.ServerTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createDumpTube(java.lang.String, java.io.PrintStream, com.sun.xml.internal.ws.api.pipe.Tube)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.ws.api.pipe.ServerTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createDumpTube(java.lang.String, java.io.PrintStream, com.sun.xml.internal.ws.api.pipe.Tube)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -279,7 +306,13 @@
   <item name="abstract virtual com.sun.xml.internal.ws.api.pipe.StreamSOAPCodec com.sun.xml.internal.ws.api.message.Message decode(javax.xml.stream.XMLStreamReader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.xml.internal.ws.api.pipe.StreamSOAPCodec com.sun.xml.internal.ws.api.message.Message decode(javax.xml.stream.XMLStreamReader)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="abstract virtual com.sun.xml.internal.ws.api.pipe.StreamSOAPCodec com.sun.xml.internal.ws.api.message.Message decode(javax.xml.stream.XMLStreamReader, com.sun.xml.internal.ws.api.message.AttachmentSet) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.xml.internal.ws.api.pipe.StreamSOAPCodec com.sun.xml.internal.ws.api.message.Message decode(javax.xml.stream.XMLStreamReader, com.sun.xml.internal.ws.api.message.AttachmentSet)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.pipe.Stubs Stubs()">
@@ -483,7 +516,13 @@
   <item name="abstract virtual com.sun.xml.internal.ws.api.pipe.Tube com.sun.xml.internal.ws.api.pipe.Tube copy(com.sun.xml.internal.ws.api.pipe.TubeCloner) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.xml.internal.ws.api.pipe.Tube com.sun.xml.internal.ws.api.pipe.Tube copy(com.sun.xml.internal.ws.api.pipe.TubeCloner)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="com.sun.xml.internal.ws.api.pipe.TubeCloner T copy(T)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.xml.internal.ws.api.pipe.TubeCloner T copy(T)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.api.pipe.TubeCloner com.sun.xml.internal.ws.api.pipe.Tube clone(com.sun.xml.internal.ws.api.pipe.Tube)">
