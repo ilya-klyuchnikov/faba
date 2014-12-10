@@ -226,12 +226,22 @@
   <item name="org.apache.velocity.runtime.RuntimeInstance java.lang.String getString(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual org.apache.velocity.runtime.RuntimeInstance org.apache.commons.collections.ExtendedProperties getConfiguration()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="org.apache.velocity.runtime.RuntimeInstance org.apache.commons.collections.ExtendedProperties getConfiguration()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="org.apache.velocity.runtime.RuntimeInstance org.apache.velocity.app.event.EventCartridge getApplicationEventCartridge()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual org.apache.velocity.runtime.RuntimeInstance org.apache.velocity.app.event.EventCartridge getApplicationEventCartridge()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -253,6 +263,11 @@
   </item>
   <item name="virtual org.apache.velocity.runtime.RuntimeInstance org.apache.velocity.runtime.directive.Directive getVelocimacro(java.lang.String, java.lang.String, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual org.apache.velocity.runtime.RuntimeInstance org.apache.velocity.runtime.log.Log getLog()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="org.apache.velocity.runtime.RuntimeInstance org.apache.velocity.runtime.log.Log getLog()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -283,7 +298,17 @@
   <item name="org.apache.velocity.runtime.RuntimeInstance org.apache.velocity.runtime.parser.node.SimpleNode parse(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual org.apache.velocity.runtime.RuntimeInstance org.apache.velocity.util.introspection.Introspector getIntrospector()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="org.apache.velocity.runtime.RuntimeInstance org.apache.velocity.util.introspection.Introspector getIntrospector()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual org.apache.velocity.runtime.RuntimeInstance org.apache.velocity.util.introspection.Uberspect getUberspect()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -386,8 +411,23 @@
   <item name="abstract virtual org.apache.velocity.runtime.RuntimeServices java.lang.String getString(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual org.apache.velocity.runtime.RuntimeServices org.apache.commons.collections.ExtendedProperties getConfiguration()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual org.apache.velocity.runtime.RuntimeServices org.apache.velocity.app.event.EventCartridge getApplicationEventCartridge()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="abstract virtual org.apache.velocity.runtime.RuntimeServices org.apache.velocity.runtime.directive.Directive getVelocimacro(java.lang.String, java.lang.String, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual org.apache.velocity.runtime.RuntimeServices org.apache.velocity.runtime.log.Log getLog()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual org.apache.velocity.runtime.RuntimeServices org.apache.velocity.runtime.parser.Parser createNewParser()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -400,6 +440,16 @@
   </item>
   <item name="abstract virtual org.apache.velocity.runtime.RuntimeServices org.apache.velocity.runtime.parser.node.SimpleNode parse(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual org.apache.velocity.runtime.RuntimeServices org.apache.velocity.util.introspection.Introspector getIntrospector()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual org.apache.velocity.runtime.RuntimeServices org.apache.velocity.util.introspection.Uberspect getUberspect()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="abstract virtual org.apache.velocity.runtime.RuntimeServices void init(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -483,6 +533,11 @@
     </annotation>
   </item>
   <item name="org.apache.velocity.runtime.RuntimeSingleton org.apache.velocity.app.event.EventCartridge getEventCartridge()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual org.apache.velocity.runtime.RuntimeSingleton org.apache.velocity.app.event.EventCartridge getEventCartridge()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -672,6 +727,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual org.apache.velocity.runtime.VelocimacroManager.MacroEntry java.lang.String getSourceTemplate()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="virtual org.apache.velocity.runtime.VelocimacroManager.MacroEntry org.apache.velocity.runtime.directive.VelocimacroProxy getProxy(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -679,6 +739,16 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="org.apache.velocity.runtime.VelocimacroManager.MacroEntry org.apache.velocity.runtime.directive.VelocimacroProxy getProxy(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual org.apache.velocity.runtime.VelocimacroManager.MacroEntry org.apache.velocity.runtime.directive.VelocimacroProxy getProxy(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual org.apache.velocity.runtime.VelocimacroManager.MacroEntry org.apache.velocity.runtime.parser.node.SimpleNode getNodeTree()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
