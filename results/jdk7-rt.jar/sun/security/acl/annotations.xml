@@ -143,6 +143,11 @@
   <item name="sun.security.acl.AclImpl java.util.Hashtable&lt;java.security.Principal,java.security.acl.AclEntry&gt; findTable(java.security.acl.AclEntry) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.acl.AclImpl java.util.Hashtable&lt;java.security.Principal,java.security.acl.AclEntry&gt; findTable(java.security.acl.AclEntry)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="sun.security.acl.AllPermissionsImpl boolean equals(java.security.acl.Permission) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -207,7 +212,7 @@
   </item>
   <item name="sun.security.acl.PermissionImpl boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
+      <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="sun.security.acl.PermissionImpl java.lang.String toString()">
