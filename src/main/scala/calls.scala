@@ -124,15 +124,14 @@ class CallResolver {
    * @param method method invoked via INVOKEINTERFACE and INVOKEVIRTUAL instruction
    * @return all concrete method that can be called in run time
    */
-  def resolveDownward(method: Method): Set[Method] = {
-    var resolvedMethods = Set[Method]()
+  def resolveDownward(method: Method): Set[Method] =
+    // TODO - there may be an optimization for "effectively stable methods"
+    // TODO - for effectively stable method: set = Set(method)
     for {
       implementationName <- inheritors(method.internalClassName)
       implementation <- resolved.get(implementationName)
       resolvedMethod <- resolveUpward(method, implementation)
-    } resolvedMethods = resolvedMethods + resolvedMethod
-    resolvedMethods
-  }
+    } yield resolvedMethod
 
   /**
    * Add class info.
@@ -151,6 +150,7 @@ class CallResolver {
     classMethods(methodInfo.classInfo.name) += methodInfo
   }
 
+  // TODO - it callKey should be associated with a solver
   def addCall(key: Key) {
     calls += key
   }
