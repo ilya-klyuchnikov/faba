@@ -36,15 +36,14 @@
     * Current FABA stores all equations in memory (see section `FABA architecture` below) and solves them at once.
       IDEA dumps equations to indices and solves these equations lazily.
       (IDEA's indices are too IDEA-specific to be reproduced here.)
+    * FABA (in master branch) handles hierarchy (if all implementations of an interface method return `@NotNullResult`,
+      then this interface method is also considered as `@NotNull` and so on)
 * __What are next steps?__
     * `@Contract` inference performs a lot of unnecessary operations.
       Many contract are not intuitive (meaningless, to be honest).
       Like this one:
       `@Contract("!null,_,_,_->true;_,!null,_,_->;true;_,_,!null,_->true")`.
       Tuning contracts is a lot of technical boilerplate.
-    * Taking hierarchy into account.
-      A lot of research and experiments.
-      It is likely that indexing and inference will be 2-3 times slower.
     * Deeper inference of purity.
       It requires an effect system under the hood (`@Pure`, `@Read`, `@Write`, `@LocalEffect`).
     * Handling nullity of fields (at least `static final` and `final`).
