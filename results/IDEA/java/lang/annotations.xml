@@ -907,6 +907,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.ClassLoader java.io.InputStream getResourceAsStream(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -945,6 +946,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.ClassLoader java.lang.String findLibrary(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -964,18 +966,22 @@
   <item name="java.lang.ClassLoader java.net.URL findResource(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual java.lang.ClassLoader java.net.URL findResource(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
-    </annotation>
-  </item>
   <item name="java.lang.ClassLoader java.net.URL findResource(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.lang.ClassLoader java.net.URL findResource(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.lang.ClassLoader java.net.URL getBootstrapResource(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.lang.ClassLoader java.net.URL getResource(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.ClassLoader java.net.URL getResource(java.lang.String)">
@@ -1662,8 +1668,14 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.lang.Object java.lang.Object clone()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.lang.Object java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual java.lang.Object java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.Object void finalize()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2715,6 +2727,9 @@
   <item name="java.lang.System void setSecurityManager0(java.lang.SecurityManager) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.lang.System.1 java.lang.Object run()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.lang.System.1 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2794,6 +2809,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.lang.Thread java.lang.ClassLoader getContextClassLoader()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.lang.Thread java.lang.ClassLoader getContextClassLoader()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2834,6 +2852,9 @@
   <item name="virtual java.lang.ThreadLocal T childValue(T) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.lang.ThreadLocal T get()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.lang.ThreadLocal T get()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2841,6 +2862,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.lang.ThreadLocal T initialValue()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.ThreadLocal T setInitialValue()">
@@ -2954,10 +2978,14 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.lang.Throwable java.lang.String getMessage()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="virtual java.lang.Throwable java.lang.Throwable getCause()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.Throwable java.lang.Throwable getCause()">
     <annotation name="org.jetbrains.annotations.Contract">
