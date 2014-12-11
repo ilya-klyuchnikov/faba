@@ -49,6 +49,9 @@
   <item name="com.sun.xml.internal.ws.message.AbstractHeaderImpl java.lang.String getRole(com.sun.xml.internal.ws.api.SOAPVersion) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.xml.internal.ws.message.AbstractHeaderImpl java.lang.String getStringContent()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="com.sun.xml.internal.ws.message.AbstractHeaderImpl java.lang.String getStringContent()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -58,8 +61,14 @@
   <item name="com.sun.xml.internal.ws.message.AbstractMessageImpl T readPayloadAsJAXB(com.sun.xml.internal.bind.api.Bridge&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.xml.internal.ws.message.AbstractMessageImpl T readPayloadAsJAXB(com.sun.xml.internal.bind.api.Bridge&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="com.sun.xml.internal.ws.message.AbstractMessageImpl T readPayloadAsJAXB(javax.xml.bind.Unmarshaller) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.xml.internal.ws.message.AbstractMessageImpl T readPayloadAsJAXB(javax.xml.bind.Unmarshaller)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.AbstractMessageImpl javax.xml.soap.SOAPMessage readAsSOAPMessage()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -189,6 +198,9 @@
   <item name="com.sun.xml.internal.ws.message.DOMHeader java.lang.String getStringContent()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.xml.internal.ws.message.DOMHeader java.lang.String getStringContent()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="virtual com.sun.xml.internal.ws.message.DOMHeader javax.xml.stream.XMLStreamReader readHeader()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -300,8 +312,15 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.EmptyMessageImpl java.lang.String getPayloadLocalPart()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.message.EmptyMessageImpl java.lang.String getPayloadNamespaceURI()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -311,8 +330,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.xml.internal.ws.message.EmptyMessageImpl java.lang.String getPayloadNamespaceURI()">
+  <item name="com.sun.xml.internal.ws.message.EmptyMessageImpl javax.xml.stream.XMLStreamReader readPayload()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -322,19 +342,15 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.xml.internal.ws.message.EmptyMessageImpl javax.xml.stream.XMLStreamReader readPayload()">
+  <item name="com.sun.xml.internal.ws.message.EmptyMessageImpl javax.xml.transform.Source readPayloadAsSource()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="virtual com.sun.xml.internal.ws.message.EmptyMessageImpl javax.xml.transform.Source readPayloadAsSource()">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
-    </annotation>
-  </item>
-  <item name="com.sun.xml.internal.ws.message.EmptyMessageImpl javax.xml.transform.Source readPayloadAsSource()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -383,12 +399,13 @@
   <item name="com.sun.xml.internal.ws.message.FaultDetailHeader java.lang.String getAttribute(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.xml.internal.ws.message.FaultDetailHeader java.lang.String getAttribute(java.lang.String, java.lang.String)">
+  <item name="com.sun.xml.internal.ws.message.FaultDetailHeader java.lang.String getAttribute(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;,pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.xml.internal.ws.message.FaultDetailHeader java.lang.String getAttribute(java.lang.String, java.lang.String)">
+  <item name="virtual com.sun.xml.internal.ws.message.FaultDetailHeader java.lang.String getAttribute(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;,pure=true"/>
     </annotation>
@@ -503,12 +520,13 @@
   <item name="com.sun.xml.internal.ws.message.ProblemActionHeader java.lang.String getAttribute(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.xml.internal.ws.message.ProblemActionHeader java.lang.String getAttribute(java.lang.String, java.lang.String)">
+  <item name="com.sun.xml.internal.ws.message.ProblemActionHeader java.lang.String getAttribute(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;,pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.xml.internal.ws.message.ProblemActionHeader java.lang.String getAttribute(java.lang.String, java.lang.String)">
+  <item name="virtual com.sun.xml.internal.ws.message.ProblemActionHeader java.lang.String getAttribute(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;,pure=true"/>
     </annotation>
@@ -620,6 +638,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.xml.internal.ws.message.StringHeader java.lang.String getAttribute(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">

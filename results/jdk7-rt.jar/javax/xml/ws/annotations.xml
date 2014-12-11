@@ -5,6 +5,9 @@
   <item name="abstract virtual javax.xml.ws.BindingProvider T getEndpointReference(java.lang.Class&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.xml.ws.BindingProvider T getEndpointReference(java.lang.Class&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="abstract virtual javax.xml.ws.BindingProvider java.util.Map&lt;java.lang.String,java.lang.Object&gt; getRequestContext()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -19,6 +22,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="abstract virtual javax.xml.ws.Dispatch T invoke(T)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual javax.xml.ws.Dispatch java.util.concurrent.Future&lt;?&gt; invokeAsync(T, javax.xml.ws.AsyncHandler&lt;T&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -150,6 +156,12 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="abstract virtual javax.xml.ws.LogicalMessage java.lang.Object getPayload(javax.xml.bind.JAXBContext)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.xml.ws.LogicalMessage javax.xml.transform.Source getPayload()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="abstract virtual javax.xml.ws.LogicalMessage void setPayload(java.lang.Object, javax.xml.bind.JAXBContext) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -244,6 +256,9 @@
   </item>
   <item name="virtual javax.xml.ws.Service T getPort(javax.xml.ws.EndpointReference, java.lang.Class&lt;T&gt;, javax.xml.ws.WebServiceFeature...) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.xml.ws.Service java.net.URL getWSDLDocumentLocation()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.xml.ws.Service java.net.URL getWSDLDocumentLocation()">
     <annotation name="org.jetbrains.annotations.Nullable"/>

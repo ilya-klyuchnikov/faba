@@ -115,6 +115,12 @@
   <item name="javax.net.ssl.HandshakeCompletedEvent java.security.Principal getLocalPrincipal()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.net.ssl.HandshakeCompletedEvent java.security.Principal getLocalPrincipal()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.net.ssl.HandshakeCompletedEvent java.security.Principal getPeerPrincipal()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.net.ssl.HandshakeCompletedEvent java.security.Principal getPeerPrincipal()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -147,7 +153,19 @@
   <item name="javax.net.ssl.HttpsURLConnection java.security.Principal getLocalPrincipal()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.net.ssl.HttpsURLConnection java.security.Principal getLocalPrincipal()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.net.ssl.HttpsURLConnection java.security.Principal getPeerPrincipal()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.net.ssl.HttpsURLConnection java.security.Principal getPeerPrincipal()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.net.ssl.HttpsURLConnection java.security.cert.Certificate[] getLocalCertificates()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.net.ssl.HttpsURLConnection java.security.cert.Certificate[] getServerCertificates()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.net.ssl.HttpsURLConnection javax.net.ssl.HostnameVerifier getDefaultHostnameVerifier()">
@@ -450,6 +468,12 @@
   <item name="javax.net.ssl.SSLParameters java.lang.String[] getCipherSuites()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.net.ssl.SSLParameters java.lang.String[] getCipherSuites()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.net.ssl.SSLParameters java.lang.String[] getProtocols()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.net.ssl.SSLParameters java.lang.String[] getProtocols()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -663,6 +687,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_,_-&gt;null;_,!null,_-&gt;null;_,_,!null-&gt;null;_,_,null-&gt;null;_,null,_-&gt;null;null,_,_-&gt;null&quot;,pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.net.ssl.X509ExtendedKeyManager java.lang.String chooseEngineClientAlias(java.lang.String[], java.security.Principal[], javax.net.ssl.SSLEngine)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -688,12 +713,13 @@
   <item name="virtual javax.net.ssl.X509ExtendedKeyManager java.lang.String chooseEngineServerAlias(java.lang.String, java.security.Principal[], javax.net.ssl.SSLEngine) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual javax.net.ssl.X509ExtendedKeyManager java.lang.String chooseEngineServerAlias(java.lang.String, java.security.Principal[], javax.net.ssl.SSLEngine)">
+  <item name="javax.net.ssl.X509ExtendedKeyManager java.lang.String chooseEngineServerAlias(java.lang.String, java.security.Principal[], javax.net.ssl.SSLEngine)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_,_-&gt;null;_,!null,_-&gt;null;_,_,!null-&gt;null;_,_,null-&gt;null;_,null,_-&gt;null;null,_,_-&gt;null&quot;,pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="javax.net.ssl.X509ExtendedKeyManager java.lang.String chooseEngineServerAlias(java.lang.String, java.security.Principal[], javax.net.ssl.SSLEngine)">
+  <item name="virtual javax.net.ssl.X509ExtendedKeyManager java.lang.String chooseEngineServerAlias(java.lang.String, java.security.Principal[], javax.net.ssl.SSLEngine)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_,_-&gt;null;_,!null,_-&gt;null;_,_,!null-&gt;null;_,_,null-&gt;null;_,null,_-&gt;null;null,_,_-&gt;null&quot;,pure=true"/>
     </annotation>
@@ -750,6 +776,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null,_,_-&gt;null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual javax.net.ssl.X509KeyManager java.lang.String chooseServerAlias(java.lang.String, java.security.Principal[], java.net.Socket) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -761,6 +788,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null,_,_-&gt;null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual javax.net.ssl.X509TrustManager void checkClientTrusted(java.security.cert.X509Certificate[], java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>

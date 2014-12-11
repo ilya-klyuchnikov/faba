@@ -5,10 +5,16 @@
   <item name="virtual javax.management.relation.MBeanServerNotificationFilter boolean isNotificationEnabled(javax.management.Notification) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.management.relation.MBeanServerNotificationFilter java.util.Vector&lt;javax.management.ObjectName&gt; getDisabledObjectNames()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.management.relation.MBeanServerNotificationFilter java.util.Vector&lt;javax.management.ObjectName&gt; getDisabledObjectNames()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.relation.MBeanServerNotificationFilter java.util.Vector&lt;javax.management.ObjectName&gt; getEnabledObjectNames()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.management.relation.MBeanServerNotificationFilter java.util.Vector&lt;javax.management.ObjectName&gt; getEnabledObjectNames()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="virtual javax.management.relation.MBeanServerNotificationFilter void disableObjectName(javax.management.ObjectName) 0">
@@ -56,8 +62,14 @@
   <item name="abstract virtual javax.management.relation.Relation javax.management.relation.RoleList retrieveAllRoles()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.management.relation.Relation javax.management.relation.RoleResult getAllRoles()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="abstract virtual javax.management.relation.Relation javax.management.relation.RoleResult getRoles(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.management.relation.Relation javax.management.relation.RoleResult getRoles(java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual javax.management.relation.Relation javax.management.relation.RoleResult setRoles(javax.management.relation.RoleList) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -152,12 +164,13 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="virtual javax.management.relation.RelationNotification java.lang.String getRoleName()">
+  <item name="javax.management.relation.RelationNotification java.lang.String getRoleName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="javax.management.relation.RelationNotification java.lang.String getRoleName()">
+  <item name="virtual javax.management.relation.RelationNotification java.lang.String getRoleName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -298,6 +311,9 @@
   <item name="javax.management.relation.RelationService java.lang.String isRelation(javax.management.ObjectName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.management.relation.RelationService java.lang.String isRelation(javax.management.ObjectName)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.management.relation.RelationService java.lang.String isRelation(javax.management.ObjectName)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -391,6 +407,9 @@
   <item name="javax.management.relation.RelationService javax.management.ObjectName isRelationMBean(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.management.relation.RelationService javax.management.ObjectName isRelationMBean(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.management.relation.RelationService javax.management.ObjectName isRelationMBean(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -440,6 +459,9 @@
   <item name="virtual javax.management.relation.RelationService javax.management.relation.RoleResult getAllRoles(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual javax.management.relation.RelationService javax.management.relation.RoleResult getAllRoles(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.management.relation.RelationService javax.management.relation.RoleResult getAllRoles(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -456,6 +478,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.relation.RelationService javax.management.relation.RoleResult getRoles(java.lang.String, java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.management.relation.RelationService javax.management.relation.RoleResult getRoles(java.lang.String, java.lang.String[])">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.relation.RelationService javax.management.relation.RoleResult setRoles(java.lang.String, javax.management.relation.RoleList) 0">
@@ -686,6 +711,9 @@
   <item name="abstract virtual javax.management.relation.RelationServiceMBean java.lang.String isRelation(javax.management.ObjectName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.management.relation.RelationServiceMBean java.lang.String isRelation(javax.management.ObjectName)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="abstract virtual javax.management.relation.RelationServiceMBean java.util.List&lt;java.lang.String&gt; findRelationsOfType(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -728,6 +756,9 @@
   <item name="abstract virtual javax.management.relation.RelationServiceMBean javax.management.ObjectName isRelationMBean(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.management.relation.RelationServiceMBean javax.management.ObjectName isRelationMBean(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="abstract virtual javax.management.relation.RelationServiceMBean javax.management.relation.RoleInfo getRoleInfo(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -740,11 +771,17 @@
   <item name="abstract virtual javax.management.relation.RelationServiceMBean javax.management.relation.RoleResult getAllRoles(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.management.relation.RelationServiceMBean javax.management.relation.RoleResult getAllRoles(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="abstract virtual javax.management.relation.RelationServiceMBean javax.management.relation.RoleResult getRoles(java.lang.String, java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.management.relation.RelationServiceMBean javax.management.relation.RoleResult getRoles(java.lang.String, java.lang.String[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual javax.management.relation.RelationServiceMBean javax.management.relation.RoleResult getRoles(java.lang.String, java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual javax.management.relation.RelationServiceMBean javax.management.relation.RoleResult setRoles(java.lang.String, javax.management.relation.RoleList) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -855,6 +892,9 @@
   <item name="javax.management.relation.RelationSupport java.lang.Object getRoleInt(java.lang.String, boolean, javax.management.relation.RelationService, boolean)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.management.relation.RelationSupport java.lang.Object getRoleInt(java.lang.String, boolean, javax.management.relation.RelationService, boolean)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="virtual javax.management.relation.RelationSupport java.lang.Object setRoleInt(javax.management.relation.Role, boolean, javax.management.relation.RelationService, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -862,6 +902,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.relation.RelationSupport java.lang.Object setRoleInt(javax.management.relation.Role, boolean, javax.management.relation.RelationService, boolean)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.management.relation.RelationSupport java.lang.Object setRoleInt(javax.management.relation.Role, boolean, javax.management.relation.RelationService, boolean)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="virtual javax.management.relation.RelationSupport java.lang.String getRelationId()">
@@ -925,7 +968,13 @@
   <item name="javax.management.relation.RelationSupport javax.management.relation.RoleResult getAllRoles()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.management.relation.RelationSupport javax.management.relation.RoleResult getAllRoles()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.management.relation.RelationSupport javax.management.relation.RoleResult getAllRolesInt(boolean, javax.management.relation.RelationService)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.management.relation.RelationSupport javax.management.relation.RoleResult getAllRolesInt(boolean, javax.management.relation.RelationService)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="virtual javax.management.relation.RelationSupport javax.management.relation.RoleResult getRoles(java.lang.String[]) 0">
@@ -933,6 +982,9 @@
   </item>
   <item name="javax.management.relation.RelationSupport javax.management.relation.RoleResult getRoles(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.management.relation.RelationSupport javax.management.relation.RoleResult getRoles(java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.relation.RelationSupport javax.management.relation.RoleResult getRoles(java.lang.String[])">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -942,6 +994,9 @@
   </item>
   <item name="virtual javax.management.relation.RelationSupport javax.management.relation.RoleResult getRolesInt(java.lang.String[], boolean, javax.management.relation.RelationService) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual javax.management.relation.RelationSupport javax.management.relation.RoleResult getRolesInt(java.lang.String[], boolean, javax.management.relation.RelationService)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.relation.RelationSupport javax.management.relation.RoleResult getRolesInt(java.lang.String[], boolean, javax.management.relation.RelationService)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1138,6 +1193,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.relation.Role java.lang.Object clone()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.management.relation.Role java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="virtual javax.management.relation.Role java.lang.String getRoleName()">
@@ -1417,6 +1475,9 @@
     </annotation>
   </item>
   <item name="javax.management.relation.RoleUnresolved java.lang.Object clone()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.management.relation.RoleUnresolved java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.relation.RoleUnresolved java.lang.String getRoleName()">

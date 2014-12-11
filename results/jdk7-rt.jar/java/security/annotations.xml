@@ -39,6 +39,12 @@
   <item name="java.security.AccessControlContext.1 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.security.AccessControlContext.1 java.lang.Object run()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.security.AccessControlContext.1 java.lang.Void run()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.security.AccessControlContext.1 java.lang.Void run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -203,6 +209,9 @@
     </annotation>
   </item>
   <item name="abstract virtual java.security.AlgorithmParametersSpi byte[] engineGetEncoded(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual java.security.AlgorithmParametersSpi java.lang.String engineToString()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual java.security.AlgorithmParametersSpi void engineInit(byte[]) 0">
@@ -479,6 +488,9 @@
   <item name="abstract virtual java.security.DomainCombiner java.security.ProtectionDomain[] combine(java.security.ProtectionDomain[], java.security.ProtectionDomain[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual java.security.DomainCombiner java.security.ProtectionDomain[] combine(java.security.ProtectionDomain[], java.security.ProtectionDomain[])">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="abstract virtual java.security.Guard void checkGuard(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -585,6 +597,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="abstract virtual java.security.Key byte[] getEncoded()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual java.security.Key java.lang.String getAlgorithm()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -704,6 +719,9 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.security.KeyPairGenerator java.security.KeyPair generateKeyPair()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.security.KeyPairGenerator java.security.KeyPairGenerator getInstance(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -762,6 +780,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="abstract virtual java.security.KeyPairGeneratorSpi java.security.KeyPair generateKeyPair()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.security.KeyPairGeneratorSpi void initialize(java.security.spec.AlgorithmParameterSpec, java.security.SecureRandom) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1095,7 +1116,25 @@
   <item name="abstract virtual java.security.KeyStoreSpi java.lang.String engineGetCertificateAlias(java.security.cert.Certificate) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual java.security.KeyStoreSpi java.lang.String engineGetCertificateAlias(java.security.cert.Certificate)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual java.security.KeyStoreSpi java.security.Key engineGetKey(java.lang.String, char[])">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.security.KeyStoreSpi java.security.KeyStore.Entry engineGetEntry(java.lang.String, java.security.KeyStore.ProtectionParameter)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.security.KeyStoreSpi java.security.KeyStore.Entry engineGetEntry(java.lang.String, java.security.KeyStore.ProtectionParameter)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual java.security.KeyStoreSpi java.security.cert.Certificate engineGetCertificate(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual java.security.KeyStoreSpi java.security.cert.Certificate[] engineGetCertificateChain(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual java.security.KeyStoreSpi java.util.Date engineGetCreationDate(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.security.KeyStoreSpi void engineLoad(java.security.KeyStore.LoadStoreParameter) 0">
@@ -1236,6 +1275,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.security.MessageDigestSpi java.lang.Object clone()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.security.MessageDigestSpi void engineUpdate(java.nio.ByteBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1260,6 +1302,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.security.Permission java.security.PermissionCollection newPermissionCollection()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="virtual java.security.Permission void checkGuard(java.lang.Object) 0">
@@ -1327,12 +1372,13 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="virtual java.security.Policy java.lang.String getType()">
+  <item name="java.security.Policy java.lang.String getType()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.security.Policy java.lang.String getType()">
+  <item name="virtual java.security.Policy java.lang.String getType()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1378,23 +1424,25 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="virtual java.security.Policy java.security.Policy.Parameters getParameters()">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
-    </annotation>
-  </item>
   <item name="java.security.Policy java.security.Policy.Parameters getParameters()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual java.security.Policy java.security.Provider getProvider()">
+  <item name="virtual java.security.Policy java.security.Policy.Parameters getParameters()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.security.Policy java.security.Provider getProvider()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.security.Policy java.security.Provider getProvider()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1522,6 +1570,9 @@
   <item name="abstract virtual java.security.Principal boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual java.security.PrivilegedAction T run()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="virtual java.security.PrivilegedActionException java.lang.Exception getException()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1541,6 +1592,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="abstract virtual java.security.PrivilegedExceptionAction T run()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.security.ProtectionDomain ProtectionDomain(java.security.CodeSource, java.security.PermissionCollection) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1620,6 +1674,9 @@
   <item name="java.security.Provider java.lang.Object get(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.security.Provider java.lang.Object get(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.security.Provider java.lang.Object implPut(java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1650,6 +1707,9 @@
   <item name="java.security.Provider java.lang.Object put(java.lang.Object, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.security.Provider java.lang.Object put(java.lang.Object, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.security.Provider java.lang.Object remove(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1657,6 +1717,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.security.Provider java.lang.Object remove(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.security.Provider java.lang.Object remove(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="virtual java.security.Provider java.lang.String getInfo()">
@@ -1695,6 +1758,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.security.Provider java.lang.String[] getTypeAndAlgorithm(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.security.Provider java.security.Provider.Service getService(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.security.Provider java.security.Provider.Service getService(java.lang.String, java.lang.String)">
@@ -1805,6 +1871,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.security.Provider.Service java.lang.Class getKeyClass(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.security.Provider.Service java.lang.Object newInstance(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.security.Provider.Service java.lang.Object newInstance(java.lang.Object)">
@@ -2371,6 +2440,9 @@
   <item name="java.security.Signature.Delegate java.lang.Object engineGetParameter(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.security.Signature.Delegate java.lang.Object engineGetParameter(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.security.Signature.Delegate java.security.SignatureSpi newInstance(java.security.Provider.Service) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2379,6 +2451,9 @@
   </item>
   <item name="java.security.SignatureSpi int engineSign(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.security.SignatureSpi java.lang.Object engineGetParameter(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.security.SignatureSpi void engineSetParameter(java.security.spec.AlgorithmParameterSpec) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2428,6 +2503,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.security.Signer.1 java.lang.Object run()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.security.Signer.1 java.lang.Object run()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.security.Signer.1 java.lang.Void run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.security.Signer.1 java.lang.Void run()">
