@@ -284,6 +284,7 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
+  // TODO - need filter for result type - we are interested only in reference and (maybe) in boolean results
   def mkOverridableOutEquation(from: Method, to: Set[Method]): Map[Key, Set[Key]] = { // TODO - extract this logic
     val resultType = Type.getReturnType(from.methodDesc)
     val resultSort = resultType.getSort
@@ -294,6 +295,35 @@ class MainProcessor extends FabaProcessor {
       )
     else
       Map[Key, Set[Key]]()
+  }
+
+  /**
+   *
+   * @param from an overridable method
+   * @param to a set of concrete methods `from` is resolved to
+   * @return additional equations for a solver
+   */
+  def mkOverridableContractEquation(from: Method, to: Set[Method]): Map[Key, Set[Key]] = {
+    val methodResultSort = Type.getReturnType(from.methodDesc).getSort
+    val isContractibleMethodResult =
+      methodResultSort == Type.OBJECT || methodResultSort == Type.ARRAY || methodResultSort == Type.BOOLEAN
+    var mapping = Map[Key, Set[Key]]()
+    if (isContractibleMethodResult) {
+      val parameterTypes = Type.getArgumentTypes(from.methodDesc)
+      for (i <- parameterTypes.indices) {
+        val argSort = parameterTypes(i).getSort
+        val isReferenceArg = argSort == Type.OBJECT || argSort == Type.ARRAY
+        if (isReferenceArg) {
+          // null -> ... equation
+          val nullFromKey = Key(from, InOut(i, Values.Null), ResolveDirection.Downward)
+          mapping += (nullFromKey -> to.map(m => Key(m, InOut(i, Values.Null), ResolveDirection.Upward)))
+          // !null -> ...
+          val notNullFromKey = Key(from, InOut(i, Values.NotNull), ResolveDirection.Downward)
+          mapping += (notNullFromKey -> to.map(m => Key(m, InOut(i, Values.NotNull), ResolveDirection.Upward)))
+        }
+      }
+    }
+    mapping
   }
 
   def process(source: Source, outDir: String) {
@@ -330,8 +360,10 @@ class MainProcessor extends FabaProcessor {
       contractsSolver.bindCalls(contractsCallsResolver.resolveCalls(), Set())
       // handling of overridable methods for Result analysis
       for {(from, to) <- contractsCallsResolver.bindOverridableMethods()} {
-        val map = mkOverridableOutEquation(from, to)
-        contractsSolver.bindCalls(map, map.keys.toSet)
+        val outMap = mkOverridableOutEquation(from, to)
+        contractsSolver.bindCalls(outMap, outMap.keys.toSet)
+        val contractMap = mkOverridableContractEquation(from, to)
+        contractsSolver.bindCalls(contractMap, contractMap.keys.toSet)
       }
 
       // nullable Result
