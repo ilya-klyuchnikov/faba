@@ -369,6 +369,10 @@ class MainProcessor extends FabaProcessor {
       // nullable Result
       nullableResultCallsResolver.buildClassHierarchy()
       nullableResultSolver.bindCalls(nullableResultCallsResolver.resolveCalls(), Set())
+      for {(from, to) <- nullableResultCallsResolver.bindOverridableMethods()} {
+        val map = mkOverridableOutEquation(from, to)
+        nullableResultSolver.bindCalls(map, map.keys.toSet)
+      }
 
       // purity resolver
       purityCallsResolver.buildClassHierarchy()
