@@ -151,6 +151,11 @@
   <item name="virtual com.sun.org.apache.xml.internal.serializer.EmptySerializer boolean startPrefixMapping(java.lang.String, java.lang.String, boolean) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.serializer.EmptySerializer boolean startPrefixMapping(java.lang.String, java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_-&gt;false;_,!null,_-&gt;false;_,null,_-&gt;false;null,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.serializer.EmptySerializer boolean startPrefixMapping(java.lang.String, java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_,_-&gt;false;_,!null,_-&gt;false;_,null,_-&gt;false;null,_,_-&gt;false&quot;,pure=true"/>
@@ -257,7 +262,7 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.serializer.EmptySerializer java.lang.String getNamespaceURI(java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null,_-&gt;null;null,_-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.serializer.EmptySerializer java.lang.String getNamespaceURI(java.lang.String, boolean)">
@@ -274,7 +279,7 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.serializer.EmptySerializer java.lang.String getNamespaceURIFromPrefix(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.serializer.EmptySerializer java.lang.String getNamespaceURIFromPrefix(java.lang.String)">
@@ -291,7 +296,7 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.serializer.EmptySerializer java.lang.String getPrefix(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.serializer.EmptySerializer java.lang.String getPrefix(java.lang.String)">
@@ -2103,6 +2108,11 @@
   <item name="com.sun.org.apache.xml.internal.serializer.ToStream boolean startPrefixMapping(java.lang.String, java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.serializer.ToStream boolean startPrefixMapping(java.lang.String, java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.serializer.ToStream int accumDefaultEntity(java.io.Writer, char, int, char[], int, boolean, boolean) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2152,6 +2162,11 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.serializer.ToStream java.lang.String ensureAttributesNamespaceIsDeclared(java.lang.String, java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.serializer.ToStream java.lang.String ensureAttributesNamespaceIsDeclared(java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.serializer.ToStream java.lang.String ensureAttributesNamespaceIsDeclared(java.lang.String, java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">

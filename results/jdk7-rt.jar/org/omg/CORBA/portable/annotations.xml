@@ -67,6 +67,11 @@
   <item name="abstract virtual org.omg.CORBA.portable.Delegate boolean is_equivalent(org.omg.CORBA.Object, org.omg.CORBA.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual org.omg.CORBA.portable.Delegate boolean is_equivalent(org.omg.CORBA.Object, org.omg.CORBA.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="org.omg.CORBA.portable.Delegate boolean is_local(org.omg.CORBA.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -104,7 +109,7 @@
   </item>
   <item name="abstract virtual org.omg.CORBA.portable.Delegate org.omg.CORBA.Object duplicate(org.omg.CORBA.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;!null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="org.omg.CORBA.portable.Delegate org.omg.CORBA.Object set_policy_override(org.omg.CORBA.Object, org.omg.CORBA.Policy[], org.omg.CORBA.SetOverrideType) 0">
@@ -225,6 +230,11 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="org.omg.CORBA.portable.ObjectImpl boolean _is_equivalent(org.omg.CORBA.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="virtual org.omg.CORBA.portable.ObjectImpl boolean _is_equivalent(org.omg.CORBA.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>

@@ -62,6 +62,11 @@
   <item name="com.sun.imageio.plugins.wbmp.WBMPImageReaderSpi boolean canDecodeInput(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.imageio.plugins.wbmp.WBMPImageReaderSpi boolean canDecodeInput(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.imageio.plugins.wbmp.WBMPImageReaderSpi boolean canDecodeInput(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
@@ -142,7 +147,7 @@
   </item>
   <item name="virtual com.sun.imageio.plugins.wbmp.WBMPImageWriter javax.imageio.metadata.IIOMetadata convertImageMetadata(javax.imageio.metadata.IIOMetadata, javax.imageio.ImageTypeSpecifier, javax.imageio.ImageWriteParam)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null,_,_-&gt;null;_,!null,_-&gt;null;_,_,!null-&gt;null;_,_,null-&gt;null;_,null,_-&gt;null;null,_,_-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.imageio.plugins.wbmp.WBMPImageWriter javax.imageio.metadata.IIOMetadata convertImageMetadata(javax.imageio.metadata.IIOMetadata, javax.imageio.ImageTypeSpecifier, javax.imageio.ImageWriteParam)">
@@ -165,7 +170,7 @@
   </item>
   <item name="virtual com.sun.imageio.plugins.wbmp.WBMPImageWriter javax.imageio.metadata.IIOMetadata convertStreamMetadata(javax.imageio.metadata.IIOMetadata, javax.imageio.ImageWriteParam)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.imageio.plugins.wbmp.WBMPImageWriter javax.imageio.metadata.IIOMetadata convertStreamMetadata(javax.imageio.metadata.IIOMetadata, javax.imageio.ImageWriteParam)">
@@ -200,7 +205,7 @@
   </item>
   <item name="virtual com.sun.imageio.plugins.wbmp.WBMPImageWriter javax.imageio.metadata.IIOMetadata getDefaultStreamMetadata(javax.imageio.ImageWriteParam)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.imageio.plugins.wbmp.WBMPImageWriter javax.imageio.metadata.IIOMetadata getDefaultStreamMetadata(javax.imageio.ImageWriteParam)">
@@ -352,6 +357,11 @@
   <item name="com.sun.imageio.plugins.wbmp.WBMPMetadataFormat boolean canNodeAppear(java.lang.String, javax.imageio.ImageTypeSpecifier)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.imageio.plugins.wbmp.WBMPMetadataFormat boolean canNodeAppear(java.lang.String, javax.imageio.ImageTypeSpecifier)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
     </annotation>
   </item>
 </root>

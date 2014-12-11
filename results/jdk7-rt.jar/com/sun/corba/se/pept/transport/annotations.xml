@@ -1,4 +1,24 @@
 <root>
+  <item name="abstract virtual com.sun.corba.se.pept.transport.Acceptor com.sun.corba.se.pept.encoding.InputObject createInputObject(com.sun.corba.se.pept.broker.Broker, com.sun.corba.se.pept.protocol.MessageMediator)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.pept.transport.Acceptor com.sun.corba.se.pept.encoding.OutputObject createOutputObject(com.sun.corba.se.pept.broker.Broker, com.sun.corba.se.pept.protocol.MessageMediator)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.pept.transport.Acceptor com.sun.corba.se.pept.protocol.MessageMediator createMessageMediator(com.sun.corba.se.pept.broker.Broker, com.sun.corba.se.pept.transport.Connection)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;null;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.pept.transport.Acceptor com.sun.corba.se.pept.protocol.MessageMediator finishCreatingMessageMediator(com.sun.corba.se.pept.broker.Broker, com.sun.corba.se.pept.transport.Connection, com.sun.corba.se.pept.protocol.MessageMediator)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;null;null,_,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="abstract virtual com.sun.corba.se.pept.transport.Acceptor com.sun.corba.se.pept.transport.EventHandler getEventHandler()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -91,6 +111,11 @@
   <item name="abstract virtual com.sun.corba.se.pept.transport.ContactInfo com.sun.corba.se.pept.protocol.MessageMediator finishCreatingMessageMediator(com.sun.corba.se.pept.broker.Broker, com.sun.corba.se.pept.transport.Connection, com.sun.corba.se.pept.protocol.MessageMediator) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.corba.se.pept.transport.ContactInfo com.sun.corba.se.pept.protocol.MessageMediator finishCreatingMessageMediator(com.sun.corba.se.pept.broker.Broker, com.sun.corba.se.pept.transport.Connection, com.sun.corba.se.pept.protocol.MessageMediator)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="abstract virtual com.sun.corba.se.pept.transport.ContactInfo com.sun.corba.se.pept.transport.Connection createConnection()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -109,6 +134,11 @@
   </item>
   <item name="abstract virtual com.sun.corba.se.pept.transport.ContactInfoList java.util.Iterator iterator()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.pept.transport.ContactInfoListIterator boolean reportException(com.sun.corba.se.pept.transport.ContactInfo, java.lang.RuntimeException)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="abstract virtual com.sun.corba.se.pept.transport.ContactInfoListIterator com.sun.corba.se.pept.transport.ContactInfoList getContactInfoList()">
     <annotation name="org.jetbrains.annotations.Contract">

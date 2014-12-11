@@ -129,6 +129,11 @@
   <item name="virtual com.sun.org.apache.xml.internal.dtm.ref.DTMDefaultBase boolean isSupported(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.dtm.ref.DTMDefaultBase boolean isSupported(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;false;_,!null-&gt;false;_,null-&gt;false;null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.dtm.ref.DTMDefaultBase boolean isSupported(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;false;_,!null-&gt;false;_,null-&gt;false;null,_-&gt;false&quot;,pure=true"/>
@@ -144,6 +149,11 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.dtm.ref.DTMDefaultBase char[] getStringValueChunk(int, int, int[]) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.dtm.ref.DTMDefaultBase char[] getStringValueChunk(int, int, int[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,!null-&gt;null;_,_,null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.dtm.ref.DTMDefaultBase char[] getStringValueChunk(int, int, int[])">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -711,6 +721,11 @@
   <item name="com.sun.org.apache.xml.internal.dtm.ref.DTMDocumentImpl boolean isSupported(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.dtm.ref.DTMDocumentImpl boolean isSupported(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;false;_,!null-&gt;false;_,null-&gt;false;null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.dtm.ref.DTMDocumentImpl boolean isSupported(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;false;_,!null-&gt;false;_,null-&gt;false;null,_-&gt;false&quot;,pure=true"/>
@@ -1034,7 +1049,7 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.dtm.ref.DTMDocumentImpl java.lang.String getUnparsedEntityURI(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.dtm.ref.DTMDocumentImpl java.lang.String getUnparsedEntityURI(java.lang.String)">
@@ -1392,6 +1407,11 @@
   <item name="virtual com.sun.org.apache.xml.internal.dtm.ref.DTMManagerDefault boolean release(com.sun.org.apache.xml.internal.dtm.DTM, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.dtm.ref.DTMManagerDefault boolean release(com.sun.org.apache.xml.internal.dtm.DTM, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.dtm.ref.DTMManagerDefault boolean release(com.sun.org.apache.xml.internal.dtm.DTM, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;true&quot;"/>
@@ -1439,7 +1459,7 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.dtm.ref.DTMManagerDefault com.sun.org.apache.xml.internal.dtm.DTMIterator createDTMIterator(int, com.sun.org.apache.xml.internal.dtm.DTMFilter, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;_,!null,_-&gt;null;_,null,_-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.dtm.ref.DTMManagerDefault com.sun.org.apache.xml.internal.dtm.DTMIterator createDTMIterator(int, com.sun.org.apache.xml.internal.dtm.DTMFilter, boolean)">
@@ -1456,7 +1476,7 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.dtm.ref.DTMManagerDefault com.sun.org.apache.xml.internal.dtm.DTMIterator createDTMIterator(java.lang.Object, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null,_-&gt;null;null,_-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.dtm.ref.DTMManagerDefault com.sun.org.apache.xml.internal.dtm.DTMIterator createDTMIterator(java.lang.Object, int)">
@@ -1479,7 +1499,7 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.dtm.ref.DTMManagerDefault com.sun.org.apache.xml.internal.dtm.DTMIterator createDTMIterator(java.lang.String, com.sun.org.apache.xml.internal.utils.PrefixResolver)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.dtm.ref.DTMManagerDefault com.sun.org.apache.xml.internal.dtm.DTMIterator createDTMIterator(java.lang.String, com.sun.org.apache.xml.internal.utils.PrefixResolver)">
@@ -1696,6 +1716,11 @@
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.dtm.ref.DTMNodeProxy boolean isDefaultNamespace(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.dtm.ref.DTMNodeProxy boolean isElementContentWhitespace()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1857,6 +1882,11 @@
   <item name="com.sun.org.apache.xml.internal.dtm.ref.DTMNodeProxy java.lang.String lookupPrefix(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.dtm.ref.DTMNodeProxy java.lang.String lookupPrefix(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.dtm.ref.DTMNodeProxy java.lang.String lookupPrefix(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
@@ -1992,7 +2022,7 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.dtm.ref.DTMNodeProxy org.w3c.dom.Node renameNode(org.w3c.dom.Node, java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null,_,_-&gt;!null;null,_,_-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.dtm.ref.DTMNodeProxy org.w3c.dom.Node renameNode(org.w3c.dom.Node, java.lang.String, java.lang.String)">
@@ -2032,7 +2062,7 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.dtm.ref.DTMNodeProxy org.w3c.dom.Text replaceWholeText(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.dtm.ref.DTMNodeProxy org.w3c.dom.Text replaceWholeText(java.lang.String)">
@@ -2212,7 +2242,7 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.dtm.ref.DTMNodeProxy.DTMNodeProxyImplementation java.lang.Object getFeature(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.dtm.ref.DTMNodeProxy.DTMNodeProxyImplementation java.lang.Object getFeature(java.lang.String, java.lang.String)">

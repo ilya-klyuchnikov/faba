@@ -2,6 +2,16 @@
   <item name="abstract virtual com.sun.corba.se.spi.presentation.rmi.DynamicMethodMarshaller boolean isDeclaredException(java.lang.Throwable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.corba.se.spi.presentation.rmi.DynamicMethodMarshaller java.lang.Object readResult(org.omg.CORBA_2_3.portable.InputStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.presentation.rmi.DynamicMethodMarshaller java.lang.Object[] copyArguments(java.lang.Object[], com.sun.corba.se.spi.orb.ORB)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="abstract virtual com.sun.corba.se.spi.presentation.rmi.DynamicMethodMarshaller java.lang.reflect.Method getMethod()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -35,6 +45,11 @@
   </item>
   <item name="abstract virtual com.sun.corba.se.spi.presentation.rmi.PresentationManager com.sun.corba.se.spi.presentation.rmi.DynamicMethodMarshaller getDynamicMethodMarshaller(java.lang.reflect.Method) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.presentation.rmi.PresentationManager com.sun.corba.se.spi.presentation.rmi.DynamicMethodMarshaller getDynamicMethodMarshaller(java.lang.reflect.Method)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="abstract virtual com.sun.corba.se.spi.presentation.rmi.PresentationManager com.sun.corba.se.spi.presentation.rmi.PresentationManager.ClassData getClassData(java.lang.Class)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -74,6 +89,11 @@
   </item>
   <item name="abstract virtual com.sun.corba.se.spi.presentation.rmi.PresentationManager.StubFactoryFactory java.lang.String getStubName(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.corba.se.spi.presentation.rmi.PresentationManager.StubFactoryFactory javax.rmi.CORBA.Tie getTie(java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.spi.presentation.rmi.StubAdapter StubAdapter()">
     <annotation name="org.jetbrains.annotations.Contract">

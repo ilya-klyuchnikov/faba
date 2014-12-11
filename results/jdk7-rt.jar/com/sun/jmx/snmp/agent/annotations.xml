@@ -34,7 +34,7 @@
   </item>
   <item name="virtual com.sun.jmx.snmp.agent.SnmpErrorHandlerAgent javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;_,!null-&gt;!null;_,null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.jmx.snmp.agent.SnmpErrorHandlerAgent javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName)">
@@ -199,6 +199,11 @@
   <item name="abstract virtual com.sun.jmx.snmp.agent.SnmpMib com.sun.jmx.snmp.agent.SnmpMibTable getRegisteredTableMeta(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual com.sun.jmx.snmp.agent.SnmpMib com.sun.jmx.snmp.agent.SnmpMibTable getRegisteredTableMeta(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.jmx.snmp.agent.SnmpMib com.sun.jmx.snmp.agent.SnmpRequestTree getGetNextHandlers(com.sun.jmx.snmp.agent.SnmpMibRequest) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -219,7 +224,7 @@
   </item>
   <item name="virtual com.sun.jmx.snmp.agent.SnmpMib java.lang.String getGroupOid(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;_,!null-&gt;!null;_,null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.jmx.snmp.agent.SnmpMib java.lang.String getGroupOid(java.lang.String, java.lang.String)">
@@ -373,6 +378,11 @@
   <item name="com.sun.jmx.snmp.agent.SnmpMibAgent javax.management.ObjectName getSnmpAdaptorName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.jmx.snmp.agent.SnmpMibAgent javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.jmx.snmp.agent.SnmpMibAgent void concatVector(com.sun.jmx.snmp.agent.SnmpMibRequest, java.util.Vector) 1">
@@ -1004,6 +1014,11 @@
       <val val="value=&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;,pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.jmx.snmp.agent.SnmpMibTable boolean isRowReady(com.sun.jmx.snmp.SnmpOid, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="virtual com.sun.jmx.snmp.agent.SnmpMibTable boolean isRowStatus(com.sun.jmx.snmp.SnmpOid, long, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1015,6 +1030,11 @@
   </item>
   <item name="virtual com.sun.jmx.snmp.agent.SnmpMibTable boolean isRowStatus(com.sun.jmx.snmp.SnmpOid, long, java.lang.Object) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.jmx.snmp.agent.SnmpMibTable boolean isRowStatus(com.sun.jmx.snmp.SnmpOid, long, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_-&gt;false;_,_,!null-&gt;false;_,_,null-&gt;false;null,_,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.jmx.snmp.agent.SnmpMibTable boolean isRowStatus(com.sun.jmx.snmp.SnmpOid, long, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1078,7 +1098,7 @@
   </item>
   <item name="virtual com.sun.jmx.snmp.agent.SnmpMibTable com.sun.jmx.snmp.SnmpValue setRowStatus(com.sun.jmx.snmp.SnmpOid, int, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null,_,_-&gt;null;_,_,!null-&gt;null;_,_,null-&gt;null;null,_,_-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.jmx.snmp.agent.SnmpMibTable com.sun.jmx.snmp.SnmpValue setRowStatus(com.sun.jmx.snmp.SnmpOid, int, java.lang.Object)">

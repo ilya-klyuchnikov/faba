@@ -27,6 +27,11 @@
   <item name="virtual javax.management.monitor.CounterMonitor boolean isComparableTypeValid(javax.management.ObjectName, java.lang.String, java.lang.Comparable&lt;?&gt;) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual javax.management.monitor.CounterMonitor boolean isComparableTypeValid(javax.management.ObjectName, java.lang.String, java.lang.Comparable&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="javax.management.monitor.CounterMonitor boolean isComparableTypeValid(javax.management.ObjectName, java.lang.String, java.lang.Comparable&lt;?&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,_,null-&gt;false&quot;"/>
@@ -309,6 +314,11 @@
   </item>
   <item name="javax.management.monitor.GaugeMonitor boolean isComparableTypeValid(javax.management.ObjectName, java.lang.String, java.lang.Comparable&lt;?&gt;) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual javax.management.monitor.GaugeMonitor boolean isComparableTypeValid(javax.management.ObjectName, java.lang.String, java.lang.Comparable&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="javax.management.monitor.GaugeMonitor boolean isComparableTypeValid(javax.management.ObjectName, java.lang.String, java.lang.Comparable&lt;?&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -654,7 +664,7 @@
   </item>
   <item name="virtual javax.management.monitor.Monitor java.lang.String buildErrorNotification(javax.management.ObjectName, java.lang.String, java.lang.Comparable&lt;?&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null,_,_-&gt;null;_,!null,_-&gt;null;_,_,!null-&gt;null;_,_,null-&gt;null;_,null,_-&gt;null;null,_,_-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="javax.management.monitor.Monitor java.lang.String buildErrorNotification(javax.management.ObjectName, java.lang.String, java.lang.Comparable&lt;?&gt;)">
@@ -719,6 +729,11 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.monitor.Monitor javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.management.monitor.Monitor javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
     </annotation>
@@ -1013,6 +1028,11 @@
   <item name="javax.management.monitor.StringMonitor boolean isComparableTypeValid(javax.management.ObjectName, java.lang.String, java.lang.Comparable&lt;?&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;_,_,null-&gt;false&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.management.monitor.StringMonitor boolean isComparableTypeValid(javax.management.ObjectName, java.lang.String, java.lang.Comparable&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="javax.management.monitor.StringMonitor java.lang.Object getDerivedGauge(javax.management.ObjectName) 0">

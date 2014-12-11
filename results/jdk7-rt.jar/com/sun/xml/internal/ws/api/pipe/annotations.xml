@@ -87,6 +87,11 @@
       <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.xml.internal.ws.api.pipe.ClientTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createClientMUTube(com.sun.xml.internal.ws.api.pipe.Tube)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="virtual com.sun.xml.internal.ws.api.pipe.ClientTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createDumpTube(java.lang.String, java.io.PrintStream, com.sun.xml.internal.ws.api.pipe.Tube)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -105,7 +110,17 @@
   <item name="com.sun.xml.internal.ws.api.pipe.ClientTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createTransportTube()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.xml.internal.ws.api.pipe.ClientTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createValidationTube(com.sun.xml.internal.ws.api.pipe.Tube)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.api.pipe.ClientTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createValidationTube(com.sun.xml.internal.ws.api.pipe.Tube)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.xml.internal.ws.api.pipe.ClientTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createWsaTube(com.sun.xml.internal.ws.api.pipe.Tube)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
@@ -137,6 +152,11 @@
   </item>
   <item name="abstract virtual com.sun.xml.internal.ws.api.pipe.Codec com.sun.xml.internal.ws.api.pipe.Codec copy()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.xml.internal.ws.api.pipe.Codec com.sun.xml.internal.ws.api.pipe.ContentType encode(com.sun.xml.internal.ws.api.message.Packet, java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="abstract virtual com.sun.xml.internal.ws.api.pipe.Codec com.sun.xml.internal.ws.api.pipe.ContentType encode(com.sun.xml.internal.ws.api.message.Packet, java.nio.channels.WritableByteChannel)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -346,6 +366,11 @@
   <item name="com.sun.xml.internal.ws.api.pipe.ServerTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createDumpTube(java.lang.String, java.io.PrintStream, com.sun.xml.internal.ws.api.pipe.Tube)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.xml.internal.ws.api.pipe.ServerTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createHandlerTube(com.sun.xml.internal.ws.api.pipe.Tube)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.api.pipe.ServerTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createHandlerTube(com.sun.xml.internal.ws.api.pipe.Tube)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null&quot;"/>
@@ -356,7 +381,22 @@
       <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.xml.internal.ws.api.pipe.ServerTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createServerMUTube(com.sun.xml.internal.ws.api.pipe.Tube)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.api.pipe.ServerTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createValidationTube(com.sun.xml.internal.ws.api.pipe.Tube)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.xml.internal.ws.api.pipe.ServerTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createValidationTube(com.sun.xml.internal.ws.api.pipe.Tube)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.xml.internal.ws.api.pipe.ServerTubeAssemblerContext com.sun.xml.internal.ws.api.pipe.Tube createWsaTube(com.sun.xml.internal.ws.api.pipe.Tube)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
@@ -594,6 +634,11 @@
   <item name="com.sun.xml.internal.ws.api.pipe.TransportTubeFactory TransportTubeFactory()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.xml.internal.ws.api.pipe.Tube com.sun.xml.internal.ws.api.pipe.NextAction processRequest(com.sun.xml.internal.ws.api.message.Packet)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="abstract virtual com.sun.xml.internal.ws.api.pipe.Tube com.sun.xml.internal.ws.api.pipe.Tube copy(com.sun.xml.internal.ws.api.pipe.TubeCloner) 0">

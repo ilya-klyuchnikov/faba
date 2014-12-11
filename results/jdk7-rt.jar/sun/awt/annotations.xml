@@ -557,6 +557,11 @@
   <item name="virtual sun.awt.AWTCharset.Encoder boolean isLegalReplacement(byte[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.AWTCharset.Encoder boolean isLegalReplacement(byte[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;true;null-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.awt.AWTCharset.Encoder boolean isLegalReplacement(byte[])">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;true;null-&gt;true&quot;,pure=true"/>
@@ -1565,6 +1570,11 @@
   <item name="virtual sun.awt.FocusingTextField boolean gotFocus(java.awt.Event, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.FocusingTextField boolean gotFocus(java.awt.Event, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.awt.FocusingTextField boolean gotFocus(java.awt.Event, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
@@ -1583,6 +1593,11 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.FocusingTextField boolean lostFocus(java.awt.Event, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.awt.FocusingTextField boolean lostFocus(java.awt.Event, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
     </annotation>
@@ -1685,7 +1700,12 @@
   </item>
   <item name="abstract virtual sun.awt.FontConfiguration java.lang.String getFaceNameFromComponentFontName(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;null-&gt;null&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual sun.awt.FontConfiguration java.lang.String getFallbackFamilyName(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.FontConfiguration java.lang.String getFontName(int)">
@@ -1726,12 +1746,17 @@
   </item>
   <item name="virtual sun.awt.FontConfiguration java.lang.String makeAWTFontName(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null,_-&gt;!null;null,_-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="sun.awt.FontConfiguration java.lang.String makeAWTFontName(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;!null;null,_-&gt;null&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.awt.FontConfiguration java.lang.String mapFileName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.FontConfiguration java.lang.String mapFileName(java.lang.String)">
@@ -2002,6 +2027,11 @@
   <item name="sun.awt.FontConfiguration sun.awt.FontDescriptor[] getFontDescriptors(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual sun.awt.FontConfiguration sun.awt.FontDescriptor[] getFontDescriptors(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.awt.FontConfiguration sun.font.CompositeFontDescriptor[] get2DCompositeFontInfo()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2064,6 +2094,11 @@
   </item>
   <item name="sun.awt.FontConfiguration.PropertiesHandler.FontProperties java.lang.Object put(java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual sun.awt.FontConfiguration.PropertiesHandler.FontProperties java.lang.Object put(java.lang.Object, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="sun.awt.FontConfiguration.PropertiesHandler.FontProperties java.lang.Object put(java.lang.Object, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2186,7 +2221,7 @@
   </item>
   <item name="virtual sun.awt.HToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null,_,_,_,_-&gt;null;_,!null,_,_,_-&gt;null;_,_,!null,_,_-&gt;null;_,_,_,_,!null-&gt;null;_,_,_,_,null-&gt;null;_,_,null,_,_-&gt;null;_,null,_,_,_-&gt;null;null,_,_,_,_-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="sun.awt.HToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener)">
@@ -2211,6 +2246,11 @@
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.awt.HToolkit boolean isModalExclusionTypeSupported(java.awt.Dialog.ModalExclusionType)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="virtual sun.awt.HToolkit boolean isModalityTypeSupported(java.awt.Dialog.ModalityType) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2220,6 +2260,11 @@
   <item name="sun.awt.HToolkit boolean isModalityTypeSupported(java.awt.Dialog.ModalityType)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.awt.HToolkit boolean isModalityTypeSupported(java.awt.Dialog.ModalityType)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.HToolkit boolean isTraySupported()">
@@ -2604,7 +2649,7 @@
   </item>
   <item name="virtual sun.awt.HeadlessToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null,_,_,_,_-&gt;null;_,!null,_,_,_-&gt;null;_,_,!null,_,_-&gt;null;_,_,_,_,!null-&gt;null;_,_,_,_,null-&gt;null;_,_,null,_,_-&gt;null;_,null,_,_,_-&gt;null;null,_,_,_,_-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="sun.awt.HeadlessToolkit T createDragGestureRecognizer(java.lang.Class&lt;T&gt;, java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener)">
@@ -2634,11 +2679,21 @@
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.awt.HeadlessToolkit boolean isModalExclusionTypeSupported(java.awt.Dialog.ModalExclusionType)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="virtual sun.awt.HeadlessToolkit boolean isModalityTypeSupported(java.awt.Dialog.ModalityType) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.HeadlessToolkit boolean isModalityTypeSupported(java.awt.Dialog.ModalityType) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.HeadlessToolkit boolean isModalityTypeSupported(java.awt.Dialog.ModalityType)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="sun.awt.HeadlessToolkit boolean isModalityTypeSupported(java.awt.Dialog.ModalityType)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -3135,6 +3190,11 @@
   <item name="sun.awt.NullComponentPeer boolean handleEvent(java.awt.Event) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.NullComponentPeer boolean handleEvent(java.awt.Event)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.awt.NullComponentPeer boolean handleEvent(java.awt.Event)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
@@ -3177,6 +3237,11 @@
   <item name="sun.awt.NullComponentPeer boolean prepareImage(java.awt.Image, int, int, java.awt.image.ImageObserver) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.NullComponentPeer boolean prepareImage(java.awt.Image, int, int, java.awt.image.ImageObserver)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_,_-&gt;false;_,_,_,!null-&gt;false;_,_,_,null-&gt;false;null,_,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.awt.NullComponentPeer boolean prepareImage(java.awt.Image, int, int, java.awt.image.ImageObserver)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_,_,_-&gt;false;_,_,_,!null-&gt;false;_,_,_,null-&gt;false;null,_,_,_-&gt;false&quot;,pure=true"/>
@@ -3194,6 +3259,11 @@
   <item name="sun.awt.NullComponentPeer boolean requestFocus(java.awt.Component, boolean, boolean, long, sun.awt.CausedFocusEvent.Cause) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.NullComponentPeer boolean requestFocus(java.awt.Component, boolean, boolean, long, sun.awt.CausedFocusEvent.Cause)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_,_,_-&gt;false;_,_,_,_,!null-&gt;false;_,_,_,_,null-&gt;false;null,_,_,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.awt.NullComponentPeer boolean requestFocus(java.awt.Component, boolean, boolean, long, sun.awt.CausedFocusEvent.Cause)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_,_,_,_-&gt;false;_,_,_,_,!null-&gt;false;_,_,_,_,null-&gt;false;null,_,_,_,_-&gt;false&quot;,pure=true"/>
@@ -3208,6 +3278,11 @@
   <item name="sun.awt.NullComponentPeer boolean updateGraphicsData(java.awt.GraphicsConfiguration)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.awt.NullComponentPeer boolean updateGraphicsData(java.awt.GraphicsConfiguration)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.NullComponentPeer int checkImage(java.awt.Image, int, int, java.awt.image.ImageObserver) 0">
@@ -3259,7 +3334,7 @@
   </item>
   <item name="virtual sun.awt.NullComponentPeer java.awt.FontMetrics getFontMetrics(java.awt.Font)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="sun.awt.NullComponentPeer java.awt.FontMetrics getFontMetrics(java.awt.Font)">
@@ -3281,7 +3356,7 @@
   </item>
   <item name="virtual sun.awt.NullComponentPeer java.awt.GraphicsConfiguration getAppropriateGraphicsConfiguration(java.awt.GraphicsConfiguration)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;!null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="sun.awt.NullComponentPeer java.awt.GraphicsConfiguration getAppropriateGraphicsConfiguration(java.awt.GraphicsConfiguration)">
@@ -3319,7 +3394,7 @@
   </item>
   <item name="virtual sun.awt.NullComponentPeer java.awt.Image createImage(java.awt.image.ImageProducer)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="sun.awt.NullComponentPeer java.awt.Image createImage(java.awt.image.ImageProducer)">
@@ -3622,6 +3697,11 @@
   <item name="virtual sun.awt.OSInfo.WindowsVersion boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.awt.OSInfo.WindowsVersion boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.awt.OSInfo.WindowsVersion boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
@@ -3725,6 +3805,11 @@
       <val val="value=&quot;!null,_-&gt;false;_,!null-&gt;false;_,null-&gt;false;null,_-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
+  <item name="virtual sun.awt.PaintEventDispatcher boolean queueSurfaceDataReplacing(java.awt.Component, java.lang.Runnable)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="virtual sun.awt.PaintEventDispatcher boolean shouldDoNativeBackgroundErase(java.awt.Component) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -3734,6 +3819,11 @@
   <item name="sun.awt.PaintEventDispatcher boolean shouldDoNativeBackgroundErase(java.awt.Component)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;true;null-&gt;true&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.awt.PaintEventDispatcher boolean shouldDoNativeBackgroundErase(java.awt.Component)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="sun.awt.PaintEventDispatcher java.awt.event.PaintEvent createPaintEvent(java.awt.Component, int, int, int, int) 0">
@@ -3770,7 +3860,7 @@
   </item>
   <item name="virtual sun.awt.PeerEvent sun.awt.PeerEvent coalesceEvents(sun.awt.PeerEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="sun.awt.PeerEvent sun.awt.PeerEvent coalesceEvents(sun.awt.PeerEvent)">
@@ -3889,6 +3979,11 @@
   <item name="abstract virtual sun.awt.RequestFocusController boolean acceptRequestFocus(java.awt.Component, java.awt.Component, boolean, boolean, sun.awt.CausedFocusEvent.Cause) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual sun.awt.RequestFocusController boolean acceptRequestFocus(java.awt.Component, java.awt.Component, boolean, boolean, sun.awt.CausedFocusEvent.Cause)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_,_,_-&gt;true;null,_,_,_,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.awt.ScrollPaneWheelScroller ScrollPaneWheelScroller()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -3974,6 +4069,11 @@
   </item>
   <item name="sun.awt.SunHints.Key boolean isCompatibleValue(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.SunHints.Key boolean isCompatibleValue(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="sun.awt.SunHints.Key boolean isCompatibleValue(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -4176,6 +4276,11 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.awt.SunToolkit boolean prepareImage(java.awt.Image, int, int, java.awt.image.ImageObserver)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.awt.SunToolkit boolean prepareImage(java.awt.Image, int, int, java.awt.image.ImageObserver)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null,_,_,_-&gt;true&quot;"/>
     </annotation>
@@ -4518,6 +4623,11 @@
   </item>
   <item name="sun.awt.Symbol.Encoder boolean isLegalReplacement(byte[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.awt.Symbol.Encoder boolean isLegalReplacement(byte[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;true;null-&gt;true&quot;"/>
+    </annotation>
   </item>
   <item name="sun.awt.Symbol.Encoder boolean isLegalReplacement(byte[])">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -5272,7 +5382,7 @@
   </item>
   <item name="virtual sun.awt.X11InputMethodDescriptor java.awt.Image getInputMethodIcon(java.util.Locale)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="sun.awt.X11InputMethodDescriptor java.awt.Image getInputMethodIcon(java.util.Locale)">

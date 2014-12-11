@@ -183,6 +183,11 @@
   <item name="abstract virtual java.rmi.server.RMIClassLoaderSpi java.lang.Class&lt;?&gt; loadProxyClass(java.lang.String, java.lang.String[], java.lang.ClassLoader) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.rmi.server.RMIClassLoaderSpi java.lang.Class&lt;?&gt; loadProxyClass(java.lang.String, java.lang.String[], java.lang.ClassLoader)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="abstract virtual java.rmi.server.RMIClassLoaderSpi java.lang.ClassLoader getClassLoader(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -217,6 +222,11 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.rmi.server.RemoteObject boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="virtual java.rmi.server.RemoteObject boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>

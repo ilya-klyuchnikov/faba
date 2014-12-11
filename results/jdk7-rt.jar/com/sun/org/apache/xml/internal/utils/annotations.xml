@@ -453,6 +453,11 @@
   <item name="com.sun.org.apache.xml.internal.utils.DOMHelper boolean isIgnorableWhitespace(org.w3c.dom.Text) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.DOMHelper boolean isIgnorableWhitespace(org.w3c.dom.Text)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.DOMHelper boolean isIgnorableWhitespace(org.w3c.dom.Text)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
@@ -487,6 +492,11 @@
   <item name="com.sun.org.apache.xml.internal.utils.DOMHelper boolean shouldStripSourceNode(org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.DOMHelper boolean shouldStripSourceNode(org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.DOMHelper boolean shouldStripSourceNode(org.w3c.dom.Node)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
@@ -503,6 +513,11 @@
       <val val="&quot;null-&gt;!null&quot;"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.DOMHelper java.lang.String getExpandedAttributeName(org.w3c.dom.Attr)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="virtual com.sun.org.apache.xml.internal.utils.DOMHelper java.lang.String getExpandedElementName(org.w3c.dom.Element) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -510,6 +525,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.DOMHelper java.lang.String getExpandedElementName(org.w3c.dom.Element)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.DOMHelper java.lang.String getExpandedElementName(org.w3c.dom.Element)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;!null&quot;"/>
     </annotation>
@@ -577,6 +597,11 @@
   <item name="com.sun.org.apache.xml.internal.utils.DOMHelper org.w3c.dom.Element getElementByID(java.lang.String, org.w3c.dom.Document) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.DOMHelper org.w3c.dom.Element getElementByID(java.lang.String, org.w3c.dom.Document)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.DOMHelper org.w3c.dom.Element getElementByID(java.lang.String, org.w3c.dom.Document)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;,pure=true"/>
@@ -594,6 +619,11 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.utils.DOMHelper org.w3c.dom.Node getRoot(org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.DOMHelper org.w3c.dom.Node getRoot(org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.DOMHelper org.w3c.dom.Node getRoot(org.w3c.dom.Node)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -734,9 +764,19 @@
   <item name="com.sun.org.apache.xml.internal.utils.FastStringBuffer java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.FastStringBuffer java.lang.StringBuffer getString(java.lang.StringBuffer, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_-&gt;!null;null,_,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.FastStringBuffer java.lang.StringBuffer getString(java.lang.StringBuffer, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_,_-&gt;!null;null,_,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.FastStringBuffer java.lang.StringBuffer getString(java.lang.StringBuffer, int, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_,_-&gt;!null;null,_,_,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.FastStringBuffer java.lang.StringBuffer getString(java.lang.StringBuffer, int, int, int)">
@@ -927,6 +967,11 @@
   <item name="com.sun.org.apache.xml.internal.utils.NamespaceSupport2 java.lang.String[] processName(java.lang.String, java.lang.String[], boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.NamespaceSupport2 java.lang.String[] processName(java.lang.String, java.lang.String[], boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.NamespaceSupport2 java.lang.String[] processName(java.lang.String, java.lang.String[], boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,null,_-&gt;null&quot;"/>
@@ -1011,6 +1056,11 @@
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.ObjectStack java.lang.Object push(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.ObjectStack java.lang.Object push(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
@@ -1796,6 +1846,11 @@
   <item name="virtual com.sun.org.apache.xml.internal.utils.URI boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.URI boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.URI boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
@@ -2001,6 +2056,11 @@
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode boolean hasAttribute(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode boolean hasAttribute(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode boolean hasAttribute(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
@@ -2023,11 +2083,21 @@
       <val val="&quot;!null,_-&gt;false;_,!null-&gt;false;_,null-&gt;false;null,_-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode boolean hasAttributeNS(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;false;_,!null-&gt;false;_,null-&gt;false;null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode boolean isDefaultNamespace(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode boolean isDefaultNamespace(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode boolean isDefaultNamespace(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode boolean isDefaultNamespace(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2065,6 +2135,11 @@
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode boolean isSupported(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;false;_,!null-&gt;false;_,null-&gt;false;null,_-&gt;false&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode boolean isSupported(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;false;_,!null-&gt;false;_,null-&gt;false;null,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode boolean isWhitespaceInElementContent()">
@@ -2117,6 +2192,11 @@
   <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode java.lang.String getAttribute(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode java.lang.String getAttribute(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode java.lang.String getAttribute(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
@@ -2134,6 +2214,11 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode java.lang.String getAttributeNS(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode java.lang.String getAttributeNS(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode java.lang.String getAttributeNS(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2229,6 +2314,11 @@
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode java.lang.String lookupPrefix(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode java.lang.String lookupPrefix(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode java.lang.String lookupPrefix(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
@@ -2243,6 +2333,11 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr createAttribute(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr createAttribute(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr createAttribute(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2262,6 +2357,11 @@
   <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr createAttributeNS(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr createAttributeNS(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr createAttributeNS(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;"/>
@@ -2273,6 +2373,11 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr getAttributeNode(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr getAttributeNode(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr getAttributeNode(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2292,6 +2397,11 @@
   <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr getAttributeNodeNS(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr getAttributeNodeNS(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr getAttributeNodeNS(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;"/>
@@ -2303,6 +2413,11 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr removeAttributeNode(org.w3c.dom.Attr) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr removeAttributeNode(org.w3c.dom.Attr)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr removeAttributeNode(org.w3c.dom.Attr)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2316,6 +2431,11 @@
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr setAttributeNode(org.w3c.dom.Attr) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr setAttributeNode(org.w3c.dom.Attr)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr setAttributeNode(org.w3c.dom.Attr)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
@@ -2327,6 +2447,11 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr setAttributeNodeNS(org.w3c.dom.Attr) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr setAttributeNodeNS(org.w3c.dom.Attr)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Attr setAttributeNodeNS(org.w3c.dom.Attr)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2340,6 +2465,11 @@
   <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.CDATASection createCDATASection(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.CDATASection createCDATASection(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.CDATASection createCDATASection(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
@@ -2351,6 +2481,11 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Comment createComment(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Comment createComment(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Comment createComment(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2387,6 +2522,11 @@
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Element createElement(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Element createElement(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Element createElement(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
@@ -2405,6 +2545,11 @@
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Element createElementNS(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Element createElementNS(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Element createElementNS(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;"/>
@@ -2419,6 +2564,11 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Element getElementById(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Element getElementById(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Element getElementById(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2435,6 +2585,11 @@
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.EntityReference createEntityReference(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.EntityReference createEntityReference(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.EntityReference createEntityReference(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
@@ -2450,6 +2605,11 @@
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node adoptNode(org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node adoptNode(org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node adoptNode(org.w3c.dom.Node)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
@@ -2461,6 +2621,11 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node appendChild(org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node appendChild(org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node appendChild(org.w3c.dom.Node)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2492,6 +2657,11 @@
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node importNode(org.w3c.dom.Node, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node importNode(org.w3c.dom.Node, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;null;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node importNode(org.w3c.dom.Node, boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;null;null,_-&gt;null&quot;"/>
@@ -2510,6 +2680,11 @@
   <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node insertBefore(org.w3c.dom.Node, org.w3c.dom.Node) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node insertBefore(org.w3c.dom.Node, org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node insertBefore(org.w3c.dom.Node, org.w3c.dom.Node)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;"/>
@@ -2524,6 +2699,11 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node removeChild(org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node removeChild(org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node removeChild(org.w3c.dom.Node)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2545,7 +2725,7 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node renameNode(org.w3c.dom.Node, java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null,_,_-&gt;!null;null,_,_-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node renameNode(org.w3c.dom.Node, java.lang.String, java.lang.String)">
@@ -2565,6 +2745,11 @@
   <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node replaceChild(org.w3c.dom.Node, org.w3c.dom.Node) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node replaceChild(org.w3c.dom.Node, org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Node replaceChild(org.w3c.dom.Node, org.w3c.dom.Node)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;"/>
@@ -2579,6 +2764,11 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.NodeList getElementsByTagName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.NodeList getElementsByTagName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.NodeList getElementsByTagName(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2598,6 +2788,11 @@
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.NodeList getElementsByTagNameNS(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.NodeList getElementsByTagNameNS(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.NodeList getElementsByTagNameNS(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;"/>
@@ -2616,6 +2811,11 @@
   <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.ProcessingInstruction createProcessingInstruction(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.ProcessingInstruction createProcessingInstruction(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.ProcessingInstruction createProcessingInstruction(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;"/>
@@ -2627,6 +2827,11 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Text createTextNode(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Text createTextNode(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Text createTextNode(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2642,7 +2847,7 @@
   </item>
   <item name="virtual com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Text replaceWholeText(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.UnImplNode org.w3c.dom.Text replaceWholeText(java.lang.String)">

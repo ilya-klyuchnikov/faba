@@ -121,6 +121,11 @@
   <item name="java.lang.ref.ReferenceQueue boolean enqueue(java.lang.ref.Reference&lt;? extends T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual java.lang.ref.ReferenceQueue boolean enqueue(java.lang.ref.Reference&lt;? extends T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.lang.ref.ReferenceQueue java.lang.ref.Reference&lt;? extends T&gt; poll()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -158,6 +163,11 @@
   <item name="java.lang.ref.ReferenceQueue.Null boolean enqueue(java.lang.ref.Reference)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.lang.ref.ReferenceQueue.Null boolean enqueue(java.lang.ref.Reference)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="java.lang.ref.SoftReference SoftReference(T, java.lang.ref.ReferenceQueue&lt;? super T&gt;) 1">

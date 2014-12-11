@@ -20,7 +20,7 @@
   </item>
   <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.Navigator C asDecl(java.lang.Class)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;!null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.Navigator C getDeclaringClassForField(F) 0">
@@ -57,6 +57,11 @@
   <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.Navigator T getFieldType(F) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.Navigator T getPrimitive(java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.Navigator T getReturnType(M) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -71,12 +76,12 @@
   </item>
   <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.Navigator T ref(java.lang.Class)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;!null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.Navigator T use(C)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;!null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.Navigator T[] getMethodParameters(M) 0">
@@ -88,8 +93,18 @@
   <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.Navigator boolean isArray(T) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.Navigator boolean isArray(T)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.Navigator boolean isArrayButNotByteArray(T) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.Navigator boolean isArrayButNotByteArray(T)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.Navigator boolean isBridgeMethod(M) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -112,11 +127,21 @@
   <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.Navigator boolean isOverriding(M, C) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.Navigator boolean isOverriding(M, C)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.Navigator boolean isParameterizedType(T) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.Navigator boolean isPrimitive(T) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.Navigator boolean isPrimitive(T)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.Navigator boolean isPublicField(F) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -202,6 +227,11 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.ParameterizedTypeImpl boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.xml.internal.bind.v2.model.nav.ParameterizedTypeImpl boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.ParameterizedTypeImpl boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1007,8 +1037,18 @@
   <item name="com.sun.xml.internal.bind.v2.model.nav.ReflectionNavigator.BinderArg BinderArg(java.lang.reflect.GenericDeclaration, java.lang.reflect.Type[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.TypeVisitor T onGenericArray(java.lang.reflect.GenericArrayType, P)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.TypeVisitor T onParameterizdType(java.lang.reflect.ParameterizedType, P) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual com.sun.xml.internal.bind.v2.model.nav.TypeVisitor T onWildcard(java.lang.reflect.WildcardType, P)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.v2.model.nav.TypeVisitor T visit(java.lang.reflect.Type, P) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

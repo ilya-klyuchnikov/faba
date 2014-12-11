@@ -411,6 +411,11 @@
   <item name="virtual java.awt.BasicStroke boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.awt.BasicStroke boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.BasicStroke boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
@@ -445,6 +450,11 @@
     </annotation>
   </item>
   <item name="java.awt.BasicStroke java.awt.Shape createStrokedShape(java.awt.Shape)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
+  <item name="virtual java.awt.BasicStroke java.awt.Shape createStrokedShape(java.awt.Shape)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;!null&quot;"/>
     </annotation>
@@ -551,7 +561,7 @@
   </item>
   <item name="virtual java.awt.BorderLayout java.lang.Object getConstraints(java.awt.Component)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="java.awt.BorderLayout java.lang.Object getConstraints(java.awt.Component)">
@@ -734,6 +744,11 @@
   </item>
   <item name="java.awt.Button.AccessibleAWTButton boolean setCurrentAccessibleValue(java.lang.Number) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.awt.Button.AccessibleAWTButton boolean setCurrentAccessibleValue(java.lang.Number)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="java.awt.Button.AccessibleAWTButton boolean setCurrentAccessibleValue(java.lang.Number)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1098,6 +1113,11 @@
   <item name="java.awt.Checkbox.AccessibleAWTCheckbox boolean setCurrentAccessibleValue(java.lang.Number) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.awt.Checkbox.AccessibleAWTCheckbox boolean setCurrentAccessibleValue(java.lang.Number)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.Checkbox.AccessibleAWTCheckbox boolean setCurrentAccessibleValue(java.lang.Number)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
@@ -1312,6 +1332,11 @@
   <item name="java.awt.CheckboxMenuItem.AccessibleAWTCheckboxMenuItem boolean setCurrentAccessibleValue(java.lang.Number)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.awt.CheckboxMenuItem.AccessibleAWTCheckboxMenuItem boolean setCurrentAccessibleValue(java.lang.Number)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="java.awt.CheckboxMenuItem.AccessibleAWTCheckboxMenuItem int getAccessibleActionCount()">
@@ -1786,6 +1811,11 @@
   <item name="java.awt.Component boolean dispatchMouseWheelToAncestor(java.awt.event.MouseWheelEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual java.awt.Component boolean dispatchMouseWheelToAncestor(java.awt.event.MouseWheelEvent)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.Component boolean eventEnabled(java.awt.AWTEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1993,8 +2023,18 @@
       <val val="value=&quot;!null,_-&gt;false;null,_-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.awt.Component boolean keyDown(java.awt.Event, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;false;null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.Component boolean keyUp(java.awt.Event, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.awt.Component boolean keyUp(java.awt.Event, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;false;null,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="java.awt.Component boolean keyUp(java.awt.Event, int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2029,11 +2069,21 @@
       <val val="value=&quot;!null,_,_-&gt;false;null,_,_-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.awt.Component boolean mouseDown(java.awt.Event, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_-&gt;false;null,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="virtual java.awt.Component boolean mouseDrag(java.awt.Event, int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.Component boolean mouseDrag(java.awt.Event, int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.awt.Component boolean mouseDrag(java.awt.Event, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_-&gt;false;null,_,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="java.awt.Component boolean mouseDrag(java.awt.Event, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2045,6 +2095,11 @@
   </item>
   <item name="java.awt.Component boolean mouseEnter(java.awt.Event, int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.awt.Component boolean mouseEnter(java.awt.Event, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_-&gt;false;null,_,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="java.awt.Component boolean mouseEnter(java.awt.Event, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2062,11 +2117,21 @@
       <val val="value=&quot;!null,_,_-&gt;false;null,_,_-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.awt.Component boolean mouseExit(java.awt.Event, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_-&gt;false;null,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="virtual java.awt.Component boolean mouseMove(java.awt.Event, int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.Component boolean mouseMove(java.awt.Event, int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.awt.Component boolean mouseMove(java.awt.Event, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_-&gt;false;null,_,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="java.awt.Component boolean mouseMove(java.awt.Event, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2082,6 +2147,11 @@
   <item name="java.awt.Component boolean mouseUp(java.awt.Event, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_,_-&gt;false;null,_,_-&gt;false&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.awt.Component boolean mouseUp(java.awt.Event, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_-&gt;false;null,_,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="java.awt.Component boolean postEvent(java.awt.Event) 0">
@@ -2144,7 +2214,7 @@
   </item>
   <item name="virtual java.awt.Component java.awt.AWTEvent coalesceEvents(java.awt.AWTEvent, java.awt.AWTEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null,_-&gt;null;_,!null-&gt;null;_,null-&gt;null;null,_-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="java.awt.Component java.awt.AWTEvent coalesceEvents(java.awt.AWTEvent, java.awt.AWTEvent)">
@@ -2973,6 +3043,11 @@
   <item name="java.awt.Component.AccessibleAWTComponent boolean contains(java.awt.Point) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual java.awt.Component.AccessibleAWTComponent boolean contains(java.awt.Point)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.Component.AccessibleAWTComponent boolean isEnabled()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -3219,6 +3294,11 @@
       <val val="value=&quot;!null,_,_,_,_-&gt;true;_,!null,_,_,_-&gt;true;_,_,_,_,!null-&gt;true;_,_,_,_,null-&gt;true;_,null,_,_,_-&gt;true;null,_,_,_,_-&gt;true&quot;,pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.awt.Component.DummyRequestFocusController boolean acceptRequestFocus(java.awt.Component, java.awt.Component, boolean, boolean, sun.awt.CausedFocusEvent.Cause)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_,_,_-&gt;true;_,!null,_,_,_-&gt;true;_,_,_,_,!null-&gt;true;_,_,_,_,null-&gt;true;_,null,_,_,_-&gt;true;null,_,_,_,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.Component.FlipBufferStrategy FlipBufferStrategy(java.awt.Component, int, java.awt.BufferCapabilities) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3370,6 +3450,11 @@
   <item name="java.awt.Container boolean isAncestorOf(java.awt.Component) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.awt.Container boolean isAncestorOf(java.awt.Component)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.Container boolean isAncestorOf(java.awt.Component)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
@@ -3443,9 +3528,19 @@
   <item name="virtual java.awt.Container int getComponentZOrder(java.awt.Component) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.awt.Container java.awt.Component add(java.awt.Component)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.Container java.awt.Component add(java.awt.Component)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="virtual java.awt.Container java.awt.Component add(java.awt.Component, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="java.awt.Container java.awt.Component add(java.awt.Component, int)">
@@ -3454,6 +3549,11 @@
     </annotation>
   </item>
   <item name="java.awt.Container java.awt.Component add(java.lang.String, java.awt.Component)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="virtual java.awt.Container java.awt.Component add(java.lang.String, java.awt.Component)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
     </annotation>
@@ -3924,6 +4024,11 @@
   <item name="java.awt.DefaultKeyboardFocusManager boolean postProcessKeyEvent(java.awt.event.KeyEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual java.awt.DefaultKeyboardFocusManager boolean postProcessKeyEvent(java.awt.event.KeyEvent)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.DefaultKeyboardFocusManager boolean postProcessKeyEvent(java.awt.event.KeyEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;true&quot;"/>
@@ -4110,6 +4215,11 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.awt.Dialog boolean shouldBlock(java.awt.Window)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.Dialog boolean shouldBlock(java.awt.Window)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
@@ -4208,6 +4318,11 @@
   </item>
   <item name="java.awt.Dimension boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.awt.Dimension boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="java.awt.Dimension boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -6610,6 +6725,11 @@
       <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.awt.Insets boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.Insets int hashCode()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -6815,6 +6935,11 @@
   </item>
   <item name="abstract virtual java.awt.KeyboardFocusManager boolean postProcessKeyEvent(java.awt.event.KeyEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.awt.KeyboardFocusManager boolean postProcessKeyEvent(java.awt.event.KeyEvent)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;true&quot;"/>
+    </annotation>
   </item>
   <item name="java.awt.KeyboardFocusManager java.awt.AWTEvent retargetFocusEvent(java.awt.AWTEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -7480,7 +7605,7 @@
   </item>
   <item name="virtual java.awt.List.AccessibleAWTList javax.accessibility.Accessible getAccessibleAt(java.awt.Point)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="java.awt.List.AccessibleAWTList javax.accessibility.Accessible getAccessibleAt(java.awt.Point)">
@@ -7557,6 +7682,11 @@
   <item name="java.awt.List.AccessibleAWTList.AccessibleAWTListChild boolean contains(java.awt.Point)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.awt.List.AccessibleAWTList.AccessibleAWTListChild boolean contains(java.awt.Point)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="java.awt.List.AccessibleAWTList.AccessibleAWTListChild boolean isEnabled()">
@@ -7650,7 +7780,7 @@
   </item>
   <item name="virtual java.awt.List.AccessibleAWTList.AccessibleAWTListChild javax.accessibility.Accessible getAccessibleAt(java.awt.Point)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="java.awt.List.AccessibleAWTList.AccessibleAWTListChild javax.accessibility.Accessible getAccessibleAt(java.awt.Point)">
@@ -8015,6 +8145,16 @@
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.awt.MenuComponent boolean eventEnabled(java.awt.AWTEvent)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="virtual java.awt.MenuComponent boolean postEvent(java.awt.Event)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.MenuComponent boolean postEvent(java.awt.Event)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
@@ -8151,6 +8291,11 @@
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
     </annotation>
   </item>
+  <item name="virtual java.awt.MenuComponent.AccessibleAWTMenuComponent boolean contains(java.awt.Point)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.MenuComponent.AccessibleAWTMenuComponent boolean isAccessibleChildSelected(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -8241,7 +8386,7 @@
   </item>
   <item name="virtual java.awt.MenuComponent.AccessibleAWTMenuComponent java.awt.FontMetrics getFontMetrics(java.awt.Font)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="java.awt.MenuComponent.AccessibleAWTMenuComponent java.awt.FontMetrics getFontMetrics(java.awt.Font)">
@@ -8311,7 +8456,7 @@
   </item>
   <item name="virtual java.awt.MenuComponent.AccessibleAWTMenuComponent javax.accessibility.Accessible getAccessibleAt(java.awt.Point)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="java.awt.MenuComponent.AccessibleAWTMenuComponent javax.accessibility.Accessible getAccessibleAt(java.awt.Point)">
@@ -8696,6 +8841,11 @@
   <item name="virtual java.awt.MenuItem.AccessibleAWTMenuItem boolean setCurrentAccessibleValue(java.lang.Number) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.awt.MenuItem.AccessibleAWTMenuItem boolean setCurrentAccessibleValue(java.lang.Number)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.MenuItem.AccessibleAWTMenuItem boolean setCurrentAccessibleValue(java.lang.Number)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
@@ -8767,6 +8917,11 @@
   <item name="virtual java.awt.MenuShortcut boolean equals(java.awt.MenuShortcut) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.awt.MenuShortcut boolean equals(java.awt.MenuShortcut)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.MenuShortcut boolean equals(java.awt.MenuShortcut)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
@@ -8777,6 +8932,11 @@
   </item>
   <item name="virtual java.awt.MenuShortcut boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.awt.MenuShortcut boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="java.awt.MenuShortcut boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -9696,6 +9856,11 @@
   <item name="virtual java.awt.RenderingHints boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.awt.RenderingHints boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.RenderingHints boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
@@ -9772,6 +9937,11 @@
   </item>
   <item name="abstract virtual java.awt.RenderingHints.Key boolean isCompatibleValue(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual java.awt.RenderingHints.Key boolean isCompatibleValue(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="java.awt.RenderingHints.Key int intKey()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -10140,6 +10310,11 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="virtual java.awt.Scrollbar.AccessibleAWTScrollBar boolean setCurrentAccessibleValue(java.lang.Number)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="virtual java.awt.Scrollbar.AccessibleAWTScrollBar javax.accessibility.AccessibleRole getAccessibleRole()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -10213,6 +10388,11 @@
   </item>
   <item name="java.awt.SplashScreen void setImageURL(java.net.URL) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.awt.Stroke java.awt.Shape createStrokedShape(java.awt.Shape)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="java.awt.SystemColor java.lang.Object readResolve()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -11004,11 +11184,21 @@
   <item name="java.awt.Toolkit java.lang.Object lazilyLoadDesktopProperty(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.awt.Toolkit java.lang.Object lazilyLoadDesktopProperty(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.awt.Toolkit java.lang.Object lazilyLoadDesktopProperty(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual java.awt.Toolkit java.util.Map&lt;java.awt.font.TextAttribute,?&gt; mapInputMethodHighlight(java.awt.im.InputMethodHighlight)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="java.awt.Toolkit java.util.ResourceBundle access$102(java.util.ResourceBundle)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -11335,6 +11525,11 @@
   </item>
   <item name="java.awt.Window boolean dispatchMouseWheelToAncestor(java.awt.event.MouseWheelEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.awt.Window boolean dispatchMouseWheelToAncestor(java.awt.event.MouseWheelEvent)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="java.awt.Window boolean dispatchMouseWheelToAncestor(java.awt.event.MouseWheelEvent)">
     <annotation name="org.jetbrains.annotations.Contract">

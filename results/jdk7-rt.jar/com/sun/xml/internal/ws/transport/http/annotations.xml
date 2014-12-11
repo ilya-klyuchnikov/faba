@@ -16,6 +16,11 @@
   <item name="virtual com.sun.xml.internal.ws.transport.http.DeploymentDescriptorParser boolean setHandlersAndRoles(com.sun.xml.internal.ws.api.WSBinding, javax.xml.stream.XMLStreamReader, javax.xml.namespace.QName, javax.xml.namespace.QName) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.xml.internal.ws.transport.http.DeploymentDescriptorParser boolean setHandlersAndRoles(com.sun.xml.internal.ws.api.WSBinding, javax.xml.stream.XMLStreamReader, javax.xml.namespace.QName, javax.xml.namespace.QName)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_,_,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.transport.http.DeploymentDescriptorParser boolean setHandlersAndRoles(com.sun.xml.internal.ws.api.WSBinding, javax.xml.stream.XMLStreamReader, javax.xml.namespace.QName, javax.xml.namespace.QName)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null,_,_,_-&gt;false&quot;"/>
@@ -60,6 +65,11 @@
   <item name="virtual com.sun.xml.internal.ws.transport.http.DeploymentDescriptorParser java.lang.String getMandatoryAttribute(javax.xml.stream.XMLStreamReader, com.sun.xml.internal.ws.streaming.Attributes, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.xml.internal.ws.transport.http.DeploymentDescriptorParser java.lang.String getMandatoryAttribute(javax.xml.stream.XMLStreamReader, com.sun.xml.internal.ws.streaming.Attributes, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.transport.http.DeploymentDescriptorParser java.lang.String getMandatoryAttribute(javax.xml.stream.XMLStreamReader, com.sun.xml.internal.ws.streaming.Attributes, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,null,_-&gt;!null&quot;"/>
@@ -76,11 +86,21 @@
       <val val="&quot;_,null,_-&gt;!null&quot;"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.xml.internal.ws.transport.http.DeploymentDescriptorParser java.lang.String getMandatoryNonEmptyAttribute(javax.xml.stream.XMLStreamReader, com.sun.xml.internal.ws.streaming.Attributes, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.transport.http.DeploymentDescriptorParser java.lang.String getNonEmptyAttribute(javax.xml.stream.XMLStreamReader, com.sun.xml.internal.ws.streaming.Attributes, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="virtual com.sun.xml.internal.ws.transport.http.DeploymentDescriptorParser java.lang.String getNonEmptyAttribute(javax.xml.stream.XMLStreamReader, com.sun.xml.internal.ws.streaming.Attributes, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.xml.internal.ws.transport.http.DeploymentDescriptorParser java.lang.String getNonEmptyAttribute(javax.xml.stream.XMLStreamReader, com.sun.xml.internal.ws.streaming.Attributes, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.DeploymentDescriptorParser java.lang.String getNonEmptyAttribute(javax.xml.stream.XMLStreamReader, com.sun.xml.internal.ws.streaming.Attributes, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -459,6 +479,11 @@
   <item name="virtual com.sun.xml.internal.ws.transport.http.HttpAdapterList.PortInfo boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.xml.internal.ws.transport.http.HttpAdapterList.PortInfo boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.transport.http.HttpAdapterList.PortInfo boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;null-&gt;false&quot;,pure=true"/>
@@ -496,7 +521,7 @@
   </item>
   <item name="virtual com.sun.xml.internal.ws.transport.http.WSHTTPConnection java.lang.String getCookie(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.WSHTTPConnection java.lang.String getCookie(java.lang.String)">

@@ -617,6 +617,11 @@
   <item name="virtual java.io.File boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.io.File boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.io.File boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
@@ -629,6 +634,11 @@
   </item>
   <item name="java.io.File boolean renameTo(java.io.File) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual java.io.File boolean renameTo(java.io.File)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="java.io.File int compareTo(java.io.File) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -989,11 +999,21 @@
   <item name="abstract virtual java.io.FileSystem java.lang.String normalize(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual java.io.FileSystem java.lang.String normalize(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="abstract virtual java.io.FileSystem java.lang.String resolve(java.io.File) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual java.io.FileSystem java.lang.String resolve(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="abstract virtual java.io.FileSystem java.lang.String resolve(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="java.io.FileWriter FileWriter(java.io.File) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1202,6 +1222,11 @@
   <item name="virtual java.io.ObjectInputStream java.lang.Class&lt;?&gt; resolveProxyClass(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual java.io.ObjectInputStream java.lang.Class&lt;?&gt; resolveProxyClass(java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.io.ObjectInputStream java.lang.Enum readEnum(boolean)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1242,6 +1267,11 @@
   </item>
   <item name="java.io.ObjectInputStream java.lang.Object readUnshared()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.io.ObjectInputStream java.lang.Object resolveObject(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="java.io.ObjectInputStream java.lang.Object resolveObject(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1508,6 +1538,11 @@
   <item name="java.io.ObjectOutputStream java.lang.Object replaceObject(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;!null;null-&gt;null&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.io.ObjectOutputStream java.lang.Object replaceObject(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
   </item>
   <item name="java.io.ObjectOutputStream void access$300(java.io.ObjectOutputStream, java.lang.Object, boolean) 0">
@@ -3437,6 +3472,11 @@
   <item name="java.io.UnixFileSystem java.lang.String normalize(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual java.io.UnixFileSystem java.lang.String normalize(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="java.io.UnixFileSystem java.lang.String normalize(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null&quot;"/>
@@ -3469,6 +3509,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.io.UnixFileSystem java.lang.String resolve(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="virtual java.io.UnixFileSystem java.lang.String resolve(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
     </annotation>

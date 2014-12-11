@@ -317,6 +317,11 @@
   <item name="sun.management.snmp.jvmmib.JVM_MANAGEMENT_MIB com.sun.jmx.snmp.agent.SnmpMibTable getRegisteredTableMeta(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.management.snmp.jvmmib.JVM_MANAGEMENT_MIB com.sun.jmx.snmp.agent.SnmpMibTable getRegisteredTableMeta(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.management.snmp.jvmmib.JVM_MANAGEMENT_MIB com.sun.jmx.snmp.agent.SnmpMibTable getRegisteredTableMeta(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
@@ -429,6 +434,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.snmp.jvmmib.JVM_MANAGEMENT_MIB javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.management.snmp.jvmmib.JVM_MANAGEMENT_MIB javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
     </annotation>
@@ -1400,6 +1410,11 @@
   <item name="virtual sun.management.snmp.jvmmib.JvmMemMgrPoolRelEntryMeta boolean skipVariable(long, java.lang.Object, int) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual sun.management.snmp.jvmmib.JvmMemMgrPoolRelEntryMeta boolean skipVariable(long, java.lang.Object, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null,_-&gt;false;_,null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="sun.management.snmp.jvmmib.JvmMemMgrPoolRelEntryMeta boolean skipVariable(long, java.lang.Object, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;_,!null,_-&gt;false;_,null,_-&gt;false&quot;,pure=true"/>
@@ -1492,6 +1507,11 @@
   </item>
   <item name="sun.management.snmp.jvmmib.JvmMemMgrPoolRelTableMeta boolean skipEntryVariable(com.sun.jmx.snmp.SnmpOid, long, java.lang.Object, int) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual sun.management.snmp.jvmmib.JvmMemMgrPoolRelTableMeta boolean skipEntryVariable(com.sun.jmx.snmp.SnmpOid, long, java.lang.Object, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,!null,_-&gt;false;_,_,null,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="sun.management.snmp.jvmmib.JvmMemMgrPoolRelTableMeta boolean skipEntryVariable(com.sun.jmx.snmp.SnmpOid, long, java.lang.Object, int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2120,6 +2140,11 @@
   <item name="sun.management.snmp.jvmmib.JvmOSMeta boolean skipVariable(long, java.lang.Object, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;_,!null,_-&gt;false;_,null,_-&gt;false&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual sun.management.snmp.jvmmib.JvmOSMeta boolean skipVariable(long, java.lang.Object, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null,_-&gt;false;_,null,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="sun.management.snmp.jvmmib.JvmOSMeta com.sun.jmx.snmp.SnmpValue get(long, java.lang.Object) 1">

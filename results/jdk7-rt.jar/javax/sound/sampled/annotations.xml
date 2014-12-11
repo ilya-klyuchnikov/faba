@@ -520,6 +520,11 @@
   <item name="abstract virtual javax.sound.sampled.Line boolean isControlSupported(javax.sound.sampled.Control.Type) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual javax.sound.sampled.Line boolean isControlSupported(javax.sound.sampled.Control.Type)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="javax.sound.sampled.Line.Info Info(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -583,6 +588,11 @@
   </item>
   <item name="abstract virtual javax.sound.sampled.Mixer boolean isSynchronizationSupported(javax.sound.sampled.Line[], boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.sound.sampled.Mixer boolean isSynchronizationSupported(javax.sound.sampled.Line[], boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;false;null,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="abstract virtual javax.sound.sampled.Mixer javax.sound.sampled.Line.Info[] getSourceLineInfo()">
     <annotation name="org.jetbrains.annotations.NotNull"/>

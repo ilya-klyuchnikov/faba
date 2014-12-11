@@ -88,6 +88,21 @@
   <item name="abstract virtual org.w3c.dom.Document org.w3c.dom.Node adoptNode(org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual org.w3c.dom.Document org.w3c.dom.Node adoptNode(org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual org.w3c.dom.Document org.w3c.dom.Node importNode(org.w3c.dom.Node, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual org.w3c.dom.Document org.w3c.dom.Node renameNode(org.w3c.dom.Node, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_,_-&gt;!null;null,_,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="abstract virtual org.w3c.dom.Element boolean hasAttributeNS(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -96,6 +111,11 @@
   </item>
   <item name="abstract virtual org.w3c.dom.Element org.w3c.dom.Attr getAttributeNodeNS(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual org.w3c.dom.Element org.w3c.dom.Attr removeAttributeNode(org.w3c.dom.Attr)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
   </item>
   <item name="abstract virtual org.w3c.dom.Element void setIdAttributeNS(java.lang.String, java.lang.String, boolean) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -109,14 +129,44 @@
   <item name="abstract virtual org.w3c.dom.Node java.lang.String lookupPrefix(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual org.w3c.dom.Node org.w3c.dom.Node appendChild(org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual org.w3c.dom.Node org.w3c.dom.Node insertBefore(org.w3c.dom.Node, org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual org.w3c.dom.Node org.w3c.dom.Node removeChild(org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual org.w3c.dom.Node org.w3c.dom.Node replaceChild(org.w3c.dom.Node, org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="abstract virtual org.w3c.dom.Node void setPrefix(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="abstract virtual org.w3c.dom.Text org.w3c.dom.Text replaceWholeText(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual org.w3c.dom.Text org.w3c.dom.Text replaceWholeText(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="abstract virtual org.w3c.dom.TypeInfo boolean isDerivedFrom(java.lang.String, java.lang.String, int) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual org.w3c.dom.TypeInfo boolean isDerivedFrom(java.lang.String, java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null,_-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="abstract virtual org.w3c.dom.TypeInfo java.lang.String getTypeName()">
     <annotation name="org.jetbrains.annotations.Contract">

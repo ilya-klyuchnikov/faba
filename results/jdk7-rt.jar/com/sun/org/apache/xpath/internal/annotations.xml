@@ -205,6 +205,11 @@
   <item name="com.sun.org.apache.xpath.internal.Expression com.sun.org.apache.xml.internal.dtm.DTMIterator asIterator(com.sun.org.apache.xpath.internal.XPathContext, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="virtual com.sun.org.apache.xpath.internal.Expression com.sun.org.apache.xml.internal.dtm.DTMIterator asIterator(com.sun.org.apache.xpath.internal.XPathContext, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xpath.internal.Expression com.sun.org.apache.xml.internal.dtm.DTMIterator asIterator(com.sun.org.apache.xpath.internal.XPathContext, int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -294,6 +299,16 @@
   </item>
   <item name="abstract virtual com.sun.org.apache.xpath.internal.ExtensionsProvider boolean elementAvailable(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual com.sun.org.apache.xpath.internal.ExtensionsProvider boolean elementAvailable(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;false;_,!null-&gt;false;_,null-&gt;false;null,_-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="abstract virtual com.sun.org.apache.xpath.internal.ExtensionsProvider boolean functionAvailable(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="abstract virtual com.sun.org.apache.xpath.internal.ExtensionsProvider java.lang.Object extFunction(com.sun.org.apache.xpath.internal.functions.FuncExtFunction, java.util.Vector) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1131,7 +1146,7 @@
   </item>
   <item name="virtual com.sun.org.apache.xpath.internal.XPathException org.w3c.dom.Node getStylesheetNode(com.sun.org.apache.xpath.internal.ExpressionNode)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xpath.internal.XPathException org.w3c.dom.Node getStylesheetNode(com.sun.org.apache.xpath.internal.ExpressionNode)">
@@ -1172,6 +1187,11 @@
   <item name="com.sun.org.apache.xpath.internal.XPathVisitor boolean visitBinaryOperation(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.operations.Operation) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xpath.internal.XPathVisitor boolean visitBinaryOperation(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.operations.Operation)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xpath.internal.XPathVisitor boolean visitBinaryOperation(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.operations.Operation)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;,pure=true"/>
@@ -1188,6 +1208,11 @@
   </item>
   <item name="virtual com.sun.org.apache.xpath.internal.XPathVisitor boolean visitFunction(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.functions.Function) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xpath.internal.XPathVisitor boolean visitFunction(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.functions.Function)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xpath.internal.XPathVisitor boolean visitFunction(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.functions.Function)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1206,6 +1231,11 @@
   <item name="com.sun.org.apache.xpath.internal.XPathVisitor boolean visitLocationPath(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.axes.LocPathIterator) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xpath.internal.XPathVisitor boolean visitLocationPath(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.axes.LocPathIterator)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xpath.internal.XPathVisitor boolean visitLocationPath(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.axes.LocPathIterator)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;,pure=true"/>
@@ -1222,6 +1252,11 @@
   </item>
   <item name="virtual com.sun.org.apache.xpath.internal.XPathVisitor boolean visitMatchPattern(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.patterns.StepPattern) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xpath.internal.XPathVisitor boolean visitMatchPattern(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.patterns.StepPattern)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xpath.internal.XPathVisitor boolean visitMatchPattern(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.patterns.StepPattern)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1243,6 +1278,11 @@
   <item name="com.sun.org.apache.xpath.internal.XPathVisitor boolean visitNumberLiteral(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.objects.XNumber)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.org.apache.xpath.internal.XPathVisitor boolean visitNumberLiteral(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.objects.XNumber)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="virtual com.sun.org.apache.xpath.internal.XPathVisitor boolean visitPredicate(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.Expression) 0">
@@ -1271,6 +1311,11 @@
   <item name="com.sun.org.apache.xpath.internal.XPathVisitor boolean visitStep(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.patterns.NodeTest) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual com.sun.org.apache.xpath.internal.XPathVisitor boolean visitStep(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.patterns.NodeTest)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xpath.internal.XPathVisitor boolean visitStep(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.patterns.NodeTest)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;,pure=true"/>
@@ -1287,6 +1332,11 @@
   </item>
   <item name="com.sun.org.apache.xpath.internal.XPathVisitor boolean visitStringLiteral(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.objects.XString) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.org.apache.xpath.internal.XPathVisitor boolean visitStringLiteral(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.objects.XString)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xpath.internal.XPathVisitor boolean visitStringLiteral(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.objects.XString)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1310,6 +1360,11 @@
       <val val="value=&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;,pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.org.apache.xpath.internal.XPathVisitor boolean visitUnaryOperation(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.operations.UnaryOperation)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="virtual com.sun.org.apache.xpath.internal.XPathVisitor boolean visitUnionPath(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.axes.UnionPathIterator) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1325,6 +1380,11 @@
   <item name="com.sun.org.apache.xpath.internal.XPathVisitor boolean visitUnionPath(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.axes.UnionPathIterator)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.org.apache.xpath.internal.XPathVisitor boolean visitUnionPath(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.axes.UnionPathIterator)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
     </annotation>
   </item>
   <item name="virtual com.sun.org.apache.xpath.internal.XPathVisitor boolean visitUnionPattern(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.patterns.UnionPattern) 0">
@@ -1344,6 +1404,11 @@
       <val val="value=&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;,pure=true"/>
     </annotation>
   </item>
+  <item name="virtual com.sun.org.apache.xpath.internal.XPathVisitor boolean visitUnionPattern(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.patterns.UnionPattern)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xpath.internal.XPathVisitor boolean visitVariableRef(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.operations.Variable) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1359,6 +1424,11 @@
   <item name="com.sun.org.apache.xpath.internal.XPathVisitor boolean visitVariableRef(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.operations.Variable)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.org.apache.xpath.internal.XPathVisitor boolean visitVariableRef(com.sun.org.apache.xpath.internal.ExpressionOwner, com.sun.org.apache.xpath.internal.operations.Variable)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null,_-&gt;true;_,!null-&gt;true;_,null-&gt;true;null,_-&gt;true&quot;"/>
     </annotation>
   </item>
 </root>

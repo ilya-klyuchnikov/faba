@@ -94,6 +94,11 @@
   <item name="javax.security.sasl.Sasl javax.security.sasl.SaslServer createSaslServer(java.lang.String, java.lang.String, java.lang.String, java.util.Map&lt;java.lang.String,?&gt;, javax.security.auth.callback.CallbackHandler)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual javax.security.sasl.SaslClient java.lang.Object getNegotiatedProperty(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
   <item name="abstract virtual javax.security.sasl.SaslClient java.lang.String getMechanismName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -101,6 +106,11 @@
   </item>
   <item name="abstract virtual javax.security.sasl.SaslClientFactory java.lang.String[] getMechanismNames(java.util.Map&lt;java.lang.String,?&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.security.sasl.SaslClientFactory java.lang.String[] getMechanismNames(java.util.Map&lt;java.lang.String,?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="abstract virtual javax.security.sasl.SaslClientFactory javax.security.sasl.SaslClient createSaslClient(java.lang.String[], java.lang.String, java.lang.String, java.lang.String, java.util.Map&lt;java.lang.String,?&gt;, javax.security.auth.callback.CallbackHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -138,10 +148,20 @@
   <item name="abstract virtual javax.security.sasl.SaslServerFactory java.lang.String[] getMechanismNames(java.util.Map&lt;java.lang.String,?&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="abstract virtual javax.security.sasl.SaslServerFactory java.lang.String[] getMechanismNames(java.util.Map&lt;java.lang.String,?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null&quot;"/>
+    </annotation>
+  </item>
   <item name="abstract virtual javax.security.sasl.SaslServerFactory javax.security.sasl.SaslServer createSaslServer(java.lang.String, java.lang.String, java.lang.String, java.util.Map&lt;java.lang.String,?&gt;, javax.security.auth.callback.CallbackHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="abstract virtual javax.security.sasl.SaslServerFactory javax.security.sasl.SaslServer createSaslServer(java.lang.String, java.lang.String, java.lang.String, java.util.Map&lt;java.lang.String,?&gt;, javax.security.auth.callback.CallbackHandler) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.security.sasl.SaslServerFactory javax.security.sasl.SaslServer createSaslServer(java.lang.String, java.lang.String, java.lang.String, java.util.Map&lt;java.lang.String,?&gt;, javax.security.auth.callback.CallbackHandler)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,_,null-&gt;null&quot;"/>
+    </annotation>
   </item>
 </root>

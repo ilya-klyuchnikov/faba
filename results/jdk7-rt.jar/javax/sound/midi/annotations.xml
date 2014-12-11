@@ -338,8 +338,18 @@
   <item name="javax.sound.midi.Sequence javax.sound.midi.Track createTrack()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="abstract virtual javax.sound.midi.Sequencer boolean addMetaEventListener(javax.sound.midi.MetaEventListener)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;true;null-&gt;true&quot;"/>
+    </annotation>
+  </item>
   <item name="abstract virtual javax.sound.midi.Sequencer int[] addControllerEventListener(javax.sound.midi.ControllerEventListener, int[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="abstract virtual javax.sound.midi.Sequencer int[] removeControllerEventListener(javax.sound.midi.ControllerEventListener, int[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="abstract virtual javax.sound.midi.Sequencer javax.sound.midi.Sequence getSequence()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -524,6 +534,11 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.sound.midi.Track boolean add(javax.sound.midi.MidiEvent)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="virtual javax.sound.midi.Track boolean add(javax.sound.midi.MidiEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
