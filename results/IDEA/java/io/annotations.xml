@@ -177,6 +177,11 @@
   <item name="virtual java.io.File boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="virtual java.io.File boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
+  </item>
   <item name="java.io.File boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
@@ -547,7 +552,7 @@
   </item>
   <item name="virtual java.io.ObjectInputStream java.lang.Object resolveObject(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;!null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="java.io.ObjectInputStream java.lang.Object resolveObject(java.lang.Object)">
@@ -611,7 +616,7 @@
   </item>
   <item name="virtual java.io.ObjectOutputStream java.lang.Object replaceObject(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val val="value=&quot;!null-&gt;!null;null-&gt;null&quot;,pure=true"/>
     </annotation>
   </item>
   <item name="java.io.ObjectOutputStream void access$100(java.io.ObjectOutputStream, java.lang.Object, boolean) 0">
