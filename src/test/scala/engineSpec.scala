@@ -94,9 +94,11 @@ class engineSpec extends FunSuite with TableDrivenPropertyChecks {
       )
 
     forAll(equationSets) { equations =>
-      val solution = new SimpleSolver(equations, lattice).solve()
+      val solver = new StagedHierarchySolver[Wrapper, Values.Value](lattice, Values.Top)
+      equations.foreach(solver.addMethodEquation)
+      val solution = solver.solve()
       info(s"equations: ${equations.map(pretty).mkString(" ")}")
-      info(s"solution : ${solution}")
+      info(s"solution : $solution")
       assert(solution validFor_? equations, "invalid solution")
     }
   }
@@ -130,7 +132,9 @@ class engineSpec extends FunSuite with TableDrivenPropertyChecks {
       )
 
     forAll(equationSets) { equations =>
-      val solution = new SimpleSolver(equations, lattice).solve()
+      val solver = new StagedHierarchySolver[Wrapper, Values.Value](lattice, Values.Top)
+      equations.foreach(solver.addMethodEquation)
+      val solution = solver.solve()
       info(s"equations: ${equations.map(pretty).mkString(" ")}")
       info(s"solution : ${solution}")
       assert(solution validFor_? equations, "invalid solution")
