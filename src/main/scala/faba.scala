@@ -39,14 +39,6 @@ case class ExtraContext(referenceResult: Boolean,
 trait FabaProcessor extends Processor {
 
   var extras = Map[Method, MethodExtra]()
-  var complexTime: Long = 0
-  var nonCycleTime: Long = 0
-  var cycleTime: Long = 0
-  var nonCycleMethods: Long = 0
-  var cycleMethods: Long = 0
-  var simpleTime: Long = 0
-  var complexMethods: Long = 0
-  var simpleMethods: Long = 0
 
   override def processClass(classReader: ClassReader): Unit =
     classReader.accept(new ClassVisitor(ASM5) {
@@ -103,7 +95,6 @@ trait FabaProcessor extends Processor {
     if (graph.transitions.nonEmpty) {
       val dfs = buildDFSTree(graph.transitions)
       val complex = dfs.backEdges.nonEmpty || graph.transitions.exists(_.size > 1)
-      val start = System.nanoTime()
       if (complex) {
         val reducible = dfs.backEdges.isEmpty || isReducible(graph, dfs)
         if (reducible) {
@@ -116,17 +107,7 @@ trait FabaProcessor extends Processor {
         handleSimpleMethod(context, extraContext)
         added = true
       }
-      val time = System.nanoTime() - start
-      if (complex) {
-        complexMethods += 1
-        complexTime += time
-      }
-      else {
-        simpleMethods += 1
-        simpleTime += time
-      }
     }
-
 
     if (!added) {
       for (i <- argumentTypes.indices) {
@@ -148,11 +129,6 @@ trait FabaProcessor extends Processor {
     }
   }
 
-  /**
-   * handles linear methods (without branching in control flow)
-   * @param context
-   * @param extraContext
-   */
   def handleSimpleMethod(context: LiteContext, extraContext: ExtraContext) {
     import extraContext._
 
@@ -190,7 +166,7 @@ trait FabaProcessor extends Processor {
                           isReferenceResult: Boolean,
                           isBooleanResult: Boolean,
                           jsr: Boolean) {
-    val start = System.nanoTime()
+    // TODO - for #39
     val cycle = dfs.backEdges.nonEmpty
     // leaking params will be taken for further decisions
     lazy val leaking = leakingParameters(className, methodNode, jsr)
@@ -280,14 +256,6 @@ trait FabaProcessor extends Processor {
         // ]]] contract analysis
       }
 
-    }
-    val time = System.nanoTime() - start
-    if (cycle) {
-      cycleMethods += 1
-      cycleTime += time
-    } else {
-      nonCycleMethods += 1
-      nonCycleTime += time
     }
   }
 
