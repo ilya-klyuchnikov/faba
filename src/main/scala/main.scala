@@ -19,9 +19,7 @@ import org.objectweb.asm.tree.analysis.Frame
 import scala.collection.mutable.ListBuffer
 import scala.xml.PrettyPrinter
 
-// TODO - current phase is migration to hierarchy support,
-// after this migration is done there should be exactly one call resolver for all solvers
-// the caveat: think how to handle calls
+// TODO - single call resolver
 class MainProcessor extends FabaProcessor {
 
   val notNullParamsCallsResolver = new CallResolver()
@@ -37,7 +35,6 @@ class MainProcessor extends FabaProcessor {
     new StagedHierarchySolver[Key, Values.Value](idle, Lattice(Values.Bot, Values.Top), Values.Top)
 
   val nullableResultCallsResolver = new CallResolver()
-  // note that defaultResolveValue is bottom here!!
   val nullableResultSolver =
     new StagedHierarchySolver[Key, Values.Value](idle, Lattice(Values.Bot, Values.Null), Values.Bot)
 
@@ -82,7 +79,6 @@ class MainProcessor extends FabaProcessor {
   var reducibleTime: Long = 0
   var dfsTime: Long = 0
   var leakingParametersTime: Long = 0
-  val processNullableParameters = true
 
   // origins.size < 32
   var smallOrigins: Long = 0
@@ -223,10 +219,8 @@ class MainProcessor extends FabaProcessor {
   }
 
   override def handleNullableParamEquation(eq: Equation[Key, Value]) {
-    if (processNullableParameters) {
-      nullableParamsSolver.addMethodEquation(eq)
-      nullableParamsSolver.getCalls(eq).foreach(nullableParamsCallResolver.addCall)
-    }
+    nullableParamsSolver.addMethodEquation(eq)
+    nullableParamsSolver.getCalls(eq).foreach(nullableParamsCallResolver.addCall)
   }
 
   override def handleNotNullContractEquation(eq: Equation[Key, Value]) {
@@ -423,8 +417,8 @@ class MainProcessor extends FabaProcessor {
             byPackagePuritySolutions.getOrElse(pkg, Map()),
             extras,
             debug = false)
-        printToFile(new File(s"$outDir${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
-          out.println(pp.format(<root>{xmlAnnotations}</root>))
+        printToFile(new File(s"$outDir$sep${pkg.replace('/', sep)}${sep}annotations.xml")) {
+          _.println(pp.format(<root>{xmlAnnotations}</root>))
         }
       }
       val writingEnd = System.currentTimeMillis()
