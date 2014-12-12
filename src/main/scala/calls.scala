@@ -124,14 +124,20 @@ class CallResolver {
    * @param method method invoked via INVOKEINTERFACE and INVOKEVIRTUAL instruction
    * @return all concrete method that can be called in run time
    */
-  def resolveDownward(method: Method): Set[Method] =
-    // TODO - there may be an optimization for "effectively stable methods"
-    // TODO - for effectively stable method: set = Set(method)
-    for {
-      implementationName <- inheritors(method.internalClassName)
-      implementation <- resolved.get(implementationName)
-      resolvedMethod <- resolveUpward(method, implementation)
-    } yield resolvedMethod
+  def resolveDownward(method: Method): Set[Method] = {
+    val preciseMethodInfo: Option[MethodInfo] =
+      classMethods.get(method.internalClassName).flatMap(candidates => findConcreteMethodDeclaration(method, candidates))
+    val effectivelyFinalMethod =
+      preciseMethodInfo.exists(!isEffectivelyOverridableMethod(_))
+    if (effectivelyFinalMethod)
+      Set(method)
+    else
+      for {
+        implementationName <- inheritors(method.internalClassName)
+        implementation <- resolved.get(implementationName)
+        resolvedMethod <- resolveUpward(method, implementation)
+      } yield resolvedMethod
+  }
 
   /**
    * Add class info.
