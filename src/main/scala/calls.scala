@@ -46,7 +46,7 @@ case class ResolvedClassInfo(classInfo: ClassInfo, hierarchyLine: List[String], 
  * Support for inference with hierarchy.
  * All methods are quite specific, read documentation carefully.
  */
-class CallResolver {
+class CallResolver(val noResolveViaHierarchy: Boolean = false) {
 
   // information collected during indexing
   private val classInfos = mutable.HashMap[String, ClassInfo]()
@@ -90,7 +90,10 @@ class CallResolver {
    * @return concrete method or None if method is not implemented yet in hierarchy
    */
   def resolveUpward(method: Method): Option[Method] =
-    resolved.get(method.internalClassName).flatMap(resolveUpward(method, _))
+    if (noResolveViaHierarchy)
+      preciseResolve(method).map(_ => method)
+    else
+      resolved.get(method.internalClassName).flatMap(resolveUpward(method, _))
 
   // O(n), n - number of the methods in the hierarchy
   private def resolveUpward(method: Method, ownerResolveInfo: ResolvedClassInfo): Option[Method] = {
@@ -108,25 +111,25 @@ class CallResolver {
   def convertToMethod(methodInfo: MethodInfo): Method =
     Method(methodInfo.classInfo.name, methodInfo.name, methodInfo.desc)
 
+  private def preciseResolve(method: Method): Option[MethodInfo] =
+    classMethods.get(method.internalClassName).flatMap(candidates => findConcreteMethodDeclaration(method, candidates))
+
   /**
    * Used for resolving of INVOKEINTERFACE and INVOKEVIRTUAL
    * @param method method invoked via INVOKEINTERFACE and INVOKEVIRTUAL instruction
    * @return all concrete method that can be called in run time
    */
-  def resolveDownward(method: Method): Set[Method] = {
-    val preciseMethodInfo: Option[MethodInfo] =
-      classMethods.get(method.internalClassName).flatMap(candidates => findConcreteMethodDeclaration(method, candidates))
-    val effectivelyFinalMethod =
-      preciseMethodInfo.exists(!isEffectivelyOverridableMethod(_))
-    if (effectivelyFinalMethod)
+  def resolveDownward(method: Method): Set[Method] =
+    if (preciseResolve(method).exists(!isEffectivelyOverridableMethod(_)))
       Set(method)
+    else if (noResolveViaHierarchy)
+      Set()
     else
       for {
         implementationName <- inheritors(method.internalClassName)
         implementation <- resolved.get(implementationName)
         resolvedMethod <- resolveUpward(method, implementation)
       } yield resolvedMethod
-  }
 
   /**
    * Add class info.
