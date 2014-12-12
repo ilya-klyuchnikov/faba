@@ -24,23 +24,23 @@ class MainProcessor extends FabaProcessor {
 
   val notNullParamsCallsResolver = new CallResolver()
   val notNullParamsSolver =
-    new StagedHierarchySolver[Key, Values.Value](idle, Lattice(Values.NotNull, Values.Top), Values.Top)
+    new StagedHierarchySolver[Key, Values.Value](Lattice(Values.NotNull, Values.Top), Values.Top)
 
   val nullableParamsCallResolver = new CallResolver()
   val nullableParamsSolver =
-    new StagedHierarchySolver[Key, Values.Value](idle, Lattice(Values.Null, Values.Top), Values.Top)
+    new StagedHierarchySolver[Key, Values.Value](Lattice(Values.Null, Values.Top), Values.Top)
 
   val contractsCallsResolver = new CallResolver()
   val contractsSolver =
-    new StagedHierarchySolver[Key, Values.Value](idle, Lattice(Values.Bot, Values.Top), Values.Top)
+    new StagedHierarchySolver[Key, Values.Value](Lattice(Values.Bot, Values.Top), Values.Top)
 
   val nullableResultCallsResolver = new CallResolver()
   val nullableResultSolver =
-    new StagedHierarchySolver[Key, Values.Value](idle, Lattice(Values.Bot, Values.Null), Values.Bot)
+    new StagedHierarchySolver[Key, Values.Value](Lattice(Values.Bot, Values.Null), Values.Bot)
 
   val purityCallsResolver = new CallResolver()
   val puritySolver =
-    new StagedHierarchySolver[Key, Values.Value](idle, Lattice(Values.Pure, Values.Top), Values.Top)
+    new StagedHierarchySolver[Key, Values.Value](Lattice(Values.Pure, Values.Top), Values.Top)
 
   val resolvers = List(
     notNullParamsCallsResolver,

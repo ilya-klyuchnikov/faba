@@ -38,14 +38,6 @@ case class ExtraContext(referenceResult: Boolean,
  **/
 trait FabaProcessor extends Processor {
 
-  /**
-   * Setting for benchmarking.
-   * If [[idle]] is true, then FABA doesn't solve equations.
-   * May be useful to set [[idle]] to true when you would like to measure/optimize performance of analysis.
-   */
-  @inline
-  final val idle = false
-
   var extras = Map[Method, MethodExtra]()
   var complexTime: Long = 0
   var nonCycleTime: Long = 0
@@ -97,9 +89,7 @@ trait FabaProcessor extends Processor {
     val isBooleanResult = Type.BOOLEAN_TYPE == resultType
 
     val method = Method(className, methodNode.name, methodNode.desc)
-
-    if (!idle)
-      extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
+    extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
 
     purityEquation(method, methodNode).foreach(handlePurityEquation)
 

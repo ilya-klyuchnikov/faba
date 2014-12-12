@@ -129,7 +129,6 @@ case class Lattice[V](bot: V, top: V) {
 }
 
 trait Solver[K <: PolymorphicId[K], V] {
-  val idleMode: Boolean
   val lattice: Lattice[V]
   import lattice._
 
@@ -156,12 +155,11 @@ trait Solver[K <: PolymorphicId[K], V] {
 /**
  * Solver of equations over lattices. Solving is performed simply by substitution.
  *
- * @param idleMode solver in idle mode does nothing
  * @param lattice lattice to use for solving (bot, top, meet, join)
  * @tparam K type of identifiers (variables, keys)
  * @tparam V type of values in the lattice
  */
-class SimpleSolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice: Lattice[V]) extends Solver[K, V] {
+class SimpleSolver[K <: PolymorphicId[K], V](val lattice: Lattice[V]) extends Solver[K, V] {
 
   type Binding = (K, V)
   import lattice._
@@ -176,7 +174,7 @@ class SimpleSolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice:
 
   // for testing
   def this(equations: List[Equation[K, V]], lattice: Lattice[V]) {
-    this(false, lattice)
+    this(lattice)
     equations.foreach(addEquation)
   }
 
@@ -189,7 +187,7 @@ class SimpleSolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice:
    * @param equation equation to add
    */
   def addEquation(equation: Equation[K, V]): Unit =
-    if (!idleMode) equation.rhs match {
+    equation.rhs match {
       case Final(value) =>
         moving enqueue (equation.id -> value)
       case Pending(sum) => normalize(sum) match {
@@ -252,13 +250,12 @@ class SimpleSolver[K <: PolymorphicId[K], V](val idleMode: Boolean, val lattice:
 
 }
 
-class NullableResultSimpleSolver[K <: PolymorphicId[K], V](idle: Boolean, lattice: Lattice[V])
-  extends SimpleSolver[K, V](idle, lattice) {
+class NullableResultSimpleSolver[K <: PolymorphicId[K], V](lattice: Lattice[V])
+  extends SimpleSolver[K, V](lattice) {
   override def mkUnstableValue(v: V) = lattice.bot
 }
 
-class StagedHierarchySolver[K <: PolymorphicId[K], V](val idleMode: Boolean,
-                                                      val lattice: Lattice[V],
+class StagedHierarchySolver[K <: PolymorphicId[K], V](val lattice: Lattice[V],
                                                       val defaultResolveValue: V) extends Solver[K, V] {
   type Binding = (K, V)
 
@@ -289,7 +286,7 @@ class StagedHierarchySolver[K <: PolymorphicId[K], V](val idleMode: Boolean,
   def addMethodEquation(equation: Equation[K, V]): Unit = {
     val id = equation.id.mkStable
     keys += id
-    if (!idleMode) equation.rhs match {
+    equation.rhs match {
       case Final(value) =>
         moving enqueue (id -> value)
       case Pending(sum) => normalize(sum) match {
@@ -309,7 +306,7 @@ class StagedHierarchySolver[K <: PolymorphicId[K], V](val idleMode: Boolean,
     // some equations may be passed several times
     if (added(id)) return
     added += id
-    if (!idleMode) equation.rhs match {
+    equation.rhs match {
       case Final(value) =>
         moving enqueue (equation.id -> value)
       case Pending(sum) => normalize(sum) match {
