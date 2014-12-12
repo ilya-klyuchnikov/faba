@@ -150,6 +150,19 @@ class LimitReachedException extends Exception("Limit reached exception")
 case class Annotations(notNulls: Set[Key], nullable: Set[Key], contracts: Map[Key, String])
 
 /**
+ * Auxiliary data structure to have an explicit result of inference.
+ * Fields are self-explaining.
+ */
+case class InferenceResult(
+  notNullParameters: Set[Key],
+  nullableParameters: Set[Key],
+  notNullMethods: Set[Key],
+  nullableMethods: Set[Key],
+  pureMethods: Set[Key],
+  contractClauses: Map[Key, Value]
+)
+
+/**
  * Utility to transform solutions into annotations.
  */
 object AnnotationsUtil {
