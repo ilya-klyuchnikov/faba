@@ -71,6 +71,7 @@ There are a few principles that make FABA fast, robust and scalable.
     Equations hold only necessary information needed for certain analysis.
     In some sense, a method's bytecode is supercompiled in an equation.
     Indexing of methods is fast.
+  * Separate equations to handle inheritance (hierarchy of classes and methods).
   * When all methods are processed, all equations are solved together at once.
     Solving equations takes a few seconds even for a large set of libraries.
 * __Specialized analyses and equations__.
@@ -80,7 +81,8 @@ There are a few principles that make FABA fast, robust and scalable.
     * Separate analysis and a separate equation for inference of a `@NotNull` method.
     * Separate analysis and a separate equation for inference of a `@Nullable` method.
     * Separate analysis and a separate equation for inference of __each__ `_,null,_->...`, `_,!null,_->...` clause.
-    * Separate analysis and a separate equation for inference of pure methods.
+    * Separate analysis and a separate equation for inference of pure methods
+      (`@Contract(pure=true)`).
   * Supercompilation instead of classical dataflow analysis.
 * __Fast auxiliary analyses__
   * Auxiliary analyses accelerates primary analyses.
@@ -133,6 +135,12 @@ The main parts of FABA, in logical (how to read) order, functionalities (classes
     - Lattices, equations over lattices, fast solver of equations.
   - [`source.scala`](/src/main/scala/source.scala)
     - IO infrastructure to traverse java bytecode (jar-files, classes in folders, classes reachable from classloader)
+  - [`calls.scala`](/src/main/scala/analysis/calls.scala)
+    - Infrastructure to resolve method calls (in hierarchy).
+      Call resolution happens in two stages:
+      at the (first) indexing stage hierarchy information (inheritance relationship + method index) and all encountered calls are collected;
+      at the (second) stage of equation construction the full hierarchy is built from index, all calls are resolved to a set of concrete calls,
+      equations for overridable methods are constructed.
   - [`faba.scala`](/src/main/scala/faba.scala)
     - The main logic of orchestration of different analysis.
       Runs different analyses and puts equations got from different analyzers into corresponding solvers.
@@ -149,7 +157,7 @@ The main parts of FABA, in logical (how to read) order, functionalities (classes
       - state (configuration + history + constraints)
       - `StagedScAnalysis` - Skeleton for implementing staged analysis via exploration of graph of configurations.
   - [`utils.scala`](/src/main/scala/analysis/utils.scala) - `AnalysisUtils`
-    - Equivalence relations for configurations and states, "instance of" (subset) relation.
+    - Equivalence relations for configurations and states, "instance of" (subset) relation.  
   - [`combined.scala`](/src/main/scala/analysis/combined.scala)
     - "All in one" staged analysis - for linear methods (without branching).
       All equations are constructed in a single pass over method's instructions.
