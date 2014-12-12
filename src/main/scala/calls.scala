@@ -89,22 +89,11 @@ class CallResolver {
    * @param method method invoked via INVOKESTATIC or INVOKESPECIAL instruction
    * @return concrete method or None if method is not implemented yet in hierarchy
    */
-  def resolveUpward(method: Method): Option[Method] = {
-    for {
-      ownerResolveInfo <- resolved.get(method.internalClassName)
-      candidateOwner <- ownerResolveInfo.hierarchyLine
-    } classMethods.get(candidateOwner) match {
-      case None =>
-        return None
-      case Some(methods) =>
-        for {found <- findConcreteMethodDeclaration(method, methods)}
-          return Some(convertToMethod(found))
-    }
-    None
-  }
+  def resolveUpward(method: Method): Option[Method] =
+    resolved.get(method.internalClassName).flatMap(resolveUpward(method, _))
 
   // O(n), n - number of the methods in the hierarchy
-  def resolveUpward(method: Method, ownerResolveInfo: ResolvedClassInfo): Option[Method] = {
+  private def resolveUpward(method: Method, ownerResolveInfo: ResolvedClassInfo): Option[Method] = {
     for {candidateOwner <- ownerResolveInfo.hierarchyLine}
       classMethods.get(candidateOwner) match {
         case None =>
@@ -191,7 +180,6 @@ class CallResolver {
    * @return mapping of calls into existing Upward Keys
    */
   def resolveCalls(): Map[Key, Set[Key]] = {
-    // TODO - a cache should be built at this stage
     println(s"${new Date()} RESOLVE calls START")
     var result = Map[Key, Set[Key]]()
     for (call <- calls) {
@@ -199,7 +187,6 @@ class CallResolver {
       val ownerName = method.internalClassName
       val resolved: Set[Method] = classInfos.get(ownerName) match {
         case None =>
-          //println(s"warning {faba.calls.CallResolver.resolveCalls}: $call is not resolved")
           Set()
         case Some(ownerInfo) =>
           if (call.resolveDirection == ResolveDirection.Upward)
