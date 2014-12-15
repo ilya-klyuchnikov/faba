@@ -160,7 +160,42 @@ case class InferenceResult(
   nullableMethods: Set[Key],
   pureMethods: Set[Key],
   contractClauses: Map[Key, Value]
-)
+) {
+  def byPackage(): Map[String, InferenceResult] = {
+
+    val notNullParametersByPackage =
+      notNullParameters.groupBy(k => k.method.internalPackageName)
+    val nullableParametersByPackage =
+      nullableParameters.groupBy(k => k.method.internalPackageName)
+    val notNullMethodsByPackage =
+      notNullMethods.groupBy(k => k.method.internalPackageName)
+    val nullableMethodsByPackage =
+      nullableMethods.groupBy(k => k.method.internalPackageName)
+    val pureMethodsByPackage =
+      pureMethods.groupBy(k => k.method.internalPackageName)
+    val contractClausesByPackage =
+      contractClauses.groupBy(kv => kv._1.method.internalPackageName)
+
+    val allPackages =
+      notNullParametersByPackage.keySet ++
+      nullableParametersByPackage.keySet ++
+      notNullMethodsByPackage.keySet ++
+      nullableMethodsByPackage.keySet ++
+      pureMethodsByPackage.keySet ++
+      contractClausesByPackage.keySet
+
+    allPackages.iterator.map { pkg =>
+      pkg -> InferenceResult(
+        notNullParametersByPackage.getOrElse(pkg, Set()),
+        nullableParametersByPackage.getOrElse(pkg, Set()),
+        notNullMethodsByPackage.getOrElse(pkg, Set()),
+        nullableMethodsByPackage.getOrElse(pkg, Set()),
+        pureMethodsByPackage.getOrElse(pkg, Set()),
+        contractClausesByPackage.getOrElse(pkg, Map())
+      )
+    }.toMap
+  }
+}
 
 /**
  * Utility to transform solutions into annotations.
@@ -215,6 +250,7 @@ object XmlUtils {
   val REGEX_PATTERN = "(?<=[^\\$\\.])\\${1}(?=[^\\$])".r // disallow .$ or $$
   val nullableResultAnnotations = List(<annotation name='org.jetbrains.annotations.Nullable'/>)
   val notNullAnn = <annotation name='org.jetbrains.annotations.NotNull'/>
+  val nullableAnn = <annotation name='org.jetbrains.annotations.Nullable'/>
 
   // intermediate data structure to serialize @Contract annotations
   class Contract {
@@ -222,43 +258,57 @@ object XmlUtils {
     var clauses = ListBuffer[(InOut, Value)]()
   }
 
-  def toXmlAnnotations(solutions: Iterable[(Key, Value)],
-                       nullableResults: Iterable[(Key, Value)],
-                       pureSolutions: Iterable[(Key, Value)],
-                       extras: Map[Method, MethodExtra],
-                       debug: Boolean = false): List[Elem] = {
+  def toXmlAnnotations(result: InferenceResult, extras: Map[Method, MethodExtra]): List[Elem] = {
     var annotations = Map[String, List[Elem]]()
 
     // preparations for contracts
     val contracts = mutable.HashMap[Key, Contract]()
 
-    for ((key, value) <- solutions) {
+    // @NotNull parameters
+    for (key <- result.notNullParameters) {
+      val In(paramIndex) = key.direction
+      val method = key.method
+      val aKey = s"${annotationKey(key, extras(method))} $paramIndex"
+      val paramAnnotations = annotations.getOrElse(aKey, Nil)
+      annotations = annotations.updated(aKey, (notNullAnn :: paramAnnotations).sortBy(_.toString))
+    }
+
+    // @Nullable parameters
+    for (key <- result.nullableParameters) {
+      val In(paramIndex) = key.direction
+      val method = key.method
+      val aKey = s"${annotationKey(key, extras(method))} $paramIndex"
+      val paramAnnotations = annotations.getOrElse(aKey, Nil)
+      annotations = annotations.updated(aKey, (nullableAnn :: paramAnnotations).sortBy(_.toString))
+    }
+
+    // @NotNull methods
+    for (key <- result.notNullMethods) {
+      val method = key.method
+      val aKey = annotationKey(key, extras(method))
+      val methodAnnotations = annotations.getOrElse(aKey, Nil)
+      annotations = annotations.updated(aKey, (notNullAnn :: methodAnnotations).sortBy(_.toString))
+    }
+
+    // @Nullable methods
+    for (key <- result.nullableMethods) {
+      val method = key.method
+      val aKey = annotationKey(key, extras(method))
+      val methodAnnotations = annotations.getOrElse(aKey, Nil)
+      annotations = annotations.updated(aKey, (nullableAnn :: methodAnnotations).sortBy(_.toString))
+    }
+
+    // @Contract pure = true
+    for (key <- result.pureMethods) {
+      if (!contracts.contains(key)) {
+        contracts(key) = new Contract()
+      }
+      contracts(key).pure = true
+    }
+
+    // constructing @Contract annotations
+    for ((key, value) <- result.contractClauses) {
       key.direction match {
-        case In(paramIndex) if value == Values.NotNull =>
-          val method = key.method
-          val aKey = s"${annotationKey(key, extras(method))} $paramIndex"
-          val anns = annotations.getOrElse(aKey, Nil)
-          annotations = annotations.updated(aKey, (notNullAnn :: anns).sortBy(_.toString()))
-        case In(paramIndex) if value == Values.Null =>
-          val method = key.method
-          val aKey = s"${annotationKey(key, extras(method))} $paramIndex"
-          val anns = annotations.getOrElse(aKey, Nil)
-          annotations = annotations.updated(
-            aKey,
-            (<annotation name='org.jetbrains.annotations.Nullable'/> :: anns).sortBy(_.toString())
-          )
-        case Out if value == Values.NotNull && !debug =>
-          val method = key.method
-          annotations = annotations.updated(
-            annotationKey(key, extras(method)),
-            List(<annotation name='org.jetbrains.annotations.NotNull'/>)
-          )
-        case Out if debug =>
-          val method = key.method
-          annotations = annotations.updated(
-            annotationKey(key, extras(method)),
-            List(<annotation name={value.toString.toLowerCase}/>)
-          )
         case inOut:InOut =>
           val contractsKey = key.copy(direction = Out)
           if (!contracts.contains(contractsKey)) {
@@ -270,29 +320,19 @@ object XmlUtils {
       }
     }
 
-    // processing purity
-    for ((key, value) <- pureSolutions) {
-      if (value == Values.Pure) {
-        if (!contracts.contains(key)) {
-          contracts(key) = new Contract()
-        }
-        contracts(key).pure = true
-      }
-    }
-
     // merging contracts and purity
     for ((key, contract) <- contracts) {
-      val annKey = annotationKey(key, extras(key.method))
+
       val arity = Type.getArgumentTypes(key.method.methodDesc).size
 
       val contractValues: Option[String] =
-        if (annotations.get(annKey).isEmpty && contract.clauses.nonEmpty)
-          // to this moment `annotations` contains only @NotNull methods (for this key)
-          // if @NotNull is already inferred, we do not output @Contract clauses
-          // (but we may output @Contract(pure=true) part of contract annotation)
-          Some(contract.clauses.map { case (InOut(i, inValue), outValue) =>
-            (0 until arity).map { j =>
-              if (i == j) AnnotationsUtil.contractValueString(inValue) else "_" }.mkString("", ",", s"->${AnnotationsUtil.contractValueString(outValue)}")
+        if (!result.notNullMethods(key) && contract.clauses.nonEmpty)
+          Some(contract.clauses.map {
+            case (InOut(i, inValue), outValue) =>
+              (0 until arity).map {
+                case `i` => AnnotationsUtil.contractValueString(inValue)
+                case _ => "_"
+              }.mkString("", ",", s"->${AnnotationsUtil.contractValueString(outValue)}")
           }.sorted.mkString("\"", ";", "\""))
         else None
 
@@ -315,20 +355,15 @@ object XmlUtils {
         </annotation>
       }
 
+      val annKey = annotationKey(key, extras(key.method))
       contractAnnotation.foreach { ann =>
         annotations = annotations.updated(annKey, ann :: annotations.getOrElse(annKey, Nil))
       }
     }
 
-    for ((key, value) <- nullableResults) {
-      val method = key.method
-      val annKey = annotationKey(key, extras(method))
-      annotations = annotations.updated(annKey, annotations.getOrElse(annKey, Nil) ::: nullableResultAnnotations)
-    }
-
     annotations.map {
       case (k, v) => <item name={k}>{v}</item>
-    }.toList.sortBy(s => realKey((s \\ "@name").toString()))
+    }.toList.sortBy(s => sortKey((s \\ "@name").toString()))
   }
 
   // the main logic to interact with IDEA
@@ -347,13 +382,13 @@ object XmlUtils {
     }
   }
 
-  def realKey(keyString: String) =
+  def sortKey(keyString: String) =
     if (keyString.startsWith("virtual "))
-      keyString.substring("virtual ".length)
+      (keyString.substring("virtual ".length), 1)
     else if (keyString.startsWith("abstract virtual "))
-      keyString.substring("abstract virtual ".length)
+      (keyString.substring("abstract virtual ".length), 1)
     else
-      keyString
+      (keyString, 0)
 
   private def returnType(method: Method, extra: MethodExtra): String =
     extra.signature match {

@@ -3,6 +3,7 @@ package faba
 import java.io.{File, PrintWriter}
 import java.nio.file._
 import java.nio.file.attribute.BasicFileAttributes
+import java.util.Date
 
 import faba.calls._
 import faba.data._
@@ -156,16 +157,14 @@ class MainProcessor extends FabaProcessor {
     mapping
   }
 
-  def process(source: Source, outDir: String) {
+  def process(source: Source): InferenceResult = {
     val pp = new PrettyPrinter(1000, 2)
     val sep = File.separatorChar
 
     val indexStart = System.currentTimeMillis()
-    println("indexing ...")
+    println(s"${new Date()} indexing ...")
     source.process(this)
     val indexEnd = System.currentTimeMillis()
-
-
 
     // handling hierarchy for @NotNull parameters
     notNullParamsCallsResolver.buildClassHierarchy()
@@ -213,67 +212,46 @@ class MainProcessor extends FabaProcessor {
       puritySolver.bindCalls(map, map.keys.toSet)
     }
 
-    val resolveEnd = System.currentTimeMillis()
-
-    println("solving ...")
+    println(s"${new Date()} solving ...")
     // solving everything
-    val notNullParams = notNullParamsSolver.solve().filter(p => p._2 != Values.Top)
-    val nullableParams = nullableParamsSolver.solve().filterNot(p => p._2 == Values.Top)
-    val contracts = contractsSolver.solve()
-    val nullableResults = nullableResultSolver.solve().filter(p => p._2 == Values.Null)
+    val notNullParameters: Set[Key] =
+      notNullParamsSolver.solve().filter(p => p._2 == Values.NotNull).keySet
+    val nullableParameters: Set[Key] =
+      nullableParamsSolver.solve().filter(p => p._2 == Values.Null).keySet
 
-    val dupKeys = notNullParams.keys.toSet intersect nullableParams.keys.toSet
-    for (k <- dupKeys) println(s"$k both @Nullable and @NotNull")
+    // not filtered yet
+    val allContracts: Map[Key, Values.Value] =
+      contractsSolver.solve()
+    val notNullMethods: Set[Key] =
+      allContracts.filter(p => p._1.direction == Out && p._2 == Values.NotNull).keySet
+    val nullableMethods: Set[Key] =
+      nullableResultSolver.solve().filter(p => p._2 == Values.Null).keySet
+    val pureMethods: Set[Key] =
+      puritySolver.solve().filter(p => p._2 == Values.Pure).keySet
+    val contractClauses: Map[Key, Values.Value] =
+      allContracts.filter(p => p._1.direction.isInstanceOf[InOut] && p._2 != Values.Bot && p._2 != Values.Top)
 
-    val debugSolutions: Map[Key, Values.Value] =
-      notNullParams ++ nullableParams ++ contracts
-    val solvingEnd = System.currentTimeMillis()
+    println(s"${new Date()} solved ...")
 
-    println("saving to file ...")
+    InferenceResult(
+      notNullParameters,
+      nullableParameters,
+      notNullMethods,
+      nullableMethods,
+      pureMethods,
+      contractClauses
+    )
+  }
 
-    val prodSolutions: Map[Key, Values.Value] =
-      debugSolutions.filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
-
-    val byPackageProd: Map[String, Map[Key, Values.Value]] =
-      prodSolutions.groupBy(_._1.method.internalPackageName)
-
-    val byPackageNullableResultSolutions: Map[String, Map[Key, Values.Value]] =
-      nullableResults.groupBy(_._1.method.internalPackageName)
-
-    val puritySolutions =
-      puritySolver.solve().filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
-
-    val byPackagePuritySolutions: Map[String, Map[Key, Values.Value]] =
-      puritySolutions.groupBy(_._1.method.internalPackageName)
-
-    // combining all packages
-    val pkgs =
-      byPackageProd.keys ++ byPackageNullableResultSolutions.keys ++ byPackagePuritySolutions.keys
-
-    for (pkg <- pkgs) {
-      val xmlAnnotations =
-        XmlUtils.toXmlAnnotations(
-          byPackageProd.getOrElse(pkg, Map()),
-          byPackageNullableResultSolutions.getOrElse(pkg, Map()),
-          byPackagePuritySolutions.getOrElse(pkg, Map()),
-          extras,
-          debug = false)
+  def dumpResult(result: InferenceResult, outDir: String): Unit = {
+    val pp = new PrettyPrinter(1000, 2)
+    val sep = File.separatorChar
+    for ((pkg, pkgResult) <- result.byPackage()) {
+      val xmlAnnotations = XmlUtils.toXmlAnnotations(pkgResult, extras)
       printToFile(new File(s"$outDir$sep${pkg.replace('/', sep)}${sep}annotations.xml")) {
         _.println(pp.format(<root>{xmlAnnotations}</root>))
       }
     }
-    val writingEnd = System.currentTimeMillis()
-    println("====")
-    println(s"indexing took ${(indexEnd - indexStart) / 1000.0} sec")
-    println(s"resolve took ${(resolveEnd - indexEnd) / 1000.0} sec")
-    println(s"solving took ${(solvingEnd - resolveEnd) / 1000.0} sec")
-    println(s"saving took ${(writingEnd - solvingEnd) / 1000.0} sec")
-    println(s"${debugSolutions.size} all contracts")
-    println(s"${prodSolutions.size} prod contracts")
-    println(s"${nullableParams.size} @Nullable parameters")
-    println(s"${nullableResults.size} @Nullable results")
-    println(s"${puritySolutions.size} @Pure methods")
-
   }
 
   // for testing
@@ -299,32 +277,47 @@ class MainProcessor extends FabaProcessor {
       contractsSolver.solve().filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
     AnnotationsUtil.toAnnotations(contractSolutions ++ notNullParamSolutions, nullableSolutions)
   }
+
+  def getInOut(args: Array[String]): (Source, String) = {
+    val out = args.last
+    val inArgs = args.init
+    val in =
+      if (inArgs(0) == "--dirs") {
+        val sources = ListBuffer[Source]()
+        for (d <- inArgs.tail)
+          Files.walkFileTree(FileSystems.getDefault.getPath(d), new SimpleFileVisitor[Path] {
+            override def visitFile(file: Path, attrs: BasicFileAttributes): FileVisitResult = {
+              if (file.toString.endsWith(".jar")) {
+                println(s"adding $file")
+                sources += JarFileSource(file.toFile)
+              }
+              if (file.toString.endsWith(".class")) {
+                println(s"adding $file")
+                sources += FileSource(file.toFile)
+              }
+              super.visitFile(file, attrs)
+            }
+          })
+        MixedSource(sources.toList)
+      }
+      else {
+        MixedSource(inArgs.toList.map {f => JarFileSource(new File(f))})
+      }
+    (in, out)
+  }
+
+  def process(in: Source, out: String): Unit = {
+    val inferenceResult = process(in)
+    dumpResult(inferenceResult, out)
+  }
 }
 
 object Main extends MainProcessor {
 
   def main(args: Array[String]) {
     //Thread.sleep(15000)
-    if (args(0) == "--dirs") {
-      val sources = ListBuffer[Source]()
-      for (d <- args.tail)
-        Files.walkFileTree(FileSystems.getDefault.getPath(d), new SimpleFileVisitor[Path] {
-          override def visitFile(file: Path, attrs: BasicFileAttributes): FileVisitResult = {
-            if (file.toString.endsWith(".jar")) {
-              println(s"adding $file")
-              sources += JarFileSource(file.toFile)
-            }
-            if (file.toString.endsWith(".class")) {
-              println(s"adding $file")
-              sources += FileSource(file.toFile)
-            }
-            super.visitFile(file, attrs)
-          }
-        })
-      process(MixedSource(sources.toList), null)
-    }
-    else {
-      process(MixedSource(args.toList.init.map {f => JarFileSource(new File(f))}), args.last)
-    }
+    val (in, out) = getInOut(args)
+    process(in, out)
   }
+
 }
