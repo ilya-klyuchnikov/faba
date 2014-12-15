@@ -276,8 +276,8 @@ class MainProcessor extends FabaProcessor {
 
   }
 
-  // for testing - processing parameters only
-  def process(source: Source): Annotations = {
+  // for testing
+  def testProcess(source: Source): Annotations = {
     source.process(this)
     notNullParamsCallsResolver.buildClassHierarchy()
     val resolveMap = notNullParamsCallsResolver.resolveCalls()

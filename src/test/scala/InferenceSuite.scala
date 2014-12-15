@@ -18,7 +18,7 @@ class InferenceSuite extends FunSuite with Matchers {
   }
 
   def checkInference(classes: Class[_]*) {
-    val annotations = new MainProcessor().process(ClassSource(classes:_*))
+    val annotations = new MainProcessor().testProcess(ClassSource(classes:_*))
     for (jClass <- classes; jMethod <- jClass.getDeclaredMethods) {
       val method = Method(Type.getType(jClass).getInternalName, jMethod.getName, Type.getMethodDescriptor(jMethod))
 
