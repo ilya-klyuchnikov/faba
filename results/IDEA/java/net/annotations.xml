@@ -96,28 +96,22 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="virtual java.net.DatagramSocket java.net.InetAddress getLocalAddress()">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
   <item name="java.net.DatagramSocket java.net.InetAddress getLocalAddress()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual java.net.DatagramSocket java.net.SocketAddress getLocalSocketAddress()">
+  <item name="virtual java.net.DatagramSocket java.net.InetAddress getLocalAddress()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.net.DatagramSocket java.net.SocketAddress getLocalSocketAddress()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual java.net.DatagramSocket java.net.SocketAddress getRemoteSocketAddress()">
+  <item name="virtual java.net.DatagramSocket java.net.SocketAddress getLocalSocketAddress()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.net.DatagramSocket java.net.SocketAddress getRemoteSocketAddress()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual java.net.DatagramSocket java.nio.channels.DatagramChannel getChannel()">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
-    </annotation>
+  <item name="virtual java.net.DatagramSocket java.net.SocketAddress getRemoteSocketAddress()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.net.DatagramSocket java.nio.channels.DatagramChannel getChannel()">
@@ -126,16 +120,22 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual java.net.DatagramSocket void connect(java.net.InetAddress, int) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
+  <item name="virtual java.net.DatagramSocket java.nio.channels.DatagramChannel getChannel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.net.DatagramSocket void connect(java.net.InetAddress, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual java.net.DatagramSocket void connect(java.net.SocketAddress) 0">
+  <item name="virtual java.net.DatagramSocket void connect(java.net.InetAddress, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.DatagramSocket void connect(java.net.SocketAddress) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual java.net.DatagramSocket void connect(java.net.SocketAddress) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.DatagramSocket void connectInternal(java.net.InetAddress, int) 0">
@@ -162,14 +162,14 @@
   <item name="virtual java.net.InetAddress boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual java.net.InetAddress boolean equals(java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="java.net.InetAddress boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
+    </annotation>
+  </item>
+  <item name="virtual java.net.InetAddress boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="java.net.InetAddress boolean isAnyLocalAddress()">
@@ -257,13 +257,13 @@
   <item name="java.net.InetAddress java.lang.Object readResolve()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual java.net.InetAddress java.lang.String getHostAddress()">
+  <item name="java.net.InetAddress java.lang.String getHostAddress()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.net.InetAddress java.lang.String getHostAddress()">
+  <item name="virtual java.net.InetAddress java.lang.String getHostAddress()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -275,10 +275,10 @@
   <item name="java.net.InetAddress java.lang.String getHostFromNameService(java.net.InetAddress, boolean)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual java.net.InetAddress java.lang.String toString()">
+  <item name="java.net.InetAddress java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.net.InetAddress java.lang.String toString()">
+  <item name="virtual java.net.InetAddress java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.InetAddress java.net.InetAddress getByAddress(byte[]) 0">
@@ -343,16 +343,16 @@
   <item name="virtual java.net.ServerSocket java.net.InetAddress getInetAddress()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual java.net.ServerSocket java.net.Socket accept()">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="java.net.ServerSocket java.net.Socket accept()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual java.net.ServerSocket java.net.SocketAddress getLocalSocketAddress()">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
+  <item name="virtual java.net.ServerSocket java.net.Socket accept()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.ServerSocket java.net.SocketAddress getLocalSocketAddress()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.net.ServerSocket java.net.SocketAddress getLocalSocketAddress()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.net.ServerSocket java.net.SocketImpl access$000(java.net.ServerSocket) 0">
@@ -363,13 +363,13 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="virtual java.net.ServerSocket java.nio.channels.ServerSocketChannel getChannel()">
+  <item name="java.net.ServerSocket java.nio.channels.ServerSocketChannel getChannel()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.net.ServerSocket java.nio.channels.ServerSocketChannel getChannel()">
+  <item name="virtual java.net.ServerSocket java.nio.channels.ServerSocketChannel getChannel()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -433,10 +433,10 @@
   <item name="virtual java.net.Socket java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual java.net.Socket java.net.InetAddress getInetAddress()">
+  <item name="java.net.Socket java.net.InetAddress getInetAddress()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.net.Socket java.net.InetAddress getInetAddress()">
+  <item name="virtual java.net.Socket java.net.InetAddress getInetAddress()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.net.Socket java.net.SocketAddress getLocalSocketAddress()">
@@ -463,10 +463,10 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual java.net.Socket void bind(java.net.SocketAddress) 0">
+  <item name="java.net.Socket void bind(java.net.SocketAddress) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.net.Socket void bind(java.net.SocketAddress) 0">
+  <item name="virtual java.net.Socket void bind(java.net.SocketAddress) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.net.Socket void connect(java.net.SocketAddress) 0">
@@ -475,10 +475,10 @@
   <item name="virtual java.net.Socket void connect(java.net.SocketAddress) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual java.net.Socket void connect(java.net.SocketAddress, int) 0">
+  <item name="java.net.Socket void connect(java.net.SocketAddress, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.net.Socket void connect(java.net.SocketAddress, int) 0">
+  <item name="virtual java.net.Socket void connect(java.net.SocketAddress, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.Socket void setSocketImplFactory(java.net.SocketImplFactory) 0">
@@ -1169,10 +1169,10 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="virtual java.net.URLConnection int getHeaderFieldInt(java.lang.String, int) 0">
+  <item name="java.net.URLConnection int getHeaderFieldInt(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.net.URLConnection int getHeaderFieldInt(java.lang.String, int) 0">
+  <item name="virtual java.net.URLConnection int getHeaderFieldInt(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.net.URLConnection int getReadTimeout()">
@@ -1219,13 +1219,13 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual java.net.URLConnection java.lang.String getHeaderField(int)">
+  <item name="java.net.URLConnection java.lang.String getHeaderField(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.net.URLConnection java.lang.String getHeaderField(int)">
+  <item name="virtual java.net.URLConnection java.lang.String getHeaderField(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1261,10 +1261,10 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual java.net.URLConnection java.lang.String getRequestProperty(java.lang.String)">
+  <item name="java.net.URLConnection java.lang.String getRequestProperty(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.net.URLConnection java.lang.String getRequestProperty(java.lang.String)">
+  <item name="virtual java.net.URLConnection java.lang.String getRequestProperty(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.net.URLConnection java.lang.String guessContentTypeFromStream(java.io.InputStream) 0">
@@ -1282,10 +1282,10 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual java.net.URLConnection java.lang.String toString()">
+  <item name="java.net.URLConnection java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.net.URLConnection java.lang.String toString()">
+  <item name="virtual java.net.URLConnection java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URLConnection java.lang.String typeToPackageName(java.lang.String) 0">
@@ -1305,12 +1305,12 @@
   <item name="java.net.URLConnection java.net.FileNameMap getFileNameMap()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual java.net.URLConnection java.net.URL getURL()">
+  <item name="java.net.URLConnection java.net.URL getURL()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="java.net.URLConnection java.net.URL getURL()">
+  <item name="virtual java.net.URLConnection java.net.URL getURL()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1335,16 +1335,16 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="virtual java.net.URLConnection long getHeaderFieldDate(java.lang.String, long) 0">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
   <item name="java.net.URLConnection long getHeaderFieldDate(java.lang.String, long) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual java.net.URLConnection long getHeaderFieldLong(java.lang.String, long) 0">
+  <item name="virtual java.net.URLConnection long getHeaderFieldDate(java.lang.String, long) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.net.URLConnection long getHeaderFieldLong(java.lang.String, long) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual java.net.URLConnection long getHeaderFieldLong(java.lang.String, long) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.net.URLConnection long getIfModifiedSince()">
