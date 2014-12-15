@@ -97,10 +97,10 @@
   <item name="virtual com.sun.jmx.snmp.daemon.CommunicatorServer java.lang.String makeDebugTag()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.CommunicatorServer java.lang.String makeThreadName()">
+  <item name="com.sun.jmx.snmp.daemon.CommunicatorServer java.lang.String makeThreadName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.CommunicatorServer java.lang.String makeThreadName()">
+  <item name="virtual com.sun.jmx.snmp.daemon.CommunicatorServer java.lang.String makeThreadName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.CommunicatorServer java.lang.Thread createMainThread()">
@@ -109,17 +109,12 @@
   <item name="virtual com.sun.jmx.snmp.daemon.CommunicatorServer java.lang.Thread createMainThread()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.CommunicatorServer javax.management.MBeanServer getMBeanServer()">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
-    </annotation>
-  </item>
   <item name="com.sun.jmx.snmp.daemon.CommunicatorServer javax.management.MBeanServer getMBeanServer()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.CommunicatorServer javax.management.ObjectName getObjectName()">
+  <item name="virtual com.sun.jmx.snmp.daemon.CommunicatorServer javax.management.MBeanServer getMBeanServer()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -129,14 +124,19 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.CommunicatorServer javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName)">
+  <item name="virtual com.sun.jmx.snmp.daemon.CommunicatorServer javax.management.ObjectName getObjectName()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null-&gt;!null&quot;"/>
+      <val val="pure=true"/>
     </annotation>
   </item>
   <item name="com.sun.jmx.snmp.daemon.CommunicatorServer javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,!null-&gt;!null;_,null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="virtual com.sun.jmx.snmp.daemon.CommunicatorServer javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,!null-&gt;!null&quot;"/>
     </annotation>
   </item>
   <item name="com.sun.jmx.snmp.daemon.CommunicatorServer long getBindSleepTime()">
@@ -153,10 +153,10 @@
   <item name="abstract virtual com.sun.jmx.snmp.daemon.CommunicatorServer void doError(java.lang.Exception) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.CommunicatorServer void notifyClientHandlerDeleted(com.sun.jmx.snmp.daemon.ClientHandler) 0">
+  <item name="com.sun.jmx.snmp.daemon.CommunicatorServer void notifyClientHandlerDeleted(com.sun.jmx.snmp.daemon.ClientHandler) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.CommunicatorServer void notifyClientHandlerDeleted(com.sun.jmx.snmp.daemon.ClientHandler) 0">
+  <item name="virtual com.sun.jmx.snmp.daemon.CommunicatorServer void notifyClientHandlerDeleted(com.sun.jmx.snmp.daemon.ClientHandler) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.CommunicatorServer void postDeregister()">
@@ -164,10 +164,10 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.CommunicatorServer void postRegister(java.lang.Boolean) 0">
+  <item name="com.sun.jmx.snmp.daemon.CommunicatorServer void postRegister(java.lang.Boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.CommunicatorServer void postRegister(java.lang.Boolean) 0">
+  <item name="virtual com.sun.jmx.snmp.daemon.CommunicatorServer void postRegister(java.lang.Boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.CommunicatorServer void readObject(java.io.ObjectInputStream) 0">
@@ -197,10 +197,10 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SendQ java.util.Vector getAllOutstandingRequest(long)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SendQ void addRequest(com.sun.jmx.snmp.daemon.SnmpInformRequest) 0">
+  <item name="com.sun.jmx.snmp.daemon.SendQ void addRequest(com.sun.jmx.snmp.daemon.SnmpInformRequest) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SendQ void addRequest(com.sun.jmx.snmp.daemon.SnmpInformRequest) 0">
+  <item name="virtual com.sun.jmx.snmp.daemon.SendQ void addRequest(com.sun.jmx.snmp.daemon.SnmpInformRequest) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer boolean getAuthRespEnabled()">
@@ -213,16 +213,16 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer boolean removeMib(com.sun.jmx.snmp.agent.SnmpMibAgent, com.sun.jmx.snmp.SnmpOid[]) 0">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer boolean removeMib(com.sun.jmx.snmp.agent.SnmpMibAgent, com.sun.jmx.snmp.SnmpOid[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer boolean removeMib(com.sun.jmx.snmp.agent.SnmpMibAgent, com.sun.jmx.snmp.SnmpOid[]) 1">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer boolean removeMib(com.sun.jmx.snmp.agent.SnmpMibAgent, com.sun.jmx.snmp.SnmpOid[]) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer boolean removeMib(com.sun.jmx.snmp.agent.SnmpMibAgent, com.sun.jmx.snmp.SnmpOid[]) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer boolean removeMib(com.sun.jmx.snmp.agent.SnmpMibAgent, com.sun.jmx.snmp.SnmpOid[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer boolean removeMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String) 1">
@@ -231,10 +231,10 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer boolean removeMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer boolean removeMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[]) 0">
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer boolean removeMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer boolean removeMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[]) 0">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer boolean removeMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer boolean removeMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[]) 1">
@@ -243,18 +243,18 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer boolean removeMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer boolean removeMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[]) 2">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer boolean removeMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[]) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.InetAddressAcl getInetAddressAcl()">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer boolean removeMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[]) 2">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.InetAddressAcl getInetAddressAcl()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.InetAddressAcl getInetAddressAcl()">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.InetAddressAcl getInetAddressAcl()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -287,16 +287,16 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent)">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, com.sun.jmx.snmp.SnmpOid[]) 0">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, com.sun.jmx.snmp.SnmpOid[]) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, com.sun.jmx.snmp.SnmpOid[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, com.sun.jmx.snmp.SnmpOid[]) 1">
@@ -305,10 +305,10 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, com.sun.jmx.snmp.SnmpOid[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, com.sun.jmx.snmp.SnmpOid[])">
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, com.sun.jmx.snmp.SnmpOid[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, com.sun.jmx.snmp.SnmpOid[])">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, com.sun.jmx.snmp.SnmpOid[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String) 0">
@@ -317,16 +317,16 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String) 1">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String)">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[]) 0">
@@ -335,38 +335,38 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[]) 1">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[]) 2">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[]) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[])">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[]) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[])">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpUserDataFactory getUserDataFactory()">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
-    </annotation>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpMibHandler addMib(com.sun.jmx.snmp.agent.SnmpMibAgent, java.lang.String, com.sun.jmx.snmp.SnmpOid[])">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpUserDataFactory getUserDataFactory()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.daemon.SnmpInformRequest snmpInformRequest(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.agent.SnmpUserDataFactory getUserDataFactory()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.daemon.SnmpInformRequest snmpInformRequest(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.daemon.SnmpInformRequest snmpInformRequest(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.daemon.SnmpInformRequest snmpInformRequest(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 3">
@@ -387,10 +387,10 @@
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.daemon.SnmpInformRequest snmpInformRequest(java.net.InetAddress, int, java.lang.String, com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.daemon.SnmpInformRequest snmpInformRequest(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 4">
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.daemon.SnmpInformRequest snmpInformRequest(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.daemon.SnmpInformRequest snmpInformRequest(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 4">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.daemon.SnmpInformRequest snmpInformRequest(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer com.sun.jmx.snmp.daemon.SnmpInformRequest snmpInformRequest(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList)">
@@ -445,10 +445,10 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Integer getBufferSize()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Integer getTrapPort()">
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Integer getTrapPort()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Integer getTrapPort()">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Integer getTrapPort()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpInASNParseErrs()">
@@ -481,16 +481,16 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpInGetNexts()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpInGetRequests()">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpInGetRequests()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpInPkts()">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpInGetRequests()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpInPkts()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpInPkts()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpInSetRequests()">
@@ -505,10 +505,10 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpInTotalReqVars()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpInTotalSetVars()">
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpInTotalSetVars()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpInTotalSetVars()">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpInTotalSetVars()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpOutBadValues()">
@@ -517,16 +517,16 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpOutBadValues()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpOutGenErrs()">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpOutGenErrs()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpOutGetResponses()">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpOutGenErrs()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpOutGetResponses()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpOutGetResponses()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpOutNoSuchNames()">
@@ -541,10 +541,10 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpOutPkts()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpOutTooBigs()">
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpOutTooBigs()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpOutTooBigs()">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpOutTooBigs()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpOutTraps()">
@@ -559,16 +559,16 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpProxyDrops()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpSilentDrops()">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpSilentDrops()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.String getEnterpriseOid()">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Long getSnmpSilentDrops()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.String getEnterpriseOid()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.String getEnterpriseOid()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.String getProtocol()">
@@ -583,10 +583,10 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.String makeDebugTag()">
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.String makeDebugTag()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.String makeDebugTag()">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.String makeDebugTag()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.String[] getMibs()">
@@ -595,10 +595,10 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.String[] getMibs()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Thread createMainThread()">
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Thread createMainThread()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Thread createMainThread()">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.lang.Thread createMainThread()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.net.InetAddress getAddress()">
@@ -611,10 +611,10 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.util.Vector snmpInformRequest(com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 2">
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.util.Vector snmpInformRequest(com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.util.Vector snmpInformRequest(com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 2">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.util.Vector snmpInformRequest(com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.util.Vector snmpInformRequest(com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList)">
@@ -623,10 +623,10 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer java.util.Vector snmpInformRequest(com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName) 1">
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName) 1">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName)">
@@ -651,10 +651,10 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void createSnmpRequestHandler(com.sun.jmx.snmp.daemon.SnmpAdaptorServer, int, java.net.DatagramSocket, java.net.DatagramPacket, com.sun.jmx.snmp.daemon.SnmpMibTree, java.util.Vector, java.lang.Object, com.sun.jmx.snmp.SnmpPduFactory, com.sun.jmx.snmp.agent.SnmpUserDataFactory, javax.management.MBeanServer, javax.management.ObjectName) 5">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void doError(java.lang.Exception) 0">
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void doError(java.lang.Exception) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void doError(java.lang.Exception) 0">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void doError(java.lang.Exception) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void doError(java.lang.Exception)">
@@ -693,46 +693,46 @@
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void sendTrapPdu(java.net.InetAddress, com.sun.jmx.snmp.SnmpPduPacket) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void setBufferSize(java.lang.Integer) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void setBufferSize(java.lang.Integer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void setEnterpriseOid(java.lang.String) 0">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void setBufferSize(java.lang.Integer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void setEnterpriseOid(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void setPduFactory(com.sun.jmx.snmp.SnmpPduFactory) 0">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void setEnterpriseOid(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void setPduFactory(com.sun.jmx.snmp.SnmpPduFactory) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void setTrapPort(java.lang.Integer) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void setPduFactory(com.sun.jmx.snmp.SnmpPduFactory) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void setTrapPort(java.lang.Integer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpPduTrap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpPduPacket) 0">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void setTrapPort(java.lang.Integer) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpPduTrap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpPduPacket) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpPduTrap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpPduPacket) 1">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpPduTrap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpPduPacket) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpPduTrap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpPduPacket) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpPduTrap(java.net.InetAddress, com.sun.jmx.snmp.SnmpPduPacket) 0">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpPduTrap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpPduPacket) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpPduTrap(java.net.InetAddress, com.sun.jmx.snmp.SnmpPduPacket) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpPduTrap(java.net.InetAddress, com.sun.jmx.snmp.SnmpPduPacket) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpPduTrap(java.net.InetAddress, com.sun.jmx.snmp.SnmpPduPacket) 1">
@@ -741,10 +741,10 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpPduTrap(java.net.InetAddress, com.sun.jmx.snmp.SnmpPduPacket) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpIpAddress, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 0">
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpIpAddress, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpIpAddress, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 0">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpIpAddress, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpIpAddress, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 1">
@@ -753,10 +753,10 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpIpAddress, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpIpAddress, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 2">
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpIpAddress, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpIpAddress, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 2">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpIpAddress, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpIpAddress, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 5">
@@ -789,16 +789,16 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(java.net.InetAddress, com.sun.jmx.snmp.SnmpIpAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(java.net.InetAddress, com.sun.jmx.snmp.SnmpIpAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 2">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(java.net.InetAddress, com.sun.jmx.snmp.SnmpIpAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(java.net.InetAddress, com.sun.jmx.snmp.SnmpIpAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 3">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(java.net.InetAddress, com.sun.jmx.snmp.SnmpIpAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(java.net.InetAddress, com.sun.jmx.snmp.SnmpIpAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 3">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(java.net.InetAddress, com.sun.jmx.snmp.SnmpIpAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(java.net.InetAddress, com.sun.jmx.snmp.SnmpIpAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 6">
@@ -807,10 +807,10 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(java.net.InetAddress, com.sun.jmx.snmp.SnmpIpAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 6">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(java.net.InetAddress, com.sun.jmx.snmp.SnmpIpAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 7">
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(java.net.InetAddress, com.sun.jmx.snmp.SnmpIpAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 7">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(java.net.InetAddress, com.sun.jmx.snmp.SnmpIpAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 7">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(java.net.InetAddress, com.sun.jmx.snmp.SnmpIpAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 7">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(java.net.InetAddress, int, com.sun.jmx.snmp.SnmpIpAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, int, int, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 0">
@@ -849,16 +849,16 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV1Trap(java.net.InetAddress, java.lang.String, int, int, com.sun.jmx.snmp.SnmpVarBindList) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 1">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 2">
@@ -867,10 +867,10 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 3">
+  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 3">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(com.sun.jmx.snmp.SnmpPeer, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, int, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 0">
@@ -885,22 +885,22 @@
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, int, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 5">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 0">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 1">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 3">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 3">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 0">
@@ -909,16 +909,16 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 1">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 3">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 3">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpAdaptorServer void snmpV2Trap(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.SnmpOid, com.sun.jmx.snmp.SnmpVarBindList, com.sun.jmx.snmp.SnmpTimeticks) 4">
@@ -1140,10 +1140,10 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpInformRequest com.sun.jmx.snmp.SnmpPdu constructPduPacket()">
+  <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest com.sun.jmx.snmp.SnmpPdu constructPduPacket()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest com.sun.jmx.snmp.SnmpPdu constructPduPacket()">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpInformRequest com.sun.jmx.snmp.SnmpPdu constructPduPacket()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest com.sun.jmx.snmp.SnmpVarBindList getResponseVarBindList()">
@@ -1193,10 +1193,10 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpInformRequest java.lang.String toString()">
+  <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest java.lang.String toString()">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpInformRequest java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest java.lang.String tostring()">
@@ -1228,19 +1228,19 @@
   <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest void invokeOnResponse(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpInformRequest void parsePduPacket(com.sun.jmx.snmp.SnmpPduRequestType) 0">
+  <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest void parsePduPacket(com.sun.jmx.snmp.SnmpPduRequestType) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest void parsePduPacket(com.sun.jmx.snmp.SnmpPduRequestType) 0">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpInformRequest void parsePduPacket(com.sun.jmx.snmp.SnmpPduRequestType) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest void sendPduPacket(byte[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpInformRequest void updateInternalVarBindWithResult(com.sun.jmx.snmp.SnmpVarBind[]) 0">
+  <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest void updateInternalVarBindWithResult(com.sun.jmx.snmp.SnmpVarBind[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpInformRequest void updateInternalVarBindWithResult(com.sun.jmx.snmp.SnmpVarBind[]) 0">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpInformRequest void updateInternalVarBindWithResult(com.sun.jmx.snmp.SnmpVarBind[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpMibTree com.sun.jmx.snmp.agent.SnmpMibAgent getAgentMib(com.sun.jmx.snmp.SnmpOid) 0">
@@ -1365,10 +1365,10 @@
   <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduPacket executeSubRequest(com.sun.jmx.snmp.SnmpPduPacket, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduPacket makeErrorVarbindPdu(com.sun.jmx.snmp.SnmpPduPacket, int) 0">
+  <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduPacket makeErrorVarbindPdu(com.sun.jmx.snmp.SnmpPduPacket, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduPacket makeErrorVarbindPdu(com.sun.jmx.snmp.SnmpPduPacket, int) 0">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduPacket makeErrorVarbindPdu(com.sun.jmx.snmp.SnmpPduPacket, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduPacket makeErrorVarbindPdu(com.sun.jmx.snmp.SnmpPduPacket, int)">
@@ -1401,10 +1401,10 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduPacket makeNoMibErrorPdu(com.sun.jmx.snmp.SnmpPduRequest, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduPacket makeNoMibErrorPdu(com.sun.jmx.snmp.SnmpPduRequest, java.lang.Object)">
+  <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduPacket makeNoMibErrorPdu(com.sun.jmx.snmp.SnmpPduRequest, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduPacket makeNoMibErrorPdu(com.sun.jmx.snmp.SnmpPduRequest, java.lang.Object)">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduPacket makeNoMibErrorPdu(com.sun.jmx.snmp.SnmpPduRequest, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpRequestHandler com.sun.jmx.snmp.SnmpPduPacket makeResponsePdu(com.sun.jmx.snmp.SnmpPduPacket, java.lang.Object) 0">
@@ -1523,10 +1523,10 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpSession com.sun.jmx.snmp.daemon.SnmpInformRequest makeAsyncRequest(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpVarBindList, int)">
+  <item name="com.sun.jmx.snmp.daemon.SnmpSession com.sun.jmx.snmp.daemon.SnmpInformRequest makeAsyncRequest(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpVarBindList, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpSession com.sun.jmx.snmp.daemon.SnmpInformRequest makeAsyncRequest(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpVarBindList, int)">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpSession com.sun.jmx.snmp.daemon.SnmpInformRequest makeAsyncRequest(java.net.InetAddress, java.lang.String, com.sun.jmx.snmp.daemon.SnmpInformHandler, com.sun.jmx.snmp.SnmpVarBindList, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpSession com.sun.jmx.snmp.daemon.SnmpInformRequest nextResponse()">
@@ -1542,12 +1542,12 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpSession com.sun.jmx.snmp.daemon.SnmpSocket getSocket()">
+  <item name="com.sun.jmx.snmp.daemon.SnmpSession com.sun.jmx.snmp.daemon.SnmpSocket getSocket()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpSession com.sun.jmx.snmp.daemon.SnmpSocket getSocket()">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpSession com.sun.jmx.snmp.daemon.SnmpSocket getSocket()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1558,19 +1558,19 @@
   <item name="virtual com.sun.jmx.snmp.daemon.SnmpSession void addInformRequest(com.sun.jmx.snmp.daemon.SnmpInformRequest) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpSession void initialize(com.sun.jmx.snmp.daemon.SnmpAdaptorServer, com.sun.jmx.snmp.daemon.SnmpResponseHandler) 0">
+  <item name="com.sun.jmx.snmp.daemon.SnmpSession void initialize(com.sun.jmx.snmp.daemon.SnmpAdaptorServer, com.sun.jmx.snmp.daemon.SnmpResponseHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpSession void initialize(com.sun.jmx.snmp.daemon.SnmpAdaptorServer, com.sun.jmx.snmp.daemon.SnmpResponseHandler) 0">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpSession void initialize(com.sun.jmx.snmp.daemon.SnmpAdaptorServer, com.sun.jmx.snmp.daemon.SnmpResponseHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpSession void processResponse(com.sun.jmx.snmp.daemon.SnmpInformRequest) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpSession void waitForResponse(com.sun.jmx.snmp.daemon.SnmpInformRequest, long) 0">
+  <item name="com.sun.jmx.snmp.daemon.SnmpSession void waitForResponse(com.sun.jmx.snmp.daemon.SnmpInformRequest, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpSession void waitForResponse(com.sun.jmx.snmp.daemon.SnmpInformRequest, long) 0">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpSession void waitForResponse(com.sun.jmx.snmp.daemon.SnmpInformRequest, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpSocket SnmpSocket(com.sun.jmx.snmp.daemon.SnmpResponseHandler, java.net.InetAddress, int) 1">
@@ -1603,10 +1603,10 @@
   <item name="com.sun.jmx.snmp.daemon.SnmpSubBulkRequestHandler void init(com.sun.jmx.snmp.daemon.SnmpAdaptorServer, com.sun.jmx.snmp.SnmpPdu, int, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.SnmpSubBulkRequestHandler void updateResult(com.sun.jmx.snmp.SnmpVarBind[]) 0">
+  <item name="com.sun.jmx.snmp.daemon.SnmpSubBulkRequestHandler void updateResult(com.sun.jmx.snmp.SnmpVarBind[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.jmx.snmp.daemon.SnmpSubBulkRequestHandler void updateResult(com.sun.jmx.snmp.SnmpVarBind[]) 0">
+  <item name="virtual com.sun.jmx.snmp.daemon.SnmpSubBulkRequestHandler void updateResult(com.sun.jmx.snmp.SnmpVarBind[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.SnmpSubNextRequestHandler SnmpSubNextRequestHandler(com.sun.jmx.snmp.SnmpEngine, com.sun.jmx.snmp.daemon.SnmpAdaptorServer, com.sun.jmx.snmp.internal.SnmpIncomingRequest, com.sun.jmx.snmp.agent.SnmpMibAgent, com.sun.jmx.snmp.SnmpPdu) 4">
@@ -1667,22 +1667,22 @@
   <item name="com.sun.jmx.snmp.daemon.SnmpTimerServer SnmpTimerServer(java.lang.ThreadGroup, com.sun.jmx.snmp.daemon.SnmpQManager) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.WaitQ com.sun.jmx.snmp.daemon.SnmpInformRequest getTimeoutRequests()">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
   <item name="com.sun.jmx.snmp.daemon.WaitQ com.sun.jmx.snmp.daemon.SnmpInformRequest getTimeoutRequests()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.WaitQ com.sun.jmx.snmp.daemon.SnmpInformRequest removeRequest(long)">
+  <item name="virtual com.sun.jmx.snmp.daemon.WaitQ com.sun.jmx.snmp.daemon.SnmpInformRequest getTimeoutRequests()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.WaitQ com.sun.jmx.snmp.daemon.SnmpInformRequest removeRequest(long)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="virtual com.sun.jmx.snmp.daemon.WaitQ void addWaiting(com.sun.jmx.snmp.daemon.SnmpInformRequest) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
+  <item name="virtual com.sun.jmx.snmp.daemon.WaitQ com.sun.jmx.snmp.daemon.SnmpInformRequest removeRequest(long)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jmx.snmp.daemon.WaitQ void addWaiting(com.sun.jmx.snmp.daemon.SnmpInformRequest) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="virtual com.sun.jmx.snmp.daemon.WaitQ void addWaiting(com.sun.jmx.snmp.daemon.SnmpInformRequest) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
 </root>
