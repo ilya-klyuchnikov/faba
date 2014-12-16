@@ -15,25 +15,25 @@ import scala.collection.mutable.ListBuffer
 import scala.xml.PrettyPrinter
 
 // TODO - single call resolver
-class MainProcessor extends FabaProcessor {
+class MainProcessor(val noResolveViaHierarchy: Boolean) extends FabaProcessor {
 
-  val notNullParamsCallsResolver = new CallResolver()
+  val notNullParamsCallsResolver = new CallResolver(noResolveViaHierarchy)
   val notNullParamsSolver =
     new StagedHierarchySolver[Key, Values.Value](Lattice(Values.NotNull, Values.Top), Values.Top)
 
-  val nullableParamsCallResolver = new CallResolver()
+  val nullableParamsCallResolver = new CallResolver(noResolveViaHierarchy)
   val nullableParamsSolver =
     new StagedHierarchySolver[Key, Values.Value](Lattice(Values.Null, Values.Top), Values.Top)
 
-  val contractsCallsResolver = new CallResolver()
+  val contractsCallsResolver = new CallResolver(noResolveViaHierarchy)
   val contractsSolver =
     new StagedHierarchySolver[Key, Values.Value](Lattice(Values.Bot, Values.Top), Values.Top)
 
-  val nullableResultCallsResolver = new CallResolver()
+  val nullableResultCallsResolver = new CallResolver(noResolveViaHierarchy)
   val nullableResultSolver =
     new StagedHierarchySolver[Key, Values.Value](Lattice(Values.Bot, Values.Null), Values.Bot)
 
-  val purityCallsResolver = new CallResolver()
+  val purityCallsResolver = new CallResolver(noResolveViaHierarchy)
   val puritySolver =
     new StagedHierarchySolver[Key, Values.Value](Lattice(Values.Pure, Values.Top), Values.Top)
 
@@ -312,7 +312,7 @@ object CmdUtils {
     (getIn(args.init), args.last)
 }
 
-object Main extends MainProcessor {
+object Main extends MainProcessor(false) {
   def main(args: Array[String]) {
     //Thread.sleep(15000)
     val (in, out) = CmdUtils.getInOut(args)
