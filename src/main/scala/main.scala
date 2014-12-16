@@ -278,46 +278,44 @@ class MainProcessor extends FabaProcessor {
     AnnotationsUtil.toAnnotations(contractSolutions ++ notNullParamSolutions, nullableSolutions)
   }
 
-  def getInOut(args: Array[String]): (Source, String) = {
-    val out = args.last
-    val inArgs = args.init
-    val in =
-      if (inArgs(0) == "--dirs") {
-        val sources = ListBuffer[Source]()
-        for (d <- inArgs.tail)
-          Files.walkFileTree(FileSystems.getDefault.getPath(d), new SimpleFileVisitor[Path] {
-            override def visitFile(file: Path, attrs: BasicFileAttributes): FileVisitResult = {
-              if (file.toString.endsWith(".jar")) {
-                println(s"adding $file")
-                sources += JarFileSource(file.toFile)
-              }
-              if (file.toString.endsWith(".class")) {
-                println(s"adding $file")
-                sources += FileSource(file.toFile)
-              }
-              super.visitFile(file, attrs)
-            }
-          })
-        MixedSource(sources.toList)
-      }
-      else {
-        MixedSource(inArgs.toList.map {f => JarFileSource(new File(f))})
-      }
-    (in, out)
-  }
-
   def process(in: Source, out: String): Unit = {
     val inferenceResult = process(in)
     dumpResult(inferenceResult, out)
   }
 }
 
-object Main extends MainProcessor {
+object CmdUtils {
+  def getIn(args: Array[String]): Source =
+    if (args(0) == "--dirs") {
+      val sources = ListBuffer[Source]()
+      for (d <- args.tail)
+        Files.walkFileTree(FileSystems.getDefault.getPath(d), new SimpleFileVisitor[Path] {
+          override def visitFile(file: Path, attrs: BasicFileAttributes): FileVisitResult = {
+            if (file.toString.endsWith(".jar")) {
+              println(s"adding $file")
+              sources += JarFileSource(file.toFile)
+            }
+            if (file.toString.endsWith(".class")) {
+              println(s"adding $file")
+              sources += FileSource(file.toFile)
+            }
+            super.visitFile(file, attrs)
+          }
+        })
+      MixedSource(sources.toList)
+    }
+    else {
+      MixedSource(args.toList.map {f => JarFileSource(new File(f))})
+    }
 
+  def getInOut(args: Array[String]): (Source, String) =
+    (getIn(args.init), args.last)
+}
+
+object Main extends MainProcessor {
   def main(args: Array[String]) {
     //Thread.sleep(15000)
-    val (in, out) = getInOut(args)
+    val (in, out) = CmdUtils.getInOut(args)
     process(in, out)
   }
-
 }
