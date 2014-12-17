@@ -10,9 +10,6 @@ object Compare {
     // without inheritance
     val result2 = new MainProcessor(false).process(source)
 
-    //val notNullParamDelta =
-    //  result2.notNullParameters -- result1.notNullParameters
-
     val notNullParam1Count =
       result1.notNullParameters.size
     val notNullParam1UpwardCount =
@@ -55,6 +52,20 @@ object Compare {
     val notNullMethod2DownwardCount =
       result2.notNullMethods.count(k => k.resolveDirection == ResolveDirection.Downward)
 
+    val nullableMethod1Count =
+      result1.nullableMethods.size
+    val nullableMethod1UpwardCount =
+      result1.nullableMethods.count(k => k.resolveDirection == ResolveDirection.Upward)
+    val nullableMethod1DownwardCount =
+      result1.nullableMethods.count(k => k.resolveDirection == ResolveDirection.Downward)
+
+    val nullableMethod2Count =
+      result2.nullableMethods.size
+    val nullableMethod2UpwardCount =
+      result2.nullableMethods.count(k => k.resolveDirection == ResolveDirection.Upward)
+    val nullableMethod2DownwardCount =
+      result2.nullableMethods.count(k => k.resolveDirection == ResolveDirection.Downward)
+
     val stat =
       s"""
         |                             | ${i("FABA 1.1")                       } | ${i("FABA 1.2")                       }
@@ -70,6 +81,10 @@ object Compare {
         | @NotNull methods            | ${i(notNullMethod1Count)              } | ${i(notNullMethod2Count)              }
         | @NotNull methods Up         | ${i(notNullMethod1UpwardCount)        } | ${i(notNullMethod2UpwardCount)        }
         | @NotNull methods Down       | ${i(notNullMethod1DownwardCount)      } | ${i(notNullMethod2DownwardCount)      }
+        |
+        | @Nullable methods           | ${i(nullableMethod1Count)             } | ${i(nullableMethod2Count)             }
+        | @Nullable methods Up        | ${i(nullableMethod1UpwardCount)       } | ${i(nullableMethod2UpwardCount)       }
+        | @Nullable methods Down      | ${i(nullableMethod1DownwardCount)     } | ${i(nullableMethod2DownwardCount)     }
       """.stripMargin
 
     println(stat)
