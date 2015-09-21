@@ -19,9 +19,6 @@ object `package` {
       l.join(x, y)
   }
 
-  // sum of products
-  type SoP[K, V] = Set[Component[K, V]]
-
   implicit class ResultOps[Id, Val](r1: Result[Id, Val])(implicit l: Lattice[Val]) {
     val top: Val = l.top
     @inline def join(r2: Result[Id, Val]): Result[Id, Val] = (r1, r2) match {
@@ -76,7 +73,7 @@ case class Component[Id, V](v: V, ids: Set[Id])
 
 sealed trait Result[+Id, Val]
 case class Final[Val](value: Val) extends Result[Nothing, Val]
-case class Pending[Id, Val](delta: SoP[Id, Val]) extends Result[Id, Val] {
+case class Pending[Id, Val](delta: Set[Component[Id, Val]]) extends Result[Id, Val] {
   if (delta.map(_.ids.size).sum > 30) throw new LimitReachedException
 }
 
@@ -161,7 +158,7 @@ class Solver[K <: StableAwareId[K], V](val doNothing: Boolean)(implicit lattice:
     normalize(sum)
   }
 
-  private def normalize(sum: SoP[K, V]): Result[K, V] = {
+  private def normalize(sum: Set[Component[K, V]]): Result[K, V] = {
     var acc = bot
     var computableNow = true
     for (Component(v, prod) <- sum )
