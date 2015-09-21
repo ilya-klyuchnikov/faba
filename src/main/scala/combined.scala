@@ -378,3 +378,151 @@ class CombinedInterpreter(val insns: InsnList, arity: Int) extends BasicInterpre
 
   }
 }
+
+object NegAnalysisFailure extends Exception
+
+class NegAnalysis(val method: Method, val controlFlow: ControlFlowGraph) {
+
+  val methodNode = controlFlow.methodNode
+  val interpreter = new NegInterpreter(methodNode.instructions, Type.getArgumentTypes(methodNode.desc).length)
+
+  var conditionValue: TrackableCallValue = null
+  var trueBranchValue: BasicValue = null
+  var falseBranchValue: BasicValue = null
+
+  def checkAssertion(assertion: Boolean): Unit = {
+    if (!assertion) {
+      throw NegAnalysisFailure
+    }
+  }
+
+  final def analyze() {
+    val frame = createStartFrame()
+    var insnIndex = 0
+
+    while (true) {
+      val insnNode = methodNode.instructions.get(insnIndex)
+      insnNode.getType match {
+        case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
+          insnIndex = controlFlow.transitions(insnIndex).head
+        case _ =>
+          insnNode.getOpcode match {
+            case IFEQ | IFNE =>
+              val conValue = popValue(frame)
+              frame.execute(insnNode, interpreter)
+              checkAssertion(conValue.isInstanceOf[TrackableCallValue])
+              conditionValue = conValue.asInstanceOf[TrackableCallValue]
+              val jumpIndex =
+                methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
+              val nextIndex = insnIndex + 1
+              proceedBranch(frame, jumpIndex, IFEQ == insnNode.getOpcode)
+              proceedBranch(frame, nextIndex, IFNE == insnNode.getOpcode)
+              checkAssertion(FalseValue() == trueBranchValue)
+              checkAssertion(TrueValue() == falseBranchValue)
+              return
+            case _ =>
+              frame.execute(insnNode, interpreter)
+              checkAssertion(controlFlow.transitions(insnIndex).size == 1)
+              insnIndex = controlFlow.transitions(insnIndex).head
+          }
+      }
+    }
+  }
+
+  final def proceedBranch(startFrame: Frame[BasicValue], startIndex: Int, branchValue: Boolean): Unit = {
+    var insnIndex = startIndex
+    val frame = new Frame(startFrame)
+    while (true) {
+      val insnNode = methodNode.instructions.get(insnIndex)
+      insnNode.getType match {
+        case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
+          insnIndex = controlFlow.transitions(insnIndex).head
+        case _ =>
+          insnNode.getOpcode match {
+            case IRETURN =>
+              val returnValue = frame.pop()
+              if (branchValue)
+                trueBranchValue = returnValue
+              else
+                falseBranchValue = returnValue
+              return
+            case _ =>
+              checkAssertion(controlFlow.transitions(insnIndex).size == 1)
+              frame.execute(insnNode, interpreter)
+              insnIndex = controlFlow.transitions(insnIndex).head
+          }
+      }
+    }
+  }
+
+  def contractEquation(paramIndex: Int, inValue: Value, stable: Boolean): Equation[Key, Value] = {
+    val key = Key(method, InOut(paramIndex, inValue), stable)
+    val result: Result[Key, Value] =
+      conditionValue match {
+        case TrackableCallValue(_, retType, m, stableCall, args, _) =>
+          var keys = Set[Key]()
+          for ((NthParamValue(_, `paramIndex`), j) <- args.zipWithIndex) {
+            keys += Key(m, InOut(j, inValue), stableCall, negated = true)
+          }
+          if (keys.nonEmpty)
+            Pending[Key, Value](Set(Component(Values.Top, keys)))
+          else
+            Final(Values.Top)
+      }
+    Equation(key, result)
+  }
+
+  final def createStartFrame(): Frame[BasicValue] = {
+    val frame = new Frame[BasicValue](methodNode.maxLocals, methodNode.maxStack)
+    val returnType = Type.getReturnType(methodNode.desc)
+    val returnValue = if (returnType == Type.VOID_TYPE) null else new BasicValue(returnType)
+    frame.setReturn(returnValue)
+
+    val args = Type.getArgumentTypes(methodNode.desc)
+    var local = 0
+    if ((methodNode.access & Opcodes.ACC_STATIC) == 0) {
+      val thisValue = ThisValue()
+      frame.setLocal(local, thisValue)
+      local += 1
+    }
+    for (i <- 0 until args.size) {
+      val value = new NthParamValue(args(i), i)
+      frame.setLocal(local, value)
+      local += 1
+      if (args(i).getSize == 2) {
+        frame.setLocal(local, BasicValue.UNINITIALIZED_VALUE)
+        local += 1
+      }
+    }
+    while (local < methodNode.maxLocals) {
+      frame.setLocal(local, BasicValue.UNINITIALIZED_VALUE)
+      local += 1
+    }
+    frame
+  }
+
+  final def popValue(frame: Frame[BasicValue]): BasicValue =
+    frame.getStack(frame.getStackSize - 1)
+}
+
+class NegInterpreter(val insns: InsnList, arity: Int) extends BasicInterpreter {
+
+  override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
+    val origin = insns.indexOf(insn)
+    val opCode = insn.getOpcode
+    val shift = if (opCode == INVOKESTATIC) 0 else 1
+    (opCode: @switch) match {
+      case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL | INVOKEINTERFACE =>
+        val stable = opCode == INVOKESTATIC || opCode == INVOKESPECIAL
+        val mNode = insn.asInstanceOf[MethodInsnNode]
+        val retType = Type.getReturnType(mNode.desc)
+        val method = Method(mNode.owner, mNode.name, mNode.desc)
+        val callToThis = (opCode == INVOKEINTERFACE || opCode == INVOKEVIRTUAL) && values.get(0).isInstanceOf[ThisValue]
+        TrackableCallValue(origin, retType, method, stable, values.drop(shift).toList, callToThis)
+      case _ =>
+        super.naryOperation(insn, values)
+    }
+
+  }
+}
+

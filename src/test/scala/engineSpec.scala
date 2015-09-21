@@ -55,10 +55,12 @@ class engineSpec extends FunSuite with TableDrivenPropertyChecks {
 
   }
 
-  case class Wrapper(s: Symbol) extends StableAwareId[Wrapper] {
+  case class Wrapper(s: Symbol, negated: Boolean = false) extends IKey[Wrapper] {
     override val stable: Boolean = true
     override def mkStable: Wrapper = this
     override def mkUnstable: Wrapper = this
+
+    override def negate: Wrapper = Wrapper(s, true)
   }
 
   type Id = Wrapper
@@ -93,7 +95,7 @@ class engineSpec extends FunSuite with TableDrivenPropertyChecks {
       )
 
     forAll(equationSets) { equations =>
-      val solution = new Solver(equations).solve()
+      val solution = new Solver(ValuesNegator, equations).solve()
       info(s"equations: ${equations.map(pretty).mkString(" ")}")
       info(s"solution : ${solution}")
       assert(solution validFor_? equations, "invalid solution")
@@ -129,7 +131,7 @@ class engineSpec extends FunSuite with TableDrivenPropertyChecks {
       )
 
     forAll(equationSets) { equations =>
-      val solution = new Solver(equations).solve()
+      val solution = new Solver(ValuesNegator, equations).solve()
       info(s"equations: ${equations.map(pretty).mkString(" ")}")
       info(s"solution : ${solution}")
       assert(solution validFor_? equations, "invalid solution")

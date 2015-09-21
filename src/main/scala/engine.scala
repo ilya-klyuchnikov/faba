@@ -79,13 +79,19 @@ case class Pending[Id, Val](delta: Set[Component[Id, Val]]) extends Result[Id, V
 
 case class Equation[Id, Val](id: Id, rhs: Result[Id, Val])
 
-trait StableAwareId[K] {
+trait IKey[K] {
   val stable: Boolean
   def mkUnstable: K
   def mkStable: K
+
+  def negate: K
 }
 
-class Solver[K <: StableAwareId[K], V](val doNothing: Boolean)(implicit lattice: Lattice[V]) {
+trait Negator[V] {
+  def negate(v: V): V
+}
+
+class Solver[K <: IKey[K], V](val negator: Negator[V], val doNothing: Boolean)(implicit lattice: Lattice[V]) {
 
   type Solution = (K, V)
   val top = lattice.top
@@ -96,8 +102,8 @@ class Solver[K <: StableAwareId[K], V](val doNothing: Boolean)(implicit lattice:
   private val moving = mutable.Queue[Solution]()
   private var solved = Map[K, V]()
 
-  def this(equations: List[Equation[K, V]])(implicit lattice: Lattice[V]) {
-    this(false)
+  def this(negator: Negator[V], equations: List[Equation[K, V]])(implicit lattice: Lattice[V]) {
+    this(negator, false)
     equations.foreach(addEquation)
   }
 
@@ -123,11 +129,16 @@ class Solver[K <: StableAwareId[K], V](val doNothing: Boolean)(implicit lattice:
       val (ident, value) = moving.dequeue()
       solved = solved + (ident -> value)
 
-      val toPropagate: List[(K, V)] =
+      val toPropagateInitial: List[(K, V)] =
         if (ident.stable)
           List((ident, value), (ident.mkUnstable, value))
         else
           List((ident.mkStable, value), (ident, mkUnstableValue(value)))
+
+      val toPropagateNegated: List[(K, V)] =
+        toPropagateInitial.map {case (k, v) => (k.negate, negator.negate(v))}
+
+      val toPropagate = toPropagateInitial ::: toPropagateNegated
 
       for {
         (pId, pValue) <- toPropagate
@@ -171,7 +182,7 @@ class Solver[K <: StableAwareId[K], V](val doNothing: Boolean)(implicit lattice:
 
 }
 
-class NullableResultSolver[K <: StableAwareId[K], V](doNothing: Boolean)(implicit lattice: Lattice[V])
-  extends Solver[K, V](doNothing)(lattice) {
+class NullableResultSolver[K <: IKey[K], V](negator: Negator[V], doNothing: Boolean)(implicit lattice: Lattice[V])
+  extends Solver[K, V](negator, doNothing)(lattice) {
   override def mkUnstableValue(v: V) = bot
 }

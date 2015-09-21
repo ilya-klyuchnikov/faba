@@ -2,9 +2,9 @@ package faba
 
 import faba.analysis.LimitReachedException
 import faba.asm.nullableResult.NullableResultAnalysis
-import faba.combined.CombinedSingleAnalysis
+import faba.combined.{NegAnalysisFailure, NegAnalysis, CombinedSingleAnalysis}
 import org.objectweb.asm._
-import org.objectweb.asm.tree.MethodNode
+import org.objectweb.asm.tree.{AbstractInsnNode, MethodNode}
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.tree.analysis.Frame
 
@@ -95,11 +95,14 @@ trait FabaProcessor extends Processor {
     if (graph.transitions.nonEmpty) {
       val dfs = buildDFSTree(graph.transitions)
       val complex = dfs.back.nonEmpty || graph.transitions.exists(_.size > 1)
+
+      // no jsr
       val start = System.nanoTime()
       if (complex) {
         val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
         if (reducible) {
-          handleComplexMethod(method, className, methodNode, dfs, argumentTypes, graph, isReferenceResult, isBooleanResult, stable, jsr)
+          val negated = tryNegation(method, argumentTypes, graph, isReferenceResult, isBooleanResult, stable, dfs)
+          handleComplexMethod(method, className, methodNode, dfs, argumentTypes, graph, isReferenceResult, isBooleanResult, stable, jsr, negated)
           added = true
         }
       } else {
@@ -139,6 +142,66 @@ trait FabaProcessor extends Processor {
     }
   }
 
+  def tryNegation(method: Method,
+                  argumentTypes: Array[Type],
+                  graph: ControlFlowGraph,
+                  isReferenceResult: Boolean,
+                  isBooleanResult: Boolean,
+                  stable: Boolean,
+                  dfs: DFSTree): Option[NegAnalysis]  = {
+
+    def isMethodCall(opCode: Int): Boolean =
+      opCode == Opcodes.INVOKESTATIC ||
+        opCode == Opcodes.INVOKESPECIAL ||
+        opCode == Opcodes.INVOKEVIRTUAL ||
+        opCode == Opcodes.INVOKEINTERFACE
+
+    val booleanConstInsns =
+      Set(Opcodes.ICONST_0, Opcodes.ICONST_1)
+
+    if (isBooleanResult && dfs.back.isEmpty) {
+      lazy val singleBranch =
+        graph.transitions.count(_.size == 2) == 1
+
+      lazy val singleIfInsn = {
+        val insnIndex = graph.transitions.indexWhere(_.size == 2)
+        val insn = graph.methodNode.instructions.get(insnIndex)
+        val opCode = insn.getOpcode
+        opCode == Opcodes.IFNE || opCode == Opcodes.IFEQ
+      }
+
+      lazy val singleMethodCall: Boolean = {
+        graph.transitions.indices.count(i => isMethodCall(graph.methodNode.instructions.get(i).getOpcode)) == 1
+      }
+
+      lazy val booleanConstResult: Boolean = {
+        lazy val leaking =
+          leakingParameters(graph.className, graph.methodNode, jsr = false)
+        val resultOrigins =
+          buildResultOrigins(graph.className, graph.methodNode, leaking.frames, graph)
+        val resultInsns: Set[Int] =
+          resultOrigins.indices.filter(resultOrigins).map(i => graph.methodNode.instructions.get(i).getOpcode).toSet
+
+        resultInsns == booleanConstInsns
+      }
+
+      if (singleBranch && singleIfInsn && singleMethodCall && booleanConstResult) {
+        val analyzer = new NegAnalysis(method, graph)
+        try {
+          analyzer.analyze()
+          return Some(analyzer)
+        } catch {
+          case NegAnalysisFailure =>
+            return None
+        }
+
+      }
+
+    }
+
+    None
+  }
+
   def handleSimpleMethod(method: Method,
                          argumentTypes: Array[Type],
                          graph: ControlFlowGraph,
@@ -176,7 +239,8 @@ trait FabaProcessor extends Processor {
                           isReferenceResult: Boolean,
                           isBooleanResult: Boolean,
                           stable: Boolean,
-                          jsr: Boolean) {
+                          jsr: Boolean,
+                          negatedAnalysis: Option[NegAnalysis]) {
     val start = System.nanoTime()
     val cycle = dfs.back.nonEmpty
     // leaking params will be taken for
@@ -219,11 +283,18 @@ trait FabaProcessor extends Processor {
       if (isReferenceArg && (isReferenceResult || isBooleanResult)) {
         if (leaking.parameters(i)) {
           if (!notNullParam) {
-            handleNullContractEquation(nullContractEquation(richControlFlow, resultOrigins, i, stable))
+            if (isBooleanResult && negatedAnalysis.isDefined) {
+              handleNullContractEquation(negatedAnalysis.get.contractEquation(i, Values.Null, stable))
+            } else {
+              handleNullContractEquation(nullContractEquation(richControlFlow, resultOrigins, i, stable))
+            }
           } else {
             handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), Final(Values.Bot)))
           }
-          handleNotNullContractEquation(notNullContractEquation(richControlFlow, resultOrigins, i, stable))
+          if (isBooleanResult && negatedAnalysis.isDefined) {
+            handleNotNullContractEquation(negatedAnalysis.get.contractEquation(i, Values.NotNull, stable))
+          } else
+            handleNotNullContractEquation(notNullContractEquation(richControlFlow, resultOrigins, i, stable))
         } else {
           handleNullContractEquation(Equation(Key(method, InOut(i, Values.Null), stable), resultEquation.rhs))
           handleNotNullContractEquation(Equation(Key(method, InOut(i, Values.NotNull), stable), resultEquation.rhs))

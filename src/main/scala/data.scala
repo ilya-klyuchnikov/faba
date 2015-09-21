@@ -1,6 +1,6 @@
 package faba.data
 
-import faba.engine.StableAwareId
+import faba.engine.{Negator, IKey}
 import org.objectweb.asm.signature.{SignatureVisitor, SignatureReader}
 import scala.collection.mutable.ListBuffer
 import scala.xml.Elem
@@ -25,7 +25,7 @@ case class In(paramIndex: Int) extends Direction
 case class InOut(paramIndex: Int, in: Value) extends Direction
 case object Out extends Direction
 
-case class Key(method: Method, direction: Direction, stable: Boolean) extends StableAwareId[Key] {
+case class Key(method: Method, direction: Direction, stable: Boolean, negated: Boolean = false) extends IKey[Key] {
   override def toString = direction match {
     case Out => s"$method"
     case In(index) => s"$method #$index"
@@ -37,10 +37,20 @@ case class Key(method: Method, direction: Direction, stable: Boolean) extends St
 
   override def mkStable =
     if (stable) this else Key(method, direction, true)
+
+  override def negate: Key = Key(method, direction, stable, true)
 }
 
 object Values extends Enumeration {
   val Bot, NotNull, Null, True, False, Pure, Top = Value
+}
+
+object ValuesNegator extends Negator[Value] {
+  override def negate(v: Value): Value = v match {
+    case Values.True => Values.False
+    case Values.False => Values.True
+    case x => x
+  }
 }
 
 object `package` {
