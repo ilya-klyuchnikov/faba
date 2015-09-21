@@ -875,13 +875,13 @@
   <item name="java.lang.Class T[] getEnumConstantsShared()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.lang.Class boolean access$100(java.lang.Object[], java.lang.Object[]) 0">
+  <item name="java.lang.Class boolean access$400(java.lang.Object[], java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.lang.Class boolean access$100(java.lang.Object[], java.lang.Object[]) 1">
+  <item name="java.lang.Class boolean access$400(java.lang.Object[], java.lang.Object[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.lang.Class boolean access$100(java.lang.Object[], java.lang.Object[])">
+  <item name="java.lang.Class boolean access$400(java.lang.Object[], java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -925,8 +925,19 @@
   <item name="java.lang.Class java.lang.Class.EnclosingMethodInfo getEnclosingMethodInfo()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.lang.Class java.lang.Class.ReflectionData&lt;T&gt; newReflectionData(java.lang.ref.SoftReference&lt;java.lang.Class.ReflectionData&lt;T&gt;&gt;, int)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.lang.Class java.lang.Class.ReflectionData&lt;T&gt; reflectionData()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.lang.Class java.lang.ClassLoader getClassLoader()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.lang.Class java.lang.ClassLoader getClassLoader0()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.lang.Class java.lang.Package getPackage()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -975,6 +986,15 @@
   <item name="java.lang.Class java.lang.reflect.Constructor&lt;U&gt;[] copyConstructors(java.lang.reflect.Constructor&lt;U&gt;[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.Class java.lang.reflect.Field access$300(java.lang.reflect.Field[], java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.Class java.lang.reflect.Field access$300(java.lang.reflect.Field[], java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.Class java.lang.reflect.Field access$300(java.lang.reflect.Field[], java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.lang.Class java.lang.reflect.Field getDeclaredField(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -995,6 +1015,9 @@
   </item>
   <item name="java.lang.Class java.lang.reflect.Field searchFields(java.lang.reflect.Field[], java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.lang.Class java.lang.reflect.Field[] access$200(java.lang.Class, boolean) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.Class java.lang.reflect.Field[] copyFields(java.lang.reflect.Field[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1078,6 +1101,17 @@
   <item name="java.lang.Class.4 java.lang.Void run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.lang.Class.Atomic Atomic()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.Class.Atomic long objectFieldOffset(java.lang.reflect.Field[], java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.Class.Atomic long objectFieldOffset(java.lang.reflect.Field[], java.lang.String) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.Class.EnclosingMethodInfo EnclosingMethodInfo(java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1139,6 +1173,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.Class.MethodArray void addAllIfNotPresent(java.lang.Class.MethodArray) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.Class.SecurityManagerHelper SecurityManagerHelper(java.lang.SecurityManager) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.ClassLoader ClassLoader(java.lang.Void, java.lang.ClassLoader) 0">
@@ -1208,7 +1245,7 @@
   </item>
   <item name="java.lang.ClassLoader java.lang.ClassLoader getClassLoader(java.lang.Class&lt;?&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val val="value=&quot;null-&gt;null&quot;,pure=true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -4458,6 +4495,12 @@
   <item name="java.lang.System.2 E[] getEnumConstantsShared(java.lang.Class&lt;E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.System.2 boolean casAnnotationType(java.lang.Class&lt;?&gt;, sun.reflect.annotation.AnnotationType, sun.reflect.annotation.AnnotationType) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.System.2 byte[] getRawClassAnnotations(java.lang.Class&lt;?&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.lang.System.2 int getStackTraceDepth(java.lang.Throwable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -4487,7 +4530,7 @@
   <item name="java.lang.System.2 void blockedOn(java.lang.Thread, sun.nio.ch.Interruptible) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.lang.System.2 void setAnnotationType(java.lang.Class, sun.reflect.annotation.AnnotationType) 0">
+  <item name="java.lang.System.2 void invokeFinalize(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.Terminator Terminator()">
@@ -4864,15 +4907,38 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="java.lang.UNIXProcess int access$100(java.lang.UNIXProcess) 0">
+  <item name="java.lang.UNIXProcess byte[] access$002(byte[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="java.lang.UNIXProcess byte[] access$100(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.lang.UNIXProcess byte[] access$100(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.lang.UNIXProcess byte[] toCString(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.lang.UNIXProcess byte[] toCString(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.lang.UNIXProcess int access$400(java.lang.UNIXProcess) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.lang.UNIXProcess int access$100(java.lang.UNIXProcess)">
+  <item name="java.lang.UNIXProcess int access$400(java.lang.UNIXProcess)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="java.lang.UNIXProcess int access$200(java.lang.UNIXProcess, int) 0">
+  <item name="java.lang.UNIXProcess int access$500(java.lang.UNIXProcess, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.UNIXProcess java.io.FileDescriptor newFileDescriptor(int)">
@@ -4901,26 +4967,33 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="java.lang.UNIXProcess.1 java.lang.Object run()">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="java.lang.UNIXProcess.1 java.util.concurrent.Executor run()">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
+  <item name="java.lang.UNIXProcess.2 2()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.lang.UNIXProcess.2 java.lang.Object run()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.UNIXProcess.2 java.util.concurrent.Executor run()">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.UNIXProcess.3 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.lang.UNIXProcess.2 java.lang.Void run()">
+  <item name="java.lang.UNIXProcess.3 java.lang.Void run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.lang.UNIXProcess.LaunchMechanism int access$300(java.lang.UNIXProcess.LaunchMechanism) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.UNIXProcess.LaunchMechanism int access$300(java.lang.UNIXProcess.LaunchMechanism)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
   </item>
   <item name="java.lang.UNIXProcess.ProcessPipeInputStream byte[] drainInputStream(java.io.InputStream) 0">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="java.lang.UNIXProcess.ProcessPipeInputStream byte[] drainInputStream(java.io.InputStream)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
-    </annotation>
-    <annotation name="org.jetbrains.annotations.Nullable"/>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.UNIXProcess.ProcessReaperThreadFactory ProcessReaperThreadFactory()">
     <annotation name="org.jetbrains.annotations.Contract">

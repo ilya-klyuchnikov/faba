@@ -94,7 +94,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.utils.SecuritySupport java.lang.String sanitizePath(java.lang.String)">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;!null-&gt;!null;null-&gt;!null&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.utils.SecuritySupport.1 1()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -178,11 +180,31 @@
       <val val="pure=true"/>
     </annotation>
   </item>
-  <item name="com.sun.org.apache.xerces.internal.utils.XMLSecurityManager boolean isOverLimit(com.sun.org.apache.xerces.internal.utils.XMLSecurityManager.Limit) 0">
+  <item name="com.sun.org.apache.xerces.internal.utils.XMLSecurityManager boolean isOverLimit(com.sun.org.apache.xerces.internal.utils.XMLSecurityManager.Limit, com.sun.org.apache.xerces.internal.utils.XMLLimitAnalyzer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.org.apache.xerces.internal.utils.XMLSecurityManager boolean isOverLimit(com.sun.org.apache.xerces.internal.utils.XMLSecurityManager.Limit, java.lang.String, int) 0">
+  <item name="com.sun.org.apache.xerces.internal.utils.XMLSecurityManager boolean isOverLimit(com.sun.org.apache.xerces.internal.utils.XMLSecurityManager.Limit, com.sun.org.apache.xerces.internal.utils.XMLLimitAnalyzer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.utils.XMLSecurityManager boolean isOverLimit(com.sun.org.apache.xerces.internal.utils.XMLSecurityManager.Limit, java.lang.String, int, com.sun.org.apache.xerces.internal.utils.XMLLimitAnalyzer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.utils.XMLSecurityManager boolean isOverLimit(com.sun.org.apache.xerces.internal.utils.XMLSecurityManager.Limit, java.lang.String, int, com.sun.org.apache.xerces.internal.utils.XMLLimitAnalyzer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.utils.XMLSecurityManager boolean isOverLimit(int, com.sun.org.apache.xerces.internal.utils.XMLLimitAnalyzer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,null-&gt;false&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.utils.XMLSecurityManager boolean isOverLimit(int, java.lang.String, int, com.sun.org.apache.xerces.internal.utils.XMLLimitAnalyzer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;_,_,_,null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.utils.XMLSecurityManager boolean isSecureProcessing()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -195,11 +217,6 @@
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.utils.XMLSecurityManager boolean printEntityCountInfo()">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
-    </annotation>
-  </item>
-  <item name="com.sun.org.apache.xerces.internal.utils.XMLSecurityManager com.sun.org.apache.xerces.internal.utils.XMLLimitAnalyzer getLimitAnalyzer()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>

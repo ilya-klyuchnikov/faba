@@ -331,6 +331,9 @@
   <item name="java.net.DatagramSocket DatagramSocket(java.net.SocketAddress) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.net.DatagramSocket boolean checkFiltering(java.net.DatagramPacket) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.net.DatagramSocket boolean isBound()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -406,12 +409,25 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="java.net.DatagramSocketImpl T getOption(java.net.SocketOption&lt;T&gt;) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.net.DatagramSocketImpl int dataAvailable()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.net.DatagramSocketImpl int getLocalPort()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
   </item>
   <item name="java.net.DatagramSocketImpl java.io.FileDescriptor getFileDescriptor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.net.DatagramSocketImpl java.net.DatagramSocket getDatagramSocket()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -428,6 +444,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="java.net.DatagramSocketImpl void setOption(java.net.SocketOption&lt;T&gt;, T) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.net.DefaultDatagramSocketImplFactory DefaultDatagramSocketImplFactory()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -810,7 +829,7 @@
   <item name="java.net.IDN boolean isAllASCII(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.net.IDN boolean isLDHChar(int)">
+  <item name="java.net.IDN boolean isNonLDHAsciiCodePoint(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
@@ -1744,6 +1763,18 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="java.net.PlainDatagramSocketImpl T getOption(java.net.SocketOption&lt;T&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.PlainDatagramSocketImpl void setOption(java.net.SocketOption&lt;T&gt;, T) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.PlainSocketImpl T getOption(java.net.SocketOption&lt;T&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.PlainSocketImpl void setOption(java.net.SocketOption&lt;T&gt;, T) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="java.net.Proxy Proxy(java.net.Proxy.Type, java.net.SocketAddress) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1946,6 +1977,9 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="java.net.SocketImpl T getOption(java.net.SocketOption&lt;T&gt;) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="java.net.SocketImpl boolean supportsUrgentData()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1983,6 +2017,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="java.net.SocketImpl void setOption(java.net.SocketOption&lt;T&gt;, T) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.net.SocketImpl void setPerformancePreferences(int, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2066,6 +2103,11 @@
   <item name="java.net.SocketPermission boolean impliesIgnoreMask(java.net.SocketPermission) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.SocketPermission boolean includesEphemerals()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
   <item name="java.net.SocketPermission boolean match(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2127,6 +2169,23 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.SocketPermissionCollection void writeObject(java.io.ObjectOutputStream) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.SocketSecrets SocketSecrets()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="java.net.SocketSecrets T getOption(java.lang.Object, java.net.SocketOption&lt;T&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.SocketSecrets T getOption(java.net.DatagramSocket, java.net.SocketOption&lt;T&gt;) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.SocketSecrets void setOption(java.lang.Object, java.net.SocketOption&lt;T&gt;, T) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.SocketSecrets void setOption(java.net.DatagramSocket, java.net.SocketOption&lt;T&gt;, T) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.SocksSocketImpl SocksSocketImpl(java.net.Proxy) 0">

@@ -813,6 +813,9 @@
   <item name="sun.lwawt.macosx.CDropTarget sun.lwawt.macosx.CDropTarget createDropTarget(java.awt.dnd.DropTarget, java.awt.Component, java.awt.peer.ComponentPeer)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.lwawt.macosx.CDropTargetContextPeer boolean isEventInsideTarget(sun.awt.dnd.SunDropTargetEvent) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.lwawt.macosx.CDropTargetContextPeer int postDropTargetEvent(java.awt.Component, int, int, int, int, long[], long, int, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -820,6 +823,12 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.lwawt.macosx.CDropTargetContextPeer void processDropMessage(sun.awt.dnd.SunDropTargetEvent) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.lwawt.macosx.CDropTargetContextPeer void processEnterMessage(sun.awt.dnd.SunDropTargetEvent) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.lwawt.macosx.CDropTargetContextPeer void processExitMessage(sun.awt.dnd.SunDropTargetEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.lwawt.macosx.CDropTargetContextPeer void processMotionMessage(sun.awt.dnd.SunDropTargetEvent, boolean) 0">
@@ -1546,19 +1555,6 @@
   <item name="sun.lwawt.macosx.CMouseDragGestureRecognizer void mouseReleased(java.awt.event.MouseEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.lwawt.macosx.CMouseInfoPeer CMouseInfoPeer()">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
-    </annotation>
-  </item>
-  <item name="sun.lwawt.macosx.CMouseInfoPeer boolean isWindowUnderMouse(java.awt.Window) 0">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="sun.lwawt.macosx.CMouseInfoPeer boolean isWindowUnderMouse(java.awt.Window)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="sun.lwawt.macosx.CPlatformComponent long getPointer()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -1606,6 +1602,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
     </annotation>
+  </item>
+  <item name="sun.lwawt.macosx.CPlatformEmbeddedFrame sun.lwawt.PlatformWindow getTopmostPlatformWindowUnderMouse()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.lwawt.macosx.CPlatformEmbeddedFrame void enterFullScreenMode()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1702,7 +1704,10 @@
   <item name="sun.lwawt.macosx.CPlatformResponder void handleInputEvent(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.lwawt.macosx.CPlatformResponder void handleKeyEvent(int, int, java.lang.String, short, boolean, boolean) 2">
+  <item name="sun.lwawt.macosx.CPlatformResponder void handleKeyEvent(int, int, java.lang.String, java.lang.String, short, boolean, boolean) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.lwawt.macosx.CPlatformResponder void handleKeyEvent(int, int, java.lang.String, java.lang.String, short, boolean, boolean) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.lwawt.macosx.CPlatformView java.awt.Image createBackBuffer()">
@@ -2579,6 +2584,12 @@
       <val val="pure=true"/>
     </annotation>
   </item>
+  <item name="sun.lwawt.macosx.CViewPlatformEmbeddedFrame sun.lwawt.PlatformWindow getTopmostPlatformWindowUnderMouse()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.lwawt.macosx.CViewPlatformEmbeddedFrame void enterFullScreenMode()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -3027,12 +3038,6 @@
   <item name="sun.lwawt.macosx.LWCToolkit java.awt.peer.MenuPeer createMenu(java.awt.Menu)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.lwawt.macosx.LWCToolkit java.awt.peer.MouseInfoPeer createMouseInfoPeerImpl()">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
-    </annotation>
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="sun.lwawt.macosx.LWCToolkit java.awt.peer.PopupMenuPeer createPopupMenu(java.awt.PopupMenu)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3119,6 +3124,9 @@
   <item name="sun.lwawt.macosx.LWCToolkit.1 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.lwawt.macosx.LWCToolkit.1 java.util.ResourceBundle run()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="sun.lwawt.macosx.LWCToolkit.2 2()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="pure=true"/>
@@ -3127,8 +3135,16 @@
   <item name="sun.lwawt.macosx.LWCToolkit.2.1 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.lwawt.macosx.LWCToolkit.4 4(java.lang.Object, java.lang.Runnable, long) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
+  <item name="sun.lwawt.macosx.LWCToolkit.3 3()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="pure=true"/>
+    </annotation>
+  </item>
+  <item name="sun.lwawt.macosx.LWCToolkit.3 java.lang.Object run()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.lwawt.macosx.LWCToolkit.3 java.lang.Void run()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.lwawt.macosx.LWCToolkit.AppleSpecificColor int getRGB()">
     <annotation name="org.jetbrains.annotations.Contract">

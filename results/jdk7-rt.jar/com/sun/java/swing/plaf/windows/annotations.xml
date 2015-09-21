@@ -458,9 +458,6 @@
   <item name="com.sun.java.swing.plaf.windows.WindowsComboBoxUI void paintCurrentValue(java.awt.Graphics, java.awt.Rectangle, boolean) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.java.swing.plaf.windows.WindowsComboBoxUI void paintXPComboBoxBackground(java.awt.Graphics, javax.swing.JComponent) 1">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="com.sun.java.swing.plaf.windows.WindowsComboBoxUI void uninstallUI(javax.swing.JComponent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -507,7 +504,10 @@
   <item name="com.sun.java.swing.plaf.windows.WindowsComboBoxUI.WindowsComboPopup.InvocationKeyHandler InvocationKeyHandler(com.sun.java.swing.plaf.windows.WindowsComboBoxUI.WindowsComboPopup) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.java.swing.plaf.windows.WindowsComboBoxUI.XPComboBoxButton XPComboBoxButton(com.sun.java.swing.plaf.windows.WindowsComboBoxUI) 0">
+  <item name="com.sun.java.swing.plaf.windows.WindowsComboBoxUI.XPComboBoxButton XPComboBoxButton(com.sun.java.swing.plaf.windows.WindowsComboBoxUI, com.sun.java.swing.plaf.windows.XPStyle) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.swing.plaf.windows.WindowsComboBoxUI.XPComboBoxButton XPComboBoxButton(com.sun.java.swing.plaf.windows.WindowsComboBoxUI, com.sun.java.swing.plaf.windows.XPStyle) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.java.swing.plaf.windows.WindowsComboBoxUI.XPComboBoxButton com.sun.java.swing.plaf.windows.WindowsComboBoxUI getWindowsComboBoxUI()">
@@ -991,19 +991,10 @@
   <item name="com.sun.java.swing.plaf.windows.WindowsGraphicsUtils void paintText(java.awt.Graphics, javax.swing.AbstractButton, java.awt.Rectangle, java.lang.String, int) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.java.swing.plaf.windows.WindowsGraphicsUtils void paintXPText(javax.swing.AbstractButton, com.sun.java.swing.plaf.windows.TMSchema.Part, com.sun.java.swing.plaf.windows.TMSchema.State, java.awt.Graphics, int, int, java.lang.String, int) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="com.sun.java.swing.plaf.windows.WindowsGraphicsUtils void paintXPText(javax.swing.AbstractButton, com.sun.java.swing.plaf.windows.TMSchema.Part, com.sun.java.swing.plaf.windows.TMSchema.State, java.awt.Graphics, int, int, java.lang.String, int) 3">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="com.sun.java.swing.plaf.windows.WindowsGraphicsUtils void paintXPText(javax.swing.AbstractButton, com.sun.java.swing.plaf.windows.TMSchema.Part, com.sun.java.swing.plaf.windows.TMSchema.State, java.awt.Graphics, int, int, java.lang.String, int) 6">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.java.swing.plaf.windows.WindowsGraphicsUtils void paintXPText(javax.swing.AbstractButton, java.awt.Graphics, int, int, java.lang.String, int) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="com.sun.java.swing.plaf.windows.WindowsGraphicsUtils void paintXPText(javax.swing.AbstractButton, java.awt.Graphics, int, int, java.lang.String, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.java.swing.plaf.windows.WindowsGraphicsUtils void paintXPText(javax.swing.AbstractButton, java.awt.Graphics, int, int, java.lang.String, int) 4">
@@ -1732,6 +1723,9 @@
   <item name="com.sun.java.swing.plaf.windows.WindowsLookAndFeel.XPColorValue java.lang.Object getXPValue(javax.swing.UIDefaults) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.java.swing.plaf.windows.WindowsLookAndFeel.XPColorValue java.lang.Object getXPValue(javax.swing.UIDefaults)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="com.sun.java.swing.plaf.windows.WindowsLookAndFeel.XPColorValue.XPColorValueKey XPColorValueKey(com.sun.java.swing.plaf.windows.TMSchema.Part, com.sun.java.swing.plaf.windows.TMSchema.State, com.sun.java.swing.plaf.windows.TMSchema.Prop) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1804,6 +1798,14 @@
   </item>
   <item name="com.sun.java.swing.plaf.windows.WindowsMenuBarUI.TakeFocus void actionPerformed(java.awt.event.ActionEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.swing.plaf.windows.WindowsMenuItemUI boolean isVistaPainting(com.sun.java.swing.plaf.windows.XPStyle) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.java.swing.plaf.windows.WindowsMenuItemUI boolean isVistaPainting(com.sun.java.swing.plaf.windows.XPStyle)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null-&gt;false&quot;"/>
+    </annotation>
   </item>
   <item name="com.sun.java.swing.plaf.windows.WindowsMenuItemUI com.sun.java.swing.plaf.windows.TMSchema.Part getPart(com.sun.java.swing.plaf.windows.WindowsMenuItemUIAccessor, javax.swing.JMenuItem) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2007,12 +2009,6 @@
   </item>
   <item name="com.sun.java.swing.plaf.windows.WindowsProgressBarUI void paintIndeterminate(java.awt.Graphics, javax.swing.JComponent) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="com.sun.java.swing.plaf.windows.WindowsProgressBarUI void paintIndeterminateFrame(java.awt.Rectangle, java.awt.Graphics2D, boolean, int, int) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="com.sun.java.swing.plaf.windows.WindowsProgressBarUI void paintIndeterminateFrame(java.awt.Rectangle, java.awt.Graphics2D, boolean, int, int) 1">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.java.swing.plaf.windows.WindowsRadioButtonMenuItemUI javax.swing.JMenuItem access$000(com.sun.java.swing.plaf.windows.WindowsRadioButtonMenuItemUI) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2396,9 +2392,6 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="com.sun.java.swing.plaf.windows.WindowsSpinnerUI void paintXPBackground(java.awt.Graphics, javax.swing.JComponent) 1">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="com.sun.java.swing.plaf.windows.WindowsSplitPaneDivider WindowsSplitPaneDivider(javax.swing.plaf.basic.BasicSplitPaneUI) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2702,6 +2695,9 @@
   <item name="com.sun.java.swing.plaf.windows.XPStyle com.sun.java.swing.plaf.windows.TMSchema.TypeEnum getTypeEnum(java.awt.Component, com.sun.java.swing.plaf.windows.TMSchema.Part, com.sun.java.swing.plaf.windows.TMSchema.State, com.sun.java.swing.plaf.windows.TMSchema.Prop)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.java.swing.plaf.windows.XPStyle com.sun.java.swing.plaf.windows.XPStyle getXP()">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="com.sun.java.swing.plaf.windows.XPStyle com.sun.java.swing.plaf.windows.XPStyle.Skin getSkin(java.awt.Component, com.sun.java.swing.plaf.windows.TMSchema.Part) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2746,12 +2742,6 @@
   <item name="com.sun.java.swing.plaf.windows.XPStyle java.awt.Dimension getDimension(java.awt.Component, com.sun.java.swing.plaf.windows.TMSchema.Part, com.sun.java.swing.plaf.windows.TMSchema.State, com.sun.java.swing.plaf.windows.TMSchema.Prop) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.java.swing.plaf.windows.XPStyle java.awt.Dimension getDimension(java.awt.Component, com.sun.java.swing.plaf.windows.TMSchema.Part, com.sun.java.swing.plaf.windows.TMSchema.State, com.sun.java.swing.plaf.windows.TMSchema.Prop)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;null;_,!null,_,_-&gt;null;_,_,!null,_-&gt;null;_,_,_,!null-&gt;null;_,_,null,_-&gt;null;null,_,_,_-&gt;null&quot;"/>
-    </annotation>
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
   <item name="com.sun.java.swing.plaf.windows.XPStyle java.awt.Dimension getPartSize(com.sun.java.swing.plaf.windows.TMSchema.Part, com.sun.java.swing.plaf.windows.TMSchema.State) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2776,12 +2766,6 @@
   <item name="com.sun.java.swing.plaf.windows.XPStyle java.awt.Insets getMargin(java.awt.Component, com.sun.java.swing.plaf.windows.TMSchema.Part, com.sun.java.swing.plaf.windows.TMSchema.State, com.sun.java.swing.plaf.windows.TMSchema.Prop) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="com.sun.java.swing.plaf.windows.XPStyle java.awt.Insets getMargin(java.awt.Component, com.sun.java.swing.plaf.windows.TMSchema.Part, com.sun.java.swing.plaf.windows.TMSchema.State, com.sun.java.swing.plaf.windows.TMSchema.Prop)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;null;_,!null,_,_-&gt;null;_,_,!null,_-&gt;null;_,_,_,!null-&gt;null;_,_,null,_-&gt;null;null,_,_,_-&gt;null&quot;"/>
-    </annotation>
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
   <item name="com.sun.java.swing.plaf.windows.XPStyle java.awt.Point getPoint(java.awt.Component, com.sun.java.swing.plaf.windows.TMSchema.Part, com.sun.java.swing.plaf.windows.TMSchema.State, com.sun.java.swing.plaf.windows.TMSchema.Prop) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2795,7 +2779,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.java.swing.plaf.windows.XPStyle java.awt.Point getPoint(java.awt.Component, com.sun.java.swing.plaf.windows.TMSchema.Part, com.sun.java.swing.plaf.windows.TMSchema.State, com.sun.java.swing.plaf.windows.TMSchema.Prop)">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.java.swing.plaf.windows.XPStyle java.lang.String access$200(java.awt.Component, com.sun.java.swing.plaf.windows.TMSchema.Part, com.sun.java.swing.plaf.windows.TMSchema.State, com.sun.java.swing.plaf.windows.TMSchema.Prop) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2894,9 +2878,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.java.swing.plaf.windows.XPStyle.Skin int getWidth(com.sun.java.swing.plaf.windows.TMSchema.State) 0">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="com.sun.java.swing.plaf.windows.XPStyle.Skin java.awt.Insets getContentMargin()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.java.swing.plaf.windows.XPStyle.Skin java.lang.String access$000(com.sun.java.swing.plaf.windows.XPStyle.Skin) 0">
