@@ -33,4 +33,14 @@ public class Data01 {
     static Object id(Object o) {
         return o;
     }
+
+    @ExpectContract("!null->true;null->false")
+    static boolean bool(Object o) {
+        return o != null;
+    }
+
+    @ExpectContract("!null->false;null->true")
+    static boolean neg(Object o) {
+        return !bool(o);
+    }
 }
