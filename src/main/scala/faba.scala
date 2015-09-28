@@ -101,7 +101,7 @@ trait FabaProcessor extends Processor {
       if (complex) {
         val reducible = dfs.back.isEmpty || isReducible(graph, dfs)
         if (reducible) {
-          val negated = tryNegation(method, argumentTypes, graph, isReferenceResult, isBooleanResult, stable, dfs)
+          val negated = tryNegation(method, argumentTypes, graph, isReferenceResult, isBooleanResult, stable, dfs, jsr);
           handleComplexMethod(method, className, methodNode, dfs, argumentTypes, graph, isReferenceResult, isBooleanResult, stable, jsr, negated)
           added = true
         }
@@ -148,7 +148,8 @@ trait FabaProcessor extends Processor {
                   isReferenceResult: Boolean,
                   isBooleanResult: Boolean,
                   stable: Boolean,
-                  dfs: DFSTree): Option[NegAnalysis]  = {
+                  dfs: DFSTree,
+                  jsr: Boolean): Option[NegAnalysis]  = {
 
     def isMethodCall(opCode: Int): Boolean =
       opCode == Opcodes.INVOKESTATIC ||
@@ -159,7 +160,7 @@ trait FabaProcessor extends Processor {
     val booleanConstInsns =
       Set(Opcodes.ICONST_0, Opcodes.ICONST_1)
 
-    if (isBooleanResult && dfs.back.isEmpty) {
+    if (isBooleanResult && dfs.back.isEmpty && !jsr) {
       lazy val singleBranch =
         graph.transitions.count(_.size == 2) == 1
 

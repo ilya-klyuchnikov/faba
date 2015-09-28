@@ -384,7 +384,7 @@ object NegAnalysisFailure extends Exception
 class NegAnalysis(val method: Method, val controlFlow: ControlFlowGraph) {
 
   val methodNode = controlFlow.methodNode
-  val interpreter = new NegInterpreter(methodNode.instructions, Type.getArgumentTypes(methodNode.desc).length)
+  val interpreter = new NegInterpreter(methodNode.instructions)
 
   var conditionValue: TrackableCallValue = null
   var trueBranchValue: BasicValue = null
@@ -505,7 +505,7 @@ class NegAnalysis(val method: Method, val controlFlow: ControlFlowGraph) {
     frame.getStack(frame.getStackSize - 1)
 }
 
-class NegInterpreter(val insns: InsnList, arity: Int) extends BasicInterpreter {
+class NegInterpreter(val insns: InsnList) extends BasicInterpreter {
 
   override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
     val origin = insns.indexOf(insn)
