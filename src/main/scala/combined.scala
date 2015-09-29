@@ -415,10 +415,10 @@ class NegAnalysis(val method: Method, val controlFlow: ControlFlowGraph) {
               val jumpIndex =
                 methodNode.instructions.indexOf(insnNode.asInstanceOf[JumpInsnNode].label)
               val nextIndex = insnIndex + 1
-              proceedBranch(frame, jumpIndex, IFEQ == insnNode.getOpcode)
-              proceedBranch(frame, nextIndex, IFNE == insnNode.getOpcode)
-              checkAssertion(FalseValue() == trueBranchValue)
-              checkAssertion(TrueValue() == falseBranchValue)
+              proceedBranch(frame, jumpIndex, IFNE == insnNode.getOpcode)
+              proceedBranch(frame, nextIndex, IFEQ == insnNode.getOpcode)
+              checkAssertion(trueBranchValue.isInstanceOf[TrueValue])
+              checkAssertion(falseBranchValue.isInstanceOf[TrueValue])
               return
             case _ =>
               frame.execute(insnNode, interpreter)
@@ -506,6 +506,18 @@ class NegAnalysis(val method: Method, val controlFlow: ControlFlowGraph) {
 }
 
 class NegInterpreter(val insns: InsnList) extends BasicInterpreter {
+
+  override def newOperation(insn: AbstractInsnNode): BasicValue = {
+    val origin = insns.indexOf(insn)
+    (insn.getOpcode: @switch) match {
+      case ICONST_0 =>
+        FalseValue()
+      case ICONST_1 =>
+        TrueValue()
+      case _ =>
+        super.newOperation(insn)
+    }
+  }
 
   override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: BasicValue]): BasicValue = {
     val origin = insns.indexOf(insn)
