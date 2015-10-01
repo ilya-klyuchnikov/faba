@@ -417,7 +417,7 @@ class NegAnalysis(val method: Method, val controlFlow: ControlFlowGraph) {
               val nextIndex = insnIndex + 1
               proceedBranch(frame, jumpIndex, IFNE == insnNode.getOpcode)
               proceedBranch(frame, nextIndex, IFEQ == insnNode.getOpcode)
-              checkAssertion(trueBranchValue.isInstanceOf[TrueValue])
+              checkAssertion(trueBranchValue.isInstanceOf[FalseValue])
               checkAssertion(falseBranchValue.isInstanceOf[TrueValue])
               return
             case _ =>
