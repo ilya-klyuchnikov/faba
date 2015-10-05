@@ -4,7 +4,7 @@ import faba.analysis.LimitReachedException
 import faba.asm.nullableResult.NullableResultAnalysis
 import faba.combined.{NegAnalysisFailure, NegAnalysis, CombinedSingleAnalysis}
 import org.objectweb.asm._
-import org.objectweb.asm.tree.{AbstractInsnNode, MethodNode}
+import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.Opcodes._
 import org.objectweb.asm.tree.analysis.Frame
 
@@ -32,6 +32,8 @@ trait FabaProcessor extends Processor {
   var simpleTime: Long = 0
   var complexMethods: Long = 0
   var simpleMethods: Long = 0
+  var knownClasses: Set[String] = Set()
+  var anonymousClasses: Set[String] = Set()
 
   def handleHierarchy(access: Int, thisName: String, superName: String) {}
 
@@ -43,6 +45,7 @@ trait FabaProcessor extends Processor {
         stableClass = (access & ACC_FINAL) != 0
         super.visit(version, access, name, signature, superName, interfaces)
         handleHierarchy(access, classReader.getClassName, superName)
+        knownClasses = knownClasses + name
       }
 
       override def visitMethod(access: Int, name: String, desc: String, signature: String, exceptions: Array[String]) = {

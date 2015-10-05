@@ -13,7 +13,7 @@ import faba.engine._
 import faba.source._
 import faba.parameters.ParametersAnalysis
 import org.objectweb.asm.tree.analysis.Frame
-import scala.xml.PrettyPrinter
+import scala.xml.{Elem, PrettyPrinter}
 import scala.collection.mutable.ListBuffer
 
 class MainProcessor extends FabaProcessor {
@@ -190,12 +190,13 @@ class MainProcessor extends FabaProcessor {
         byPackageProd.keys ++ byPackageNullableResultSolutions.keys ++ byPackagePuritySolutions.keys
 
       for (pkg <- pkgs) {
-        val xmlAnnotations =
+        val xmlAnnotations: List[Elem] =
           XmlUtils.toXmlAnnotations(
             byPackageProd.getOrElse(pkg, Map()),
             byPackageNullableResultSolutions.getOrElse(pkg, Map()),
             byPackagePuritySolutions.getOrElse(pkg, Map()),
             extras,
+            knownClasses,
             debug = false)
         printToFile(new File(s"$outDir${sep}${pkg.replace('/', sep)}${sep}annotations.xml")) { out =>
           out.println(pp.format(<root>{xmlAnnotations}</root>))

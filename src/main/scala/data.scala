@@ -106,6 +106,7 @@ object XmlUtils {
 
   val REGEX_PATTERN = "(?<=[^\\$\\.])\\${1}(?=[^\\$])".r // disallow .$ or $$
   val nullableResultAnnotations = List(<annotation name='org.jetbrains.annotations.Nullable'/>)
+  val notNullResultAnnotations = List(<annotation name='org.jetbrains.annotations.NotNull'/>)
   val notNullAnn = <annotation name='org.jetbrains.annotations.NotNull'/>
 
   // intermediate data structure to serialize @Contract annotations
@@ -118,37 +119,39 @@ object XmlUtils {
                        nullableResults: Iterable[(Key, Value)],
                        pureSolutions: Iterable[(Key, Value)],
                        extras: Map[Method, MethodExtra],
+                       knownClasses: Set[String],
                        debug: Boolean = false): List[Elem] = {
     var annotations = Map[String, List[Elem]]()
+    var notNullResults: Set[String] = Set()
 
     // preparations for contracts
     val contracts = mutable.HashMap[Method, Contract]()
 
-    for ((key, value) <- solutions) {
+    for {
+      (key, value) <- solutions
+      annKey <- annotationKey(key.method, extras(key.method), knownClasses)
+    } {
+
       key.direction match {
         case In(paramIndex) if value == Values.NotNull =>
           val method = key.method
-          val aKey = s"${annotationKey(method, extras(method))} $paramIndex"
+          val aKey = s"$annKey $paramIndex"
           val anns = annotations.getOrElse(aKey, Nil)
           annotations = annotations.updated(aKey, (notNullAnn :: anns).sortBy(_.toString()))
         case In(paramIndex) if value == Values.Null =>
           val method = key.method
-          val aKey = s"${annotationKey(method, extras(method))} $paramIndex"
+          val aKey = s"$annKey $paramIndex"
           val anns = annotations.getOrElse(aKey, Nil)
           annotations = annotations.updated(
             aKey,
             (<annotation name='org.jetbrains.annotations.Nullable'/> :: anns).sortBy(_.toString())
           )
         case Out if value == Values.NotNull && !debug =>
-          val method = key.method
-          annotations = annotations.updated(
-            annotationKey(method, extras(method)),
-            List(<annotation name='org.jetbrains.annotations.NotNull'/>)
-          )
+          notNullResults = notNullResults + annKey
         case Out if debug =>
           val method = key.method
           annotations = annotations.updated(
-            annotationKey(method, extras(method)),
+            annKey,
             List(<annotation name={value.toString.toLowerCase}/>)
           )
         case inOut:InOut =>
@@ -172,12 +175,14 @@ object XmlUtils {
     }
 
     // merging contracts and purity
-    for ((method, contract) <- contracts) {
-      val key = annotationKey(method, extras(method))
+    for {
+      (method, contract) <- contracts
+      annKey <- annotationKey(method, extras(method), knownClasses)
+    } {
       val arity = Type.getArgumentTypes(method.methodDesc).size
 
       val contractValues: Option[String] =
-        if (annotations.get(key).isEmpty && contract.clauses.nonEmpty)
+        if (!notNullResults(annKey) && contract.clauses.nonEmpty)
           // to this moment `annotations` contains only @NotNull methods (for this key)
           // if @NotNull is already inferred, we do not output @Contract clauses
           // (but we may output @Contract(pure=true) part of contract annotation)
@@ -189,46 +194,79 @@ object XmlUtils {
 
       val pure = contract.pure
 
-      val contractString: Option[String] = (contractValues, pure) match {
+      val contractAnnotation: Option[Elem] = (contractValues, pure) match {
         case (Some(values), false) =>
-          Some(values)
+          Some(<annotation name='org.jetbrains.annotations.Contract'>
+            <val val={values}/>
+          </annotation>)
         case (Some(values), true) =>
-          Some(s"value=$values,pure=true")
+          Some(<annotation name='org.jetbrains.annotations.Contract'>
+            <val name="value" val={values}/>
+            <val name="pure" val="true"/>
+          </annotation>)
         case (None, true) =>
-          Some("pure=true")
+          Some(<annotation name='org.jetbrains.annotations.Contract'>
+            <val name="pure" val="true"/>
+          </annotation>)
         case (_, _) =>
           None
       }
 
-      val contractAnnotation = contractString.map { values =>
-        <annotation name='org.jetbrains.annotations.Contract'>
-          <val val={values}/>
-        </annotation>
-      }
-
       contractAnnotation.foreach { ann =>
-        annotations = annotations.updated(key, ann :: annotations.getOrElse(key, Nil))
+        annotations = annotations.updated(annKey, ann :: annotations.getOrElse(annKey, Nil))
       }
 
     }
 
-    for ((key, value) <- nullableResults) {
-      val method = key.method
-      val annKey = annotationKey(method, extras(method))
+    for {
+      (key, value) <- nullableResults
+      annKey <- annotationKey(key.method, extras(key.method), knownClasses)
+    } {
       annotations = annotations.updated(annKey, annotations.getOrElse(annKey, Nil) ::: nullableResultAnnotations)
     }
 
-    annotations.map {
-      case (k, v) => <item name={k}>{v}</item>
-    }.toList.sortBy(s => (s \\ "@name").toString())
+    for (annKey <- notNullResults) {
+      annotations = annotations.updated(annKey, annotations.getOrElse(annKey, Nil) ::: notNullResultAnnotations)
+    }
+
+    val keys = annotations.keys.toList.sorted
+
+    keys.map {
+      k => <item name={k}>{annotations(k)}</item>
+    }
   }
 
+  def fullMethod(method: Method, knownClasses: Set[String], extra: MethodExtra): Boolean = {
+    isKnowType(Type.getReturnType(method.methodDesc), knownClasses) &&
+      Type.getArgumentTypes(method.methodDesc).forall(isKnowType(_, knownClasses)) &&
+      (extra.access & Opcodes.ACC_SYNTHETIC) == 0 &&
+      isGoodName(method.internalClassName)
+  }
+
+  def isGoodName(internalClassName: String): Boolean = {
+    val qn = internalName2Idea(internalClassName)
+    val parts = qn.split('.')
+    !parts.exists(s => s.forall(Character.isDigit))
+  }
+
+  def isKnowType(tp: Type, knownClasses: Set[String]): Boolean =
+    tp.getSort match {
+      case Type.ARRAY =>
+        isKnowType(tp.getElementType, knownClasses)
+      case Type.OBJECT =>
+        knownClasses(tp.getInternalName)
+      case _ =>
+        true
+    }
+
   // the main logic to interact with IDEA
-  def annotationKey(method: Method, extra: MethodExtra): String =
-    if (method.methodName == "<init>")
-      s"${internalName2Idea(method.internalClassName)} ${simpleName(method.internalClassName)}${parameters(method, extra)}"
+  def annotationKey(method: Method, extra: MethodExtra, knownClasses: Set[String]): Option[String] =
+    if (!fullMethod(method, knownClasses, extra))
+      None
+    else if (method.methodName == "<init>")
+      Some(s"${internalName2Idea(method.internalClassName)} ${simpleName(method.internalClassName)}${parameters(method, extra)}")
     else
-      s"${internalName2Idea(method.internalClassName)} ${returnType(method, extra)} ${method.methodName}${parameters(method, extra)}"
+      Some(s"${internalName2Idea(method.internalClassName)} ${returnType(method, extra)} ${method.methodName}${parameters(method, extra)}")
 
   private def returnType(method: Method, extra: MethodExtra): String =
     extra.signature match {
@@ -240,7 +278,7 @@ object XmlUtils {
         })
         sb.toString()
       case None =>
-        binaryName2Idea(Type.getReturnType(method.methodDesc).getClassName)
+        tp2Idea(Type.getReturnType(method.methodDesc))
     }
 
   private def simpleName(internalName: String): String = {
@@ -259,7 +297,7 @@ object XmlUtils {
         new SignatureReader(sig).accept(renderer)
         renderer.parameters()
       case _ =>
-        Type.getArgumentTypes(method.methodDesc).map(t => binaryName2Idea(t.getClassName)).mkString("(", ", ", ")")
+        Type.getArgumentTypes(method.methodDesc).map(t => tp2Idea(t)).mkString("(", ", ", ")")
     }
     if ((extra.access & Opcodes.ACC_VARARGS) != 0) result.replace("[])", "...)")
     else result
@@ -275,7 +313,8 @@ object XmlUtils {
   }
 
   // class FQN as it rendered by IDEA in external annotations
-  private def binaryName2Idea(binaryName: String): String = {
+  private def tp2Idea(tp: Type): String = {
+    val binaryName = tp.getClassName
     if (binaryName.indexOf('$') >= 0) {
       REGEX_PATTERN.replaceAllIn(binaryName, "\\.")
     } else {
