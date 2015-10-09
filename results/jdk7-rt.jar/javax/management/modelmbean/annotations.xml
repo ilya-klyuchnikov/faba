@@ -19,7 +19,12 @@
   </item>
   <item name="javax.management.modelmbean.DescriptorSupport boolean isMagic(char)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="javax.management.modelmbean.DescriptorSupport boolean validateField(java.lang.String, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val val="&quot;null,_-&gt;false&quot;"/>
     </annotation>
   </item>
   <item name="javax.management.modelmbean.DescriptorSupport boolean validateField(java.lang.String, java.lang.Object) 0">
@@ -28,47 +33,42 @@
   <item name="javax.management.modelmbean.DescriptorSupport boolean validateField(java.lang.String, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="javax.management.modelmbean.DescriptorSupport boolean validateField(java.lang.String, java.lang.Object)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_-&gt;false&quot;"/>
-    </annotation>
-  </item>
   <item name="javax.management.modelmbean.DescriptorSupport java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.modelmbean.DescriptorSupport java.lang.Object getFieldValue(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.management.modelmbean.DescriptorSupport java.lang.Object parseQuotedFieldValue(java.lang.String) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="javax.management.modelmbean.DescriptorSupport java.lang.Object parseQuotedFieldValue(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="javax.management.modelmbean.DescriptorSupport java.lang.Object[] getFieldValues(java.lang.String...) 0">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
+  <item name="javax.management.modelmbean.DescriptorSupport java.lang.Object parseQuotedFieldValue(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.management.modelmbean.DescriptorSupport java.lang.String makeFieldValue(java.lang.Object) 0">
+  <item name="javax.management.modelmbean.DescriptorSupport java.lang.Object[] getFieldValues(java.lang.String...) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.modelmbean.DescriptorSupport java.lang.String makeFieldValue(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.management.modelmbean.DescriptorSupport java.lang.String quote(java.lang.String) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
+  <item name="javax.management.modelmbean.DescriptorSupport java.lang.String makeFieldValue(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.modelmbean.DescriptorSupport java.lang.String quote(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null&quot;"/>
     </annotation>
   </item>
+  <item name="javax.management.modelmbean.DescriptorSupport java.lang.String quote(java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="javax.management.modelmbean.DescriptorSupport java.lang.String toXMLString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.management.modelmbean.DescriptorSupport java.lang.String unquote(java.lang.String) 0">
+  <item name="javax.management.modelmbean.DescriptorSupport java.lang.String unquote(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.management.modelmbean.DescriptorSupport java.lang.String unquote(java.lang.String)">
+  <item name="javax.management.modelmbean.DescriptorSupport java.lang.String unquote(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.modelmbean.DescriptorSupport void init(java.util.Map&lt;java.lang.String,?&gt;) 0">
@@ -159,13 +159,13 @@
   <item name="javax.management.modelmbean.ModelMBeanInfoSupport java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.modelmbean.ModelMBeanInfoSupport javax.management.Descriptor getDescriptor(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.management.modelmbean.ModelMBeanInfoSupport javax.management.Descriptor getDescriptor(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.modelmbean.ModelMBeanInfoSupport javax.management.Descriptor getDescriptor(java.lang.String, java.lang.String) 1">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.management.modelmbean.ModelMBeanInfoSupport javax.management.Descriptor getDescriptor(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.modelmbean.ModelMBeanInfoSupport javax.management.Descriptor validDescriptor(javax.management.Descriptor)">
@@ -249,13 +249,13 @@
   <item name="javax.management.modelmbean.ModelMBeanOperationInfo void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.management.modelmbean.RequiredModelMBean boolean hasNotification(javax.management.modelmbean.ModelMBeanInfo, java.lang.String) 0">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
   <item name="javax.management.modelmbean.RequiredModelMBean boolean hasNotification(javax.management.modelmbean.ModelMBeanInfo, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null,_-&gt;false&quot;"/>
     </annotation>
+  </item>
+  <item name="javax.management.modelmbean.RequiredModelMBean boolean hasNotification(javax.management.modelmbean.ModelMBeanInfo, java.lang.String) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.modelmbean.RequiredModelMBean java.lang.Object getAttribute(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -266,25 +266,19 @@
   <item name="javax.management.modelmbean.RequiredModelMBean java.lang.Object invokeMethod(java.lang.String, java.lang.reflect.Method, java.lang.Object, java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="javax.management.modelmbean.RequiredModelMBean java.lang.Object resolveForCacheValue(javax.management.Descriptor) 0">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
   <item name="javax.management.modelmbean.RequiredModelMBean java.lang.Object resolveForCacheValue(javax.management.Descriptor)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="javax.management.modelmbean.RequiredModelMBean java.lang.String printModelMBeanInfo(javax.management.modelmbean.ModelMBeanInfo) 0">
+  <item name="javax.management.modelmbean.RequiredModelMBean java.lang.Object resolveForCacheValue(javax.management.Descriptor) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.modelmbean.RequiredModelMBean java.lang.String printModelMBeanInfo(javax.management.modelmbean.ModelMBeanInfo)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.management.modelmbean.RequiredModelMBean java.lang.reflect.Method findRMMBMethod(java.lang.String, java.lang.Object, java.lang.String, java.lang.String[]) 1">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.management.modelmbean.RequiredModelMBean java.lang.reflect.Method findRMMBMethod(java.lang.String, java.lang.Object, java.lang.String, java.lang.String[]) 2">
+  <item name="javax.management.modelmbean.RequiredModelMBean java.lang.String printModelMBeanInfo(javax.management.modelmbean.ModelMBeanInfo) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.modelmbean.RequiredModelMBean java.lang.reflect.Method findRMMBMethod(java.lang.String, java.lang.Object, java.lang.String, java.lang.String[])">
@@ -293,16 +287,17 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.management.modelmbean.RequiredModelMBean java.lang.reflect.Method findRMMBMethod(java.lang.String, java.lang.Object, java.lang.String, java.lang.String[]) 1">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.management.modelmbean.RequiredModelMBean java.lang.reflect.Method findRMMBMethod(java.lang.String, java.lang.Object, java.lang.String, java.lang.String[]) 2">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
   <item name="javax.management.modelmbean.RequiredModelMBean java.lang.reflect.Method resolveMethod(java.lang.Class&lt;?&gt;, java.lang.String, java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.modelmbean.RequiredModelMBean java.lang.reflect.Method resolveMethod(java.lang.Class&lt;?&gt;, java.lang.String, java.lang.String[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="javax.management.modelmbean.RequiredModelMBean java.util.Map access$000()">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
-    </annotation>
   </item>
   <item name="javax.management.modelmbean.RequiredModelMBean javax.management.AttributeList getAttributes(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -310,13 +305,13 @@
   <item name="javax.management.modelmbean.RequiredModelMBean javax.management.AttributeList setAttributes(javax.management.AttributeList) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="javax.management.modelmbean.RequiredModelMBean javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName) 1">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="javax.management.modelmbean.RequiredModelMBean javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,!null-&gt;!null&quot;"/>
     </annotation>
+  </item>
+  <item name="javax.management.modelmbean.RequiredModelMBean javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName) 1">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.modelmbean.RequiredModelMBean javax.management.modelmbean.ModelMBeanInfo createDefaultModelMBeanInfo()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -347,7 +342,7 @@
   </item>
   <item name="javax.management.modelmbean.RequiredModelMBean void preDeregister()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="javax.management.modelmbean.RequiredModelMBean void removeAttributeChangeNotificationListener(javax.management.NotificationListener, java.lang.String) 0">
@@ -390,39 +385,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.modelmbean.RequiredModelMBean void writeToLog(java.lang.String, java.lang.String) 1">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.management.modelmbean.RequiredModelMBean.1 java.lang.Class&lt;?&gt; run()">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.management.modelmbean.RequiredModelMBean.1 java.lang.Object run()">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.management.modelmbean.RequiredModelMBean.2 java.lang.Object run()">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.management.modelmbean.RequiredModelMBean.2 java.lang.Void run()">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.management.modelmbean.RequiredModelMBean.3 java.lang.Class&lt;?&gt; run()">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.management.modelmbean.RequiredModelMBean.3 java.lang.Object run()">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.management.modelmbean.RequiredModelMBean.4 java.lang.Object run()">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.management.modelmbean.RequiredModelMBean.5 java.lang.Class&lt;?&gt; run()">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.management.modelmbean.RequiredModelMBean.5 java.lang.Object run()">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.management.modelmbean.RequiredModelMBean.6 java.lang.Class&lt;?&gt; run()">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="javax.management.modelmbean.RequiredModelMBean.6 java.lang.Object run()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.management.modelmbean.XMLParseException XMLParseException(java.lang.Exception, java.lang.String) 0">

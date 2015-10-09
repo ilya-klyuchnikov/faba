@@ -31,7 +31,7 @@
   </item>
   <item name="sun.security.validator.KeyStores KeyStores()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="sun.security.validator.KeyStores java.util.Set&lt;java.security.cert.X509Certificate&gt; getTrustedCerts(java.security.KeyStore)">
@@ -58,13 +58,16 @@
   </item>
   <item name="sun.security.validator.PKIXValidator int getCertPathLength()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="sun.security.validator.PKIXValidator java.security.cert.PKIXBuilderParameters getParameters()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.security.validator.PKIXValidator java.security.cert.X509Certificate[] doBuild(java.security.cert.X509Certificate[], java.util.Collection&lt;java.security.cert.X509Certificate&gt;, java.security.cert.PKIXBuilderParameters)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.validator.PKIXValidator java.security.cert.X509Certificate[] doBuild(java.security.cert.X509Certificate[], java.util.Collection&lt;java.security.cert.X509Certificate&gt;, java.security.cert.PKIXBuilderParameters) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -72,13 +75,13 @@
   <item name="sun.security.validator.PKIXValidator java.security.cert.X509Certificate[] doBuild(java.security.cert.X509Certificate[], java.util.Collection&lt;java.security.cert.X509Certificate&gt;, java.security.cert.PKIXBuilderParameters) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.security.validator.PKIXValidator java.security.cert.X509Certificate[] doBuild(java.security.cert.X509Certificate[], java.util.Collection&lt;java.security.cert.X509Certificate&gt;, java.security.cert.PKIXBuilderParameters)">
+  <item name="sun.security.validator.PKIXValidator java.security.cert.X509Certificate[] doValidate(java.security.cert.X509Certificate[], java.security.cert.PKIXBuilderParameters)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.validator.PKIXValidator java.security.cert.X509Certificate[] doValidate(java.security.cert.X509Certificate[], java.security.cert.PKIXBuilderParameters) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.security.validator.PKIXValidator java.security.cert.X509Certificate[] doValidate(java.security.cert.X509Certificate[], java.security.cert.PKIXBuilderParameters)">
+  <item name="sun.security.validator.PKIXValidator java.security.cert.X509Certificate[] engineValidate(java.security.cert.X509Certificate[], java.util.Collection&lt;java.security.cert.X509Certificate&gt;, java.security.AlgorithmConstraints, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.validator.PKIXValidator java.security.cert.X509Certificate[] engineValidate(java.security.cert.X509Certificate[], java.util.Collection&lt;java.security.cert.X509Certificate&gt;, java.security.AlgorithmConstraints, java.lang.Object) 0">
@@ -87,7 +90,7 @@
   <item name="sun.security.validator.PKIXValidator java.security.cert.X509Certificate[] engineValidate(java.security.cert.X509Certificate[], java.util.Collection&lt;java.security.cert.X509Certificate&gt;, java.security.AlgorithmConstraints, java.lang.Object) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="sun.security.validator.PKIXValidator java.security.cert.X509Certificate[] engineValidate(java.security.cert.X509Certificate[], java.util.Collection&lt;java.security.cert.X509Certificate&gt;, java.security.AlgorithmConstraints, java.lang.Object)">
+  <item name="sun.security.validator.PKIXValidator java.security.cert.X509Certificate[] toArray(java.security.cert.CertPath, java.security.cert.TrustAnchor)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.validator.PKIXValidator java.security.cert.X509Certificate[] toArray(java.security.cert.CertPath, java.security.cert.TrustAnchor) 0">
@@ -96,12 +99,9 @@
   <item name="sun.security.validator.PKIXValidator java.security.cert.X509Certificate[] toArray(java.security.cert.CertPath, java.security.cert.TrustAnchor) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.security.validator.PKIXValidator java.security.cert.X509Certificate[] toArray(java.security.cert.CertPath, java.security.cert.TrustAnchor)">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="sun.security.validator.PKIXValidator java.util.Collection&lt;java.security.cert.X509Certificate&gt; getTrustedCertificates()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="sun.security.validator.PKIXValidator void setDefaultParameters(java.lang.String) 0">
@@ -124,11 +124,11 @@
   <item name="sun.security.validator.SimpleValidator int checkExtensions(java.security.cert.X509Certificate, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.security.validator.SimpleValidator java.security.cert.X509Certificate getTrustedCertificate(java.security.cert.X509Certificate) 0">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="sun.security.validator.SimpleValidator java.security.cert.X509Certificate getTrustedCertificate(java.security.cert.X509Certificate)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.validator.SimpleValidator java.security.cert.X509Certificate getTrustedCertificate(java.security.cert.X509Certificate) 0">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.validator.SimpleValidator java.security.cert.X509Certificate[] buildTrustedChain(java.security.cert.X509Certificate[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -144,7 +144,7 @@
   </item>
   <item name="sun.security.validator.SimpleValidator java.util.Collection&lt;java.security.cert.X509Certificate&gt; getTrustedCertificates()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="sun.security.validator.SimpleValidator void checkKeyUsage(java.security.cert.X509Certificate, java.util.Set&lt;java.lang.String&gt;) 0">
@@ -153,10 +153,13 @@
   <item name="sun.security.validator.SimpleValidator void checkKeyUsage(java.security.cert.X509Certificate, java.util.Set&lt;java.lang.String&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.validator.Validator sun.security.validator.Validator getInstance(java.lang.String, java.lang.String, java.security.KeyStore)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
   <item name="sun.security.validator.Validator sun.security.validator.Validator getInstance(java.lang.String, java.lang.String, java.security.KeyStore) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.security.validator.Validator sun.security.validator.Validator getInstance(java.lang.String, java.lang.String, java.security.KeyStore)">
+  <item name="sun.security.validator.Validator sun.security.validator.Validator getInstance(java.lang.String, java.lang.String, java.security.cert.PKIXBuilderParameters)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.validator.Validator sun.security.validator.Validator getInstance(java.lang.String, java.lang.String, java.security.cert.PKIXBuilderParameters) 0">
@@ -168,7 +171,7 @@
   <item name="sun.security.validator.Validator sun.security.validator.Validator getInstance(java.lang.String, java.lang.String, java.security.cert.PKIXBuilderParameters) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.security.validator.Validator sun.security.validator.Validator getInstance(java.lang.String, java.lang.String, java.security.cert.PKIXBuilderParameters)">
+  <item name="sun.security.validator.Validator sun.security.validator.Validator getInstance(java.lang.String, java.lang.String, java.util.Collection&lt;java.security.cert.X509Certificate&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.validator.Validator sun.security.validator.Validator getInstance(java.lang.String, java.lang.String, java.util.Collection&lt;java.security.cert.X509Certificate&gt;) 0">
@@ -177,17 +180,14 @@
   <item name="sun.security.validator.Validator sun.security.validator.Validator getInstance(java.lang.String, java.lang.String, java.util.Collection&lt;java.security.cert.X509Certificate&gt;) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="sun.security.validator.Validator sun.security.validator.Validator getInstance(java.lang.String, java.lang.String, java.util.Collection&lt;java.security.cert.X509Certificate&gt;)">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
   <item name="sun.security.validator.ValidatorException java.lang.Object getErrorType()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="sun.security.validator.ValidatorException java.security.cert.X509Certificate getErrorCertificate()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
 </root>

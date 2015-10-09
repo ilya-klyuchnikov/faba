@@ -1,7 +1,7 @@
 <root>
   <item name="java.awt.dnd.DnDConstants DnDConstants()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DnDEventMulticaster java.awt.dnd.DragSourceListener add(java.awt.dnd.DragSourceListener, java.awt.dnd.DragSourceListener) 0">
@@ -16,21 +16,21 @@
   <item name="java.awt.dnd.DnDEventMulticaster java.awt.dnd.DragSourceMotionListener remove(java.awt.dnd.DragSourceMotionListener, java.awt.dnd.DragSourceMotionListener) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.awt.dnd.DnDEventMulticaster java.util.EventListener addInternal(java.util.EventListener, java.util.EventListener) 0">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
   <item name="java.awt.dnd.DnDEventMulticaster java.util.EventListener addInternal(java.util.EventListener, java.util.EventListener)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
     </annotation>
   </item>
-  <item name="java.awt.dnd.DnDEventMulticaster java.util.EventListener removeInternal(java.util.EventListener, java.util.EventListener) 0">
+  <item name="java.awt.dnd.DnDEventMulticaster java.util.EventListener addInternal(java.util.EventListener, java.util.EventListener) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.dnd.DnDEventMulticaster java.util.EventListener removeInternal(java.util.EventListener, java.util.EventListener)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null,_-&gt;null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.awt.dnd.DnDEventMulticaster java.util.EventListener removeInternal(java.util.EventListener, java.util.EventListener) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.dnd.DnDEventMulticaster void save(java.io.ObjectOutputStream, java.lang.String, java.util.EventListener) 2">
@@ -47,22 +47,22 @@
   </item>
   <item name="java.awt.dnd.DragGestureEvent int getDragAction()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragGestureEvent java.awt.Component getComponent()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragGestureEvent java.awt.Point getDragOrigin()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragGestureEvent java.awt.dnd.DragSource getDragSource()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragGestureEvent void readObject(java.io.ObjectInputStream) 0">
@@ -88,17 +88,17 @@
   </item>
   <item name="java.awt.dnd.DragGestureRecognizer int getSourceActions()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragGestureRecognizer java.awt.Component getComponent()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragGestureRecognizer java.awt.dnd.DragSource getDragSource()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragGestureRecognizer java.awt.event.InputEvent getTriggerEvent()">
@@ -115,8 +115,11 @@
   </item>
   <item name="java.awt.dnd.DragSource java.awt.datatransfer.FlavorMap getFlavorMap()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.awt.dnd.DragSource java.awt.dnd.DragSourceContext createDragSourceContext(java.awt.dnd.peer.DragSourceContextPeer, java.awt.dnd.DragGestureEvent, java.awt.Cursor, java.awt.Image, java.awt.Point, java.awt.datatransfer.Transferable, java.awt.dnd.DragSourceListener)">
+    <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.dnd.DragSource java.awt.dnd.DragSourceContext createDragSourceContext(java.awt.dnd.peer.DragSourceContextPeer, java.awt.dnd.DragGestureEvent, java.awt.Cursor, java.awt.Image, java.awt.Point, java.awt.datatransfer.Transferable, java.awt.dnd.DragSourceListener) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -128,9 +131,6 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.dnd.DragSource java.awt.dnd.DragSourceContext createDragSourceContext(java.awt.dnd.peer.DragSourceContextPeer, java.awt.dnd.DragGestureEvent, java.awt.Cursor, java.awt.Image, java.awt.Point, java.awt.datatransfer.Transferable, java.awt.dnd.DragSourceListener) 5">
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="java.awt.dnd.DragSource java.awt.dnd.DragSourceContext createDragSourceContext(java.awt.dnd.peer.DragSourceContextPeer, java.awt.dnd.DragGestureEvent, java.awt.Cursor, java.awt.Image, java.awt.Point, java.awt.datatransfer.Transferable, java.awt.dnd.DragSourceListener)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.dnd.DragSource void addDragSourceListener(java.awt.dnd.DragSourceListener) 0">
@@ -153,56 +153,56 @@
   </item>
   <item name="java.awt.dnd.DragSourceAdapter DragSourceAdapter()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.dnd.DragSourceAdapter void dragDropEnd(java.awt.dnd.DragSourceDropEvent)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragSourceAdapter void dragDropEnd(java.awt.dnd.DragSourceDropEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.awt.dnd.DragSourceAdapter void dragDropEnd(java.awt.dnd.DragSourceDropEvent)">
+  <item name="java.awt.dnd.DragSourceAdapter void dragEnter(java.awt.dnd.DragSourceDragEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragSourceAdapter void dragEnter(java.awt.dnd.DragSourceDragEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.awt.dnd.DragSourceAdapter void dragEnter(java.awt.dnd.DragSourceDragEvent)">
+  <item name="java.awt.dnd.DragSourceAdapter void dragExit(java.awt.dnd.DragSourceEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragSourceAdapter void dragExit(java.awt.dnd.DragSourceEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.awt.dnd.DragSourceAdapter void dragExit(java.awt.dnd.DragSourceEvent)">
+  <item name="java.awt.dnd.DragSourceAdapter void dragMouseMoved(java.awt.dnd.DragSourceDragEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragSourceAdapter void dragMouseMoved(java.awt.dnd.DragSourceDragEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.awt.dnd.DragSourceAdapter void dragMouseMoved(java.awt.dnd.DragSourceDragEvent)">
+  <item name="java.awt.dnd.DragSourceAdapter void dragOver(java.awt.dnd.DragSourceDragEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragSourceAdapter void dragOver(java.awt.dnd.DragSourceDragEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.awt.dnd.DragSourceAdapter void dragOver(java.awt.dnd.DragSourceDragEvent)">
+  <item name="java.awt.dnd.DragSourceAdapter void dropActionChanged(java.awt.dnd.DragSourceDragEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragSourceAdapter void dropActionChanged(java.awt.dnd.DragSourceDragEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="java.awt.dnd.DragSourceAdapter void dropActionChanged(java.awt.dnd.DragSourceDragEvent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
-    </annotation>
   </item>
   <item name="java.awt.dnd.DragSourceContext DragSourceContext(java.awt.dnd.peer.DragSourceContextPeer, java.awt.dnd.DragGestureEvent, java.awt.Cursor, java.awt.Image, java.awt.Point, java.awt.datatransfer.Transferable, java.awt.dnd.DragSourceListener) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -218,22 +218,22 @@
   </item>
   <item name="java.awt.dnd.DragSourceContext int getSourceActions()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragSourceContext java.awt.Cursor getCursor()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragSourceContext java.awt.datatransfer.Transferable getTransferable()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragSourceContext java.awt.dnd.DragGestureEvent getTrigger()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragSourceContext void addDragSourceListener(java.awt.dnd.DragSourceListener) 0">
@@ -254,23 +254,6 @@
   <item name="java.awt.dnd.DragSourceContext void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
-  <item name="java.awt.dnd.DragSourceContext.1 boolean isDataFlavorSupported(java.awt.datatransfer.DataFlavor) 0">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="java.awt.dnd.DragSourceContext.1 boolean isDataFlavorSupported(java.awt.datatransfer.DataFlavor)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="value=&quot;!null-&gt;false;null-&gt;false&quot;,pure=true"/>
-    </annotation>
-  </item>
-  <item name="java.awt.dnd.DragSourceContext.1 java.awt.datatransfer.DataFlavor[] getTransferDataFlavors()">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
-    </annotation>
-    <annotation name="org.jetbrains.annotations.NotNull"/>
-  </item>
-  <item name="java.awt.dnd.DragSourceContext.1 java.lang.Object getTransferData(java.awt.datatransfer.DataFlavor) 0">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
   <item name="java.awt.dnd.DragSourceDragEvent DragSourceDragEvent(java.awt.dnd.DragSourceContext, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -279,22 +262,22 @@
   </item>
   <item name="java.awt.dnd.DragSourceDragEvent int getGestureModifiers()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragSourceDragEvent int getGestureModifiersEx()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragSourceDragEvent int getTargetActions()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragSourceDragEvent int getUserAction()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragSourceDropEvent DragSourceDropEvent(java.awt.dnd.DragSourceContext) 0">
@@ -308,12 +291,12 @@
   </item>
   <item name="java.awt.dnd.DragSourceDropEvent boolean getDropSuccess()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragSourceDropEvent int getDropAction()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragSourceEvent DragSourceEvent(java.awt.dnd.DragSourceContext) 0">
@@ -324,12 +307,12 @@
   </item>
   <item name="java.awt.dnd.DragSourceEvent int getX()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragSourceEvent int getY()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DragSourceEvent java.awt.Point getLocation()">
@@ -352,22 +335,22 @@
   </item>
   <item name="java.awt.dnd.DropTarget boolean isActive()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DropTarget int getDefaultActions()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DropTarget java.awt.Component getComponent()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DropTarget java.awt.datatransfer.FlavorMap getFlavorMap()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DropTarget java.awt.dnd.DropTarget.DropTargetAutoScroller createDropTargetAutoScroller(java.awt.Component, java.awt.Point)">
@@ -378,7 +361,7 @@
   </item>
   <item name="java.awt.dnd.DropTarget java.awt.dnd.DropTargetContext getDropTargetContext()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DropTarget void addDropTargetListener(java.awt.dnd.DropTargetListener) 0">
@@ -404,52 +387,52 @@
   </item>
   <item name="java.awt.dnd.DropTargetAdapter DropTargetAdapter()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.dnd.DropTargetAdapter void dragEnter(java.awt.dnd.DropTargetDragEvent)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DropTargetAdapter void dragEnter(java.awt.dnd.DropTargetDragEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.awt.dnd.DropTargetAdapter void dragEnter(java.awt.dnd.DropTargetDragEvent)">
+  <item name="java.awt.dnd.DropTargetAdapter void dragExit(java.awt.dnd.DropTargetEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DropTargetAdapter void dragExit(java.awt.dnd.DropTargetEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.awt.dnd.DropTargetAdapter void dragExit(java.awt.dnd.DropTargetEvent)">
+  <item name="java.awt.dnd.DropTargetAdapter void dragOver(java.awt.dnd.DropTargetDragEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DropTargetAdapter void dragOver(java.awt.dnd.DropTargetDragEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.awt.dnd.DropTargetAdapter void dragOver(java.awt.dnd.DropTargetDragEvent)">
+  <item name="java.awt.dnd.DropTargetAdapter void dropActionChanged(java.awt.dnd.DropTargetDragEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DropTargetAdapter void dropActionChanged(java.awt.dnd.DropTargetDragEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
-  </item>
-  <item name="java.awt.dnd.DropTargetAdapter void dropActionChanged(java.awt.dnd.DropTargetDragEvent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
-    </annotation>
   </item>
   <item name="java.awt.dnd.DropTargetContext java.awt.datatransfer.Transferable createTransferableProxy(java.awt.datatransfer.Transferable, boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.dnd.DropTargetContext java.awt.dnd.DropTarget getDropTarget()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DropTargetContext java.awt.dnd.peer.DropTargetContextPeer getDropTargetContextPeer()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DropTargetContext java.util.List&lt;java.awt.datatransfer.DataFlavor&gt; getCurrentDataFlavorsAsList()">
@@ -463,17 +446,17 @@
   </item>
   <item name="java.awt.dnd.DropTargetDragEvent int getDropAction()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DropTargetDragEvent int getSourceActions()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DropTargetDragEvent java.awt.Point getLocation()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DropTargetDropEvent DropTargetDropEvent(java.awt.dnd.DropTargetContext, java.awt.Point, int, int) 0">
@@ -490,22 +473,22 @@
   </item>
   <item name="java.awt.dnd.DropTargetDropEvent boolean isLocalTransfer()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DropTargetDropEvent int getDropAction()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DropTargetDropEvent int getSourceActions()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DropTargetDropEvent java.awt.Point getLocation()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.DropTargetEvent DropTargetEvent(java.awt.dnd.DropTargetContext) 0">
@@ -513,7 +496,7 @@
   </item>
   <item name="java.awt.dnd.DropTargetEvent java.awt.dnd.DropTargetContext getDropTargetContext()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.MouseDragGestureRecognizer MouseDragGestureRecognizer(java.awt.dnd.DragSource) 0">
@@ -531,83 +514,73 @@
   <item name="java.awt.dnd.MouseDragGestureRecognizer MouseDragGestureRecognizer(java.awt.dnd.DragSource, java.awt.Component, int, java.awt.dnd.DragGestureListener) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.awt.dnd.MouseDragGestureRecognizer void mouseClicked(java.awt.event.MouseEvent)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.awt.dnd.MouseDragGestureRecognizer void mouseClicked(java.awt.event.MouseEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.awt.dnd.MouseDragGestureRecognizer void mouseClicked(java.awt.event.MouseEvent)">
+  <item name="java.awt.dnd.MouseDragGestureRecognizer void mouseDragged(java.awt.event.MouseEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.MouseDragGestureRecognizer void mouseDragged(java.awt.event.MouseEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.awt.dnd.MouseDragGestureRecognizer void mouseDragged(java.awt.event.MouseEvent)">
+  <item name="java.awt.dnd.MouseDragGestureRecognizer void mouseEntered(java.awt.event.MouseEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.MouseDragGestureRecognizer void mouseEntered(java.awt.event.MouseEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.awt.dnd.MouseDragGestureRecognizer void mouseEntered(java.awt.event.MouseEvent)">
+  <item name="java.awt.dnd.MouseDragGestureRecognizer void mouseExited(java.awt.event.MouseEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.MouseDragGestureRecognizer void mouseExited(java.awt.event.MouseEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.awt.dnd.MouseDragGestureRecognizer void mouseExited(java.awt.event.MouseEvent)">
+  <item name="java.awt.dnd.MouseDragGestureRecognizer void mouseMoved(java.awt.event.MouseEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.MouseDragGestureRecognizer void mouseMoved(java.awt.event.MouseEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.awt.dnd.MouseDragGestureRecognizer void mouseMoved(java.awt.event.MouseEvent)">
+  <item name="java.awt.dnd.MouseDragGestureRecognizer void mousePressed(java.awt.event.MouseEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.MouseDragGestureRecognizer void mousePressed(java.awt.event.MouseEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.awt.dnd.MouseDragGestureRecognizer void mousePressed(java.awt.event.MouseEvent)">
+  <item name="java.awt.dnd.MouseDragGestureRecognizer void mouseReleased(java.awt.event.MouseEvent)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.awt.dnd.MouseDragGestureRecognizer void mouseReleased(java.awt.event.MouseEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
-  <item name="java.awt.dnd.MouseDragGestureRecognizer void mouseReleased(java.awt.event.MouseEvent)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
-    </annotation>
-  </item>
   <item name="java.awt.dnd.SerializationTester SerializationTester()">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
+      <val name="pure" val="true"/>
     </annotation>
-  </item>
-  <item name="java.awt.dnd.SerializationTester boolean test(java.lang.Object) 0">
-    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.dnd.SerializationTester boolean test(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
-  <item name="java.awt.dnd.SerializationTester.1 1()">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
-    </annotation>
-  </item>
-  <item name="java.awt.dnd.SerializationTester.1 void write(int)">
-    <annotation name="org.jetbrains.annotations.Contract">
-      <val val="pure=true"/>
-    </annotation>
+  <item name="java.awt.dnd.SerializationTester boolean test(java.lang.Object) 0">
+    <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
 </root>
