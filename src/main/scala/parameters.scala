@@ -292,7 +292,7 @@ class NotNullInAnalysis(val richControlFlow: RichControlFlow, val direction: Dir
     case _ =>
       ParametersAnalysis.notNullExecute += 1
       val nextFrame = new Frame(frame)
-      NonNullInterpreter.reset()
+      NonNullInterpreter.reset(false)
       nextFrame.execute(insnNode, NonNullInterpreter)
       (nextFrame, NonNullInterpreter.getSubResult)
   }
@@ -372,7 +372,7 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
       val frame = conf.frame
       val insnNode = methodNode.instructions.get(insnIndex)
       val nextHistory = if (isLoopEnter) conf :: history else history
-      val (nextFrame, localSubResult, top) = execute(frame, insnNode)
+      val (nextFrame, localSubResult, top) = execute(frame, insnNode, taken)
 
       if (localSubResult == NPE || top) {
         earlyResult = Some(NPE)
@@ -430,13 +430,13 @@ class NullableInAnalysis(val richControlFlow: RichControlFlow, val direction: Di
     }
   }
 
-  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode) = insnNode.getType match {
+  private def execute(frame: Frame[BasicValue], insnNode: AbstractInsnNode, taken: Boolean) = insnNode.getType match {
     case AbstractInsnNode.LABEL | AbstractInsnNode.LINE | AbstractInsnNode.FRAME =>
       (frame, Identity, false)
     case _ =>
       ParametersAnalysis.nullableExecute += 1
       val nextFrame = new Frame(frame)
-      NullableInterpreter.reset()
+      NullableInterpreter.reset(taken)
       nextFrame.execute(insnNode, NullableInterpreter)
       (nextFrame, NullableInterpreter.getSubResult, NullableInterpreter.top)
   }
@@ -447,9 +447,11 @@ abstract class Interpreter extends BasicInterpreter {
   var top = false
   val nullable: Boolean
   protected var _subResult: Result = Identity
-  final def reset(): Unit = {
+  var taken = false
+  final def reset(tk: Boolean): Unit = {
     _subResult = Identity
     top = false
+    taken = tk
   }
 
   def combine(res1: Result, res2: Result): Result
@@ -516,7 +518,7 @@ abstract class Interpreter extends BasicInterpreter {
         val stable = opCode == INVOKESTATIC || opCode == INVOKESPECIAL
         val mNode = insn.asInstanceOf[MethodInsnNode]
         for (i <- shift until values.size()) {
-          if (values.get(i).isInstanceOf[ParamValue]) {
+          if (values.get(i).isInstanceOf[ParamValue] || (values.get(i).isInstanceOf[NullValue] && mNode.name == "<init>")) {
             val method = Method(mNode.owner, mNode.name, mNode.desc)
             _subResult = combine(_subResult, ConditionalNPE(Key(method, In(i - shift), stable)))
           }
@@ -536,4 +538,11 @@ object NonNullInterpreter extends Interpreter {
 object NullableInterpreter extends Interpreter {
   override val nullable = true
   override def combine(res1: Result, res2: Result): Result = Result.join(res1, res2)
+
+  override def newOperation(insn: AbstractInsnNode): BasicValue =
+    insn.getOpcode match {
+      case ACONST_NULL if taken =>
+        NullValue()
+      case _ => super.newOperation(insn)
+  }
 }
