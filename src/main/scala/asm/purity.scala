@@ -65,7 +65,12 @@ object PurityAnalysis {
           return Equation(aKey, finalTop)
         case INVOKESPECIAL | INVOKESTATIC =>
           val mNode = insn.asInstanceOf[MethodInsnNode]
-          calls += Key(Method(mNode.owner, mNode.name, mNode.desc), Out, stable = true)
+          if (isArrayCopy(mNode) && ownedInsns(insns.indexOf(insn))) {
+            // nothing
+          }
+          else {
+            calls += Key(Method(mNode.owner, mNode.name, mNode.desc), Out, stable = true)
+          }
         case INVOKEVIRTUAL =>
           val mNode = insn.asInstanceOf[MethodInsnNode]
           calls += Key(Method(mNode.owner, mNode.name, mNode.desc), Out, stable = false)
@@ -78,6 +83,9 @@ object PurityAnalysis {
     else
       Equation(aKey, Pending(calls.map(k => Component(Values.Top, Set(k)))))
   }
+
+  def isArrayCopy(mnode: MethodInsnNode) =
+    mnode.owner == "java/lang/System" && mnode.name == "arraycopy"
 
   class OwnershipInterpreter(val insns: InsnList) extends SourceInterpreter {
     // all values except ones created in this method (new objects and new arrays) are unknown
@@ -131,6 +139,10 @@ object PurityAnalysis {
           new SourceValue(1, insn)
         case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL =>
           val mNode = insn.asInstanceOf[MethodInsnNode]
+          // arraycopy(src, srcPos, dest, destPos, length)
+          if (isArrayCopy(mNode)) {
+            ownedInsn(insns.indexOf(insn)) = !values.get(2).insns.isEmpty
+          }
           val retType = Type.getReturnType(mNode.desc)
           if (retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY)
             unknownSourceVal1
