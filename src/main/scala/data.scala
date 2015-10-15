@@ -42,7 +42,12 @@ case class Key(method: Method, direction: Direction, stable: Boolean, negated: B
 }
 
 object Values extends Enumeration {
-  val Bot, NotNull, Null, True, False, Pure, Top = Value
+  // current hack for advanced equations (see purity.scala)
+  // ThisObject, LocalObject, NonLocalObjects - receivers
+  // ThisObject - this
+  // LocalObject - object created in this method (method being analyzed)
+  // NonLocalObject - we do not know about origins
+  val Bot, NotNull, Null, True, False, Pure, LocalEffect, ThisObject, LocalObject, NonLocalObject, Top = Value
 }
 
 object ValuesNegator extends Negator[Value] {
@@ -107,6 +112,7 @@ object XmlUtils {
   val REGEX_PATTERN = "(?<=[^\\$\\.])\\${1}(?=[^\\$])".r // disallow .$ or $$
   val nullableResultAnnotations = List(<annotation name='org.jetbrains.annotations.Nullable'/>)
   val notNullResultAnnotations = List(<annotation name='org.jetbrains.annotations.NotNull'/>)
+  val localAnnotations = List(<annotation name='org.jetbrains.annotations.LocalEffect'/>)
   val notNullAnn = <annotation name='org.jetbrains.annotations.NotNull'/>
 
   // intermediate data structure to serialize @Contract annotations
@@ -171,6 +177,12 @@ object XmlUtils {
           contracts(key.method) = new Contract()
         }
         contracts(key.method).pure = true
+      }
+      if (value == Values.LocalEffect) {
+        val method = key.method
+        for (annKey <- annotationKey(method, extras(method), knownClasses)) {
+          annotations = annotations.updated(annKey, annotations.getOrElse(annKey, Nil) ::: localAnnotations)
+        }
       }
     }
 

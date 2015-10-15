@@ -4,7 +4,7 @@ import _root_.java.io.{PrintWriter, File}
 import java.nio.file.attribute.BasicFileAttributes
 import java.nio.file._
 
-import faba.asm.ParamsValue
+import faba.asm.{PurityAnalysis, ParamsValue}
 import org.objectweb.asm.tree.MethodNode
 
 import faba.cfg._
@@ -22,7 +22,7 @@ class MainProcessor extends FabaProcessor {
   val nullableParamsSolver = new Solver[Key, Values.Value](ValuesNegator, doNothing)(ELattice(Values.Null, Values.Top))
   val contractsSolver = new Solver[Key, Values.Value](ValuesNegator, doNothing)(ELattice(Values.Bot, Values.Top))
   val nullableResultSolver = new NullableResultSolver[Key, Values.Value](ValuesNegator, doNothing)(ELattice(Values.Bot, Values.Null))
-  val puritySolver = new Solver[Key, Values.Value](ValuesNegator, doNothing)(ELattice(Values.Pure, Values.Top))
+  val puritySolver = new Solver[Key, Values.Value](ValuesNegator, doNothing)(PurityAnalysis.purityLattice)
 
   var notNullParamsTime: Long = 0
   var nullableParamsTime: Long = 0
@@ -180,7 +180,7 @@ class MainProcessor extends FabaProcessor {
         nullableResults.groupBy(_._1.method.internalPackageName)
 
       val puritySolutions =
-        puritySolver.solve().filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
+        puritySolver.solve().filter(p => p._2 == Values.Pure || p._2 == Values.LocalEffect)
 
       val byPackagePuritySolutions: Map[String, Map[Key, Values.Value]] =
         puritySolutions.groupBy(_._1.method.internalPackageName)
@@ -204,13 +204,18 @@ class MainProcessor extends FabaProcessor {
       }
       val writingEnd = System.currentTimeMillis()
 
+      val pureAnnotations = puritySolutions.count(_._2 == Values.Pure)
+      val localEffectAnnotations = puritySolutions.count(_._2 == Values.LocalEffect)
+
       println(s"solving took ${(solvingEnd - indexEnd) / 1000.0} sec")
       println(s"saving took ${(writingEnd - solvingEnd) / 1000.0} sec")
       println(s"${debugSolutions.size} all contracts")
       println(s"${prodSolutions.size} prod contracts")
       println(s"${nullableParams.size} @Nullable parameters")
       println(s"${nullableResults.size} @Nullable results")
-      println(s"${puritySolutions.size} @Pure methods")
+      println(s"${pureAnnotations} @Pure methods")
+      println(s"${localEffectAnnotations} @LocalEffect methods")
+
     }
 
     println("====")

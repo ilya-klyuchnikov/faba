@@ -44,7 +44,7 @@ trait Lattice[T] {
   val bot: T
 
   // |,  union
-  final def join(x: T, y: T): T =
+  def join(x: T, y: T): T =
     (x, y) match {
       case (`bot`, _) => y
       case (_, `bot`) => x
@@ -54,7 +54,7 @@ trait Lattice[T] {
     }
 
   // &, intersection
-  final def meet(x: T, y: T): T =
+  def meet(x: T, y: T): T =
     (x, y) match {
       case (`top`, _) => y
       case (_, `top`) => x
