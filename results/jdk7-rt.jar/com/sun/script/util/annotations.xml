@@ -1,4 +1,7 @@
 <root>
+  <item name="com.sun.script.util.BindingsBase BindingsBase()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.script.util.BindingsBase void checkKey(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -14,7 +17,13 @@
     </annotation>
   </item>
   <item name="com.sun.script.util.BindingsEntrySet java.util.Iterator&lt;java.util.Map.Entry&lt;java.lang.String,java.lang.Object&gt;&gt; iterator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.script.util.BindingsEntrySet.BindingsEntry BindingsEntry(com.sun.script.util.BindingsEntrySet, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.script.util.BindingsEntrySet.BindingsEntry java.lang.Object setValue(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -24,19 +33,35 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.script.util.BindingsEntrySet.BindingsIterator BindingsIterator(com.sun.script.util.BindingsEntrySet)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.script.util.BindingsEntrySet.BindingsIterator boolean hasNext()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.script.util.BindingsEntrySet.BindingsIterator com.sun.script.util.BindingsEntrySet.BindingsEntry next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.script.util.BindingsImpl BindingsImpl()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.script.util.BindingsImpl java.lang.Object get(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.script.util.BindingsImpl java.util.Set&lt;java.util.Map.Entry&lt;java.lang.String,java.lang.Object&gt;&gt; entrySet()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.script.util.BindingsImpl void setGlobal(javax.script.Bindings)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.script.util.BindingsImpl void setLocal(javax.script.Bindings)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.script.util.InterfaceImplementor InterfaceImplementor(javax.script.Invocable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.script.util.InterfaceImplementor T getInterface(java.lang.Object, java.lang.Class&lt;T&gt;)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -79,6 +104,9 @@
   </item>
   <item name="com.sun.script.util.InterfaceImplementor java.lang.Object[] convertArguments(java.lang.reflect.Method, java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.script.util.InterfaceImplementor.InterfaceImplementorInvocationHandler InterfaceImplementorInvocationHandler(com.sun.script.util.InterfaceImplementor, java.lang.Object, java.security.AccessControlContext)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.script.util.InterfaceImplementor.InterfaceImplementorInvocationHandler java.lang.Object invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

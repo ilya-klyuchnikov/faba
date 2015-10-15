@@ -83,6 +83,9 @@
   <item name="com.sun.xml.internal.fastinfoset.tools.PrintTable void printVocabulary(com.sun.xml.internal.fastinfoset.vocab.ParserVocabulary) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.tools.SAX2StAXWriter SAX2StAXWriter(javax.xml.stream.XMLStreamWriter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.tools.SAX2StAXWriter javax.xml.stream.XMLStreamWriter getWriter()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -184,6 +187,9 @@
   <item name="com.sun.xml.internal.fastinfoset.tools.SAXEventSerializer void comment(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.tools.SAXEventSerializer void endCDATA()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.tools.SAXEventSerializer void endDTD()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -219,6 +225,9 @@
   </item>
   <item name="com.sun.xml.internal.fastinfoset.tools.SAXEventSerializer void processingInstruction(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.tools.SAXEventSerializer void startCDATA()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.tools.SAXEventSerializer void startDTD(java.lang.String, java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -257,8 +266,23 @@
   <item name="com.sun.xml.internal.fastinfoset.tools.SAXEventSerializer void startPrefixMapping(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.fastinfoset.tools.SAXEventSerializer.AttributeValueHolder AttributeValueHolder(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.fastinfoset.tools.SAXEventSerializer.AttributeValueHolder int compareTo(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.tools.StAX2SAXReader StAX2SAXReader(javax.xml.stream.XMLStreamReader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.tools.StAX2SAXReader StAX2SAXReader(javax.xml.stream.XMLStreamReader, org.xml.sax.ContentHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.tools.StAX2SAXReader void setContentHandler(org.xml.sax.ContentHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.tools.StAX2SAXReader void setLexicalHandler(org.xml.sax.ext.LexicalHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.tools.TransformInputOutput TransformInputOutput()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -280,6 +304,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.tools.TransformInputOutput org.xml.sax.EntityResolver createRelativePathResolver(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.tools.TransformInputOutput void parse(java.io.InputStream, java.io.OutputStream, java.lang.String) 0">
@@ -401,6 +428,12 @@
   </item>
   <item name="com.sun.xml.internal.fastinfoset.tools.VocabularyGenerator void processingInstruction(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.tools.VocabularyGenerator void setAttributeValueSizeLimit(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.fastinfoset.tools.VocabularyGenerator void setCharacterContentChunkSizeLimit(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.fastinfoset.tools.VocabularyGenerator void setDocumentLocator(org.xml.sax.Locator)">
     <annotation name="org.jetbrains.annotations.Contract">

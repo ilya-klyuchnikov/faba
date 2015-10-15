@@ -1,4 +1,7 @@
 <root>
+  <item name="java.text.Annotation Annotation(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.text.Annotation java.lang.Object getValue()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -6,6 +9,9 @@
   </item>
   <item name="java.text.Annotation java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.AttributeEntry AttributeEntry(java.text.AttributedCharacterIterator.Attribute, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.AttributeEntry boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -109,8 +115,14 @@
   <item name="java.text.AttributedString void appendContents(java.lang.StringBuffer, java.text.CharacterIterator) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.AttributedString void createRunAttributeDataVectors()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.text.AttributedString void setAttributes(java.util.Map, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.text.AttributedString.AttributeMap AttributeMap(java.text.AttributedString, int, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.AttributedString.AttributeMap java.lang.Object get(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -164,6 +176,9 @@
   </item>
   <item name="java.text.AttributedString.AttributedStringIterator java.util.Map&lt;java.text.AttributedCharacterIterator.Attribute,java.lang.Object&gt; getAttributes()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.AttributedString.AttributedStringIterator void updateRunInfo()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.Bidi Bidi(char[], int, byte[], int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -261,6 +276,9 @@
   <item name="java.text.BreakIterator.BreakIteratorGetter java.text.BreakIterator getObject(java.text.spi.BreakIteratorProvider, java.util.Locale, java.lang.String, java.lang.Object...) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.CalendarBuilder CalendarBuilder()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.text.CalendarBuilder boolean isSet(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -300,6 +318,9 @@
   </item>
   <item name="java.text.CalendarBuilder java.util.Calendar establish(java.util.Calendar) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.CharacterIteratorFieldDelegate CharacterIteratorFieldDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.CharacterIteratorFieldDelegate java.text.AttributedCharacterIterator getIterator(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -452,6 +473,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.text.Collator Collator()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.text.Collator boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -512,6 +536,12 @@
   <item name="java.text.DateFormat java.util.Locale[] getAvailableLocales()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.DateFormat void setCalendar(java.util.Calendar)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DateFormat void setNumberFormat(java.text.NumberFormat)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.text.DateFormat.DateFormatGetter DateFormatGetter()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -567,6 +597,9 @@
   </item>
   <item name="java.text.DateFormatSymbols void setEras(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.DateFormatSymbols void setLocalPatternChars(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.DateFormatSymbols void setLocalPatternChars(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -835,6 +868,9 @@
   <item name="java.text.DecimalFormat java.lang.StringBuffer subformat(java.lang.StringBuffer, java.text.Format.FieldDelegate, boolean, boolean, int, int, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.DecimalFormat java.math.BigDecimal getBigDecimalMultiplier()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.text.DecimalFormat java.math.RoundingMode getRoundingMode()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -872,6 +908,42 @@
   </item>
   <item name="java.text.DecimalFormat void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.DecimalFormat void setDecimalSeparatorAlwaysShown(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormat void setGroupingSize(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormat void setMaximumFractionDigits(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormat void setMaximumIntegerDigits(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormat void setMinimumFractionDigits(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormat void setMinimumIntegerDigits(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormat void setMultiplier(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormat void setNegativePrefix(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormat void setNegativeSuffix(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormat void setParseBigDecimal(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormat void setPositivePrefix(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormat void setPositiveSuffix(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.DecimalFormat void setRoundingMode(java.math.RoundingMode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -984,8 +1056,47 @@
   <item name="java.text.DecimalFormatSymbols void setCurrency(java.util.Currency) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.DecimalFormatSymbols void setCurrencySymbol(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormatSymbols void setDecimalSeparator(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormatSymbols void setDigit(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.text.DecimalFormatSymbols void setExponentSeparator(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.DecimalFormatSymbols void setExponentialSymbol(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormatSymbols void setGroupingSeparator(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormatSymbols void setInfinity(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormatSymbols void setMinusSign(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormatSymbols void setMonetaryDecimalSeparator(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormatSymbols void setNaN(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormatSymbols void setPatternSeparator(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormatSymbols void setPerMill(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormatSymbols void setPercent(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DecimalFormatSymbols void setZeroDigit(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.DecimalFormatSymbols.DecimalFormatSymbolsGetter DecimalFormatSymbolsGetter()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1004,6 +1115,9 @@
   <item name="java.text.DictionaryBasedBreakIterator void setText(java.text.CharacterIterator) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.DigitList DigitList()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.text.DigitList boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1011,6 +1125,9 @@
   </item>
   <item name="java.text.DigitList boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.text.DigitList boolean fitsIntoLong(boolean, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.DigitList boolean isLongMIN_VALUE()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1021,6 +1138,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.text.DigitList char[] getDataChars(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.DigitList int hashCode()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1038,6 +1158,12 @@
   <item name="java.text.DigitList java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.DigitList void clear()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DigitList void extendDigits(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.text.DigitList void set(boolean, java.lang.String, int, boolean) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1047,10 +1173,31 @@
   <item name="java.text.DigitList void set(boolean, java.math.BigInteger, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.DigitList void setRoundingMode(java.math.RoundingMode)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.DontCareFieldPosition DontCareFieldPosition()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.text.DontCareFieldPosition java.text.Format.FieldDelegate getFieldDelegate()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.text.EntryPair EntryPair(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.EntryPair EntryPair(java.lang.String, int, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.FieldPosition FieldPosition(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.FieldPosition FieldPosition(java.text.Format.Field)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.FieldPosition FieldPosition(java.text.Format.Field, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.FieldPosition boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1089,7 +1236,19 @@
     </annotation>
   </item>
   <item name="java.text.FieldPosition java.text.Format.FieldDelegate getFieldDelegate()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.FieldPosition void setBeginIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.FieldPosition void setEndIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.FieldPosition.Delegate Delegate(java.text.FieldPosition)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.FieldPosition.Delegate void formatted(int, java.text.Format.Field, java.lang.Object, int, int, java.lang.StringBuffer) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1259,6 +1418,9 @@
   <item name="java.text.MessageFormat void setFormats(java.text.Format[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.MessageFormat void setLocale(java.util.Locale)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.text.Normalizer Normalizer()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1275,6 +1437,12 @@
   </item>
   <item name="java.text.Normalizer java.lang.String normalize(java.lang.CharSequence, java.text.Normalizer.Form) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.Normalizer.Form Form(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.NumberFormat NumberFormat()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.NumberFormat boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1337,6 +1505,24 @@
   <item name="java.text.NumberFormat void setCurrency(java.util.Currency) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.text.NumberFormat void setGroupingUsed(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.NumberFormat void setMaximumFractionDigits(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.NumberFormat void setMaximumIntegerDigits(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.NumberFormat void setMinimumFractionDigits(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.NumberFormat void setMinimumIntegerDigits(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.NumberFormat void setParseIntegerOnly(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.text.NumberFormat void setRoundingMode(java.math.RoundingMode) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1365,6 +1551,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.text.ParsePosition ParsePosition(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.text.ParsePosition boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="value" val="&quot;null-&gt;false&quot;"/>
@@ -1391,6 +1580,12 @@
   </item>
   <item name="java.text.ParsePosition java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.ParsePosition void setErrorIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.ParsePosition void setIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.PatternEntry PatternEntry(int, java.lang.StringBuffer, java.lang.StringBuffer) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1448,6 +1643,9 @@
   <item name="java.text.PatternEntry void appendQuotedExtension(java.lang.StringBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.PatternEntry.Parser Parser(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.text.PatternEntry.Parser java.text.PatternEntry next()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1496,8 +1694,14 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.text.RBCollationTables.BuildAPI BuildAPI(java.text.RBCollationTables)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.text.RBTableBuilder int addExpansion(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.RBTableBuilder int increment(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.RBTableBuilder java.util.Vector getContractValues(int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1562,6 +1766,9 @@
   </item>
   <item name="java.text.RuleBasedBreakIterator void checkOffset(int, java.text.CharacterIterator) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.text.RuleBasedBreakIterator void setAdditionalData(byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.RuleBasedBreakIterator void setText(java.text.CharacterIterator) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

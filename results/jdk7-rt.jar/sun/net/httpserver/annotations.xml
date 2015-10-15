@@ -1,4 +1,7 @@
 <root>
+  <item name="sun.net.httpserver.AuthFilter AuthFilter(com.sun.net.httpserver.Authenticator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.AuthFilter java.lang.String description()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -7,6 +10,9 @@
   </item>
   <item name="sun.net.httpserver.AuthFilter void consumeInput(com.sun.net.httpserver.HttpExchange) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.AuthFilter void setAuthenticator(com.sun.net.httpserver.Authenticator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.ChunkedInputStream ChunkedInputStream(sun.net.httpserver.ExchangeImpl, java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -21,6 +27,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.net.httpserver.ChunkedOutputStream ChunkedOutputStream(sun.net.httpserver.ExchangeImpl, java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.Code Code()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -31,6 +40,9 @@
       <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.ContextList ContextList()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.ContextList sun.net.httpserver.HttpContextImpl findContext(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -46,6 +58,9 @@
   </item>
   <item name="sun.net.httpserver.DefaultHttpServerProvider com.sun.net.httpserver.HttpsServer createHttpsServer(java.net.InetSocketAddress, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.Event Event(sun.net.httpserver.ExchangeImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.ExchangeImpl ExchangeImpl(java.lang.String, java.net.URI, sun.net.httpserver.Request, long, sun.net.httpserver.HttpConnection) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -70,6 +85,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.net.httpserver.ExchangeImpl java.io.OutputStream getResponseBody()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.ExchangeImpl java.lang.Object getAttribute(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -112,6 +130,9 @@
   <item name="sun.net.httpserver.ExchangeImpl void setAttribute(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ExchangeImpl void setPrincipal(com.sun.net.httpserver.HttpPrincipal)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.ExchangeImpl void setStreams(java.io.InputStream, java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -136,6 +157,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.net.httpserver.FixedLengthOutputStream FixedLengthOutputStream(sun.net.httpserver.ExchangeImpl, java.io.OutputStream, long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection HttpConnection()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.HttpConnection int getRemaining()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -190,8 +217,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.net.httpserver.HttpConnection void setChannel(java.nio.channels.SocketChannel)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection void setContext(sun.net.httpserver.HttpContextImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.HttpConnection void setParameters(java.io.InputStream, java.io.OutputStream, java.nio.channels.SocketChannel, javax.net.ssl.SSLEngine, sun.net.httpserver.SSLStreams, javax.net.ssl.SSLContext, java.lang.String, sun.net.httpserver.HttpContextImpl, java.io.InputStream) 7">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection void setRemaining(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection void setState(sun.net.httpserver.HttpConnection.State)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.HttpConnection.State State(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.HttpContextImpl HttpContextImpl(java.lang.String, java.lang.String, com.sun.net.httpserver.HttpHandler, sun.net.httpserver.ServerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -242,10 +284,16 @@
   <item name="sun.net.httpserver.HttpContextImpl void setHandler(com.sun.net.httpserver.HttpHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.HttpExchangeImpl HttpExchangeImpl(sun.net.httpserver.ExchangeImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.HttpExchangeImpl sun.net.httpserver.ExchangeImpl getExchangeImpl()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.net.httpserver.HttpsExchangeImpl HttpsExchangeImpl(sun.net.httpserver.ExchangeImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.HttpsExchangeImpl sun.net.httpserver.ExchangeImpl getExchangeImpl()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -265,10 +313,16 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.net.httpserver.PlaceholderOutputStream PlaceholderOutputStream(java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.PlaceholderOutputStream boolean isWrapped()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.net.httpserver.PlaceholderOutputStream void setWrappedStream(java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.Request java.io.InputStream inputStream()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -349,6 +403,9 @@
   <item name="sun.net.httpserver.SSLStreams void configureEngine(com.sun.net.httpserver.HttpsConfigurator, java.net.InetSocketAddress) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.net.httpserver.SSLStreams.BufType BufType(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.SSLStreams.EngineWrapper EngineWrapper(sun.net.httpserver.SSLStreams, java.nio.channels.SocketChannel, javax.net.ssl.SSLEngine) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -379,6 +436,9 @@
   <item name="sun.net.httpserver.SSLStreams.OutputStream void write(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.SSLStreams.Parameters Parameters(sun.net.httpserver.SSLStreams, com.sun.net.httpserver.HttpsConfigurator, java.net.InetSocketAddress)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.SSLStreams.Parameters com.sun.net.httpserver.HttpsConfigurator getHttpsConfigurator()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -393,6 +453,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.net.httpserver.SSLStreams.Parameters void setSSLParameters(javax.net.ssl.SSLParameters)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.SSLStreams.WrapperResult WrapperResult(sun.net.httpserver.SSLStreams)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.ServerConfig ServerConfig()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -534,6 +600,9 @@
   <item name="sun.net.httpserver.ServerImpl void setHttpsConfigurator(com.sun.net.httpserver.HttpsConfigurator) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ServerImpl void startExchange()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.ServerImpl.DefaultExecutor DefaultExecutor()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -541,6 +610,9 @@
   </item>
   <item name="sun.net.httpserver.ServerImpl.DefaultExecutor void execute(java.lang.Runnable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl.Dispatcher Dispatcher(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.ServerImpl.Dispatcher void handleEvent(sun.net.httpserver.Event) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -554,8 +626,23 @@
   <item name="sun.net.httpserver.ServerImpl.Dispatcher void reRegister(sun.net.httpserver.HttpConnection) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ServerImpl.Exchange Exchange(sun.net.httpserver.ServerImpl, java.nio.channels.SocketChannel, java.lang.String, sun.net.httpserver.HttpConnection)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.ServerImpl.Exchange void sendReply(int, boolean, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl.Exchange.LinkHandler LinkHandler(sun.net.httpserver.ServerImpl.Exchange, com.sun.net.httpserver.Filter.Chain)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl.ServerTimerTask ServerTimerTask(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.ServerImpl.ServerTimerTask1 ServerTimerTask1(sun.net.httpserver.ServerImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.httpserver.UndefLengthOutputStream UndefLengthOutputStream(sun.net.httpserver.ExchangeImpl, java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.UnmodifiableHeaders java.util.Collection&lt;java.util.List&lt;java.lang.String&gt;&gt; values()">
     <annotation name="org.jetbrains.annotations.NotNull"/>

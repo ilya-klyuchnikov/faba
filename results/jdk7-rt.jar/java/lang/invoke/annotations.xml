@@ -50,6 +50,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.BoundMethodHandle.Factory java.lang.String typeSig(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.BoundMethodHandle.Factory java.lang.invoke.BoundMethodHandle.SpeciesData speciesDataFromConcreteBMHClass(java.lang.Class&lt;? extends java.lang.invoke.BoundMethodHandle&gt;) 0">
@@ -87,6 +90,9 @@
   </item>
   <item name="java.lang.invoke.BoundMethodHandle.Factory void emitPushFields(java.lang.String, java.lang.String, com.sun.xml.internal.ws.org.objectweb.asm.MethodVisitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.BoundMethodHandle.SpeciesData SpeciesData(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.invoke.BoundMethodHandle.SpeciesData SpeciesData(java.lang.String, java.lang.Class&lt;? extends java.lang.invoke.BoundMethodHandle&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -565,8 +571,14 @@
   <item name="java.lang.invoke.InvokerBytecodeGenerator void emitUnboxing(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.InvokerBytecodeGenerator.CpPatch CpPatch(java.lang.invoke.InvokerBytecodeGenerator, int, java.lang.String, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.lang.invoke.InvokerBytecodeGenerator.CpPatch java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.Invokers Invokers(java.lang.invoke.MethodType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.invoke.Invokers Invokers(java.lang.invoke.MethodType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -908,6 +920,9 @@
   <item name="java.lang.invoke.LambdaForm.Name boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.lang.invoke.LambdaForm.Name boolean initIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.lang.invoke.LambdaForm.Name boolean isParam()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -951,6 +966,12 @@
   </item>
   <item name="java.lang.invoke.LambdaForm.Name java.lang.invoke.LambdaForm.Name replaceNames(java.lang.invoke.LambdaForm.Name[], java.lang.invoke.LambdaForm.Name[], int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.LambdaForm.NamedFunction NamedFunction(java.lang.invoke.MemberName)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.invoke.LambdaForm.NamedFunction NamedFunction(java.lang.invoke.MemberName, java.lang.invoke.MethodHandle)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.invoke.LambdaForm.NamedFunction NamedFunction(java.lang.invoke.MethodHandle) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1767,6 +1788,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.lang.invoke.MethodHandleImpl.GuardWithCatch GuardWithCatch(java.lang.invoke.MethodHandle, java.lang.Class&lt;? extends java.lang.Throwable&gt;, java.lang.invoke.MethodHandle)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.lang.invoke.MethodHandleImpl.Lazy Lazy()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -2171,6 +2195,9 @@
   <item name="java.lang.invoke.MethodHandles.Lookup Lookup(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.MethodHandles.Lookup Lookup(java.lang.Class&lt;?&gt;, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.lang.invoke.MethodHandles.Lookup boolean isCheckMemberAccessOverridden(java.lang.SecurityManager) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2355,6 +2382,9 @@
   <item name="java.lang.invoke.MethodHandles.Lookup void checkUnprivilegedlookupClass(java.lang.Class&lt;?&gt;, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.MethodType MethodType()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.lang.invoke.MethodType MethodType(java.lang.Class&lt;?&gt;, java.lang.Class&lt;?&gt;[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2453,6 +2483,9 @@
   <item name="java.lang.invoke.MethodType java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.MethodType java.lang.invoke.Invokers invokers()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.lang.invoke.MethodType java.lang.invoke.MethodType appendParameterTypes(java.lang.Class&lt;?&gt;...) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2546,8 +2579,14 @@
   <item name="java.lang.invoke.MethodType void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.MethodType void setForm(java.lang.invoke.MethodTypeForm)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.lang.invoke.MethodType void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.MethodType.WeakInternSet WeakInternSet()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.invoke.MethodType.WeakInternSet boolean eq(java.lang.Object, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2581,6 +2620,9 @@
   </item>
   <item name="java.lang.invoke.MethodType.WeakInternSet void transfer(java.lang.invoke.MethodType.WeakInternSet.Entry[], java.lang.invoke.MethodType.WeakInternSet.Entry[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.MethodType.WeakInternSet.Entry Entry(java.lang.invoke.MethodType, java.lang.ref.ReferenceQueue&lt;java.lang.Object&gt;, int, java.lang.invoke.MethodType.WeakInternSet.Entry)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.invoke.MethodType.WeakInternSet.Entry Entry(java.lang.invoke.MethodType, java.lang.ref.ReferenceQueue&lt;java.lang.Object&gt;, int, java.lang.invoke.MethodType.WeakInternSet.Entry) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>

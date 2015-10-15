@@ -160,6 +160,9 @@
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.DOMResultAugmentor void setDocumentSource(com.sun.org.apache.xerces.internal.xni.parser.XMLDocumentSource) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.DOMResultAugmentor void setIgnoringCharacters(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.DOMResultAugmentor void startCDATA(com.sun.org.apache.xerces.internal.xni.Augmentations)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -356,6 +359,9 @@
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.DOMResultBuilder void setDocumentSource(com.sun.org.apache.xerces.internal.xni.parser.XMLDocumentSource) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.DOMResultBuilder void setIgnoringCharacters(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.DOMResultBuilder void startCDATA(com.sun.org.apache.xerces.internal.xni.Augmentations)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -482,6 +488,9 @@
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.DOMValidatorHelper void validate(org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.DOMValidatorHelper.DOMNamespaceContext DOMNamespaceContext(com.sun.org.apache.xerces.internal.jaxp.validation.DOMValidatorHelper)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.DOMValidatorHelper.DOMNamespaceContext java.lang.String getURI(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -493,6 +502,9 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.DOMValidatorHelper.DOMNamespaceContext java.lang.String getURI0(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.DOMValidatorHelper.DOMNamespaceContext void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.DraconianErrorHandler DraconianErrorHandler()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -583,6 +595,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ErrorHandlerAdaptor ErrorHandlerAdaptor()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ErrorHandlerAdaptor boolean hadError()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -606,6 +621,9 @@
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ErrorHandlerAdaptor void fatalError(java.lang.String, java.lang.String, com.sun.org.apache.xerces.internal.xni.parser.XMLParseException) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ErrorHandlerAdaptor void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ErrorHandlerAdaptor void warning(java.lang.String, java.lang.String, com.sun.org.apache.xerces.internal.xni.parser.XMLParseException) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -619,6 +637,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ReadOnlyGrammarPool ReadOnlyGrammarPool(com.sun.org.apache.xerces.internal.xni.grammars.XMLGrammarPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ReadOnlyGrammarPool void cacheGrammars(java.lang.String, com.sun.org.apache.xerces.internal.xni.grammars.Grammar[])">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -692,6 +713,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.SoftReferenceGrammarPool SoftReferenceGrammarPool()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.SoftReferenceGrammarPool SoftReferenceGrammarPool(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.SoftReferenceGrammarPool boolean containsGrammar(com.sun.org.apache.xerces.internal.xni.grammars.XMLGrammarDescription) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -728,11 +755,23 @@
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.SoftReferenceGrammarPool void cacheGrammars(java.lang.String, com.sun.org.apache.xerces.internal.xni.grammars.Grammar[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.SoftReferenceGrammarPool void lockPool()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.SoftReferenceGrammarPool void unlockPool()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.SoftReferenceGrammarPool.Entry Entry(int, int, com.sun.org.apache.xerces.internal.xni.grammars.XMLGrammarDescription, com.sun.org.apache.xerces.internal.xni.grammars.Grammar, com.sun.org.apache.xerces.internal.jaxp.validation.SoftReferenceGrammarPool.Entry, java.lang.ref.ReferenceQueue) 5">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.SoftReferenceGrammarPool.SoftGrammarReference SoftGrammarReference(com.sun.org.apache.xerces.internal.jaxp.validation.SoftReferenceGrammarPool.Entry, com.sun.org.apache.xerces.internal.xni.grammars.Grammar, java.lang.ref.ReferenceQueue)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.SoftReferenceGrammarPool.SoftGrammarReference SoftGrammarReference(com.sun.org.apache.xerces.internal.jaxp.validation.SoftReferenceGrammarPool.Entry, com.sun.org.apache.xerces.internal.xni.grammars.Grammar, java.lang.ref.ReferenceQueue) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.StAXValidatorHelper StAXValidatorHelper(com.sun.org.apache.xerces.internal.jaxp.validation.XMLSchemaValidatorComponentManager)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.StreamValidatorHelper com.sun.org.apache.xerces.internal.xni.parser.XMLParserConfiguration initialize()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -897,6 +936,9 @@
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ValidatorHandlerImpl void processingInstruction(java.lang.String, com.sun.org.apache.xerces.internal.xni.XMLString, com.sun.org.apache.xerces.internal.xni.Augmentations) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ValidatorHandlerImpl void setContentHandler(org.xml.sax.ContentHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ValidatorHandlerImpl void setDocumentSource(com.sun.org.apache.xerces.internal.xni.parser.XMLDocumentSource)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1005,6 +1047,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ValidatorHandlerImpl.ResolutionForwarder ResolutionForwarder(org.w3c.dom.ls.LSResourceResolver)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ValidatorHandlerImpl.ResolutionForwarder java.lang.String resolveSystemId(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null,_-&gt;null&quot;"/>
@@ -1038,6 +1083,12 @@
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ValidatorHandlerImpl.ResolutionForwarder org.xml.sax.InputSource resolveEntity(java.lang.String, java.lang.String, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ValidatorHandlerImpl.ResolutionForwarder void setEntityResolver(org.w3c.dom.ls.LSResourceResolver)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ValidatorHandlerImpl.XMLSchemaTypeInfoProvider XMLSchemaTypeInfoProvider(com.sun.org.apache.xerces.internal.jaxp.validation.ValidatorHandlerImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ValidatorHandlerImpl.XMLSchemaTypeInfoProvider com.sun.org.apache.xerces.internal.xs.AttributePSVI getAttributePSVI(int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1070,6 +1121,18 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ValidatorHandlerImpl.XMLSchemaTypeInfoProvider org.w3c.dom.TypeInfo getTypeInfoFromPSVI(com.sun.org.apache.xerces.internal.xs.ItemPSVI) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ValidatorHandlerImpl.XMLSchemaTypeInfoProvider void beginEndElement(com.sun.org.apache.xerces.internal.xni.Augmentations)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ValidatorHandlerImpl.XMLSchemaTypeInfoProvider void beginStartElement(com.sun.org.apache.xerces.internal.xni.Augmentations, com.sun.org.apache.xerces.internal.xni.XMLAttributes)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ValidatorHandlerImpl.XMLSchemaTypeInfoProvider void finishEndElement()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ValidatorHandlerImpl.XMLSchemaTypeInfoProvider void finishStartElement()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.ValidatorImpl ValidatorImpl(com.sun.org.apache.xerces.internal.jaxp.validation.XSGrammarPoolContainer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1166,6 +1229,12 @@
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.XMLSchemaFactory void setProperty(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.XMLSchemaFactory.XMLGrammarPoolImplExtension XMLGrammarPoolImplExtension()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.XMLSchemaFactory.XMLGrammarPoolImplExtension XMLGrammarPoolImplExtension(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.XMLSchemaFactory.XMLGrammarPoolImplExtension int getGrammarCount()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1180,6 +1249,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.jaxp.validation.XMLSchemaFactory.XMLGrammarPoolWrapper void setGrammarPool(com.sun.org.apache.xerces.internal.xni.grammars.XMLGrammarPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.jaxp.validation.XMLSchemaValidatorComponentManager XMLSchemaValidatorComponentManager(com.sun.org.apache.xerces.internal.jaxp.validation.XSGrammarPoolContainer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

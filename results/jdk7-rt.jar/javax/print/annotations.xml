@@ -87,6 +87,9 @@
   <item name="javax.print.MimeType java.lang.String toUnicodeLowerCase(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.print.MimeType java.util.Map getParameterMap()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.print.MimeType void parse(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -100,6 +103,12 @@
   </item>
   <item name="javax.print.MimeType.LexicalAnalyzer java.lang.String getLexeme()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.print.MimeType.ParameterMap ParameterMap(javax.print.MimeType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.print.MimeType.ParameterMapEntry ParameterMapEntry(javax.print.MimeType, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.print.MimeType.ParameterMapEntry boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -122,13 +131,22 @@
   <item name="javax.print.MimeType.ParameterMapEntry java.lang.Object setValue(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.print.MimeType.ParameterMapEntrySet ParameterMapEntrySet(javax.print.MimeType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.print.MimeType.ParameterMapEntrySet int size()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="javax.print.MimeType.ParameterMapEntrySet java.util.Iterator iterator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.print.MimeType.ParameterMapEntrySetIterator ParameterMapEntrySetIterator(javax.print.MimeType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.print.MimeType.ParameterMapEntrySetIterator boolean hasNext()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -156,6 +174,9 @@
   </item>
   <item name="javax.print.PrintServiceLookup javax.print.PrintService lookupDefaultPrintService()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.print.PrintServiceLookup.Services Services()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.print.ServiceUI ServiceUI()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -191,6 +212,12 @@
   <item name="javax.print.SimpleDoc SimpleDoc(java.lang.Object, javax.print.DocFlavor, javax.print.attribute.DocAttributeSet) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.print.SimpleDoc java.io.InputStream getStreamForBytes()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.print.SimpleDoc java.io.Reader getReaderForText()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.print.SimpleDoc java.lang.Object getPrintData()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -206,6 +233,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="javax.print.StreamPrintService StreamPrintService()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.print.StreamPrintService StreamPrintService(java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.print.StreamPrintService boolean isDisposed()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -215,6 +248,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="javax.print.StreamPrintService void dispose()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.print.StreamPrintServiceFactory StreamPrintServiceFactory()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -243,5 +279,8 @@
   </item>
   <item name="javax.print.StreamPrintServiceFactory javax.print.StreamPrintServiceFactory[] lookupStreamPrintServiceFactories(javax.print.DocFlavor, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.print.StreamPrintServiceFactory.Services Services()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

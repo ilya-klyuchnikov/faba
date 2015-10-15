@@ -2,6 +2,9 @@
   <item name="sun.security.jgss.spnego.NegTokenInit NegTokenInit(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.spnego.NegTokenInit NegTokenInit(byte[], sun.security.util.BitArray, byte[], byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.jgss.spnego.NegTokenInit byte[] getMechListMIC()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -32,6 +35,9 @@
   </item>
   <item name="sun.security.jgss.spnego.NegTokenTarg NegTokenTarg(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.spnego.NegTokenTarg NegTokenTarg(int, org.ietf.jgss.Oid, byte[], byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.jgss.spnego.NegTokenTarg byte[] getMechListMIC()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -179,10 +185,43 @@
   <item name="sun.security.jgss.spnego.SpNegoContext sun.security.util.BitArray getContextFlags()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.spnego.SpNegoContext void dispose()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.jgss.spnego.SpNegoContext void requestAnonymity(boolean)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.security.jgss.spnego.SpNegoContext void requestConf(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.spnego.SpNegoContext void requestCredDeleg(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.spnego.SpNegoContext void requestDelegPolicy(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.spnego.SpNegoContext void requestInteg(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.spnego.SpNegoContext void requestLifetime(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.spnego.SpNegoContext void requestMutualAuth(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.spnego.SpNegoContext void requestReplayDet(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.spnego.SpNegoContext void requestSequenceDet(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.spnego.SpNegoContext void setChannelBinding(org.ietf.jgss.ChannelBinding)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.spnego.SpNegoCredElement SpNegoCredElement(sun.security.jgss.spi.GSSCredentialSpi)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.jgss.spnego.SpNegoCredElement java.security.Provider getProvider()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -235,6 +274,9 @@
   <item name="sun.security.jgss.spnego.SpNegoMechFactory sun.security.jgss.spi.GSSContextSpi getMechanismContext(sun.security.jgss.spi.GSSNameSpi, sun.security.jgss.spi.GSSCredentialSpi, int) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.jgss.spnego.SpNegoToken SpNegoToken(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.jgss.spnego.SpNegoToken int getType()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -253,5 +295,8 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.security.jgss.spnego.SpNegoToken.NegoResult NegoResult(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

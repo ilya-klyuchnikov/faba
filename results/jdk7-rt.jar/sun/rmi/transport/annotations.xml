@@ -2,6 +2,9 @@
   <item name="sun.rmi.transport.ConnectionInputStream void saveRef(sun.rmi.transport.LiveRef) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.rmi.transport.ConnectionInputStream void setAckNeeded()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.transport.ConnectionOutputStream ConnectionOutputStream(sun.rmi.transport.Connection, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -39,10 +42,16 @@
   <item name="sun.rmi.transport.DGCClient.EndpointEntry void removeRefEntry(sun.rmi.transport.DGCClient.EndpointEntry.RefEntry) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.rmi.transport.DGCClient.EndpointEntry.CleanRequest CleanRequest(java.rmi.server.ObjID[], long, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.transport.DGCClient.EndpointEntry.RefEntry sun.rmi.transport.LiveRef getRef()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.rmi.transport.DGCClient.EndpointEntry.RefEntry.PhantomLiveRef PhantomLiveRef(sun.rmi.transport.DGCClient.EndpointEntry.RefEntry, sun.rmi.transport.LiveRef)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.rmi.transport.DGCClient.EndpointEntry.RefEntry.PhantomLiveRef PhantomLiveRef(sun.rmi.transport.DGCClient.EndpointEntry.RefEntry, sun.rmi.transport.LiveRef) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -51,6 +60,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.rmi.transport.DGCClient.EndpointEntry.RenewCleanThread RenewCleanThread(sun.rmi.transport.DGCClient.EndpointEntry)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.rmi.transport.DGCImpl java.rmi.dgc.Lease dirty(java.rmi.server.ObjID[], long, java.rmi.dgc.Lease) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -76,6 +88,15 @@
   </item>
   <item name="sun.rmi.transport.DGCImpl_Skel void dispatch(java.rmi.Remote, java.rmi.server.RemoteCall, int, long) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.rmi.transport.DGCImpl_Stub DGCImpl_Stub()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.rmi.transport.DGCImpl_Stub DGCImpl_Stub(java.rmi.server.RemoteRef)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.rmi.transport.LiveRef LiveRef(java.rmi.server.ObjID, sun.rmi.transport.Endpoint, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.rmi.transport.LiveRef boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -157,6 +178,18 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.rmi.transport.SequenceEntry SequenceEntry(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.rmi.transport.SequenceEntry void retain(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.rmi.transport.SequenceEntry void update(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.rmi.transport.StreamRemoteCall StreamRemoteCall(sun.rmi.transport.Connection)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.rmi.transport.StreamRemoteCall StreamRemoteCall(sun.rmi.transport.Connection, java.rmi.server.ObjID, int, long) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -219,6 +252,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.rmi.transport.Target void setExportedTransport(sun.rmi.transport.Transport)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.rmi.transport.Transport Transport()">
     <annotation name="org.jetbrains.annotations.Contract">

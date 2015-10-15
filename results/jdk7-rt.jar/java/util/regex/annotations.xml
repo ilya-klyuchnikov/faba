@@ -99,6 +99,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.regex.Matcher Matcher()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Matcher Matcher(java.util.regex.Pattern, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -193,6 +196,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Matcher java.util.regex.Matcher useAnchoringBounds(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Matcher java.util.regex.Matcher usePattern(java.util.regex.Pattern)">
@@ -202,6 +206,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Matcher java.util.regex.Matcher useTransparentBounds(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Matcher java.util.regex.Pattern pattern()">
@@ -253,8 +258,38 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.regex.Pattern int next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern int nextEscaped()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern int normalizeCharClass(java.lang.StringBuilder, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.regex.Pattern int parsePastLine()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern int parsePastWhitespace(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern int peek()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern int peekPastLine()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern int peekPastWhitespace(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern int read()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern int readEscaped()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern int skip()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern java.lang.String composeOneStep(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -305,18 +340,30 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Pattern java.util.regex.Pattern.CharProperty caseInsensitiveRangeFor(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Pattern java.util.regex.Pattern.CharProperty intersection(java.util.regex.Pattern.CharProperty, java.util.regex.Pattern.CharProperty)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Pattern java.util.regex.Pattern.CharProperty newSingle(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Pattern java.util.regex.Pattern.CharProperty rangeFor(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Pattern java.util.regex.Pattern.CharProperty setDifference(java.util.regex.Pattern.CharProperty, java.util.regex.Pattern.CharProperty)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Pattern java.util.regex.Pattern.CharProperty unicodeBlockPropertyFor(java.lang.String)">
@@ -332,6 +379,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Pattern java.util.regex.Pattern.CharProperty union(java.util.regex.Pattern.CharProperty, java.util.regex.Pattern.CharProperty)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Pattern java.util.regex.Pattern.Node closure(java.util.regex.Pattern.Node)">
@@ -349,10 +399,17 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Pattern java.util.regex.Pattern.Node ref(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Pattern java.util.regex.PatternSyntaxException error(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.regex.Pattern void RemoveQEQuoting()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern void addFlag()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern void printObjectTree(java.util.regex.Pattern.Node) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -360,10 +417,25 @@
   <item name="java.util.regex.Pattern void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.regex.Pattern void setcursor(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern void subFlag()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern void unread()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern.All All()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.All boolean isSatisfiedBy(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.util.regex.Pattern.BackRef BackRef(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.BackRef boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -371,17 +443,32 @@
   <item name="java.util.regex.Pattern.BackRef boolean study(java.util.regex.Pattern.TreeInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.regex.Pattern.Begin Begin()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.Begin boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.regex.Pattern.Behind Behind(java.util.regex.Pattern.Node, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.Behind boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.regex.Pattern.BehindS BehindS(java.util.regex.Pattern.Node, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.BehindS boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Pattern.BehindS boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.regex.Pattern.BitClass BitClass()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern.BitClass BitClass(boolean[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.BitClass boolean isSatisfiedBy(int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -391,6 +478,12 @@
   <item name="java.util.regex.Pattern.BitClass java.util.regex.Pattern.BitClass add(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.regex.Pattern.Block Block(java.lang.Character.UnicodeBlock)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern.BmpCharProperty BmpCharProperty()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.BmpCharProperty boolean match(java.util.regex.Matcher, int, java.lang.CharSequence)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,_,null-&gt;false&quot;"/>
@@ -398,6 +491,9 @@
   </item>
   <item name="java.util.regex.Pattern.BmpCharProperty boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.regex.Pattern.BnM BnM(int[], int[], int[], java.util.regex.Pattern.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.BnM boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -407,11 +503,18 @@
   </item>
   <item name="java.util.regex.Pattern.BnM java.util.regex.Pattern.Node optimize(java.util.regex.Pattern.Node)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+      <val name="value" val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.util.regex.Pattern.BnMS BnMS(int[], int[], int[], java.util.regex.Pattern.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.BnMS boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.regex.Pattern.Bound Bound(int, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.Bound boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -427,6 +530,9 @@
   <item name="java.util.regex.Pattern.Branch boolean study(java.util.regex.Pattern.TreeInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.regex.Pattern.BranchConn BranchConn()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.BranchConn boolean study(java.util.regex.Pattern.TreeInfo)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -435,14 +541,26 @@
   <item name="java.util.regex.Pattern.BranchConn boolean study(java.util.regex.Pattern.TreeInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.regex.Pattern.CIBackRef CIBackRef(int, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.CIBackRef boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Pattern.CIBackRef boolean study(java.util.regex.Pattern.TreeInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.regex.Pattern.Caret Caret()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.Caret boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.regex.Pattern.Category Category(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern.CharProperty CharProperty()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.CharProperty boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -451,6 +569,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Pattern.CharProperty java.util.regex.Pattern.CharProperty complement()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Pattern.CharPropertyNames CharPropertyNames()">
@@ -466,16 +587,31 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.regex.Pattern.CharPropertyNames.CloneableProperty CloneableProperty()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern.Conditional Conditional(java.util.regex.Pattern.Node, java.util.regex.Pattern.Node, java.util.regex.Pattern.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.Conditional boolean study(java.util.regex.Pattern.TreeInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.regex.Pattern.Ctype Ctype(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.Ctype boolean isSatisfiedBy(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.regex.Pattern.Curly Curly(java.util.regex.Pattern.Node, int, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.Curly boolean study(java.util.regex.Pattern.TreeInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.regex.Pattern.Dollar Dollar(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.Dollar boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -483,13 +619,22 @@
   <item name="java.util.regex.Pattern.Dollar boolean study(java.util.regex.Pattern.TreeInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.regex.Pattern.Dot Dot()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.Dot boolean isSatisfiedBy(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.regex.Pattern.End End()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.End boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.regex.Pattern.First First(java.util.regex.Pattern.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.First boolean match(java.util.regex.Matcher, int, java.lang.CharSequence)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -498,6 +643,9 @@
   </item>
   <item name="java.util.regex.Pattern.First boolean study(java.util.regex.Pattern.TreeInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.regex.Pattern.GroupCurly GroupCurly(java.util.regex.Pattern.Node, int, int, int, int, int, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.GroupCurly boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -508,11 +656,17 @@
   <item name="java.util.regex.Pattern.GroupCurly boolean study(java.util.regex.Pattern.TreeInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.regex.Pattern.GroupHead GroupHead(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.GroupHead boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Pattern.GroupHead boolean matchRef(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.regex.Pattern.GroupRef GroupRef(java.util.regex.Pattern.GroupHead)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.GroupRef boolean match(java.util.regex.Matcher, int, java.lang.CharSequence)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -525,17 +679,29 @@
   <item name="java.util.regex.Pattern.GroupRef boolean study(java.util.regex.Pattern.TreeInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.regex.Pattern.GroupTail GroupTail(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.GroupTail boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.regex.Pattern.LastMatch LastMatch()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.LastMatch boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.regex.Pattern.LastNode LastNode()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.LastNode boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.regex.Pattern.LastNode boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.regex.Pattern.LazyLoop LazyLoop(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.LazyLoop boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -551,6 +717,9 @@
   <item name="java.util.regex.Pattern.LazyLoop boolean study(java.util.regex.Pattern.TreeInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.regex.Pattern.Loop Loop(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.Loop boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -565,8 +734,14 @@
   <item name="java.util.regex.Pattern.Loop boolean study(java.util.regex.Pattern.TreeInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.regex.Pattern.Neg Neg(java.util.regex.Pattern.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.Neg boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.regex.Pattern.Node Node()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.Node boolean match(java.util.regex.Matcher, int, java.lang.CharSequence)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -579,8 +754,14 @@
   <item name="java.util.regex.Pattern.Node boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.regex.Pattern.NotBehind NotBehind(java.util.regex.Pattern.Node, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.NotBehind boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.regex.Pattern.NotBehindS NotBehindS(java.util.regex.Pattern.Node, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.NotBehindS boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -588,31 +769,76 @@
   <item name="java.util.regex.Pattern.NotBehindS boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.regex.Pattern.Pos Pos(java.util.regex.Pattern.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.Pos boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.regex.Pattern.Prolog Prolog(java.util.regex.Pattern.Loop)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern.Ques Ques(java.util.regex.Pattern.Node, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern.Script Script(java.lang.Character.UnicodeScript)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern.Single Single(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.Single boolean isSatisfiedBy(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.regex.Pattern.SingleI SingleI(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.SingleI boolean isSatisfiedBy(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.util.regex.Pattern.SingleS SingleS(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.SingleS boolean isSatisfiedBy(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.regex.Pattern.SingleU SingleU(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern.Slice Slice(int[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern.SliceI SliceI(int[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern.SliceIS SliceIS(int[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.SliceIS int toLower(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.regex.Pattern.SliceNode SliceNode(int[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.SliceNode boolean study(java.util.regex.Pattern.TreeInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.regex.Pattern.SliceS SliceS(int[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern.SliceU SliceU(int[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern.SliceUS SliceUS(int[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.Start boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -628,8 +854,20 @@
   <item name="java.util.regex.Pattern.StartS boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.regex.Pattern.TreeInfo TreeInfo()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern.TreeInfo void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.regex.Pattern.UnixCaret UnixCaret()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.UnixCaret boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.regex.Pattern.UnixDollar UnixDollar(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.Pattern.UnixDollar boolean match(java.util.regex.Matcher, int, java.lang.CharSequence) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -637,10 +875,16 @@
   <item name="java.util.regex.Pattern.UnixDollar boolean study(java.util.regex.Pattern.TreeInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.regex.Pattern.UnixDot UnixDot()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.regex.Pattern.UnixDot boolean isSatisfiedBy(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.util.regex.Pattern.Utype Utype(java.util.regex.UnicodeProp)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.PatternSyntaxException int getIndex()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -659,6 +903,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.util.regex.UnicodeProp UnicodeProp(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.regex.UnicodeProp java.util.regex.UnicodeProp forName(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>

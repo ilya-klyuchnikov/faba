@@ -877,7 +877,8 @@
   </item>
   <item name="org.apache.commons.lang.ArrayUtils java.lang.Byte[] toObject(byte[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val name="value" val="&quot;null-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -886,7 +887,8 @@
   </item>
   <item name="org.apache.commons.lang.ArrayUtils java.lang.Character[] toObject(char[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val name="value" val="&quot;null-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -895,7 +897,8 @@
   </item>
   <item name="org.apache.commons.lang.ArrayUtils java.lang.Double[] toObject(double[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val name="value" val="&quot;null-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -904,7 +907,8 @@
   </item>
   <item name="org.apache.commons.lang.ArrayUtils java.lang.Float[] toObject(float[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val name="value" val="&quot;null-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -913,7 +917,8 @@
   </item>
   <item name="org.apache.commons.lang.ArrayUtils java.lang.Integer[] toObject(int[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val name="value" val="&quot;null-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -922,7 +927,8 @@
   </item>
   <item name="org.apache.commons.lang.ArrayUtils java.lang.Long[] toObject(long[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val name="value" val="&quot;null-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -976,7 +982,8 @@
   </item>
   <item name="org.apache.commons.lang.ArrayUtils java.lang.Short[] toObject(short[])">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val name="value" val="&quot;null-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1138,6 +1145,9 @@
   </item>
   <item name="org.apache.commons.lang.ArrayUtils void reverse(short[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="org.apache.commons.lang.BitField BitField(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="org.apache.commons.lang.BitField boolean isAllSet(int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1427,6 +1437,18 @@
   <item name="org.apache.commons.lang.CharEncoding boolean isSupported(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="org.apache.commons.lang.CharRange CharRange(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="org.apache.commons.lang.CharRange CharRange(char, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="org.apache.commons.lang.CharRange CharRange(char, char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="org.apache.commons.lang.CharRange CharRange(char, char, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="org.apache.commons.lang.CharRange boolean contains(char)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1634,15 +1656,26 @@
   <item name="org.apache.commons.lang.CharUtils int toIntValue(java.lang.Character, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="org.apache.commons.lang.CharUtils java.lang.Character toCharacterObject(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="org.apache.commons.lang.CharUtils java.lang.Character toCharacterObject(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="org.apache.commons.lang.CharUtils java.lang.String toString(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="org.apache.commons.lang.CharUtils java.lang.String toString(java.lang.Character)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val name="value" val="&quot;null-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1868,6 +1901,12 @@
   <item name="org.apache.commons.lang.Entities void unescape(java.io.Writer, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="org.apache.commons.lang.Entities.ArrayEntityMap ArrayEntityMap()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="org.apache.commons.lang.Entities.ArrayEntityMap ArrayEntityMap(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="org.apache.commons.lang.Entities.ArrayEntityMap int value(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1881,6 +1920,15 @@
       <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="org.apache.commons.lang.Entities.ArrayEntityMap void ensureCapacity(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="org.apache.commons.lang.Entities.BinaryEntityMap BinaryEntityMap()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="org.apache.commons.lang.Entities.BinaryEntityMap BinaryEntityMap(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="org.apache.commons.lang.Entities.BinaryEntityMap int binarySearch(int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1897,6 +1945,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="org.apache.commons.lang.Entities.TreeEntityMap TreeEntityMap()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="org.apache.commons.lang.IllegalClassException IllegalClassException(java.lang.Class, java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1966,6 +2017,9 @@
   </item>
   <item name="org.apache.commons.lang.IntHashMap java.lang.Object remove(int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="org.apache.commons.lang.IntHashMap.Entry Entry(int, int, java.lang.Object, org.apache.commons.lang.IntHashMap.Entry)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="org.apache.commons.lang.LocaleUtils LocaleUtils()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -3255,7 +3309,8 @@
   </item>
   <item name="org.apache.commons.lang.StringUtils java.lang.String replaceChars(java.lang.String, char, char)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_-&gt;!null;null,_,_-&gt;null&quot;"/>
+      <val name="value" val="&quot;!null,_,_-&gt;!null;null,_,_-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>

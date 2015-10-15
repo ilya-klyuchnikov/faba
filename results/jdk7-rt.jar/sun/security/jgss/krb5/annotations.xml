@@ -135,6 +135,12 @@
   <item name="sun.security.jgss.krb5.CipherHelper void encryptData(sun.security.jgss.krb5.WrapToken, byte[], byte[], int, int, byte[], byte[], int) 5">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.krb5.CipherHelper.WrapTokenInputStream WrapTokenInputStream(sun.security.jgss.krb5.CipherHelper, java.io.InputStream, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.krb5.CipherHelper.WrapTokenInputStream void close()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.jgss.krb5.InitSecContextToken InitSecContextToken(sun.security.jgss.krb5.Krb5Context, sun.security.krb5.Credentials, sun.security.krb5.Credentials) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -160,6 +166,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.security.jgss.krb5.InitialToken InitialToken()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.jgss.krb5.InitialToken byte[] computeChannelBinding(org.ietf.jgss.ChannelBinding) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -200,12 +209,18 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.jgss.krb5.InitialToken.OverloadedChecksum sun.security.krb5.Checksum getChecksum()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.jgss.krb5.InitialToken.OverloadedChecksum sun.security.krb5.Credentials getDelegatedCreds()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5AcceptCredential Krb5AcceptCredential(sun.security.jgss.krb5.Krb5NameElement, sun.security.jgss.krb5.Krb5Util.ServiceCreds)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.jgss.krb5.Krb5AcceptCredential boolean isAcceptorCredential()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -250,6 +265,9 @@
   </item>
   <item name="sun.security.jgss.krb5.Krb5Context Krb5Context(sun.security.jgss.GSSCaller, byte[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context Krb5Context(sun.security.jgss.GSSCaller, sun.security.jgss.krb5.Krb5CredElement)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.jgss.krb5.Krb5Context Krb5Context(sun.security.jgss.GSSCaller, sun.security.jgss.krb5.Krb5NameElement, sun.security.jgss.krb5.Krb5CredElement, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -345,6 +363,9 @@
   <item name="sun.security.jgss.krb5.Krb5Context int getMIC(byte[], int, int, byte[], int, org.ietf.jgss.MessageProp) 5">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.jgss.krb5.Krb5Context int incrementMySequenceNumber()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.jgss.krb5.Krb5Context java.lang.Object inquireSecContext(com.sun.security.jgss.InquireType)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -392,6 +413,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void dispose()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.jgss.krb5.Krb5Context void getMIC(byte[], int, int, java.io.OutputStream, org.ietf.jgss.MessageProp) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -406,8 +430,68 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void requestConf(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void requestCredDeleg(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void requestDelegPolicy(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void requestInteg(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void requestLifetime(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void requestMutualAuth(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void requestReplayDet(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void requestSequenceDet(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void setAuthTime(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void setAuthzData(com.sun.security.jgss.AuthorizationDataEntry[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void setChannelBinding(org.ietf.jgss.ChannelBinding)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void setConfState(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void setCredDelegState(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void setDelegCred(sun.security.jgss.krb5.Krb5CredElement)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void setDelegPolicyState(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void setIntegState(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.jgss.krb5.Krb5Context void setKey(int, sun.security.krb5.EncryptionKey) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void setMutualAuthState(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void setReplayDetState(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void setSequenceDetState(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context void setTktFlags(boolean[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.jgss.krb5.Krb5Context void unwrap(java.io.InputStream, java.io.OutputStream, org.ietf.jgss.MessageProp) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -417,6 +501,9 @@
   </item>
   <item name="sun.security.jgss.krb5.Krb5Context void wrap(java.io.InputStream, java.io.OutputStream, org.ietf.jgss.MessageProp) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Context.KerberosSessionKey KerberosSessionKey(sun.security.krb5.EncryptionKey)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.jgss.krb5.Krb5Context.KerberosSessionKey java.lang.String getAlgorithm()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -513,6 +600,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.security.jgss.krb5.Krb5MechFactory Krb5MechFactory(sun.security.jgss.GSSCaller)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.jgss.krb5.Krb5MechFactory java.security.Provider getProvider()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -563,6 +653,9 @@
   </item>
   <item name="sun.security.jgss.krb5.Krb5MechFactory sun.security.jgss.spi.GSSNameSpi getNameElement(java.lang.String, org.ietf.jgss.Oid) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5NameElement Krb5NameElement(sun.security.krb5.PrincipalName, java.lang.String, org.ietf.jgss.Oid)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.jgss.krb5.Krb5NameElement boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -682,6 +775,9 @@
   </item>
   <item name="sun.security.jgss.krb5.Krb5Util.ServiceCreds sun.security.jgss.krb5.Krb5Util.ServiceCreds getInstance(javax.security.auth.Subject, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.krb5.Krb5Util.ServiceCreds void destroy()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.jgss.krb5.MessageToken MessageToken(int, sun.security.jgss.krb5.Krb5Context) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -830,6 +926,9 @@
   </item>
   <item name="sun.security.jgss.krb5.MessageToken_v2 void init(int, sun.security.jgss.krb5.Krb5Context) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.krb5.MessageToken_v2 void rotate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.jgss.krb5.MessageToken_v2.MessageTokenHeader MessageTokenHeader(sun.security.jgss.krb5.MessageToken_v2, int, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

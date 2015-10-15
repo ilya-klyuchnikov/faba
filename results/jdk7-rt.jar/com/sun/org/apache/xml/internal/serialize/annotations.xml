@@ -250,6 +250,9 @@
   <item name="com.sun.org.apache.xml.internal.serialize.HTMLSerializer void setOutputFormat(com.sun.org.apache.xml.internal.serialize.OutputFormat) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.HTMLSerializer void setXHTMLNamespace(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xml.internal.serialize.HTMLSerializer void startDocument(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -297,6 +300,9 @@
   <item name="com.sun.org.apache.xml.internal.serialize.HTMLdtd java.lang.String fromChar(int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.IndentPrinter IndentPrinter(java.io.Writer, com.sun.org.apache.xml.internal.serialize.OutputFormat)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xml.internal.serialize.IndentPrinter int getNextIndent()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -311,6 +317,12 @@
   <item name="com.sun.org.apache.xml.internal.serialize.IndentPrinter void printText(java.lang.StringBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.IndentPrinter void setNextIndent(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.IndentPrinter void setThisIndent(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xml.internal.serialize.LineSeparator LineSeparator()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -320,6 +332,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat OutputFormat()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat OutputFormat(org.w3c.dom.Document) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -462,11 +477,65 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setAllowJavaNames(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setCDataElements(java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setDoctype(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setEncoding(com.sun.org.apache.xml.internal.serialize.EncodingInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setEncoding(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setIndent(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setIndenting(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setLineSeparator(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setLineSeparator(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setLineWidth(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setMediaType(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setMethod(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setNonEscapingElements(java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setOmitComments(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setOmitDocumentType(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setOmitXMLDeclaration(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setPreserveEmptyAttributes(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setPreserveSpace(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setStandalone(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat void setVersion(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.serialize.OutputFormat.DTD DTD()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -477,6 +546,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.Printer Printer(java.io.Writer, com.sun.org.apache.xml.internal.serialize.OutputFormat)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.serialize.Printer int getNextIndent()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -659,6 +731,9 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.serialize.XMLSerializer void serializeElement(org.w3c.dom.Element) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.serialize.XMLSerializer void setNamespaces(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.serialize.XMLSerializer void startElement(java.lang.String, java.lang.String, java.lang.String, org.xml.sax.Attributes) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>

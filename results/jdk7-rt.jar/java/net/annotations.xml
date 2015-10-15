@@ -1,4 +1,7 @@
 <root>
+  <item name="java.net.AbstractPlainDatagramSocketImpl AbstractPlainDatagramSocketImpl()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.AbstractPlainDatagramSocketImpl boolean isClosed()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -17,6 +20,9 @@
   </item>
   <item name="java.net.AbstractPlainDatagramSocketImpl void setOption(int, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.AbstractPlainSocketImpl AbstractPlainSocketImpl()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.AbstractPlainSocketImpl boolean isClosedOrPending()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -43,6 +49,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.net.AbstractPlainSocketImpl java.io.FileDescriptor acquireFD()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.AbstractPlainSocketImpl java.io.OutputStream getOutputStream()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -61,8 +70,29 @@
   <item name="java.net.AbstractPlainSocketImpl void connectToAddress(java.net.InetAddress, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.AbstractPlainSocketImpl void setAddress(java.net.InetAddress)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.AbstractPlainSocketImpl void setConnectionReset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.AbstractPlainSocketImpl void setConnectionResetPending()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.AbstractPlainSocketImpl void setFileDescriptor(java.io.FileDescriptor)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.AbstractPlainSocketImpl void setInputStream(java.net.SocketInputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.AbstractPlainSocketImpl void setLocalPort(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.AbstractPlainSocketImpl void setOption(int, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.AbstractPlainSocketImpl void setPort(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.Authenticator Authenticator()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -124,8 +154,14 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.net.Authenticator void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.Authenticator void setDefault(java.net.Authenticator) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.net.Authenticator.RequestorType RequestorType(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.CacheRequest CacheRequest()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -199,6 +235,9 @@
   <item name="java.net.CookieManager void put(java.net.URI, java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.CookieManager void setCookiePolicy(java.net.CookiePolicy)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.CookieManager void setCookiePolicy(java.net.CookiePolicy) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -269,6 +308,9 @@
   </item>
   <item name="java.net.DatagramPacket java.net.SocketAddress getSocketAddress()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.DatagramPacket void setAddress(java.net.InetAddress)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.DatagramPacket void setData(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -395,6 +437,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.net.DatagramSocketImpl void setDatagramSocket(java.net.DatagramSocket)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.DatagramSocketImpl void setOption(java.net.SocketOption&lt;T&gt;, T) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -560,6 +605,33 @@
   <item name="java.net.HttpCookie void assignAttribute(java.net.HttpCookie, java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.HttpCookie void setComment(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.HttpCookie void setCommentURL(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.HttpCookie void setDiscard(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.HttpCookie void setHttpOnly(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.HttpCookie void setMaxAge(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.HttpCookie void setPath(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.HttpCookie void setPortlist(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.HttpCookie void setSecure(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.HttpCookie void setValue(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.HttpRetryException int responseCode()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -569,6 +641,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.net.HttpURLConnection HttpURLConnection(java.net.URL)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.HttpURLConnection boolean getFollowRedirects()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -605,6 +680,9 @@
   </item>
   <item name="java.net.HttpURLConnection java.security.Permission getPermission()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.HttpURLConnection void setInstanceFollowRedirects(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.HttpURLConnection void setRequestMethod(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -855,6 +933,12 @@
   <item name="java.net.Inet6Address void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.Inet6Address.Inet6AddressHolder Inet6AddressHolder(java.net.Inet6Address)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.Inet6Address.Inet6AddressHolder Inet6AddressHolder(java.net.Inet6Address, byte[], int, boolean, java.net.NetworkInterface, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.Inet6Address.Inet6AddressHolder boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="value" val="&quot;null-&gt;false&quot;"/>
@@ -945,6 +1029,9 @@
   </item>
   <item name="java.net.Inet6AddressImpl boolean isReachable(java.net.InetAddress, int, java.net.NetworkInterface, int) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.net.InetAddress InetAddress()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.InetAddress boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1126,10 +1213,19 @@
   <item name="java.net.InetAddress.Cache java.net.InetAddress.CacheEntry get(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.net.InetAddress.Cache.Type Type(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.InetAddress.CacheEntry CacheEntry(java.net.InetAddress[], long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.InetAddress.InetAddressHolder InetAddressHolder()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.net.InetAddress.InetAddressHolder InetAddressHolder(java.lang.String, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.InetAddress.InetAddressHolder int getAddress()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1146,6 +1242,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.net.InetAddress.InetAddressHolder void init(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.InetAddressContainer InetAddressContainer()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1155,6 +1254,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.net.InetSocketAddress InetSocketAddress(int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.InetSocketAddress InetSocketAddress(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1211,6 +1313,9 @@
   <item name="java.net.InetSocketAddress void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.InetSocketAddress.InetSocketAddressHolder InetSocketAddressHolder(java.lang.String, java.net.InetAddress, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.InetSocketAddress.InetSocketAddressHolder boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
@@ -1242,6 +1347,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.net.InterfaceAddress InterfaceAddress()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.InterfaceAddress boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1326,6 +1434,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.net.NetworkInterface NetworkInterface()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.NetworkInterface NetworkInterface(java.lang.String, int, java.net.InetAddress[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.NetworkInterface boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
@@ -1384,6 +1498,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.net.NetworkInterface java.util.Enumeration&lt;java.net.NetworkInterface&gt; getSubInterfaces()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.NetworkInterface.1checkedAddresses 1checkedAddresses(java.net.NetworkInterface) 0">
@@ -1393,6 +1510,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.net.NetworkInterface.1subIFs 1subIFs(java.net.NetworkInterface)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.NetworkInterface.1subIFs boolean hasMoreElements()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1430,17 +1550,29 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.net.PlainDatagramSocketImpl PlainDatagramSocketImpl()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.PlainDatagramSocketImpl T getOption(java.net.SocketOption&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.PlainDatagramSocketImpl void setOption(java.net.SocketOption&lt;T&gt;, T) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.PlainSocketImpl PlainSocketImpl()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.PlainSocketImpl PlainSocketImpl(java.io.FileDescriptor)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.PlainSocketImpl T getOption(java.net.SocketOption&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.PlainSocketImpl void setOption(java.net.SocketOption&lt;T&gt;, T) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.Proxy Proxy()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.Proxy Proxy(java.net.Proxy.Type, java.net.SocketAddress) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1466,6 +1598,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.net.Proxy.Type Type(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.ProxySelector ProxySelector()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1481,6 +1616,9 @@
   </item>
   <item name="java.net.ResponseCache void setDefault(java.net.ResponseCache) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.net.SdpSocketImpl SdpSocketImpl()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.SecureCacheResponse SecureCacheResponse()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1523,6 +1661,12 @@
   </item>
   <item name="java.net.ServerSocket void implAccept(java.net.Socket) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.ServerSocket void setBound()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.ServerSocket void setCreated()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.ServerSocket void setPerformancePreferences(int, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1608,6 +1752,18 @@
   <item name="java.net.Socket void connect(java.net.SocketAddress, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.Socket void postAccept()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.Socket void setBound()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.Socket void setConnected()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.Socket void setCreated()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.Socket void setPerformancePreferences(int, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1620,6 +1776,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.net.SocketImpl SocketImpl()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.SocketImpl T getOption(java.net.SocketOption&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1662,6 +1821,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.net.SocketImpl void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.SocketImpl void setOption(java.net.SocketOption&lt;T&gt;, T) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1669,6 +1831,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.net.SocketImpl void setServerSocket(java.net.ServerSocket)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.SocketImpl void setSocket(java.net.Socket)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.SocketInputStream SocketInputStream(java.net.AbstractPlainSocketImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1686,6 +1854,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.net.SocketInputStream void setEOF(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.SocketOutputStream SocketOutputStream(java.net.AbstractPlainSocketImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1784,6 +1955,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.SocketPermission java.security.PermissionCollection newPermissionCollection()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.SocketPermission void init(java.lang.String, int) 0">
@@ -1792,8 +1966,14 @@
   <item name="java.net.SocketPermission void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.SocketPermission void setDeny()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.SocketPermission void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.SocketPermissionCollection SocketPermissionCollection()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.SocketPermissionCollection boolean implies(java.security.Permission)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1832,6 +2012,12 @@
   <item name="java.net.SocketSecrets void setOption(java.net.DatagramSocket, java.net.SocketOption&lt;T&gt;, T) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.SocksSocketImpl SocksSocketImpl()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.SocksSocketImpl SocksSocketImpl(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.SocksSocketImpl SocksSocketImpl(java.net.Proxy) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1856,13 +2042,22 @@
   <item name="java.net.SocksSocketImpl void connectV4(java.io.InputStream, java.io.OutputStream, java.net.InetSocketAddress, long) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.SocksSocketImpl void setV4()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.SocksSocketImpl void superConnectServer(java.lang.String, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.StandardProtocolFamily StandardProtocolFamily(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.StandardSocketOptions StandardSocketOptions()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.net.StandardSocketOptions.StdSocketOption StdSocketOption(java.lang.String, java.lang.Class&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.StandardSocketOptions.StdSocketOption java.lang.Class&lt;T&gt; type()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1878,6 +2073,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.net.URI URI()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.URI URI(java.lang.String, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2435,6 +2633,9 @@
   </item>
   <item name="java.net.URLClassLoader java.util.Enumeration&lt;java.net.URL&gt; findResources(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.URLConnection URLConnection(java.net.URL)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.URLConnection boolean checkfpx(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

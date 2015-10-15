@@ -73,11 +73,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.applet.AppletClassLoader sun.awt.AppContext resetAppContext()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.applet.AppletClassLoader void addJar(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.applet.AppletClassLoader void disableRecursiveDirectoryRead()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.applet.AppletClassLoader void printError(java.lang.String, java.lang.Throwable) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.applet.AppletClassLoader void setCodebaseLookup(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.applet.AppletClassLoader void setExceptionStatus()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.applet.AppletClassLoader void setJDK11Target(java.lang.Class, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -101,9 +113,13 @@
   <item name="sun.applet.AppletEvent java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.applet.AppletEventMulticaster AppletEventMulticaster(sun.applet.AppletListener, sun.applet.AppletListener)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.applet.AppletEventMulticaster sun.applet.AppletListener add(sun.applet.AppletListener, sun.applet.AppletListener)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+      <val name="value" val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="sun.applet.AppletEventMulticaster sun.applet.AppletListener add(sun.applet.AppletListener, sun.applet.AppletListener) 0">
@@ -111,7 +127,8 @@
   </item>
   <item name="sun.applet.AppletEventMulticaster sun.applet.AppletListener addInternal(sun.applet.AppletListener, sun.applet.AppletListener)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+      <val name="value" val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="sun.applet.AppletEventMulticaster sun.applet.AppletListener addInternal(sun.applet.AppletListener, sun.applet.AppletListener) 0">
@@ -134,6 +151,12 @@
   </item>
   <item name="sun.applet.AppletEventMulticaster sun.applet.AppletListener removeInternal(sun.applet.AppletListener, sun.applet.AppletListener) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.applet.AppletImageRef AppletImageRef(java.net.URL)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.applet.AppletMessageHandler AppletMessageHandler(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.applet.AppletMessageHandler java.lang.String getMessage(java.lang.String, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -226,9 +249,15 @@
     </annotation>
   </item>
   <item name="sun.applet.AppletPanel java.awt.Dimension minimumSize()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.applet.AppletPanel java.awt.Dimension preferredSize()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.applet.AppletPanel java.lang.Thread getAppletHandlerThread()">
@@ -245,11 +274,23 @@
   <item name="sun.applet.AppletPanel sun.applet.AppletEvent getNextEvent()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.applet.AppletPanel void addAppletListener(sun.applet.AppletListener)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.applet.AppletPanel void clearLoadAbortRequest()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.applet.AppletPanel void findAppletJDKLevel(java.applet.Applet) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.applet.AppletPanel void setExceptionStatus(java.security.AccessControlException) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.applet.AppletPanel void setLoadAbortRequest()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.applet.AppletPanel void setLoaderThread(java.lang.Thread)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.applet.AppletPanel void setupAppletAppContext()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -412,8 +453,14 @@
   <item name="sun.applet.AppletViewer void showDocument(java.net.URL, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.applet.AppletViewer.1AppletEventListener 1AppletEventListener(sun.applet.AppletViewer, java.awt.Frame)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.applet.AppletViewer.1AppletEventListener void appletStateChanged(sun.applet.AppletEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.applet.AppletViewer.UserActionListener UserActionListener(sun.applet.AppletViewer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.applet.AppletViewerPanel java.lang.String getParameter(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -433,6 +480,9 @@
   </item>
   <item name="sun.applet.AppletViewerPanel void debug(java.lang.String, java.lang.Throwable) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.applet.Main Main()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.applet.Main int decodeArg(java.lang.String[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -470,6 +520,9 @@
   </item>
   <item name="sun.applet.StdAppletViewerFactory sun.applet.AppletViewer createAppletViewer(int, int, java.net.URL, java.util.Hashtable) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.applet.TextFrame.1ActionEventListener 1ActionEventListener(sun.applet.TextFrame)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.applet.TextFrame.1ActionEventListener void actionPerformed(java.awt.event.ActionEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

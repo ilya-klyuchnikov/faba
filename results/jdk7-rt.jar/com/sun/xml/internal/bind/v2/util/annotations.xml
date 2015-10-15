@@ -15,6 +15,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.util.CollisionCheckStack CollisionCheckStack()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.util.CollisionCheckStack E get(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -42,6 +45,12 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.util.CollisionCheckStack java.lang.String getCycleString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.util.CollisionCheckStack void expandCapacity()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.util.CollisionCheckStack void setUseIdentity(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.util.DataSourceSource DataSourceSource(javax.activation.DataHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -89,8 +98,17 @@
   <item name="com.sun.xml.internal.bind.v2.util.EditDistance java.lang.String findNearest(java.lang.String, java.util.Collection&lt;java.lang.String&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.util.EditDistance void flip()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.util.FatalAdapter FatalAdapter(org.xml.sax.ErrorHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.util.FlattenIterator FlattenIterator(java.lang.Iterable&lt;? extends java.util.Map&lt;?,? extends T&gt;&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.util.QNameMap QNameMap()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.util.QNameMap V get(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -144,7 +162,13 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.util.QNameMap java.util.Iterator&lt;com.sun.xml.internal.bind.v2.util.QNameMap.Entry&lt;V&gt;&gt; newEntryIterator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.util.QNameMap java.util.Set&lt;com.sun.xml.internal.bind.v2.util.QNameMap.Entry&lt;V&gt;&gt; entrySet()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.util.QNameMap void put(com.sun.xml.internal.bind.v2.runtime.Name, V) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -158,10 +182,16 @@
   <item name="com.sun.xml.internal.bind.v2.util.QNameMap void transfer(com.sun.xml.internal.bind.v2.util.QNameMap.Entry&lt;V&gt;[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.util.QNameMap.Entry Entry(int, java.lang.String, java.lang.String, V, com.sun.xml.internal.bind.v2.util.QNameMap.Entry&lt;V&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.util.QNameMap.Entry V getValue()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.util.QNameMap.Entry V setValue(V)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.util.QNameMap.Entry boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -177,8 +207,14 @@
   <item name="com.sun.xml.internal.bind.v2.util.QNameMap.Entry javax.xml.namespace.QName createQName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.util.QNameMap.EntryIterator EntryIterator(com.sun.xml.internal.bind.v2.util.QNameMap)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.util.QNameMap.EntryIterator EntryIterator(com.sun.xml.internal.bind.v2.util.QNameMap) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.util.QNameMap.EntrySet EntrySet(com.sun.xml.internal.bind.v2.util.QNameMap)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.util.QNameMap.EntrySet boolean contains(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -197,7 +233,13 @@
     </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.v2.util.QNameMap.EntrySet java.util.Iterator&lt;com.sun.xml.internal.bind.v2.util.QNameMap.Entry&lt;V&gt;&gt; iterator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.util.QNameMap.HashIterator HashIterator(com.sun.xml.internal.bind.v2.util.QNameMap)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.util.QNameMap.HashIterator HashIterator(com.sun.xml.internal.bind.v2.util.QNameMap) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

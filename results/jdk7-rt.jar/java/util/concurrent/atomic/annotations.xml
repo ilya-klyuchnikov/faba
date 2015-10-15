@@ -4,6 +4,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.concurrent.atomic.AtomicBoolean AtomicBoolean(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.atomic.AtomicBoolean boolean get()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -15,10 +18,16 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.atomic.AtomicBoolean void set(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.atomic.AtomicInteger AtomicInteger()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.util.concurrent.atomic.AtomicInteger AtomicInteger(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.atomic.AtomicInteger double doubleValue()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -47,6 +56,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.util.concurrent.atomic.AtomicInteger void set(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.concurrent.atomic.AtomicIntegerArray AtomicIntegerArray(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.atomic.AtomicIntegerArray AtomicIntegerArray(int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -92,6 +107,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.concurrent.atomic.AtomicLong AtomicLong(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.atomic.AtomicLong double doubleValue()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -119,6 +137,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.util.concurrent.atomic.AtomicLong void set(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.concurrent.atomic.AtomicLongArray AtomicLongArray(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.atomic.AtomicLongArray AtomicLongArray(long[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -168,6 +192,9 @@
   <item name="java.util.concurrent.atomic.AtomicLongFieldUpdater.LockedUpdater LockedUpdater(java.lang.Class&lt;T&gt;, java.lang.String, java.lang.Class&lt;?&gt;) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.atomic.AtomicMarkableReference AtomicMarkableReference(V, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.atomic.AtomicMarkableReference V get(boolean[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -193,7 +220,16 @@
   <item name="java.util.concurrent.atomic.AtomicMarkableReference long objectFieldOffset(sun.misc.Unsafe, java.lang.String, java.lang.Class&lt;?&gt;) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.atomic.AtomicMarkableReference void set(V, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.concurrent.atomic.AtomicMarkableReference.Pair Pair(T, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.atomic.AtomicMarkableReference.Pair java.util.concurrent.atomic.AtomicMarkableReference.Pair&lt;T&gt; of(T, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.atomic.AtomicReference AtomicReference()">
@@ -201,13 +237,22 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.concurrent.atomic.AtomicReference AtomicReference(V)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.atomic.AtomicReference V get()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.concurrent.atomic.AtomicReference void set(V)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.atomic.AtomicReferenceArray AtomicReferenceArray(E[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.atomic.AtomicReferenceArray AtomicReferenceArray(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.atomic.AtomicReferenceArray int length()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -257,6 +302,9 @@
   <item name="java.util.concurrent.atomic.AtomicReferenceFieldUpdater.AtomicReferenceFieldUpdaterImpl void updateCheck(T, V) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.concurrent.atomic.AtomicStampedReference AtomicStampedReference(V, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.atomic.AtomicStampedReference V get(int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -282,7 +330,16 @@
   <item name="java.util.concurrent.atomic.AtomicStampedReference long objectFieldOffset(sun.misc.Unsafe, java.lang.String, java.lang.Class&lt;?&gt;) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.atomic.AtomicStampedReference void set(V, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.concurrent.atomic.AtomicStampedReference.Pair Pair(T, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.atomic.AtomicStampedReference.Pair java.util.concurrent.atomic.AtomicStampedReference.Pair&lt;T&gt; of(T, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
 </root>

@@ -60,8 +60,14 @@
   <item name="java.util.jar.JarEntry JarEntry(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.jar.JarEntry JarEntry(java.util.jar.JarEntry)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.jar.JarEntry JarEntry(java.util.jar.JarEntry) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.jar.JarEntry JarEntry(java.util.zip.ZipEntry)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.jar.JarEntry JarEntry(java.util.zip.ZipEntry) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -111,6 +117,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.jar.JarFile java.util.jar.JarEntry newEntry(java.util.zip.ZipEntry)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.jar.JarFile java.util.jar.JarEntry newEntry(java.util.zip.ZipEntry) 0">
@@ -121,6 +130,9 @@
   </item>
   <item name="java.util.jar.JarFile java.util.zip.ZipEntry getEntry(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.jar.JarFile.JarFileEntry JarFileEntry(java.util.jar.JarFile, java.util.zip.ZipEntry)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.jar.JarFile.JarFileEntry JarFileEntry(java.util.jar.JarFile, java.util.zip.ZipEntry) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -250,6 +262,9 @@
   <item name="java.util.jar.JarVerifier void beginEntry(java.util.jar.JarEntry, sun.security.util.ManifestEntryVerifier) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.jar.JarVerifier void setEagerValidation(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.jar.JarVerifier.VerifierCodeSource boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -337,6 +352,12 @@
   </item>
   <item name="java.util.jar.Manifest void make72Safe(java.lang.StringBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.jar.Manifest.FastInputStream FastInputStream(java.io.InputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.jar.Manifest.FastInputStream FastInputStream(java.io.InputStream, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.jar.Manifest.FastInputStream int readLine(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

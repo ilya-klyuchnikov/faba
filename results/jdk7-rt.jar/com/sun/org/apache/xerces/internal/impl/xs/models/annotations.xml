@@ -1,4 +1,7 @@
 <root>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.models.CMBuilder CMBuilder(com.sun.org.apache.xerces.internal.impl.xs.models.CMNodeFactory)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.models.CMBuilder boolean useRepeatingLeafNodes(com.sun.org.apache.xerces.internal.impl.xs.XSParticleDecl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -35,10 +38,19 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xs.models.CMBuilder com.sun.org.apache.xerces.internal.impl.xs.models.XSCMValidator getContentModel(com.sun.org.apache.xerces.internal.impl.xs.XSComplexTypeDecl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.models.CMBuilder void setDeclPool(com.sun.org.apache.xerces.internal.impl.xs.XSDeclarationPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.models.CMNodeFactory CMNodeFactory()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.models.CMNodeFactory com.sun.org.apache.xerces.internal.impl.dtd.models.CMNode getCMBinOpNode(int, com.sun.org.apache.xerces.internal.impl.dtd.models.CMNode, com.sun.org.apache.xerces.internal.impl.dtd.models.CMNode)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.models.CMNodeFactory com.sun.org.apache.xerces.internal.impl.dtd.models.CMNode getCMLeafNode(int, java.lang.Object, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.models.CMNodeFactory com.sun.org.apache.xerces.internal.impl.dtd.models.CMNode getCMRepeatingLeafNode(int, java.lang.Object, int, int, int, int)">
@@ -50,8 +62,14 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xs.models.CMNodeFactory void reset(com.sun.org.apache.xerces.internal.xni.parser.XMLComponentManager) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.models.CMNodeFactory void resetNodeCount()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.models.CMNodeFactory void setProperty(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.models.XSAllCM XSAllCM(boolean, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.models.XSAllCM boolean checkUniqueParticleAttribution(com.sun.org.apache.xerces.internal.impl.xs.SubstitutionGroupHandler)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -99,6 +117,9 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xs.models.XSCMBinOp void calcLastPos(com.sun.org.apache.xerces.internal.impl.dtd.models.CMStateSet) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.models.XSCMLeaf XSCMLeaf(int, java.lang.Object, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.models.XSCMLeaf boolean isNullable()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -127,6 +148,12 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.models.XSCMLeaf void calcLastPos(com.sun.org.apache.xerces.internal.impl.dtd.models.CMStateSet) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.models.XSCMLeaf void setPosition(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.models.XSCMRepeatingLeaf XSCMRepeatingLeaf(int, java.lang.Object, int, int, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.models.XSCMRepeatingLeaf int getMaxOccurs()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -196,6 +223,9 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.models.XSDFACM void postTreeBuildInit(com.sun.org.apache.xerces.internal.impl.dtd.models.CMNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.models.XSDFACM.Occurence Occurence(com.sun.org.apache.xerces.internal.impl.xs.models.XSCMRepeatingLeaf, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.models.XSDFACM.Occurence Occurence(com.sun.org.apache.xerces.internal.impl.xs.models.XSCMRepeatingLeaf, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

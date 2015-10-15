@@ -81,6 +81,9 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.DOM2SAX void parse(org.xml.sax.InputSource) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.DOM2SAX void setContentHandler(org.xml.sax.ContentHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.DOM2SAX void setDTDHandler(org.xml.sax.DTDHandler)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -123,6 +126,9 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.DOM2SAX void setProperty(java.lang.String, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.DOM2TO DOM2TO(org.w3c.dom.Node, com.sun.org.apache.xml.internal.serializer.SerializationHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.DOM2TO boolean getFeature(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -274,6 +280,9 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.DOM2TO void setXMLVersion(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.OutputSettings OutputSettings()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.OutputSettings java.util.Properties getProperties()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -328,6 +337,9 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2DOM void ignorableWhitespace(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2DOM void setDocumentLocator(org.xml.sax.Locator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2DOM void skippedEntity(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -374,6 +386,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXBaseWriter SAX2StAXBaseWriter(javax.xml.stream.XMLReporter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXBaseWriter javax.xml.stream.Location getCurrentLocation()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -389,6 +404,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXBaseWriter void endDocument()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXBaseWriter void endElement(java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXBaseWriter void endElement(java.lang.String, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -421,6 +442,12 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXBaseWriter void parseQName(java.lang.String, java.lang.String[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXBaseWriter void setDocumentLocator(org.xml.sax.Locator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXBaseWriter void setXMLReporter(javax.xml.stream.XMLReporter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXBaseWriter void startDTD(java.lang.String, java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -434,6 +461,9 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXBaseWriter void startDTD(java.lang.String, java.lang.String, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXBaseWriter void startElement(java.lang.String, java.lang.String, java.lang.String, org.xml.sax.Attributes)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXBaseWriter void startElement(java.lang.String, java.lang.String, java.lang.String, org.xml.sax.Attributes) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -514,8 +544,20 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXEventWriter void endElement(java.lang.String, java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXEventWriter void setEventFactory(javax.xml.stream.XMLEventFactory)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXEventWriter void setEventWriter(javax.xml.stream.XMLEventWriter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXEventWriter void startElement(java.lang.String, java.lang.String, java.lang.String, org.xml.sax.Attributes) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXStreamWriter SAX2StAXStreamWriter()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXStreamWriter SAX2StAXStreamWriter(javax.xml.stream.XMLStreamWriter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXStreamWriter javax.xml.stream.XMLStreamWriter getStreamWriter()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -534,6 +576,9 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXStreamWriter void endElement(java.lang.String, java.lang.String, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXStreamWriter void setStreamWriter(javax.xml.stream.XMLStreamWriter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXStreamWriter void startElement(java.lang.String, java.lang.String, java.lang.String, org.xml.sax.Attributes) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -542,6 +587,9 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SAX2StAXStreamWriter void startElement(java.lang.String, java.lang.String, java.lang.String, org.xml.sax.Attributes) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SmartTransformerFactoryImpl SmartTransformerFactoryImpl()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SmartTransformerFactoryImpl boolean getFeature(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -568,8 +616,17 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SmartTransformerFactoryImpl void setAttribute(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SmartTransformerFactoryImpl void setErrorListener(javax.xml.transform.ErrorListener)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SmartTransformerFactoryImpl void setFeature(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.SmartTransformerFactoryImpl void setURIResolver(javax.xml.transform.URIResolver)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.StAXEvent2SAX StAXEvent2SAX(javax.xml.stream.XMLEventReader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.StAXEvent2SAX boolean getFeature(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -701,6 +758,9 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.StAXEvent2SAX void parse(org.xml.sax.InputSource) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.StAXEvent2SAX void setContentHandler(org.xml.sax.ContentHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.StAXEvent2SAX void setDTDHandler(org.xml.sax.DTDHandler)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -743,6 +803,9 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.StAXEvent2SAX void setProperty(java.lang.String, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.StAXStream2SAX StAXStream2SAX(javax.xml.stream.XMLStreamReader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.StAXStream2SAX boolean getFeature(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -859,6 +922,9 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.StAXStream2SAX void parse(org.xml.sax.InputSource) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.StAXStream2SAX void setContentHandler(org.xml.sax.ContentHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.StAXStream2SAX void setDTDHandler(org.xml.sax.DTDHandler)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -921,6 +987,12 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesHandlerImpl void setDocumentLocator(org.xml.sax.Locator) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesHandlerImpl void setSystemId(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesHandlerImpl void setURIResolver(javax.xml.transform.URIResolver)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl TemplatesImpl(byte[][], java.lang.String, java.util.Properties, int, com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl) 4">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -956,6 +1028,15 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl void setTransletBytecodes(byte[][])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl void setTransletName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl void setURIResolver(javax.xml.transform.URIResolver)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1072,6 +1153,9 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl void passWarningsToListener(java.util.Vector) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl void resetTransientAttributes()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl void setAttribute(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1081,8 +1165,17 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl void setFeature(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl void setURIResolver(javax.xml.transform.URIResolver)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl void warning(javax.xml.transform.TransformerException) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl.PIParamWrapper PIParamWrapper(java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerHandlerImpl TransformerHandlerImpl(com.sun.org.apache.xalan.internal.xsltc.trax.TransformerImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerHandlerImpl TransformerHandlerImpl(com.sun.org.apache.xalan.internal.xsltc.trax.TransformerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1096,6 +1189,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerHandlerImpl void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerHandlerImpl void setSystemId(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerImpl TransformerImpl(com.sun.org.apache.xalan.internal.xsltc.Translet, java.util.Properties, int, com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1196,6 +1295,9 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerImpl void fatalError(javax.xml.transform.TransformerException) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerImpl void setDOM(com.sun.org.apache.xalan.internal.xsltc.DOM)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerImpl void setDefaults(java.util.Properties, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1211,6 +1313,12 @@
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerImpl void setParameter(java.lang.String, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerImpl void setServicesMechnism(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerImpl void setURIResolver(javax.xml.transform.URIResolver)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerImpl void transform(javax.xml.transform.Source, com.sun.org.apache.xml.internal.serializer.SerializationHandler, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1219,6 +1327,9 @@
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerImpl void warning(javax.xml.transform.TransformerException) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerImpl.MessageHandler MessageHandler(javax.xml.transform.ErrorListener)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xalan.internal.xsltc.trax.Util Util()">
     <annotation name="org.jetbrains.annotations.Contract">

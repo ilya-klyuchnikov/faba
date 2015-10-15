@@ -1,4 +1,7 @@
 <root>
+  <item name="java.awt.event.AWTEventListenerProxy AWTEventListenerProxy(long, java.awt.event.AWTEventListener)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.event.AWTEventListenerProxy long getEventMask()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -296,6 +299,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.awt.event.InputEvent void consume()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.event.InputMethodEvent InputMethodEvent(java.awt.Component, int, java.awt.font.TextHitInfo, java.awt.font.TextHitInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -340,6 +346,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.awt.event.InputMethodEvent void consume()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.event.InputMethodEvent void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -480,6 +489,18 @@
   <item name="java.awt.event.KeyEvent void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.event.KeyEvent void setKeyChar(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.event.KeyEvent void setKeyCode(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.event.KeyEvent void setNewModifiers()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.event.KeyEvent void setOldModifiers()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.event.MouseAdapter MouseAdapter()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -594,9 +615,15 @@
     </annotation>
   </item>
   <item name="java.awt.event.MouseEvent java.awt.Point getLocationOnScreen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.event.MouseEvent java.awt.Point getPoint()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.event.MouseEvent java.lang.String getMouseModifiersText(int)">
@@ -607,6 +634,15 @@
   </item>
   <item name="java.awt.event.MouseEvent void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.event.MouseEvent void setNewModifiers()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.event.MouseEvent void setOldModifiers()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.event.MouseEvent void translatePoint(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.event.MouseMotionAdapter MouseMotionAdapter()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -681,6 +717,9 @@
   </item>
   <item name="java.awt.event.PaintEvent java.lang.String paramString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.event.PaintEvent void setUpdateRect(java.awt.Rectangle)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.event.TextEvent TextEvent(java.lang.Object, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

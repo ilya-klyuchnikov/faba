@@ -4,6 +4,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.ws.client.AsyncInvoker void setReceiver(com.sun.xml.internal.ws.client.AsyncResponseImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.client.AsyncResponseImpl AsyncResponseImpl(java.lang.Runnable, javax.xml.ws.AsyncHandler&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -12,10 +15,19 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.ws.client.AsyncResponseImpl void setResponseContext(com.sun.xml.internal.ws.client.ResponseContext)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.client.AsyncResponseImpl.1CallbackFuture 1CallbackFuture(T, java.lang.Throwable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.client.AsyncResponseImpl.1CallbackFuture java.util.Map&lt;java.lang.String,java.lang.Object&gt; getContext()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.client.ClientContainer ClientContainer()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.client.ClientContainer T getSPI(java.lang.Class&lt;T&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -57,6 +69,12 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.client.ContentNegotiation ContentNegotiation(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.client.HandlerConfiguration HandlerConfiguration(java.util.Set&lt;java.lang.String&gt;, com.sun.xml.internal.ws.client.HandlerConfiguration)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.client.HandlerConfiguration HandlerConfiguration(java.util.Set&lt;java.lang.String&gt;, com.sun.xml.internal.ws.client.HandlerConfiguration) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -97,6 +115,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.client.HandlerConfigurator.AnnotationConfigurator javax.xml.ws.handler.HandlerResolver getResolver()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.client.HandlerConfigurator.AnnotationConfigurator void configureHandlers(com.sun.xml.internal.ws.api.client.WSPortInfo, com.sun.xml.internal.ws.binding.BindingImpl) 0">
@@ -117,10 +138,16 @@
   <item name="com.sun.xml.internal.ws.client.HandlerConfigurator.AnnotationConfigurator void logSetChain(com.sun.xml.internal.ws.api.client.WSPortInfo, com.sun.xml.internal.ws.util.HandlerAnnotationInfo) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.client.HandlerConfigurator.HandlerResolverImpl HandlerResolverImpl(javax.xml.ws.handler.HandlerResolver)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.client.HandlerConfigurator.HandlerResolverImpl javax.xml.ws.handler.HandlerResolver getResolver()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.client.MonitorRootClient MonitorRootClient(com.sun.xml.internal.ws.client.Stub)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.client.PortInfo PortInfo(com.sun.xml.internal.ws.client.WSServiceDelegate, com.sun.xml.internal.ws.api.EndpointAddress, javax.xml.namespace.QName, com.sun.xml.internal.ws.api.BindingID) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -215,11 +242,23 @@
   <item name="com.sun.xml.internal.ws.client.RequestContext void setEndPointAddressString(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.client.RequestContext void setEndpointAddress(com.sun.xml.internal.ws.api.EndpointAddress)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.client.RequestContext void setSoapAction(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.client.RequestContext void setSoapActionUse(java.lang.Boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.client.RequestContext.MapView MapView(com.sun.xml.internal.ws.client.RequestContext)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.client.RequestContext.MapView void putAll(java.util.Map&lt;? extends java.lang.String,? extends java.lang.Object&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.client.ResponseContext ResponseContext(com.sun.xml.internal.ws.api.message.Packet)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.client.ResponseContext java.lang.Object get(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -363,6 +402,9 @@
   <item name="com.sun.xml.internal.ws.client.Stub void setOutboundHeaders(java.util.List&lt;com.sun.xml.internal.ws.api.message.Header&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.client.Stub void setResponseContext(com.sun.xml.internal.ws.client.ResponseContext)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.client.WSServiceDelegate T createEndpointIFBaseProxy(com.sun.xml.internal.ws.api.addressing.WSEndpointReference, javax.xml.namespace.QName, java.lang.Class&lt;T&gt;, javax.xml.ws.WebServiceFeature[], com.sun.xml.internal.ws.client.SEIPortInfo) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -481,6 +523,15 @@
   </item>
   <item name="com.sun.xml.internal.ws.client.WSServiceDelegate javax.xml.ws.Dispatch&lt;java.lang.Object&gt; createDispatch(javax.xml.ws.EndpointReference, javax.xml.bind.JAXBContext, javax.xml.ws.Service.Mode, javax.xml.ws.WebServiceFeature...) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.client.WSServiceDelegate void setExecutor(java.util.concurrent.Executor)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.client.WSServiceDelegate void setHandlerResolver(javax.xml.ws.handler.HandlerResolver)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.client.WSServiceDelegate.DaemonThreadFactory DaemonThreadFactory(com.sun.xml.internal.ws.client.WSServiceDelegate)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.client.WSServiceDelegate.DaemonThreadFactory java.lang.Thread newThread(java.lang.Runnable)">
     <annotation name="org.jetbrains.annotations.NotNull"/>

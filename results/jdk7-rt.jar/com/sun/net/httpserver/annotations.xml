@@ -4,6 +4,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.net.httpserver.Authenticator.Failure Failure(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.net.httpserver.Authenticator.Failure int getResponseCode()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -14,10 +17,16 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.net.httpserver.Authenticator.Retry Retry(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.net.httpserver.Authenticator.Retry int getResponseCode()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.net.httpserver.Authenticator.Success Success(com.sun.net.httpserver.HttpPrincipal)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.net.httpserver.Authenticator.Success com.sun.net.httpserver.HttpPrincipal getPrincipal()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -58,6 +67,9 @@
   </item>
   <item name="com.sun.net.httpserver.Base64 java.lang.String byteArrayToBase64(byte[], boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.net.httpserver.BasicAuthenticator BasicAuthenticator(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.net.httpserver.BasicAuthenticator com.sun.net.httpserver.Authenticator.Result authenticate(com.sun.net.httpserver.HttpExchange)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -198,8 +210,14 @@
   <item name="com.sun.net.httpserver.HttpsParameters void setCipherSuites(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.net.httpserver.HttpsParameters void setNeedClientAuth(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.net.httpserver.HttpsParameters void setProtocols(java.lang.String[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.net.httpserver.HttpsParameters void setWantClientAuth(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.net.httpserver.HttpsServer HttpsServer()">
     <annotation name="org.jetbrains.annotations.Contract">

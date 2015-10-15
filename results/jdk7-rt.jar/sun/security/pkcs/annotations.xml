@@ -8,6 +8,9 @@
   <item name="sun.security.pkcs.ContentInfo ContentInfo(sun.security.util.DerInputStream, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.pkcs.ContentInfo ContentInfo(sun.security.util.ObjectIdentifier, sun.security.util.DerValue)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.pkcs.ContentInfo byte[] getContentBytes()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -58,6 +61,9 @@
   <item name="sun.security.pkcs.PKCS10 PKCS10(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.pkcs.PKCS10 PKCS10(java.security.PublicKey, sun.security.pkcs.PKCS10Attributes)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.pkcs.PKCS10 boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -102,6 +108,9 @@
   <item name="sun.security.pkcs.PKCS10Attribute PKCS10Attribute(sun.security.util.DerValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.pkcs.PKCS10Attribute PKCS10Attribute(sun.security.util.ObjectIdentifier, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.pkcs.PKCS10Attribute java.lang.Object getAttributeValue()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -138,6 +147,12 @@
   </item>
   <item name="sun.security.pkcs.PKCS7 PKCS7(sun.security.util.DerInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.pkcs.PKCS7 PKCS7(sun.security.x509.AlgorithmId[], sun.security.pkcs.ContentInfo, java.security.cert.X509Certificate[], java.security.cert.X509CRL[], sun.security.pkcs.SignerInfo[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.pkcs.PKCS7 PKCS7(sun.security.x509.AlgorithmId[], sun.security.pkcs.ContentInfo, java.security.cert.X509Certificate[], sun.security.pkcs.SignerInfo[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.pkcs.PKCS7 boolean isOldStyle()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -341,6 +356,12 @@
   </item>
   <item name="sun.security.pkcs.SignerInfo SignerInfo(sun.security.util.DerInputStream, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.pkcs.SignerInfo SignerInfo(sun.security.x509.X500Name, java.math.BigInteger, sun.security.x509.AlgorithmId, sun.security.pkcs.PKCS9Attributes, sun.security.x509.AlgorithmId, byte[], sun.security.pkcs.PKCS9Attributes)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.pkcs.SignerInfo SignerInfo(sun.security.x509.X500Name, java.math.BigInteger, sun.security.x509.AlgorithmId, sun.security.x509.AlgorithmId, byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.pkcs.SignerInfo byte[] getEncryptedDigest()">
     <annotation name="org.jetbrains.annotations.Contract">

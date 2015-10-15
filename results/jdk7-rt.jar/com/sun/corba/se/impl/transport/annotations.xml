@@ -115,6 +115,15 @@
   <item name="com.sun.corba.se.impl.transport.CorbaContactInfoBase void dprint(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.transport.CorbaContactInfoBase void setAddressingDisposition(short)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.CorbaContactInfoBase void setConnectionCache(com.sun.corba.se.pept.transport.OutboundConnectionCache)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.CorbaContactInfoListImpl CorbaContactInfoListImpl(com.sun.corba.se.spi.orb.ORB)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.corba.se.impl.transport.CorbaContactInfoListImpl com.sun.corba.se.pept.transport.ContactInfo createContactInfo(java.lang.String, java.lang.String, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -154,6 +163,9 @@
   </item>
   <item name="com.sun.corba.se.impl.transport.CorbaContactInfoListIteratorImpl void reportRedirect(com.sun.corba.se.spi.transport.CorbaContactInfo, com.sun.corba.se.spi.ior.IOR) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.CorbaContactInfoListIteratorImpl void reportSuccess(com.sun.corba.se.pept.transport.ContactInfo)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.corba.se.impl.transport.CorbaInboundConnectionCacheImpl CorbaInboundConnectionCacheImpl(com.sun.corba.se.spi.orb.ORB, com.sun.corba.se.pept.transport.Acceptor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -230,6 +242,9 @@
   <item name="com.sun.corba.se.impl.transport.CorbaResponseWaitingRoomImpl void unregisterWaiter(com.sun.corba.se.pept.protocol.MessageMediator) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.transport.CorbaResponseWaitingRoomImpl.OutCallDesc OutCallDesc()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.corba.se.impl.transport.CorbaTransportManagerImpl CorbaTransportManagerImpl(com.sun.corba.se.spi.orb.ORB) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -259,6 +274,9 @@
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.transport.DefaultIORToSocketInfoImpl com.sun.corba.se.spi.transport.SocketInfo createSocketInfo(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.transport.DefaultIORToSocketInfoImpl java.util.List getSocketInfo(com.sun.corba.se.spi.ior.IOR) 0">
@@ -283,6 +301,9 @@
   </item>
   <item name="com.sun.corba.se.impl.transport.DefaultSocketFactoryImpl void setAcceptedSocketOptions(com.sun.corba.se.pept.transport.Acceptor, java.net.ServerSocket, java.net.Socket) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.DefaultSocketFactoryImpl void setORB(com.sun.corba.se.spi.orb.ORB)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.corba.se.impl.transport.EventHandlerBase EventHandlerBase()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -312,6 +333,21 @@
   <item name="com.sun.corba.se.impl.transport.EventHandlerBase void dprint(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.transport.EventHandlerBase void setSelectionKey(java.nio.channels.SelectionKey)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.EventHandlerBase void setUseSelectThreadToWait(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.EventHandlerBase void setUseWorkerThreadForEvent(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.EventHandlerBase void setWork(com.sun.corba.se.spi.orbutil.threadpool.Work)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.ListenerThreadImpl ListenerThreadImpl(com.sun.corba.se.spi.orb.ORB, com.sun.corba.se.pept.transport.Acceptor, com.sun.corba.se.pept.transport.Selector)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.corba.se.impl.transport.ListenerThreadImpl com.sun.corba.se.pept.transport.Acceptor getAcceptor()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -337,6 +373,12 @@
   <item name="com.sun.corba.se.impl.transport.ListenerThreadImpl void dprint(java.lang.String, java.lang.Throwable) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.transport.ListenerThreadImpl void setEnqueueTime(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.ReadTCPTimeoutsImpl ReadTCPTimeoutsImpl(int, int, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.corba.se.impl.transport.ReadTCPTimeoutsImpl double get_backoff_factor()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -356,6 +398,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.ReaderThreadImpl ReaderThreadImpl(com.sun.corba.se.spi.orb.ORB, com.sun.corba.se.pept.transport.Connection, com.sun.corba.se.pept.transport.Selector)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.corba.se.impl.transport.ReaderThreadImpl com.sun.corba.se.pept.transport.Connection getConnection()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -381,6 +426,9 @@
   </item>
   <item name="com.sun.corba.se.impl.transport.ReaderThreadImpl void dprint(java.lang.String, java.lang.Throwable) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.ReaderThreadImpl void setEnqueueTime(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.corba.se.impl.transport.SelectorImpl SelectorImpl(com.sun.corba.se.spi.orb.ORB) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -412,6 +460,18 @@
   </item>
   <item name="com.sun.corba.se.impl.transport.SelectorImpl void registerInterestOps(com.sun.corba.se.pept.transport.EventHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SelectorImpl void setClosed(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SelectorImpl void setTimeout(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SelectorImpl.SelectionKeyAndOp SelectionKeyAndOp(com.sun.corba.se.impl.transport.SelectorImpl, java.nio.channels.SelectionKey, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SharedCDRContactInfoImpl SharedCDRContactInfoImpl(com.sun.corba.se.spi.orb.ORB, com.sun.corba.se.spi.transport.CorbaContactInfoList, com.sun.corba.se.spi.ior.IOR, short)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.corba.se.impl.transport.SharedCDRContactInfoImpl boolean isConnectionBased()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -576,6 +636,15 @@
   <item name="com.sun.corba.se.impl.transport.SocketOrChannelAcceptorImpl void dprint(java.lang.String, java.lang.Throwable) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelAcceptorImpl void setConnectionCache(com.sun.corba.se.pept.transport.InboundConnectionCache)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelAcceptorImpl void setEnqueueTime(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelAcceptorImpl void setLocatorPort(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl SocketOrChannelConnectionImpl(com.sun.corba.se.spi.orb.ORB) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -717,6 +786,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl int getNextRequestId()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl java.lang.String getStateString(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -754,6 +826,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl void clientReply_1_1_Put(com.sun.corba.se.pept.protocol.MessageMediator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl void clientReply_1_1_Remove()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl void dprint(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -781,11 +859,59 @@
   <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl void sendWithoutLock(com.sun.corba.se.pept.encoding.OutputObject) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl void serverRequestProcessingBegins()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl void serverRequestProcessingEnds()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl void serverRequest_1_1_Put(com.sun.corba.se.pept.protocol.MessageMediator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl void serverRequest_1_1_Remove()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl void setCodeBaseIOR(com.sun.corba.se.spi.ior.IOR)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl void setConnectionCache(com.sun.corba.se.pept.transport.ConnectionCache)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl void setEnqueueTime(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl void setPartialMessageMediator(com.sun.corba.se.spi.protocol.CorbaMessageMediator)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl void setPostInitialContexts()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl void setReadGiopHeaderOnly(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl void setReadTimeouts(com.sun.corba.se.spi.transport.ReadTimeouts)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl void setState(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl void setTimeStamp(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl void write(java.nio.ByteBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelContactInfoImpl SocketOrChannelContactInfoImpl()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelContactInfoImpl SocketOrChannelContactInfoImpl(com.sun.corba.se.spi.orb.ORB, com.sun.corba.se.spi.transport.CorbaContactInfoList)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelContactInfoImpl SocketOrChannelContactInfoImpl(com.sun.corba.se.spi.orb.ORB, com.sun.corba.se.spi.transport.CorbaContactInfoList, com.sun.corba.se.spi.ior.IOR, short, java.lang.String, java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.transport.SocketOrChannelContactInfoImpl SocketOrChannelContactInfoImpl(com.sun.corba.se.spi.orb.ORB, com.sun.corba.se.spi.transport.CorbaContactInfoList, java.lang.String, java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.corba.se.impl.transport.SocketOrChannelContactInfoImpl boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">

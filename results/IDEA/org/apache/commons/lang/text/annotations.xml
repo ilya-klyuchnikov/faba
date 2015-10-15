@@ -17,6 +17,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="org.apache.commons.lang.text.StrBuilder StrBuilder()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="org.apache.commons.lang.text.StrBuilder StrBuilder(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="org.apache.commons.lang.text.StrBuilder StrBuilder(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -121,9 +127,15 @@
     </annotation>
   </item>
   <item name="org.apache.commons.lang.text.StrBuilder java.io.Reader asReader()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.apache.commons.lang.text.StrBuilder java.io.Writer asWriter()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.apache.commons.lang.text.StrBuilder java.lang.String getNewLineText()">
@@ -306,6 +318,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="org.apache.commons.lang.text.StrBuilder org.apache.commons.lang.text.StrBuilder clear()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.apache.commons.lang.text.StrBuilder org.apache.commons.lang.text.StrBuilder delete(int, int)">
@@ -400,16 +413,24 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.apache.commons.lang.text.StrBuilder org.apache.commons.lang.text.StrBuilder setNewLineText(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.apache.commons.lang.text.StrBuilder org.apache.commons.lang.text.StrBuilder setNullText(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.apache.commons.lang.text.StrBuilder org.apache.commons.lang.text.StrBuilder trim()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.apache.commons.lang.text.StrBuilder org.apache.commons.lang.text.StrTokenizer asTokenizer()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="org.apache.commons.lang.text.StrBuilder.StrBuilderReader StrBuilderReader(org.apache.commons.lang.text.StrBuilder)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="org.apache.commons.lang.text.StrBuilder.StrBuilderReader boolean markSupported()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -424,8 +445,20 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="org.apache.commons.lang.text.StrBuilder.StrBuilderReader void mark(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="org.apache.commons.lang.text.StrBuilder.StrBuilderReader void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="org.apache.commons.lang.text.StrBuilder.StrBuilderTokenizer StrBuilderTokenizer(org.apache.commons.lang.text.StrBuilder)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="org.apache.commons.lang.text.StrBuilder.StrBuilderTokenizer java.util.List tokenize(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="org.apache.commons.lang.text.StrBuilder.StrBuilderWriter StrBuilderWriter(org.apache.commons.lang.text.StrBuilder)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="org.apache.commons.lang.text.StrBuilder.StrBuilderWriter void close()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -443,6 +476,9 @@
     </annotation>
   </item>
   <item name="org.apache.commons.lang.text.StrLookup org.apache.commons.lang.text.StrLookup mapLookup(java.util.Map)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.apache.commons.lang.text.StrLookup org.apache.commons.lang.text.StrLookup noneLookup()">
@@ -454,6 +490,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="org.apache.commons.lang.text.StrLookup.MapStrLookup MapStrLookup(java.util.Map)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="org.apache.commons.lang.text.StrLookup.MapStrLookup java.lang.String lookup(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -467,6 +506,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.apache.commons.lang.text.StrMatcher org.apache.commons.lang.text.StrMatcher charMatcher(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.apache.commons.lang.text.StrMatcher org.apache.commons.lang.text.StrMatcher charSetMatcher(char[]) 0">
@@ -522,6 +564,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="org.apache.commons.lang.text.StrMatcher.CharMatcher CharMatcher(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="org.apache.commons.lang.text.StrMatcher.CharMatcher int isMatch(char[], int, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -745,6 +790,18 @@
   <item name="org.apache.commons.lang.text.StrSubstitutor void checkCyclicSubstitution(java.lang.String, java.util.List) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="org.apache.commons.lang.text.StrSubstitutor void setEscapeChar(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="org.apache.commons.lang.text.StrSubstitutor void setVariableResolver(org.apache.commons.lang.text.StrLookup)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="org.apache.commons.lang.text.StrTokenizer StrTokenizer()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="org.apache.commons.lang.text.StrTokenizer StrTokenizer(char[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="org.apache.commons.lang.text.StrTokenizer StrTokenizer(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -795,6 +852,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="org.apache.commons.lang.text.StrTokenizer java.lang.String getContent()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="org.apache.commons.lang.text.StrTokenizer java.lang.String nextToken()">
@@ -830,6 +890,7 @@
     </annotation>
   </item>
   <item name="org.apache.commons.lang.text.StrTokenizer org.apache.commons.lang.text.StrTokenizer reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.apache.commons.lang.text.StrTokenizer org.apache.commons.lang.text.StrTokenizer reset(char[])">
@@ -842,6 +903,7 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="org.apache.commons.lang.text.StrTokenizer org.apache.commons.lang.text.StrTokenizer setDelimiterMatcher(org.apache.commons.lang.text.StrMatcher)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.apache.commons.lang.text.StrTokenizer org.apache.commons.lang.text.StrTokenizer setDelimiterMatcher(org.apache.commons.lang.text.StrMatcher) 0">
@@ -851,24 +913,29 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="org.apache.commons.lang.text.StrTokenizer org.apache.commons.lang.text.StrTokenizer setEmptyTokenAsNull(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.apache.commons.lang.text.StrTokenizer org.apache.commons.lang.text.StrTokenizer setIgnoreEmptyTokens(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.apache.commons.lang.text.StrTokenizer org.apache.commons.lang.text.StrTokenizer setIgnoredMatcher(org.apache.commons.lang.text.StrMatcher)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.apache.commons.lang.text.StrTokenizer org.apache.commons.lang.text.StrTokenizer setIgnoredMatcher(org.apache.commons.lang.text.StrMatcher) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="org.apache.commons.lang.text.StrTokenizer org.apache.commons.lang.text.StrTokenizer setQuoteMatcher(org.apache.commons.lang.text.StrMatcher)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.apache.commons.lang.text.StrTokenizer org.apache.commons.lang.text.StrTokenizer setQuoteMatcher(org.apache.commons.lang.text.StrMatcher) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="org.apache.commons.lang.text.StrTokenizer org.apache.commons.lang.text.StrTokenizer setTrimmerMatcher(org.apache.commons.lang.text.StrMatcher)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.apache.commons.lang.text.StrTokenizer org.apache.commons.lang.text.StrTokenizer setTrimmerMatcher(org.apache.commons.lang.text.StrMatcher) 0">

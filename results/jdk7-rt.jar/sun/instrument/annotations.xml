@@ -1,4 +1,7 @@
 <root>
+  <item name="sun.instrument.InstrumentationImpl InstrumentationImpl(long, boolean, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.instrument.InstrumentationImpl boolean isModifiableClass(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -39,6 +42,9 @@
   <item name="sun.instrument.InstrumentationImpl void setNativeMethodPrefix(java.lang.instrument.ClassFileTransformer, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.instrument.TransformerManager TransformerManager(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.instrument.TransformerManager boolean includesTransformer(java.lang.instrument.ClassFileTransformer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -66,6 +72,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.instrument.TransformerManager void addTransformer(java.lang.instrument.ClassFileTransformer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.instrument.TransformerManager.TransformerInfo TransformerInfo(sun.instrument.TransformerManager, java.lang.instrument.ClassFileTransformer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.instrument.TransformerManager.TransformerInfo java.lang.String getPrefix()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -75,5 +87,8 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.instrument.TransformerManager.TransformerInfo void setPrefix(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

@@ -799,6 +799,9 @@
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLList void replaceNode(sun.org.mozilla.javascript.internal.xmlimpl.XML, sun.org.mozilla.javascript.internal.xmlimpl.XML) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLList void setTargets(sun.org.mozilla.javascript.internal.xmlimpl.XMLObjectImpl, sun.org.mozilla.javascript.internal.xmlimpl.XmlNode.QName)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLName XMLName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -933,6 +936,12 @@
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLName void initXMLObject(sun.org.mozilla.javascript.internal.xmlimpl.XMLObjectImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLName void setAttributeName()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLName void setIsDescendants()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLName void setMyValueOn(sun.org.mozilla.javascript.internal.xmlimpl.XML, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1005,6 +1014,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLObjectImpl sun.org.mozilla.javascript.internal.NativeWith enterWith(sun.org.mozilla.javascript.internal.Scriptable)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLObjectImpl sun.org.mozilla.javascript.internal.Ref memberRef(sun.org.mozilla.javascript.internal.Context, java.lang.Object, int)">
@@ -1115,8 +1127,14 @@
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLObjectImpl void xmlMethodNotFound(java.lang.Object, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLWithScope XMLWithScope(sun.org.mozilla.javascript.internal.xmlimpl.XMLLibImpl, sun.org.mozilla.javascript.internal.Scriptable, sun.org.mozilla.javascript.internal.xml.XMLObject)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XMLWithScope java.lang.Object updateDotQuery(boolean)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlNode XmlNode()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlNode boolean isSameNode(sun.org.mozilla.javascript.internal.xmlimpl.XmlNode)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1263,13 +1281,22 @@
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlNode void setUserData(org.w3c.dom.Node, sun.org.mozilla.javascript.internal.xmlimpl.XmlNode) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlNode void setXml(sun.org.mozilla.javascript.internal.xmlimpl.XML)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlNode.Filter Filter()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlNode.Filter sun.org.mozilla.javascript.internal.xmlimpl.XmlNode.Filter PROCESSING_INSTRUCTION(sun.org.mozilla.javascript.internal.xmlimpl.XMLName)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlNode.InternalList InternalList()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlNode.InternalList void add(sun.org.mozilla.javascript.internal.xmlimpl.XML) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1539,6 +1566,24 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlProcessor void beautifyElement(org.w3c.dom.Element, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlProcessor void setDefault()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlProcessor void setIgnoreComments(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlProcessor void setIgnoreProcessingInstructions(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlProcessor void setIgnoreWhitespace(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlProcessor void setPrettyIndent(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlProcessor void setPrettyPrinting(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.xmlimpl.XmlProcessor.RhinoSAXErrorHandler RhinoSAXErrorHandler()">
     <annotation name="org.jetbrains.annotations.Contract">

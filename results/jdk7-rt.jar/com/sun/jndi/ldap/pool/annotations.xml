@@ -1,4 +1,10 @@
 <root>
+  <item name="com.sun.jndi.ldap.pool.ConnectionDesc ConnectionDesc(com.sun.jndi.ldap.pool.PooledConnection)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jndi.ldap.pool.ConnectionDesc ConnectionDesc(com.sun.jndi.ldap.pool.PooledConnection, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jndi.ldap.pool.ConnectionDesc boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="value" val="&quot;null-&gt;false&quot;"/>
@@ -60,10 +66,16 @@
   <item name="com.sun.jndi.ldap.pool.Connections void td(java.lang.String, java.lang.Object, java.lang.Object) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jndi.ldap.pool.ConnectionsRef ConnectionsRef(com.sun.jndi.ldap.pool.Connections)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jndi.ldap.pool.ConnectionsRef com.sun.jndi.ldap.pool.Connections getConnections()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.pool.ConnectionsWeakRef ConnectionsWeakRef(com.sun.jndi.ldap.pool.ConnectionsRef, java.lang.ref.ReferenceQueue)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jndi.ldap.pool.ConnectionsWeakRef ConnectionsWeakRef(com.sun.jndi.ldap.pool.ConnectionsRef, java.lang.ref.ReferenceQueue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

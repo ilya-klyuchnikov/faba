@@ -5,6 +5,9 @@
   <item name="com.sun.jndi.dns.BindingEnumeration java.lang.Object next()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.dns.CT CT(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jndi.dns.DnsClient DnsClient(java.lang.String[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -89,6 +92,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.DnsContext com.sun.jndi.dns.CT getClassAndTypeToQuery(com.sun.jndi.dns.CT[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.DnsContext com.sun.jndi.dns.CT getClassAndTypeToQuery(com.sun.jndi.dns.CT[]) 0">
@@ -353,6 +359,9 @@
   <item name="com.sun.jndi.dns.DnsContextFactory javax.naming.Context urlToContext(java.lang.String, java.util.Hashtable) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.dns.DnsName DnsName()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jndi.dns.DnsName DnsName(com.sun.jndi.dns.DnsName, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -414,6 +423,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.DnsName java.util.Enumeration getAll()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.DnsName javax.naming.Name add(int, java.lang.String)">
@@ -516,6 +528,12 @@
   <item name="com.sun.jndi.dns.NameClassPairEnumeration java.lang.Object next()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.dns.NameClassPairEnumeration void close()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jndi.dns.NameNode NameNode(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jndi.dns.NameNode boolean isZoneCut()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -531,6 +549,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jndi.dns.NameNode com.sun.jndi.dns.NameNode newNameNode(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.NameNode int depth()">
@@ -547,6 +568,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.jndi.dns.NameNode void setZoneCut(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jndi.dns.Packet Packet(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jndi.dns.Packet byte[] getData()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -665,10 +692,16 @@
   <item name="com.sun.jndi.dns.ResourceRecords void add(byte[], int, com.sun.jndi.dns.Header) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.dns.ZoneNode ZoneNode(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jndi.dns.ZoneNode com.sun.jndi.dns.NameNode getContents()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.jndi.dns.ZoneNode com.sun.jndi.dns.NameNode newNameNode(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.dns.ZoneNode com.sun.jndi.dns.NameNode populate(com.sun.jndi.dns.DnsName, com.sun.jndi.dns.ResourceRecords) 1">
@@ -688,5 +721,8 @@
   </item>
   <item name="com.sun.jndi.dns.ZoneNode long getSerialNumber(com.sun.jndi.dns.ResourceRecord) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.ZoneNode void depopulate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

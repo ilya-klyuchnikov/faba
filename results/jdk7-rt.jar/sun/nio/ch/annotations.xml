@@ -1,4 +1,7 @@
 <root>
+  <item name="sun.nio.ch.AbstractPollArrayWrapper AbstractPollArrayWrapper()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.AbstractPollSelectorImpl java.nio.channels.Selector wakeup()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -25,6 +28,9 @@
     </annotation>
   </item>
   <item name="sun.nio.ch.AsynchronousChannelGroupImpl java.lang.Runnable bindToGroup(java.lang.Runnable)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.AsynchronousChannelGroupImpl java.lang.Runnable pollTask()">
@@ -93,6 +99,9 @@
   </item>
   <item name="sun.nio.ch.AsynchronousServerSocketChannelImpl void accept(A, java.nio.channels.CompletionHandler&lt;java.nio.channels.AsynchronousSocketChannel,? super A&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.AsynchronousServerSocketChannelImpl void onCancel(sun.nio.ch.PendingFuture&lt;?,?&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.ch.AsynchronousServerSocketChannelImpl void onCancel(sun.nio.ch.PendingFuture&lt;?,?&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -163,6 +172,27 @@
   <item name="sun.nio.ch.AsynchronousSocketChannelImpl void connect(java.net.SocketAddress, A, java.nio.channels.CompletionHandler&lt;java.lang.Void,? super A&gt;) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.AsynchronousSocketChannelImpl void enableReading()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.AsynchronousSocketChannelImpl void enableReading(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.AsynchronousSocketChannelImpl void enableWriting()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.AsynchronousSocketChannelImpl void enableWriting(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.AsynchronousSocketChannelImpl void killConnect()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.AsynchronousSocketChannelImpl void killReading()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.AsynchronousSocketChannelImpl void killWriting()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.AsynchronousSocketChannelImpl void read(java.nio.ByteBuffer, long, java.util.concurrent.TimeUnit, A, java.nio.channels.CompletionHandler&lt;java.lang.Integer,? super A&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -224,11 +254,17 @@
   <item name="sun.nio.ch.BsdAsynchronousChannelProvider sun.nio.ch.Port toPort(java.nio.channels.AsynchronousChannelGroup) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.nio.ch.ChannelInputStream ChannelInputStream(java.nio.channels.ReadableByteChannel)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.ChannelInputStream int read(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.ChannelInputStream int read(java.nio.channels.ReadableByteChannel, java.nio.ByteBuffer, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.CompletedFuture CompletedFuture(V, java.lang.Throwable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.ch.CompletedFuture V get(long, java.util.concurrent.TimeUnit) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -252,6 +288,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.CompletedFuture sun.nio.ch.CompletedFuture&lt;V&gt; withResult(V)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.CompletedFuture sun.nio.ch.CompletedFuture&lt;V&gt; withResult(V, java.lang.Throwable)">
@@ -433,6 +472,9 @@
   <item name="sun.nio.ch.DatagramSocketAdaptor void connectInternal(java.net.SocketAddress) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.DatagramSocketAdaptor void setSoTimeout(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.DefaultAsynchronousChannelProvider DefaultAsynchronousChannelProvider()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -465,6 +507,9 @@
   <item name="sun.nio.ch.EPollPort sun.nio.ch.EPollPort start()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.EPollPort.Event Event(sun.nio.ch.Port.PollableChannel, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.EPollPort.Event int events()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -475,10 +520,16 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.nio.ch.EPollPort.EventHandlerTask EventHandlerTask(sun.nio.ch.EPollPort)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.ExtendedSocketOption ExtendedSocketOption()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.nio.ch.FileChannelImpl FileChannelImpl(java.io.FileDescriptor, java.lang.String, boolean, boolean, boolean, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.ch.FileChannelImpl int read(java.nio.ByteBuffer, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -493,9 +544,15 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.FileChannelImpl java.nio.channels.FileChannel open(java.io.FileDescriptor, java.lang.String, boolean, boolean, boolean, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.FileChannelImpl java.nio.channels.FileChannel open(java.io.FileDescriptor, java.lang.String, boolean, boolean, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.FileChannelImpl java.nio.channels.FileChannel position(long)">
@@ -576,6 +633,9 @@
     </annotation>
   </item>
   <item name="sun.nio.ch.FileDispatcherImpl java.io.FileDescriptor duplicateForMapping(java.io.FileDescriptor)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.FileDispatcherImpl java.io.FileDescriptor duplicateForMapping(java.io.FileDescriptor) 0">
@@ -691,6 +751,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.nio.ch.IOVecWrapper.Deallocator Deallocator(sun.nio.ch.AllocatedNativeObject)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.InheritedChannel InheritedChannel()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -751,6 +814,9 @@
   <item name="sun.nio.ch.Invoker void invokeUnchecked(sun.nio.ch.PendingFuture&lt;V,A&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.Invoker.GroupAndInvokeCount GroupAndInvokeCount(sun.nio.ch.AsynchronousChannelGroupImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.Invoker.GroupAndInvokeCount int invokeCount()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -760,6 +826,15 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.nio.ch.Invoker.GroupAndInvokeCount void incrementInvokeCount()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.Invoker.GroupAndInvokeCount void resetInvokeCount()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.Invoker.GroupAndInvokeCount void setInvokeCount(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.ch.KQueue KQueue()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -774,11 +849,17 @@
   <item name="sun.nio.ch.KQueueArrayWrapper void release(sun.nio.ch.SelChImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.KQueueArrayWrapper.Update Update(sun.nio.ch.SelChImpl, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.KQueuePort KQueuePort(java.nio.channels.spi.AsynchronousChannelProvider, sun.nio.ch.ThreadPool) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.KQueuePort sun.nio.ch.KQueuePort start()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.KQueuePort.Event Event(sun.nio.ch.Port.PollableChannel, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.ch.KQueuePort.Event int events()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -789,6 +870,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.nio.ch.KQueuePort.EventHandlerTask EventHandlerTask(sun.nio.ch.KQueuePort)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.ch.KQueueSelectorImpl java.nio.channels.Selector wakeup()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -801,6 +885,9 @@
   </item>
   <item name="sun.nio.ch.KQueueSelectorImpl void putEventOps(sun.nio.ch.SelectionKeyImpl, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.KQueueSelectorImpl.MapEntry MapEntry(sun.nio.ch.SelectionKeyImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.ch.KQueueSelectorProvider java.nio.channels.spi.AbstractSelector openSelector()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -837,6 +924,9 @@
   <item name="sun.nio.ch.LinuxAsynchronousChannelProvider sun.nio.ch.Port toPort(java.nio.channels.AsynchronousChannelGroup) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.nio.ch.MembershipKeyImpl MembershipKeyImpl(java.nio.channels.MulticastChannel, java.net.InetAddress, java.net.NetworkInterface, java.net.InetAddress)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.MembershipKeyImpl boolean isValid()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -871,6 +961,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.nio.ch.MembershipKeyImpl void invalidate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.MembershipKeyImpl.Type4 Type4(java.nio.channels.MulticastChannel, java.net.InetAddress, java.net.NetworkInterface, java.net.InetAddress, int, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.MembershipKeyImpl.Type4 int groupAddress()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -886,6 +982,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.nio.ch.MembershipKeyImpl.Type6 Type6(java.nio.channels.MulticastChannel, java.net.InetAddress, java.net.NetworkInterface, java.net.InetAddress, byte[], int, byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.MembershipKeyImpl.Type6 byte[] groupAddress()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -900,6 +999,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.nio.ch.MembershipRegistry MembershipRegistry()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.ch.MembershipRegistry java.nio.channels.MembershipKey checkMembership(java.net.InetAddress, java.net.NetworkInterface, java.net.InetAddress)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -937,6 +1039,12 @@
   <item name="sun.nio.ch.NativeDispatcher void preClose(java.io.FileDescriptor) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.nio.ch.NativeObject NativeObject(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.NativeObject NativeObject(long, long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.NativeObject long address()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -951,6 +1059,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.NativeObject sun.nio.ch.NativeObject subObject(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.NativeObject void putObject(int, sun.nio.ch.NativeObject) 1">
@@ -960,6 +1071,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.nio.ch.NativeThreadSet NativeThreadSet(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.ch.Net Net()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1049,6 +1163,9 @@
   <item name="sun.nio.ch.Net void translateToSocketException(java.lang.Exception) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.OptionKey OptionKey(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.OptionKey int level()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1063,6 +1180,18 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.nio.ch.PendingFuture PendingFuture(java.nio.channels.AsynchronousChannel)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.PendingFuture PendingFuture(java.nio.channels.AsynchronousChannel, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.PendingFuture PendingFuture(java.nio.channels.AsynchronousChannel, java.nio.channels.CompletionHandler&lt;V,? super A&gt;, A)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.PendingFuture PendingFuture(java.nio.channels.AsynchronousChannel, java.nio.channels.CompletionHandler&lt;V,? super A&gt;, A, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.ch.PendingFuture V value()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1099,6 +1228,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.nio.ch.PendingFuture void setContext(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.ch.PendingFuture void setResult(V, java.lang.Throwable) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1219,6 +1351,12 @@
   <item name="sun.nio.ch.SctpChannelImpl int send(java.nio.ByteBuffer, com.sun.nio.sctp.MessageInfo) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.nio.ch.SctpMessageInfoImpl SctpMessageInfoImpl(com.sun.nio.sctp.Association, java.net.SocketAddress, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.SctpMessageInfoImpl SctpMessageInfoImpl(int, java.net.SocketAddress, int, int, boolean, boolean, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.SctpMessageInfoImpl boolean isComplete()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1235,18 +1373,22 @@
     </annotation>
   </item>
   <item name="sun.nio.ch.SctpMessageInfoImpl com.sun.nio.sctp.MessageInfo complete(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.SctpMessageInfoImpl com.sun.nio.sctp.MessageInfo payloadProtocolID(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.SctpMessageInfoImpl com.sun.nio.sctp.MessageInfo streamNumber(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.SctpMessageInfoImpl com.sun.nio.sctp.MessageInfo timeToLive(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.SctpMessageInfoImpl com.sun.nio.sctp.MessageInfo unordered(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.SctpMessageInfoImpl int associationID()">
@@ -1281,6 +1423,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.nio.ch.SctpMessageInfoImpl void setAssociation(com.sun.nio.sctp.Association)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.ch.SctpMultiChannelImpl T getOption(com.sun.nio.sctp.SctpSocketOption&lt;T&gt;, com.sun.nio.sctp.Association) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1348,6 +1493,12 @@
   <item name="sun.nio.ch.SctpServerChannelImpl com.sun.nio.sctp.SctpServerChannel unbindAddress(java.net.InetAddress) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.nio.ch.SctpStdSocketOption SctpStdSocketOption(java.lang.String, java.lang.Class&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.SctpStdSocketOption SctpStdSocketOption(java.lang.String, java.lang.Class&lt;T&gt;, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.SctpStdSocketOption int constValue()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1379,6 +1530,9 @@
   <item name="sun.nio.ch.Secrets java.nio.channels.SocketChannel newSocketChannel(java.io.FileDescriptor)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.SelectionKeyImpl SelectionKeyImpl(sun.nio.ch.SelChImpl, sun.nio.ch.SelectorImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.SelectionKeyImpl int getIndex()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1406,6 +1560,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.nio.ch.SelectionKeyImpl void nioReadyOps(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.SelectionKeyImpl void setIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.ch.SelectorImpl java.nio.channels.SelectionKey register(java.nio.channels.spi.AbstractSelectableChannel, int, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1460,6 +1620,9 @@
   </item>
   <item name="sun.nio.ch.ServerSocketAdaptor void bind(java.net.SocketAddress, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.ServerSocketAdaptor void setSoTimeout(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.ch.ServerSocketChannelImpl T getOption(java.net.SocketOption&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1532,6 +1695,9 @@
   </item>
   <item name="sun.nio.ch.SharedFileLockTable void replace(java.nio.channels.FileLock, java.nio.channels.FileLock) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.SharedFileLockTable.FileLockReference FileLockReference(java.nio.channels.FileLock, java.lang.ref.ReferenceQueue&lt;java.nio.channels.FileLock&gt;, sun.nio.ch.FileKey)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.ch.SharedFileLockTable.FileLockReference FileLockReference(java.nio.channels.FileLock, java.lang.ref.ReferenceQueue&lt;java.nio.channels.FileLock&gt;, sun.nio.ch.FileKey) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1628,6 +1794,9 @@
   </item>
   <item name="sun.nio.ch.SocketAdaptor void connect(java.net.SocketAddress, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.SocketAdaptor.SocketInputStream SocketInputStream(sun.nio.ch.SocketAdaptor)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.ch.SocketAdaptor.SocketInputStream SocketInputStream(sun.nio.ch.SocketAdaptor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1751,6 +1920,9 @@
   <item name="sun.nio.ch.SocketOptionRegistry.LazyInitialization java.util.Map&lt;sun.nio.ch.SocketOptionRegistry.RegistryKey,sun.nio.ch.OptionKey&gt; options()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.SocketOptionRegistry.RegistryKey RegistryKey(java.net.SocketOption&lt;?&gt;, java.net.ProtocolFamily)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.SocketOptionRegistry.RegistryKey boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="value" val="&quot;null-&gt;false&quot;"/>
@@ -1797,6 +1969,9 @@
   <item name="sun.nio.ch.SolarisEventPort sun.nio.ch.SolarisEventPort start()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.SolarisEventPort.EventHandlerTask EventHandlerTask(sun.nio.ch.SolarisEventPort)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.SourceChannelImpl boolean translateAndUpdateReadyOps(int, sun.nio.ch.SelectionKeyImpl) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1821,6 +1996,9 @@
   </item>
   <item name="sun.nio.ch.SourceChannelImpl void translateAndSetInterestOps(int, sun.nio.ch.SelectionKeyImpl) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.ThreadPool ThreadPool(java.util.concurrent.ExecutorService, boolean, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.ch.ThreadPool boolean isFixedThreadPool()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1920,6 +2098,9 @@
   <item name="sun.nio.ch.UnixAsynchronousSocketChannelImpl void onCancel(sun.nio.ch.PendingFuture&lt;?,?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.UnixAsynchronousSocketChannelImpl.OpType OpType(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.Util Util()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1937,6 +2118,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.Util java.util.Set&lt;E&gt; ungrowableSet(java.util.Set&lt;E&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.Util sun.misc.Unsafe unsafe()">
@@ -1952,6 +2136,9 @@
   </item>
   <item name="sun.nio.ch.Util void releaseTemporarySelector(java.nio.channels.Selector) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.Util.BufferCache BufferCache()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.ch.Util.BufferCache boolean isEmpty()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1970,5 +2157,8 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.nio.ch.Util.SelectorWrapper.Closer Closer(java.nio.channels.Selector)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

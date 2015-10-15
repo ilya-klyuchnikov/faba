@@ -94,8 +94,14 @@
   <item name="java.util.concurrent.locks.AbstractQueuedSynchronizer void setHeadAndPropagate(java.util.concurrent.locks.AbstractQueuedSynchronizer.Node, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.locks.AbstractQueuedSynchronizer void setState(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.locks.AbstractQueuedSynchronizer void unparkSuccessor(java.util.concurrent.locks.AbstractQueuedSynchronizer.Node) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject ConditionObject(java.util.concurrent.locks.AbstractQueuedSynchronizer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject boolean await(long, java.util.concurrent.TimeUnit) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -124,6 +130,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.util.concurrent.locks.AbstractQueuedSynchronizer.Node Node(java.lang.Thread, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.concurrent.locks.AbstractQueuedSynchronizer.Node Node(java.lang.Thread, java.util.concurrent.locks.AbstractQueuedSynchronizer.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.locks.AbstractQueuedSynchronizer.Node boolean isShared()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -162,12 +174,18 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantLock java.util.concurrent.locks.Condition newCondition()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantLock.Sync java.lang.Thread getOwner()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantLock.Sync java.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject newCondition()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantLock.Sync void readObject(java.io.ObjectInputStream) 0">
@@ -208,6 +226,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock ReadLock(java.util.concurrent.locks.ReentrantReadWriteLock)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock ReadLock(java.util.concurrent.locks.ReentrantReadWriteLock) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -231,6 +252,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock.Sync java.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject newCondition()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock.Sync void readObject(java.io.ObjectInputStream) 0">
@@ -238,6 +262,9 @@
   </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock.Sync.ThreadLocalHoldCounter java.util.concurrent.locks.ReentrantReadWriteLock.Sync.HoldCounter initialValue()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock WriteLock(java.util.concurrent.locks.ReentrantReadWriteLock)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock WriteLock(java.util.concurrent.locks.ReentrantReadWriteLock) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -249,6 +276,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock java.util.concurrent.locks.Condition newCondition()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
 </root>

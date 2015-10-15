@@ -1,4 +1,7 @@
 <root>
+  <item name="javax.swing.table.AbstractTableModel AbstractTableModel()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.swing.table.AbstractTableModel boolean isCellEditable(int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -95,8 +98,14 @@
   <item name="javax.swing.table.DefaultTableColumnModel void addColumn(javax.swing.table.TableColumn) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.swing.table.DefaultTableColumnModel void invalidateWidthCache()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.swing.table.DefaultTableColumnModel void propertyChange(java.beans.PropertyChangeEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.table.DefaultTableColumnModel void setColumnSelectionAllowed(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.swing.table.DefaultTableColumnModel void setSelectionModel(javax.swing.ListSelectionModel) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -211,6 +220,9 @@
   <item name="javax.swing.table.JTableHeader java.lang.String paramString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.swing.table.JTableHeader javax.accessibility.AccessibleContext getAccessibleContext()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.swing.table.JTableHeader javax.swing.JTable getTable()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -270,8 +282,26 @@
   <item name="javax.swing.table.JTableHeader void setColumnModel(javax.swing.table.TableColumnModel) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.swing.table.JTableHeader void setDefaultRenderer(javax.swing.table.TableCellRenderer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.swing.table.JTableHeader void setDraggedColumn(javax.swing.table.TableColumn)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.swing.table.JTableHeader void setDraggedDistance(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.swing.table.JTableHeader void setResizingColumn(javax.swing.table.TableColumn)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.swing.table.JTableHeader void setUpdateTableInRealTime(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.swing.table.JTableHeader void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.table.JTableHeader.AccessibleJTableHeader AccessibleJTableHeader(javax.swing.table.JTableHeader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.swing.table.JTableHeader.AccessibleJTableHeader javax.accessibility.Accessible getAccessibleAt(java.awt.Point)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -342,6 +372,18 @@
   <item name="javax.swing.table.JTableHeader.AccessibleJTableHeader.AccessibleJTableHeaderEntry void setLocation(java.awt.Point) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.swing.table.TableColumn TableColumn()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.swing.table.TableColumn TableColumn(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.swing.table.TableColumn TableColumn(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.swing.table.TableColumn TableColumn(int, int, javax.swing.table.TableCellRenderer, javax.swing.table.TableCellEditor)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.swing.table.TableColumn boolean getResizable()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -395,10 +437,19 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="javax.swing.table.TableColumn void disableResizedPosting()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.swing.table.TableColumn void enableResizedPosting()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.swing.table.TableRowSorter javax.swing.table.TableStringConverter getStringConverter()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="javax.swing.table.TableRowSorter void setStringConverter(javax.swing.table.TableStringConverter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.swing.table.TableRowSorter.ComparableComparator ComparableComparator()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -412,6 +463,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="javax.swing.table.TableRowSorter.TableRowSorterModelWrapper TableRowSorterModelWrapper(javax.swing.table.TableRowSorter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.swing.table.TableStringConverter TableStringConverter()">
     <annotation name="org.jetbrains.annotations.Contract">

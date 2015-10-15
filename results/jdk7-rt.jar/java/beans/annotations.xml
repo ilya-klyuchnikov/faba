@@ -116,6 +116,9 @@
   <item name="java.beans.BeansAppletContext void showStatus(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.beans.BeansAppletStub BeansAppletStub(java.applet.Applet, java.applet.AppletContext, java.net.URL, java.net.URL)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.BeansAppletStub boolean isActive()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -167,6 +170,12 @@
   </item>
   <item name="java.beans.ChangeListenerMap void set(java.lang.String, L[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.beans.DefaultPersistenceDelegate DefaultPersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.beans.DefaultPersistenceDelegate DefaultPersistenceDelegate(java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.DefaultPersistenceDelegate boolean definesEquals(java.lang.Class)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -241,6 +250,9 @@
   </item>
   <item name="java.beans.Encoder java.lang.Object remove(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.beans.Encoder void setExceptionListener(java.beans.ExceptionListener)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.Encoder void writeStatement(java.beans.Statement) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -451,11 +463,17 @@
   <item name="java.beans.EventSetDescriptor void setGetListenerMethod(java.lang.reflect.Method) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.beans.EventSetDescriptor void setInDefaultEventSet(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.EventSetDescriptor void setListenerMethods(java.lang.reflect.Method[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.beans.EventSetDescriptor void setRemoveListenerMethod(java.lang.reflect.Method) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.beans.EventSetDescriptor void setUnicast(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.Expression Expression(java.lang.Object, java.lang.Object, java.lang.String, java.lang.Object[]) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -471,6 +489,9 @@
   </item>
   <item name="java.beans.Expression java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.Expression void setValue(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.FeatureDescriptor FeatureDescriptor()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -529,7 +550,8 @@
   </item>
   <item name="java.beans.FeatureDescriptor java.lang.ref.Reference&lt;T&gt; getSoftReference(T)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+      <val name="value" val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -538,7 +560,8 @@
   </item>
   <item name="java.beans.FeatureDescriptor java.lang.ref.Reference&lt;T&gt; getWeakReference(T)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+      <val name="value" val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -571,11 +594,35 @@
   <item name="java.beans.FeatureDescriptor void appendTo(java.lang.StringBuilder, java.lang.String, java.lang.ref.Reference) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.beans.FeatureDescriptor void setClass0(java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.FeatureDescriptor void setClass0(java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.beans.FeatureDescriptor void setDisplayName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.beans.FeatureDescriptor void setExpert(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.beans.FeatureDescriptor void setHidden(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.beans.FeatureDescriptor void setName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.beans.FeatureDescriptor void setPreferred(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.beans.FeatureDescriptor void setShortDescription(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.FeatureDescriptor void setTransient(java.beans.Transient) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.beans.GenericBeanInfo GenericBeanInfo(java.beans.BeanDescriptor, java.beans.EventSetDescriptor[], int, java.beans.PropertyDescriptor[], int, java.beans.MethodDescriptor[], java.beans.BeanInfo)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.GenericBeanInfo GenericBeanInfo(java.beans.BeanDescriptor, java.beans.EventSetDescriptor[], int, java.beans.PropertyDescriptor[], int, java.beans.MethodDescriptor[], java.beans.BeanInfo) 6">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1007,6 +1054,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.beans.MetaData.java_awt_BorderLayout_PersistenceDelegate java_awt_BorderLayout_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.MetaData.java_awt_BorderLayout_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1016,6 +1066,9 @@
   <item name="java.beans.MetaData.java_awt_BorderLayout_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.beans.MetaData.java_awt_CardLayout_PersistenceDelegate java_awt_CardLayout_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.MetaData.java_awt_CardLayout_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1024,6 +1077,9 @@
   </item>
   <item name="java.beans.MetaData.java_awt_CardLayout_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.MetaData.java_awt_Choice_PersistenceDelegate java_awt_Choice_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.MetaData.java_awt_Choice_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1037,6 +1093,9 @@
   <item name="java.beans.MetaData.java_awt_Choice_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.beans.MetaData.java_awt_Component_PersistenceDelegate java_awt_Component_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.MetaData.java_awt_Component_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1045,6 +1104,9 @@
   </item>
   <item name="java.beans.MetaData.java_awt_Component_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.MetaData.java_awt_Container_PersistenceDelegate java_awt_Container_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.MetaData.java_awt_Container_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1072,6 +1134,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.beans.MetaData.java_awt_GridBagLayout_PersistenceDelegate java_awt_GridBagLayout_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.MetaData.java_awt_GridBagLayout_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1098,6 +1163,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.beans.MetaData.java_awt_List_PersistenceDelegate java_awt_List_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.MetaData.java_awt_List_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1109,6 +1177,9 @@
   </item>
   <item name="java.beans.MetaData.java_awt_List_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.MetaData.java_awt_MenuBar_PersistenceDelegate java_awt_MenuBar_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.MetaData.java_awt_MenuBar_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1139,6 +1210,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.beans.MetaData.java_awt_Menu_PersistenceDelegate java_awt_Menu_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.MetaData.java_awt_Menu_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1160,6 +1234,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.beans.MetaData.java_beans_beancontext_BeanContextSupport_PersistenceDelegate java_beans_beancontext_BeanContextSupport_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.MetaData.java_lang_Class_PersistenceDelegate boolean mutatesTo(java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1251,6 +1328,18 @@
   </item>
   <item name="java.beans.MetaData.java_sql_Timestamp_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.beans.MetaData.java_util_AbstractCollection_PersistenceDelegate java_util_AbstractCollection_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.beans.MetaData.java_util_AbstractList_PersistenceDelegate java_util_AbstractList_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.beans.MetaData.java_util_AbstractMap_PersistenceDelegate java_util_AbstractMap_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.beans.MetaData.java_util_Collection_PersistenceDelegate java_util_Collection_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.MetaData.java_util_Collection_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1689,11 +1778,20 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.beans.MetaData.java_util_Hashtable_PersistenceDelegate java_util_Hashtable_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.beans.MetaData.java_util_List_PersistenceDelegate java_util_List_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.MetaData.java_util_List_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.beans.MetaData.java_util_List_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.MetaData.java_util_Map_PersistenceDelegate java_util_Map_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.MetaData.java_util_Map_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1713,6 +1811,12 @@
   <item name="java.beans.MetaData.javax_swing_Box_PersistenceDelegate java.lang.Integer getAxis(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.beans.MetaData.javax_swing_Box_PersistenceDelegate javax_swing_Box_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.beans.MetaData.javax_swing_DefaultComboBoxModel_PersistenceDelegate javax_swing_DefaultComboBoxModel_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.MetaData.javax_swing_DefaultComboBoxModel_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1721,6 +1825,9 @@
   </item>
   <item name="java.beans.MetaData.javax_swing_DefaultComboBoxModel_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.MetaData.javax_swing_DefaultListModel_PersistenceDelegate javax_swing_DefaultListModel_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.MetaData.javax_swing_DefaultListModel_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1734,6 +1841,9 @@
   <item name="java.beans.MetaData.javax_swing_DefaultListModel_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.beans.MetaData.javax_swing_JFrame_PersistenceDelegate javax_swing_JFrame_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.MetaData.javax_swing_JFrame_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1746,6 +1856,9 @@
   <item name="java.beans.MetaData.javax_swing_JFrame_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.beans.MetaData.javax_swing_JMenu_PersistenceDelegate javax_swing_JMenu_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.MetaData.javax_swing_JMenu_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1754,6 +1867,9 @@
   </item>
   <item name="java.beans.MetaData.javax_swing_JMenu_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.MetaData.javax_swing_JTabbedPane_PersistenceDelegate javax_swing_JTabbedPane_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.MetaData.javax_swing_JTabbedPane_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1788,6 +1904,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.beans.MetaData.javax_swing_tree_DefaultMutableTreeNode_PersistenceDelegate javax_swing_tree_DefaultMutableTreeNode_PersistenceDelegate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.MetaData.javax_swing_tree_DefaultMutableTreeNode_PersistenceDelegate void initialize(java.lang.Class&lt;?&gt;, java.lang.Object, java.lang.Object, java.beans.Encoder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1972,6 +2091,12 @@
   <item name="java.beans.PropertyChangeEvent void appendTo(java.lang.StringBuilder) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.beans.PropertyChangeEvent void setPropagationId(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.beans.PropertyChangeListenerProxy PropertyChangeListenerProxy(java.lang.String, java.beans.PropertyChangeListener)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.PropertyChangeListenerProxy java.lang.String getPropertyName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -2021,6 +2146,9 @@
     </annotation>
   </item>
   <item name="java.beans.PropertyChangeSupport.PropertyChangeListenerMap java.beans.PropertyChangeListener newProxy(java.lang.String, java.beans.PropertyChangeListener)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.PropertyChangeSupport.PropertyChangeListenerMap java.beans.PropertyChangeListener[] newArray(int)">
@@ -2100,6 +2228,12 @@
   <item name="java.beans.PropertyDescriptor java.lang.reflect.Method getWriteMethod()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.beans.PropertyDescriptor void setBound(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.beans.PropertyDescriptor void setConstrained(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.PropertyDescriptor void setReadMethod(java.lang.reflect.Method) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2171,6 +2305,9 @@
   </item>
   <item name="java.beans.PropertyEditorSupport void paintValue(java.awt.Graphics, java.awt.Rectangle) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.beans.PropertyEditorSupport void setSource(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.PropertyVetoException java.beans.PropertyChangeEvent getPropertyChangeEvent()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2280,6 +2417,15 @@
   <item name="java.beans.ThreadGroupContext java.beans.BeanInfo getBeanInfo(java.lang.Class&lt;?&gt;)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.beans.ThreadGroupContext void setDesignTime(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.beans.ThreadGroupContext void setGuiAvailable(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.beans.VetoableChangeListenerProxy VetoableChangeListenerProxy(java.lang.String, java.beans.VetoableChangeListener)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.VetoableChangeListenerProxy java.lang.String getPropertyName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -2326,12 +2472,18 @@
     </annotation>
   </item>
   <item name="java.beans.VetoableChangeSupport.VetoableChangeListenerMap java.beans.VetoableChangeListener newProxy(java.lang.String, java.beans.VetoableChangeListener)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.VetoableChangeSupport.VetoableChangeListenerMap java.beans.VetoableChangeListener[] newArray(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.beans.WeakIdentityMap WeakIdentityMap()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.WeakIdentityMap int getIndex(java.beans.WeakIdentityMap.Entry&lt;?&gt;[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2348,6 +2500,9 @@
   </item>
   <item name="java.beans.WeakIdentityMap void transfer(java.beans.WeakIdentityMap.Entry&lt;T&gt;[], java.beans.WeakIdentityMap.Entry&lt;T&gt;[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.WeakIdentityMap.Entry Entry(java.lang.Object, int, T, java.lang.ref.ReferenceQueue&lt;java.lang.Object&gt;, java.beans.WeakIdentityMap.Entry&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.WeakIdentityMap.Entry Entry(java.lang.Object, int, T, java.lang.ref.ReferenceQueue&lt;java.lang.Object&gt;, java.beans.WeakIdentityMap.Entry&lt;T&gt;) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2376,6 +2531,9 @@
   </item>
   <item name="java.beans.XMLDecoder void setExceptionListener(java.beans.ExceptionListener) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.beans.XMLDecoder void setOwner(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.XMLEncoder XMLEncoder(java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2452,5 +2610,8 @@
   </item>
   <item name="java.beans.XMLEncoder void writeln(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.beans.XMLEncoder.ValueData ValueData(java.beans.XMLEncoder)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

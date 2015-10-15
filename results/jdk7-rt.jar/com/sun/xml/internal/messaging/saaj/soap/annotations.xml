@@ -55,6 +55,9 @@
   <item name="com.sun.xml.internal.messaging.saaj.soap.EnvelopeFactory com.sun.xml.internal.messaging.saaj.soap.Envelope createEnvelope(javax.xml.transform.Source, com.sun.xml.internal.messaging.saaj.soap.SOAPPartImpl) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.messaging.saaj.soap.FastInfosetDataContentHandler FastInfosetDataContentHandler()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.FastInfosetDataContentHandler java.awt.datatransfer.DataFlavor[] getTransferDataFlavors()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -149,6 +152,12 @@
   <item name="com.sun.xml.internal.messaging.saaj.soap.JpegDataContentHandler void writeTo(java.lang.Object, java.lang.String, java.io.OutputStream) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.messaging.saaj.soap.MessageFactoryImpl MessageFactoryImpl()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.soap.MessageFactoryImpl java.io.OutputStream listen(java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.MessageFactoryImpl java.lang.String getContentType(javax.xml.soap.MimeHeaders)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -160,6 +169,9 @@
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.MessageFactoryImpl javax.xml.soap.SOAPMessage createMessage(javax.xml.soap.MimeHeaders, java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.soap.MessageFactoryImpl void setLazyAttachmentOptimization(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.MessageImpl MessageImpl(javax.xml.soap.MimeHeaders, java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -317,6 +329,15 @@
   <item name="com.sun.xml.internal.messaging.saaj.soap.MessageImpl void initializeAttachment(com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeMultipart, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.messaging.saaj.soap.MessageImpl void needsSave()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.soap.MessageImpl void setIsFastInfoset(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.soap.MessageImpl void setLazyAttachments(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.MessageImpl void setMimeHeaders(javax.xml.soap.SOAPPart, com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeBodyPart) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -370,6 +391,12 @@
   <item name="com.sun.xml.internal.messaging.saaj.soap.SAAJMetaFactoryImpl javax.xml.soap.SOAPFactory newSOAPFactory(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPDocumentFragment SOAPDocumentFragment()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPDocumentFragment SOAPDocumentFragment(com.sun.org.apache.xerces.internal.dom.CoreDocumentImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPDocumentImpl com.sun.xml.internal.messaging.saaj.soap.SOAPDocumentImpl getDocument()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -380,9 +407,15 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPDocumentImpl org.w3c.dom.CDATASection createCDATASection(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPDocumentImpl org.w3c.dom.Comment createComment(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPDocumentImpl org.w3c.dom.DOMImplementation getImplementation()">
@@ -391,6 +424,9 @@
     </annotation>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPDocumentImpl org.w3c.dom.DocumentFragment createDocumentFragment()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPDocumentImpl org.w3c.dom.DocumentType getDoctype()">
@@ -415,6 +451,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPDocumentImpl org.w3c.dom.Text createTextNode(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPFactoryImpl SOAPFactoryImpl()">
@@ -503,6 +542,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPPartImpl javax.activation.DataHandler getDataHandler()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPPartImpl javax.xml.soap.MimeHeaders getMimeHeaders()">
@@ -531,6 +573,9 @@
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPPartImpl void setParentElement(javax.xml.soap.SOAPElement) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPPartImpl void setSourceCharsetEncoding(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPPartImpl void setValue(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

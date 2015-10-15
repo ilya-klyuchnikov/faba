@@ -1,4 +1,7 @@
 <root>
+  <item name="com.sun.xml.internal.stream.writers.UTF8OutputStreamWriter UTF8OutputStreamWriter(java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.stream.writers.UTF8OutputStreamWriter java.lang.String getEncoding()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -18,6 +21,12 @@
   </item>
   <item name="com.sun.xml.internal.stream.writers.WriterUtility java.nio.charset.CharsetEncoder getDefaultEncoder()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.stream.writers.WriterUtility void setEscapeCharacters(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.stream.writers.WriterUtility void setWriter(java.io.Writer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.stream.writers.WriterUtility void writeXMLAttributeValue(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -64,6 +73,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.stream.writers.XMLDOMWriterImpl void incDepth()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.stream.writers.XMLDOMWriterImpl void setNamespaceContext(javax.xml.namespace.NamespaceContext) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -108,6 +120,9 @@
   </item>
   <item name="com.sun.xml.internal.stream.writers.XMLDOMWriterImpl void writeStartDocument(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.stream.writers.XMLEventWriterImpl XMLEventWriterImpl(javax.xml.stream.XMLStreamWriter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.stream.writers.XMLEventWriterImpl void add(javax.xml.stream.XMLEventReader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -204,6 +219,9 @@
   <item name="com.sun.xml.internal.stream.writers.XMLStreamWriterImpl void correctPrefix(com.sun.org.apache.xerces.internal.xni.QName, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.stream.writers.XMLStreamWriterImpl void setEscapeCharacters(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.stream.writers.XMLStreamWriterImpl void setOutput(javax.xml.transform.stream.StreamResult, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -289,16 +307,37 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.stream.writers.XMLStreamWriterImpl.ElementStack com.sun.xml.internal.stream.writers.XMLStreamWriterImpl.ElementState pop()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.stream.writers.XMLStreamWriterImpl.ElementStack void clear()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.stream.writers.XMLStreamWriterImpl.ElementState void setValues(java.lang.String, java.lang.String, java.lang.String, java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.stream.writers.XMLStreamWriterImpl.NamespaceContextImpl NamespaceContextImpl(com.sun.xml.internal.stream.writers.XMLStreamWriterImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.stream.writers.XMLStreamWriterImpl.NamespaceContextImpl java.lang.String getNamespaceURI(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.xml.internal.stream.writers.XMLStreamWriterImpl.NamespaceContextImpl java.lang.String getPrefix(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.stream.writers.XMLWriter XMLWriter(java.io.Writer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.stream.writers.XMLWriter XMLWriter(java.io.Writer, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.stream.writers.XMLWriter java.io.Writer getWriter()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.stream.writers.XMLWriter void setWriter(java.io.Writer, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.stream.writers.XMLWriter void write(char[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

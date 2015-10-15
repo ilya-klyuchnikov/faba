@@ -20,6 +20,9 @@
   <item name="java.math.BigDecimal BigDecimal(double, java.math.MathContext) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.math.BigDecimal BigDecimal(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.math.BigDecimal BigDecimal(int, java.math.MathContext) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -32,8 +35,14 @@
   <item name="java.math.BigDecimal BigDecimal(java.lang.String, java.math.MathContext) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.math.BigDecimal BigDecimal(java.math.BigInteger)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.math.BigDecimal BigDecimal(java.math.BigInteger) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.math.BigDecimal BigDecimal(java.math.BigInteger, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.math.BigDecimal BigDecimal(java.math.BigInteger, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -49,6 +58,9 @@
   </item>
   <item name="java.math.BigDecimal BigDecimal(java.math.BigInteger, java.math.MathContext) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.math.BigDecimal BigDecimal(java.math.BigInteger, long, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.math.BigDecimal BigDecimal(long, java.math.MathContext) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -239,6 +251,9 @@
   <item name="java.math.BigDecimal.LongOverflow void check(java.math.BigDecimal) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.math.BigDecimal.StringBuilderHelper StringBuilderHelper()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.math.BigDecimal.StringBuilderHelper char[] getCompactCharArray()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -246,6 +261,9 @@
   </item>
   <item name="java.math.BigInteger BigInteger(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.math.BigInteger BigInteger(byte[], int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.math.BigInteger BigInteger(byte[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -261,6 +279,9 @@
   </item>
   <item name="java.math.BigInteger BigInteger(int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.math.BigInteger BigInteger(int[], int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.math.BigInteger BigInteger(int[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -296,6 +317,12 @@
   <item name="java.math.BigInteger int addOne(int[], int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.math.BigInteger int bitCount()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.math.BigInteger int bitLength()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.math.BigInteger int bitLength(int[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -322,6 +349,15 @@
   <item name="java.math.BigInteger int compareTo(java.math.BigInteger) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.math.BigInteger int firstNonzeroIntNum()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.math.BigInteger int getInt(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.math.BigInteger int getLowestSetBit()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.math.BigInteger int hashCode()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -331,6 +367,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.math.BigInteger int intValue()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.math.BigInteger int mulAdd(int[], int[], int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -506,6 +545,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.math.BigInteger java.math.BigInteger negate()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.math.BigInteger java.math.BigInteger not()">
@@ -549,6 +591,9 @@
   </item>
   <item name="java.math.BigInteger java.math.BigInteger[] divideAndRemainder(java.math.BigInteger) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.math.BigInteger long longValue()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.math.BigInteger void destructiveMulAdd(int[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -622,8 +667,17 @@
   <item name="java.math.MathContext void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.math.MutableBigInteger MutableBigInteger()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.math.MutableBigInteger MutableBigInteger(int[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.math.MutableBigInteger MutableBigInteger(int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.math.MutableBigInteger MutableBigInteger(java.math.BigInteger)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.math.MutableBigInteger MutableBigInteger(java.math.BigInteger) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -767,6 +821,9 @@
   <item name="java.math.MutableBigInteger void divWord(int[], long, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.math.MutableBigInteger void ensureCapacity(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.math.MutableBigInteger void mul(int, java.math.MutableBigInteger) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -775,6 +832,21 @@
   </item>
   <item name="java.math.MutableBigInteger void multiply(java.math.MutableBigInteger, java.math.MutableBigInteger) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.math.MutableBigInteger void normalize()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.math.MutableBigInteger void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.math.MutableBigInteger void setValue(int[], int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.math.RoundingMode RoundingMode(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.math.SignedMutableBigInteger SignedMutableBigInteger()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.math.SignedMutableBigInteger SignedMutableBigInteger(java.math.MutableBigInteger) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

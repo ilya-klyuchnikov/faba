@@ -1,4 +1,7 @@
 <root>
+  <item name="sun.reflect.AccessorGenerator AccessorGenerator()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.reflect.AccessorGenerator boolean canWidenTo(java.lang.Class, java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -28,6 +31,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.reflect.AccessorGenerator java.lang.String internalize(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.reflect.AccessorGenerator java.lang.String internalize(java.lang.String) 0">
@@ -64,6 +70,9 @@
   <item name="sun.reflect.AccessorGenerator void emitWideningBytecodeForPrimitiveConversion(sun.reflect.ClassFileAssembler, java.lang.Class, java.lang.Class) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.reflect.BootstrapConstructorAccessorImpl BootstrapConstructorAccessorImpl(java.lang.reflect.Constructor)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.reflect.BootstrapConstructorAccessorImpl java.lang.Object newInstance(java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -73,10 +82,25 @@
     </annotation>
   </item>
   <item name="sun.reflect.ByteVectorFactory sun.reflect.ByteVector create()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.reflect.ByteVectorFactory sun.reflect.ByteVector create(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.reflect.ByteVectorImpl ByteVectorImpl()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.reflect.ByteVectorImpl ByteVectorImpl(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.reflect.ByteVectorImpl byte get(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.reflect.ByteVectorImpl byte[] getData()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -88,10 +112,22 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.reflect.ByteVectorImpl void resize(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.reflect.ByteVectorImpl void trim()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.reflect.ClassDefiner ClassDefiner()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.reflect.ClassFileAssembler ClassFileAssembler()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.reflect.ClassFileAssembler ClassFileAssembler(sun.reflect.ByteVector)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.reflect.ClassFileAssembler int getStack()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -119,6 +155,9 @@
   <item name="sun.reflect.ClassFileAssembler void append(sun.reflect.ClassFileAssembler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.reflect.ClassFileAssembler void decStack()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.reflect.ClassFileAssembler void emitConstantPoolUTF8(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -137,6 +176,12 @@
   <item name="sun.reflect.ClassFileAssembler void opc_ifnull(sun.reflect.Label) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.reflect.ClassFileAssembler void setMaxLocals(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.reflect.ClassFileAssembler void setStack(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.reflect.ConstantPool ConstantPool()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -146,6 +191,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.reflect.DelegatingConstructorAccessorImpl void setDelegate(sun.reflect.ConstructorAccessorImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.reflect.DelegatingMethodAccessorImpl void setDelegate(sun.reflect.MethodAccessorImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.reflect.FieldAccessorImpl FieldAccessorImpl()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -177,13 +228,25 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.reflect.InstantiationExceptionConstructorAccessorImpl InstantiationExceptionConstructorAccessorImpl(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.reflect.InstantiationExceptionConstructorAccessorImpl java.lang.Object newInstance(java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.reflect.Label Label()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.reflect.Label.PatchInfo PatchInfo(sun.reflect.ClassFileAssembler, short, short, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.reflect.MagicAccessorImpl MagicAccessorImpl()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.reflect.MethodAccessorGenerator MethodAccessorGenerator()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.reflect.MethodAccessorGenerator java.lang.String buildInternalSignature()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -219,6 +282,18 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.reflect.NativeConstructorAccessorImpl NativeConstructorAccessorImpl(java.lang.reflect.Constructor)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.reflect.NativeConstructorAccessorImpl void setParent(sun.reflect.DelegatingConstructorAccessorImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.reflect.NativeMethodAccessorImpl NativeMethodAccessorImpl(java.lang.reflect.Method)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.reflect.NativeMethodAccessorImpl void setParent(sun.reflect.DelegatingMethodAccessorImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.reflect.Reflection Reflection()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -335,6 +410,9 @@
   </item>
   <item name="sun.reflect.SignatureIterator java.lang.String returnType()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.reflect.SignatureIterator void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.reflect.UTF8 UTF8()">
     <annotation name="org.jetbrains.annotations.Contract">

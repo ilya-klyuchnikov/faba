@@ -11,6 +11,9 @@
   <item name="sun.net.www.protocol.http.AuthCacheImpl void remove(java.lang.String, sun.net.www.protocol.http.AuthCacheValue) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.net.www.protocol.http.AuthCacheImpl void setMap(java.util.HashMap)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.www.protocol.http.AuthCacheValue AuthCacheValue()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -18,6 +21,12 @@
   </item>
   <item name="sun.net.www.protocol.http.AuthCacheValue void setAuthCache(sun.net.www.protocol.http.AuthCache) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.net.www.protocol.http.AuthCacheValue.Type Type(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.www.protocol.http.AuthScheme AuthScheme(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.www.protocol.http.AuthenticationHeader boolean isPresent()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -44,6 +53,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.net.www.protocol.http.AuthenticationHeader.SchemeMapValue SchemeMapValue(sun.net.www.HeaderParser, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.www.protocol.http.AuthenticationInfo AuthenticationInfo(char, sun.net.www.protocol.http.AuthScheme, java.lang.String, int, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -213,6 +225,9 @@
   <item name="sun.net.www.protocol.http.BasicAuthentication java.lang.String getHeaderValue(java.net.URL, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.net.www.protocol.http.BasicAuthentication.BasicBASE64Encoder BasicBASE64Encoder(sun.net.www.protocol.http.BasicAuthentication)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.www.protocol.http.BasicAuthentication.BasicBASE64Encoder int bytesPerLine()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -344,8 +359,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.net.www.protocol.http.DigestAuthentication.Parameters void incrementNC()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.www.protocol.http.DigestAuthentication.Parameters void setAlgorithm(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.www.protocol.http.DigestAuthentication.Parameters void setCachedHA1(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.www.protocol.http.DigestAuthentication.Parameters void setNonce(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.www.protocol.http.DigestAuthentication.Parameters void setNonce(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.www.protocol.http.DigestAuthentication.Parameters void setOpaque(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.www.protocol.http.DigestAuthentication.Parameters void setQop(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -365,6 +395,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.net.www.protocol.http.Handler Handler()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.www.protocol.http.Handler Handler(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.www.protocol.http.Handler int getDefaultPort()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -376,8 +412,14 @@
   <item name="sun.net.www.protocol.http.HttpCallerInfo HttpCallerInfo(java.net.URL) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.www.protocol.http.HttpCallerInfo HttpCallerInfo(java.net.URL, java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.www.protocol.http.HttpCallerInfo HttpCallerInfo(java.net.URL, java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.www.protocol.http.HttpCallerInfo HttpCallerInfo(sun.net.www.protocol.http.HttpCallerInfo, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.www.protocol.http.HttpCallerInfo HttpCallerInfo(sun.net.www.protocol.http.HttpCallerInfo, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -509,6 +551,9 @@
   <item name="sun.net.www.protocol.http.HttpURLConnection void addRequestProperty(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.www.protocol.http.HttpURLConnection void authObj(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.www.protocol.http.HttpURLConnection void checkMessageHeader(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -527,6 +572,15 @@
   <item name="sun.net.www.protocol.http.HttpURLConnection void setRequestProperty(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.www.protocol.http.HttpURLConnection void setTunnelState(sun.net.www.protocol.http.HttpURLConnection.TunnelState)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.www.protocol.http.HttpURLConnection.ErrorStream ErrorStream(java.nio.ByteBuffer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.www.protocol.http.HttpURLConnection.ErrorStream ErrorStream(java.nio.ByteBuffer, java.io.InputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.www.protocol.http.HttpURLConnection.ErrorStream int read(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -536,8 +590,14 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.net.www.protocol.http.HttpURLConnection.HttpInputStream HttpInputStream(sun.net.www.protocol.http.HttpURLConnection, java.io.InputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.www.protocol.http.HttpURLConnection.HttpInputStream int read(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.www.protocol.http.HttpURLConnection.StreamingOutputStream StreamingOutputStream(sun.net.www.protocol.http.HttpURLConnection, java.io.OutputStream, long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.www.protocol.http.HttpURLConnection.StreamingOutputStream boolean writtenOK()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -546,6 +606,12 @@
   </item>
   <item name="sun.net.www.protocol.http.HttpURLConnection.StreamingOutputStream void write(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.www.protocol.http.HttpURLConnection.TunnelState TunnelState(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.www.protocol.http.NTLMAuthenticationProxy NTLMAuthenticationProxy(java.lang.reflect.Constructor&lt;? extends sun.net.www.protocol.http.AuthenticationInfo&gt;, java.lang.reflect.Constructor&lt;? extends sun.net.www.protocol.http.AuthenticationInfo&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.www.protocol.http.NTLMAuthenticationProxy sun.net.www.protocol.http.AuthenticationInfo create(boolean, java.lang.String, int, java.net.PasswordAuthentication)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -595,6 +661,9 @@
   </item>
   <item name="sun.net.www.protocol.http.NegotiateAuthentication java.lang.String getHeaderValue(java.net.URL, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.net.www.protocol.http.NegotiateAuthentication.B64Encoder B64Encoder(sun.net.www.protocol.http.NegotiateAuthentication)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.www.protocol.http.NegotiateAuthentication.B64Encoder int bytesPerLine()">
     <annotation name="org.jetbrains.annotations.Contract">

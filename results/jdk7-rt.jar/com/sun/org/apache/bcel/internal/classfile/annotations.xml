@@ -4,6 +4,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.AccessFlags AccessFlags(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.AccessFlags boolean isAbstract()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -74,6 +77,54 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.AccessFlags void isAbstract(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.AccessFlags void isFinal(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.AccessFlags void isInterface(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.AccessFlags void isNative(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.AccessFlags void isPrivate(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.AccessFlags void isProtected(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.AccessFlags void isPublic(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.AccessFlags void isStatic(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.AccessFlags void isStrictfp(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.AccessFlags void isSynchronized(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.AccessFlags void isTransient(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.AccessFlags void isVolatile(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.AccessFlags void setAccessFlags(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.AccessFlags void setFlag(int, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.AccessFlags void setModifiers(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Attribute Attribute(byte, int, int, com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Attribute byte getTag()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -111,6 +162,15 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.Attribute void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Attribute void setConstantPool(com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Attribute void setLength(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Attribute void setNameIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ClassParser ClassParser(java.io.InputStream, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -122,6 +182,9 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Code Code(com.sun.org.apache.bcel.internal.classfile.Code) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Code Code(int, int, int, int, byte[], com.sun.org.apache.bcel.internal.classfile.CodeException[], com.sun.org.apache.bcel.internal.classfile.Attribute[], com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Code Code(int, int, java.io.DataInputStream, com.sun.org.apache.bcel.internal.classfile.ConstantPool) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -185,8 +248,29 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.Code void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Code void setAttributes(com.sun.org.apache.bcel.internal.classfile.Attribute[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Code void setCode(byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Code void setExceptionTable(com.sun.org.apache.bcel.internal.classfile.CodeException[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Code void setMaxLocals(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Code void setMaxStack(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.CodeException CodeException(com.sun.org.apache.bcel.internal.classfile.CodeException)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.CodeException CodeException(com.sun.org.apache.bcel.internal.classfile.CodeException) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.CodeException CodeException(int, int, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.CodeException CodeException(java.io.DataInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -229,6 +313,21 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.CodeException void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.CodeException void setCatchType(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.CodeException void setEndPC(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.CodeException void setHandlerPC(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.CodeException void setStartPC(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Constant Constant(byte)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Constant byte getTag()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -245,6 +344,9 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Constant java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantCP ConstantCP(byte, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantCP ConstantCP(byte, java.io.DataInputStream) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -271,8 +373,20 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantCP void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantCP void setClassIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantCP void setNameAndTypeIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantClass ConstantClass(com.sun.org.apache.bcel.internal.classfile.ConstantClass)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantClass ConstantClass(com.sun.org.apache.bcel.internal.classfile.ConstantClass) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantClass ConstantClass(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantClass ConstantClass(java.io.DataInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -297,8 +411,17 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantClass void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantClass void setNameIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantDouble ConstantDouble(com.sun.org.apache.bcel.internal.classfile.ConstantDouble)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantDouble ConstantDouble(com.sun.org.apache.bcel.internal.classfile.ConstantDouble) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantDouble ConstantDouble(double)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantDouble ConstantDouble(java.io.DataInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -309,6 +432,9 @@
     </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantDouble java.lang.Object getConstantValue(com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantDouble java.lang.Object getConstantValue(com.sun.org.apache.bcel.internal.classfile.ConstantPool) 0">
@@ -323,8 +449,14 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantDouble void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantDouble void setBytes(double)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantFieldref ConstantFieldref(com.sun.org.apache.bcel.internal.classfile.ConstantFieldref) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantFieldref ConstantFieldref(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantFieldref ConstantFieldref(java.io.DataInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -332,8 +464,14 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantFieldref void accept(com.sun.org.apache.bcel.internal.classfile.Visitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantFloat ConstantFloat(com.sun.org.apache.bcel.internal.classfile.ConstantFloat)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantFloat ConstantFloat(com.sun.org.apache.bcel.internal.classfile.ConstantFloat) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantFloat ConstantFloat(float)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantFloat ConstantFloat(java.io.DataInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -344,6 +482,9 @@
     </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantFloat java.lang.Object getConstantValue(com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantFloat java.lang.Object getConstantValue(com.sun.org.apache.bcel.internal.classfile.ConstantPool) 0">
@@ -358,8 +499,17 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantFloat void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantFloat void setBytes(float)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantInteger ConstantInteger(com.sun.org.apache.bcel.internal.classfile.ConstantInteger)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantInteger ConstantInteger(com.sun.org.apache.bcel.internal.classfile.ConstantInteger) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantInteger ConstantInteger(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantInteger ConstantInteger(java.io.DataInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -370,6 +520,9 @@
     </annotation>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantInteger java.lang.Object getConstantValue(com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantInteger java.lang.Object getConstantValue(com.sun.org.apache.bcel.internal.classfile.ConstantPool) 0">
@@ -384,8 +537,14 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantInteger void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantInteger void setBytes(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantInterfaceMethodref ConstantInterfaceMethodref(com.sun.org.apache.bcel.internal.classfile.ConstantInterfaceMethodref) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantInterfaceMethodref ConstantInterfaceMethodref(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantInterfaceMethodref ConstantInterfaceMethodref(java.io.DataInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -393,13 +552,22 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantInterfaceMethodref void accept(com.sun.org.apache.bcel.internal.classfile.Visitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantLong ConstantLong(com.sun.org.apache.bcel.internal.classfile.ConstantLong)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantLong ConstantLong(com.sun.org.apache.bcel.internal.classfile.ConstantLong) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantLong ConstantLong(java.io.DataInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantLong ConstantLong(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantLong java.lang.Object getConstantValue(com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantLong java.lang.Object getConstantValue(com.sun.org.apache.bcel.internal.classfile.ConstantPool) 0">
@@ -419,8 +587,14 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantLong void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantLong void setBytes(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantMethodref ConstantMethodref(com.sun.org.apache.bcel.internal.classfile.ConstantMethodref) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantMethodref ConstantMethodref(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantMethodref ConstantMethodref(java.io.DataInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -428,8 +602,14 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantMethodref void accept(com.sun.org.apache.bcel.internal.classfile.Visitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantNameAndType ConstantNameAndType(com.sun.org.apache.bcel.internal.classfile.ConstantNameAndType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantNameAndType ConstantNameAndType(com.sun.org.apache.bcel.internal.classfile.ConstantNameAndType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantNameAndType ConstantNameAndType(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantNameAndType ConstantNameAndType(java.io.DataInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -458,6 +638,12 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantNameAndType void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantNameAndType void setNameIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantNameAndType void setSignatureIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantPool ConstantPool(java.io.DataInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -490,8 +676,17 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantPool void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantPool void setConstantPool(com.sun.org.apache.bcel.internal.classfile.Constant[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantString ConstantString(com.sun.org.apache.bcel.internal.classfile.ConstantString)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantString ConstantString(com.sun.org.apache.bcel.internal.classfile.ConstantString) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantString ConstantString(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantString ConstantString(java.io.DataInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -516,6 +711,9 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantString void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantString void setStringIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantUtf8 ConstantUtf8(com.sun.org.apache.bcel.internal.classfile.ConstantUtf8) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -539,8 +737,14 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantUtf8 void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantUtf8 void setBytes(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantValue ConstantValue(com.sun.org.apache.bcel.internal.classfile.ConstantValue) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantValue ConstantValue(int, int, int, com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantValue ConstantValue(int, int, java.io.DataInputStream, com.sun.org.apache.bcel.internal.classfile.ConstantPool) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -559,8 +763,14 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.ConstantValue void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ConstantValue void setConstantValueIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Deprecated Deprecated(com.sun.org.apache.bcel.internal.classfile.Deprecated) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Deprecated Deprecated(int, int, byte[], com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Deprecated byte[] getBytes()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -577,6 +787,9 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Deprecated void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Deprecated void setBytes(byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.DescendingVisitor java.lang.Object predecessor()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -955,6 +1168,9 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.ExceptionTable ExceptionTable(com.sun.org.apache.bcel.internal.classfile.ExceptionTable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ExceptionTable ExceptionTable(int, int, int[], com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.ExceptionTable ExceptionTable(int, int, java.io.DataInputStream, com.sun.org.apache.bcel.internal.classfile.ConstantPool) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -977,8 +1193,14 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.ExceptionTable void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.ExceptionTable void setExceptionIndexTable(int[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Field Field(com.sun.org.apache.bcel.internal.classfile.Field) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Field Field(int, int, int, com.sun.org.apache.bcel.internal.classfile.Attribute[], com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Field Field(java.io.DataInputStream, com.sun.org.apache.bcel.internal.classfile.ConstantPool) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1002,6 +1224,9 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.FieldOrMethod FieldOrMethod(com.sun.org.apache.bcel.internal.classfile.FieldOrMethod) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.FieldOrMethod FieldOrMethod(int, int, int, com.sun.org.apache.bcel.internal.classfile.Attribute[], com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.FieldOrMethod FieldOrMethod(java.io.DataInputStream, com.sun.org.apache.bcel.internal.classfile.ConstantPool) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1029,8 +1254,26 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.FieldOrMethod void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.FieldOrMethod void setAttributes(com.sun.org.apache.bcel.internal.classfile.Attribute[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.FieldOrMethod void setConstantPool(com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.FieldOrMethod void setNameIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.FieldOrMethod void setSignatureIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.InnerClass InnerClass(com.sun.org.apache.bcel.internal.classfile.InnerClass)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.InnerClass InnerClass(com.sun.org.apache.bcel.internal.classfile.InnerClass) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.InnerClass InnerClass(int, int, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.InnerClass InnerClass(java.io.DataInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1073,8 +1316,23 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.InnerClass void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.InnerClass void setInnerAccessFlags(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.InnerClass void setInnerClassIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.InnerClass void setInnerNameIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.InnerClass void setOuterClassIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.InnerClasses InnerClasses(com.sun.org.apache.bcel.internal.classfile.InnerClasses) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.InnerClasses InnerClasses(int, int, com.sun.org.apache.bcel.internal.classfile.InnerClass[], com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.InnerClasses InnerClasses(int, int, java.io.DataInputStream, com.sun.org.apache.bcel.internal.classfile.ConstantPool) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1092,6 +1350,9 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.InnerClasses void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.InnerClasses void setInnerClasses(com.sun.org.apache.bcel.internal.classfile.InnerClass[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass JavaClass(int, int, java.lang.String, int, int, int, com.sun.org.apache.bcel.internal.classfile.ConstantPool, int[], com.sun.org.apache.bcel.internal.classfile.Field[], com.sun.org.apache.bcel.internal.classfile.Method[], com.sun.org.apache.bcel.internal.classfile.Attribute[]) 10">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1259,8 +1520,59 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass void dump(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass void setAttributes(com.sun.org.apache.bcel.internal.classfile.Attribute[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass void setClassName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass void setClassNameIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass void setConstantPool(com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass void setFields(com.sun.org.apache.bcel.internal.classfile.Field[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass void setFileName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass void setInterfaceNames(java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass void setInterfaces(int[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass void setMajor(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass void setMethods(com.sun.org.apache.bcel.internal.classfile.Method[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass void setMinor(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass void setRepository(com.sun.org.apache.bcel.internal.util.Repository)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass void setSourceFileName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass void setSuperclassName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.JavaClass void setSuperclassNameIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.LineNumber LineNumber(com.sun.org.apache.bcel.internal.classfile.LineNumber)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.LineNumber LineNumber(com.sun.org.apache.bcel.internal.classfile.LineNumber) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.LineNumber LineNumber(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.LineNumber LineNumber(java.io.DataInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1287,8 +1599,17 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.LineNumber void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.LineNumber void setLineNumber(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.LineNumber void setStartPC(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.LineNumberTable LineNumberTable(com.sun.org.apache.bcel.internal.classfile.LineNumberTable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.LineNumberTable LineNumberTable(int, int, com.sun.org.apache.bcel.internal.classfile.LineNumber[], com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.LineNumberTable LineNumberTable(int, int, java.io.DataInputStream, com.sun.org.apache.bcel.internal.classfile.ConstantPool) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1317,8 +1638,17 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.LineNumberTable void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.LineNumberTable void setLineNumberTable(com.sun.org.apache.bcel.internal.classfile.LineNumber[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariable LocalVariable(com.sun.org.apache.bcel.internal.classfile.LocalVariable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariable LocalVariable(com.sun.org.apache.bcel.internal.classfile.LocalVariable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariable LocalVariable(int, int, int, int, int, com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariable LocalVariable(java.io.DataInputStream, com.sun.org.apache.bcel.internal.classfile.ConstantPool) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1365,8 +1695,29 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariable void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariable void setConstantPool(com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariable void setIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariable void setLength(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariable void setNameIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariable void setSignatureIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariable void setStartPC(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariableTable LocalVariableTable(com.sun.org.apache.bcel.internal.classfile.LocalVariableTable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariableTable LocalVariableTable(int, int, com.sun.org.apache.bcel.internal.classfile.LocalVariable[], com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariableTable LocalVariableTable(int, int, java.io.DataInputStream, com.sun.org.apache.bcel.internal.classfile.ConstantPool) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1396,8 +1747,14 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariableTable void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariableTable void setLocalVariableTable(com.sun.org.apache.bcel.internal.classfile.LocalVariable[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariableTypeTable LocalVariableTypeTable(com.sun.org.apache.bcel.internal.classfile.LocalVariableTypeTable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariableTypeTable LocalVariableTypeTable(int, int, com.sun.org.apache.bcel.internal.classfile.LocalVariable[], com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariableTypeTable LocalVariableTypeTable(int, int, java.io.DataInputStream, com.sun.org.apache.bcel.internal.classfile.ConstantPool) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1427,6 +1784,9 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariableTypeTable void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.LocalVariableTypeTable void setLocalVariableTable(com.sun.org.apache.bcel.internal.classfile.LocalVariable[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Method Method()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1434,6 +1794,9 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Method Method(com.sun.org.apache.bcel.internal.classfile.Method) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Method Method(int, int, int, com.sun.org.apache.bcel.internal.classfile.Attribute[], com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Method Method(java.io.DataInputStream, com.sun.org.apache.bcel.internal.classfile.ConstantPool) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1474,6 +1837,9 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.PMGClass PMGClass(com.sun.org.apache.bcel.internal.classfile.PMGClass) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.PMGClass PMGClass(int, int, int, int, com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.PMGClass PMGClass(int, int, java.io.DataInputStream, com.sun.org.apache.bcel.internal.classfile.ConstantPool) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1499,8 +1865,17 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.PMGClass void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.PMGClass void setPMGClassIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.PMGClass void setPMGIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Signature Signature(com.sun.org.apache.bcel.internal.classfile.Signature) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Signature Signature(int, int, int, com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Signature Signature(int, int, java.io.DataInputStream, com.sun.org.apache.bcel.internal.classfile.ConstantPool) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1560,6 +1935,9 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.Signature void matchIdent(com.sun.org.apache.bcel.internal.classfile.Signature.MyByteArrayInputStream, java.lang.StringBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Signature void setSignatureIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Signature.MyByteArrayInputStream MyByteArrayInputStream(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1571,8 +1949,17 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.Signature.MyByteArrayInputStream java.lang.String getData()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Signature.MyByteArrayInputStream void reset(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Signature.MyByteArrayInputStream void unread()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.SourceFile SourceFile(com.sun.org.apache.bcel.internal.classfile.SourceFile) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.SourceFile SourceFile(int, int, int, com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.SourceFile SourceFile(int, int, java.io.DataInputStream, com.sun.org.apache.bcel.internal.classfile.ConstantPool) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1593,6 +1980,12 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.SourceFile void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.SourceFile void setSourceFileIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.StackMap StackMap(int, int, com.sun.org.apache.bcel.internal.classfile.StackMapEntry[], com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.StackMap StackMap(int, int, java.io.DataInputStream, com.sun.org.apache.bcel.internal.classfile.ConstantPool) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1615,6 +2008,12 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.StackMap void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.StackMap void setStackMap(com.sun.org.apache.bcel.internal.classfile.StackMapEntry[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.StackMapEntry StackMapEntry(int, int, com.sun.org.apache.bcel.internal.classfile.StackMapType[], int, com.sun.org.apache.bcel.internal.classfile.StackMapType[], com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.StackMapEntry StackMapEntry(java.io.DataInputStream, com.sun.org.apache.bcel.internal.classfile.ConstantPool) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1661,6 +2060,24 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.StackMapEntry void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.StackMapEntry void setByteCodeOffset(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.StackMapEntry void setConstantPool(com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.StackMapEntry void setNumberOfLocals(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.StackMapEntry void setNumberOfStackItems(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.StackMapEntry void setTypesOfLocals(com.sun.org.apache.bcel.internal.classfile.StackMapType[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.StackMapEntry void setTypesOfStackItems(com.sun.org.apache.bcel.internal.classfile.StackMapType[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.StackMapType StackMapType(java.io.DataInputStream, com.sun.org.apache.bcel.internal.classfile.ConstantPool) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1696,8 +2113,17 @@
   <item name="com.sun.org.apache.bcel.internal.classfile.StackMapType void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.StackMapType void setConstantPool(com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.StackMapType void setIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Synthetic Synthetic(com.sun.org.apache.bcel.internal.classfile.Synthetic) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Synthetic Synthetic(int, int, byte[], com.sun.org.apache.bcel.internal.classfile.ConstantPool)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Synthetic byte[] getBytes()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1712,6 +2138,9 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Synthetic void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Synthetic void setBytes(byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Unknown Unknown(com.sun.org.apache.bcel.internal.classfile.Unknown) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1740,6 +2169,9 @@
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Unknown void dump(java.io.DataOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.bcel.internal.classfile.Unknown void setBytes(byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.bcel.internal.classfile.Utility Utility()">
     <annotation name="org.jetbrains.annotations.Contract">

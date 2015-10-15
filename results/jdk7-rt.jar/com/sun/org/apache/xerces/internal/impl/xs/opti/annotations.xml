@@ -1,4 +1,10 @@
 <root>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.AttrImpl AttrImpl()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.AttrImpl AttrImpl(org.w3c.dom.Element, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.AttrImpl boolean getSpecified()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -32,6 +38,12 @@
       <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.AttrImpl void setValue(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.DefaultDocument DefaultDocument()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.DefaultDocument boolean getStrictErrorChecking()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -183,6 +195,9 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.DefaultDocument org.w3c.dom.Text createTextNode(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.DefaultDocument void setDocumentURI(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.DefaultDocument void setXmlVersion(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -190,6 +205,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.DefaultElement DefaultElement(java.lang.String, java.lang.String, java.lang.String, java.lang.String, short)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.DefaultElement boolean hasAttribute(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -929,6 +947,15 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.DefaultXMLDocumentHandler void separator(short, com.sun.org.apache.xerces.internal.xni.Augmentations) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.DefaultXMLDocumentHandler void setDTDContentModelSource(com.sun.org.apache.xerces.internal.xni.parser.XMLDTDContentModelSource)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.DefaultXMLDocumentHandler void setDTDSource(com.sun.org.apache.xerces.internal.xni.parser.XMLDTDSource)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.DefaultXMLDocumentHandler void setDocumentSource(com.sun.org.apache.xerces.internal.xni.parser.XMLDocumentSource)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.DefaultXMLDocumentHandler void startAttlist(java.lang.String, com.sun.org.apache.xerces.internal.xni.Augmentations)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1124,6 +1151,18 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.DefaultXMLDocumentHandler void xmlDecl(java.lang.String, java.lang.String, java.lang.String, com.sun.org.apache.xerces.internal.xni.Augmentations) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.ElementImpl ElementImpl(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.ElementImpl ElementImpl(int, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.ElementImpl ElementImpl(java.lang.String, java.lang.String, java.lang.String, java.lang.String, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.ElementImpl ElementImpl(java.lang.String, java.lang.String, java.lang.String, java.lang.String, int, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.ElementImpl boolean hasAttribute(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1214,6 +1253,9 @@
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.ElementImpl org.w3c.dom.NamedNodeMap getAttributes()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.ElementImpl org.w3c.dom.Node getFirstChild()">
@@ -1247,6 +1289,9 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.ElementImpl void setAttribute(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.NamedNodeMapImpl NamedNodeMapImpl(org.w3c.dom.Attr[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.NamedNodeMapImpl int getLength()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1291,6 +1336,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.NodeImpl NodeImpl(java.lang.String, java.lang.String, java.lang.String, java.lang.String, short)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.NodeImpl boolean getReadOnly()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1320,6 +1368,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.NodeImpl void setReadOnly(boolean, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.SchemaDOM com.sun.org.apache.xerces.internal.impl.xs.opti.ElementImpl emptyElement(com.sun.org.apache.xerces.internal.xni.QName, com.sun.org.apache.xerces.internal.xni.XMLAttributes, int, int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1384,6 +1435,9 @@
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.SchemaDOM void endAnnotationElement(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.SchemaDOM void endElement()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.SchemaDOM void endSyntheticAnnotationElement(com.sun.org.apache.xerces.internal.xni.QName, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1409,6 +1463,9 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.SchemaDOM void processingInstruction(java.lang.String, com.sun.org.apache.xerces.internal.xni.XMLString) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.SchemaDOM void resizeRelations()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.SchemaDOM void startAnnotation(com.sun.org.apache.xerces.internal.xni.QName, com.sun.org.apache.xerces.internal.xni.XMLAttributes, com.sun.org.apache.xerces.internal.xni.NamespaceContext) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1531,10 +1588,19 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.SchemaDOMParser.BooleanStack boolean pop()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.SchemaDOMParser.BooleanStack int size()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.SchemaDOMParser.BooleanStack void clear()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.SchemaDOMParser.BooleanStack void ensureCapacity(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.SchemaParsingConfig SchemaParsingConfig(com.sun.org.apache.xerces.internal.util.SymbolTable) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1561,6 +1627,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.SchemaParsingConfig void setInputSource(com.sun.org.apache.xerces.internal.xni.parser.XMLInputSource)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.xs.opti.TextImpl TextImpl(java.lang.StringBuffer, com.sun.org.apache.xerces.internal.impl.xs.opti.SchemaDOM, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

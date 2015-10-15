@@ -30,15 +30,24 @@
   <item name="com.sun.xml.internal.ws.server.AbstractInstanceResolver.Compositor Compositor(java.util.Collection&lt;com.sun.xml.internal.ws.server.AbstractInstanceResolver.InjectionPlan&lt;T,R&gt;&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.server.AbstractInstanceResolver.FieldInjectionPlan FieldInjectionPlan(java.lang.reflect.Field)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.server.AbstractInstanceResolver.FieldInjectionPlan int count()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.ws.server.AbstractInstanceResolver.MethodInjectionPlan MethodInjectionPlan(java.lang.reflect.Method)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.server.AbstractInstanceResolver.MethodInjectionPlan int count()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.server.AbstractWebServiceContext AbstractWebServiceContext(com.sun.xml.internal.ws.api.server.WSEndpoint)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.server.AbstractWebServiceContext T getEndpointReference(java.lang.Class&lt;T&gt;, org.w3c.dom.Element...) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -184,6 +193,9 @@
   <item name="com.sun.xml.internal.ws.server.EndpointFactory.EntityResolverImpl com.sun.xml.internal.ws.api.wsdl.parser.XMLEntityResolver.Parser resolveEntity(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.server.EndpointMessageContextImpl EndpointMessageContextImpl(com.sun.xml.internal.ws.api.message.Packet)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.server.EndpointMessageContextImpl java.lang.Object get(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -192,6 +204,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.server.EndpointMessageContextImpl java.lang.Object remove(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.server.EndpointMessageContextImpl java.util.Set&lt;java.util.Map.Entry&lt;java.lang.String,java.lang.Object&gt;&gt; entrySet()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.server.EndpointMessageContextImpl javax.xml.ws.handler.MessageContext.Scope getScope(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -202,8 +217,14 @@
   <item name="com.sun.xml.internal.ws.server.EndpointMessageContextImpl void setScope(java.lang.String, javax.xml.ws.handler.MessageContext.Scope) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.server.EndpointMessageContextImpl.EntrySet EntrySet(com.sun.xml.internal.ws.server.EndpointMessageContextImpl)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.server.EndpointMessageContextImpl.EntrySet java.util.Iterator&lt;java.util.Map.Entry&lt;java.lang.String,java.lang.Object&gt;&gt; iterator()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.server.InvokerTube InvokerTube(com.sun.xml.internal.ws.api.server.Invoker)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.server.InvokerTube com.sun.xml.internal.ws.api.pipe.helper.AbstractTubeImpl copy(com.sun.xml.internal.ws.api.pipe.TubeCloner)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -258,6 +279,9 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.server.MonitorRootService MonitorRootService(com.sun.xml.internal.ws.api.server.WSEndpoint)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.server.MonitorRootService boolean dumpHTTPMessages()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -285,6 +309,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.server.MonitorRootService javax.xml.namespace.QName wsdlPortTypeName()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.server.RewritingMOM RewritingMOM(com.sun.org.glassfish.gmbal.ManagedObjectManager)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.server.RewritingMOM com.sun.org.glassfish.gmbal.GmbalMBean createRoot(java.lang.Object, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -339,6 +366,15 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.server.SDDocumentImpl void setFilters(java.util.List&lt;com.sun.xml.internal.ws.api.server.SDDocumentFilter&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.server.SDDocumentImpl void setResolver(com.sun.xml.internal.ws.wsdl.SDDocumentResolver)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.server.SDDocumentImpl.DocumentLocationResolverImpl DocumentLocationResolverImpl(com.sun.xml.internal.ws.server.SDDocumentImpl, com.sun.xml.internal.ws.api.server.DocumentAddressResolver)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.server.SDDocumentImpl.DocumentLocationResolverImpl java.lang.String getLocationFor(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -434,6 +470,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.server.SingletonResolver SingletonResolver(T)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.server.SingletonResolver T resolve(com.sun.xml.internal.ws.api.message.Packet)">
     <annotation name="org.jetbrains.annotations.Contract">

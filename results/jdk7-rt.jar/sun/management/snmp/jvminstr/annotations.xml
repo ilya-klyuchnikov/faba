@@ -222,6 +222,9 @@
   <item name="sun.management.snmp.jvminstr.JVM_MANAGEMENT_MIB_IMPL void addTargets(java.util.List&lt;sun.management.snmp.jvminstr.NotificationTarget&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.management.snmp.jvminstr.JVM_MANAGEMENT_MIB_IMPL.NotificationHandler NotificationHandler(sun.management.snmp.jvminstr.JVM_MANAGEMENT_MIB_IMPL)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.management.snmp.jvminstr.JVM_MANAGEMENT_MIB_IMPL.NotificationHandler void handleNotification(javax.management.Notification, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -278,7 +281,13 @@
   <item name="sun.management.snmp.jvminstr.JvmCompilationImpl java.lang.Long getJvmJITCompilerTimeMs()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.management.snmp.jvminstr.JvmMemGCEntryImpl JvmMemGCEntryImpl(java.lang.management.GarbageCollectorMXBean, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.management.snmp.jvminstr.JvmMemGCEntryImpl java.lang.Integer getJvmMemManagerIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmMemGCEntryImpl java.lang.Long getJvmMemGCCount()">
@@ -319,7 +328,13 @@
   <item name="sun.management.snmp.jvminstr.JvmMemGCTableMetaImpl.GCTableFilter java.lang.Object getData(sun.management.snmp.util.SnmpTableHandler, com.sun.jmx.snmp.SnmpOid) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.management.snmp.jvminstr.JvmMemManagerEntryImpl JvmMemManagerEntryImpl(java.lang.management.MemoryManagerMXBean, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.management.snmp.jvminstr.JvmMemManagerEntryImpl java.lang.Integer getJvmMemManagerIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmMemManagerTableMetaImpl JvmMemManagerTableMetaImpl(com.sun.jmx.snmp.agent.SnmpMib, com.sun.jmx.snmp.agent.SnmpStandardObjectServer) 0">
@@ -330,6 +345,9 @@
   </item>
   <item name="sun.management.snmp.jvminstr.JvmMemManagerTableMetaImpl sun.management.snmp.util.SnmpTableHandler getHandler(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.management.snmp.jvminstr.JvmMemManagerTableMetaImpl.JvmMemManagerTableCache JvmMemManagerTableCache(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmMemManagerTableMetaImpl.JvmMemManagerTableCache java.lang.String getKey(java.lang.Object, java.util.List, int, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -355,10 +373,19 @@
   <item name="sun.management.snmp.jvminstr.JvmMemManagerTableMetaImpl.JvmMemManagerTableCache java.util.List loadRawDatas(java.util.Map) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.management.snmp.jvminstr.JvmMemMgrPoolRelEntryImpl JvmMemMgrPoolRelEntryImpl(java.lang.String, java.lang.String, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.management.snmp.jvminstr.JvmMemMgrPoolRelEntryImpl java.lang.Integer getJvmMemManagerIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmMemMgrPoolRelEntryImpl java.lang.Integer getJvmMemPoolIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmMemMgrPoolRelTableMetaImpl JvmMemMgrPoolRelTableMetaImpl(com.sun.jmx.snmp.agent.SnmpMib, com.sun.jmx.snmp.agent.SnmpStandardObjectServer) 0">
@@ -369,6 +396,9 @@
   </item>
   <item name="sun.management.snmp.jvminstr.JvmMemMgrPoolRelTableMetaImpl sun.management.snmp.util.SnmpTableHandler getHandler(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.management.snmp.jvminstr.JvmMemMgrPoolRelTableMetaImpl.JvmMemMgrPoolRelTableCache JvmMemMgrPoolRelTableCache(sun.management.snmp.jvminstr.JvmMemMgrPoolRelTableMetaImpl, long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmMemMgrPoolRelTableMetaImpl.JvmMemMgrPoolRelTableCache java.lang.String[] getMemoryPools(java.lang.Object, java.lang.management.MemoryManagerMXBean, long) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -395,9 +425,15 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmMemPoolEntryImpl java.lang.Integer getJvmMemPoolIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmMemPoolEntryImpl java.lang.Long getJvmMemPoolPeakReset()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmMemPoolEntryImpl sun.management.snmp.jvmmib.EnumJvmMemPoolType jvmMemPoolType(java.lang.management.MemoryType) 0">
@@ -434,6 +470,9 @@
   </item>
   <item name="sun.management.snmp.jvminstr.JvmMemPoolTableMetaImpl sun.management.snmp.util.SnmpTableHandler getHandler(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.management.snmp.jvminstr.JvmMemPoolTableMetaImpl.JvmMemPoolTableCache JvmMemPoolTableCache(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmMemPoolTableMetaImpl.JvmMemPoolTableCache java.lang.String getKey(java.lang.Object, java.util.List, int, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -603,6 +642,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmRTBootClassPathEntryImpl java.lang.Integer getJvmRTBootClassPathIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmRTBootClassPathEntryImpl java.lang.String getJvmRTBootClassPathItem()">
@@ -624,6 +666,9 @@
   <item name="sun.management.snmp.jvminstr.JvmRTBootClassPathTableMetaImpl sun.management.snmp.util.SnmpTableHandler getHandler(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.management.snmp.jvminstr.JvmRTBootClassPathTableMetaImpl.JvmRTBootClassPathTableCache JvmRTBootClassPathTableCache(sun.management.snmp.jvminstr.JvmRTBootClassPathTableMetaImpl, long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.management.snmp.jvminstr.JvmRTBootClassPathTableMetaImpl.JvmRTBootClassPathTableCache sun.management.snmp.util.SnmpCachedData updateCachedDatas(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -634,6 +679,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmRTClassPathEntryImpl java.lang.Integer getJvmRTClassPathIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmRTClassPathEntryImpl java.lang.String getJvmRTClassPathItem()">
@@ -655,6 +703,9 @@
   <item name="sun.management.snmp.jvminstr.JvmRTClassPathTableMetaImpl sun.management.snmp.util.SnmpTableHandler getHandler(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.management.snmp.jvminstr.JvmRTClassPathTableMetaImpl.JvmRTClassPathTableCache JvmRTClassPathTableCache(sun.management.snmp.jvminstr.JvmRTClassPathTableMetaImpl, long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.management.snmp.jvminstr.JvmRTClassPathTableMetaImpl.JvmRTClassPathTableCache sun.management.snmp.util.SnmpCachedData updateCachedDatas(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -665,6 +716,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmRTInputArgsEntryImpl java.lang.Integer getJvmRTInputArgsIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmRTInputArgsEntryImpl java.lang.String getJvmRTInputArgsItem()">
@@ -686,6 +740,9 @@
   <item name="sun.management.snmp.jvminstr.JvmRTInputArgsTableMetaImpl sun.management.snmp.util.SnmpTableHandler getHandler(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.management.snmp.jvminstr.JvmRTInputArgsTableMetaImpl.JvmRTInputArgsTableCache JvmRTInputArgsTableCache(sun.management.snmp.jvminstr.JvmRTInputArgsTableMetaImpl, long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.management.snmp.jvminstr.JvmRTInputArgsTableMetaImpl.JvmRTInputArgsTableCache sun.management.snmp.util.SnmpCachedData updateCachedDatas(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -696,6 +753,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmRTLibraryPathEntryImpl java.lang.Integer getJvmRTLibraryPathIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmRTLibraryPathEntryImpl java.lang.String getJvmRTLibraryPathItem()">
@@ -716,6 +776,9 @@
   </item>
   <item name="sun.management.snmp.jvminstr.JvmRTLibraryPathTableMetaImpl sun.management.snmp.util.SnmpTableHandler getHandler(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.management.snmp.jvminstr.JvmRTLibraryPathTableMetaImpl.JvmRTLibraryPathTableCache JvmRTLibraryPathTableCache(sun.management.snmp.jvminstr.JvmRTLibraryPathTableMetaImpl, long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmRTLibraryPathTableMetaImpl.JvmRTLibraryPathTableCache sun.management.snmp.util.SnmpCachedData updateCachedDatas(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -841,6 +904,9 @@
   <item name="sun.management.snmp.jvminstr.JvmRuntimeMetaImpl sun.management.snmp.jvmmib.JvmRTLibraryPathTableMeta createJvmRTLibraryPathTableMetaNode(java.lang.String, java.lang.String, com.sun.jmx.snmp.agent.SnmpMib, javax.management.MBeanServer) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl JvmThreadInstanceEntryImpl(java.lang.management.ThreadInfo, java.lang.Byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl java.lang.Byte[] getJvmThreadInstIndex()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -951,6 +1017,9 @@
   <item name="sun.management.snmp.jvminstr.JvmThreadInstanceTableMetaImpl sun.management.snmp.util.SnmpTableHandler getHandler(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.management.snmp.jvminstr.JvmThreadInstanceTableMetaImpl.JvmThreadInstanceTableCache JvmThreadInstanceTableCache(sun.management.snmp.jvminstr.JvmThreadInstanceTableMetaImpl, long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.management.snmp.jvminstr.JvmThreadInstanceTableMetaImpl.JvmThreadInstanceTableCache sun.management.snmp.util.SnmpCachedData updateCachedDatas(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -976,6 +1045,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmThreadingImpl java.lang.Long getJvmThreadPeakCountReset()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.management.snmp.jvminstr.JvmThreadingImpl java.lang.Long getJvmThreadTotalStartedCount()">
@@ -1027,6 +1099,9 @@
   </item>
   <item name="sun.management.snmp.jvminstr.NotificationTargetImpl NotificationTargetImpl(java.lang.String, int, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.management.snmp.jvminstr.NotificationTargetImpl NotificationTargetImpl(java.net.InetAddress, int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.management.snmp.jvminstr.NotificationTargetImpl boolean isNumericIPv6Address(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">

@@ -4,6 +4,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.awt.font.CharArrayIterator char next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.font.CharArrayIterator char previous()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.font.CharArrayIterator int getBeginIndex()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -22,6 +28,12 @@
   <item name="java.awt.font.CharArrayIterator java.lang.Object clone()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.font.CharArrayIterator void reset(char[], int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.font.FontRenderContext FontRenderContext()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.font.FontRenderContext FontRenderContext(java.awt.geom.AffineTransform, boolean, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -39,6 +51,9 @@
     </annotation>
   </item>
   <item name="java.awt.font.FontRenderContext java.awt.geom.AffineTransform getTransform()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.font.GlyphJustificationInfo boolean priorityIsValid(int)">
@@ -214,6 +229,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.awt.font.NumericShaper NumericShaper(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.font.NumericShaper NumericShaper(java.awt.font.NumericShaper.Range, java.util.Set&lt;java.awt.font.NumericShaper.Range&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -229,6 +247,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.awt.font.NumericShaper boolean isStrongDirectional(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.font.NumericShaper int getHighBit(int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -249,6 +270,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.font.NumericShaper java.awt.font.NumericShaper getContextualShaper(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.font.NumericShaper java.awt.font.NumericShaper getContextualShaper(int, int)">
@@ -277,6 +301,9 @@
   </item>
   <item name="java.awt.font.NumericShaper java.awt.font.NumericShaper getShaper(java.awt.font.NumericShaper.Range) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.font.NumericShaper java.awt.font.NumericShaper.Range rangeForCodePoint(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.font.NumericShaper java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -415,6 +442,9 @@
   <item name="java.awt.font.StyledParagraph void insertInto(int, int[], int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.font.TextHitInfo TextHitInfo(int, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.font.TextHitInfo boolean equals(java.awt.font.TextHitInfo)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="value" val="&quot;null-&gt;false&quot;"/>
@@ -454,25 +484,46 @@
     </annotation>
   </item>
   <item name="java.awt.font.TextHitInfo java.awt.font.TextHitInfo afterOffset(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.font.TextHitInfo java.awt.font.TextHitInfo beforeOffset(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.font.TextHitInfo java.awt.font.TextHitInfo getOffsetHit(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.font.TextHitInfo java.awt.font.TextHitInfo getOtherHit()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.font.TextHitInfo java.awt.font.TextHitInfo leading(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.font.TextHitInfo java.awt.font.TextHitInfo trailing(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.font.TextHitInfo java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.font.TextLayout TextLayout(java.awt.font.TextLine, byte, float[], float)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.font.TextLayout TextLayout(java.awt.font.TextLine, byte, float[], float) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -883,6 +934,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.awt.font.TextLine int visualToLogical(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.font.TextLine int[] computeComponentOrder(sun.font.TextLineComponent[], int[])">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,null-&gt;null;null,_-&gt;null&quot;"/>
@@ -994,6 +1048,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.awt.font.TextLine.TextLineMetrics TextLineMetrics(float, float, float, float)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.font.TextMeasurer TextMeasurer(java.text.AttributedCharacterIterator, java.awt.font.FontRenderContext) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1017,6 +1074,9 @@
   <item name="java.awt.font.TextMeasurer void insertChar(java.text.AttributedCharacterIterator, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.font.TextMeasurer void invalidateComponents()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.font.TransformAttribute TransformAttribute(java.awt.geom.AffineTransform) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1031,6 +1091,9 @@
     </annotation>
   </item>
   <item name="java.awt.font.TransformAttribute java.awt.geom.AffineTransform getTransform()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.font.TransformAttribute void writeObject(java.io.ObjectOutputStream) 0">

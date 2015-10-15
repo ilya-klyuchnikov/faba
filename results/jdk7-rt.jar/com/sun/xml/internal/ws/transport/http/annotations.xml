@@ -127,6 +127,9 @@
   <item name="com.sun.xml.internal.ws.transport.http.HttpAdapter void writeNotFoundErrorPage(com.sun.xml.internal.ws.transport.http.WSHTTPConnection, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.transport.http.HttpAdapter.AsyncTransport AsyncTransport(com.sun.xml.internal.ws.transport.http.HttpAdapter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.transport.http.HttpAdapter.AsyncTransport AsyncTransport(com.sun.xml.internal.ws.transport.http.HttpAdapter) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -137,6 +140,9 @@
     </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.HttpAdapter.AsyncTransport com.sun.xml.internal.ws.api.server.TransportBackChannel getTransportBackChannel(com.sun.xml.internal.ws.transport.http.WSHTTPConnection)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.HttpAdapter.AsyncTransport com.sun.xml.internal.ws.api.server.WebServiceContextDelegate getWebServiceContextDelegate(com.sun.xml.internal.ws.transport.http.WSHTTPConnection) 0">
@@ -170,10 +176,16 @@
   <item name="com.sun.xml.internal.ws.transport.http.HttpAdapter.HttpToolkit void handle(com.sun.xml.internal.ws.transport.http.WSHTTPConnection) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.transport.http.HttpAdapter.Oneway Oneway(com.sun.xml.internal.ws.transport.http.HttpAdapter, com.sun.xml.internal.ws.transport.http.WSHTTPConnection)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.transport.http.HttpAdapterList T createAdapter(java.lang.String, java.lang.String, com.sun.xml.internal.ws.api.server.WSEndpoint&lt;?&gt;) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.HttpAdapterList com.sun.xml.internal.ws.api.server.PortAddressResolver createPortAddressResolver(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.HttpAdapterList java.lang.String getValidPath(java.lang.String)">
@@ -183,6 +195,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.HttpAdapterList java.lang.String getValidPath(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.HttpAdapterList.PortInfo PortInfo(javax.xml.namespace.QName, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.HttpAdapterList.PortInfo boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -223,6 +238,9 @@
       <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.WSHTTPConnection void close()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.WSHTTPConnection void setContentLengthResponseHeader(int)">
     <annotation name="org.jetbrains.annotations.Contract">

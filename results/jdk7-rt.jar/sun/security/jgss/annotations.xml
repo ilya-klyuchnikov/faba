@@ -7,6 +7,9 @@
   <item name="sun.security.jgss.GSSContextImpl GSSContextImpl(sun.security.jgss.GSSManagerImpl, byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.GSSContextImpl GSSContextImpl(sun.security.jgss.GSSManagerImpl, org.ietf.jgss.GSSCredential)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.jgss.GSSContextImpl GSSContextImpl(sun.security.jgss.GSSManagerImpl, org.ietf.jgss.GSSName, org.ietf.jgss.Oid, org.ietf.jgss.GSSCredential, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -41,6 +44,36 @@
   <item name="sun.security.jgss.GSSContextImpl org.ietf.jgss.GSSCredential getDelegCred()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.security.jgss.GSSContextImpl void requestAnonymity(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.GSSContextImpl void requestConf(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.GSSContextImpl void requestCredDeleg(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.GSSContextImpl void requestDelegPolicy(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.GSSContextImpl void requestInteg(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.GSSContextImpl void requestLifetime(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.GSSContextImpl void requestMutualAuth(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.GSSContextImpl void requestReplayDet(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.GSSContextImpl void requestSequenceDet(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.GSSContextImpl void setChannelBinding(org.ietf.jgss.ChannelBinding)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.jgss.GSSCredentialImpl GSSCredentialImpl(sun.security.jgss.GSSManagerImpl, org.ietf.jgss.GSSName, int, org.ietf.jgss.Oid, int) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -70,6 +103,9 @@
   </item>
   <item name="sun.security.jgss.GSSCredentialImpl void init(sun.security.jgss.GSSManagerImpl) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.GSSCredentialImpl.SearchKey SearchKey(org.ietf.jgss.Oid, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.jgss.GSSCredentialImpl.SearchKey boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -131,6 +167,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.jgss.GSSManagerImpl org.ietf.jgss.GSSContext createContext(org.ietf.jgss.GSSCredential)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.jgss.GSSManagerImpl org.ietf.jgss.GSSContext createContext(org.ietf.jgss.GSSName, org.ietf.jgss.Oid, org.ietf.jgss.GSSCredential, int)">
@@ -388,6 +427,9 @@
   <item name="sun.security.jgss.GSSUtil void populateCredentials(java.util.Set&lt;java.lang.Object&gt;, java.util.Set&lt;?&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.HttpCaller HttpCaller(sun.net.www.protocol.http.HttpCallerInfo)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.jgss.HttpCaller sun.net.www.protocol.http.HttpCallerInfo info()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -449,6 +491,9 @@
   <item name="sun.security.jgss.ProviderList void addProviderAtFront(java.security.Provider, org.ietf.jgss.Oid) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.ProviderList.PreferencesEntry PreferencesEntry(java.security.Provider, org.ietf.jgss.Oid)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.jgss.ProviderList.PreferencesEntry boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -479,6 +524,9 @@
   <item name="sun.security.jgss.TokenTracker void getProps(int, org.ietf.jgss.MessageProp) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.TokenTracker.Entry Entry(sun.security.jgss.TokenTracker, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.jgss.TokenTracker.Entry boolean contains(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -501,5 +549,17 @@
   </item>
   <item name="sun.security.jgss.TokenTracker.Entry java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.jgss.TokenTracker.Entry void append(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.TokenTracker.Entry void setEnd(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.TokenTracker.Entry void setInterval(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.TokenTracker.Entry void setStart(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

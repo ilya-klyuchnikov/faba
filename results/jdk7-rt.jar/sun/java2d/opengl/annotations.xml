@@ -88,6 +88,12 @@
   <item name="sun.java2d.opengl.CGLGraphicsConfig void flip(sun.lwawt.macosx.CPlatformView, java.awt.Component, java.awt.image.VolatileImage, int, int, int, int, java.awt.BufferCapabilities.FlipContents) 7">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.java2d.opengl.CGLGraphicsConfig.CGLGCDisposerRecord CGLGCDisposerRecord(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.java2d.opengl.CGLGraphicsConfig.CGLImageCaps CGLImageCaps()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.opengl.CGLGraphicsConfig.CGLImageCaps boolean isTrueVolatile()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -180,6 +186,9 @@
     </annotation>
   </item>
   <item name="sun.java2d.opengl.CGLSurfaceData.CGLLayerSurfaceData java.awt.Rectangle getBounds()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.opengl.CGLSurfaceData.CGLOffScreenSurfaceData CGLOffScreenSurfaceData(sun.lwawt.macosx.CPlatformView, sun.java2d.opengl.CGLGraphicsConfig, int, int, java.awt.Image, java.awt.image.ColorModel, int) 1">
@@ -308,10 +317,16 @@
   <item name="sun.java2d.opengl.GLXGraphicsConfig void flip(sun.awt.X11ComponentPeer, java.awt.Component, java.awt.image.VolatileImage, int, int, int, int, java.awt.BufferCapabilities.FlipContents) 7">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.java2d.opengl.GLXGraphicsConfig.GLXGetConfigInfo GLXGetConfigInfo(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.opengl.GLXGraphicsConfig.GLXGetConfigInfo long getConfigInfo()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.java2d.opengl.GLXGraphicsConfig.GLXImageCaps GLXImageCaps()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.opengl.GLXGraphicsConfig.GLXImageCaps boolean isTrueVolatile()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -391,6 +406,9 @@
   <item name="sun.java2d.opengl.GLXVolatileSurfaceManager sun.java2d.SurfaceData initAcceleratedSurface()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.java2d.opengl.OGLAnyCompositeBlit OGLAnyCompositeBlit(sun.java2d.loops.SurfaceType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.opengl.OGLAnyCompositeBlit void Blit(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -441,11 +459,17 @@
   <item name="sun.java2d.opengl.OGLBufImgOps boolean renderImageWithOp(sun.java2d.SunGraphics2D, java.awt.image.BufferedImage, java.awt.image.BufferedImageOp, int, int) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.java2d.opengl.OGLContext OGLContext(sun.java2d.pipe.RenderQueue, sun.java2d.opengl.OGLGraphicsConfig)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.opengl.OGLContext OGLContext(sun.java2d.pipe.RenderQueue, sun.java2d.opengl.OGLGraphicsConfig) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.opengl.OGLContext void setScratchSurface(sun.java2d.opengl.OGLGraphicsConfig) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.opengl.OGLContext.OGLContextCaps OGLContextCaps(int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.opengl.OGLContext.OGLContextCaps OGLContextCaps(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -463,6 +487,9 @@
   </item>
   <item name="sun.java2d.opengl.OGLDrawImage void transformImage(sun.java2d.SunGraphics2D, java.awt.image.BufferedImage, java.awt.image.BufferedImageOp, int, int) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.java2d.opengl.OGLGeneralBlit OGLGeneralBlit(sun.java2d.loops.SurfaceType, sun.java2d.loops.CompositeType, sun.java2d.loops.Blit)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.opengl.OGLGeneralBlit void Blit(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -521,17 +548,26 @@
   <item name="sun.java2d.opengl.OGLPaints.Texture boolean isPaintValid(sun.java2d.SunGraphics2D) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.opengl.OGLRTTSurfaceToSurfaceBlit OGLRTTSurfaceToSurfaceBlit()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.opengl.OGLRTTSurfaceToSurfaceBlit void Blit(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.opengl.OGLRTTSurfaceToSurfaceBlit void Blit(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.opengl.OGLRTTSurfaceToSurfaceScale OGLRTTSurfaceToSurfaceScale()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.opengl.OGLRTTSurfaceToSurfaceScale void Scale(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, double, double, double, double) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.opengl.OGLRTTSurfaceToSurfaceScale void Scale(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, double, double, double, double) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.opengl.OGLRTTSurfaceToSurfaceTransform OGLRTTSurfaceToSurfaceTransform()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.opengl.OGLRTTSurfaceToSurfaceTransform void Transform(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, java.awt.geom.AffineTransform, int, int, int, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -609,6 +645,9 @@
   <item name="sun.java2d.opengl.OGLSurfaceData void validatePipe(sun.java2d.SunGraphics2D) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.opengl.OGLSurfaceDataProxy OGLSurfaceDataProxy(sun.java2d.opengl.OGLGraphicsConfig, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.opengl.OGLSurfaceDataProxy boolean isSupportedOperation(sun.java2d.SurfaceData, int, sun.java2d.loops.CompositeType, java.awt.Color)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -638,11 +677,17 @@
   <item name="sun.java2d.opengl.OGLSurfaceDataProxy sun.java2d.SurfaceDataProxy createProxy(sun.java2d.SurfaceData, sun.java2d.opengl.OGLGraphicsConfig) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.opengl.OGLSurfaceToSurfaceBlit OGLSurfaceToSurfaceBlit()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.opengl.OGLSurfaceToSurfaceBlit void Blit(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.opengl.OGLSurfaceToSurfaceBlit void Blit(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.opengl.OGLSurfaceToSurfaceScale OGLSurfaceToSurfaceScale()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.opengl.OGLSurfaceToSurfaceScale void Scale(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, double, double, double, double) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -650,11 +695,17 @@
   <item name="sun.java2d.opengl.OGLSurfaceToSurfaceScale void Scale(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, double, double, double, double) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.opengl.OGLSurfaceToSurfaceTransform OGLSurfaceToSurfaceTransform()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.opengl.OGLSurfaceToSurfaceTransform void Transform(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, java.awt.geom.AffineTransform, int, int, int, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.opengl.OGLSurfaceToSurfaceTransform void Transform(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, java.awt.geom.AffineTransform, int, int, int, int, int, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.opengl.OGLSurfaceToSwBlit OGLSurfaceToSwBlit(sun.java2d.loops.SurfaceType, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.opengl.OGLSurfaceToSwBlit void Blit(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -668,11 +719,17 @@
   <item name="sun.java2d.opengl.OGLSurfaceToSwBlit void Blit(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, int, int) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.java2d.opengl.OGLSwToSurfaceBlit OGLSwToSurfaceBlit(sun.java2d.loops.SurfaceType, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.opengl.OGLSwToSurfaceBlit void Blit(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.opengl.OGLSwToSurfaceBlit void Blit(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.opengl.OGLSwToSurfaceScale OGLSwToSurfaceScale(sun.java2d.loops.SurfaceType, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.opengl.OGLSwToSurfaceScale void Scale(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, double, double, double, double) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -680,11 +737,17 @@
   <item name="sun.java2d.opengl.OGLSwToSurfaceScale void Scale(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, double, double, double, double) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.opengl.OGLSwToSurfaceTransform OGLSwToSurfaceTransform(sun.java2d.loops.SurfaceType, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.opengl.OGLSwToSurfaceTransform void Transform(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, java.awt.geom.AffineTransform, int, int, int, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.opengl.OGLSwToSurfaceTransform void Transform(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, java.awt.geom.AffineTransform, int, int, int, int, int, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.opengl.OGLSwToTextureBlit OGLSwToTextureBlit(sun.java2d.loops.SurfaceType, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.opengl.OGLSwToTextureBlit void Blit(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -692,14 +755,26 @@
   <item name="sun.java2d.opengl.OGLSwToTextureBlit void Blit(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.opengl.OGLTextRenderer OGLTextRenderer(sun.java2d.pipe.RenderQueue)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.opengl.OGLTextRenderer sun.java2d.opengl.OGLTextRenderer traceWrap()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.opengl.OGLTextRenderer void validateContext(sun.java2d.SunGraphics2D, java.awt.Composite) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.opengl.OGLTextRenderer.Tracer Tracer(sun.java2d.opengl.OGLTextRenderer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.opengl.OGLTextRenderer.Tracer Tracer(sun.java2d.opengl.OGLTextRenderer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.opengl.OGLTextureToSurfaceBlit OGLTextureToSurfaceBlit()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.opengl.OGLTextureToSurfaceBlit void Blit(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -707,11 +782,17 @@
   <item name="sun.java2d.opengl.OGLTextureToSurfaceBlit void Blit(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.opengl.OGLTextureToSurfaceScale OGLTextureToSurfaceScale()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.opengl.OGLTextureToSurfaceScale void Scale(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, double, double, double, double) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.java2d.opengl.OGLTextureToSurfaceScale void Scale(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, int, int, int, int, double, double, double, double) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.opengl.OGLTextureToSurfaceTransform OGLTextureToSurfaceTransform()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.opengl.OGLTextureToSurfaceTransform void Transform(sun.java2d.SurfaceData, sun.java2d.SurfaceData, java.awt.Composite, sun.java2d.pipe.Region, java.awt.geom.AffineTransform, int, int, int, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

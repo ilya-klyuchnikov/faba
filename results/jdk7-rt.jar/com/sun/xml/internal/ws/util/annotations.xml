@@ -22,13 +22,22 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.ASCIIUtility java.lang.String toString(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.ASCIIUtility void copyStream(java.io.InputStream, java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.util.ByteArrayBuffer ByteArrayBuffer(byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.util.ByteArrayBuffer ByteArrayBuffer(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.ByteArrayBuffer ByteArrayBuffer(byte[], int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.ByteArrayBuffer byte[] getRawData()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -47,9 +56,15 @@
     </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.util.ByteArrayBuffer java.io.InputStream newInputStream()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.ByteArrayBuffer java.io.InputStream newInputStream(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.ByteArrayBuffer java.lang.String toString()">
@@ -60,13 +75,31 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.ws.util.ByteArrayBuffer void ensureCapacity(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.ByteArrayBuffer void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.util.ByteArrayBuffer void write(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.ByteArrayDataSource ByteArrayDataSource(byte[], int, int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.ByteArrayDataSource ByteArrayDataSource(byte[], int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.ByteArrayDataSource ByteArrayDataSource(byte[], java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.ByteArrayDataSource ByteArrayDataSource(byte[], java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.ByteArrayDataSource java.io.InputStream getInputStream()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.ByteArrayDataSource java.lang.String getContentType()">
@@ -79,6 +112,9 @@
       <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.CompletedFuture CompletedFuture(T, java.lang.Throwable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.CompletedFuture T get(long, java.util.concurrent.TimeUnit) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -181,6 +217,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.ws.util.HandlerAnnotationInfo void setHandlers(java.util.List&lt;javax.xml.ws.handler.Handler&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.HandlerAnnotationInfo void setRoles(java.util.Set&lt;java.lang.String&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.util.HandlerAnnotationProcessor HandlerAnnotationProcessor()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -272,6 +314,9 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.util.NamespaceSupport void slideContextUp()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.util.NamespaceSupport.Context Context(com.sun.xml.internal.ws.util.NamespaceSupport.Context, com.sun.xml.internal.ws.util.NamespaceSupport.Context) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -295,13 +340,22 @@
   <item name="com.sun.xml.internal.ws.util.NamespaceSupport.Context void declarePrefix(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.util.NamespaceSupport.Context void setParent(com.sun.xml.internal.ws.util.NamespaceSupport.Context)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.util.NamespaceSupport.Context void setParent(com.sun.xml.internal.ws.util.NamespaceSupport.Context) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.NoCloseInputStream NoCloseInputStream(java.io.InputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.NoCloseInputStream void close()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.NoCloseOutputStream NoCloseOutputStream(java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.NoCloseOutputStream void close()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -312,6 +366,15 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.Pool.Marshaller Marshaller(javax.xml.bind.JAXBContext)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.Pool.Unmarshaller Unmarshaller(javax.xml.bind.JAXBContext)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.QNameMap QNameMap()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.QNameMap V get(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -376,7 +439,13 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.QNameMap java.util.Iterator&lt;com.sun.xml.internal.ws.util.QNameMap.Entry&lt;V&gt;&gt; newEntryIterator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.QNameMap java.util.Set&lt;com.sun.xml.internal.ws.util.QNameMap.Entry&lt;V&gt;&gt; entrySet()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.QNameMap void put(java.lang.String, java.lang.String, V) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -387,10 +456,16 @@
   <item name="com.sun.xml.internal.ws.util.QNameMap void transfer(com.sun.xml.internal.ws.util.QNameMap.Entry&lt;V&gt;[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.util.QNameMap.Entry Entry(int, java.lang.String, java.lang.String, V, com.sun.xml.internal.ws.util.QNameMap.Entry&lt;V&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.util.QNameMap.Entry V getValue()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.QNameMap.Entry V setValue(V)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.QNameMap.Entry boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -406,8 +481,14 @@
   <item name="com.sun.xml.internal.ws.util.QNameMap.Entry javax.xml.namespace.QName createQName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.util.QNameMap.EntryIterator EntryIterator(com.sun.xml.internal.ws.util.QNameMap)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.util.QNameMap.EntryIterator EntryIterator(com.sun.xml.internal.ws.util.QNameMap) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.QNameMap.EntrySet EntrySet(com.sun.xml.internal.ws.util.QNameMap)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.QNameMap.EntrySet boolean contains(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -426,7 +507,13 @@
     </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.util.QNameMap.EntrySet java.util.Iterator&lt;com.sun.xml.internal.ws.util.QNameMap.Entry&lt;V&gt;&gt; iterator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.QNameMap.HashIterator HashIterator(com.sun.xml.internal.ws.util.QNameMap)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.QNameMap.HashIterator HashIterator(com.sun.xml.internal.ws.util.QNameMap) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -436,8 +523,14 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.ws.util.QNameMap.ValueIterator ValueIterator(com.sun.xml.internal.ws.util.QNameMap)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.util.QNameMap.ValueIterator ValueIterator(com.sun.xml.internal.ws.util.QNameMap) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.ReadAllStream ReadAllStream()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.ReadAllStream.FileStream FileStream()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -452,10 +545,20 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.ws.util.ReadAllStream.MemoryStream boolean fetch()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.util.ReadAllStream.MemoryStream int fill(java.io.InputStream, byte[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.util.ReadAllStream.MemoryStream int read()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.ReadAllStream.MemoryStream.Chunk Chunk(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.util.ReadAllStream.MemoryStream.Chunk com.sun.xml.internal.ws.util.ReadAllStream.MemoryStream.Chunk createNext(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.ReadOnlyPropertyException java.lang.String getPropertyName()">
@@ -473,10 +576,16 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.ws.util.ServiceFinder ServiceFinder(java.lang.Class&lt;T&gt;, java.lang.ClassLoader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.util.ServiceFinder com.sun.xml.internal.ws.util.ServiceFinder&lt;T&gt; find(java.lang.Class&lt;T&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.ServiceFinder com.sun.xml.internal.ws.util.ServiceFinder&lt;T&gt; find(java.lang.Class&lt;T&gt;, java.lang.ClassLoader)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.ServiceFinder int parseLine(java.lang.Class, java.net.URL, java.io.BufferedReader, int, java.util.List&lt;java.lang.String&gt;, java.util.Set&lt;java.lang.String&gt;) 1">
@@ -486,6 +595,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.ServiceFinder java.util.Iterator&lt;T&gt; iterator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.ServiceFinder void fail(java.lang.Class, java.lang.String) 0">
@@ -508,6 +620,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.util.ServiceFinder void fail(java.lang.Class, java.net.URL, int, java.lang.String) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.ServiceFinder.LazyIterator LazyIterator(java.lang.Class&lt;T&gt;, java.lang.ClassLoader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.ServiceFinder.LazyIterator T next()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -549,6 +664,9 @@
       <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.util.Version Version(java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.util.Version Version(java.lang.String, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
