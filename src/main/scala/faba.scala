@@ -257,6 +257,9 @@ trait FabaProcessor extends Processor {
       handleOutContractEquation(resultEquation)
       handleNullableResultEquation(nullableResultEquation(className, methodNode, method, resultOrigins, stable, jsr))
     }
+    if (argumentTypes.length > 50 && cycle) {
+      return
+    }
     for (i <- argumentTypes.indices) {
       val argType = argumentTypes(i)
       val argSort = argType.getSort
