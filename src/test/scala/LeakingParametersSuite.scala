@@ -1,7 +1,7 @@
 package faba.test
 
 import annotations._
-import data.Data02
+import data.LeakingData
 import faba.asm.LeakingParameters
 import faba.data._
 import org.objectweb.asm._
@@ -10,8 +10,8 @@ import org.scalatest.{FunSuite, Matchers}
 
 class LeakingParametersSuite extends FunSuite with Matchers {
 
-  test("Data02.class") {
-    checkLeakingParameters(classOf[Data02])
+  test("LeakingData.class") {
+    checkLeakingParameters(classOf[LeakingData])
   }
 
   def checkLeakingParameters(classes: Class[_]*) {

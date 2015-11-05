@@ -3,7 +3,7 @@ package data;
 import annotations.ExpectContract;
 import annotations.ExpectNotNull;
 
-public class Data01 {
+public class AnalysisData {
 
     static void f(@ExpectNotNull Object o1, @ExpectNotNull Object o2) {
         if (o1 == null) throw new NullPointerException();

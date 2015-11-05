@@ -2,7 +2,10 @@ package data;
 
 import annotations.ExpectLeaking;
 
-public class Data02 {
+/**
+ * Test data for LeakingParameters analysis
+ */
+public class LeakingData {
 
     int z;
 
@@ -12,15 +15,15 @@ public class Data02 {
         o3.toString();
     }
 
-    void test02(@ExpectLeaking Data02 d) {
+    void test02(@ExpectLeaking LeakingData d) {
         System.out.println(d.z);
     }
 
-    void test03(int i, @ExpectLeaking Data02 d) {
+    void test03(int i, @ExpectLeaking LeakingData d) {
         System.out.println(d.z);
     }
 
-    void test04(long i, @ExpectLeaking Data02 d) {
+    void test04(long i, @ExpectLeaking LeakingData d) {
         System.out.println(d.z);
     }
 }
