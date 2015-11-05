@@ -62,11 +62,11 @@ object `package` {
   type Value = Values.Value
 }
 
-case class Annotations(notNulls: Set[Key], contracts: Map[Key, String])
+case class Annotations(notNulls: Set[Key], contracts: Map[Key, String], pure: Set[Key], localEffects: Set[Key])
 
 object Utils {
 
-  def toAnnotations(solutions: Iterable[(Key, Value)]): Annotations = {
+  def toAnnotations(solutions: Iterable[(Key, Value)], puritySolutions: Iterable[(Key, Value)]): Annotations = {
     val inOuts = mutable.HashMap[Method, List[(InOut, Value)]]()
     var notNulls = Set[Key]()
     var contracts = Map[Key, String]()
@@ -91,7 +91,18 @@ object Utils {
       }.sorted.mkString(";")
       contracts = contracts + (key -> contractValues)
     }
-    Annotations(notNulls, contracts)
+
+    var pure = Set[Key]()
+    var localEffects = Set[Key]()
+
+    for ((key, value) <- puritySolutions) {
+      if (value == Values.LocalEffect)
+        localEffects = localEffects + key
+      if (value == Values.Pure)
+        pure = pure + key
+    }
+
+    Annotations(notNulls, contracts, pure, localEffects)
   }
 
   def contractValueString(v: Value): String = v match {

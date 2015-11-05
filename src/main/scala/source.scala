@@ -15,7 +15,7 @@ sealed trait Source {
 case class ClassSource(classes: Class[_]*) extends Source {
   override def process(processor: Processor): Unit =
     classes.foreach { clazz =>
-      processor.processClass(new ClassReader(clazz.getCanonicalName))
+      processor.processClass(new ClassReader(clazz.getName))
     }
 }
 
