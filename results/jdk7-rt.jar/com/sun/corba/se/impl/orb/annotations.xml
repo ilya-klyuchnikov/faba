@@ -30,8 +30,18 @@
   <item name="com.sun.corba.se.impl.orb.DataCollectorBase java.util.Properties getFileProperties()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.orb.DataCollectorBase java.util.Properties getProperties()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.orb.DataCollectorBase java.util.Set getCORBAPrefixes(java.util.Set) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.DataCollectorBase void checkSetParserCalled()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.orb.DataCollectorBase void doProperties(java.util.Properties) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -532,6 +542,16 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton boolean poll_next_response()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton boolean work_pending()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton com.sun.corba.se.impl.corba.TypeCodeImpl getTypeCodeForClass(java.lang.Class)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="value" val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
@@ -576,17 +596,32 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton com.sun.corba.se.pept.transport.TransportManager getTransportManager()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton com.sun.corba.se.spi.copyobject.CopierManager getCopierManager()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton com.sun.corba.se.spi.ior.IOR getFVDCodeBaseIOR()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton com.sun.corba.se.spi.legacy.connection.LegacyServerSocketEndPointInfo getServerEndpoint()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton com.sun.corba.se.spi.legacy.connection.LegacyServerSocketManager getLegacyServerSocketManager()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton com.sun.corba.se.spi.oa.OAInvocationInfo peekInvocationInfo()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -635,6 +670,16 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton com.sun.corba.se.spi.servicecontext.ServiceContextRegistry getServiceContextRegistry()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton com.sun.corba.se.spi.transport.CorbaTransportManager getCorbaTransportManager()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton int getGIOPBuffMgrStrategy(com.sun.corba.se.spi.ior.iiop.GIOPVersion)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -648,8 +693,68 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton int getHighWaterMark()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton int getLowWaterMark()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton int getNumberToReclaim()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton int getORBInitialPort()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton int getORBServerPort()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton int getTransientServerId()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton java.lang.String getAppletHost()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton java.lang.String getORBInitialHost()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton java.lang.String getORBServerHost()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton java.lang.String object_to_string(org.omg.CORBA.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton java.lang.String object_to_string(org.omg.CORBA.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton java.net.URL getAppletCodeBase()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton java.rmi.Remote string_to_remote(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton java.rmi.Remote string_to_remote(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -684,11 +789,26 @@
   <item name="com.sun.corba.se.impl.orb.ORBSingleton org.omg.CORBA.Object resolve_initial_references(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton org.omg.CORBA.Object string_to_object(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton org.omg.CORBA.Object string_to_object(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton org.omg.CORBA.Policy create_policy(int, org.omg.CORBA.Any)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton org.omg.CORBA.Policy create_policy(int, org.omg.CORBA.Any) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton org.omg.CORBA.Request get_next_response()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton org.omg.CORBA.TypeCode create_abstract_interface_tc(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -747,8 +867,18 @@
   <item name="com.sun.corba.se.impl.orb.ORBSingleton org.omg.CORBA.TypeCode get_primitive_tc(org.omg.CORBA.TCKind) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton org.omg.CORBA.portable.ValueFactory lookup_value_factory(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton org.omg.CORBA.portable.ValueFactory lookup_value_factory(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton org.omg.CORBA.portable.ValueFactory register_value_factory(java.lang.String, org.omg.CORBA.portable.ValueFactory)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton org.omg.CORBA.portable.ValueFactory register_value_factory(java.lang.String, org.omg.CORBA.portable.ValueFactory) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -761,8 +891,28 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton void connect(org.omg.CORBA.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton void connect(org.omg.CORBA.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton void destroy()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton void destroyConnections()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton void disconnect(org.omg.CORBA.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton void disconnect(org.omg.CORBA.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -786,6 +936,11 @@
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton void notifyORB()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton void perform_work()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -820,8 +975,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton void run()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton void send_multiple_requests_deferred(org.omg.CORBA.Request[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton void send_multiple_requests_deferred(org.omg.CORBA.Request[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton void send_multiple_requests_oneway(org.omg.CORBA.Request[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton void send_multiple_requests_oneway(org.omg.CORBA.Request[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -866,8 +1036,18 @@
   <item name="com.sun.corba.se.impl.orb.ORBSingleton void setLocalResolver(com.sun.corba.se.spi.resolver.LocalResolver) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton void setORBVersion(com.sun.corba.se.spi.orb.ORBVersion)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton void setORBVersion(com.sun.corba.se.spi.orb.ORBVersion) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton void setObjectKeyFactory(com.sun.corba.se.spi.ior.ObjectKeyFactory)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton void setObjectKeyFactory(com.sun.corba.se.spi.ior.ObjectKeyFactory) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -942,7 +1122,22 @@
   <item name="com.sun.corba.se.impl.orb.ORBSingleton void set_parameters(java.util.Properties) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton void shutdown(boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton void shutdownServants(boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.orb.ORBSingleton void startingDispatch()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.orb.ORBSingleton void unregister_value_factory(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>

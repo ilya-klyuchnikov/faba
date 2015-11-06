@@ -51,6 +51,11 @@
   <item name="java.util.prefs.AbstractPreferences java.util.prefs.Preferences node(java.util.StringTokenizer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.prefs.AbstractPreferences java.util.prefs.Preferences parent()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.prefs.AbstractPreferences void addNodeChangeListener(java.util.prefs.NodeChangeListener) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -72,17 +77,32 @@
   <item name="java.util.prefs.AbstractPreferences void putByteArray(java.lang.String, byte[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.prefs.AbstractPreferences void removeNodeChangeListener(java.util.prefs.NodeChangeListener)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.prefs.AbstractPreferences void removeNodeChangeListener(java.util.prefs.NodeChangeListener) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.prefs.AbstractPreferences void removePreferenceChangeListener(java.util.prefs.PreferenceChangeListener)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.prefs.AbstractPreferences void removePreferenceChangeListener(java.util.prefs.PreferenceChangeListener) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.prefs.AbstractPreferences.NodeAddedEvent NodeAddedEvent(java.util.prefs.AbstractPreferences, java.util.prefs.Preferences, java.util.prefs.Preferences)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.prefs.AbstractPreferences.NodeAddedEvent NodeAddedEvent(java.util.prefs.AbstractPreferences, java.util.prefs.Preferences, java.util.prefs.Preferences) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.prefs.AbstractPreferences.NodeRemovedEvent NodeRemovedEvent(java.util.prefs.AbstractPreferences, java.util.prefs.Preferences, java.util.prefs.Preferences)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.prefs.AbstractPreferences.NodeRemovedEvent NodeRemovedEvent(java.util.prefs.AbstractPreferences, java.util.prefs.Preferences, java.util.prefs.Preferences) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.prefs.BackingStoreException BackingStoreException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.prefs.Base64 Base64()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -190,6 +210,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.prefs.InvalidPreferencesFormatException InvalidPreferencesFormatException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.prefs.InvalidPreferencesFormatException InvalidPreferencesFormatException(java.lang.String, java.lang.Throwable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.prefs.MacOSXPreferences MacOSXPreferences(java.util.prefs.MacOSXPreferences, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -253,6 +279,9 @@
   <item name="java.util.prefs.MacOSXPreferencesFile.SyncTask SyncTask(java.util.prefs.MacOSXPreferencesFile)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.util.prefs.NodeChangeEvent NodeChangeEvent(java.util.prefs.Preferences, java.util.prefs.Preferences)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.prefs.NodeChangeEvent NodeChangeEvent(java.util.prefs.Preferences, java.util.prefs.Preferences) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -261,11 +290,24 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.prefs.NodeChangeEvent void readObject(java.io.ObjectInputStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.prefs.NodeChangeEvent void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.prefs.NodeChangeEvent void writeObject(java.io.ObjectOutputStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.prefs.NodeChangeEvent void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.prefs.PreferenceChangeEvent PreferenceChangeEvent(java.util.prefs.Preferences, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.prefs.PreferenceChangeEvent PreferenceChangeEvent(java.util.prefs.Preferences, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -280,8 +322,18 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.prefs.PreferenceChangeEvent void readObject(java.io.ObjectInputStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.prefs.PreferenceChangeEvent void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.prefs.PreferenceChangeEvent void writeObject(java.io.ObjectOutputStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.prefs.PreferenceChangeEvent void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

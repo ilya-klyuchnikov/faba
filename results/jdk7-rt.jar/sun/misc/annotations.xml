@@ -70,6 +70,12 @@
   <item name="sun.misc.BASE64Encoder void encodeAtom(java.io.OutputStream, byte[], int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.misc.CEFormatException CEFormatException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.misc.CEStreamExhausted CEStreamExhausted()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.misc.CRC16 CRC16()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -77,6 +83,15 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.misc.CRC16 void update(byte)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.misc.Cache Cache()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.misc.Cache Cache(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.misc.Cache Cache(int, float)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.misc.Cache boolean isEmpty()">
@@ -122,6 +137,9 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.misc.Cache void init(int, float)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.misc.CacheEntry CacheEntry()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -156,6 +174,11 @@
   </item>
   <item name="sun.misc.CharacterDecoder java.nio.ByteBuffer decodeBufferToByteBuffer(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.misc.CharacterDecoder void decodeAtom(java.io.PushbackInputStream, java.io.OutputStream, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.misc.CharacterDecoder void decodeAtom(java.io.PushbackInputStream, java.io.OutputStream, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -377,6 +400,9 @@
   <item name="sun.misc.ExtensionInfo java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.misc.ExtensionInstallationException ExtensionInstallationException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.misc.FDBigInt FDBigInt(int[], int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -443,6 +469,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.misc.FIFOQueueEnumerator java.lang.Object nextElement()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.misc.FileURLMapper FileURLMapper(java.net.URL)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -619,6 +648,11 @@
   <item name="sun.misc.GC.LatencyRequest java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.misc.Hashing Hashing()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.misc.Hashing int murmur3_32(byte[])">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -726,6 +760,11 @@
   <item name="sun.misc.InnocuousThread java.lang.ClassLoader getContextClassLoader()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.misc.InnocuousThread void setContextClassLoader(java.lang.ClassLoader)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.misc.InnocuousThread void setContextClassLoader(java.lang.ClassLoader) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -736,6 +775,12 @@
   </item>
   <item name="sun.misc.InnocuousThread void setUncaughtExceptionHandler(java.lang.Thread.UncaughtExceptionHandler) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.misc.InvalidJarIndexException InvalidJarIndexException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.misc.InvalidJarIndexException InvalidJarIndexException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.misc.IoTrace IoTrace()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -871,6 +916,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.misc.LIFOQueueEnumerator java.lang.Object nextElement()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.misc.LRUCache LRUCache(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -1052,6 +1100,11 @@
   </item>
   <item name="sun.misc.PathPermissions java.util.Enumeration&lt;java.security.Permission&gt; elements()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.misc.PathPermissions void add(java.security.Permission)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.misc.PathPermissions void add(java.security.Permission) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1366,6 +1419,9 @@
   <item name="sun.misc.QueueElement java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.misc.REException REException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.misc.Ref Ref()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -1520,6 +1576,14 @@
   </item>
   <item name="sun.misc.Service.LazyIterator java.lang.Object next()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.misc.Service.LazyIterator void remove()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.misc.ServiceConfigurationError ServiceConfigurationError(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.misc.SharedSecrets SharedSecrets()">
     <annotation name="org.jetbrains.annotations.Contract">

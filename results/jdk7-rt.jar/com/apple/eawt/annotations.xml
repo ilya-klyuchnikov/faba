@@ -88,8 +88,14 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.apple.eawt.ApplicationEvent ApplicationEvent(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.apple.eawt.ApplicationEvent ApplicationEvent(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.apple.eawt.ApplicationEvent ApplicationEvent(java.lang.Object, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.apple.eawt.ApplicationEvent ApplicationEvent(java.lang.Object, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -241,6 +247,9 @@
   </item>
   <item name="com.apple.eawt._AppEventHandler._AppEventDispatcher void performDefaultAction(com.apple.eawt._AppEventHandler._NativeEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.apple.eawt._AppEventHandler._AppEventDispatcher void setHandlerContext(sun.awt.AppContext)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.apple.eawt._AppEventHandler._AppEventDispatcher void setHandlerContext(sun.awt.AppContext) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -408,6 +417,11 @@
   </item>
   <item name="com.apple.eawt._AppEventLegacyHandler void blockLegacyAPI()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.apple.eawt._AppEventLegacyHandler void checkIfLegacyAPIBlocked()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.apple.eawt._AppEventLegacyHandler void handleAbout(com.apple.eawt.AppEvent.AboutEvent) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

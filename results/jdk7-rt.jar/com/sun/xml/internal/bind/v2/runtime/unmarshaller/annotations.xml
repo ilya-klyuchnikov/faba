@@ -12,6 +12,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.Base64Data char charAt(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.Base64Data int getDataLen()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -37,8 +42,14 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.Base64Data void set(byte[], java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.Base64Data void set(javax.activation.DataHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.Base64Data void writeTo(com.sun.xml.internal.bind.v2.runtime.output.UTF8XmlOutput) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.ChildLoader ChildLoader(com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader, com.sun.xml.internal.bind.v2.runtime.unmarshaller.Receiver)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.DefaultIDResolver DefaultIDResolver()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -400,6 +411,11 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.ProxyLoader ProxyLoader()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.ProxyLoader void leaveElement(com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.State, com.sun.xml.internal.bind.v2.runtime.unmarshaller.TagName)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.ProxyLoader void leaveElement(com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.State, com.sun.xml.internal.bind.v2.runtime.unmarshaller.TagName) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -413,6 +429,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.SAXConnector com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext getContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.SAXConnector java.lang.Object getResult()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -467,6 +488,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.Scope void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.StAXConnector StAXConnector(com.sun.xml.internal.bind.v2.runtime.unmarshaller.XmlVisitor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -614,6 +638,16 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl boolean handleEvent(javax.xml.bind.ValidationEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl boolean hasEventHandler()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl boolean isValidating()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl boolean needsInterning(org.xml.sax.XMLReader)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;true&quot;"/>
@@ -707,6 +741,11 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl javax.xml.bind.UnmarshallerHandler getUnmarshallerHandler()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl javax.xml.bind.ValidationEventHandler getEventHandler()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl javax.xml.bind.attachment.AttachmentUnmarshaller getAttachmentUnmarshaller()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -737,6 +776,11 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl void setSchema(javax.xml.validation.Schema)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallerImpl void setValidating(boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext boolean expectText()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -802,6 +846,11 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext java.lang.Object getOuterPeer()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext java.lang.Object getResult()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext java.lang.String addToIdTable(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
@@ -857,6 +906,9 @@
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext void addFactory(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext void clearResult()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext void endPrefixMapping(java.lang.String)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -1015,6 +1067,9 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.WildcardLoader com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader selectLoader(com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.State, com.sun.xml.internal.bind.v2.runtime.unmarshaller.TagName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader XsiNilLoader(com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader selectLoader(com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.State, com.sun.xml.internal.bind.v2.runtime.unmarshaller.TagName) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1026,8 +1081,14 @@
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader void onNil(com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.State) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array Array(com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array void onNil(com.sun.xml.internal.bind.v2.runtime.unmarshaller.UnmarshallingContext.State) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Single Single(com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader, com.sun.xml.internal.bind.v2.runtime.reflect.Accessor)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiTypeLoader XsiTypeLoader(com.sun.xml.internal.bind.v2.runtime.JaxBeanInfo)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>

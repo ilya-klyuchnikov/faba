@@ -156,6 +156,16 @@
   <item name="sun.java2d.CompositeCRenderer void fill(sun.java2d.SunGraphics2D, java.awt.Shape) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.DataBufferNIOInt int[] getData()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.java2d.DataBufferNIOInt int[] getData(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.java2d.DataBufferNIOInt int[][] getBankData()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -200,7 +210,27 @@
   <item name="sun.java2d.HeadlessGraphicsEnvironment HeadlessGraphicsEnvironment(java.awt.GraphicsEnvironment)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.java2d.HeadlessGraphicsEnvironment java.awt.GraphicsDevice getDefaultScreenDevice()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.java2d.HeadlessGraphicsEnvironment java.awt.GraphicsDevice[] getScreenDevices()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.java2d.HeadlessGraphicsEnvironment java.awt.GraphicsEnvironment getSunGraphicsEnvironment()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.java2d.HeadlessGraphicsEnvironment java.awt.Point getCenterPoint()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.java2d.HeadlessGraphicsEnvironment java.awt.Rectangle getMaximumWindowBounds()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -239,6 +269,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.java2d.InvalidPipeException InvalidPipeException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.java2d.InvalidPipeException InvalidPipeException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.MacosxSurfaceManagerFactory MacosxSurfaceManagerFactory()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -286,6 +322,11 @@
       <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.NullSurfaceData java.awt.image.Raster getRaster(int, int, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.java2d.NullSurfaceData java.lang.Object getDestination()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -342,6 +383,11 @@
   </item>
   <item name="sun.java2d.OSXOffScreenSurfaceData sun.java2d.SurfaceData createData(java.awt.image.BufferedImage) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.OSXOffScreenSurfaceData sun.java2d.SurfaceData createData(java.awt.image.Raster, java.awt.image.ColorModel)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.java2d.OSXOffScreenSurfaceData sun.java2d.SurfaceData createData(java.awt.image.Raster, java.awt.image.ColorModel) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -645,10 +691,22 @@
   <item name="sun.java2d.StateTrackableDelegate sun.java2d.StateTrackableDelegate createInstance(sun.java2d.StateTrackable.State) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.java2d.StateTrackableDelegate void addDynamicAgent()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.java2d.StateTrackableDelegate void markDirty()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.StateTrackableDelegate void removeDynamicAgent()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.java2d.StateTrackableDelegate void setImmutable()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.java2d.StateTrackableDelegate void setUntrackable()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.java2d.SunCompositeContext SunCompositeContext(java.awt.AlphaComposite, java.awt.image.ColorModel, java.awt.image.ColorModel)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.SunCompositeContext SunCompositeContext(java.awt.AlphaComposite, java.awt.image.ColorModel, java.awt.image.ColorModel) 0">
@@ -659,6 +717,9 @@
   </item>
   <item name="sun.java2d.SunCompositeContext SunCompositeContext(java.awt.AlphaComposite, java.awt.image.ColorModel, java.awt.image.ColorModel) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.java2d.SunCompositeContext SunCompositeContext(sun.java2d.loops.XORComposite, java.awt.image.ColorModel, java.awt.image.ColorModel)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.SunCompositeContext SunCompositeContext(sun.java2d.loops.XORComposite, java.awt.image.ColorModel, java.awt.image.ColorModel) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1237,6 +1298,11 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.java2d.SurfaceManagerFactory SurfaceManagerFactory()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.java2d.SurfaceManagerFactory sun.java2d.SurfaceManagerFactory getInstance()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>

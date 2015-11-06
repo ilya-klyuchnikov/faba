@@ -40,6 +40,18 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="javax.smartcardio.CardException CardException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.smartcardio.CardException CardException(java.lang.String, java.lang.Throwable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.smartcardio.CardNotPresentException CardNotPresentException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.smartcardio.CardNotPresentException CardNotPresentException(java.lang.String, java.lang.Throwable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.smartcardio.CardPermission CardPermission(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -154,6 +166,11 @@
   <item name="javax.smartcardio.CommandAPDU java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.smartcardio.CommandAPDU void checkArrayBounds(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.smartcardio.CommandAPDU void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -201,6 +218,11 @@
   </item>
   <item name="javax.smartcardio.ResponseAPDU java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.smartcardio.ResponseAPDU void check(byte[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.smartcardio.ResponseAPDU void check(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -250,6 +272,16 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.smartcardio.TerminalFactory.NoneCardTerminals NoneCardTerminals()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="javax.smartcardio.TerminalFactory.NoneCardTerminals boolean waitForChange(long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="javax.smartcardio.TerminalFactory.NoneCardTerminals java.util.List&lt;javax.smartcardio.CardTerminal&gt; list(javax.smartcardio.CardTerminals.State)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>

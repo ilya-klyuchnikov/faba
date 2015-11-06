@@ -2,7 +2,13 @@
   <item name="javax.tools.Diagnostic.Kind Kind(java.lang.String, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="javax.tools.DiagnosticCollector DiagnosticCollector()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.tools.DiagnosticCollector java.util.List&lt;javax.tools.Diagnostic&lt;? extends S&gt;&gt; getDiagnostics()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.tools.DiagnosticCollector void report(javax.tools.Diagnostic&lt;? extends S&gt;) 0">
@@ -37,11 +43,26 @@
   <item name="javax.tools.SimpleJavaFileObject boolean isNameCompatible(java.lang.String, javax.tools.JavaFileObject.Kind) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.tools.SimpleJavaFileObject java.io.InputStream openInputStream()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="javax.tools.SimpleJavaFileObject java.io.OutputStream openOutputStream()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.tools.SimpleJavaFileObject java.io.Reader openReader(boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.tools.SimpleJavaFileObject java.io.Writer openWriter()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.tools.SimpleJavaFileObject java.lang.CharSequence getCharContent(boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.tools.SimpleJavaFileObject java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>

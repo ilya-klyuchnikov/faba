@@ -10,6 +10,9 @@
   <item name="sun.security.jgss.GSSContextImpl GSSContextImpl(sun.security.jgss.GSSManagerImpl, org.ietf.jgss.GSSCredential)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.security.jgss.GSSContextImpl GSSContextImpl(sun.security.jgss.GSSManagerImpl, org.ietf.jgss.GSSName, org.ietf.jgss.Oid, org.ietf.jgss.GSSCredential, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.jgss.GSSContextImpl GSSContextImpl(sun.security.jgss.GSSManagerImpl, org.ietf.jgss.GSSName, org.ietf.jgss.Oid, org.ietf.jgss.GSSCredential, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -80,8 +83,18 @@
   <item name="sun.security.jgss.GSSCredentialImpl GSSCredentialImpl(sun.security.jgss.GSSManagerImpl, sun.security.jgss.spi.GSSCredentialSpi) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.GSSCredentialImpl boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.security.jgss.GSSCredentialImpl boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.jgss.GSSCredentialImpl int hashCode()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.security.jgss.GSSCredentialImpl java.lang.String getElementStr(org.ietf.jgss.Oid, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -124,6 +137,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.security.jgss.GSSExceptionImpl GSSExceptionImpl(int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.jgss.GSSExceptionImpl GSSExceptionImpl(int, org.ietf.jgss.Oid) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -173,6 +189,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.jgss.GSSManagerImpl org.ietf.jgss.GSSContext createContext(org.ietf.jgss.GSSName, org.ietf.jgss.Oid, org.ietf.jgss.GSSCredential, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.jgss.GSSManagerImpl org.ietf.jgss.GSSContext createContext(org.ietf.jgss.GSSName, org.ietf.jgss.Oid, org.ietf.jgss.GSSCredential, int) 0">

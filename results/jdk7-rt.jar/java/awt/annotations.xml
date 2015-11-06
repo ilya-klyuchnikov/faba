@@ -1,4 +1,7 @@
 <root>
+  <item name="java.awt.AWTError AWTError(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.AWTEvent AWTEvent(java.awt.Event) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -26,6 +29,11 @@
   </item>
   <item name="java.awt.AWTEvent java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.AWTEvent java.security.AccessControlContext getAccessControlContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.awt.AWTEvent void consume()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -247,6 +255,9 @@
   <item name="java.awt.AWTEventMulticaster void save(java.io.ObjectOutputStream, java.lang.String, java.util.EventListener) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.awt.AWTException AWTException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.AWTKeyStroke AWTKeyStroke()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -335,6 +346,12 @@
   <item name="java.awt.AWTPermission AWTPermission(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.awt.AlphaComposite AlphaComposite(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.AlphaComposite AlphaComposite(int, float)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.AlphaComposite boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="value" val="&quot;null-&gt;false&quot;"/>
@@ -354,7 +371,30 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.awt.AlphaComposite java.awt.AlphaComposite derive(float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.AlphaComposite java.awt.AlphaComposite derive(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.AlphaComposite java.awt.AlphaComposite getInstance(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.AlphaComposite java.awt.AlphaComposite getInstance(int, float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.awt.AlphaComposite java.awt.CompositeContext createContext(java.awt.image.ColorModel, java.awt.image.ColorModel, java.awt.RenderingHints)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.AlphaComposite java.awt.CompositeContext createContext(java.awt.image.ColorModel, java.awt.image.ColorModel, java.awt.RenderingHints) 0">
@@ -527,6 +567,9 @@
   <item name="java.awt.BorderLayout void setVgap(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.awt.BufferCapabilities BufferCapabilities(java.awt.ImageCapabilities, java.awt.ImageCapabilities, java.awt.BufferCapabilities.FlipContents)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.BufferCapabilities BufferCapabilities(java.awt.ImageCapabilities, java.awt.ImageCapabilities, java.awt.BufferCapabilities.FlipContents) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -614,6 +657,21 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.Button.AccessibleAWTButton int getAccessibleActionCount()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.Button.AccessibleAWTButton java.lang.Number getCurrentAccessibleValue()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.Button.AccessibleAWTButton java.lang.Number getMaximumAccessibleValue()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.Button.AccessibleAWTButton java.lang.Number getMinimumAccessibleValue()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1245,6 +1303,11 @@
   <item name="java.awt.Component boolean action(java.awt.Event, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.awt.Component boolean areFocusTraversalKeysSet(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.awt.Component boolean areInputMethodsEnabled()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1512,6 +1575,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.awt.Component int getBaseline(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.awt.Component int getHeight()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1743,6 +1811,11 @@
   </item>
   <item name="java.awt.Component java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.Component java.security.AccessControlContext getAccessControlContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.awt.Component javax.accessibility.AccessibleContext getAccessibleContext()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2117,6 +2190,11 @@
   <item name="java.awt.ComponentOrientation java.awt.ComponentOrientation getOrientation(java.util.Locale) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.Container boolean areFocusTraversalKeysSet(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.awt.Container boolean eventEnabled(java.awt.AWTEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2255,11 +2333,21 @@
   <item name="java.awt.Container void applyComponentOrientation(java.awt.ComponentOrientation) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.Container void checkAddToSelf(java.awt.Component)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.awt.Container void checkAddToSelf(java.awt.Component) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.awt.Container void checkAdding(java.awt.Component, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.Container void checkNotAWindow(java.awt.Component)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.awt.Container void checkNotAWindow(java.awt.Component) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2895,7 +2983,8 @@
   </item>
   <item name="java.awt.EventQueue java.security.AccessControlContext getAccessControlContextFrom(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val name="value" val="&quot;null-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2973,6 +3062,9 @@
   </item>
   <item name="java.awt.FileDialog void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.FileDialog void setMode(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.FlowLayout boolean getAlignOnBaseline()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -3313,6 +3405,9 @@
   <item name="java.awt.Font.FontAccessImpl void setFont2D(java.awt.Font, sun.font.Font2DHandle) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.FontFormatException FontFormatException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.FontMetrics FontMetrics(java.awt.Font)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -3441,11 +3536,17 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.awt.GradientPaint GradientPaint(float, float, java.awt.Color, float, float, java.awt.Color)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.GradientPaint GradientPaint(float, float, java.awt.Color, float, float, java.awt.Color) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.GradientPaint GradientPaint(float, float, java.awt.Color, float, float, java.awt.Color) 5">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.GradientPaint GradientPaint(float, float, java.awt.Color, float, float, java.awt.Color, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.GradientPaint GradientPaint(float, float, java.awt.Color, float, float, java.awt.Color, boolean) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3720,6 +3821,9 @@
   <item name="java.awt.GraphicsConfiguration java.awt.image.VolatileImage createCompatibleVolatileImage(int, int, java.awt.ImageCapabilities, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.GraphicsConfiguration.DefaultBufferCapabilities DefaultBufferCapabilities(java.awt.ImageCapabilities)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.GraphicsConfiguration.DefaultBufferCapabilities DefaultBufferCapabilities(java.awt.ImageCapabilities) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3758,6 +3862,11 @@
   </item>
   <item name="java.awt.GraphicsDevice java.awt.Window getFullScreenWindow()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.awt.GraphicsDevice void setDisplayMode(java.awt.DisplayMode)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.awt.GraphicsDevice void setDisplayMode(java.awt.DisplayMode) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -3906,6 +4015,15 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.awt.GridLayout GridLayout()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.GridLayout GridLayout(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.GridLayout GridLayout(int, int, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.GridLayout int getColumns()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -3963,14 +4081,32 @@
   <item name="java.awt.GridLayout void removeLayoutComponent(java.awt.Component) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.awt.GridLayout void setColumns(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.GridLayout void setHgap(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.GridLayout void setRows(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.GridLayout void setVgap(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.awt.HeadlessException HeadlessException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.HeadlessException HeadlessException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.HeadlessException java.lang.String getMessage()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.awt.IllegalComponentStateException IllegalComponentStateException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.IllegalComponentStateException IllegalComponentStateException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.Image Image()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -4038,6 +4174,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.Insets void set(int, int, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.JobAttributes JobAttributes()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.JobAttributes JobAttributes(int, java.awt.JobAttributes.DefaultSelectionType, java.awt.JobAttributes.DestinationType, java.awt.JobAttributes.DialogType, java.lang.String, int, int, java.awt.JobAttributes.MultipleDocumentHandlingType, int[][], java.lang.String, java.awt.JobAttributes.SidesType) 1">
@@ -4142,11 +4281,26 @@
   <item name="java.awt.JobAttributes void set(java.awt.JobAttributes) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.JobAttributes void setCopies(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.JobAttributes void setCopiesToDefault()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.JobAttributes void setDefaultSelection(java.awt.JobAttributes.DefaultSelectionType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.JobAttributes void setDefaultSelection(java.awt.JobAttributes.DefaultSelectionType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.JobAttributes void setDestination(java.awt.JobAttributes.DestinationType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.JobAttributes void setDestination(java.awt.JobAttributes.DestinationType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.JobAttributes void setDialog(java.awt.JobAttributes.DialogType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.JobAttributes void setDialog(java.awt.JobAttributes.DialogType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -4154,8 +4308,23 @@
   <item name="java.awt.JobAttributes void setFileName(java.lang.String)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.awt.JobAttributes void setFromPage(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.JobAttributes void setMaxPage(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.JobAttributes void setMinPage(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.JobAttributes void setMultipleDocumentHandling(java.awt.JobAttributes.MultipleDocumentHandlingType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.JobAttributes void setMultipleDocumentHandling(java.awt.JobAttributes.MultipleDocumentHandlingType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.JobAttributes void setMultipleDocumentHandlingToDefault()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.JobAttributes void setPageRanges(int[][]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -4163,8 +4332,17 @@
   <item name="java.awt.JobAttributes void setPrinter(java.lang.String)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.awt.JobAttributes void setSides(java.awt.JobAttributes.SidesType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.JobAttributes void setSides(java.awt.JobAttributes.SidesType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.JobAttributes void setSidesToDefault()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.JobAttributes void setToPage(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.KeyboardFocusManager boolean isAutoFocusTransferEnabledFor(java.awt.Component)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -4249,6 +4427,11 @@
   <item name="java.awt.KeyboardFocusManager java.util.Set initFocusTraversalKeysSet(java.lang.String, java.util.Set) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.KeyboardFocusManager java.util.Set&lt;java.awt.AWTKeyStroke&gt; getDefaultFocusTraversalKeys(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.awt.KeyboardFocusManager void addKeyEventDispatcher(java.awt.KeyEventDispatcher) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -4301,6 +4484,9 @@
   </item>
   <item name="java.awt.KeyboardFocusManager void removeVetoableChangeListener(java.lang.String, java.beans.VetoableChangeListener) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.awt.KeyboardFocusManager void setCurrentSequencedEvent(java.awt.SequencedEvent)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.KeyboardFocusManager void setDefaultFocusTraversalKeys(int, java.util.Set&lt;? extends java.awt.AWTKeyStroke&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -4888,6 +5074,11 @@
   <item name="java.awt.MenuComponent java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.MenuComponent java.security.AccessControlContext getAccessControlContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.awt.MenuComponent javax.accessibility.AccessibleContext getAccessibleContext()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -5264,6 +5455,21 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.awt.MenuItem.AccessibleAWTMenuItem java.lang.Number getCurrentAccessibleValue()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.MenuItem.AccessibleAWTMenuItem java.lang.Number getMaximumAccessibleValue()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.MenuItem.AccessibleAWTMenuItem java.lang.Number getMinimumAccessibleValue()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.awt.MenuItem.AccessibleAWTMenuItem java.lang.String getAccessibleActionDescription(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -5481,6 +5687,9 @@
   <item name="java.awt.PageAttributes PageAttributes(java.awt.PageAttributes) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.PageAttributes PageAttributes(java.awt.PageAttributes.ColorType, java.awt.PageAttributes.MediaType, java.awt.PageAttributes.OrientationRequestedType, java.awt.PageAttributes.OriginType, java.awt.PageAttributes.PrintQualityType, int[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.PageAttributes PageAttributes(java.awt.PageAttributes.ColorType, java.awt.PageAttributes.MediaType, java.awt.PageAttributes.OrientationRequestedType, java.awt.PageAttributes.OriginType, java.awt.PageAttributes.PrintQualityType, int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -5553,23 +5762,59 @@
   <item name="java.awt.PageAttributes void set(java.awt.PageAttributes) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.PageAttributes void setColor(java.awt.PageAttributes.ColorType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.PageAttributes void setColor(java.awt.PageAttributes.ColorType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.PageAttributes void setMedia(java.awt.PageAttributes.MediaType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.PageAttributes void setMedia(java.awt.PageAttributes.MediaType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.PageAttributes void setOrientationRequested(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.PageAttributes void setOrientationRequested(java.awt.PageAttributes.OrientationRequestedType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.PageAttributes void setOrientationRequested(java.awt.PageAttributes.OrientationRequestedType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.PageAttributes void setOrientationRequestedToDefault()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.PageAttributes void setOrigin(java.awt.PageAttributes.OriginType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.PageAttributes void setOrigin(java.awt.PageAttributes.OriginType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.PageAttributes void setPrintQuality(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.PageAttributes void setPrintQuality(java.awt.PageAttributes.PrintQualityType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.PageAttributes void setPrintQuality(java.awt.PageAttributes.PrintQualityType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.PageAttributes void setPrintQualityToDefault()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.PageAttributes void setPrinterResolution(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.PageAttributes void setPrinterResolution(int[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.PageAttributes void setPrinterResolution(int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.PageAttributes void setPrinterResolutionToDefault()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.Panel java.lang.String constructComponentName()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -5648,6 +5893,9 @@
     </annotation>
   </item>
   <item name="java.awt.Polygon Polygon()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.Polygon Polygon(int[], int[], int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.Polygon Polygon(int[], int[], int) 0">
@@ -6123,14 +6371,37 @@
   <item name="java.awt.Robot java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.Robot void checkButtonsArgument(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.Robot void checkDelayArgument(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.awt.Robot void checkIsScreenDevice(java.awt.GraphicsDevice) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.Robot void checkKeycodeArgument(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.Robot void checkValidRect(java.awt.Rectangle)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.awt.Robot void checkValidRect(java.awt.Rectangle) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.Robot void init(java.awt.GraphicsDevice) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.Robot void setAutoDelay(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.Robot void setAutoWaitForIdle(boolean)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -6181,6 +6452,11 @@
   </item>
   <item name="java.awt.ScrollPane void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.ScrollPane void setLayout(java.awt.LayoutManager)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.awt.ScrollPane void setLayout(java.awt.LayoutManager) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -6265,6 +6541,21 @@
   </item>
   <item name="java.awt.ScrollPaneAdjustable void setBlockIncrement(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.ScrollPaneAdjustable void setMaximum(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.ScrollPaneAdjustable void setMinimum(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.ScrollPaneAdjustable void setVisibleAmount(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.awt.Scrollbar boolean eventEnabled(java.awt.AWTEvent) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -6774,7 +7065,15 @@
   <item name="java.awt.Toolkit java.awt.peer.LightweightPeer createComponent(java.awt.Component) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.awt.Toolkit java.awt.peer.MouseInfoPeer getMouseInfoPeer()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.awt.Toolkit java.beans.PropertyChangeSupport createPropertyChangeSupport(java.awt.Toolkit)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.Toolkit java.beans.PropertyChangeSupport createPropertyChangeSupport(java.awt.Toolkit) 0">
@@ -6806,6 +7105,9 @@
   </item>
   <item name="java.awt.Toolkit void setPlatformResources(java.util.ResourceBundle) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.awt.Toolkit.DesktopPropertyChangeSupport DesktopPropertyChangeSupport(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.Toolkit.DesktopPropertyChangeSupport DesktopPropertyChangeSupport(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -6882,6 +7184,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.awt.TrayIcon java.security.AccessControlContext getAccessControlContext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.awt.TrayIcon void addActionListener(java.awt.event.ActionListener)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -6924,8 +7231,14 @@
   <item name="java.awt.TrayIcon.MessageType MessageType(java.lang.String, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.awt.WaitDispatchSupport WaitDispatchSupport(java.awt.EventDispatchThread)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.WaitDispatchSupport WaitDispatchSupport(java.awt.EventDispatchThread) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.WaitDispatchSupport WaitDispatchSupport(java.awt.EventDispatchThread, java.awt.Conditional)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.WaitDispatchSupport WaitDispatchSupport(java.awt.EventDispatchThread, java.awt.Conditional) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

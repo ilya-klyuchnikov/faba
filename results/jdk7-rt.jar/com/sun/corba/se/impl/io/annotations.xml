@@ -54,6 +54,11 @@
   <item name="com.sun.corba.se.impl.io.IIOPInputStream int decreaseRecursionDepth()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.corba.se.impl.io.IIOPInputStream java.lang.Class resolveClass(com.sun.corba.se.impl.io.ObjectStreamClass)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.io.IIOPInputStream java.lang.Class resolveClass(com.sun.corba.se.impl.io.ObjectStreamClass) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -84,6 +89,11 @@
   <item name="com.sun.corba.se.impl.io.IIOPInputStream java.lang.Object inputObjectUsingFVD(java.lang.Class, java.lang.String, com.sun.org.omg.SendingContext.CodeBase, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.io.IIOPInputStream java.lang.Object resolveObject(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.io.IIOPInputStream java.lang.Object resolveObject(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -101,6 +111,11 @@
   </item>
   <item name="com.sun.corba.se.impl.io.IIOPInputStream java.lang.String internalReadUTF(org.omg.CORBA.portable.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.io.IIOPInputStream java.lang.String readLine()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.io.IIOPInputStream java.util.Vector getOrderedDescriptions(java.lang.String, com.sun.org.omg.SendingContext.CodeBase)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -153,6 +168,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.io.IIOPInputStream void readStreamHeader()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.io.IIOPInputStream void registerValidation(java.io.ObjectInputValidation, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -236,7 +256,8 @@
   </item>
   <item name="com.sun.corba.se.impl.io.IIOPOutputStream boolean checkSpecialClasses(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+      <val name="value" val="&quot;!null-&gt;false;null-&gt;false&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.io.IIOPOutputStream boolean checkSpecialClasses(java.lang.Object) 0">
@@ -263,10 +284,20 @@
   <item name="com.sun.corba.se.impl.io.IIOPOutputStream int decreaseRecursionDepth()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.corba.se.impl.io.IIOPOutputStream java.lang.Object replaceObject(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.io.IIOPOutputStream java.lang.Object replaceObject(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.corba.se.impl.io.IIOPOutputStream org.omg.CORBA_2_3.portable.OutputStream getOrbStream()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.io.IIOPOutputStream void annotateClass(java.lang.Class&lt;?&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -375,6 +406,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.corba.se.impl.io.InputStreamHook.InReadObjectOptionalDataState void beginDefaultReadObject(com.sun.corba.se.impl.io.InputStreamHook)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.io.InputStreamHook.InReadObjectOptionalDataState void beginDefaultReadObject(com.sun.corba.se.impl.io.InputStreamHook) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -385,6 +421,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.io.InputStreamHook.InReadObjectPastDefaultsRemoteDidNotUseWOState InReadObjectPastDefaultsRemoteDidNotUseWOState()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.io.InputStreamHook.InReadObjectPastDefaultsRemoteDidNotUseWOState void beginDefaultReadObject(com.sun.corba.se.impl.io.InputStreamHook)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -809,6 +850,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.corba.se.impl.io.OptionalDataException OptionalDataException(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.io.OptionalDataException OptionalDataException(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.corba.se.impl.io.OutputStreamHook byte getStreamFormatVersion()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -835,6 +882,11 @@
   </item>
   <item name="com.sun.corba.se.impl.io.OutputStreamHook.InWriteObjectState void defaultWriteObject(com.sun.corba.se.impl.io.OutputStreamHook) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.io.OutputStreamHook.InWriteObjectState void enterWriteObject(com.sun.corba.se.impl.io.OutputStreamHook)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.io.OutputStreamHook.InWriteObjectState void enterWriteObject(com.sun.corba.se.impl.io.OutputStreamHook) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -887,6 +939,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.corba.se.impl.io.OutputStreamHook.WroteCustomDataState void defaultWriteObject(com.sun.corba.se.impl.io.OutputStreamHook)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.io.OutputStreamHook.WroteCustomDataState void defaultWriteObject(com.sun.corba.se.impl.io.OutputStreamHook) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -906,6 +963,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.corba.se.impl.io.OutputStreamHook.WroteDefaultDataState void defaultWriteObject(com.sun.corba.se.impl.io.OutputStreamHook)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.io.OutputStreamHook.WroteDefaultDataState void defaultWriteObject(com.sun.corba.se.impl.io.OutputStreamHook) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -914,6 +976,12 @@
   </item>
   <item name="com.sun.corba.se.impl.io.OutputStreamHook.WroteDefaultDataState void writeData(com.sun.corba.se.impl.io.OutputStreamHook) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.io.TypeMismatchException TypeMismatchException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.io.TypeMismatchException TypeMismatchException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.corba.se.impl.io.ValueHandlerImpl T createCustom(java.lang.Class&lt;T&gt;, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>

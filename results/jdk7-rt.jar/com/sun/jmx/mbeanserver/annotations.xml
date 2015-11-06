@@ -235,6 +235,11 @@
   <item name="com.sun.jmx.mbeanserver.DefaultMXBeanMappingFactory.CompositeBuilderCheckGetters CompositeBuilderCheckGetters(java.lang.Class&lt;?&gt;, java.lang.String[], com.sun.jmx.mbeanserver.MXBeanMapping[])">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.jmx.mbeanserver.DefaultMXBeanMappingFactory.CompositeBuilderCheckGetters java.lang.Object fromCompositeData(javax.management.openmbean.CompositeData, java.lang.String[], com.sun.jmx.mbeanserver.MXBeanMapping[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jmx.mbeanserver.DefaultMXBeanMappingFactory.CompositeBuilderCheckGetters java.lang.Object fromCompositeData(javax.management.openmbean.CompositeData, java.lang.String[], com.sun.jmx.mbeanserver.MXBeanMapping[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -594,6 +599,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.jmx.mbeanserver.JmxMBeanServer com.sun.jmx.mbeanserver.MBeanInstantiator getMBeanInstantiator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jmx.mbeanserver.JmxMBeanServer java.io.ObjectInputStream deserialize(java.lang.String, byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -605,6 +615,11 @@
   <item name="com.sun.jmx.mbeanserver.JmxMBeanServer javax.management.AttributeList cloneAttributeList(javax.management.AttributeList)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jmx.mbeanserver.JmxMBeanServer javax.management.MBeanServer getMBeanServerInterceptor()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.jmx.mbeanserver.JmxMBeanServer javax.management.MBeanServer newMBeanServer(java.lang.String, javax.management.MBeanServer, javax.management.MBeanServerDelegate, boolean)">
@@ -619,6 +634,11 @@
   <item name="com.sun.jmx.mbeanserver.JmxMBeanServer javax.management.MBeanServer newMBeanServer(java.lang.String, javax.management.MBeanServer, javax.management.MBeanServerDelegate, boolean) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jmx.mbeanserver.JmxMBeanServer javax.management.MBeanServerDelegate getMBeanServerDelegate()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jmx.mbeanserver.JmxMBeanServer javax.management.MBeanServerDelegate newMBeanServerDelegate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -632,6 +652,9 @@
   </item>
   <item name="com.sun.jmx.mbeanserver.JmxMBeanServer void checkMBeanPermission(java.lang.String, java.lang.String, javax.management.ObjectName, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.jmx.mbeanserver.JmxMBeanServer void setMBeanServerInterceptor(javax.management.MBeanServer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jmx.mbeanserver.JmxMBeanServer void setMBeanServerInterceptor(javax.management.MBeanServer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -911,6 +934,11 @@
   </item>
   <item name="com.sun.jmx.mbeanserver.MBeanServerDelegateImpl void postRegister(java.lang.Boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.jmx.mbeanserver.MBeanServerDelegateImpl void preDeregister()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.jmx.mbeanserver.MBeanServerDelegateImpl void setAttribute(javax.management.Attribute) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1255,6 +1283,11 @@
   <item name="com.sun.jmx.mbeanserver.Repository com.sun.jmx.mbeanserver.NamedObject retrieveNamedObject(javax.management.ObjectName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jmx.mbeanserver.Repository java.lang.Integer getCount()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jmx.mbeanserver.Repository java.lang.String getDefaultDomain()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1488,6 +1521,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.mbeanserver.Util java.util.Map&lt;K,V&gt; newSynchronizedIdentityHashMap()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.mbeanserver.Util java.util.Map&lt;K,V&gt; newSynchronizedMap()">

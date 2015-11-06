@@ -164,6 +164,16 @@
   <item name="com.sun.xml.internal.messaging.saaj.soap.MessageFactoryImpl java.lang.String getContentType(javax.xml.soap.MimeHeaders) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.messaging.saaj.soap.MessageFactoryImpl javax.xml.soap.SOAPMessage createMessage()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.soap.MessageFactoryImpl javax.xml.soap.SOAPMessage createMessage(boolean, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.MessageFactoryImpl javax.xml.soap.SOAPMessage createMessage(javax.xml.soap.MimeHeaders, java.io.InputStream)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -461,6 +471,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPFactoryImpl javax.xml.soap.Detail createDetail()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPFactoryImpl javax.xml.soap.Name createName(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -506,6 +521,16 @@
   <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPFactoryImpl javax.xml.soap.SOAPElement createElement(org.w3c.dom.Element) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPFactoryImpl javax.xml.soap.SOAPFault createFault()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPFactoryImpl javax.xml.soap.SOAPFault createFault(java.lang.String, javax.xml.namespace.QName)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPFactoryImpl javax.xml.soap.SOAPFault createFault(java.lang.String, javax.xml.namespace.QName) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -516,6 +541,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPIOException java.lang.Throwable fillInStackTrace()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPPartImpl com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeBodyPart getMimePart()">
@@ -579,6 +605,12 @@
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPPartImpl void setValue(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPVersionMismatchException SOAPVersionMismatchException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPVersionMismatchException SOAPVersionMismatchException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.soap.SOAPVersionMismatchException SOAPVersionMismatchException(java.lang.Throwable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

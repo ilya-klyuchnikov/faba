@@ -137,6 +137,9 @@
   <item name="com.sun.xml.internal.ws.encoding.ImageDataContentHandler void writeTo(java.lang.Object, java.lang.String, java.io.OutputStream) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.encoding.MIMEPartStreamingDataHandler.MyIOException MyIOException(java.lang.Exception)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.encoding.MIMEPartStreamingDataHandler.MyIOException java.lang.Throwable getCause()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -183,6 +186,11 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.MimeCodec void decode(java.io.InputStream, java.lang.String, com.sun.xml.internal.ws.api.message.Packet) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.MimeCodec void decode(java.nio.channels.ReadableByteChannel, java.lang.String, com.sun.xml.internal.ws.api.message.Packet)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.MimeCodec void decode(java.nio.channels.ReadableByteChannel, java.lang.String, com.sun.xml.internal.ws.api.message.Packet) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -235,6 +243,11 @@
   <item name="com.sun.xml.internal.ws.encoding.MtomCodec com.sun.xml.internal.ws.api.pipe.ContentType encode(com.sun.xml.internal.ws.api.message.Packet, java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.encoding.MtomCodec com.sun.xml.internal.ws.api.pipe.ContentType encode(com.sun.xml.internal.ws.api.message.Packet, java.nio.channels.WritableByteChannel)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.encoding.MtomCodec com.sun.xml.internal.ws.api.pipe.ContentType encode(com.sun.xml.internal.ws.api.message.Packet, java.nio.channels.WritableByteChannel) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -286,6 +299,11 @@
   <item name="com.sun.xml.internal.ws.encoding.MtomCodec.MtomStreamWriterImpl com.sun.xml.internal.org.jvnet.staxex.NamespaceContextEx getNamespaceContext()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.encoding.MtomCodec.MtomStreamWriterImpl java.io.OutputStream writeBinary(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.encoding.MtomCodec.MtomStreamWriterImpl java.io.OutputStream writeBinary(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -307,6 +325,11 @@
   <item name="com.sun.xml.internal.ws.encoding.MtomCodec.MtomStreamWriterImpl.MtomNamespaceContextEx MtomNamespaceContextEx(com.sun.xml.internal.ws.encoding.MtomCodec.MtomStreamWriterImpl, javax.xml.namespace.NamespaceContext)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.xml.internal.ws.encoding.MtomCodec.MtomStreamWriterImpl.MtomNamespaceContextEx java.util.Iterator&lt;com.sun.xml.internal.org.jvnet.staxex.NamespaceContextEx.Binding&gt; iterator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.encoding.MtomCodec.MtomXMLStreamReaderEx MtomXMLStreamReaderEx(com.sun.xml.internal.ws.encoding.MimeMultipartParser, javax.xml.stream.XMLStreamReader)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -321,8 +344,18 @@
       <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
     </annotation>
   </item>
+  <item name="com.sun.xml.internal.ws.encoding.MtomCodec.MtomXMLStreamReaderEx java.lang.String getElementTextTrim()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.encoding.MtomCodec.MtomXMLStreamReaderEx.MtomNamespaceContextEx MtomNamespaceContextEx(javax.xml.namespace.NamespaceContext)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.MtomCodec.MtomXMLStreamReaderEx.MtomNamespaceContextEx java.util.Iterator&lt;com.sun.xml.internal.org.jvnet.staxex.NamespaceContextEx.Binding&gt; iterator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.ParameterList ParameterList(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -542,6 +575,11 @@
   <item name="com.sun.xml.internal.ws.encoding.StreamSOAPCodec com.sun.xml.internal.ws.api.pipe.ContentType encode(com.sun.xml.internal.ws.api.message.Packet, java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.encoding.StreamSOAPCodec com.sun.xml.internal.ws.api.pipe.ContentType encode(com.sun.xml.internal.ws.api.message.Packet, java.nio.channels.WritableByteChannel)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.encoding.StreamSOAPCodec com.sun.xml.internal.ws.api.pipe.ContentType encode(com.sun.xml.internal.ws.api.message.Packet, java.nio.channels.WritableByteChannel) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -566,6 +604,11 @@
   <item name="com.sun.xml.internal.ws.encoding.StreamSOAPCodec void decode(java.io.InputStream, java.lang.String, com.sun.xml.internal.ws.api.message.Packet, com.sun.xml.internal.ws.api.message.AttachmentSet) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.encoding.StreamSOAPCodec void decode(java.nio.channels.ReadableByteChannel, java.lang.String, com.sun.xml.internal.ws.api.message.Packet)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.encoding.StreamSOAPCodec void decode(java.nio.channels.ReadableByteChannel, java.lang.String, com.sun.xml.internal.ws.api.message.Packet) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -574,6 +617,11 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.StreamSOAPCodec void decode(java.nio.channels.ReadableByteChannel, java.lang.String, com.sun.xml.internal.ws.api.message.Packet) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.StreamSOAPCodec void decode(java.nio.channels.ReadableByteChannel, java.lang.String, com.sun.xml.internal.ws.api.message.Packet, com.sun.xml.internal.ws.api.message.AttachmentSet)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.StreamSOAPCodec void decode(java.nio.channels.ReadableByteChannel, java.lang.String, com.sun.xml.internal.ws.api.message.Packet, com.sun.xml.internal.ws.api.message.AttachmentSet) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -629,6 +677,11 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.SwACodec SwACodec(com.sun.xml.internal.ws.encoding.SwACodec) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.SwACodec com.sun.xml.internal.ws.api.pipe.ContentType encode(com.sun.xml.internal.ws.api.message.Packet, java.nio.channels.WritableByteChannel)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.SwACodec com.sun.xml.internal.ws.api.pipe.ContentType encode(com.sun.xml.internal.ws.api.message.Packet, java.nio.channels.WritableByteChannel) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -702,6 +755,11 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.XMLHTTPBindingCodec com.sun.xml.internal.ws.api.pipe.ContentType encode(com.sun.xml.internal.ws.api.message.Packet, java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.XMLHTTPBindingCodec com.sun.xml.internal.ws.api.pipe.ContentType encode(com.sun.xml.internal.ws.api.message.Packet, java.nio.channels.WritableByteChannel)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.XMLHTTPBindingCodec com.sun.xml.internal.ws.api.pipe.ContentType encode(com.sun.xml.internal.ws.api.message.Packet, java.nio.channels.WritableByteChannel) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

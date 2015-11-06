@@ -170,6 +170,9 @@
   <item name="com.sun.xml.internal.ws.transport.http.HttpAdapter.DummyList com.sun.xml.internal.ws.transport.http.HttpAdapter createHttpAdapter(java.lang.String, java.lang.String, com.sun.xml.internal.ws.api.server.WSEndpoint&lt;?&gt;) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.transport.http.HttpAdapter.Http10OutputStream Http10OutputStream(com.sun.xml.internal.ws.transport.http.WSHTTPConnection)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.transport.http.HttpAdapter.HttpToolkit HttpToolkit(com.sun.xml.internal.ws.transport.http.HttpAdapter) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -219,6 +222,11 @@
     </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.transport.http.WSHTTPConnection boolean isClosed()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.transport.http.WSHTTPConnection java.lang.String getBaseAddress()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>

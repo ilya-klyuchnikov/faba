@@ -51,6 +51,12 @@
   <item name="javax.imageio.metadata.IIOAttr void setValue(java.lang.String)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="javax.imageio.metadata.IIODOMException IIODOMException(short, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.imageio.metadata.IIOInvalidTreeException IIOInvalidTreeException(java.lang.String, org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.imageio.metadata.IIOInvalidTreeException org.w3c.dom.Node getOffendingNode()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -203,6 +209,9 @@
   <item name="javax.imageio.metadata.IIOMetadataFormatImpl void addObjectValue(java.lang.String, java.lang.Class&lt;T&gt;, boolean, T, java.util.List&lt;? extends T&gt;) 4">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.imageio.metadata.IIOMetadataFormatImpl void setResourceBaseName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.imageio.metadata.IIOMetadataFormatImpl void setResourceBaseName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -226,11 +235,26 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="javax.imageio.metadata.IIOMetadataNode boolean isDefaultNamespace(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.metadata.IIOMetadataNode boolean isDefaultNamespace(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.imageio.metadata.IIOMetadataNode boolean isEqualNode(org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.metadata.IIOMetadataNode boolean isEqualNode(org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.metadata.IIOMetadataNode boolean isSameNode(org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.metadata.IIOMetadataNode boolean isSameNode(org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -252,16 +276,31 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="javax.imageio.metadata.IIOMetadataNode java.lang.Object getFeature(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.metadata.IIOMetadataNode java.lang.Object getFeature(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.imageio.metadata.IIOMetadataNode java.lang.Object getFeature(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.imageio.metadata.IIOMetadataNode java.lang.Object getUserData(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.metadata.IIOMetadataNode java.lang.Object getUserData(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.imageio.metadata.IIOMetadataNode java.lang.Object getUserObject()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.metadata.IIOMetadataNode java.lang.Object setUserData(java.lang.String, java.lang.Object, org.w3c.dom.UserDataHandler)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -277,6 +316,11 @@
   </item>
   <item name="javax.imageio.metadata.IIOMetadataNode java.lang.String getAttributeNS(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.metadata.IIOMetadataNode java.lang.String getBaseURI()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.metadata.IIOMetadataNode java.lang.String getLocalName()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -310,8 +354,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="javax.imageio.metadata.IIOMetadataNode java.lang.String getTextContent()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.metadata.IIOMetadataNode java.lang.String lookupNamespaceURI(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.metadata.IIOMetadataNode java.lang.String lookupNamespaceURI(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.metadata.IIOMetadataNode java.lang.String lookupPrefix(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.metadata.IIOMetadataNode java.lang.String lookupPrefix(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -421,10 +480,25 @@
   <item name="javax.imageio.metadata.IIOMetadataNode org.w3c.dom.NodeList getElementsByTagNameNS(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.imageio.metadata.IIOMetadataNode org.w3c.dom.TypeInfo getSchemaTypeInfo()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.metadata.IIOMetadataNode short compareDocumentPosition(org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.metadata.IIOMetadataNode short compareDocumentPosition(org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.imageio.metadata.IIOMetadataNode short getNodeType()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.metadata.IIOMetadataNode void checkNode(org.w3c.dom.Node)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -446,14 +520,29 @@
   <item name="javax.imageio.metadata.IIOMetadataNode void setAttributeNS(java.lang.String, java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.imageio.metadata.IIOMetadataNode void setIdAttribute(java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.metadata.IIOMetadataNode void setIdAttribute(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.metadata.IIOMetadataNode void setIdAttributeNS(java.lang.String, java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.metadata.IIOMetadataNode void setIdAttributeNS(java.lang.String, java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.imageio.metadata.IIOMetadataNode void setIdAttributeNS(java.lang.String, java.lang.String, boolean) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.metadata.IIOMetadataNode void setIdAttributeNode(org.w3c.dom.Attr, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.metadata.IIOMetadataNode void setIdAttributeNode(org.w3c.dom.Attr, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -468,6 +557,11 @@
   </item>
   <item name="javax.imageio.metadata.IIOMetadataNode void setPrefix(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.metadata.IIOMetadataNode void setTextContent(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.metadata.IIOMetadataNode void setTextContent(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -490,11 +584,21 @@
   <item name="javax.imageio.metadata.IIONamedNodeMap org.w3c.dom.Node getNamedItemNS(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.imageio.metadata.IIONamedNodeMap org.w3c.dom.Node removeNamedItem(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.metadata.IIONamedNodeMap org.w3c.dom.Node removeNamedItem(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="javax.imageio.metadata.IIONamedNodeMap org.w3c.dom.Node removeNamedItemNS(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.metadata.IIONamedNodeMap org.w3c.dom.Node setNamedItem(org.w3c.dom.Node)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.metadata.IIONamedNodeMap org.w3c.dom.Node setNamedItem(org.w3c.dom.Node) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

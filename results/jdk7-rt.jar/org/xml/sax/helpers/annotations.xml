@@ -569,6 +569,9 @@
   <item name="org.xml.sax.helpers.XMLFilterImpl void setParent(org.xml.sax.XMLReader)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="org.xml.sax.helpers.XMLReaderAdapter XMLReaderAdapter(org.xml.sax.XMLReader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="org.xml.sax.helpers.XMLReaderAdapter XMLReaderAdapter(org.xml.sax.XMLReader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -589,8 +592,16 @@
   <item name="org.xml.sax.helpers.XMLReaderAdapter void setDocumentHandler(org.xml.sax.DocumentHandler)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="org.xml.sax.helpers.XMLReaderAdapter void setLocale(java.util.Locale)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="org.xml.sax.helpers.XMLReaderAdapter void setLocale(java.util.Locale) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="org.xml.sax.helpers.XMLReaderAdapter void setup(org.xml.sax.XMLReader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="org.xml.sax.helpers.XMLReaderAdapter void setup(org.xml.sax.XMLReader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

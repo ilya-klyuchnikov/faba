@@ -37,6 +37,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.fsm.StateEngineImpl com.sun.corba.se.spi.orbutil.fsm.FSM makeFSM(com.sun.corba.se.spi.orbutil.fsm.State)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.corba.se.impl.orbutil.fsm.StateEngineImpl com.sun.corba.se.spi.orbutil.fsm.StateEngine add(com.sun.corba.se.spi.orbutil.fsm.State, com.sun.corba.se.spi.orbutil.fsm.Input, com.sun.corba.se.spi.orbutil.fsm.Action, com.sun.corba.se.spi.orbutil.fsm.State)">
@@ -63,10 +66,26 @@
   <item name="com.sun.corba.se.impl.orbutil.fsm.StateEngineImpl void doIt(com.sun.corba.se.spi.orbutil.fsm.FSM, com.sun.corba.se.spi.orbutil.fsm.Input, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.orbutil.fsm.StateEngineImpl void done()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.corba.se.impl.orbutil.fsm.StateEngineImpl void innerDoIt(com.sun.corba.se.spi.orbutil.fsm.FSM, com.sun.corba.se.spi.orbutil.fsm.Input, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.orbutil.fsm.StateEngineImpl void mustBeInitializing()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.orbutil.fsm.StateEngineImpl void mustNotBeInitializing()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.orbutil.fsm.StateEngineImpl void performStateTransition(com.sun.corba.se.spi.orbutil.fsm.FSM, com.sun.corba.se.spi.orbutil.fsm.Input, com.sun.corba.se.spi.orbutil.fsm.StateImpl, com.sun.corba.se.spi.orbutil.fsm.Action, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.orbutil.fsm.StateEngineImpl void setDefaultAction(com.sun.corba.se.spi.orbutil.fsm.Action)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

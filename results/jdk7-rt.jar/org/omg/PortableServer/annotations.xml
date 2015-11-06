@@ -21,6 +21,11 @@
   <item name="org.omg.PortableServer.CurrentHelper org.omg.PortableServer.Current narrow(org.omg.CORBA.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="org.omg.PortableServer.CurrentHelper org.omg.PortableServer.Current read(org.omg.CORBA.portable.InputStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="org.omg.PortableServer.CurrentHelper org.omg.PortableServer.Current read(org.omg.CORBA.portable.InputStream) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -29,6 +34,11 @@
   </item>
   <item name="org.omg.PortableServer.CurrentHelper void insert(org.omg.CORBA.Any, org.omg.PortableServer.Current) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="org.omg.PortableServer.CurrentHelper void write(org.omg.CORBA.portable.OutputStream, org.omg.PortableServer.Current)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="org.omg.PortableServer.CurrentHelper void write(org.omg.CORBA.portable.OutputStream, org.omg.PortableServer.Current) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -39,8 +49,14 @@
   <item name="org.omg.PortableServer.DynamicImplementation DynamicImplementation()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="org.omg.PortableServer.ForwardRequest ForwardRequest()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="org.omg.PortableServer.ForwardRequest ForwardRequest(java.lang.String, org.omg.CORBA.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="org.omg.PortableServer.ForwardRequest ForwardRequest(org.omg.CORBA.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="org.omg.PortableServer.ForwardRequestHelper ForwardRequestHelper()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -81,7 +97,17 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="org.omg.PortableServer.IdAssignmentPolicyValue org.omg.PortableServer.IdAssignmentPolicyValue from_int(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="org.omg.PortableServer.IdUniquenessPolicyValue int value()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="org.omg.PortableServer.IdUniquenessPolicyValue org.omg.PortableServer.IdUniquenessPolicyValue from_int(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -91,7 +117,17 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="org.omg.PortableServer.ImplicitActivationPolicyValue org.omg.PortableServer.ImplicitActivationPolicyValue from_int(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="org.omg.PortableServer.LifespanPolicyValue int value()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="org.omg.PortableServer.LifespanPolicyValue org.omg.PortableServer.LifespanPolicyValue from_int(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -118,6 +154,11 @@
   <item name="org.omg.PortableServer.POAHelper org.omg.PortableServer.POA narrow(org.omg.CORBA.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="org.omg.PortableServer.POAHelper org.omg.PortableServer.POA read(org.omg.CORBA.portable.InputStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="org.omg.PortableServer.POAHelper org.omg.PortableServer.POA read(org.omg.CORBA.portable.InputStream) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -126,6 +167,11 @@
   </item>
   <item name="org.omg.PortableServer.POAHelper void insert(org.omg.CORBA.Any, org.omg.PortableServer.POA) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="org.omg.PortableServer.POAHelper void write(org.omg.CORBA.portable.OutputStream, org.omg.PortableServer.POA)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="org.omg.PortableServer.POAHelper void write(org.omg.CORBA.portable.OutputStream, org.omg.PortableServer.POA) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -138,11 +184,21 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="org.omg.PortableServer.RequestProcessingPolicyValue org.omg.PortableServer.RequestProcessingPolicyValue from_int(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="org.omg.PortableServer.Servant Servant()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="org.omg.PortableServer.Servant org.omg.CORBA.Object _this_object(org.omg.CORBA.ORB) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="org.omg.PortableServer.Servant org.omg.PortableServer.portable.Delegate _get_delegate()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="org.omg.PortableServer.Servant void _set_delegate(org.omg.PortableServer.portable.Delegate)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -169,6 +225,11 @@
   <item name="org.omg.PortableServer.ServantActivatorHelper org.omg.PortableServer.ServantActivator narrow(org.omg.CORBA.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="org.omg.PortableServer.ServantActivatorHelper org.omg.PortableServer.ServantActivator read(org.omg.CORBA.portable.InputStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="org.omg.PortableServer.ServantActivatorHelper org.omg.PortableServer.ServantActivator read(org.omg.CORBA.portable.InputStream) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -187,6 +248,11 @@
   <item name="org.omg.PortableServer.ServantActivatorHelper void insert(org.omg.CORBA.Any, org.omg.PortableServer.ServantActivator) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="org.omg.PortableServer.ServantActivatorHelper void write(org.omg.CORBA.portable.OutputStream, org.omg.PortableServer.ServantActivator)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="org.omg.PortableServer.ServantActivatorHelper void write(org.omg.CORBA.portable.OutputStream, org.omg.PortableServer.ServantActivator) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -201,6 +267,11 @@
   </item>
   <item name="org.omg.PortableServer.ServantActivatorPOA java.lang.String[] _all_interfaces(org.omg.PortableServer.POA, byte[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="org.omg.PortableServer.ServantActivatorPOA org.omg.CORBA.portable.OutputStream _invoke(java.lang.String, org.omg.CORBA.portable.InputStream, org.omg.CORBA.portable.ResponseHandler)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="org.omg.PortableServer.ServantActivatorPOA org.omg.CORBA.portable.OutputStream _invoke(java.lang.String, org.omg.CORBA.portable.InputStream, org.omg.CORBA.portable.ResponseHandler) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -242,6 +313,11 @@
   <item name="org.omg.PortableServer.ServantLocatorHelper org.omg.PortableServer.ServantLocator narrow(org.omg.CORBA.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="org.omg.PortableServer.ServantLocatorHelper org.omg.PortableServer.ServantLocator read(org.omg.CORBA.portable.InputStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="org.omg.PortableServer.ServantLocatorHelper org.omg.PortableServer.ServantLocator read(org.omg.CORBA.portable.InputStream) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -260,6 +336,11 @@
   <item name="org.omg.PortableServer.ServantLocatorHelper void insert(org.omg.CORBA.Any, org.omg.PortableServer.ServantLocator) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="org.omg.PortableServer.ServantLocatorHelper void write(org.omg.CORBA.portable.OutputStream, org.omg.PortableServer.ServantLocator)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="org.omg.PortableServer.ServantLocatorHelper void write(org.omg.CORBA.portable.OutputStream, org.omg.PortableServer.ServantLocator) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -274,6 +355,11 @@
   </item>
   <item name="org.omg.PortableServer.ServantLocatorPOA java.lang.String[] _all_interfaces(org.omg.PortableServer.POA, byte[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="org.omg.PortableServer.ServantLocatorPOA org.omg.CORBA.portable.OutputStream _invoke(java.lang.String, org.omg.CORBA.portable.InputStream, org.omg.CORBA.portable.ResponseHandler)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="org.omg.PortableServer.ServantLocatorPOA org.omg.CORBA.portable.OutputStream _invoke(java.lang.String, org.omg.CORBA.portable.InputStream, org.omg.CORBA.portable.ResponseHandler) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -298,7 +384,17 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="org.omg.PortableServer.ServantRetentionPolicyValue org.omg.PortableServer.ServantRetentionPolicyValue from_int(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="org.omg.PortableServer.ThreadPolicyValue int value()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="org.omg.PortableServer.ThreadPolicyValue org.omg.PortableServer.ThreadPolicyValue from_int(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>

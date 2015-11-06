@@ -63,6 +63,9 @@
   <item name="com.sun.xml.internal.ws.server.sei.EndpointArgumentsBuilder.DocLit void readRequest(com.sun.xml.internal.ws.api.message.Message, java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.server.sei.EndpointArgumentsBuilder.DocLit.PartBuilder PartBuilder(com.sun.xml.internal.bind.api.RawAccessor, com.sun.xml.internal.ws.server.sei.EndpointValueSetter)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.server.sei.EndpointArgumentsBuilder.Header Header(com.sun.xml.internal.ws.api.SOAPVersion, com.sun.xml.internal.ws.model.ParameterImpl, com.sun.xml.internal.ws.server.sei.EndpointValueSetter) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -103,6 +106,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.server.sei.EndpointArgumentsBuilder.None void readRequest(com.sun.xml.internal.ws.api.message.Message, java.lang.Object[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.server.sei.EndpointArgumentsBuilder.NullSetter NullSetter(com.sun.xml.internal.ws.server.sei.EndpointValueSetter, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.server.sei.EndpointArgumentsBuilder.NullSetter void readRequest(com.sun.xml.internal.ws.api.message.Message, java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -171,6 +177,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.server.sei.EndpointResponseMessageBuilder.Empty com.sun.xml.internal.ws.api.message.Message createMessage(java.lang.Object[], java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.server.sei.EndpointResponseMessageBuilder.JAXB JAXB(com.sun.xml.internal.bind.api.Bridge, com.sun.xml.internal.ws.api.SOAPVersion)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.server.sei.EndpointResponseMessageBuilder.JAXB com.sun.xml.internal.ws.api.message.Message createMessage(java.lang.Object[], java.lang.Object)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -254,11 +263,21 @@
   <item name="com.sun.xml.internal.ws.server.sei.SEIInvokerTube SEIInvokerTube(com.sun.xml.internal.ws.model.AbstractSEIModelImpl, com.sun.xml.internal.ws.api.server.Invoker, com.sun.xml.internal.ws.api.WSBinding) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.server.sei.SEIInvokerTube com.sun.xml.internal.ws.api.pipe.NextAction processException(java.lang.Throwable)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.server.sei.SEIInvokerTube com.sun.xml.internal.ws.api.pipe.NextAction processException(java.lang.Throwable) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.xml.internal.ws.server.sei.SEIInvokerTube com.sun.xml.internal.ws.api.pipe.NextAction processRequest(com.sun.xml.internal.ws.api.message.Packet) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.server.sei.SEIInvokerTube com.sun.xml.internal.ws.api.pipe.NextAction processResponse(com.sun.xml.internal.ws.api.message.Packet)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.server.sei.SEIInvokerTube com.sun.xml.internal.ws.api.pipe.NextAction processResponse(com.sun.xml.internal.ws.api.message.Packet) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

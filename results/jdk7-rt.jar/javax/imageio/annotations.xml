@@ -1,6 +1,15 @@
 <root>
+  <item name="javax.imageio.IIOException IIOException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.imageio.IIOImage IIOImage(java.awt.image.Raster, java.util.List&lt;? extends java.awt.image.BufferedImage&gt;, javax.imageio.metadata.IIOMetadata)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.imageio.IIOImage IIOImage(java.awt.image.Raster, java.util.List&lt;? extends java.awt.image.BufferedImage&gt;, javax.imageio.metadata.IIOMetadata) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.imageio.IIOImage IIOImage(java.awt.image.RenderedImage, java.util.List&lt;? extends java.awt.image.BufferedImage&gt;, javax.imageio.metadata.IIOMetadata)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.imageio.IIOImage IIOImage(java.awt.image.RenderedImage, java.util.List&lt;? extends java.awt.image.BufferedImage&gt;, javax.imageio.metadata.IIOMetadata) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -33,8 +42,14 @@
   <item name="javax.imageio.IIOImage void setMetadata(javax.imageio.metadata.IIOMetadata)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="javax.imageio.IIOImage void setRaster(java.awt.image.Raster)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.imageio.IIOImage void setRaster(java.awt.image.Raster) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.imageio.IIOImage void setRenderedImage(java.awt.image.RenderedImage)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.imageio.IIOImage void setRenderedImage(java.awt.image.RenderedImage) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -105,6 +120,9 @@
   </item>
   <item name="javax.imageio.IIOParam void setSourceRegion(java.awt.Rectangle) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.IIOParam void setSourceSubsampling(int, int, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.imageio.ImageIO ImageIO()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -285,14 +303,29 @@
   <item name="javax.imageio.ImageIO.ImageReaderIterator javax.imageio.ImageReader next()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.imageio.ImageIO.ImageReaderIterator void remove()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.imageio.ImageIO.ImageTranscoderIterator ImageTranscoderIterator(java.util.Iterator)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.imageio.ImageIO.ImageTranscoderIterator void remove()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.ImageIO.ImageWriterIterator ImageWriterIterator(java.util.Iterator)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.imageio.ImageIO.ImageWriterIterator javax.imageio.ImageWriter next()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.ImageIO.ImageWriterIterator void remove()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.ImageIO.SpiInfo SpiInfo(java.lang.String, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -345,6 +378,9 @@
   </item>
   <item name="javax.imageio.ImageReadParam void setDestinationBands(int[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.imageio.ImageReadParam void setSourceProgressivePasses(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.imageio.ImageReadParam void setSourceRenderSize(java.awt.Dimension) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -417,6 +453,16 @@
   </item>
   <item name="javax.imageio.ImageReader java.awt.image.BufferedImage getDestination(javax.imageio.ImageReadParam, java.util.Iterator&lt;javax.imageio.ImageTypeSpecifier&gt;, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.imageio.ImageReader java.awt.image.BufferedImage readThumbnail(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="javax.imageio.ImageReader java.awt.image.Raster readRaster(int, javax.imageio.ImageReadParam)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.imageio.ImageReader java.awt.image.Raster readRaster(int, javax.imageio.ImageReadParam) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>

@@ -2,6 +2,9 @@
   <item name="com.sun.imageio.plugins.common.BitFile BitFile(javax.imageio.stream.ImageOutputStream, boolean)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.imageio.plugins.common.BogusColorSpace BogusColorSpace(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.imageio.plugins.common.BogusColorSpace float[] fromCIEXYZ(float[])">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null&quot;"/>
@@ -33,6 +36,11 @@
   </item>
   <item name="com.sun.imageio.plugins.common.BogusColorSpace float[] toRGB(float[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.imageio.plugins.common.BogusColorSpace int getType(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.imageio.plugins.common.I18N I18N()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -170,7 +178,8 @@
   </item>
   <item name="com.sun.imageio.plugins.common.PaletteBuilder boolean canCreatePalette(javax.imageio.ImageTypeSpecifier)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;true&quot;"/>
+      <val name="value" val="&quot;!null-&gt;true&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.imageio.plugins.common.PaletteBuilder boolean canCreatePalette(javax.imageio.ImageTypeSpecifier) 0">

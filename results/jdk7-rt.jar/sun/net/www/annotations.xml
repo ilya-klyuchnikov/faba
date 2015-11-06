@@ -1,4 +1,7 @@
 <root>
+  <item name="sun.net.www.ApplicationLaunchException ApplicationLaunchException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.www.HeaderParser HeaderParser()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -45,6 +48,11 @@
   </item>
   <item name="sun.net.www.HeaderParser.ParserIterator java.lang.Object next()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.www.HeaderParser.ParserIterator void remove()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.net.www.MessageHeader MessageHeader()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -119,6 +127,11 @@
   </item>
   <item name="sun.net.www.MessageHeader.HeaderIterator HeaderIterator(sun.net.www.MessageHeader, java.lang.String, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.net.www.MessageHeader.HeaderIterator void remove()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.net.www.MeteredStream boolean isMarked()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -484,14 +497,25 @@
   </item>
   <item name="sun.net.www.URLConnection java.lang.String getRequestProperty(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
+      <val name="value" val="&quot;!null-&gt;null;null-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.net.www.URLConnection java.lang.String getRequestProperty(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.net.www.URLConnection java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt; getRequestProperties()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.net.www.URLConnection sun.net.www.MessageHeader getProperties()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.net.www.URLConnection void addRequestProperty(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>

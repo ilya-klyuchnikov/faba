@@ -20,6 +20,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="javax.management.Attribute Attribute(java.lang.String, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.Attribute Attribute(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -43,6 +46,9 @@
   </item>
   <item name="javax.management.Attribute java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.AttributeChangeNotification AttributeChangeNotification(java.lang.Object, long, long, java.lang.String, java.lang.String, java.lang.String, java.lang.Object, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.AttributeChangeNotification AttributeChangeNotification(java.lang.Object, long, long, java.lang.String, java.lang.String, java.lang.String, java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -113,6 +119,12 @@
   <item name="javax.management.AttributeList void adding(java.util.Collection&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.AttributeNotFoundException AttributeNotFoundException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.AttributeNotFoundException AttributeNotFoundException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.AttributeValueExp AttributeValueExp()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -154,6 +166,9 @@
   <item name="javax.management.BadAttributeValueExpException void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.BadBinaryOpValueExpException BadBinaryOpValueExpException(javax.management.ValueExp)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.BadBinaryOpValueExpException java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -161,6 +176,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="javax.management.BadStringOperationException BadStringOperationException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.BadStringOperationException java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -204,7 +222,15 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="javax.management.BinaryOpValueExp int precedence(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.management.BinaryOpValueExp java.lang.String opString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.BinaryOpValueExp java.lang.String parens(javax.management.ValueExp, boolean)">
@@ -375,8 +401,18 @@
   <item name="javax.management.ImmutableDescriptor javax.management.ImmutableDescriptor union(javax.management.Descriptor...) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.ImmutableDescriptor void checkIllegalFieldName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.management.ImmutableDescriptor void checkIllegalFieldName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.management.ImmutableDescriptor void illegal(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.management.ImmutableDescriptor void removeField(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -386,6 +422,11 @@
   </item>
   <item name="javax.management.ImmutableDescriptor void setFields(java.lang.String[], java.lang.Object[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.ImmutableDescriptor void unsupported()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.management.InQueryExp InQueryExp()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -411,6 +452,21 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="javax.management.InstanceAlreadyExistsException InstanceAlreadyExistsException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.InstanceAlreadyExistsException InstanceAlreadyExistsException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.InstanceNotFoundException InstanceNotFoundException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.InstanceNotFoundException InstanceNotFoundException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.InstanceOfQueryExp InstanceOfQueryExp(javax.management.StringValueExp)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.InstanceOfQueryExp InstanceOfQueryExp(javax.management.StringValueExp) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -421,6 +477,36 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="javax.management.IntrospectionException IntrospectionException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.IntrospectionException IntrospectionException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.InvalidApplicationException InvalidApplicationException(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.InvalidAttributeValueException InvalidAttributeValueException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.InvalidAttributeValueException InvalidAttributeValueException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.JMException JMException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.JMException JMException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.JMRuntimeException JMRuntimeException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.JMRuntimeException JMRuntimeException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.JMRuntimeException JMRuntimeException(java.lang.String, java.lang.Throwable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.JMX JMX()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -477,6 +563,18 @@
   </item>
   <item name="javax.management.JMX void checkProxyInterface(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.ListenerNotFoundException ListenerNotFoundException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.ListenerNotFoundException ListenerNotFoundException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.MBeanAttributeInfo MBeanAttributeInfo(java.lang.String, java.lang.String, java.lang.String, boolean, boolean, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.MBeanAttributeInfo MBeanAttributeInfo(java.lang.String, java.lang.String, java.lang.String, boolean, boolean, boolean, javax.management.Descriptor)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.MBeanAttributeInfo boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -535,6 +633,12 @@
   </item>
   <item name="javax.management.MBeanConstructorInfo javax.management.MBeanParameterInfo[] constructorSignature(java.lang.reflect.Constructor&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.MBeanException MBeanException(java.lang.Exception)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.MBeanException MBeanException(java.lang.Exception, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.MBeanException java.lang.Exception getTargetException()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -782,6 +886,12 @@
   <item name="javax.management.MBeanPermission void setMember(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.management.MBeanRegistrationException MBeanRegistrationException(java.lang.Exception)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.MBeanRegistrationException MBeanRegistrationException(java.lang.Exception, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.MBeanServerBuilder MBeanServerBuilder()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -866,11 +976,17 @@
   <item name="javax.management.MBeanServerFactory javax.management.loading.ClassLoaderRepository getClassLoaderRepository(javax.management.MBeanServer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.MBeanServerInvocationHandler MBeanServerInvocationHandler(javax.management.MBeanServerConnection, javax.management.ObjectName)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.MBeanServerInvocationHandler MBeanServerInvocationHandler(javax.management.MBeanServerConnection, javax.management.ObjectName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.MBeanServerInvocationHandler MBeanServerInvocationHandler(javax.management.MBeanServerConnection, javax.management.ObjectName) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.MBeanServerInvocationHandler MBeanServerInvocationHandler(javax.management.MBeanServerConnection, javax.management.ObjectName, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.MBeanServerInvocationHandler MBeanServerInvocationHandler(javax.management.MBeanServerConnection, javax.management.ObjectName, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1024,6 +1140,12 @@
   <item name="javax.management.MBeanTrustPermission void validate(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.MalformedObjectNameException MalformedObjectNameException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.MalformedObjectNameException MalformedObjectNameException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.MatchQueryExp MatchQueryExp()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1051,6 +1173,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="javax.management.NotCompliantMBeanException NotCompliantMBeanException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.NotCompliantMBeanException NotCompliantMBeanException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.NotQueryExp NotQueryExp()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1073,8 +1201,14 @@
   <item name="javax.management.Notification Notification(java.lang.String, java.lang.Object, long, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.Notification Notification(java.lang.String, java.lang.Object, long, long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.Notification Notification(java.lang.String, java.lang.Object, long, long) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.Notification Notification(java.lang.String, java.lang.Object, long, long, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.Notification Notification(java.lang.String, java.lang.Object, long, long, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1425,6 +1559,12 @@
   <item name="javax.management.ObjectName.Property void setKeyIndex(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="javax.management.OperationsException OperationsException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.OperationsException OperationsException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.OrQueryExp OrQueryExp()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1549,6 +1689,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.Query javax.management.QueryExp isInstanceOf(javax.management.StringValueExp)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.Query javax.management.QueryExp isInstanceOf(javax.management.StringValueExp) 0">
@@ -1655,6 +1798,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="javax.management.ReflectionException ReflectionException(java.lang.Exception)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.ReflectionException ReflectionException(java.lang.Exception, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.ReflectionException java.lang.Exception getTargetException()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1664,6 +1813,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="javax.management.RuntimeErrorException RuntimeErrorException(java.lang.Error)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.RuntimeErrorException RuntimeErrorException(java.lang.Error, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.RuntimeErrorException java.lang.Error getTargetError()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1675,6 +1830,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="javax.management.RuntimeMBeanException RuntimeMBeanException(java.lang.RuntimeException)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.RuntimeMBeanException RuntimeMBeanException(java.lang.RuntimeException, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.RuntimeMBeanException java.lang.RuntimeException getTargetException()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1685,6 +1846,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="javax.management.RuntimeOperationsException RuntimeOperationsException(java.lang.RuntimeException)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.RuntimeOperationsException RuntimeOperationsException(java.lang.RuntimeException, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.RuntimeOperationsException java.lang.RuntimeException getTargetException()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1694,6 +1861,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="javax.management.ServiceNotFoundException ServiceNotFoundException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.ServiceNotFoundException ServiceNotFoundException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.StandardEmitterMBean StandardEmitterMBean(T, java.lang.Class&lt;T&gt;, boolean, javax.management.NotificationEmitter) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>

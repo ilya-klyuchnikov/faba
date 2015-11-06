@@ -26,6 +26,11 @@
   <item name="java.awt.geom.AffineTransform boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.awt.geom.AffineTransform double getDeterminant()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.awt.geom.AffineTransform double getScaleX()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -155,6 +160,9 @@
   <item name="java.awt.geom.AffineTransform void rotate90()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.awt.geom.AffineTransform void scale(double, double)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.geom.AffineTransform void setToIdentity()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -178,6 +186,14 @@
   </item>
   <item name="java.awt.geom.AffineTransform void setTransform(java.awt.geom.AffineTransform) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.geom.AffineTransform void stateError()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.geom.AffineTransform void translate(double, double)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.geom.AffineTransform void updateState()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -847,8 +863,26 @@
   <item name="java.awt.geom.FlatteningPathIterator void ensureHoldCapacity(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.awt.geom.GeneralPath GeneralPath()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.geom.GeneralPath GeneralPath(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.geom.GeneralPath GeneralPath(int, byte[], int, float[], int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.geom.GeneralPath GeneralPath(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.geom.GeneralPath GeneralPath(java.awt.Shape) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.geom.IllegalPathStateException IllegalPathStateException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.geom.IllegalPathStateException IllegalPathStateException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.geom.Line2D Line2D()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1056,10 +1090,16 @@
   <item name="java.awt.geom.LineIterator void next()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.awt.geom.NoninvertibleTransformException NoninvertibleTransformException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.geom.Path2D Path2D()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.awt.geom.Path2D Path2D(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.geom.Path2D boolean contains(java.awt.geom.PathIterator, double, double)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1132,8 +1172,20 @@
   <item name="java.awt.geom.Path2D void reset()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.awt.geom.Path2D void setWindingRule(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.geom.Path2D void writeObject(java.io.ObjectOutputStream, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.geom.Path2D.Double Double()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.geom.Path2D.Double Double(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.geom.Path2D.Double Double(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.geom.Path2D.Double Double(java.awt.Shape) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1179,6 +1231,9 @@
   <item name="java.awt.geom.Path2D.Double void append(java.awt.geom.PathIterator, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.geom.Path2D.Double void needRoom(boolean, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.geom.Path2D.Double void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1199,6 +1254,15 @@
   </item>
   <item name="java.awt.geom.Path2D.Double.TxIterator TxIterator(java.awt.geom.Path2D.Double, java.awt.geom.AffineTransform) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.geom.Path2D.Float Float()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.geom.Path2D.Float Float(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.awt.geom.Path2D.Float Float(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.geom.Path2D.Float Float(java.awt.Shape) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1243,6 +1307,9 @@
   </item>
   <item name="java.awt.geom.Path2D.Float void append(java.awt.geom.PathIterator, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.geom.Path2D.Float void needRoom(boolean, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.geom.Path2D.Float void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

@@ -30,6 +30,11 @@
   <item name="sun.security.smartcardio.CardImpl javax.smartcardio.CardChannel openLogicalChannel()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.smartcardio.CardImpl void checkState()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.security.smartcardio.CardImpl void handleError(sun.security.smartcardio.PCSCException)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -57,6 +62,11 @@
   <item name="sun.security.smartcardio.ChannelImpl byte[] doTransmit(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.smartcardio.ChannelImpl int getChannelNumber()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.security.smartcardio.ChannelImpl int getSW(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -80,6 +90,16 @@
   <item name="sun.security.smartcardio.ChannelImpl javax.smartcardio.ResponseAPDU transmit(javax.smartcardio.CommandAPDU) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.smartcardio.ChannelImpl void checkClosed()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.security.smartcardio.ChannelImpl void checkManageChannel(byte[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.security.smartcardio.ChannelImpl void checkManageChannel(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -96,6 +116,11 @@
   </item>
   <item name="sun.security.smartcardio.PCSC java.lang.String toString(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.smartcardio.PCSC void checkAvailable()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.security.smartcardio.PCSCException java.lang.String toErrorString(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>

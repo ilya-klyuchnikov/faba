@@ -13,6 +13,11 @@
   <item name="java.util.AbstractCollection T[] toArray(T[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.AbstractCollection boolean add(E)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.AbstractCollection boolean add(E) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -28,11 +33,26 @@
   <item name="java.util.AbstractCollection boolean remove(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.AbstractCollection int hugeCapacity(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.AbstractCollection java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.AbstractList AbstractList()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.AbstractList E remove(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.AbstractList E set(int, E)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.AbstractList E set(int, E) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -69,11 +89,21 @@
   <item name="java.util.AbstractList java.util.ListIterator&lt;E&gt; listIterator(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.AbstractList void add(int, E)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.AbstractList void add(int, E) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.AbstractList.Itr Itr(java.util.AbstractList)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.AbstractList.Itr void checkForComodification()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.AbstractList.ListItr ListItr(java.util.AbstractList, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -101,6 +131,11 @@
   </item>
   <item name="java.util.AbstractMap V get(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.AbstractMap V put(K, V)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.AbstractMap V put(K, V) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -184,6 +219,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.AbstractMap.SimpleImmutableEntry V setValue(V)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.AbstractMap.SimpleImmutableEntry V setValue(V) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -236,6 +276,16 @@
   </item>
   <item name="java.util.ArrayDeque ArrayDeque(java.util.Collection&lt;? extends E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.ArrayDeque E getFirst()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.ArrayDeque E getLast()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.ArrayDeque E peekFirst()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -334,6 +384,14 @@
   <item name="java.util.ArrayDeque void allocateElements(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.util.ArrayDeque void checkInvariants()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.ArrayDeque void doubleCapacity()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.ArrayDeque void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -343,12 +401,18 @@
   <item name="java.util.ArrayDeque.DeqIterator DeqIterator(java.util.ArrayDeque)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.util.ArrayDeque.DeqIterator E next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.ArrayDeque.DeqIterator boolean hasNext()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.util.ArrayDeque.DescendingIterator DescendingIterator(java.util.ArrayDeque)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.ArrayDeque.DescendingIterator E next()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.ArrayDeque.DescendingIterator boolean hasNext()">
@@ -389,6 +453,11 @@
   <item name="java.util.ArrayList boolean remove(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.ArrayList int hugeCapacity(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.ArrayList int indexOf(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -427,10 +496,18 @@
   <item name="java.util.ArrayList void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.ArrayList.Itr E next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.ArrayList.Itr Itr(java.util.ArrayList)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.ArrayList.Itr boolean hasNext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.ArrayList.Itr void checkForComodification()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -462,6 +539,11 @@
   <item name="java.util.ArrayList.SubList boolean addAll(int, java.util.Collection&lt;? extends E&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.ArrayList.SubList int size()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.ArrayList.SubList java.lang.String outOfBoundsMsg(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -470,6 +552,11 @@
   </item>
   <item name="java.util.ArrayList.SubList java.util.ListIterator&lt;E&gt; listIterator(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.ArrayList.SubList void checkForComodification()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.Arrays Arrays()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -905,6 +992,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.Arrays java.util.List&lt;T&gt; asList(T...)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Arrays java.util.List&lt;T&gt; asList(T...) 0">
@@ -1081,6 +1171,9 @@
   <item name="java.util.Arrays void swap(java.lang.Object[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.Arrays.ArrayList ArrayList(E[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Arrays.ArrayList ArrayList(E[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1108,12 +1201,16 @@
   <item name="java.util.BitSet BitSet()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.util.BitSet BitSet(long[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.BitSet BitSet(long[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.BitSet boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
+      <val name="value" val="&quot;null-&gt;false&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.util.BitSet boolean equals(java.lang.Object) 0">
@@ -1179,6 +1276,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.BitSet java.util.BitSet valueOf(long[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.BitSet java.util.BitSet valueOf(long[]) 0">
@@ -1193,6 +1293,11 @@
   <item name="java.util.BitSet void andNot(java.util.BitSet) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.BitSet void checkInvariants()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.BitSet void ensureCapacity(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -1206,6 +1311,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.BitSet void recalculateWordsInUse()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.BitSet void trimToSize()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.BitSet void writeObject(java.io.ObjectOutputStream) 0">
@@ -1229,6 +1337,11 @@
   </item>
   <item name="java.util.Calendar boolean before(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.Calendar boolean checkDisplayNameParams(int, int, int, int, java.util.Locale, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.Calendar boolean checkDisplayNameParams(int, int, int, int, java.util.Locale, int) 4">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1291,7 +1404,22 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.Calendar int getWeekYear()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.Calendar int getWeeksInWeekYear()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.Calendar int internalGet(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.Calendar int selectFields()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1377,6 +1505,11 @@
   </item>
   <item name="java.util.Calendar void setUnnormalized()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.Calendar void setWeekDate(int, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.Calendar void setZoneShared(boolean)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -1476,6 +1609,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.Collection&lt;E&gt; checkedCollection(java.util.Collection&lt;E&gt;, java.lang.Class&lt;E&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.Collection&lt;E&gt; checkedCollection(java.util.Collection&lt;E&gt;, java.lang.Class&lt;E&gt;) 0">
@@ -1485,6 +1621,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.Collection&lt;T&gt; synchronizedCollection(java.util.Collection&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.Collection&lt;T&gt; synchronizedCollection(java.util.Collection&lt;T&gt;) 0">
@@ -1497,12 +1636,20 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.Collection&lt;T&gt; unmodifiableCollection(java.util.Collection&lt;? extends T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.Collection&lt;T&gt; unmodifiableCollection(java.util.Collection&lt;? extends T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.Comparator&lt;T&gt; reverseOrder()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.Collections java.util.Comparator&lt;T&gt; reverseOrder(java.util.Comparator&lt;T&gt;)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1530,6 +1677,9 @@
     </annotation>
   </item>
   <item name="java.util.Collections java.util.List&lt;E&gt; checkedList(java.util.List&lt;E&gt;, java.lang.Class&lt;E&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.List&lt;E&gt; checkedList(java.util.List&lt;E&gt;, java.lang.Class&lt;E&gt;) 0">
@@ -1553,6 +1703,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.List&lt;T&gt; synchronizedList(java.util.List&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.List&lt;T&gt; synchronizedList(java.util.List&lt;T&gt;) 0">
@@ -1565,6 +1718,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.List&lt;T&gt; unmodifiableList(java.util.List&lt;? extends T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.List&lt;T&gt; unmodifiableList(java.util.List&lt;? extends T&gt;) 0">
@@ -1576,6 +1732,9 @@
     </annotation>
   </item>
   <item name="java.util.Collections java.util.Map&lt;K,V&gt; checkedMap(java.util.Map&lt;K,V&gt;, java.lang.Class&lt;K&gt;, java.lang.Class&lt;V&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.Map&lt;K,V&gt; checkedMap(java.util.Map&lt;K,V&gt;, java.lang.Class&lt;K&gt;, java.lang.Class&lt;V&gt;) 0">
@@ -1599,12 +1758,18 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.Map&lt;K,V&gt; synchronizedMap(java.util.Map&lt;K,V&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.Map&lt;K,V&gt; synchronizedMap(java.util.Map&lt;K,V&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.Map&lt;K,V&gt; unmodifiableMap(java.util.Map&lt;? extends K,? extends V&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.Map&lt;K,V&gt; unmodifiableMap(java.util.Map&lt;? extends K,? extends V&gt;) 0">
@@ -1617,6 +1782,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.Set&lt;E&gt; checkedSet(java.util.Set&lt;E&gt;, java.lang.Class&lt;E&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.Set&lt;E&gt; checkedSet(java.util.Set&lt;E&gt;, java.lang.Class&lt;E&gt;) 0">
@@ -1643,6 +1811,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.Set&lt;T&gt; synchronizedSet(java.util.Set&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.Set&lt;T&gt; synchronizedSet(java.util.Set&lt;T&gt;) 0">
@@ -1655,12 +1826,18 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.Set&lt;T&gt; unmodifiableSet(java.util.Set&lt;? extends T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.Set&lt;T&gt; unmodifiableSet(java.util.Set&lt;? extends T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.SortedMap&lt;K,V&gt; checkedSortedMap(java.util.SortedMap&lt;K,V&gt;, java.lang.Class&lt;K&gt;, java.lang.Class&lt;V&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.SortedMap&lt;K,V&gt; checkedSortedMap(java.util.SortedMap&lt;K,V&gt;, java.lang.Class&lt;K&gt;, java.lang.Class&lt;V&gt;) 0">
@@ -1673,18 +1850,27 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.SortedMap&lt;K,V&gt; synchronizedSortedMap(java.util.SortedMap&lt;K,V&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.SortedMap&lt;K,V&gt; synchronizedSortedMap(java.util.SortedMap&lt;K,V&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.SortedMap&lt;K,V&gt; unmodifiableSortedMap(java.util.SortedMap&lt;K,? extends V&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.SortedMap&lt;K,V&gt; unmodifiableSortedMap(java.util.SortedMap&lt;K,? extends V&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.SortedSet&lt;E&gt; checkedSortedSet(java.util.SortedSet&lt;E&gt;, java.lang.Class&lt;E&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.SortedSet&lt;E&gt; checkedSortedSet(java.util.SortedSet&lt;E&gt;, java.lang.Class&lt;E&gt;) 0">
@@ -1694,12 +1880,18 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.SortedSet&lt;T&gt; synchronizedSortedSet(java.util.SortedSet&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.SortedSet&lt;T&gt; synchronizedSortedSet(java.util.SortedSet&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.SortedSet&lt;T&gt; unmodifiableSortedSet(java.util.SortedSet&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections java.util.SortedSet&lt;T&gt; unmodifiableSortedSet(java.util.SortedSet&lt;T&gt;) 0">
@@ -1755,6 +1947,9 @@
       <val val="&quot;!null-&gt;true;null-&gt;true&quot;"/>
     </annotation>
   </item>
+  <item name="java.util.Collections.CheckedCollection CheckedCollection(java.util.Collection&lt;E&gt;, java.lang.Class&lt;E&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Collections.CheckedCollection CheckedCollection(java.util.Collection&lt;E&gt;, java.lang.Class&lt;E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1779,6 +1974,9 @@
   <item name="java.util.Collections.CheckedCollection void typeCheck(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.Collections.CheckedList CheckedList(java.util.List&lt;E&gt;, java.lang.Class&lt;E&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Collections.CheckedList CheckedList(java.util.List&lt;E&gt;, java.lang.Class&lt;E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1790,6 +1988,9 @@
   </item>
   <item name="java.util.Collections.CheckedList java.util.ListIterator&lt;E&gt; listIterator(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.Collections.CheckedMap CheckedMap(java.util.Map&lt;K,V&gt;, java.lang.Class&lt;K&gt;, java.lang.Class&lt;V&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.Collections.CheckedMap CheckedMap(java.util.Map&lt;K,V&gt;, java.lang.Class&lt;K&gt;, java.lang.Class&lt;V&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1824,8 +2025,18 @@
   <item name="java.util.Collections.CheckedMap.CheckedEntrySet T[] toArray(T[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.Collections.CheckedMap.CheckedEntrySet boolean add(java.util.Map.Entry&lt;K,V&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.Collections.CheckedMap.CheckedEntrySet boolean add(java.util.Map.Entry&lt;K,V&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.Collections.CheckedMap.CheckedEntrySet boolean addAll(java.util.Collection&lt;? extends java.util.Map.Entry&lt;K,V&gt;&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.Collections.CheckedMap.CheckedEntrySet boolean addAll(java.util.Collection&lt;? extends java.util.Map.Entry&lt;K,V&gt;&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1873,6 +2084,9 @@
   <item name="java.util.Collections.CheckedMap.CheckedEntrySet.CheckedEntry java.lang.String badValueMsg(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.Collections.CheckedRandomAccessList CheckedRandomAccessList(java.util.List&lt;E&gt;, java.lang.Class&lt;E&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Collections.CheckedRandomAccessList CheckedRandomAccessList(java.util.List&lt;E&gt;, java.lang.Class&lt;E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1882,11 +2096,17 @@
   <item name="java.util.Collections.CheckedRandomAccessList java.util.List&lt;E&gt; subList(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.Collections.CheckedSet CheckedSet(java.util.Set&lt;E&gt;, java.lang.Class&lt;E&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Collections.CheckedSet CheckedSet(java.util.Set&lt;E&gt;, java.lang.Class&lt;E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections.CheckedSet CheckedSet(java.util.Set&lt;E&gt;, java.lang.Class&lt;E&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.Collections.CheckedSortedMap CheckedSortedMap(java.util.SortedMap&lt;K,V&gt;, java.lang.Class&lt;K&gt;, java.lang.Class&lt;V&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.Collections.CheckedSortedMap CheckedSortedMap(java.util.SortedMap&lt;K,V&gt;, java.lang.Class&lt;K&gt;, java.lang.Class&lt;V&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1906,6 +2126,9 @@
   <item name="java.util.Collections.CheckedSortedMap java.util.SortedMap&lt;K,V&gt; tailMap(K)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.Collections.CheckedSortedSet CheckedSortedSet(java.util.SortedSet&lt;E&gt;, java.lang.Class&lt;E&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Collections.CheckedSortedSet CheckedSortedSet(java.util.SortedSet&lt;E&gt;, java.lang.Class&lt;E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1920,6 +2143,9 @@
   </item>
   <item name="java.util.Collections.CheckedSortedSet java.util.SortedSet&lt;E&gt; tailSet(E)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.Collections.CopiesList CopiesList(int, E)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.Collections.CopiesList T[] toArray(T[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1938,6 +2164,11 @@
   <item name="java.util.Collections.CopiesList java.util.List&lt;E&gt; subList(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.Collections.EmptyEnumeration E nextElement()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.Collections.EmptyEnumeration EmptyEnumeration()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1948,12 +2179,22 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.Collections.EmptyIterator E next()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.Collections.EmptyIterator EmptyIterator()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.util.Collections.EmptyIterator boolean hasNext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.Collections.EmptyIterator void remove()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -2025,6 +2266,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.Collections.EmptyListIterator E previous()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.Collections.EmptyListIterator EmptyListIterator()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -2045,8 +2291,18 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.Collections.EmptyListIterator void add(E)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.Collections.EmptyListIterator void add(E) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.Collections.EmptyListIterator void set(E)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.Collections.EmptyListIterator void set(E) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2189,6 +2445,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.Collections.ReverseComparator2 ReverseComparator2(java.util.Comparator&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Collections.ReverseComparator2 boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2266,6 +2525,9 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.Collections.SynchronizedCollection SynchronizedCollection(java.util.Collection&lt;E&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Collections.SynchronizedCollection SynchronizedCollection(java.util.Collection&lt;E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2275,6 +2537,9 @@
   <item name="java.util.Collections.SynchronizedCollection void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.Collections.SynchronizedList SynchronizedList(java.util.List&lt;E&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Collections.SynchronizedList SynchronizedList(java.util.List&lt;E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2282,10 +2547,16 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.Collections.SynchronizedList java.lang.Object readResolve()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections.SynchronizedList java.util.List&lt;E&gt; subList(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.Collections.SynchronizedMap SynchronizedMap(java.util.Map&lt;K,V&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.Collections.SynchronizedMap SynchronizedMap(java.util.Map&lt;K,V&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2296,6 +2567,9 @@
   <item name="java.util.Collections.SynchronizedMap void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.Collections.SynchronizedRandomAccessList SynchronizedRandomAccessList(java.util.List&lt;E&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Collections.SynchronizedRandomAccessList SynchronizedRandomAccessList(java.util.List&lt;E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2303,15 +2577,24 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.Collections.SynchronizedRandomAccessList java.lang.Object writeReplace()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections.SynchronizedRandomAccessList java.util.List&lt;E&gt; subList(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.Collections.SynchronizedSet SynchronizedSet(java.util.Set&lt;E&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Collections.SynchronizedSet SynchronizedSet(java.util.Set&lt;E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections.SynchronizedSet SynchronizedSet(java.util.Set&lt;E&gt;, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.Collections.SynchronizedSortedMap SynchronizedSortedMap(java.util.SortedMap&lt;K,V&gt;)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.Collections.SynchronizedSortedMap SynchronizedSortedMap(java.util.SortedMap&lt;K,V&gt;) 0">
@@ -2329,6 +2612,9 @@
   <item name="java.util.Collections.SynchronizedSortedMap java.util.SortedMap&lt;K,V&gt; tailMap(K)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.Collections.SynchronizedSortedSet SynchronizedSortedSet(java.util.SortedSet&lt;E&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Collections.SynchronizedSortedSet SynchronizedSortedSet(java.util.SortedSet&lt;E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2344,20 +2630,48 @@
   <item name="java.util.Collections.SynchronizedSortedSet java.util.SortedSet&lt;E&gt; tailSet(E)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.Collections.UnmodifiableCollection UnmodifiableCollection(java.util.Collection&lt;? extends E&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Collections.UnmodifiableCollection UnmodifiableCollection(java.util.Collection&lt;? extends E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.Collections.UnmodifiableCollection boolean add(E)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.Collections.UnmodifiableCollection boolean add(E) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.Collections.UnmodifiableCollection boolean addAll(java.util.Collection&lt;? extends E&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.Collections.UnmodifiableCollection boolean addAll(java.util.Collection&lt;? extends E&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.Collections.UnmodifiableCollection boolean remove(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.Collections.UnmodifiableCollection boolean remove(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.Collections.UnmodifiableCollection boolean removeAll(java.util.Collection&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.Collections.UnmodifiableCollection boolean removeAll(java.util.Collection&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.Collections.UnmodifiableCollection boolean retainAll(java.util.Collection&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.Collections.UnmodifiableCollection boolean retainAll(java.util.Collection&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2365,16 +2679,42 @@
   <item name="java.util.Collections.UnmodifiableCollection java.util.Iterator&lt;E&gt; iterator()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.Collections.UnmodifiableCollection void clear()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.Collections.UnmodifiableList E remove(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.Collections.UnmodifiableList E set(int, E)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.Collections.UnmodifiableList E set(int, E) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.Collections.UnmodifiableList UnmodifiableList(java.util.List&lt;? extends E&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Collections.UnmodifiableList UnmodifiableList(java.util.List&lt;? extends E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.Collections.UnmodifiableList boolean addAll(int, java.util.Collection&lt;? extends E&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.Collections.UnmodifiableList boolean addAll(int, java.util.Collection&lt;? extends E&gt;) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.Collections.UnmodifiableList java.lang.Object readResolve()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections.UnmodifiableList java.util.List&lt;E&gt; subList(int, int)">
@@ -2383,11 +2723,24 @@
   <item name="java.util.Collections.UnmodifiableList java.util.ListIterator&lt;E&gt; listIterator(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.Collections.UnmodifiableList void add(int, E)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.Collections.UnmodifiableList void add(int, E) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.Collections.UnmodifiableMap UnmodifiableMap(java.util.Map&lt;? extends K,? extends V&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Collections.UnmodifiableMap UnmodifiableMap(java.util.Map&lt;? extends K,? extends V&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.Collections.UnmodifiableMap V put(K, V)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.Collections.UnmodifiableMap V put(K, V) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2395,14 +2748,32 @@
   <item name="java.util.Collections.UnmodifiableMap V put(K, V) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.Collections.UnmodifiableMap V remove(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.Collections.UnmodifiableMap V remove(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.Collections.UnmodifiableMap void clear()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.Collections.UnmodifiableMap void putAll(java.util.Map&lt;? extends K,? extends V&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.Collections.UnmodifiableMap void putAll(java.util.Map&lt;? extends K,? extends V&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.Collections.UnmodifiableMap.UnmodifiableEntrySet T[] toArray(T[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.Collections.UnmodifiableMap.UnmodifiableEntrySet UnmodifiableEntrySet(java.util.Set&lt;? extends java.util.Map.Entry&lt;? extends K,? extends V&gt;&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.Collections.UnmodifiableMap.UnmodifiableEntrySet UnmodifiableEntrySet(java.util.Set&lt;? extends java.util.Map.Entry&lt;? extends K,? extends V&gt;&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2427,23 +2798,40 @@
   <item name="java.util.Collections.UnmodifiableMap.UnmodifiableEntrySet.UnmodifiableEntry UnmodifiableEntry(java.util.Map.Entry&lt;? extends K,? extends V&gt;)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.util.Collections.UnmodifiableMap.UnmodifiableEntrySet.UnmodifiableEntry V setValue(V)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.Collections.UnmodifiableMap.UnmodifiableEntrySet.UnmodifiableEntry V setValue(V) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.Collections.UnmodifiableMap.UnmodifiableEntrySet.UnmodifiableEntry boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.Collections.UnmodifiableRandomAccessList UnmodifiableRandomAccessList(java.util.List&lt;? extends E&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Collections.UnmodifiableRandomAccessList UnmodifiableRandomAccessList(java.util.List&lt;? extends E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections.UnmodifiableRandomAccessList java.lang.Object writeReplace()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.Collections.UnmodifiableRandomAccessList java.util.List&lt;E&gt; subList(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.Collections.UnmodifiableSet UnmodifiableSet(java.util.Set&lt;? extends E&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Collections.UnmodifiableSet UnmodifiableSet(java.util.Set&lt;? extends E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.Collections.UnmodifiableSortedMap UnmodifiableSortedMap(java.util.SortedMap&lt;K,? extends V&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.Collections.UnmodifiableSortedMap UnmodifiableSortedMap(java.util.SortedMap&lt;K,? extends V&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2456,6 +2844,9 @@
   </item>
   <item name="java.util.Collections.UnmodifiableSortedMap java.util.SortedMap&lt;K,V&gt; tailMap(K)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.Collections.UnmodifiableSortedSet UnmodifiableSortedSet(java.util.SortedSet&lt;E&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.Collections.UnmodifiableSortedSet UnmodifiableSortedSet(java.util.SortedSet&lt;E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2487,6 +2878,11 @@
   <item name="java.util.ComparableTimSort int gallopRight(java.lang.Comparable&lt;java.lang.Object&gt;, java.lang.Object[], int, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.ComparableTimSort int minRunLength(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.ComparableTimSort java.lang.Object[] ensureCapacity(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -2496,10 +2892,24 @@
   <item name="java.util.ComparableTimSort void sort(java.lang.Object[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.ConcurrentModificationException ConcurrentModificationException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.ConcurrentModificationException ConcurrentModificationException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.ConcurrentModificationException ConcurrentModificationException(java.lang.String, java.lang.Throwable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Currency Currency(java.lang.String, int, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.Currency int getDefaultFractionDigits()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.Currency int getMainTableEntry(char, char)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -2640,6 +3050,9 @@
   <item name="java.util.DualPivotQuicksort void sort(short[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.DuplicateFormatFlagsException DuplicateFormatFlagsException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.DuplicateFormatFlagsException DuplicateFormatFlagsException(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2647,6 +3060,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.util.EmptyStackException EmptyStackException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.EnumMap EnumMap(java.util.EnumMap&lt;K,? extends V&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2761,7 +3177,15 @@
   <item name="java.util.EnumMap.EntryIterator.Entry Entry(java.util.EnumMap.EntryIterator, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.util.EnumMap.EntryIterator.Entry K getKey()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.EnumMap.EntryIterator.Entry V getValue()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.EnumMap.EntryIterator.Entry V setValue(V)">
@@ -2775,6 +3199,11 @@
   </item>
   <item name="java.util.EnumMap.EntryIterator.Entry java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.EnumMap.EntryIterator.Entry void checkIndexForEntryUse()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.EnumMap.EntrySet EntrySet(java.util.EnumMap)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -2819,6 +3248,11 @@
   </item>
   <item name="java.util.EnumMap.EnumMapIterator boolean hasNext()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.EnumMap.EnumMapIterator void checkLastReturnedIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.EnumMap.KeyIterator KeyIterator(java.util.EnumMap)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -2926,6 +3360,11 @@
   <item name="java.util.EnumSet java.util.EnumSet&lt;E&gt; range(E, E) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.EnumSet void readObject(java.io.ObjectInputStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.EnumSet void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2943,6 +3382,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.EventObject EventObject(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.EventObject EventObject(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2953,6 +3395,9 @@
   </item>
   <item name="java.util.EventObject java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.FormatFlagsConversionMismatchException FormatFlagsConversionMismatchException(java.lang.String, char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.FormatFlagsConversionMismatchException FormatFlagsConversionMismatchException(java.lang.String, char) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3049,6 +3494,11 @@
   <item name="java.util.Formatter java.lang.Appendable nonNullAppendable(java.lang.Appendable) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.Formatter java.lang.Appendable out()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.Formatter java.nio.charset.Charset toCharset(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3072,6 +3522,16 @@
   </item>
   <item name="java.util.Formatter java.util.Formatter.FormatString[] parse(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.Formatter java.util.Locale locale()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.Formatter void ensureOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.Formatter.BigDecimalLayoutForm BigDecimalLayoutForm(java.lang.String, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -3169,6 +3629,11 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.Formatter.Flags java.util.Formatter.Flags parse(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.Formatter.Flags java.util.Formatter.Flags parse(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3200,6 +3665,11 @@
   </item>
   <item name="java.util.Formatter.FormatSpecifier char[] addDot(char[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.Formatter.FormatSpecifier char[] addZeros(char[], int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.Formatter.FormatSpecifier char[] addZeros(char[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3417,6 +3887,9 @@
   <item name="java.util.Formatter.FormatSpecifier.BigDecimalLayout void layout(java.math.BigInteger, int, java.util.Formatter.BigDecimalLayoutForm) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.FormatterClosedException FormatterClosedException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.GregorianCalendar boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;false&quot;"/>
@@ -3436,6 +3909,11 @@
     </annotation>
   </item>
   <item name="java.util.GregorianCalendar int getMinimum(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.GregorianCalendar int getRolledValue(int, int, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -3682,6 +4160,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.HashMap.HashIterator java.util.HashMap.Entry&lt;K,V&gt; nextEntry()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.HashMap.Holder Holder()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -3836,6 +4317,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.Hashtable.Entry V setValue(V)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Hashtable.Entry V setValue(V) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3883,6 +4367,9 @@
     </annotation>
   </item>
   <item name="java.util.Hashtable.Enumerator Enumerator(java.util.Hashtable, int, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.Hashtable.Enumerator T nextElement()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.Hashtable.Enumerator boolean hasMoreElements()">
@@ -4036,13 +4523,26 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.IdentityHashMap.EntryIterator.Entry K getKey()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.IdentityHashMap.EntryIterator.Entry V getValue()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.IdentityHashMap.EntryIterator.Entry boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.IdentityHashMap.EntryIterator.Entry java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.IdentityHashMap.EntryIterator.Entry void checkIndexForEntryUse()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.IdentityHashMap.EntrySet EntrySet(java.util.IdentityHashMap)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -4123,10 +4623,16 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.IllegalFormatCodePointException IllegalFormatCodePointException(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.IllegalFormatCodePointException int getCodePoint()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.util.IllegalFormatConversionException IllegalFormatConversionException(char, java.lang.Class&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.IllegalFormatConversionException IllegalFormatConversionException(char, java.lang.Class&lt;?&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -4141,6 +4647,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.IllegalFormatException IllegalFormatException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.IllegalFormatFlagsException IllegalFormatFlagsException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.IllegalFormatFlagsException IllegalFormatFlagsException(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -4152,6 +4664,9 @@
   <item name="java.util.IllegalFormatFlagsException java.lang.String getMessage()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.IllegalFormatPrecisionException IllegalFormatPrecisionException(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.IllegalFormatPrecisionException int getPrecision()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -4159,6 +4674,9 @@
   </item>
   <item name="java.util.IllegalFormatPrecisionException java.lang.String getMessage()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.IllegalFormatWidthException IllegalFormatWidthException(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.IllegalFormatWidthException int getWidth()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -4168,6 +4686,12 @@
   <item name="java.util.IllegalFormatWidthException java.lang.String getMessage()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.IllformedLocaleException IllformedLocaleException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.IllformedLocaleException IllformedLocaleException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.IllformedLocaleException IllformedLocaleException(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -4176,8 +4700,27 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.InputMismatchException InputMismatchException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.InputMismatchException InputMismatchException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.InvalidPropertiesFormatException InvalidPropertiesFormatException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.InvalidPropertiesFormatException void readObject(java.io.ObjectInputStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.InvalidPropertiesFormatException void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.InvalidPropertiesFormatException void writeObject(java.io.ObjectOutputStream)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.InvalidPropertiesFormatException void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -4199,6 +4742,11 @@
     </annotation>
   </item>
   <item name="java.util.JapaneseImperialCalendar int getMinimum(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.JapaneseImperialCalendar int getRolledValue(int, int, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -4362,11 +4910,24 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.LinkedHashMap.LinkedHashIterator java.util.LinkedHashMap.Entry&lt;K,V&gt; nextEntry()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.LinkedHashMap.ValueIterator ValueIterator(java.util.LinkedHashMap)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.LinkedHashSet LinkedHashSet(java.util.Collection&lt;? extends E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.LinkedList E getFirst()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.LinkedList E getLast()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.LinkedList E peek()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -4502,6 +5063,11 @@
     </annotation>
   </item>
   <item name="java.util.LinkedList.ListItr int previousIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.LinkedList.ListItr void checkForComodification()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -4810,6 +5376,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.MissingFormatArgumentException MissingFormatArgumentException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.MissingFormatArgumentException MissingFormatArgumentException(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -4820,6 +5389,9 @@
   </item>
   <item name="java.util.MissingFormatArgumentException java.lang.String getMessage()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.MissingFormatWidthException MissingFormatWidthException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.MissingFormatWidthException MissingFormatWidthException(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -4834,6 +5406,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.MissingResourceException MissingResourceException(java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.MissingResourceException MissingResourceException(java.lang.String, java.lang.String, java.lang.String, java.lang.Throwable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.MissingResourceException java.lang.String getClassName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -4844,9 +5422,16 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.NoSuchElementException NoSuchElementException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.NoSuchElementException NoSuchElementException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Objects T requireNonNull(T)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val name="value" val="&quot;!null-&gt;!null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.util.Objects T requireNonNull(T) 0">
@@ -4854,7 +5439,8 @@
   </item>
   <item name="java.util.Objects T requireNonNull(T, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null&quot;"/>
+      <val name="value" val="&quot;!null,_-&gt;!null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.util.Objects T requireNonNull(T, java.lang.String) 0">
@@ -4912,6 +5498,15 @@
   <item name="java.util.PriorityQueue E removeAt(int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.PriorityQueue PriorityQueue()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.PriorityQueue PriorityQueue(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.PriorityQueue PriorityQueue(int, java.util.Comparator&lt;? super E&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.PriorityQueue PriorityQueue(java.util.Collection&lt;? extends E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -4940,6 +5535,11 @@
   </item>
   <item name="java.util.PriorityQueue boolean removeEq(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.PriorityQueue int hugeCapacity(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.PriorityQueue int indexOf(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -5176,6 +5776,9 @@
   <item name="java.util.RegularEnumSet void complement()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.util.RegularEnumSet.EnumSetIterator E next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.RegularEnumSet.EnumSetIterator EnumSetIterator(java.util.RegularEnumSet)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -5315,6 +5918,9 @@
   <item name="java.util.ResourceBundle void setExpirationTime(java.util.ResourceBundle.CacheKey, java.util.ResourceBundle.Control) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.ResourceBundle void setParent(java.util.ResourceBundle)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.ResourceBundle void throwMissingResourceException(java.lang.String, java.util.Locale, java.lang.Throwable) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -5420,6 +6026,11 @@
   <item name="java.util.ResourceBundle.Control java.lang.String toResourceName0(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.ResourceBundle.Control java.util.List&lt;java.lang.String&gt; getFormats(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.ResourceBundle.Control java.util.List&lt;java.lang.String&gt; getFormats(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -5452,6 +6063,11 @@
   </item>
   <item name="java.util.ResourceBundle.Control java.util.ResourceBundle.Control getNoFallbackControl(java.util.List&lt;java.lang.String&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.ResourceBundle.Control long getTimeToLive(java.lang.String, java.util.Locale)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.ResourceBundle.Control long getTimeToLive(java.lang.String, java.util.Locale) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -5490,7 +6106,8 @@
   </item>
   <item name="java.util.ResourceBundle.NoFallbackControl java.util.Locale getFallbackLocale(java.lang.String, java.util.Locale)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;null;_,!null-&gt;null&quot;"/>
+      <val name="value" val="&quot;!null,_-&gt;null;_,!null-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -5508,6 +6125,11 @@
   </item>
   <item name="java.util.ResourceBundle.SingleFormatControl SingleFormatControl(java.util.List&lt;java.lang.String&gt;)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.ResourceBundle.SingleFormatControl java.util.List&lt;java.lang.String&gt; getFormats(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.ResourceBundle.SingleFormatControl java.util.List&lt;java.lang.String&gt; getFormats(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -5707,8 +6329,21 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.Scanner void cacheResult(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.Scanner void clearCaches()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.Scanner void ensureOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.Scanner void remove()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.Scanner void revertState()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -5720,6 +6355,15 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.Scanner void translateSavedIndexes(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.Scanner void useTypeCache()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.ServiceConfigurationError ServiceConfigurationError(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.ServiceConfigurationError ServiceConfigurationError(java.lang.String, java.lang.Throwable)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.ServiceLoader int parseLine(java.lang.Class, java.net.URL, java.io.BufferedReader, int, java.util.List&lt;java.lang.String&gt;) 1">
@@ -5766,6 +6410,11 @@
   </item>
   <item name="java.util.ServiceLoader.LazyIterator LazyIterator(java.lang.Class&lt;S&gt;, java.lang.ClassLoader)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.ServiceLoader.LazyIterator void remove()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.SimpleTimeZone boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -5895,6 +6544,11 @@
   <item name="java.util.SubList boolean addAll(int, java.util.Collection&lt;? extends E&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.SubList int size()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.SubList java.lang.String outOfBoundsMsg(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -5903,6 +6557,11 @@
   </item>
   <item name="java.util.SubList java.util.ListIterator&lt;E&gt; listIterator(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.SubList void checkForComodification()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.TaskQueue TaskQueue()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -5948,6 +6607,11 @@
   <item name="java.util.TimSort int gallopRight(T, T[], int, int, int, java.util.Comparator&lt;? super T&gt;) 5">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.TimSort int minRunLength(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.TimSort void sort(T[], int, int, java.util.Comparator&lt;? super T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -5992,6 +6656,9 @@
   </item>
   <item name="java.util.TimeZone java.util.TimeZone parseCustomTimeZone(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.TimeZone void setID(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.TimeZone void setID(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -6042,14 +6709,30 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.TooManyListenersException TooManyListenersException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.TooManyListenersException TooManyListenersException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.TreeMap K ceilingKey(K)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.TreeMap K firstKey()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.TreeMap K floorKey(K)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.TreeMap K higherKey(K)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.TreeMap K key(java.util.TreeMap.Entry&lt;K,?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.TreeMap K key(java.util.TreeMap.Entry&lt;K,?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -6063,6 +6746,11 @@
   </item>
   <item name="java.util.TreeMap K keyOrNull(java.util.TreeMap.Entry&lt;K,V&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.TreeMap K lastKey()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.TreeMap K lowerKey(K)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -6578,6 +7266,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.TreeMap.NavigableSubMap.SubMapIterator java.util.TreeMap.Entry&lt;K,V&gt; nextEntry()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.TreeMap.NavigableSubMap.SubMapIterator java.util.TreeMap.Entry&lt;K,V&gt; prevEntry()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.TreeMap.NavigableSubMap.SubMapKeyIterator SubMapKeyIterator(java.util.TreeMap.Entry&lt;K,V&gt;, java.util.TreeMap.Entry&lt;K,V&gt;)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -6598,20 +7292,61 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.TreeMap.PrivateEntryIterator java.util.TreeMap.Entry&lt;K,V&gt; nextEntry()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.TreeMap.PrivateEntryIterator java.util.TreeMap.Entry&lt;K,V&gt; prevEntry()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.TreeMap.SubMap K firstKey()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.TreeMap.SubMap K lastKey()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.TreeMap.SubMap SubMap(java.util.TreeMap)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.TreeMap.SubMap java.lang.Object readResolve()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.TreeMap.SubMap java.util.Comparator&lt;? super K&gt; comparator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.TreeMap.SubMap java.util.Set&lt;java.util.Map.Entry&lt;K,V&gt;&gt; entrySet()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.TreeMap.SubMap java.util.SortedMap&lt;K,V&gt; headMap(K)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.TreeMap.SubMap java.util.SortedMap&lt;K,V&gt; headMap(K) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.TreeMap.SubMap java.util.SortedMap&lt;K,V&gt; subMap(K, K)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.TreeMap.SubMap java.util.SortedMap&lt;K,V&gt; subMap(K, K) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.TreeMap.SubMap java.util.SortedMap&lt;K,V&gt; subMap(K, K) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.TreeMap.SubMap java.util.SortedMap&lt;K,V&gt; tailMap(K)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.TreeMap.SubMap java.util.SortedMap&lt;K,V&gt; tailMap(K) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -6675,6 +7410,11 @@
       <val val="&quot;null-&gt;false&quot;"/>
     </annotation>
   </item>
+  <item name="java.util.UUID int clockSequence()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.UUID int compareTo(java.util.UUID)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -6726,10 +7466,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.UUID long node()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.UUID long timestamp()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.UUID.Holder Holder()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.util.UnknownFormatConversionException UnknownFormatConversionException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.UnknownFormatConversionException UnknownFormatConversionException(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -6738,6 +7491,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.util.UnknownFormatFlagsException UnknownFormatFlagsException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.UnknownFormatFlagsException UnknownFormatFlagsException(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -6785,6 +7541,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.Vector int hugeCapacity(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.Vector int indexOf(java.lang.Object, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -6827,6 +7588,11 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.Vector.Itr boolean hasNext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.Vector.Itr void checkForComodification()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>

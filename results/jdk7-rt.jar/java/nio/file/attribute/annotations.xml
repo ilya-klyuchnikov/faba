@@ -12,9 +12,15 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.file.attribute.AclEntry java.nio.file.attribute.AclEntry.Builder newBuilder()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.file.attribute.AclEntry java.nio.file.attribute.AclEntry.Builder newBuilder(java.nio.file.attribute.AclEntry)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.file.attribute.AclEntry java.nio.file.attribute.AclEntry.Builder newBuilder(java.nio.file.attribute.AclEntry) 0">
@@ -36,7 +42,13 @@
   <item name="java.nio.file.attribute.AclEntry java.util.Set&lt;java.nio.file.attribute.AclEntryPermission&gt; permissions()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.file.attribute.AclEntry.Builder Builder(java.nio.file.attribute.AclEntryType, java.nio.file.attribute.UserPrincipal, java.util.Set&lt;java.nio.file.attribute.AclEntryPermission&gt;, java.util.Set&lt;java.nio.file.attribute.AclEntryFlag&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.nio.file.attribute.AclEntry.Builder java.nio.file.attribute.AclEntry build()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.file.attribute.AclEntry.Builder java.nio.file.attribute.AclEntry.Builder setFlags(java.nio.file.attribute.AclEntryFlag...)">
@@ -64,12 +76,14 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.file.attribute.AclEntry.Builder java.nio.file.attribute.AclEntry.Builder setPrincipal(java.nio.file.attribute.UserPrincipal)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.file.attribute.AclEntry.Builder java.nio.file.attribute.AclEntry.Builder setPrincipal(java.nio.file.attribute.UserPrincipal) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.file.attribute.AclEntry.Builder java.nio.file.attribute.AclEntry.Builder setType(java.nio.file.attribute.AclEntryType)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.file.attribute.AclEntry.Builder java.nio.file.attribute.AclEntry.Builder setType(java.nio.file.attribute.AclEntryType) 0">
@@ -87,6 +101,9 @@
   <item name="java.nio.file.attribute.AclEntryType AclEntryType(java.lang.String, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.nio.file.attribute.FileTime FileTime(long, java.util.concurrent.TimeUnit)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.nio.file.attribute.FileTime FileTime(long, java.util.concurrent.TimeUnit) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -102,12 +119,18 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.file.attribute.FileTime java.nio.file.attribute.FileTime from(long, java.util.concurrent.TimeUnit)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.file.attribute.FileTime java.nio.file.attribute.FileTime from(long, java.util.concurrent.TimeUnit) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.file.attribute.FileTime java.nio.file.attribute.FileTime fromMillis(long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.file.attribute.FileTime long to(java.util.concurrent.TimeUnit) 0">
@@ -150,6 +173,26 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.file.attribute.PosixFilePermissions boolean isR(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.file.attribute.PosixFilePermissions boolean isSet(char, char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.file.attribute.PosixFilePermissions boolean isW(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.file.attribute.PosixFilePermissions boolean isX(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.file.attribute.PosixFilePermissions java.lang.String toString(java.util.Set&lt;java.nio.file.attribute.PosixFilePermission&gt;)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -175,6 +218,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.nio.file.attribute.UserPrincipalNotFoundException UserPrincipalNotFoundException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.nio.file.attribute.UserPrincipalNotFoundException java.lang.String getName()">
     <annotation name="org.jetbrains.annotations.Contract">

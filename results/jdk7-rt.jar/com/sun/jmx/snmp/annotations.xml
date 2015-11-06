@@ -5,16 +5,52 @@
     </annotation>
   </item>
   <item name="com.sun.jmx.snmp.BerDecoder byte[] fetchAny()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.BerDecoder byte[] fetchOctetString(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.BerDecoder byte[] fetchStringValue()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.snmp.BerDecoder int fetchInteger(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.BerDecoder int fetchIntegerValue()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.BerDecoder int fetchLength()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.BerDecoder int fetchTag()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.BerDecoder int getTag()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jmx.snmp.BerDecoder java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.snmp.BerDecoder long fetchIntegerAsLong(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.BerDecoder long fetchIntegerValueAsLong()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.BerDecoder long[] fetchOid(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.BerDecoder long[] fetchOidValue()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.BerDecoder void closeSequence()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.BerDecoder void fetchNull(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jmx.snmp.BerDecoder void reset()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -39,6 +75,12 @@
   </item>
   <item name="com.sun.jmx.snmp.BerEncoder void putStringValue(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.snmp.BerException BerException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.BerException BerException(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jmx.snmp.BerException boolean isInvalidSnmpVersion()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -106,6 +148,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.jmx.snmp.SnmpBadSecurityLevelException SnmpBadSecurityLevelException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jmx.snmp.SnmpCounter SnmpCounter(java.lang.Integer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -118,8 +163,14 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jmx.snmp.SnmpCounter64 SnmpCounter64(java.lang.Long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jmx.snmp.SnmpCounter64 SnmpCounter64(java.lang.Long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.snmp.SnmpCounter64 SnmpCounter64(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jmx.snmp.SnmpCounter64 com.sun.jmx.snmp.SnmpOid toOid()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -131,6 +182,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.SnmpCounter64 int intValue()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jmx.snmp.SnmpCounter64 int nextOid(long[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -357,6 +413,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.jmx.snmp.SnmpInt int nextOid(long[], int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jmx.snmp.SnmpInt int nextOid(long[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -409,6 +470,11 @@
   </item>
   <item name="com.sun.jmx.snmp.SnmpIpAddress com.sun.jmx.snmp.SnmpOid toOid(long[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.snmp.SnmpIpAddress int nextOid(long[], int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.jmx.snmp.SnmpIpAddress int nextOid(long[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -497,6 +563,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.jmx.snmp.SnmpNull com.sun.jmx.snmp.SnmpOid toOid()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jmx.snmp.SnmpNull int getTag()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -534,6 +605,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.jmx.snmp.SnmpOid byte[] tobyte()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jmx.snmp.SnmpOid com.sun.jmx.snmp.SnmpOid toOid()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -561,13 +637,34 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.jmx.snmp.SnmpOid int nextOid(long[], int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jmx.snmp.SnmpOid int nextOid(long[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jmx.snmp.SnmpOid java.lang.Boolean toBoolean()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jmx.snmp.SnmpOid java.lang.Byte[] toByte()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jmx.snmp.SnmpOid java.lang.Integer toInteger()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.SnmpOid java.lang.Long toLong()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jmx.snmp.SnmpOid java.lang.String getTypeName()">
@@ -592,6 +689,11 @@
   </item>
   <item name="com.sun.jmx.snmp.SnmpOid java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.snmp.SnmpOid long getOidArc(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.jmx.snmp.SnmpOid long[] longValue()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -908,7 +1010,13 @@
   <item name="com.sun.jmx.snmp.SnmpPeer void setMaxSnmpPktSize(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.jmx.snmp.SnmpPeer void setMaxTries(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jmx.snmp.SnmpPeer void setParams(com.sun.jmx.snmp.SnmpParams)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.SnmpPeer void setTimeout(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jmx.snmp.SnmpPeer void setVarBindLimit(int)">
@@ -979,8 +1087,20 @@
   <item name="com.sun.jmx.snmp.SnmpScopedPduRequest void setErrorStatus(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.jmx.snmp.SnmpSecurityException SnmpSecurityException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jmx.snmp.SnmpStatusException SnmpStatusException(com.sun.jmx.snmp.SnmpStatusException, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.snmp.SnmpStatusException SnmpStatusException(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.SnmpStatusException SnmpStatusException(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.SnmpStatusException SnmpStatusException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jmx.snmp.SnmpStatusException int getErrorIndex()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1020,6 +1140,11 @@
   </item>
   <item name="com.sun.jmx.snmp.SnmpString com.sun.jmx.snmp.SnmpOid toOid(long[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jmx.snmp.SnmpString int nextOid(long[], int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.jmx.snmp.SnmpString int nextOid(long[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1080,6 +1205,11 @@
   <item name="com.sun.jmx.snmp.SnmpStringFixed com.sun.jmx.snmp.SnmpOid toOid(int, long[], int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jmx.snmp.SnmpStringFixed int nextOid(int, long[], int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jmx.snmp.SnmpStringFixed int nextOid(int, long[], int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1104,10 +1234,34 @@
   <item name="com.sun.jmx.snmp.SnmpTimeticks java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jmx.snmp.SnmpTooBigException SnmpTooBigException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.SnmpTooBigException SnmpTooBigException(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jmx.snmp.SnmpTooBigException int getVarBindCount()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.jmx.snmp.SnmpUnknownAccContrModelException SnmpUnknownAccContrModelException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.SnmpUnknownModelException SnmpUnknownModelException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.SnmpUnknownModelLcdException SnmpUnknownModelLcdException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.SnmpUnknownMsgProcModelException SnmpUnknownMsgProcModelException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.SnmpUnknownSecModelException SnmpUnknownSecModelException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.SnmpUnknownSubSystemException SnmpUnknownSubSystemException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jmx.snmp.SnmpUnsignedInt SnmpUnsignedInt(java.lang.Integer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1306,6 +1460,9 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jmx.snmp.SnmpVarBind void setOid(com.sun.jmx.snmp.SnmpOid)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jmx.snmp.SnmpVarBind void setSnmpCounter64Value(long)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jmx.snmp.SnmpVarBind void setSnmpIpAddressValue(java.lang.String) 0">

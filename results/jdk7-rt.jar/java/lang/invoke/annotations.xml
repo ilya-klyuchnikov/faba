@@ -5,6 +5,11 @@
   <item name="java.lang.invoke.BoundMethodHandle BoundMethodHandle(java.lang.invoke.MethodType, java.lang.invoke.LambdaForm) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.BoundMethodHandle byte extensionIndex(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.lang.invoke.BoundMethodHandle java.lang.Object internalProperties()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -160,7 +165,8 @@
   </item>
   <item name="java.lang.invoke.CallSite java.lang.Object maybeReBox(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;null&quot;"/>
+      <val name="value" val="&quot;null-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.lang.invoke.CallSite java.lang.invoke.CallSite makeSite(java.lang.invoke.MethodHandle, java.lang.String, java.lang.invoke.MethodType, java.lang.Object, java.lang.Class&lt;?&gt;) 0">
@@ -181,6 +187,11 @@
   <item name="java.lang.invoke.CallSite java.lang.invoke.WrongMethodTypeException wrongTargetType(java.lang.invoke.MethodHandle, java.lang.invoke.MethodType) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.lang.invoke.CallSite sun.invoke.empty.Empty uninitializedCallSite()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.lang.invoke.CallSite void checkTargetChange(java.lang.invoke.MethodHandle, java.lang.invoke.MethodHandle) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -198,6 +209,21 @@
   </item>
   <item name="java.lang.invoke.ConstantCallSite ConstantCallSite(java.lang.invoke.MethodType, java.lang.invoke.MethodHandle) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.ConstantCallSite java.lang.invoke.MethodHandle dynamicInvoker()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.ConstantCallSite java.lang.invoke.MethodHandle getTarget()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.ConstantCallSite void setTarget(java.lang.invoke.MethodHandle)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.lang.invoke.ConstantCallSite void setTarget(java.lang.invoke.MethodHandle) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -421,6 +447,11 @@
   <item name="java.lang.invoke.DirectMethodHandle.StaticAccessor java.lang.Object checkCast(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;!null-&gt;!null;null-&gt;null&quot;"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.InvokeDynamic InvokeDynamic()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.lang.invoke.InvokeGeneric boolean returnConversionNeeded(java.lang.invoke.MethodType, java.lang.invoke.MethodHandle)">
@@ -702,7 +733,8 @@
   </item>
   <item name="java.lang.invoke.LambdaForm boolean permutedTypesMatch(int[], char[], java.lang.invoke.LambdaForm.Name[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_,_,_-&gt;true;_,!null,_,_-&gt;true;_,_,!null,_-&gt;true;_,_,null,_-&gt;true&quot;"/>
+      <val name="value" val="&quot;!null,_,_,_-&gt;true;_,!null,_,_-&gt;true;_,_,!null,_-&gt;true;_,_,null,_-&gt;true&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.lang.invoke.LambdaForm boolean permutedTypesMatch(int[], char[], java.lang.invoke.LambdaForm.Name[], int) 0">
@@ -729,6 +761,11 @@
   </item>
   <item name="java.lang.invoke.LambdaForm char basicType(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.LambdaForm char parameterType(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.lang.invoke.LambdaForm char returnType()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -770,6 +807,9 @@
     </annotation>
   </item>
   <item name="java.lang.invoke.LambdaForm java.lang.Class&lt;?&gt; typeClass(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.invoke.LambdaForm java.lang.Object interpretName(java.lang.invoke.LambdaForm.Name, java.lang.Object[]) 0">
@@ -841,11 +881,21 @@
   <item name="java.lang.invoke.LambdaForm java.lang.invoke.LambdaForm permuteArguments(int, int[], char[]) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.LambdaForm java.lang.invoke.LambdaForm.Name argument(int, char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.lang.invoke.LambdaForm java.lang.invoke.LambdaForm.Name constantZero(int, char)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.LambdaForm java.lang.invoke.LambdaForm.Name internArgument(java.lang.invoke.LambdaForm.Name) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.LambdaForm java.lang.invoke.LambdaForm.Name[] arguments(int, char...)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.lang.invoke.LambdaForm java.lang.invoke.LambdaForm.Name[] arguments(int, char...) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -897,6 +947,15 @@
   <item name="java.lang.invoke.LambdaForm void traceInterpreter(java.lang.String, java.lang.Object, java.lang.Object...) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.lang.invoke.LambdaForm.Name Name(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.invoke.LambdaForm.Name Name(int, char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.invoke.LambdaForm.Name Name(int, char, java.lang.invoke.LambdaForm.NamedFunction, java.lang.Object[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.lang.invoke.LambdaForm.Name Name(java.lang.invoke.LambdaForm.NamedFunction, java.lang.Object...) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -931,6 +990,11 @@
   <item name="java.lang.invoke.LambdaForm.Name boolean isSiblingBindingBefore(java.lang.invoke.LambdaForm.Name)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;true&quot;"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.LambdaForm.Name boolean typesMatch(char, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.lang.invoke.LambdaForm.Name char type()">
@@ -1122,8 +1186,17 @@
   <item name="java.lang.invoke.MemberName MemberName(java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.MemberName MemberName(java.lang.Class&lt;?&gt;, java.lang.String, java.lang.Class&lt;?&gt;, byte)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.invoke.MemberName MemberName(java.lang.Class&lt;?&gt;, java.lang.String, java.lang.Class&lt;?&gt;, java.lang.Void)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.lang.invoke.MemberName MemberName(java.lang.Class&lt;?&gt;, java.lang.String, java.lang.Class&lt;?&gt;, java.lang.Void) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.lang.invoke.MemberName MemberName(java.lang.Class&lt;?&gt;, java.lang.String, java.lang.invoke.MethodType, byte)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.invoke.MemberName MemberName(java.lang.reflect.Constructor&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1150,6 +1223,11 @@
   </item>
   <item name="java.lang.invoke.MemberName boolean equals(java.lang.invoke.MemberName) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.lang.invoke.MemberName boolean hasReceiverTypeDispatch()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.lang.invoke.MemberName boolean isAbstract()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1182,6 +1260,11 @@
     </annotation>
   </item>
   <item name="java.lang.invoke.MemberName boolean isFinal()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.MemberName boolean isGetter()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1231,6 +1314,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.lang.invoke.MemberName boolean isSetter()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.lang.invoke.MemberName boolean isStatic()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1256,6 +1344,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.lang.invoke.MemberName boolean staticIsConsistent()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.lang.invoke.MemberName boolean testAllFlags(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1272,6 +1365,11 @@
     </annotation>
   </item>
   <item name="java.lang.invoke.MemberName byte getReferenceKind()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.MemberName int flagsMods(int, int, byte)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1337,6 +1435,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.MemberName java.lang.invoke.MemberName changeReferenceKind(byte, byte)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.MemberName java.lang.invoke.MemberName.Factory getFactory()">
@@ -1352,6 +1451,12 @@
   </item>
   <item name="java.lang.invoke.MemberName java.lang.invoke.MethodType getMethodType()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.lang.invoke.MemberName void init(java.lang.Class&lt;?&gt;, java.lang.String, java.lang.Object, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.invoke.MemberName void initResolved(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.invoke.MemberName.Factory Factory()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1839,7 +1944,47 @@
   <item name="java.lang.invoke.MethodHandleNatives boolean isCallerSensitiveMethod(java.lang.Class&lt;?&gt;, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.MethodHandleNatives boolean refKindDoesDispatch(byte)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.MethodHandleNatives boolean refKindHasReceiver(byte)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.MethodHandleNatives boolean refKindIsField(byte)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.MethodHandleNatives boolean refKindIsGetter(byte)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.MethodHandleNatives boolean refKindIsMethod(byte)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.MethodHandleNatives boolean refKindIsSetter(byte)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.MethodHandleNatives boolean refKindIsStatic(byte)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.lang.invoke.MethodHandleNatives boolean refKindIsValid(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.MethodHandleNatives java.lang.String refKindName(byte)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1947,7 +2092,8 @@
   </item>
   <item name="java.lang.invoke.MethodHandleProxies sun.invoke.WrapperInstance asWrapperInstance(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val name="value" val="&quot;!null-&gt;!null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.lang.invoke.MethodHandleProxies sun.invoke.WrapperInstance asWrapperInstance(java.lang.Object) 0">
@@ -1965,6 +2111,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.MethodHandleStatics java.lang.RuntimeException newIllegalArgumentException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.MethodHandleStatics java.lang.RuntimeException newIllegalArgumentException(java.lang.String, java.lang.Object)">
@@ -1983,6 +2132,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.lang.invoke.MethodHandleStatics java.lang.RuntimeException newIllegalStateException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.lang.invoke.MethodHandleStatics java.lang.RuntimeException newIllegalStateException(java.lang.String, java.lang.Object)">
@@ -2432,7 +2584,17 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.lang.invoke.MethodType int parameterSlotCount()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.lang.invoke.MethodType int parameterSlotDepth(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.MethodType int returnSlotCount()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -2630,7 +2792,22 @@
   <item name="java.lang.invoke.MethodTypeForm MethodTypeForm(java.lang.invoke.MethodType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.lang.invoke.MethodTypeForm boolean hasLongPrimitives()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.MethodTypeForm boolean hasNonVoidPrimitives()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.lang.invoke.MethodTypeForm boolean hasPrimitives()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.MethodTypeForm char unpack(long, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -2640,7 +2817,47 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.lang.invoke.MethodTypeForm int longPrimitiveParameterCount()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.MethodTypeForm int longPrimitiveReturnCount()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.MethodTypeForm int parameterCount()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.MethodTypeForm int parameterSlotCount()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.lang.invoke.MethodTypeForm int parameterToArgSlot(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.MethodTypeForm int primitiveParameterCount()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.MethodTypeForm int primitiveReturnCount()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.MethodTypeForm int returnCount()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.invoke.MethodTypeForm int returnSlotCount()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -2685,6 +2902,11 @@
   </item>
   <item name="java.lang.invoke.MethodTypeForm java.lang.invoke.MethodTypeForm findForm(java.lang.invoke.MethodType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.MethodTypeForm long pack(int, int, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.lang.invoke.MutableCallSite MutableCallSite(java.lang.invoke.MethodHandle) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2754,5 +2976,14 @@
   </item>
   <item name="java.lang.invoke.VolatileCallSite VolatileCallSite(java.lang.invoke.MethodType) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.lang.invoke.WrongMethodTypeException WrongMethodTypeException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.invoke.WrongMethodTypeException WrongMethodTypeException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.invoke.WrongMethodTypeException WrongMethodTypeException(java.lang.String, java.lang.Throwable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

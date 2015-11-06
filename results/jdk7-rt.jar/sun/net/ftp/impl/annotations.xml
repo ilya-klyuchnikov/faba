@@ -62,7 +62,8 @@
   </item>
   <item name="sun.net.ftp.impl.FtpClient java.io.OutputStream createOutputStream(java.io.OutputStream)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val name="value" val="&quot;!null-&gt;!null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="sun.net.ftp.impl.FtpClient java.io.OutputStream putFileStream(java.lang.String, boolean)">
@@ -254,6 +255,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.net.ftp.impl.FtpClient sun.net.ftp.FtpClient setRestartOffset(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.net.ftp.impl.FtpClient sun.net.ftp.FtpClient setType(sun.net.ftp.FtpClient.TransferType)">
@@ -301,6 +303,11 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.net.ftp.impl.FtpClient.FtpFileIterator boolean hasNext()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.net.ftp.impl.FtpClient.FtpFileIterator void remove()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>

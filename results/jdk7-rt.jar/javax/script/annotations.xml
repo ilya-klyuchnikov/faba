@@ -16,6 +16,9 @@
   <item name="javax.script.AbstractScriptEngine javax.script.ScriptContext getScriptContext(javax.script.Bindings) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.script.AbstractScriptEngine void setContext(javax.script.ScriptContext)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.script.AbstractScriptEngine void setContext(javax.script.ScriptContext) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -77,8 +80,20 @@
   <item name="javax.script.ScriptEngineManager void registerEngineName(java.lang.String, javax.script.ScriptEngineFactory) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.script.ScriptEngineManager void setBindings(javax.script.Bindings)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.script.ScriptEngineManager void setBindings(javax.script.Bindings) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.script.ScriptException ScriptException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.script.ScriptException ScriptException(java.lang.String, java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.script.ScriptException ScriptException(java.lang.String, java.lang.String, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.script.ScriptException int getColumnNumber()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -94,6 +109,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="javax.script.SimpleBindings SimpleBindings(java.util.Map&lt;java.lang.String,java.lang.Object&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.script.SimpleBindings SimpleBindings(java.util.Map&lt;java.lang.String,java.lang.Object&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -144,6 +162,14 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="javax.script.SimpleScriptContext javax.script.Bindings getBindings(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="javax.script.SimpleScriptContext void setBindings(javax.script.Bindings, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.script.SimpleScriptContext void setErrorWriter(java.io.Writer)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>

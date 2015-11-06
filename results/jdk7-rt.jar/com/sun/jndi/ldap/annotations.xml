@@ -26,6 +26,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.jndi.ldap.Ber.DecodeException DecodeException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jndi.ldap.Ber.EncodeException EncodeException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jndi.ldap.BerDecoder BerDecoder(byte[], int, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -45,8 +51,19 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.jndi.ldap.BerDecoder int parseByte()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jndi.ldap.BerDecoder int parseLength()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jndi.ldap.BerDecoder int parseSeq(int[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.jndi.ldap.BerDecoder int peekByte()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.BerDecoder java.lang.String parseString(boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -60,13 +77,24 @@
   <item name="com.sun.jndi.ldap.BerDecoder void reset()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.jndi.ldap.BerDecoder void seek(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jndi.ldap.BerEncoder BerEncoder()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jndi.ldap.BerEncoder BerEncoder(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.jndi.ldap.BerEncoder byte[] getBuf()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.BerEncoder byte[] getTrimmedBuf()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.BerEncoder int getDataLen()">
@@ -597,6 +625,11 @@
   <item name="com.sun.jndi.ldap.LdapClient void encodeControls(com.sun.jndi.ldap.BerEncoder, javax.naming.ldap.Control[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapClient void ensureOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.LdapClient void incRefCount()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -686,6 +719,11 @@
   </item>
   <item name="com.sun.jndi.ldap.LdapCtx com.sun.jndi.ldap.LdapResult getSearchReply(com.sun.jndi.ldap.LdapClient, com.sun.jndi.ldap.LdapResult) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapCtx int convertToLdapModCode(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.ldap.LdapCtx int findControl(javax.naming.ldap.Control[], javax.naming.ldap.Control)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1020,6 +1058,9 @@
   <item name="com.sun.jndi.ldap.LdapCtx void setDeleteRDN(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapCtx void setDerefAliases(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jndi.ldap.LdapCtx void setDerefAliases(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1037,6 +1078,9 @@
   </item>
   <item name="com.sun.jndi.ldap.LdapCtx void setReferralLimit(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapCtx void setReferralMode(java.lang.String, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapCtx void setReferralMode(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

@@ -1,4 +1,10 @@
 <root>
+  <item name="java.beans.beancontext.BeanContextChildSupport BeanContextChildSupport()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.beans.beancontext.BeanContextChildSupport BeanContextChildSupport(java.beans.beancontext.BeanContextChild)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.beancontext.BeanContextChildSupport BeanContextChildSupport(java.beans.beancontext.BeanContextChild) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -53,6 +59,9 @@
   <item name="java.beans.beancontext.BeanContextChildSupport void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.beans.beancontext.BeanContextEvent BeanContextEvent(java.beans.beancontext.BeanContext)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.beancontext.BeanContextEvent BeanContextEvent(java.beans.beancontext.BeanContext) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -69,17 +78,26 @@
   <item name="java.beans.beancontext.BeanContextEvent void setPropagatedFrom(java.beans.beancontext.BeanContext)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.beans.beancontext.BeanContextMembershipEvent BeanContextMembershipEvent(java.beans.beancontext.BeanContext, java.lang.Object[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.beancontext.BeanContextMembershipEvent BeanContextMembershipEvent(java.beans.beancontext.BeanContext, java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.beancontext.BeanContextMembershipEvent BeanContextMembershipEvent(java.beans.beancontext.BeanContext, java.lang.Object[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.beans.beancontext.BeanContextMembershipEvent BeanContextMembershipEvent(java.beans.beancontext.BeanContext, java.util.Collection)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.beans.beancontext.BeanContextMembershipEvent BeanContextMembershipEvent(java.beans.beancontext.BeanContext, java.util.Collection) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.beans.beancontext.BeanContextMembershipEvent BeanContextMembershipEvent(java.beans.beancontext.BeanContext, java.util.Collection) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServiceAvailableEvent BeanContextServiceAvailableEvent(java.beans.beancontext.BeanContextServices, java.lang.Class)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.beancontext.BeanContextServiceAvailableEvent BeanContextServiceAvailableEvent(java.beans.beancontext.BeanContextServices, java.lang.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -88,6 +106,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.beans.beancontext.BeanContextServiceRevokedEvent BeanContextServiceRevokedEvent(java.beans.beancontext.BeanContextServices, java.lang.Class, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.beans.beancontext.BeanContextServiceRevokedEvent BeanContextServiceRevokedEvent(java.beans.beancontext.BeanContextServices, java.lang.Class, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -327,6 +348,11 @@
   <item name="java.beans.beancontext.BeanContextSupport boolean add(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.beans.beancontext.BeanContextSupport boolean addAll(java.util.Collection)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.beans.beancontext.BeanContextSupport boolean addAll(java.util.Collection) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -354,8 +380,18 @@
   <item name="java.beans.beancontext.BeanContextSupport boolean remove(java.lang.Object, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.beans.beancontext.BeanContextSupport boolean removeAll(java.util.Collection)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.beans.beancontext.BeanContextSupport boolean removeAll(java.util.Collection) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.beans.beancontext.BeanContextSupport boolean retainAll(java.util.Collection)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.beans.beancontext.BeanContextSupport boolean retainAll(java.util.Collection) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -494,6 +530,11 @@
   </item>
   <item name="java.beans.beancontext.BeanContextSupport void childJustRemovedHook(java.lang.Object, java.beans.beancontext.BeanContextSupport.BCSChild) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.beans.beancontext.BeanContextSupport void clear()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.beans.beancontext.BeanContextSupport void deserialize(java.io.ObjectInputStream, java.util.Collection) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

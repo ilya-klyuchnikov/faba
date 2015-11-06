@@ -1296,6 +1296,11 @@
   <item name="sun.nio.cs.StreamDecoder sun.nio.cs.StreamDecoder forInputStreamReader(java.io.InputStream, java.lang.Object, java.nio.charset.CharsetDecoder) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.cs.StreamDecoder void ensureOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.cs.StreamEncoder StreamEncoder(java.io.OutputStream, java.lang.Object, java.nio.charset.Charset) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1349,6 +1354,11 @@
   <item name="sun.nio.cs.StreamEncoder sun.nio.cs.StreamEncoder forOutputStreamWriter(java.io.OutputStream, java.lang.Object, java.nio.charset.CharsetEncoder) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.cs.StreamEncoder void ensureOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.cs.StreamEncoder void implWrite(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1383,11 +1393,51 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.nio.cs.Surrogate char high(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.cs.Surrogate char low(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.cs.Surrogate int toUCS4(char, char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.cs.Surrogate.Generator Generator()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.nio.cs.Surrogate.Generator java.nio.charset.CoderResult error()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.cs.Surrogate.Parser Parser()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.cs.Surrogate.Parser boolean isPair()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.cs.Surrogate.Parser int character()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.cs.Surrogate.Parser int increment()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.cs.Surrogate.Parser java.nio.charset.CoderResult error()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.nio.cs.ThreadLocalCoders ThreadLocalCoders()">
     <annotation name="org.jetbrains.annotations.Contract">

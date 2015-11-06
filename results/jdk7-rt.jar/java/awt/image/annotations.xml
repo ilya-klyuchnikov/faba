@@ -209,6 +209,11 @@
   <item name="java.awt.image.BufferedImage boolean isStandard(java.awt.image.ColorModel, java.awt.image.WritableRaster) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.image.BufferedImage boolean isTileWritable(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.awt.image.BufferedImage int getHeight(java.awt.image.ImageObserver) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -264,6 +269,11 @@
   </item>
   <item name="java.awt.image.BufferedImage java.awt.image.Raster getData(java.awt.Rectangle) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.image.BufferedImage java.awt.image.Raster getTile(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.awt.image.BufferedImage java.awt.image.WritableRaster copyData(java.awt.image.WritableRaster)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -327,6 +337,9 @@
   </item>
   <item name="java.awt.image.BufferedImage void setData(java.awt.image.Raster) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.image.BufferedImageFilter BufferedImageFilter(java.awt.image.BufferedImageOp)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.image.BufferedImageFilter BufferedImageFilter(java.awt.image.BufferedImageOp) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -513,8 +526,18 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.awt.image.ColorModel boolean isCompatibleRaster(java.awt.image.Raster)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.awt.image.ColorModel boolean isCompatibleRaster(java.awt.image.Raster) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.awt.image.ColorModel boolean isCompatibleSampleModel(java.awt.image.SampleModel)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.awt.image.ColorModel boolean isCompatibleSampleModel(java.awt.image.SampleModel) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -551,6 +574,16 @@
   </item>
   <item name="java.awt.image.ColorModel int getBlue(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.image.ColorModel int getComponentSize(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.image.ColorModel int getDataElement(int[], int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.awt.image.ColorModel int getDataElement(int[], int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -599,8 +632,18 @@
   <item name="java.awt.image.ColorModel int[] getComponentSize()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.awt.image.ColorModel int[] getComponents(int, int[], int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.awt.image.ColorModel int[] getComponents(int, int[], int) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.awt.image.ColorModel int[] getComponents(java.lang.Object, int[], int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.awt.image.ColorModel int[] getComponents(java.lang.Object, int[], int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -624,8 +667,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.awt.image.ColorModel java.awt.image.ColorModel coerceData(java.awt.image.WritableRaster, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.awt.image.ColorModel java.awt.image.ColorModel coerceData(java.awt.image.WritableRaster, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.awt.image.ColorModel java.awt.image.SampleModel createCompatibleSampleModel(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.awt.image.ColorModel java.awt.image.WritableRaster createCompatibleWritableRaster(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.awt.image.ColorModel java.awt.image.WritableRaster getAlphaRaster(java.awt.image.WritableRaster)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -637,8 +695,18 @@
   <item name="java.awt.image.ColorModel java.awt.image.WritableRaster getAlphaRaster(java.awt.image.WritableRaster) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.awt.image.ColorModel java.lang.Object getDataElements(int, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.awt.image.ColorModel java.lang.Object getDataElements(int, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.awt.image.ColorModel java.lang.Object getDataElements(int[], int, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.awt.image.ColorModel java.lang.Object getDataElements(int[], int, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -700,6 +768,11 @@
   </item>
   <item name="java.awt.image.ComponentColorModel int extractComponent(java.lang.Object, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.image.ComponentColorModel int getAlpha(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.awt.image.ComponentColorModel int getDataElement(int[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1271,6 +1344,9 @@
   <item name="java.awt.image.ImageFilter void setProperties(java.util.Hashtable&lt;?,?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.image.ImagingOpException ImagingOpException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.awt.image.IndexColorModel IndexColorModel(int, int, byte[], byte[], byte[], byte[]) 5">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1492,6 +1568,9 @@
   </item>
   <item name="java.awt.image.LookupOp void shortFilter(java.awt.image.ShortLookupTable, java.awt.image.Raster, java.awt.image.WritableRaster, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.image.LookupTable LookupTable(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.image.LookupTable int getNumComponents()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1963,6 +2042,9 @@
   </item>
   <item name="java.awt.image.Raster java.awt.image.WritableRaster createWritableRaster(java.awt.image.SampleModel, java.awt.image.DataBuffer, java.awt.Point) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.awt.image.RasterFormatException RasterFormatException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.awt.image.ReplicateScaleFilter void setProperties(java.util.Hashtable&lt;?,?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

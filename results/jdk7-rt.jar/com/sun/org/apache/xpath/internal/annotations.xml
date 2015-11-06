@@ -121,6 +121,9 @@
   <item name="com.sun.org.apache.xpath.internal.Expression void exprAddChild(com.sun.org.apache.xpath.internal.ExpressionNode, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xpath.internal.FoundIndex FoundIndex()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xpath.internal.NodeSet NodeSet()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -547,7 +550,27 @@
   <item name="com.sun.org.apache.xpath.internal.XPathContext com.sun.org.apache.xpath.internal.axes.SubContextList getSubContextList()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xpath.internal.XPathContext int getContextNode()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.XPathContext int getCurrentExpressionNode()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.XPathContext int getCurrentNode()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xpath.internal.XPathContext int getIteratorRoot()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.XPathContext int getPredicatePos()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -639,6 +662,18 @@
   <item name="com.sun.org.apache.xpath.internal.XPathContext.XPathExpressionContext org.w3c.dom.traversal.NodeIterator getContextNodes()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xpath.internal.XPathException XPathException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.XPathException XPathException(java.lang.String, java.lang.Exception)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.XPathException XPathException(java.lang.String, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.XPathException XPathException(java.lang.String, org.w3c.dom.Node, java.lang.Exception)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.org.apache.xpath.internal.XPathException com.sun.org.apache.xpath.internal.ExpressionNode getExpressionOwner(com.sun.org.apache.xpath.internal.ExpressionNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -662,6 +697,12 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xpath.internal.XPathException void setStylesheetNode(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.XPathProcessorException XPathProcessorException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xpath.internal.XPathProcessorException XPathProcessorException(java.lang.String, java.lang.Exception)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xpath.internal.XPathVisitor XPathVisitor()">

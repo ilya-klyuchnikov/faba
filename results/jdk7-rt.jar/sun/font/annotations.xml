@@ -339,6 +339,9 @@
   <item name="sun.font.AttributeValues sun.font.AttributeValues merge(sun.font.AttributeValues, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.font.AttributeValues void defineAll(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.font.AttributeValues void i_set(sun.font.EAttribute, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -461,11 +464,36 @@
   <item name="sun.font.CFont CFont(sun.font.CFont, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.font.CFont float getGlyphAdvance(long, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.font.CFont java.awt.geom.GeneralPath getGlyphOutline(long, int, float, float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.font.CFont java.awt.geom.GeneralPath getGlyphVectorOutline(long, int[], int, float, float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.font.CFont java.awt.geom.GeneralPath getGlyphVectorOutline(long, int[], int, float, float) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.font.CFont java.awt.geom.Rectangle2D.Float getGlyphOutlineBounds(long, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.font.CFont java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.font.CFont long getGlyphImage(long, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.font.CFont sun.font.CFont createItalicVariant()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -475,6 +503,16 @@
   </item>
   <item name="sun.font.CFont sun.font.FontStrike createStrike(sun.font.FontStrikeDesc) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.font.CFont sun.font.StrikeMetrics getFontMetrics(long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.font.CFont void getGlyphMetrics(long, int, java.awt.geom.Point2D.Float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.font.CFont void getGlyphMetrics(long, int, java.awt.geom.Point2D.Float) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -651,6 +689,11 @@
   <item name="sun.font.CMap.CMapFormat10 CMapFormat10(java.nio.ByteBuffer, int, char[]) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.font.CMap.CMapFormat10 char getGlyph(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.font.CMap.CMapFormat12 CMapFormat12(java.nio.ByteBuffer, int, char[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -675,6 +718,11 @@
   <item name="sun.font.CMap.CMapFormat8 CMapFormat8(java.nio.ByteBuffer, int, char[]) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.font.CMap.CMapFormat8 char getGlyph(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.font.CMap.NullCMapClass NullCMapClass()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -687,6 +735,11 @@
   </item>
   <item name="sun.font.CStrike CStrike(sun.font.CFont, sun.font.FontStrikeDesc) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.font.CStrike java.awt.geom.GeneralPath getGlyphVectorOutline(int[], float, float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.font.CStrike java.awt.geom.GeneralPath getGlyphVectorOutline(int[], float, float) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1587,6 +1640,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.font.FontScalerException FontScalerException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.font.FontScalerException FontScalerException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.font.FontStrike FontStrike()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -1683,6 +1742,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.font.FreetypeFontScaler void invalidateScaler()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.font.FreetypeFontScaler void invalidateScalerContext(long)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1938,6 +2000,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.font.GraphicComponent java.awt.Rectangle getPixelBounds(java.awt.font.FontRenderContext, float, float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.font.GraphicComponent java.awt.Rectangle getPixelBounds(java.awt.font.FontRenderContext, float, float) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2148,6 +2215,9 @@
   <item name="sun.font.LayoutPathImpl.SegmentPath.Segment Segment(sun.font.LayoutPathImpl.SegmentPath, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.font.LayoutPathImpl.SegmentPath.Segment void init()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.font.LayoutPathImpl.SegmentPath.Segment void line(sun.font.LayoutPathImpl.SegmentPath.LineInfo) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2223,6 +2293,11 @@
   <item name="sun.font.NativeFont sun.font.FontStrike createStrike(sun.font.FontStrikeDesc) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.font.NativeFont void getGlyphMetrics(long, int, java.awt.geom.Point2D.Float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.font.NativeFont void getGlyphMetrics(long, int, java.awt.geom.Point2D.Float) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -2262,9 +2337,15 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.NativeStrike java.awt.geom.GeneralPath getGlyphOutline(int, float, float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.NativeStrike java.awt.geom.GeneralPath getGlyphVectorOutline(int[], float, float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.NativeStrike java.awt.geom.GeneralPath getGlyphVectorOutline(int[], float, float) 0">
@@ -2326,9 +2407,15 @@
     </annotation>
   </item>
   <item name="sun.font.NullFontScaler java.awt.geom.GeneralPath getGlyphOutline(long, int, float, float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.NullFontScaler java.awt.geom.GeneralPath getGlyphVectorOutline(long, int[], int, float, float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.font.NullFontScaler java.awt.geom.GeneralPath getGlyphVectorOutline(long, int[], int, float, float) 1">
@@ -2419,6 +2506,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.font.ScriptRun ScriptRun(char[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.font.ScriptRun ScriptRun(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2453,6 +2543,9 @@
     </annotation>
   </item>
   <item name="sun.font.ScriptRun int nextCodePoint()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.font.ScriptRun void init(char[], int, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.font.ScriptRun void init(char[], int, int) 0">
@@ -3290,6 +3383,9 @@
   </item>
   <item name="sun.font.SunLayoutEngine void layout(sun.font.FontStrikeDesc, float[], int, int, sun.font.TextRecord, int, java.awt.geom.Point2D.Float, sun.font.GlyphLayout.GVData) 4">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.font.T2KFontScaler void invalidateScaler()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.font.T2KFontScaler void invalidateScalerContext(long)">
     <annotation name="org.jetbrains.annotations.Contract">

@@ -1,4 +1,7 @@
 <root>
+  <item name="sun.awt.image.BadDepthException BadDepthException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.awt.image.BufImgSurfaceData BufImgSurfaceData(java.awt.image.DataBuffer, java.awt.image.BufferedImage, sun.java2d.loops.SurfaceType) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -15,6 +18,11 @@
   </item>
   <item name="sun.awt.image.BufImgSurfaceData sun.java2d.SurfaceData createData(java.awt.image.BufferedImage) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.image.BufImgSurfaceData sun.java2d.SurfaceData createData(java.awt.image.Raster, java.awt.image.ColorModel)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.awt.image.BufImgSurfaceData sun.java2d.SurfaceData createData(java.awt.image.Raster, java.awt.image.ColorModel) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -423,6 +431,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.awt.image.ByteInterleavedRaster int getSample(int, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.awt.image.ByteInterleavedRaster int getScanlineStride()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -601,6 +614,14 @@
   <item name="sun.awt.image.GifImageDecoder int ExtractWord(byte[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.image.GifImageDecoder void error(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.awt.image.ImageAccessException ImageAccessException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.awt.image.ImageConsumerQueue ImageConsumerQueue(sun.awt.image.InputStreamImageSource, java.awt.image.ImageConsumer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -652,6 +673,9 @@
   </item>
   <item name="sun.awt.image.ImageFetcher sun.awt.image.ImageFetchable nextImage()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.awt.image.ImageFormatException ImageFormatException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.awt.image.ImageRepresentation boolean drawToBufImage(java.awt.Graphics, sun.awt.image.ToolkitImage, int, int, int, int, int, int, int, int, java.awt.Color, java.awt.image.ImageObserver) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -986,6 +1010,11 @@
   <item name="sun.awt.image.JPEGImageDecoder boolean sendPixels(int[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.awt.image.JPEGImageDecoder void error(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.awt.image.NativeLibLoader NativeLibLoader()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1080,6 +1109,9 @@
   </item>
   <item name="sun.awt.image.PNGImageDecoder.Chromaticities java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.image.PNGImageDecoder.PNGException PNGException(sun.awt.image.PNGImageDecoder, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.awt.image.PixelConverter PixelConverter()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -1712,6 +1744,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.awt.image.SunVolatileImage java.lang.Object getProperty(java.lang.String, java.awt.image.ImageObserver)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.awt.image.SunVolatileImage java.lang.Object getProperty(java.lang.String, java.awt.image.ImageObserver) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1792,6 +1829,11 @@
   </item>
   <item name="sun.awt.image.ToolkitImage ToolkitImage(java.awt.image.ImageProducer)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.awt.image.ToolkitImage java.awt.Graphics getGraphics()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.awt.image.ToolkitImage java.lang.Object getProperty(java.lang.String, java.awt.image.ImageObserver)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1906,5 +1948,10 @@
   </item>
   <item name="sun.awt.image.WritableRasterNative sun.awt.image.WritableRasterNative createNativeRaster(java.awt.image.SampleModel, java.awt.image.DataBuffer) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.awt.image.XbmImageDecoder void error(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
 </root>

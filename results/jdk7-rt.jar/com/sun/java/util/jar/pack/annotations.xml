@@ -1,4 +1,7 @@
 <root>
+  <item name="com.sun.java.util.jar.pack.AdaptiveCoding AdaptiveCoding(int, com.sun.java.util.jar.pack.CodingMethod, com.sun.java.util.jar.pack.CodingMethod)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.AdaptiveCoding boolean isCodableLength(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -9,12 +12,22 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.java.util.jar.pack.AdaptiveCoding int decodeK(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.java.util.jar.pack.AdaptiveCoding int getKBOf(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.java.util.jar.pack.AdaptiveCoding int getKXOf(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.AdaptiveCoding int getNextK(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -38,6 +51,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.java.util.jar.pack.AdaptiveCoding void setHeadCoding(com.sun.java.util.jar.pack.CodingMethod)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.AdaptiveCoding void setHeadLength(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.AdaptiveCoding void setTailCoding(com.sun.java.util.jar.pack.CodingMethod)">
@@ -101,6 +117,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.java.util.jar.pack.Attribute com.sun.java.util.jar.pack.Attribute.Layout layout()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Attribute com.sun.java.util.jar.pack.Attribute.Layout.Element matchCase(com.sun.java.util.jar.pack.Attribute.Layout.Element, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -334,10 +355,43 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.java.util.jar.pack.Attribute.ValueStream com.sun.java.util.jar.pack.ConstantPool.Entry getRef(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Attribute.ValueStream int decodeBCI(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Attribute.ValueStream int encodeBCI(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Attribute.ValueStream int getInt(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.java.util.jar.pack.Attribute.ValueStream java.lang.RuntimeException undef()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.java.util.jar.pack.Attribute.ValueStream void noteBackCall(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Attribute.ValueStream void putInt(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Attribute.ValueStream void putRef(int, com.sun.java.util.jar.pack.ConstantPool.Entry)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -398,6 +452,11 @@
   </item>
   <item name="com.sun.java.util.jar.pack.BandStructure boolean assertValidCPRefs(com.sun.java.util.jar.pack.BandStructure.CPRefBand) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.BandStructure boolean haveFlagsHi(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.java.util.jar.pack.BandStructure boolean notePrevForAssert(com.sun.java.util.jar.pack.BandStructure.Band, com.sun.java.util.jar.pack.BandStructure.Band)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -460,7 +519,15 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.java.util.jar.pack.BandStructure com.sun.java.util.jar.pack.BandStructure.CPRefBand getCPRefOpBand(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.BandStructure com.sun.java.util.jar.pack.BandStructure.CPRefBand selfOpRefBand(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.java.util.jar.pack.BandStructure com.sun.java.util.jar.pack.BandStructure.IntBand getAttrBand(com.sun.java.util.jar.pack.BandStructure.MultiBand, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -503,8 +570,18 @@
   <item name="com.sun.java.util.jar.pack.BandStructure int getLabel(com.sun.java.util.jar.pack.BandStructure.IntBand, com.sun.java.util.jar.pack.Code, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.BandStructure int getPackageMajver()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.java.util.jar.pack.BandStructure int parseMetaCoding(byte[], int, com.sun.java.util.jar.pack.Coding, com.sun.java.util.jar.pack.CodingMethod[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.BandStructure int phaseCmp(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.java.util.jar.pack.BandStructure int setAttributeLayoutIndex(com.sun.java.util.jar.pack.Attribute.Layout, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -516,6 +593,26 @@
   </item>
   <item name="com.sun.java.util.jar.pack.BandStructure int shortCodeHeader(com.sun.java.util.jar.pack.Code) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.BandStructure int shortCodeHeader_h_base(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.BandStructure int shortCodeHeader_handler_count(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.BandStructure int shortCodeHeader_max_na_locals(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.BandStructure int shortCodeHeader_max_stack(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.java.util.jar.pack.BandStructure int[] realloc(int[])">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -691,6 +788,11 @@
   <item name="com.sun.java.util.jar.pack.BandStructure.MultiBand MultiBand(com.sun.java.util.jar.pack.BandStructure, java.lang.String, com.sun.java.util.jar.pack.Coding) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.BandStructure.MultiBand com.sun.java.util.jar.pack.BandStructure.Band get(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.java.util.jar.pack.BandStructure.MultiBand com.sun.java.util.jar.pack.BandStructure.Band init()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -769,8 +871,14 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.java.util.jar.pack.BandStructure.ValueBand void initializeValues(int[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.BandStructure.ValueBand void initializeValues(int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.BandStructure.ValueBand void setCapacity(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.ClassReader ClassReader(com.sun.java.util.jar.pack.Package.Class, java.io.InputStream)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -801,6 +909,12 @@
   </item>
   <item name="com.sun.java.util.jar.pack.ClassReader void skip(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.ClassReader.ClassFormatException ClassFormatException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.ClassReader.ClassFormatException ClassFormatException(java.lang.String, java.lang.Throwable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.ClassWriter ClassWriter(com.sun.java.util.jar.pack.Package.Class, java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -834,6 +948,11 @@
     </annotation>
   </item>
   <item name="com.sun.java.util.jar.pack.Code int getByte(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Code int getHandlerCount()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -903,12 +1022,22 @@
   <item name="com.sun.java.util.jar.pack.Coding boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.Coding boolean hasNegativeCode(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.java.util.jar.pack.Coding boolean isDelta()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.java.util.jar.pack.Coding boolean isFullRange()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Coding boolean isNegativeCode(long, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -964,6 +1093,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.java.util.jar.pack.Coding int ceil_lg2(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.java.util.jar.pack.Coding int compareTo(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1012,6 +1146,11 @@
   <item name="com.sun.java.util.jar.pack.Coding int readInt(byte[], int[], int, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.Coding int reduceToSignedRange(int, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.java.util.jar.pack.Coding int saturate32(long)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1027,6 +1166,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.java.util.jar.pack.Coding int[] makeDeltas(int[], int, int, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.java.util.jar.pack.Coding java.lang.String keyString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1035,6 +1179,16 @@
   </item>
   <item name="com.sun.java.util.jar.pack.Coding java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Coding long codeRangeLong(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Coding long codeRangeLong(int, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.java.util.jar.pack.Coding long toUnsigned32(int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1107,6 +1261,9 @@
   </item>
   <item name="com.sun.java.util.jar.pack.CodingChooser int[] computeSizePrivate(com.sun.java.util.jar.pack.CodingMethod)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.CodingChooser int[] getDeltas(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.CodingChooser java.lang.String pct(double, double)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1586,20 +1743,55 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.java.util.jar.pack.FixedList E remove(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.FixedList boolean add(E)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.java.util.jar.pack.FixedList boolean add(E) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.FixedList boolean addAll(int, java.util.Collection&lt;? extends E&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.java.util.jar.pack.FixedList boolean addAll(int, java.util.Collection&lt;? extends E&gt;) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.FixedList boolean addAll(java.util.Collection&lt;? extends E&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.java.util.jar.pack.FixedList boolean addAll(java.util.Collection&lt;? extends E&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.FixedList boolean remove(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.java.util.jar.pack.FixedList boolean remove(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.FixedList boolean removeAll(java.util.Collection&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.java.util.jar.pack.FixedList boolean removeAll(java.util.Collection&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.FixedList boolean retainAll(java.util.Collection&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.java.util.jar.pack.FixedList boolean retainAll(java.util.Collection&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1607,8 +1799,18 @@
   <item name="com.sun.java.util.jar.pack.FixedList java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.FixedList void add(int, E)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.java.util.jar.pack.FixedList void add(int, E) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.FixedList void clear()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.java.util.jar.pack.Fixups Fixups()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -1661,7 +1863,17 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.java.util.jar.pack.Fixups int fetchDesc(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.java.util.jar.pack.Fixups int fmtLen(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Fixups int makeDesc(int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1703,6 +1915,9 @@
   <item name="com.sun.java.util.jar.pack.Fixups.Fixup Fixup(int, com.sun.java.util.jar.pack.ConstantPool.Entry)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.Fixups.Fixup Fixup(int, int, com.sun.java.util.jar.pack.ConstantPool.Entry)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.Fixups.Fixup boolean equals(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="value" val="&quot;null-&gt;false&quot;"/>
@@ -1741,8 +1956,16 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.java.util.jar.pack.Fixups.Itr int nextDesc()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.Fixups.Itr java.lang.Object next()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Fixups.Itr void remove()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.java.util.jar.pack.Histogram Histogram(int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1774,6 +1997,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.java.util.jar.pack.Histogram com.sun.java.util.jar.pack.Histogram.BitMetric getBitMetric()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Histogram int getFrequency(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1993,6 +2221,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.java.util.jar.pack.Instruction int getBranchLabel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.java.util.jar.pack.Instruction int getByte(byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -2002,6 +2235,16 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.java.util.jar.pack.Instruction int getByteAt(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Instruction int getCPIndex()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Instruction int getConstant()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -2057,6 +2300,16 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.java.util.jar.pack.Instruction int opLength(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Instruction int opWideLength(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.java.util.jar.pack.Instruction java.lang.String labstr(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2086,6 +2339,9 @@
   </item>
   <item name="com.sun.java.util.jar.pack.Instruction void setShort(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.java.util.jar.pack.Instruction.FormatException FormatException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.java.util.jar.pack.Instruction.LookupSwitch int getLength(int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2333,6 +2589,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.java.util.jar.pack.Package.File com.sun.java.util.jar.pack.Package.Class getStubClass()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.java.util.jar.pack.Package.File int compareTo(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -2427,10 +2688,18 @@
   <item name="com.sun.java.util.jar.pack.PackageReader void reconstructClass(com.sun.java.util.jar.pack.Package.Class) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.java.util.jar.pack.PackageReader.LimitedBuffer LimitedBuffer(java.io.InputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.java.util.jar.pack.PackageReader.LimitedBuffer int read(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.java.util.jar.pack.PackageReader.LimitedBuffer long getBytesServed()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.PackageReader.LimitedBuffer long skip(long)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -2567,6 +2836,11 @@
   <item name="com.sun.java.util.jar.pack.PopulationCoding com.sun.java.util.jar.pack.Coding getTailCoding(com.sun.java.util.jar.pack.CodingMethod)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="value" val="&quot;null-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.java.util.jar.pack.PopulationCoding int moreCentral(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
   </item>

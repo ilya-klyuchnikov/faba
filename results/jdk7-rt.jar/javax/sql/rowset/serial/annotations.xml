@@ -25,6 +25,11 @@
   <item name="javax.sql.rowset.serial.SQLInputImpl java.lang.Object readObject()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.sql.rowset.serial.SQLInputImpl java.lang.String readNString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.sql.rowset.serial.SQLInputImpl java.lang.String readString()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -43,8 +48,23 @@
   <item name="javax.sql.rowset.serial.SQLInputImpl java.sql.Date readDate()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.sql.rowset.serial.SQLInputImpl java.sql.NClob readNClob()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.sql.rowset.serial.SQLInputImpl java.sql.Ref readRef()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.sql.rowset.serial.SQLInputImpl java.sql.RowId readRowId()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="javax.sql.rowset.serial.SQLInputImpl java.sql.SQLXML readSQLXML()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.sql.rowset.serial.SQLInputImpl java.sql.Time readTime()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -67,14 +87,34 @@
   <item name="javax.sql.rowset.serial.SQLOutputImpl void writeCharacterStream(java.io.Reader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.sql.rowset.serial.SQLOutputImpl void writeNClob(java.sql.NClob)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.sql.rowset.serial.SQLOutputImpl void writeNClob(java.sql.NClob) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.sql.rowset.serial.SQLOutputImpl void writeNString(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.sql.rowset.serial.SQLOutputImpl void writeNString(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.sql.rowset.serial.SQLOutputImpl void writeRowId(java.sql.RowId)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.sql.rowset.serial.SQLOutputImpl void writeRowId(java.sql.RowId) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.sql.rowset.serial.SQLOutputImpl void writeSQLXML(java.sql.SQLXML)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.sql.rowset.serial.SQLOutputImpl void writeSQLXML(java.sql.SQLXML) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -131,8 +171,28 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="javax.sql.rowset.serial.SerialArray java.sql.ResultSet getResultSet()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="javax.sql.rowset.serial.SerialArray java.sql.ResultSet getResultSet(java.util.Map&lt;java.lang.String,java.lang.Class&lt;?&gt;&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.sql.rowset.serial.SerialArray java.sql.ResultSet getResultSet(java.util.Map&lt;java.lang.String,java.lang.Class&lt;?&gt;&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.sql.rowset.serial.SerialArray java.sql.ResultSet getResultSet(long, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="javax.sql.rowset.serial.SerialArray java.sql.ResultSet getResultSet(long, int, java.util.Map&lt;java.lang.String,java.lang.Class&lt;?&gt;&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.sql.rowset.serial.SerialArray java.sql.ResultSet getResultSet(long, int, java.util.Map&lt;java.lang.String,java.lang.Class&lt;?&gt;&gt;) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -155,6 +215,11 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.sql.rowset.serial.SerialBlob java.io.InputStream getBinaryStream(long, long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.sql.rowset.serial.SerialBlob long length()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -167,6 +232,11 @@
   </item>
   <item name="javax.sql.rowset.serial.SerialBlob long position(java.sql.Blob, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.sql.rowset.serial.SerialBlob void free()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.sql.rowset.serial.SerialClob SerialClob(char[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -186,6 +256,11 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.sql.rowset.serial.SerialClob java.io.Reader getCharacterStream(long, long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.sql.rowset.serial.SerialClob java.lang.String getSubString(long, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -201,6 +276,11 @@
   </item>
   <item name="javax.sql.rowset.serial.SerialClob long position(java.sql.Clob, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.sql.rowset.serial.SerialClob void free()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.sql.rowset.serial.SerialDatalink SerialDatalink(java.net.URL) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

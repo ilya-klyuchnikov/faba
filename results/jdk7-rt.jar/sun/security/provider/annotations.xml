@@ -172,6 +172,9 @@
   <item name="sun.security.provider.DSA.RawDSA RawDSA()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.security.provider.DSA.RawDSA byte[] getDigest()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.provider.DSA.RawDSA void resetDigest()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -213,6 +216,14 @@
   <item name="sun.security.provider.DSAKeyPairGenerator java.security.KeyPair generateKeyPair(java.math.BigInteger, java.math.BigInteger, java.math.BigInteger, java.security.SecureRandom)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.provider.DSAKeyPairGenerator void checkStrength(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.security.provider.DSAKeyPairGenerator void initialize(int, java.security.SecureRandom)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.provider.DSAKeyPairGenerator void initialize(java.security.interfaces.DSAParams, java.security.SecureRandom) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -239,6 +250,14 @@
   </item>
   <item name="sun.security.provider.DSAParameterGenerator java.security.AlgorithmParameters engineGenerateParameters()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.provider.DSAParameterGenerator void engineInit(int, java.security.SecureRandom)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.provider.DSAParameterGenerator void engineInit(java.security.spec.AlgorithmParameterSpec, java.security.SecureRandom)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.security.provider.DSAParameterGenerator void engineInit(java.security.spec.AlgorithmParameterSpec, java.security.SecureRandom) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -767,6 +786,9 @@
   </item>
   <item name="sun.security.provider.PolicyParser.GrantEntry void write(java.io.PrintWriter) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.provider.PolicyParser.ParsingException ParsingException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.provider.PolicyParser.ParsingException java.lang.String getLocalizedMessage()">
     <annotation name="org.jetbrains.annotations.Contract">

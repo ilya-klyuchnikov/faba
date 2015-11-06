@@ -11,6 +11,11 @@
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLCodec com.sun.xml.internal.ws.api.pipe.ContentType encode(com.sun.xml.internal.ws.api.message.Packet, java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.encoding.xml.XMLCodec com.sun.xml.internal.ws.api.pipe.ContentType encode(com.sun.xml.internal.ws.api.message.Packet, java.nio.channels.WritableByteChannel)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLCodec com.sun.xml.internal.ws.api.pipe.ContentType encode(com.sun.xml.internal.ws.api.message.Packet, java.nio.channels.WritableByteChannel) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -33,6 +38,11 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLCodec void decode(java.io.InputStream, java.lang.String, com.sun.xml.internal.ws.api.message.Packet) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.xml.XMLCodec void decode(java.nio.channels.ReadableByteChannel, java.lang.String, com.sun.xml.internal.ws.api.message.Packet)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLCodec void decode(java.nio.channels.ReadableByteChannel, java.lang.String, com.sun.xml.internal.ws.api.message.Packet) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -160,6 +170,26 @@
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.UnknownContent com.sun.xml.internal.ws.api.message.Message copy()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.UnknownContent java.lang.String getPayloadLocalPart()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.UnknownContent java.lang.String getPayloadNamespaceURI()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.UnknownContent javax.activation.DataSource getDataSource()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.UnknownContent javax.xml.stream.XMLStreamReader readPayload()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.UnknownContent javax.xml.transform.Source readPayloadAsSource()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -173,6 +203,11 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.UnknownContent void writePayloadTo(javax.xml.stream.XMLStreamWriter) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.UnknownContent void writePayloadTo(org.xml.sax.ContentHandler, org.xml.sax.ErrorHandler, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.UnknownContent void writePayloadTo(org.xml.sax.ContentHandler, org.xml.sax.ErrorHandler, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -220,6 +255,11 @@
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.XMLMultiPart javax.activation.DataSource getDataSource()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.XMLMultiPart void writePayloadTo(org.xml.sax.ContentHandler, org.xml.sax.ErrorHandler, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.XMLMultiPart void writePayloadTo(org.xml.sax.ContentHandler, org.xml.sax.ErrorHandler, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -251,6 +291,11 @@
   </item>
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.XmlContent javax.activation.DataSource getDataSource()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.XmlContent void writePayloadTo(org.xml.sax.ContentHandler, org.xml.sax.ErrorHandler, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.encoding.xml.XMLMessage.XmlContent void writePayloadTo(org.xml.sax.ContentHandler, org.xml.sax.ErrorHandler, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

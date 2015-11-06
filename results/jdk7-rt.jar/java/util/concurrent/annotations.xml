@@ -38,12 +38,18 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.AbstractExecutorService java.util.concurrent.RunnableFuture&lt;T&gt; newTaskFor(java.lang.Runnable, T)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.AbstractExecutorService java.util.concurrent.RunnableFuture&lt;T&gt; newTaskFor(java.lang.Runnable, T) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.AbstractExecutorService java.util.concurrent.RunnableFuture&lt;T&gt; newTaskFor(java.util.concurrent.Callable&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.AbstractExecutorService java.util.concurrent.RunnableFuture&lt;T&gt; newTaskFor(java.util.concurrent.Callable&lt;T&gt;) 0">
@@ -130,6 +136,11 @@
   <item name="java.util.concurrent.ArrayBlockingQueue java.util.Iterator&lt;E&gt; iterator()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.ArrayBlockingQueue void checkNotNull(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.concurrent.ArrayBlockingQueue void checkNotNull(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -143,6 +154,18 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.util.concurrent.BrokenBarrierException BrokenBarrierException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.concurrent.BrokenBarrierException BrokenBarrierException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.concurrent.CancellationException CancellationException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.concurrent.CancellationException CancellationException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.ConcurrentHashMap ConcurrentHashMap(java.util.Map&lt;? extends K,? extends V&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -377,7 +400,8 @@
   </item>
   <item name="java.util.concurrent.ConcurrentLinkedDeque E screenNullResult(E)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val name="value" val="&quot;!null-&gt;!null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.util.concurrent.ConcurrentLinkedDeque E screenNullResult(E) 0">
@@ -453,6 +477,11 @@
   </item>
   <item name="java.util.concurrent.ConcurrentLinkedDeque void addLast(E) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ConcurrentLinkedDeque void checkNotNull(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.concurrent.ConcurrentLinkedDeque void checkNotNull(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -546,6 +575,11 @@
   </item>
   <item name="java.util.concurrent.ConcurrentLinkedQueue java.util.concurrent.ConcurrentLinkedQueue.Node&lt;E&gt; succ(java.util.concurrent.ConcurrentLinkedQueue.Node&lt;E&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ConcurrentLinkedQueue void checkNotNull(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.concurrent.ConcurrentLinkedQueue void checkNotNull(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -688,7 +722,8 @@
   </item>
   <item name="java.util.concurrent.ConcurrentSkipListMap java.lang.Comparable&lt;? super K&gt; comparable(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val name="value" val="&quot;!null-&gt;!null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.util.concurrent.ConcurrentSkipListMap java.lang.Comparable&lt;? super K&gt; comparable(java.lang.Object) 0">
@@ -873,6 +908,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.util.concurrent.ConcurrentSkipListMap.Iter void advance()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.ConcurrentSkipListMap.KeyIterator KeyIterator(java.util.concurrent.ConcurrentSkipListMap) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1290,8 +1328,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.concurrent.CopyOnWriteArrayList.COWIterator void add(E)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.concurrent.CopyOnWriteArrayList.COWIterator void add(E) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.concurrent.CopyOnWriteArrayList.COWIterator void remove()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.concurrent.CopyOnWriteArrayList.COWIterator void set(E)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.concurrent.CopyOnWriteArrayList.COWIterator void set(E) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1308,11 +1361,31 @@
   <item name="java.util.concurrent.CopyOnWriteArrayList.COWSubList java.util.ListIterator&lt;E&gt; listIterator(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.CopyOnWriteArrayList.COWSubList void checkForComodification()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.concurrent.CopyOnWriteArrayList.COWSubListIterator COWSubListIterator(java.util.List&lt;E&gt;, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.CopyOnWriteArrayList.COWSubListIterator void add(E)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.concurrent.CopyOnWriteArrayList.COWSubListIterator void add(E) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.concurrent.CopyOnWriteArrayList.COWSubListIterator void remove()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.concurrent.CopyOnWriteArrayList.COWSubListIterator void set(E)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.concurrent.CopyOnWriteArrayList.COWSubListIterator void set(E) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1374,6 +1447,9 @@
   <item name="java.util.concurrent.DelayQueue java.util.Iterator&lt;E&gt; iterator()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.DelayQueue.Itr E next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.DelayQueue.Itr Itr(java.util.concurrent.DelayQueue, java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -1419,8 +1495,20 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.concurrent.ExecutionException ExecutionException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.concurrent.ExecutionException ExecutionException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.concurrent.ExecutionException ExecutionException(java.lang.String, java.lang.Throwable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.ExecutorCompletionService ExecutorCompletionService(java.util.concurrent.Executor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ExecutorCompletionService ExecutorCompletionService(java.util.concurrent.Executor, java.util.concurrent.BlockingQueue&lt;java.util.concurrent.Future&lt;V&gt;&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.ExecutorCompletionService ExecutorCompletionService(java.util.concurrent.Executor, java.util.concurrent.BlockingQueue&lt;java.util.concurrent.Future&lt;V&gt;&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1434,6 +1522,9 @@
   <item name="java.util.concurrent.ExecutorCompletionService java.util.concurrent.Future&lt;V&gt; submit(java.util.concurrent.Callable&lt;V&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.ExecutorCompletionService.QueueingFuture QueueingFuture(java.util.concurrent.RunnableFuture&lt;V&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.ExecutorCompletionService.QueueingFuture QueueingFuture(java.util.concurrent.RunnableFuture&lt;V&gt;) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1443,6 +1534,9 @@
     </annotation>
   </item>
   <item name="java.util.concurrent.Executors java.util.concurrent.Callable&lt;T&gt; callable(java.lang.Runnable, T)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.Executors java.util.concurrent.Callable&lt;T&gt; callable(java.lang.Runnable, T) 0">
@@ -1461,18 +1555,27 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.Executors java.util.concurrent.Callable&lt;java.lang.Object&gt; callable(java.lang.Runnable)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.Executors java.util.concurrent.Callable&lt;java.lang.Object&gt; callable(java.lang.Runnable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.Executors java.util.concurrent.Callable&lt;java.lang.Object&gt; callable(java.security.PrivilegedAction&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.Executors java.util.concurrent.Callable&lt;java.lang.Object&gt; callable(java.security.PrivilegedAction&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.Executors java.util.concurrent.Callable&lt;java.lang.Object&gt; callable(java.security.PrivilegedExceptionAction&lt;?&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.Executors java.util.concurrent.Callable&lt;java.lang.Object&gt; callable(java.security.PrivilegedExceptionAction&lt;?&gt;) 0">
@@ -1506,6 +1609,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.Executors java.util.concurrent.ExecutorService unconfigurableExecutorService(java.util.concurrent.ExecutorService)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.Executors java.util.concurrent.ExecutorService unconfigurableExecutorService(java.util.concurrent.ExecutorService) 0">
@@ -1530,6 +1636,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.Executors java.util.concurrent.ScheduledExecutorService unconfigurableScheduledExecutorService(java.util.concurrent.ScheduledExecutorService)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.Executors java.util.concurrent.ScheduledExecutorService unconfigurableScheduledExecutorService(java.util.concurrent.ScheduledExecutorService) 0">
@@ -1691,8 +1800,18 @@
   <item name="java.util.concurrent.ForkJoinPool java.util.concurrent.ForkJoinTask&lt;T&gt; submit(java.util.concurrent.ForkJoinTask&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.ForkJoinPool java.util.concurrent.RunnableFuture&lt;T&gt; newTaskFor(java.lang.Runnable, T)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.concurrent.ForkJoinPool java.util.concurrent.RunnableFuture&lt;T&gt; newTaskFor(java.lang.Runnable, T) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ForkJoinPool java.util.concurrent.RunnableFuture&lt;T&gt; newTaskFor(java.util.concurrent.Callable&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.concurrent.ForkJoinPool java.util.concurrent.RunnableFuture&lt;T&gt; newTaskFor(java.util.concurrent.Callable&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1797,6 +1916,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.concurrent.ForkJoinTask java.util.concurrent.ForkJoinTask&lt;?&gt; adapt(java.lang.Runnable)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ForkJoinTask java.util.concurrent.ForkJoinTask&lt;?&gt; adapt(java.lang.Runnable) 0">
@@ -1812,12 +1934,18 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.util.concurrent.ForkJoinTask java.util.concurrent.ForkJoinTask&lt;T&gt; adapt(java.lang.Runnable, T)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ForkJoinTask java.util.concurrent.ForkJoinTask&lt;T&gt; adapt(java.lang.Runnable, T) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ForkJoinTask java.util.concurrent.ForkJoinTask&lt;T&gt; adapt(java.util.concurrent.Callable&lt;? extends T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.concurrent.ForkJoinTask java.util.concurrent.ForkJoinTask&lt;T&gt; adapt(java.util.concurrent.Callable&lt;? extends T&gt;) 0">
@@ -1841,6 +1969,9 @@
   <item name="java.util.concurrent.ForkJoinTask void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.ForkJoinTask.AdaptedCallable AdaptedCallable(java.util.concurrent.Callable&lt;? extends T&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.ForkJoinTask.AdaptedCallable AdaptedCallable(java.util.concurrent.Callable&lt;? extends T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1850,6 +1981,9 @@
     </annotation>
   </item>
   <item name="java.util.concurrent.ForkJoinTask.AdaptedCallable void setRawResult(T)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.concurrent.ForkJoinTask.AdaptedRunnable AdaptedRunnable(java.lang.Runnable, T)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.ForkJoinTask.AdaptedRunnable AdaptedRunnable(java.lang.Runnable, T) 0">
@@ -1924,8 +2058,14 @@
   <item name="java.util.concurrent.ForkJoinWorkerThread java.util.concurrent.ForkJoinTask&lt;?&gt; popTask()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.concurrent.FutureTask FutureTask(java.lang.Runnable, V)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.FutureTask FutureTask(java.lang.Runnable, V) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.FutureTask FutureTask(java.util.concurrent.Callable&lt;V&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.FutureTask FutureTask(java.util.concurrent.Callable&lt;V&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2540,6 +2680,9 @@
   <item name="java.util.concurrent.PriorityBlockingQueue void writeObject(java.io.ObjectOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.PriorityBlockingQueue.Itr E next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.PriorityBlockingQueue.Itr Itr(java.util.concurrent.PriorityBlockingQueue, java.lang.Object[])">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -2578,6 +2721,15 @@
     </annotation>
   </item>
   <item name="java.util.concurrent.RecursiveTask void setRawResult(V)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.concurrent.RejectedExecutionException RejectedExecutionException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.concurrent.RejectedExecutionException RejectedExecutionException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.concurrent.RejectedExecutionException RejectedExecutionException(java.lang.String, java.lang.Throwable)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.ScheduledThreadPoolExecutor ScheduledThreadPoolExecutor(int, java.util.concurrent.RejectedExecutionHandler) 1">
@@ -2727,6 +2879,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.util.concurrent.ScheduledThreadPoolExecutor.DelayedWorkQueue.Itr java.lang.Runnable next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.ScheduledThreadPoolExecutor.ScheduledFutureTask ScheduledFutureTask(java.lang.Runnable, V, long) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2979,6 +3134,9 @@
   <item name="java.util.concurrent.ThreadLocalRandom int next(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.util.concurrent.ThreadLocalRandom void setSeed(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.ThreadPoolExecutor ThreadPoolExecutor(int, int, long, java.util.concurrent.TimeUnit, java.util.concurrent.BlockingQueue&lt;java.lang.Runnable&gt;) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3146,8 +3304,14 @@
   <item name="java.util.concurrent.ThreadPoolExecutor void setKeepAliveTime(long, java.util.concurrent.TimeUnit) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.concurrent.ThreadPoolExecutor void setRejectedExecutionHandler(java.util.concurrent.RejectedExecutionHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.concurrent.ThreadPoolExecutor void setRejectedExecutionHandler(java.util.concurrent.RejectedExecutionHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.concurrent.ThreadPoolExecutor void setThreadFactory(java.util.concurrent.ThreadFactory)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.concurrent.ThreadPoolExecutor void setThreadFactory(java.util.concurrent.ThreadFactory) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3206,12 +3370,58 @@
   <item name="java.util.concurrent.TimeUnit TimeUnit(java.lang.String, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.util.concurrent.TimeUnit long convert(long, java.util.concurrent.TimeUnit)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.concurrent.TimeUnit long convert(long, java.util.concurrent.TimeUnit) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.concurrent.TimeUnit long toDays(long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.concurrent.TimeUnit long toHours(long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.concurrent.TimeUnit long toMicros(long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.concurrent.TimeUnit long toMillis(long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.concurrent.TimeUnit long toMinutes(long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.concurrent.TimeUnit long toNanos(long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.concurrent.TimeUnit long toSeconds(long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.concurrent.TimeUnit long x(long, long, long)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.util.concurrent.TimeoutException TimeoutException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.concurrent.TimeoutException TimeoutException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

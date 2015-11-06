@@ -116,6 +116,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,!null-&gt;!null&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.remote.JMXConnectorServer javax.management.ObjectName preRegister(javax.management.MBeanServer, javax.management.ObjectName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -163,6 +164,9 @@
   <item name="javax.management.remote.JMXConnectorServerFactory javax.management.remote.JMXConnectorServer newJMXConnectorServer(javax.management.remote.JMXServiceURL, java.util.Map&lt;java.lang.String,?&gt;, javax.management.MBeanServer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.remote.JMXPrincipal JMXPrincipal(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.management.remote.JMXPrincipal JMXPrincipal(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -185,13 +189,30 @@
   <item name="javax.management.remote.JMXPrincipal void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.remote.JMXPrincipal void validate(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.management.remote.JMXPrincipal void validate(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.remote.JMXProviderException JMXProviderException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.remote.JMXProviderException JMXProviderException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.management.remote.JMXProviderException JMXProviderException(java.lang.String, java.lang.Throwable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.remote.JMXProviderException java.lang.Throwable getCause()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="javax.management.remote.JMXServerErrorException JMXServerErrorException(java.lang.String, java.lang.Error)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.remote.JMXServerErrorException java.lang.Throwable getCause()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -285,6 +306,11 @@
   <item name="javax.management.remote.NotificationResult void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.remote.NotificationResult void validate(javax.management.remote.TargetedNotification[], long, long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.management.remote.NotificationResult void validate(javax.management.remote.TargetedNotification[], long, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -296,6 +322,9 @@
   </item>
   <item name="javax.management.remote.SubjectDelegationPermission SubjectDelegationPermission(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.management.remote.TargetedNotification TargetedNotification(javax.management.Notification, java.lang.Integer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.remote.TargetedNotification TargetedNotification(javax.management.Notification, java.lang.Integer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -318,6 +347,11 @@
   </item>
   <item name="javax.management.remote.TargetedNotification void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.management.remote.TargetedNotification void validate(javax.management.Notification, java.lang.Integer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.management.remote.TargetedNotification void validate(javax.management.Notification, java.lang.Integer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

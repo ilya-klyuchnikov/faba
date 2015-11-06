@@ -129,8 +129,14 @@
   <item name="com.sun.xml.internal.messaging.saaj.util.ByteOutputStream void writeTo(java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.messaging.saaj.util.CharReader CharReader(char[], int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.messaging.saaj.util.CharReader CharReader(char[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.util.CharReader CharReader(char[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.util.CharReader CharReader(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -165,6 +171,11 @@
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.util.FastInfosetReflection boolean isFastInfosetSource(javax.xml.transform.Source) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.util.FastInfosetReflection java.lang.Class getFastInfosetSource_class()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.util.FinalArrayList FinalArrayList()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -333,11 +344,20 @@
   <item name="com.sun.xml.internal.messaging.saaj.util.JaxmURI void setPath(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.messaging.saaj.util.JaxmURI void setPort(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.messaging.saaj.util.JaxmURI void setQueryString(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.util.JaxmURI void setScheme(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.util.JaxmURI.MalformedURIException MalformedURIException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.util.JaxmURI.MalformedURIException MalformedURIException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.util.MimeHeadersUtil MimeHeadersUtil()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -368,6 +388,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.util.RejectDoctypeSaxFilter void endDTD()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.util.RejectDoctypeSaxFilter void startDTD(java.lang.String, java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>

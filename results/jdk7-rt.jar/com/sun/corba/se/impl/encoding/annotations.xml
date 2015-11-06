@@ -141,6 +141,11 @@
   <item name="com.sun.corba.se.impl.encoding.BufferManagerWriteCollect.BufferManagerWriteCollectIterator BufferManagerWriteCollectIterator(com.sun.corba.se.impl.encoding.BufferManagerWriteCollect)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.corba.se.impl.encoding.BufferManagerWriteCollect.BufferManagerWriteCollectIterator void remove()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.BufferManagerWriteGrow BufferManagerWriteGrow(com.sun.corba.se.spi.orb.ORB) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -277,6 +282,16 @@
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDRInputStreamBase boolean markSupported()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.encoding.CDRInputStreamBase int read()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.encoding.CDRInputStreamBase org.omg.CORBA.Context read_Context()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -626,6 +641,16 @@
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDROutputStreamBase void setParent(com.sun.corba.se.impl.encoding.CDROutputStream)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.corba.se.impl.encoding.CDROutputStreamBase void write(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.encoding.CDROutputStreamBase void write_Context(org.omg.CORBA.Context, org.omg.CORBA.ContextList)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.encoding.CDROutputStreamBase void write_Context(org.omg.CORBA.Context, org.omg.CORBA.ContextList) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1061,6 +1086,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.corba.se.impl.encoding.CodeSetConversion.JavaCTBConverter byte[] getBytes()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.encoding.CodeSetConversion.JavaCTBConverter float getMaxBytesPerChar()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1315,6 +1345,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.encoding.IDLJavaSerializationInputStream._ByteArrayInputStream void setPosition(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.corba.se.impl.encoding.IDLJavaSerializationOutputStream IDLJavaSerializationOutputStream(byte)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>

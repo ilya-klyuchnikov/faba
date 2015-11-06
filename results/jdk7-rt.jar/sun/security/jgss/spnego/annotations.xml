@@ -62,11 +62,20 @@
   <item name="sun.security.jgss.spnego.NegTokenTarg void parseToken(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.jgss.spnego.SpNegoContext SpNegoContext(sun.security.jgss.spnego.SpNegoMechFactory, byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.jgss.spnego.SpNegoContext SpNegoContext(sun.security.jgss.spnego.SpNegoMechFactory, byte[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.security.jgss.spnego.SpNegoContext SpNegoContext(sun.security.jgss.spnego.SpNegoMechFactory, byte[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.jgss.spnego.SpNegoContext SpNegoContext(sun.security.jgss.spnego.SpNegoMechFactory, sun.security.jgss.spi.GSSCredentialSpi)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.spnego.SpNegoContext SpNegoContext(sun.security.jgss.spnego.SpNegoMechFactory, sun.security.jgss.spi.GSSNameSpi, sun.security.jgss.spi.GSSCredentialSpi, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.jgss.spnego.SpNegoContext SpNegoContext(sun.security.jgss.spnego.SpNegoMechFactory, sun.security.jgss.spi.GSSNameSpi, sun.security.jgss.spi.GSSCredentialSpi, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -140,6 +149,11 @@
       <val val="&quot;null,_-&gt;null&quot;"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.jgss.spnego.SpNegoContext byte[] export()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.security.jgss.spnego.SpNegoContext byte[] getEncodedMechs(org.ietf.jgss.Oid[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -254,6 +268,9 @@
     </annotation>
   </item>
   <item name="sun.security.jgss.spnego.SpNegoMechFactory sun.security.jgss.spi.GSSContextSpi getMechanismContext(byte[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.jgss.spnego.SpNegoMechFactory sun.security.jgss.spi.GSSContextSpi getMechanismContext(byte[]) 0">
@@ -276,6 +293,11 @@
   </item>
   <item name="sun.security.jgss.spnego.SpNegoToken SpNegoToken(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.jgss.spnego.SpNegoToken int checkNextField(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.security.jgss.spnego.SpNegoToken int getType()">
     <annotation name="org.jetbrains.annotations.Contract">

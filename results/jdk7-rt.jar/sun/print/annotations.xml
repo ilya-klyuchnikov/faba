@@ -505,6 +505,9 @@
   <item name="sun.print.PSPrinterJob void setColor(java.awt.Color)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.print.PSPrinterJob void setFillMode(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.print.PSPrinterJob void setTransform(java.awt.geom.AffineTransform)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -515,6 +518,16 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.print.PSPrinterJob.EPSPrinter int getNumberOfPages()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.print.PSPrinterJob.EPSPrinter java.awt.print.PageFormat getPageFormat(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.print.PSPrinterJob.EPSPrinter java.awt.print.Printable getPrintable(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1231,6 +1244,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.print.PrintJobAttributeException PrintJobAttributeException(java.lang.String, java.lang.Class, javax.print.attribute.Attribute)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.print.PrintJobAttributeException java.lang.Class[] getUnsupportedAttributes()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1242,6 +1258,9 @@
       <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.print.PrintJobFlavorException PrintJobFlavorException(java.lang.String, javax.print.DocFlavor)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.print.PrintJobFlavorException javax.print.DocFlavor[] getUnsupportedFlavors()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1552,10 +1571,16 @@
   <item name="sun.print.RasterPrinterJob void setGraphicsConfigInfo(java.awt.geom.AffineTransform, double, double) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.print.RasterPrinterJob void setJobName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.print.RasterPrinterJob void setJobName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.print.RasterPrinterJob void setPageRange(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.print.RasterPrinterJob void setPageable(java.awt.print.Pageable)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.print.RasterPrinterJob void setPageable(java.awt.print.Pageable) 0">
@@ -1911,6 +1936,9 @@
   </item>
   <item name="sun.print.UnixPrintService T getAttribute(java.lang.Class&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.print.UnixPrintService UnixPrintService(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.print.UnixPrintService UnixPrintService(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

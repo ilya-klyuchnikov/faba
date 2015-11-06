@@ -131,6 +131,11 @@
   <item name="sun.nio.ch.AsynchronousSocketChannelImpl java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.AsynchronousSocketChannelImpl java.net.SocketAddress getRemoteAddress()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.AsynchronousSocketChannelImpl java.nio.channels.AsynchronousSocketChannel bind(java.net.SocketAddress)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -662,6 +667,12 @@
   <item name="sun.nio.ch.FileKey sun.nio.ch.FileKey create(java.io.FileDescriptor)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.FileLockImpl FileLockImpl(java.nio.channels.AsynchronousFileChannel, long, long, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.FileLockImpl FileLockImpl(java.nio.channels.FileChannel, long, long, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.nio.ch.FileLockImpl boolean isValid()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1025,8 +1036,18 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.nio.ch.NativeDispatcher int pread(java.io.FileDescriptor, long, int, long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.NativeDispatcher int pread(java.io.FileDescriptor, long, int, long) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.NativeDispatcher int pwrite(java.io.FileDescriptor, long, int, long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.NativeDispatcher int pwrite(java.io.FileDescriptor, long, int, long) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1117,7 +1138,8 @@
   </item>
   <item name="sun.nio.ch.Net java.net.InetSocketAddress asInetSocketAddress(java.net.SocketAddress)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val name="value" val="&quot;!null-&gt;!null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="sun.nio.ch.Net java.net.InetSocketAddress asInetSocketAddress(java.net.SocketAddress) 0">
@@ -1125,7 +1147,8 @@
   </item>
   <item name="sun.nio.ch.Net java.net.InetSocketAddress checkAddress(java.net.SocketAddress)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val name="value" val="&quot;!null-&gt;!null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="sun.nio.ch.Net java.net.InetSocketAddress checkAddress(java.net.SocketAddress) 0">
@@ -1312,14 +1335,52 @@
   <item name="sun.nio.ch.Reflect void setInt(java.lang.Object, java.lang.reflect.Field, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.ch.SctpChannelImpl SctpChannelImpl(java.nio.channels.spi.SelectorProvider)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.SctpChannelImpl T getOption(com.sun.nio.sctp.SctpSocketOption&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.SctpChannelImpl T getOption(com.sun.nio.sctp.SctpSocketOption&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.SctpChannelImpl boolean connect(java.net.SocketAddress)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.SctpChannelImpl boolean connect(java.net.SocketAddress) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.nio.ch.SctpChannelImpl boolean connect(java.net.SocketAddress, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.SctpChannelImpl boolean connect(java.net.SocketAddress, int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.SctpChannelImpl boolean finishConnect()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.ch.SctpChannelImpl boolean isConnectionPending()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.ch.SctpChannelImpl com.sun.nio.sctp.Association association()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.ch.SctpChannelImpl com.sun.nio.sctp.MessageInfo receive(java.nio.ByteBuffer, T, com.sun.nio.sctp.NotificationHandler&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.SctpChannelImpl com.sun.nio.sctp.MessageInfo receive(java.nio.ByteBuffer, T, com.sun.nio.sctp.NotificationHandler&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1330,11 +1391,26 @@
   <item name="sun.nio.ch.SctpChannelImpl com.sun.nio.sctp.MessageInfo receive(java.nio.ByteBuffer, T, com.sun.nio.sctp.NotificationHandler&lt;T&gt;) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.nio.ch.SctpChannelImpl com.sun.nio.sctp.SctpChannel bind(java.net.SocketAddress)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.SctpChannelImpl com.sun.nio.sctp.SctpChannel bind(java.net.SocketAddress) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.nio.ch.SctpChannelImpl com.sun.nio.sctp.SctpChannel bindAddress(java.net.InetAddress)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.SctpChannelImpl com.sun.nio.sctp.SctpChannel bindAddress(java.net.InetAddress) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.SctpChannelImpl com.sun.nio.sctp.SctpChannel setOption(com.sun.nio.sctp.SctpSocketOption&lt;T&gt;, T)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.SctpChannelImpl com.sun.nio.sctp.SctpChannel setOption(com.sun.nio.sctp.SctpSocketOption&lt;T&gt;, T) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1342,14 +1418,54 @@
   <item name="sun.nio.ch.SctpChannelImpl com.sun.nio.sctp.SctpChannel setOption(com.sun.nio.sctp.SctpSocketOption&lt;T&gt;, T) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.nio.ch.SctpChannelImpl com.sun.nio.sctp.SctpChannel shutdown()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.ch.SctpChannelImpl com.sun.nio.sctp.SctpChannel unbindAddress(java.net.InetAddress)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.SctpChannelImpl com.sun.nio.sctp.SctpChannel unbindAddress(java.net.InetAddress) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.SctpChannelImpl int send(java.nio.ByteBuffer, com.sun.nio.sctp.MessageInfo)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.SctpChannelImpl int send(java.nio.ByteBuffer, com.sun.nio.sctp.MessageInfo) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.SctpChannelImpl int send(java.nio.ByteBuffer, com.sun.nio.sctp.MessageInfo) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.SctpChannelImpl java.util.Set&lt;com.sun.nio.sctp.SctpSocketOption&lt;?&gt;&gt; supportedOptions()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.ch.SctpChannelImpl java.util.Set&lt;java.net.SocketAddress&gt; getAllLocalAddresses()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.ch.SctpChannelImpl java.util.Set&lt;java.net.SocketAddress&gt; getRemoteAddresses()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.ch.SctpChannelImpl void implCloseSelectableChannel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.ch.SctpChannelImpl void implConfigureBlocking(boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.SctpMessageInfoImpl SctpMessageInfoImpl(com.sun.nio.sctp.Association, java.net.SocketAddress, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -1381,6 +1497,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.SctpMessageInfoImpl com.sun.nio.sctp.MessageInfo streamNumber(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.ch.SctpMessageInfoImpl com.sun.nio.sctp.MessageInfo timeToLive(long)">
@@ -1427,11 +1544,24 @@
   <item name="sun.nio.ch.SctpMessageInfoImpl void setAssociation(com.sun.nio.sctp.Association)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.nio.ch.SctpMultiChannelImpl SctpMultiChannelImpl(java.nio.channels.spi.SelectorProvider)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.SctpMultiChannelImpl T getOption(com.sun.nio.sctp.SctpSocketOption&lt;T&gt;, com.sun.nio.sctp.Association)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.SctpMultiChannelImpl T getOption(com.sun.nio.sctp.SctpSocketOption&lt;T&gt;, com.sun.nio.sctp.Association) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.ch.SctpMultiChannelImpl T getOption(com.sun.nio.sctp.SctpSocketOption&lt;T&gt;, com.sun.nio.sctp.Association) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.SctpMultiChannelImpl com.sun.nio.sctp.MessageInfo receive(java.nio.ByteBuffer, T, com.sun.nio.sctp.NotificationHandler&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.SctpMultiChannelImpl com.sun.nio.sctp.MessageInfo receive(java.nio.ByteBuffer, T, com.sun.nio.sctp.NotificationHandler&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1442,14 +1572,34 @@
   <item name="sun.nio.ch.SctpMultiChannelImpl com.sun.nio.sctp.MessageInfo receive(java.nio.ByteBuffer, T, com.sun.nio.sctp.NotificationHandler&lt;T&gt;) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.nio.ch.SctpMultiChannelImpl com.sun.nio.sctp.SctpChannel branch(com.sun.nio.sctp.Association)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.SctpMultiChannelImpl com.sun.nio.sctp.SctpChannel branch(com.sun.nio.sctp.Association) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.SctpMultiChannelImpl com.sun.nio.sctp.SctpMultiChannel bind(java.net.SocketAddress, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.SctpMultiChannelImpl com.sun.nio.sctp.SctpMultiChannel bind(java.net.SocketAddress, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.nio.ch.SctpMultiChannelImpl com.sun.nio.sctp.SctpMultiChannel bindAddress(java.net.InetAddress)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.SctpMultiChannelImpl com.sun.nio.sctp.SctpMultiChannel bindAddress(java.net.InetAddress) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.SctpMultiChannelImpl com.sun.nio.sctp.SctpMultiChannel setOption(com.sun.nio.sctp.SctpSocketOption&lt;T&gt;, T, com.sun.nio.sctp.Association)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.SctpMultiChannelImpl com.sun.nio.sctp.SctpMultiChannel setOption(com.sun.nio.sctp.SctpSocketOption&lt;T&gt;, T, com.sun.nio.sctp.Association) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1460,11 +1610,26 @@
   <item name="sun.nio.ch.SctpMultiChannelImpl com.sun.nio.sctp.SctpMultiChannel setOption(com.sun.nio.sctp.SctpSocketOption&lt;T&gt;, T, com.sun.nio.sctp.Association) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.nio.ch.SctpMultiChannelImpl com.sun.nio.sctp.SctpMultiChannel shutdown(com.sun.nio.sctp.Association)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.SctpMultiChannelImpl com.sun.nio.sctp.SctpMultiChannel shutdown(com.sun.nio.sctp.Association) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.nio.ch.SctpMultiChannelImpl com.sun.nio.sctp.SctpMultiChannel unbindAddress(java.net.InetAddress)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.SctpMultiChannelImpl com.sun.nio.sctp.SctpMultiChannel unbindAddress(java.net.InetAddress) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.SctpMultiChannelImpl int send(java.nio.ByteBuffer, com.sun.nio.sctp.MessageInfo)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.SctpMultiChannelImpl int send(java.nio.ByteBuffer, com.sun.nio.sctp.MessageInfo) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1472,17 +1637,75 @@
   <item name="sun.nio.ch.SctpMultiChannelImpl int send(java.nio.ByteBuffer, com.sun.nio.sctp.MessageInfo) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.nio.ch.SctpMultiChannelImpl java.util.Set&lt;com.sun.nio.sctp.Association&gt; associations()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.ch.SctpMultiChannelImpl java.util.Set&lt;com.sun.nio.sctp.SctpSocketOption&lt;?&gt;&gt; supportedOptions()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.ch.SctpMultiChannelImpl java.util.Set&lt;java.net.SocketAddress&gt; getAllLocalAddresses()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.ch.SctpMultiChannelImpl java.util.Set&lt;java.net.SocketAddress&gt; getRemoteAddresses(com.sun.nio.sctp.Association)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.SctpMultiChannelImpl java.util.Set&lt;java.net.SocketAddress&gt; getRemoteAddresses(com.sun.nio.sctp.Association) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.SctpMultiChannelImpl void implCloseSelectableChannel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.ch.SctpMultiChannelImpl void implConfigureBlocking(boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.ch.SctpServerChannelImpl SctpServerChannelImpl(java.nio.channels.spi.SelectorProvider)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.ch.SctpServerChannelImpl T getOption(com.sun.nio.sctp.SctpSocketOption&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.SctpServerChannelImpl T getOption(com.sun.nio.sctp.SctpSocketOption&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.nio.ch.SctpServerChannelImpl com.sun.nio.sctp.SctpChannel accept()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.ch.SctpServerChannelImpl com.sun.nio.sctp.SctpServerChannel bind(java.net.SocketAddress, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.SctpServerChannelImpl com.sun.nio.sctp.SctpServerChannel bind(java.net.SocketAddress, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.nio.ch.SctpServerChannelImpl com.sun.nio.sctp.SctpServerChannel bindAddress(java.net.InetAddress)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.SctpServerChannelImpl com.sun.nio.sctp.SctpServerChannel bindAddress(java.net.InetAddress) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.SctpServerChannelImpl com.sun.nio.sctp.SctpServerChannel setOption(com.sun.nio.sctp.SctpSocketOption&lt;T&gt;, T)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.SctpServerChannelImpl com.sun.nio.sctp.SctpServerChannel setOption(com.sun.nio.sctp.SctpSocketOption&lt;T&gt;, T) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1490,8 +1713,33 @@
   <item name="sun.nio.ch.SctpServerChannelImpl com.sun.nio.sctp.SctpServerChannel setOption(com.sun.nio.sctp.SctpSocketOption&lt;T&gt;, T) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.nio.ch.SctpServerChannelImpl com.sun.nio.sctp.SctpServerChannel unbindAddress(java.net.InetAddress)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.ch.SctpServerChannelImpl com.sun.nio.sctp.SctpServerChannel unbindAddress(java.net.InetAddress) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.ch.SctpServerChannelImpl java.util.Set&lt;com.sun.nio.sctp.SctpSocketOption&lt;?&gt;&gt; supportedOptions()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.ch.SctpServerChannelImpl java.util.Set&lt;java.net.SocketAddress&gt; getAllLocalAddresses()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.ch.SctpServerChannelImpl void implCloseSelectableChannel()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.ch.SctpServerChannelImpl void implConfigureBlocking(boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.nio.ch.SctpStdSocketOption SctpStdSocketOption(java.lang.String, java.lang.Class&lt;T&gt;)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -1794,6 +2042,9 @@
   </item>
   <item name="sun.nio.ch.SocketAdaptor void connect(java.net.SocketAddress, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.ch.SocketAdaptor void setSoTimeout(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.ch.SocketAdaptor.SocketInputStream SocketInputStream(sun.nio.ch.SocketAdaptor)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>

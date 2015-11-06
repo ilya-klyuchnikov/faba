@@ -114,6 +114,11 @@
       <val val="&quot;null-&gt;true&quot;"/>
     </annotation>
   </item>
+  <item name="sun.security.util.BigInt int toInt()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.security.util.BigInt java.lang.String hexify()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -121,10 +126,16 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.util.BigInt java.math.BigInteger toBigInteger()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.util.BitArray BitArray(boolean[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.util.BitArray BitArray(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.util.BitArray BitArray(int, byte[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -351,6 +362,11 @@
   </item>
   <item name="sun.security.util.DerInputBuffer byte[] toByteArray()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.util.DerInputBuffer int peek()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.security.util.DerInputBuffer java.math.BigInteger getBigInteger(int, boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1015,14 +1031,34 @@
   <item name="sun.security.util.ObjectIdentifier sun.security.util.ObjectIdentifier newInternal(int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.util.ObjectIdentifier void check(byte[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.security.util.ObjectIdentifier void check(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.util.ObjectIdentifier void checkCount(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.security.util.ObjectIdentifier void checkFirstComponent(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.security.util.ObjectIdentifier void checkFirstComponent(java.math.BigInteger) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.security.util.ObjectIdentifier void checkOtherComponent(int, java.math.BigInteger) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.security.util.ObjectIdentifier void checkSecondComponent(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.security.util.ObjectIdentifier void checkSecondComponent(int, java.math.BigInteger) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1078,6 +1114,12 @@
   <item name="sun.security.util.PathList java.net.URL[] pathToURLs(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.util.PendingException PendingException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.security.util.PendingException PendingException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.util.PolicyUtil PolicyUtil()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1114,6 +1156,9 @@
   </item>
   <item name="sun.security.util.PropertyExpander java.lang.String expand(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.util.PropertyExpander.ExpandException ExpandException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.security.util.Resources Resources()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>

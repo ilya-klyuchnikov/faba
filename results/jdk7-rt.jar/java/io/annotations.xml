@@ -71,7 +71,18 @@
   <item name="java.io.Bits void putShort(byte[], int, short) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.BufferedInputStream BufferedInputStream(java.io.InputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.BufferedInputStream BufferedInputStream(java.io.InputStream, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.BufferedInputStream boolean markSupported()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.io.BufferedInputStream byte[] getBufIfOpen()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -79,11 +90,31 @@
   <item name="java.io.BufferedInputStream int read(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.BufferedInputStream java.io.InputStream getInIfOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.io.BufferedInputStream void mark(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.BufferedInputStream void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.BufferedOutputStream BufferedOutputStream(java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.BufferedOutputStream BufferedOutputStream(java.io.OutputStream, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.BufferedReader BufferedReader(java.io.Reader)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.BufferedReader BufferedReader(java.io.Reader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.io.BufferedReader BufferedReader(java.io.Reader, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.BufferedReader BufferedReader(java.io.Reader, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -102,6 +133,17 @@
   <item name="java.io.BufferedReader java.lang.String readLine(boolean)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.io.BufferedReader void ensureOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.io.BufferedReader void mark(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.BufferedReader void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.BufferedWriter BufferedWriter(java.io.Writer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -109,6 +151,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.io.BufferedWriter int min(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.io.BufferedWriter void ensureOpen()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -164,6 +211,11 @@
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.ByteArrayOutputStream int hugeCapacity(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.io.ByteArrayOutputStream int size()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -186,6 +238,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.io.ByteArrayOutputStream void ensureCapacity(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.ByteArrayOutputStream void grow(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.ByteArrayOutputStream void reset()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -201,6 +259,9 @@
   <item name="java.io.CharArrayReader CharArrayReader(char[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.CharArrayReader CharArrayReader(char[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.CharArrayReader CharArrayReader(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -209,10 +270,32 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.io.CharArrayReader boolean ready()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.io.CharArrayReader int read()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.CharArrayReader int read(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.CharArrayReader long skip(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.CharArrayReader void close()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.CharArrayReader void ensureOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.io.CharArrayReader void mark(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.CharArrayReader void reset()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.CharArrayWriter char[] toCharArray()">
@@ -265,6 +348,12 @@
   </item>
   <item name="java.io.CharArrayWriter void writeTo(java.io.Writer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.io.CharConversionException CharConversionException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.CharConversionException CharConversionException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.Console char[] readPassword()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -377,6 +466,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.io.EOFException EOFException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.EOFException EOFException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.ExpiringCache java.io.ExpiringCache.Entry entryFor(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -564,6 +659,17 @@
   <item name="java.io.FileInputStream int read(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.FileInputStream java.io.FileDescriptor getFD()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.io.FileNotFoundException FileNotFoundException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.FileNotFoundException FileNotFoundException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.FileNotFoundException FileNotFoundException(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -578,6 +684,11 @@
   </item>
   <item name="java.io.FileOutputStream FileOutputStream(java.io.FileDescriptor) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.io.FileOutputStream java.io.FileDescriptor getFD()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.io.FileOutputStream void write(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -699,11 +810,26 @@
   <item name="java.io.FilterOutputStream void write(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.FilterReader FilterReader(java.io.Reader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.FilterReader FilterReader(java.io.Reader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.FilterWriter FilterWriter(java.io.Writer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.FilterWriter FilterWriter(java.io.Writer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.io.IOException IOException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.IOException IOException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.IOException IOException(java.lang.String, java.lang.Throwable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.InputStream InputStream()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -736,6 +862,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.io.InputStream void reset()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.io.InputStreamReader InputStreamReader(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -757,6 +888,21 @@
   <item name="java.io.InputStreamReader InputStreamReader(java.io.InputStream, java.nio.charset.CharsetDecoder) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.InterruptedIOException InterruptedIOException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.InterruptedIOException InterruptedIOException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.InvalidClassException InvalidClassException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.InvalidClassException InvalidClassException(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.InvalidObjectException InvalidObjectException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.LineNumberInputStream LineNumberInputStream(java.io.InputStream)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -771,8 +917,14 @@
   <item name="java.io.LineNumberInputStream void setLineNumber(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.io.LineNumberReader LineNumberReader(java.io.Reader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.LineNumberReader LineNumberReader(java.io.Reader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.io.LineNumberReader LineNumberReader(java.io.Reader, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.LineNumberReader LineNumberReader(java.io.Reader, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -785,7 +937,25 @@
   <item name="java.io.LineNumberReader int read(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.LineNumberReader void mark(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.LineNumberReader void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.LineNumberReader void setLineNumber(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.NotActiveException NotActiveException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.NotActiveException NotActiveException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.NotSerializableException NotSerializableException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.NotSerializableException NotSerializableException(java.lang.String)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.ObjectInputStream int read(byte[], int, int) 0">
@@ -868,6 +1038,14 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.io.ObjectInputStream.BlockDataInputStream boolean setBlockDataMode(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.ObjectInputStream.BlockDataInputStream int currentBlockRemaining()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.io.ObjectInputStream.BlockDataInputStream int readUTFChar(java.lang.StringBuilder, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -935,6 +1113,11 @@
   </item>
   <item name="java.io.ObjectInputStream.HandleTable.HandleList HandleList()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.ObjectInputStream.HandleTable.HandleList int get(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.io.ObjectInputStream.HandleTable.HandleList int size()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1345,6 +1528,9 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.ObjectStreamClass.ExceptionInfo java.io.InvalidClassException newInvalidClassException()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.io.ObjectStreamClass.FieldReflector FieldReflector(java.io.ObjectStreamField[]) 0">
@@ -1400,6 +1586,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.io.ObjectStreamException ObjectStreamException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.ObjectStreamException ObjectStreamException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.ObjectStreamField ObjectStreamField(java.lang.String, java.lang.Class&lt;?&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1465,6 +1657,12 @@
   <item name="java.io.ObjectStreamField void setOffset(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.io.OptionalDataException OptionalDataException(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.OptionalDataException OptionalDataException(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.OutputStream OutputStream()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1507,6 +1705,12 @@
   <item name="java.io.OutputStreamWriter OutputStreamWriter(java.io.OutputStream, java.nio.charset.CharsetEncoder) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.PipedInputStream PipedInputStream()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.PipedInputStream PipedInputStream(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.PipedInputStream int available()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1521,6 +1725,9 @@
   <item name="java.io.PipedInputStream void connect(java.io.PipedOutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.PipedInputStream void initPipe(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.PipedOutputStream PipedOutputStream()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1532,6 +1739,12 @@
   <item name="java.io.PipedOutputStream void write(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.PipedReader PipedReader()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.PipedReader PipedReader(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.PipedReader int read(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1540,6 +1753,9 @@
   </item>
   <item name="java.io.PipedReader void connect(java.io.PipedWriter) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.io.PipedReader void initPipe(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.PipedWriter PipedWriter()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -1582,7 +1798,8 @@
   </item>
   <item name="java.io.PrintStream T requireNonNull(T, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null&quot;"/>
+      <val name="value" val="&quot;!null,_-&gt;!null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.io.PrintStream T requireNonNull(T, java.lang.String) 0">
@@ -1620,6 +1837,11 @@
   </item>
   <item name="java.io.PrintStream void clearError()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.PrintStream void ensureOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.io.PrintStream void print(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1699,6 +1921,11 @@
   <item name="java.io.PrintWriter void clearError()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.io.PrintWriter void ensureOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.io.PrintWriter void print(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1717,6 +1944,12 @@
   <item name="java.io.PrintWriter void write(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.PushbackInputStream PushbackInputStream(java.io.InputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.PushbackInputStream PushbackInputStream(java.io.InputStream, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.PushbackInputStream boolean markSupported()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1725,7 +1958,17 @@
   <item name="java.io.PushbackInputStream int read(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.PushbackInputStream void ensureOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.io.PushbackInputStream void mark(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.io.PushbackInputStream void reset()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1733,13 +1976,34 @@
   <item name="java.io.PushbackInputStream void unread(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.PushbackReader PushbackReader(java.io.Reader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.PushbackReader PushbackReader(java.io.Reader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.io.PushbackReader PushbackReader(java.io.Reader, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.PushbackReader PushbackReader(java.io.Reader, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.io.PushbackReader boolean markSupported()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.io.PushbackReader void ensureOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.io.PushbackReader void mark(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.io.PushbackReader void reset()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1758,6 +2022,11 @@
   </item>
   <item name="java.io.RandomAccessFile int read(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.io.RandomAccessFile java.io.FileDescriptor getFD()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.io.RandomAccessFile java.lang.String readLine()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1783,6 +2052,9 @@
   <item name="java.io.Reader Reader()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.io.Reader Reader(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.Reader Reader(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1802,6 +2074,16 @@
   <item name="java.io.Reader int read(java.nio.CharBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.Reader void mark(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.io.Reader void reset()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.io.SerialCallbackContext java.io.ObjectStreamClass getDesc()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1818,6 +2100,12 @@
   </item>
   <item name="java.io.SerializablePermission SerializablePermission(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.io.StreamCorruptedException StreamCorruptedException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.StreamCorruptedException StreamCorruptedException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.StreamTokenizer StreamTokenizer(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1879,13 +2167,35 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.io.StringReader boolean ready()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.io.StringReader int read(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.io.StringReader long skip(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.StringReader void close()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.io.StringReader void ensureOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.io.StringReader void mark(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.StringReader void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.StringWriter StringWriter()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.StringWriter StringWriter(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.StringWriter java.io.StringWriter append(char)">
@@ -1929,6 +2239,15 @@
   </item>
   <item name="java.io.StringWriter void write(java.lang.String, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.io.SyncFailedException SyncFailedException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.UTFDataFormatException UTFDataFormatException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.UTFDataFormatException UTFDataFormatException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.UnixFileSystem boolean isAbsolute(java.io.File) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2008,12 +2327,21 @@
   <item name="java.io.UnixFileSystem java.lang.String resolve(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.UnsupportedEncodingException UnsupportedEncodingException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.UnsupportedEncodingException UnsupportedEncodingException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.io.WriteAbortedException java.lang.Throwable getCause()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.io.Writer Writer()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.Writer Writer(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.io.Writer Writer(java.lang.Object) 0">

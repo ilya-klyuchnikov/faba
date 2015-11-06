@@ -140,6 +140,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.Bits java.nio.ByteOrder byteOrder()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.Bits long getLong(java.nio.ByteBuffer, int, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -247,6 +252,16 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.Buffer int checkIndex(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.Buffer int checkIndex(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.Buffer int limit()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -256,6 +271,18 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.nio.Buffer int nextGetIndex()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.nio.Buffer int nextGetIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.nio.Buffer int nextPutIndex()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.nio.Buffer int nextPutIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.nio.Buffer int position()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -276,6 +303,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.Buffer java.nio.Buffer limit(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.Buffer java.nio.Buffer mark()">
@@ -283,19 +311,32 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.Buffer java.nio.Buffer position(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.Buffer java.nio.Buffer reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.Buffer java.nio.Buffer rewind()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.Buffer void checkBounds(int, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.Buffer void discardMark()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.nio.Buffer void truncate()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.nio.BufferOverflowException BufferOverflowException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.nio.BufferUnderflowException BufferUnderflowException()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.nio.ByteBuffer boolean equals(byte, byte)">
@@ -307,6 +348,16 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.nio.ByteBuffer boolean hasArray()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.ByteBuffer byte[] array()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.ByteBuffer int arrayOffset()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -338,6 +389,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.ByteBuffer java.nio.ByteBuffer order(java.nio.ByteOrder)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.nio.ByteBuffer java.nio.ByteBuffer order(java.nio.ByteOrder) 0">
@@ -475,8 +527,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.ByteBufferAsCharBufferRB java.nio.CharBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.ByteBufferAsCharBufferRB java.nio.CharBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.nio.ByteBufferAsCharBufferRB java.nio.CharBuffer put(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.ByteBufferAsCharBufferRB java.nio.CharBuffer put(int, char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.ByteBufferAsCharBufferRB java.nio.CharBuffer slice()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -500,8 +567,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.ByteBufferAsCharBufferRL java.nio.CharBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.ByteBufferAsCharBufferRL java.nio.CharBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.nio.ByteBufferAsCharBufferRL java.nio.CharBuffer put(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.ByteBufferAsCharBufferRL java.nio.CharBuffer put(int, char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.ByteBufferAsCharBufferRL java.nio.CharBuffer slice()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -594,8 +676,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.ByteBufferAsDoubleBufferRB java.nio.DoubleBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.ByteBufferAsDoubleBufferRB java.nio.DoubleBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.nio.ByteBufferAsDoubleBufferRB java.nio.DoubleBuffer put(double)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.ByteBufferAsDoubleBufferRB java.nio.DoubleBuffer put(int, double)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.ByteBufferAsDoubleBufferRB java.nio.DoubleBuffer slice()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -613,8 +710,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.ByteBufferAsDoubleBufferRL java.nio.DoubleBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.ByteBufferAsDoubleBufferRL java.nio.DoubleBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.nio.ByteBufferAsDoubleBufferRL java.nio.DoubleBuffer put(double)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.ByteBufferAsDoubleBufferRL java.nio.DoubleBuffer put(int, double)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.ByteBufferAsDoubleBufferRL java.nio.DoubleBuffer slice()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -704,8 +816,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.ByteBufferAsFloatBufferRB java.nio.FloatBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.ByteBufferAsFloatBufferRB java.nio.FloatBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.nio.ByteBufferAsFloatBufferRB java.nio.FloatBuffer put(float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.ByteBufferAsFloatBufferRB java.nio.FloatBuffer put(int, float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.ByteBufferAsFloatBufferRB java.nio.FloatBuffer slice()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -723,8 +850,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.ByteBufferAsFloatBufferRL java.nio.FloatBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.ByteBufferAsFloatBufferRL java.nio.FloatBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.nio.ByteBufferAsFloatBufferRL java.nio.FloatBuffer put(float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.ByteBufferAsFloatBufferRL java.nio.FloatBuffer put(int, float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.ByteBufferAsFloatBufferRL java.nio.FloatBuffer slice()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -814,8 +956,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.ByteBufferAsIntBufferRB java.nio.IntBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.ByteBufferAsIntBufferRB java.nio.IntBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.nio.ByteBufferAsIntBufferRB java.nio.IntBuffer put(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.ByteBufferAsIntBufferRB java.nio.IntBuffer put(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.ByteBufferAsIntBufferRB java.nio.IntBuffer slice()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -833,8 +990,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.ByteBufferAsIntBufferRL java.nio.IntBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.ByteBufferAsIntBufferRL java.nio.IntBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.nio.ByteBufferAsIntBufferRL java.nio.IntBuffer put(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.ByteBufferAsIntBufferRL java.nio.IntBuffer put(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.ByteBufferAsIntBufferRL java.nio.IntBuffer slice()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -924,8 +1096,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.ByteBufferAsLongBufferRB java.nio.LongBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.ByteBufferAsLongBufferRB java.nio.LongBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.nio.ByteBufferAsLongBufferRB java.nio.LongBuffer put(int, long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.ByteBufferAsLongBufferRB java.nio.LongBuffer put(long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.ByteBufferAsLongBufferRB java.nio.LongBuffer slice()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -943,8 +1130,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.ByteBufferAsLongBufferRL java.nio.LongBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.ByteBufferAsLongBufferRL java.nio.LongBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.nio.ByteBufferAsLongBufferRL java.nio.LongBuffer put(int, long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.ByteBufferAsLongBufferRL java.nio.LongBuffer put(long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.ByteBufferAsLongBufferRL java.nio.LongBuffer slice()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1034,8 +1236,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.ByteBufferAsShortBufferRB java.nio.ShortBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.ByteBufferAsShortBufferRB java.nio.ShortBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.nio.ByteBufferAsShortBufferRB java.nio.ShortBuffer put(int, short)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.ByteBufferAsShortBufferRB java.nio.ShortBuffer put(short)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.ByteBufferAsShortBufferRB java.nio.ShortBuffer slice()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1053,8 +1270,23 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.ByteBufferAsShortBufferRL java.nio.ShortBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.ByteBufferAsShortBufferRL java.nio.ShortBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.nio.ByteBufferAsShortBufferRL java.nio.ShortBuffer put(int, short)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.ByteBufferAsShortBufferRL java.nio.ShortBuffer put(short)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.ByteBufferAsShortBufferRL java.nio.ShortBuffer slice()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1063,6 +1295,11 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.nio.ByteOrder java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.ByteOrder java.nio.ByteOrder nativeOrder()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1076,6 +1313,16 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.nio.CharBuffer boolean hasArray()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.CharBuffer char[] array()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.CharBuffer int arrayOffset()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1295,6 +1542,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.DirectByteBuffer.Deallocator Deallocator(long, long, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.nio.DirectByteBufferR DirectByteBufferR(int, long, java.io.FileDescriptor, java.lang.Runnable) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1311,14 +1561,129 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer put(byte)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer put(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer put(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer put(int, byte)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer put(java.nio.ByteBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer put(java.nio.ByteBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer putChar(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer putChar(int, char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer putChar(long, char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer putDouble(double)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer putDouble(int, double)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer putDouble(long, double)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer putFloat(float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer putFloat(int, float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer putFloat(long, float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer putInt(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer putInt(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer putInt(long, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer putLong(int, long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer putLong(long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer putLong(long, long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer putShort(int, short)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer putShort(long, short)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer putShort(short)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.DirectByteBufferR java.nio.ByteBuffer slice()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1341,6 +1706,11 @@
   <item name="java.nio.DirectByteBufferR java.nio.ShortBuffer asShortBuffer()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.DirectByteBufferR void _put(int, byte)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectCharBufferRS DirectCharBufferRS(sun.nio.ch.DirectBuffer, int, int, int, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1357,11 +1727,41 @@
   <item name="java.nio.DirectCharBufferRS java.lang.String toString(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.DirectCharBufferRS java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectCharBufferRS java.nio.CharBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectCharBufferRS java.nio.CharBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.DirectCharBufferRS java.nio.CharBuffer put(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectCharBufferRS java.nio.CharBuffer put(char[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectCharBufferRS java.nio.CharBuffer put(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.DirectCharBufferRS java.nio.CharBuffer put(int, char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectCharBufferRS java.nio.CharBuffer put(java.nio.CharBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.DirectCharBufferRS java.nio.CharBuffer put(java.nio.CharBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1388,11 +1788,41 @@
   <item name="java.nio.DirectCharBufferRU java.lang.String toString(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.DirectCharBufferRU java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectCharBufferRU java.nio.CharBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectCharBufferRU java.nio.CharBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.DirectCharBufferRU java.nio.CharBuffer put(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectCharBufferRU java.nio.CharBuffer put(char[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectCharBufferRU java.nio.CharBuffer put(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.DirectCharBufferRU java.nio.CharBuffer put(int, char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectCharBufferRU java.nio.CharBuffer put(java.nio.CharBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.DirectCharBufferRU java.nio.CharBuffer put(java.nio.CharBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1423,6 +1853,11 @@
   </item>
   <item name="java.nio.DirectCharBufferS java.lang.String toString(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.nio.DirectCharBufferS java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.DirectCharBufferS java.nio.CharBuffer asReadOnlyBuffer()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1500,6 +1935,11 @@
   <item name="java.nio.DirectCharBufferU java.lang.String toString(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.DirectCharBufferU java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectCharBufferU java.nio.CharBuffer asReadOnlyBuffer()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1568,11 +2008,41 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.DirectDoubleBufferRS java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectDoubleBufferRS java.nio.DoubleBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectDoubleBufferRS java.nio.DoubleBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.DirectDoubleBufferRS java.nio.DoubleBuffer put(double)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectDoubleBufferRS java.nio.DoubleBuffer put(double[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectDoubleBufferRS java.nio.DoubleBuffer put(double[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.DirectDoubleBufferRS java.nio.DoubleBuffer put(int, double)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectDoubleBufferRS java.nio.DoubleBuffer put(java.nio.DoubleBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.DirectDoubleBufferRS java.nio.DoubleBuffer put(java.nio.DoubleBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1593,11 +2063,41 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.DirectDoubleBufferRU java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectDoubleBufferRU java.nio.DoubleBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectDoubleBufferRU java.nio.DoubleBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.DirectDoubleBufferRU java.nio.DoubleBuffer put(double)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectDoubleBufferRU java.nio.DoubleBuffer put(double[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectDoubleBufferRU java.nio.DoubleBuffer put(double[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.DirectDoubleBufferRU java.nio.DoubleBuffer put(int, double)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectDoubleBufferRU java.nio.DoubleBuffer put(java.nio.DoubleBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.DirectDoubleBufferRU java.nio.DoubleBuffer put(java.nio.DoubleBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1619,6 +2119,11 @@
     </annotation>
   </item>
   <item name="java.nio.DirectDoubleBufferS java.lang.Object attachment()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectDoubleBufferS java.nio.ByteOrder order()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1693,6 +2198,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.DirectDoubleBufferU java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectDoubleBufferU java.nio.DoubleBuffer asReadOnlyBuffer()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1758,11 +2268,41 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.DirectFloatBufferRS java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectFloatBufferRS java.nio.FloatBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectFloatBufferRS java.nio.FloatBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.DirectFloatBufferRS java.nio.FloatBuffer put(float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectFloatBufferRS java.nio.FloatBuffer put(float[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectFloatBufferRS java.nio.FloatBuffer put(float[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.DirectFloatBufferRS java.nio.FloatBuffer put(int, float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectFloatBufferRS java.nio.FloatBuffer put(java.nio.FloatBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.DirectFloatBufferRS java.nio.FloatBuffer put(java.nio.FloatBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1783,11 +2323,41 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.DirectFloatBufferRU java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectFloatBufferRU java.nio.FloatBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectFloatBufferRU java.nio.FloatBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.DirectFloatBufferRU java.nio.FloatBuffer put(float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectFloatBufferRU java.nio.FloatBuffer put(float[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectFloatBufferRU java.nio.FloatBuffer put(float[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.DirectFloatBufferRU java.nio.FloatBuffer put(int, float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectFloatBufferRU java.nio.FloatBuffer put(java.nio.FloatBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.DirectFloatBufferRU java.nio.FloatBuffer put(java.nio.FloatBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1809,6 +2379,11 @@
     </annotation>
   </item>
   <item name="java.nio.DirectFloatBufferS java.lang.Object attachment()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectFloatBufferS java.nio.ByteOrder order()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1883,6 +2458,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.DirectFloatBufferU java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectFloatBufferU java.nio.FloatBuffer asReadOnlyBuffer()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1948,11 +2528,41 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.DirectIntBufferRS java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectIntBufferRS java.nio.IntBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectIntBufferRS java.nio.IntBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.DirectIntBufferRS java.nio.IntBuffer put(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectIntBufferRS java.nio.IntBuffer put(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectIntBufferRS java.nio.IntBuffer put(int[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectIntBufferRS java.nio.IntBuffer put(int[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.DirectIntBufferRS java.nio.IntBuffer put(java.nio.IntBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.DirectIntBufferRS java.nio.IntBuffer put(java.nio.IntBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1973,11 +2583,41 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.DirectIntBufferRU java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectIntBufferRU java.nio.IntBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectIntBufferRU java.nio.IntBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.DirectIntBufferRU java.nio.IntBuffer put(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectIntBufferRU java.nio.IntBuffer put(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectIntBufferRU java.nio.IntBuffer put(int[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectIntBufferRU java.nio.IntBuffer put(int[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.DirectIntBufferRU java.nio.IntBuffer put(java.nio.IntBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.DirectIntBufferRU java.nio.IntBuffer put(java.nio.IntBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1999,6 +2639,11 @@
     </annotation>
   </item>
   <item name="java.nio.DirectIntBufferS java.lang.Object attachment()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectIntBufferS java.nio.ByteOrder order()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -2073,6 +2718,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.DirectIntBufferU java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectIntBufferU java.nio.IntBuffer asReadOnlyBuffer()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2138,11 +2788,41 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.DirectLongBufferRS java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectLongBufferRS java.nio.LongBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectLongBufferRS java.nio.LongBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.DirectLongBufferRS java.nio.LongBuffer put(int, long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectLongBufferRS java.nio.LongBuffer put(java.nio.LongBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectLongBufferRS java.nio.LongBuffer put(java.nio.LongBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.DirectLongBufferRS java.nio.LongBuffer put(long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectLongBufferRS java.nio.LongBuffer put(long[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.DirectLongBufferRS java.nio.LongBuffer put(long[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2163,11 +2843,41 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.DirectLongBufferRU java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectLongBufferRU java.nio.LongBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectLongBufferRU java.nio.LongBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.DirectLongBufferRU java.nio.LongBuffer put(int, long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectLongBufferRU java.nio.LongBuffer put(java.nio.LongBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectLongBufferRU java.nio.LongBuffer put(java.nio.LongBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.DirectLongBufferRU java.nio.LongBuffer put(long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectLongBufferRU java.nio.LongBuffer put(long[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.DirectLongBufferRU java.nio.LongBuffer put(long[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2189,6 +2899,11 @@
     </annotation>
   </item>
   <item name="java.nio.DirectLongBufferS java.lang.Object attachment()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectLongBufferS java.nio.ByteOrder order()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -2263,6 +2978,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.DirectLongBufferU java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectLongBufferU java.nio.LongBuffer asReadOnlyBuffer()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2328,11 +3048,41 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.DirectShortBufferRS java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectShortBufferRS java.nio.ShortBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectShortBufferRS java.nio.ShortBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.DirectShortBufferRS java.nio.ShortBuffer put(int, short)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectShortBufferRS java.nio.ShortBuffer put(java.nio.ShortBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectShortBufferRS java.nio.ShortBuffer put(java.nio.ShortBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.DirectShortBufferRS java.nio.ShortBuffer put(short)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectShortBufferRS java.nio.ShortBuffer put(short[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.DirectShortBufferRS java.nio.ShortBuffer put(short[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2353,11 +3103,41 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.DirectShortBufferRU java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectShortBufferRU java.nio.ShortBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectShortBufferRU java.nio.ShortBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.DirectShortBufferRU java.nio.ShortBuffer put(int, short)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectShortBufferRU java.nio.ShortBuffer put(java.nio.ShortBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectShortBufferRU java.nio.ShortBuffer put(java.nio.ShortBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.DirectShortBufferRU java.nio.ShortBuffer put(short)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectShortBufferRU java.nio.ShortBuffer put(short[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.DirectShortBufferRU java.nio.ShortBuffer put(short[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2379,6 +3159,11 @@
     </annotation>
   </item>
   <item name="java.nio.DirectShortBufferS java.lang.Object attachment()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DirectShortBufferS java.nio.ByteOrder order()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -2453,6 +3238,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.DirectShortBufferU java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DirectShortBufferU java.nio.ShortBuffer asReadOnlyBuffer()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2518,6 +3308,16 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.DoubleBuffer double[] array()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.DoubleBuffer int arrayOffset()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.DoubleBuffer int compare(double, double)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -2577,6 +3377,16 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="java.nio.FloatBuffer boolean hasArray()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.FloatBuffer float[] array()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.FloatBuffer int arrayOffset()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -2757,14 +3567,99 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer put(byte)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer put(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer put(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer put(int, byte)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer put(java.nio.ByteBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer put(java.nio.ByteBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer putChar(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer putChar(int, char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer putDouble(double)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer putDouble(int, double)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer putFloat(float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer putFloat(int, float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer putInt(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer putInt(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer putLong(int, long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer putLong(long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer putShort(int, short)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer putShort(short)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.HeapByteBufferR java.nio.ByteBuffer slice()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2787,6 +3682,11 @@
   <item name="java.nio.HeapByteBufferR java.nio.ShortBuffer asShortBuffer()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.HeapByteBufferR void _put(int, byte)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.HeapCharBuffer HeapCharBuffer(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2807,6 +3707,11 @@
   </item>
   <item name="java.nio.HeapCharBuffer java.lang.String toString(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.nio.HeapCharBuffer java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.HeapCharBuffer java.nio.CharBuffer asReadOnlyBuffer()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2858,11 +3763,41 @@
   <item name="java.nio.HeapCharBufferR java.lang.String toString(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.HeapCharBufferR java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapCharBufferR java.nio.CharBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.HeapCharBufferR java.nio.CharBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.HeapCharBufferR java.nio.CharBuffer put(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapCharBufferR java.nio.CharBuffer put(char[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.HeapCharBufferR java.nio.CharBuffer put(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.HeapCharBufferR java.nio.CharBuffer put(int, char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapCharBufferR java.nio.CharBuffer put(java.nio.CharBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.HeapCharBufferR java.nio.CharBuffer put(java.nio.CharBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2887,6 +3822,11 @@
     </annotation>
   </item>
   <item name="java.nio.HeapDoubleBuffer int ix(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapDoubleBuffer java.nio.ByteOrder order()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -2935,11 +3875,41 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.HeapDoubleBufferR java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapDoubleBufferR java.nio.DoubleBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.HeapDoubleBufferR java.nio.DoubleBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.HeapDoubleBufferR java.nio.DoubleBuffer put(double)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapDoubleBufferR java.nio.DoubleBuffer put(double[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.HeapDoubleBufferR java.nio.DoubleBuffer put(double[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.HeapDoubleBufferR java.nio.DoubleBuffer put(int, double)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapDoubleBufferR java.nio.DoubleBuffer put(java.nio.DoubleBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.HeapDoubleBufferR java.nio.DoubleBuffer put(java.nio.DoubleBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -2961,6 +3931,11 @@
     </annotation>
   </item>
   <item name="java.nio.HeapFloatBuffer int ix(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapFloatBuffer java.nio.ByteOrder order()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -3009,11 +3984,41 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.HeapFloatBufferR java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapFloatBufferR java.nio.FloatBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.HeapFloatBufferR java.nio.FloatBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.HeapFloatBufferR java.nio.FloatBuffer put(float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapFloatBufferR java.nio.FloatBuffer put(float[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.HeapFloatBufferR java.nio.FloatBuffer put(float[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.HeapFloatBufferR java.nio.FloatBuffer put(int, float)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapFloatBufferR java.nio.FloatBuffer put(java.nio.FloatBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.HeapFloatBufferR java.nio.FloatBuffer put(java.nio.FloatBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -3035,6 +4040,11 @@
     </annotation>
   </item>
   <item name="java.nio.HeapIntBuffer int ix(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapIntBuffer java.nio.ByteOrder order()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -3083,11 +4093,41 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.HeapIntBufferR java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapIntBufferR java.nio.IntBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.HeapIntBufferR java.nio.IntBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.HeapIntBufferR java.nio.IntBuffer put(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapIntBufferR java.nio.IntBuffer put(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapIntBufferR java.nio.IntBuffer put(int[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.HeapIntBufferR java.nio.IntBuffer put(int[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.HeapIntBufferR java.nio.IntBuffer put(java.nio.IntBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.HeapIntBufferR java.nio.IntBuffer put(java.nio.IntBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -3109,6 +4149,11 @@
     </annotation>
   </item>
   <item name="java.nio.HeapLongBuffer int ix(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapLongBuffer java.nio.ByteOrder order()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -3157,11 +4202,41 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.HeapLongBufferR java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapLongBufferR java.nio.LongBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.HeapLongBufferR java.nio.LongBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.HeapLongBufferR java.nio.LongBuffer put(int, long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapLongBufferR java.nio.LongBuffer put(java.nio.LongBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.HeapLongBufferR java.nio.LongBuffer put(java.nio.LongBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.HeapLongBufferR java.nio.LongBuffer put(long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapLongBufferR java.nio.LongBuffer put(long[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.HeapLongBufferR java.nio.LongBuffer put(long[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -3183,6 +4258,11 @@
     </annotation>
   </item>
   <item name="java.nio.HeapShortBuffer int ix(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapShortBuffer java.nio.ByteOrder order()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -3231,11 +4311,41 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.HeapShortBufferR java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapShortBufferR java.nio.ShortBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.HeapShortBufferR java.nio.ShortBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.HeapShortBufferR java.nio.ShortBuffer put(int, short)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapShortBufferR java.nio.ShortBuffer put(java.nio.ShortBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.HeapShortBufferR java.nio.ShortBuffer put(java.nio.ShortBuffer) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.nio.HeapShortBufferR java.nio.ShortBuffer put(short)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.HeapShortBufferR java.nio.ShortBuffer put(short[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.HeapShortBufferR java.nio.ShortBuffer put(short[], int, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -3256,6 +4366,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.IntBuffer int arrayOffset()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.IntBuffer int compare(int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -3263,6 +4378,11 @@
   </item>
   <item name="java.nio.IntBuffer int compareTo(java.nio.IntBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.nio.IntBuffer int[] array()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.IntBuffer java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3306,6 +4426,9 @@
   <item name="java.nio.IntBuffer java.nio.IntBuffer wrap(int[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.InvalidMarkException InvalidMarkException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.nio.LongBuffer boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -3315,6 +4438,11 @@
     </annotation>
   </item>
   <item name="java.nio.LongBuffer boolean hasArray()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.LongBuffer int arrayOffset()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -3369,6 +4497,11 @@
   <item name="java.nio.LongBuffer java.nio.LongBuffer wrap(long[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.LongBuffer long[] array()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.MappedByteBuffer java.nio.MappedByteBuffer force()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3380,6 +4513,14 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.nio.MappedByteBuffer void checkMapped()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.ReadOnlyBufferException ReadOnlyBufferException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.nio.ShortBuffer boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -3389,6 +4530,11 @@
     </annotation>
   </item>
   <item name="java.nio.ShortBuffer boolean hasArray()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.ShortBuffer int arrayOffset()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -3443,6 +4589,11 @@
   <item name="java.nio.ShortBuffer java.nio.ShortBuffer wrap(short[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.ShortBuffer short[] array()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.StringCharBuffer StringCharBuffer(java.lang.CharSequence, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3459,8 +4610,28 @@
   <item name="java.nio.StringCharBuffer java.lang.String toString(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.nio.StringCharBuffer java.nio.ByteOrder order()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.StringCharBuffer java.nio.CharBuffer compact()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.nio.StringCharBuffer java.nio.CharBuffer duplicate()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.nio.StringCharBuffer java.nio.CharBuffer put(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.nio.StringCharBuffer java.nio.CharBuffer put(int, char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.nio.StringCharBuffer java.nio.CharBuffer slice()">
     <annotation name="org.jetbrains.annotations.NotNull"/>

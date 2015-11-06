@@ -22,7 +22,17 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.net.httpserver.ChunkedInputStream int numeric(char[], int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.ChunkedInputStream void mark(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.net.httpserver.ChunkedInputStream void reset()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -133,6 +143,9 @@
   <item name="sun.net.httpserver.ExchangeImpl void setPrincipal(com.sun.net.httpserver.HttpPrincipal)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.net.httpserver.ExchangeImpl void setStreams(java.io.InputStream, java.io.OutputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.ExchangeImpl void setStreams(java.io.InputStream, java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -154,6 +167,11 @@
     </annotation>
   </item>
   <item name="sun.net.httpserver.FixedLengthInputStream void mark(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.net.httpserver.FixedLengthInputStream void reset()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -281,8 +299,14 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.net.httpserver.HttpContextImpl void setHandler(com.sun.net.httpserver.HttpHandler)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.HttpContextImpl void setHandler(com.sun.net.httpserver.HttpHandler) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.HttpError HttpError(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.HttpExchangeImpl HttpExchangeImpl(sun.net.httpserver.ExchangeImpl)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -317,6 +341,11 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.PlaceholderOutputStream boolean isWrapped()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.net.httpserver.PlaceholderOutputStream void checkWrap()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -425,6 +454,11 @@
   <item name="sun.net.httpserver.SSLStreams.InputStream int read(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.SSLStreams.InputStream void reset()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.SSLStreams.OutputStream OutputStream(sun.net.httpserver.SSLStreams) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -528,6 +562,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.net.httpserver.ServerImpl int endExchange()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.ServerImpl java.nio.channels.Selector getSelector()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -597,6 +634,9 @@
   <item name="sun.net.httpserver.ServerImpl void responseCompleted(sun.net.httpserver.HttpConnection) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.ServerImpl void setExecutor(java.util.concurrent.Executor)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.ServerImpl void setHttpsConfigurator(com.sun.net.httpserver.HttpsConfigurator) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -641,11 +681,19 @@
   <item name="sun.net.httpserver.ServerImpl.ServerTimerTask1 ServerTimerTask1(sun.net.httpserver.ServerImpl)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.net.httpserver.StreamClosedException StreamClosedException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.httpserver.UndefLengthOutputStream UndefLengthOutputStream(sun.net.httpserver.ExchangeImpl, java.io.OutputStream)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.httpserver.UnmodifiableHeaders java.util.Collection&lt;java.util.List&lt;java.lang.String&gt;&gt; values()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.net.httpserver.UnmodifiableHeaders java.util.List&lt;java.lang.String&gt; remove(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.net.httpserver.UnmodifiableHeaders java.util.List&lt;java.lang.String&gt; remove(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -656,14 +704,34 @@
   <item name="sun.net.httpserver.UnmodifiableHeaders java.util.Set&lt;java.util.Map.Entry&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt;&gt; entrySet()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.httpserver.UnmodifiableHeaders void add(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.UnmodifiableHeaders void add(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.net.httpserver.UnmodifiableHeaders void add(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.net.httpserver.UnmodifiableHeaders void clear()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.net.httpserver.UnmodifiableHeaders void putAll(java.util.Map&lt;? extends java.lang.String,? extends java.util.List&lt;java.lang.String&gt;&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.net.httpserver.UnmodifiableHeaders void putAll(java.util.Map&lt;? extends java.lang.String,? extends java.util.List&lt;java.lang.String&gt;&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.net.httpserver.UnmodifiableHeaders void set(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.net.httpserver.UnmodifiableHeaders void set(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

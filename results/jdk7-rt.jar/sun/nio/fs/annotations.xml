@@ -43,6 +43,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.fs.AbstractBasicFileAttributeView.AttributesBuilder java.util.Map&lt;java.lang.String,java.lang.Object&gt; unmodifiableMap()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.fs.AbstractBasicFileAttributeView.AttributesBuilder sun.nio.fs.AbstractBasicFileAttributeView.AttributesBuilder create(java.util.Set&lt;java.lang.String&gt;, java.lang.String[])">
@@ -179,6 +182,11 @@
     </annotation>
   </item>
   <item name="sun.nio.fs.AbstractWatchService java.lang.Object closeLock()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.fs.AbstractWatchService void checkOpen()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -526,8 +534,18 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.nio.fs.UnixCopyFile.Flags sun.nio.fs.UnixCopyFile.Flags fromCopyOptions(java.nio.file.CopyOption...)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.fs.UnixCopyFile.Flags sun.nio.fs.UnixCopyFile.Flags fromCopyOptions(java.nio.file.CopyOption...) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.fs.UnixCopyFile.Flags sun.nio.fs.UnixCopyFile.Flags fromMoveOptions(java.nio.file.CopyOption...)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.nio.fs.UnixCopyFile.Flags sun.nio.fs.UnixCopyFile.Flags fromMoveOptions(java.nio.file.CopyOption...) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -536,6 +554,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.nio.fs.UnixDirectoryStream java.util.Iterator&lt;java.nio.file.Path&gt; iterator()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.fs.UnixDirectoryStream java.util.Iterator&lt;java.nio.file.Path&gt; iterator(java.nio.file.DirectoryStream&lt;java.nio.file.Path&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.fs.UnixDirectoryStream sun.nio.fs.UnixPath directory()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -555,6 +579,17 @@
   </item>
   <item name="sun.nio.fs.UnixDirectoryStream.UnixDirectoryIterator java.nio.file.Path readNextEntry()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.fs.UnixDirectoryStream.UnixDirectoryIterator void remove()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.fs.UnixException UnixException(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.fs.UnixException UnixException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.nio.fs.UnixException int errno()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -727,12 +762,21 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.fs.UnixFileAttributes java.nio.file.attribute.FileTime ctime()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.fs.UnixFileAttributes java.nio.file.attribute.FileTime lastAccessTime()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.fs.UnixFileAttributes java.nio.file.attribute.FileTime lastModifiedTime()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.fs.UnixFileAttributes java.util.Set&lt;java.nio.file.attribute.PosixFilePermission&gt; permissions()">
@@ -831,6 +875,11 @@
   </item>
   <item name="sun.nio.fs.UnixFileStore UnixFileStore(sun.nio.fs.UnixFileSystem, sun.nio.fs.UnixMountEntry) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.fs.UnixFileStore V getFileStoreAttributeView(java.lang.Class&lt;V&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.nio.fs.UnixFileStore V getFileStoreAttributeView(java.lang.Class&lt;V&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -940,6 +989,9 @@
     </annotation>
   </item>
   <item name="sun.nio.fs.UnixFileSystem java.lang.Iterable&lt;java.nio.file.Path&gt; getRootDirectories()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.fs.UnixFileSystem java.lang.String getSeparator()">
@@ -977,12 +1029,20 @@
     </annotation>
   </item>
   <item name="sun.nio.fs.UnixFileSystem java.util.List&lt;java.lang.String&gt; standardFileAttributeViews()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.fs.UnixFileSystem java.util.regex.Pattern compilePathMatchPattern(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.nio.fs.UnixFileSystem sun.nio.fs.UnixPath rootDirectory()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.fs.UnixFileSystem void close()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -997,6 +1057,11 @@
   </item>
   <item name="sun.nio.fs.UnixFileSystem.FileStoreIterator java.nio.file.FileStore readNext()">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.nio.fs.UnixFileSystem.FileStoreIterator void remove()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.nio.fs.UnixFileSystem.LookupService LookupService()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1105,7 +1170,8 @@
   </item>
   <item name="sun.nio.fs.UnixFileSystemProvider sun.nio.fs.UnixPath checkPath(java.nio.file.Path)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val name="value" val="&quot;!null-&gt;!null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="sun.nio.fs.UnixFileSystemProvider sun.nio.fs.UnixPath checkPath(java.nio.file.Path) 0">
@@ -1437,14 +1503,25 @@
   </item>
   <item name="sun.nio.fs.UnixPath sun.nio.fs.UnixPath toUnixPath(java.nio.file.Path)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val name="value" val="&quot;!null-&gt;!null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="sun.nio.fs.UnixPath sun.nio.fs.UnixPath toUnixPath(java.nio.file.Path) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.nio.fs.UnixPath void checkNotNul(java.lang.String, char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.nio.fs.UnixPath void initOffsets()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.nio.fs.UnixSecureDirectoryStream V getFileAttributeView(java.lang.Class&lt;V&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.nio.fs.UnixSecureDirectoryStream V getFileAttributeView(java.lang.Class&lt;V&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1457,6 +1534,11 @@
   </item>
   <item name="sun.nio.fs.UnixSecureDirectoryStream V getFileAttributeView(java.nio.file.Path, java.lang.Class&lt;V&gt;, java.nio.file.LinkOption...) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.nio.fs.UnixSecureDirectoryStream V getFileAttributeViewImpl(sun.nio.fs.UnixPath, java.lang.Class&lt;V&gt;, boolean)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.nio.fs.UnixSecureDirectoryStream V getFileAttributeViewImpl(sun.nio.fs.UnixPath, java.lang.Class&lt;V&gt;, boolean) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1481,7 +1563,8 @@
   </item>
   <item name="sun.nio.fs.UnixSecureDirectoryStream sun.nio.fs.UnixPath getName(java.nio.file.Path)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val name="value" val="&quot;!null-&gt;!null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="sun.nio.fs.UnixSecureDirectoryStream sun.nio.fs.UnixPath getName(java.nio.file.Path) 0">
@@ -1544,6 +1627,11 @@
     </annotation>
   </item>
   <item name="sun.nio.fs.UnixUriUtils boolean match(char, long, long)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.fs.UnixUriUtils int decode(char)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1620,6 +1708,16 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.nio.fs.UnixUserPrincipals.User boolean isSpecial()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.fs.UnixUserPrincipals.User int gid()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.nio.fs.UnixUserPrincipals.User int uid()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>

@@ -54,6 +54,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.zip.DataFormatException DataFormatException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.zip.DataFormatException DataFormatException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.zip.Deflater boolean finished()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -82,17 +88,32 @@
   <item name="java.util.zip.Deflater void setInput(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.zip.Deflater void setInput(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.zip.Deflater void setInput(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.zip.Deflater void setLevel(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.zip.Deflater void setStrategy(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.zip.DeflaterInputStream DeflaterInputStream(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.zip.DeflaterInputStream DeflaterInputStream(java.io.InputStream, java.util.zip.Deflater)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.zip.DeflaterInputStream DeflaterInputStream(java.io.InputStream, java.util.zip.Deflater) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.zip.DeflaterInputStream DeflaterInputStream(java.io.InputStream, java.util.zip.Deflater) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.zip.DeflaterInputStream DeflaterInputStream(java.io.InputStream, java.util.zip.Deflater, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.zip.DeflaterInputStream DeflaterInputStream(java.io.InputStream, java.util.zip.Deflater, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -105,10 +126,25 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.zip.DeflaterInputStream int available()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.zip.DeflaterInputStream int read(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.zip.DeflaterInputStream void ensureOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.zip.DeflaterInputStream void mark(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.zip.DeflaterInputStream void reset()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -119,11 +155,17 @@
   <item name="java.util.zip.DeflaterOutputStream DeflaterOutputStream(java.io.OutputStream, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.zip.DeflaterOutputStream DeflaterOutputStream(java.io.OutputStream, java.util.zip.Deflater)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.zip.DeflaterOutputStream DeflaterOutputStream(java.io.OutputStream, java.util.zip.Deflater) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.zip.DeflaterOutputStream DeflaterOutputStream(java.io.OutputStream, java.util.zip.Deflater) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.zip.DeflaterOutputStream DeflaterOutputStream(java.io.OutputStream, java.util.zip.Deflater, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.zip.DeflaterOutputStream DeflaterOutputStream(java.io.OutputStream, java.util.zip.Deflater, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -131,11 +173,17 @@
   <item name="java.util.zip.DeflaterOutputStream DeflaterOutputStream(java.io.OutputStream, java.util.zip.Deflater, boolean) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.zip.DeflaterOutputStream DeflaterOutputStream(java.io.OutputStream, java.util.zip.Deflater, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.zip.DeflaterOutputStream DeflaterOutputStream(java.io.OutputStream, java.util.zip.Deflater, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.zip.DeflaterOutputStream DeflaterOutputStream(java.io.OutputStream, java.util.zip.Deflater, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.zip.DeflaterOutputStream DeflaterOutputStream(java.io.OutputStream, java.util.zip.Deflater, int, boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.zip.DeflaterOutputStream DeflaterOutputStream(java.io.OutputStream, java.util.zip.Deflater, int, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -160,6 +208,11 @@
   </item>
   <item name="java.util.zip.GZIPInputStream long readUInt(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.zip.GZIPInputStream void ensureOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.zip.GZIPOutputStream GZIPOutputStream(java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -220,17 +273,26 @@
   <item name="java.util.zip.Inflater void setInput(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.zip.Inflater void setInput(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.zip.Inflater void setInput(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.zip.InflaterInputStream InflaterInputStream(java.io.InputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.zip.InflaterInputStream InflaterInputStream(java.io.InputStream, java.util.zip.Inflater)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.zip.InflaterInputStream InflaterInputStream(java.io.InputStream, java.util.zip.Inflater) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.zip.InflaterInputStream InflaterInputStream(java.io.InputStream, java.util.zip.Inflater) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.zip.InflaterInputStream InflaterInputStream(java.io.InputStream, java.util.zip.Inflater, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.zip.InflaterInputStream InflaterInputStream(java.io.InputStream, java.util.zip.Inflater, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -243,10 +305,25 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.zip.InflaterInputStream int available()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.zip.InflaterInputStream int read(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.zip.InflaterInputStream void ensureOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.zip.InflaterInputStream void mark(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.zip.InflaterInputStream void reset()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -254,17 +331,28 @@
   <item name="java.util.zip.InflaterOutputStream InflaterOutputStream(java.io.OutputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.zip.InflaterOutputStream InflaterOutputStream(java.io.OutputStream, java.util.zip.Inflater)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.zip.InflaterOutputStream InflaterOutputStream(java.io.OutputStream, java.util.zip.Inflater) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.zip.InflaterOutputStream InflaterOutputStream(java.io.OutputStream, java.util.zip.Inflater) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.zip.InflaterOutputStream InflaterOutputStream(java.io.OutputStream, java.util.zip.Inflater, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.zip.InflaterOutputStream InflaterOutputStream(java.io.OutputStream, java.util.zip.Inflater, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.zip.InflaterOutputStream InflaterOutputStream(java.io.OutputStream, java.util.zip.Inflater, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.zip.InflaterOutputStream void ensureOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.zip.InflaterOutputStream void write(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -332,6 +420,9 @@
   <item name="java.util.zip.ZipEntry ZipEntry()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.util.zip.ZipEntry ZipEntry(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.zip.ZipEntry ZipEntry(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -387,6 +478,27 @@
   <item name="java.util.zip.ZipEntry void setCompressedSize(long)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.util.zip.ZipEntry void setCrc(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.zip.ZipEntry void setExtra(byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.zip.ZipEntry void setMethod(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.zip.ZipEntry void setSize(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.zip.ZipError ZipError(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.zip.ZipException ZipException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.util.zip.ZipException ZipException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.util.zip.ZipFile ZipFile(java.io.File) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -419,6 +531,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.util.zip.ZipFile int size()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.zip.ZipFile java.io.InputStream getInputStream(java.util.zip.ZipEntry)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -434,6 +551,9 @@
     </annotation>
   </item>
   <item name="java.util.zip.ZipFile java.util.Enumeration&lt;? extends java.util.zip.ZipEntry&gt; entries()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.zip.ZipFile java.util.zip.ZipEntry getEntry(java.lang.String)">
@@ -448,8 +568,21 @@
   <item name="java.util.zip.ZipFile java.util.zip.ZipEntry getZipEntry(java.lang.String, long) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.util.zip.ZipFile void ensureOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.util.zip.ZipFile void ensureOpenOrZipException()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.zip.ZipFile void releaseInflater(java.util.zip.Inflater) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.zip.ZipFile.ZipFileInflaterInputStream ZipFileInflaterInputStream(java.util.zip.ZipFile, java.util.zip.ZipFile.ZipFileInputStream, java.util.zip.Inflater, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.zip.ZipFile.ZipFileInflaterInputStream ZipFileInflaterInputStream(java.util.zip.ZipFile, java.util.zip.ZipFile.ZipFileInputStream, java.util.zip.Inflater, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -476,6 +609,11 @@
   <item name="java.util.zip.ZipInputStream ZipInputStream(java.io.InputStream, java.nio.charset.Charset) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.zip.ZipInputStream int available()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.zip.ZipInputStream int get16(byte[], int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -488,6 +626,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.zip.ZipInputStream java.util.zip.ZipEntry createZipEntry(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.zip.ZipInputStream java.util.zip.ZipEntry createZipEntry(java.lang.String) 0">
@@ -515,6 +656,11 @@
   <item name="java.util.zip.ZipInputStream long get64(byte[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.zip.ZipInputStream void ensureOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.zip.ZipInputStream void readEnd(java.util.zip.ZipEntry) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -527,14 +673,27 @@
   <item name="java.util.zip.ZipOutputStream ZipOutputStream(java.io.OutputStream, java.nio.charset.Charset) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.util.zip.ZipOutputStream int version(java.util.zip.ZipEntry)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.util.zip.ZipOutputStream int version(java.util.zip.ZipEntry) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.util.zip.ZipOutputStream void ensureOpen()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.util.zip.ZipOutputStream void putNextEntry(java.util.zip.ZipEntry) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.util.zip.ZipOutputStream void setComment(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.util.zip.ZipOutputStream void setMethod(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.util.zip.ZipOutputStream void write(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

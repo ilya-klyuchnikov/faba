@@ -7,6 +7,9 @@
   <item name="com.sun.xml.internal.ws.client.AsyncInvoker void setReceiver(com.sun.xml.internal.ws.client.AsyncResponseImpl)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.xml.internal.ws.client.AsyncResponseImpl AsyncResponseImpl(java.lang.Runnable, javax.xml.ws.AsyncHandler&lt;T&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.client.AsyncResponseImpl AsyncResponseImpl(java.lang.Runnable, javax.xml.ws.AsyncHandler&lt;T&gt;) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -59,6 +62,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.client.ClientTransportException ClientTransportException(com.sun.xml.internal.ws.util.localization.Localizable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.client.ClientTransportException ClientTransportException(java.lang.Throwable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -245,6 +251,9 @@
   <item name="com.sun.xml.internal.ws.client.RequestContext void setEndpointAddress(com.sun.xml.internal.ws.api.EndpointAddress)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.xml.internal.ws.client.RequestContext void setSoapAction(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.client.RequestContext void setSoapAction(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -263,14 +272,34 @@
   <item name="com.sun.xml.internal.ws.client.ResponseContext java.lang.Object get(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.client.ResponseContext java.lang.Object put(java.lang.String, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.client.ResponseContext java.lang.Object put(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.xml.internal.ws.client.ResponseContext java.lang.Object put(java.lang.String, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.client.ResponseContext java.lang.Object remove(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.client.ResponseContext java.lang.Object remove(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.client.ResponseContext void clear()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.client.ResponseContext void putAll(java.util.Map&lt;? extends java.lang.String,? extends java.lang.Object&gt;)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.client.ResponseContext void putAll(java.util.Map&lt;? extends java.lang.String,? extends java.lang.Object&gt;) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -395,6 +424,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.client.Stub void processAsync(com.sun.xml.internal.ws.api.message.Packet, com.sun.xml.internal.ws.client.RequestContext, com.sun.xml.internal.ws.api.pipe.Fiber.CompletionCallback) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.client.Stub void setOutboundHeaders(com.sun.xml.internal.ws.api.message.Header...)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.client.Stub void setOutboundHeaders(com.sun.xml.internal.ws.api.message.Header...) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

@@ -173,11 +173,17 @@
   <item name="com.sun.xml.internal.ws.policy.Policy Policy(com.sun.xml.internal.ws.policy.sourcemodel.wspolicy.NamespaceVersion, java.lang.String, java.lang.String, java.lang.String, java.util.Collection&lt;com.sun.xml.internal.ws.policy.AssertionSet&gt;) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.policy.Policy Policy(com.sun.xml.internal.ws.policy.sourcemodel.wspolicy.NamespaceVersion, java.lang.String, java.lang.String, java.util.List&lt;com.sun.xml.internal.ws.policy.AssertionSet&gt;, java.util.Set&lt;javax.xml.namespace.QName&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.ws.policy.Policy Policy(com.sun.xml.internal.ws.policy.sourcemodel.wspolicy.NamespaceVersion, java.lang.String, java.util.Collection&lt;com.sun.xml.internal.ws.policy.AssertionSet&gt;) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.Policy Policy(java.lang.String, java.lang.String, java.lang.String, java.util.Collection&lt;com.sun.xml.internal.ws.policy.AssertionSet&gt;) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.Policy Policy(java.lang.String, java.lang.String, java.util.List&lt;com.sun.xml.internal.ws.policy.AssertionSet&gt;, java.util.Set&lt;javax.xml.namespace.QName&gt;)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.Policy Policy(java.lang.String, java.util.Collection&lt;com.sun.xml.internal.ws.policy.AssertionSet&gt;) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -206,12 +212,14 @@
   </item>
   <item name="com.sun.xml.internal.ws.policy.Policy com.sun.xml.internal.ws.policy.Policy createEmptyPolicy(com.sun.xml.internal.ws.policy.sourcemodel.wspolicy.NamespaceVersion, java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null,_-&gt;!null;_,_,!null-&gt;!null&quot;"/>
+      <val name="value" val="&quot;_,!null,_-&gt;!null;_,_,!null-&gt;!null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.policy.Policy com.sun.xml.internal.ws.policy.Policy createEmptyPolicy(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+      <val name="value" val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.policy.Policy com.sun.xml.internal.ws.policy.Policy createNullPolicy()">
@@ -221,12 +229,14 @@
   </item>
   <item name="com.sun.xml.internal.ws.policy.Policy com.sun.xml.internal.ws.policy.Policy createNullPolicy(com.sun.xml.internal.ws.policy.sourcemodel.wspolicy.NamespaceVersion, java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,!null,_-&gt;!null;_,_,!null-&gt;!null&quot;"/>
+      <val name="value" val="&quot;_,!null,_-&gt;!null;_,_,!null-&gt;!null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.policy.Policy com.sun.xml.internal.ws.policy.Policy createNullPolicy(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+      <val name="value" val="&quot;!null,_-&gt;!null;_,!null-&gt;!null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.xml.internal.ws.policy.Policy com.sun.xml.internal.ws.policy.Policy createPolicy(com.sun.xml.internal.ws.policy.sourcemodel.wspolicy.NamespaceVersion, java.lang.String, java.lang.String, java.util.Collection&lt;com.sun.xml.internal.ws.policy.AssertionSet&gt;)">
@@ -364,6 +374,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyException PolicyException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.policy.PolicyException PolicyException(java.lang.String, java.lang.Throwable)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.xml.internal.ws.policy.PolicyIntersector PolicyIntersector(com.sun.xml.internal.ws.policy.PolicyIntersector.CompatibilityMode)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>

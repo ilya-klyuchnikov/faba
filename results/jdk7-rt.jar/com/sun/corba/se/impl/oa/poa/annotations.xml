@@ -170,6 +170,11 @@
   <item name="com.sun.corba.se.impl.oa.poa.LifespanPolicyImpl void destroy()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.corba.se.impl.oa.poa.MultipleObjectMap com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key getKey(com.sun.corba.se.impl.oa.poa.AOMEntry)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.oa.poa.MultipleObjectMap com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key getKey(com.sun.corba.se.impl.oa.poa.AOMEntry) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -184,6 +189,11 @@
   </item>
   <item name="com.sun.corba.se.impl.oa.poa.POACurrent void throwInternalIfNull(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POACurrent void throwNoContextIfNull(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.oa.poa.POACurrent void throwNoContextIfNull(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -448,6 +458,11 @@
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_UDS POAPolicyMediatorImpl_NR_UDS(com.sun.corba.se.impl.oa.poa.Policies, com.sun.corba.se.impl.oa.poa.POAImpl) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_UDS byte[] servantToId(org.omg.PortableServer.Servant)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_UDS byte[] servantToId(org.omg.PortableServer.Servant) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -457,11 +472,36 @@
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_UDS java.lang.Object internalGetServant(byte[], java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_UDS org.omg.PortableServer.Servant deactivateObject(byte[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_UDS org.omg.PortableServer.Servant deactivateObject(byte[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_UDS org.omg.PortableServer.Servant getDefaultServant()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_UDS org.omg.PortableServer.Servant idToServant(byte[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_UDS org.omg.PortableServer.Servant idToServant(byte[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_UDS org.omg.PortableServer.ServantManager getServantManager()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_UDS void activateObject(byte[], org.omg.PortableServer.Servant)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_UDS void activateObject(byte[], org.omg.PortableServer.Servant) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -484,6 +524,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_UDS void setServantManager(org.omg.PortableServer.ServantManager)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_UDS void setServantManager(org.omg.PortableServer.ServantManager) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -493,16 +538,41 @@
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_USM POAPolicyMediatorImpl_NR_USM(com.sun.corba.se.impl.oa.poa.Policies, com.sun.corba.se.impl.oa.poa.POAImpl) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_USM byte[] servantToId(org.omg.PortableServer.Servant)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_USM byte[] servantToId(org.omg.PortableServer.Servant) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_USM org.omg.PortableServer.Servant deactivateObject(byte[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_USM org.omg.PortableServer.Servant deactivateObject(byte[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_USM org.omg.PortableServer.Servant getDefaultServant()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_USM org.omg.PortableServer.Servant idToServant(byte[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_USM org.omg.PortableServer.Servant idToServant(byte[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_USM org.omg.PortableServer.ServantManager getServantManager()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_USM void activateObject(byte[], org.omg.PortableServer.Servant)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -523,6 +593,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_USM void setDefaultServant(org.omg.PortableServer.Servant)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_NR_USM void setDefaultServant(org.omg.PortableServer.Servant) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -538,13 +613,33 @@
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_R_AOM java.lang.Object internalGetServant(byte[], java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_R_AOM org.omg.PortableServer.Servant getDefaultServant()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_R_AOM org.omg.PortableServer.ServantManager getServantManager()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_R_AOM void etherealizeAll()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_R_AOM void setDefaultServant(org.omg.PortableServer.Servant)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_R_AOM void setDefaultServant(org.omg.PortableServer.Servant) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_R_AOM void setServantManager(org.omg.PortableServer.ServantManager)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_R_AOM void setServantManager(org.omg.PortableServer.ServantManager) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -558,7 +653,22 @@
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_R_UDS java.lang.Object internalGetServant(byte[], java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_R_UDS org.omg.PortableServer.Servant getDefaultServant()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_R_UDS org.omg.PortableServer.ServantManager getServantManager()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_R_UDS void etherealizeAll()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_R_UDS void setServantManager(org.omg.PortableServer.ServantManager)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -575,6 +685,11 @@
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_R_USM java.lang.Object internalGetServant(byte[], java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_R_USM org.omg.PortableServer.Servant getDefaultServant()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_R_USM org.omg.PortableServer.ServantManager getServantManager()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -582,6 +697,11 @@
   </item>
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_R_USM void deactivateHelper(com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key, com.sun.corba.se.impl.oa.poa.AOMEntry, org.omg.PortableServer.Servant) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_R_USM void setDefaultServant(org.omg.PortableServer.Servant)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.corba.se.impl.oa.poa.POAPolicyMediatorImpl_R_USM void setDefaultServant(org.omg.PortableServer.Servant) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>

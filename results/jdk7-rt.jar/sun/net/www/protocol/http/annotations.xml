@@ -566,8 +566,14 @@
   <item name="sun.net.www.protocol.http.HttpURLConnection void setAuthenticationProperty(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.net.www.protocol.http.HttpURLConnection void setConnectTimeout(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.net.www.protocol.http.HttpURLConnection void setDefaultAuthenticator(sun.net.www.protocol.http.HttpAuthenticator) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.net.www.protocol.http.HttpURLConnection void setReadTimeout(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.net.www.protocol.http.HttpURLConnection void setRequestProperty(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -652,6 +658,11 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.net.www.protocol.http.NegotiateAuthentication boolean supportsPreemptiveAuthorization()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.net.www.protocol.http.NegotiateAuthentication java.lang.String getHeaderValue(java.net.URL, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>

@@ -64,6 +64,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="javax.net.ssl.HandshakeCompletedEvent HandshakeCompletedEvent(javax.net.ssl.SSLSocket, javax.net.ssl.SSLSession)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.net.ssl.HandshakeCompletedEvent HandshakeCompletedEvent(javax.net.ssl.SSLSocket, javax.net.ssl.SSLSession) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -98,6 +101,9 @@
   </item>
   <item name="javax.net.ssl.HttpsURLConnection void setDefaultSSLSocketFactory(javax.net.ssl.SSLSocketFactory) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.net.ssl.HttpsURLConnection void setHostnameVerifier(javax.net.ssl.HostnameVerifier)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.net.ssl.HttpsURLConnection void setHostnameVerifier(javax.net.ssl.HostnameVerifier) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -154,6 +160,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="javax.net.ssl.KeyStoreBuilderParameters KeyStoreBuilderParameters(java.security.KeyStore.Builder)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.net.ssl.KeyStoreBuilderParameters KeyStoreBuilderParameters(java.security.KeyStore.Builder) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -230,8 +239,16 @@
   <item name="javax.net.ssl.SSLEngine javax.net.ssl.SSLParameters getSSLParameters()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.net.ssl.SSLEngine javax.net.ssl.SSLSession getHandshakeSession()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.net.ssl.SSLEngine void setSSLParameters(javax.net.ssl.SSLParameters) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.net.ssl.SSLEngineResult SSLEngineResult(javax.net.ssl.SSLEngineResult.Status, javax.net.ssl.SSLEngineResult.HandshakeStatus, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.net.ssl.SSLEngineResult SSLEngineResult(javax.net.ssl.SSLEngineResult.Status, javax.net.ssl.SSLEngineResult.HandshakeStatus, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -266,6 +283,15 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.net.ssl.SSLEngineResult.Status Status(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.net.ssl.SSLException SSLException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.net.ssl.SSLHandshakeException SSLHandshakeException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.net.ssl.SSLKeyException SSLKeyException(java.lang.String)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.net.ssl.SSLParameters SSLParameters()">
@@ -326,6 +352,9 @@
   <item name="javax.net.ssl.SSLParameters void setWantClientAuth(boolean)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="javax.net.ssl.SSLPeerUnverifiedException SSLPeerUnverifiedException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.net.ssl.SSLPermission SSLPermission(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -334,6 +363,9 @@
   </item>
   <item name="javax.net.ssl.SSLPermission SSLPermission(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="javax.net.ssl.SSLProtocolException SSLProtocolException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.net.ssl.SSLServerSocket SSLServerSocket(int, int, java.net.InetAddress) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -348,6 +380,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="javax.net.ssl.SSLSessionBindingEvent SSLSessionBindingEvent(javax.net.ssl.SSLSession, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.net.ssl.SSLSessionBindingEvent SSLSessionBindingEvent(javax.net.ssl.SSLSession, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -371,6 +406,11 @@
   </item>
   <item name="javax.net.ssl.SSLSocket javax.net.ssl.SSLParameters getSSLParameters()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.net.ssl.SSLSocket javax.net.ssl.SSLSession getHandshakeSession()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="javax.net.ssl.SSLSocket void setSSLParameters(javax.net.ssl.SSLParameters) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
