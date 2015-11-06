@@ -133,7 +133,7 @@ class Solver[K <: IKey[K], V](val negator: Negator[V], val doNothing: Boolean)(i
         if (ident.stable)
           List((ident, value), (ident.mkUnstable, value))
         else
-          List((ident.mkStable, value), (ident, mkUnstableValue(value)))
+          List((ident.mkStable, value), (ident, mkUnstableValue(ident, value)))
 
       val toPropagateNegated: List[(K, V)] =
         toPropagateInitial.map {case (k, v) => (k.negate, negator.negate(v))}
@@ -158,6 +158,9 @@ class Solver[K <: IKey[K], V](val negator: Negator[V], val doNothing: Boolean)(i
     pending.clear()
     solved
   }
+
+  def mkUnstableValue(k: K, v: V): V =
+    mkUnstableValue(v)
 
   def mkUnstableValue(v: V) = top
 

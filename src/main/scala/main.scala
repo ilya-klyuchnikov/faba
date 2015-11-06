@@ -4,7 +4,7 @@ import _root_.java.io.{PrintWriter, File}
 import java.nio.file.attribute.BasicFileAttributes
 import java.nio.file._
 
-import faba.asm.{PurityAnalysis, ParamsValue}
+import faba.asm.{PuritySolver, PurityAnalysis, ParamsValue}
 import org.objectweb.asm.tree.MethodNode
 
 import faba.cfg._
@@ -22,7 +22,7 @@ class MainProcessor extends FabaProcessor {
   val nullableParamsSolver = new Solver[Key, Values.Value](ValuesNegator, doNothing)(ELattice(Values.Null, Values.Top))
   val contractsSolver = new Solver[Key, Values.Value](ValuesNegator, doNothing)(ELattice(Values.Bot, Values.Top))
   val nullableResultSolver = new NullableResultSolver[Key, Values.Value](ValuesNegator, doNothing)(ELattice(Values.Bot, Values.Null))
-  val puritySolver = new Solver[Key, Values.Value](ValuesNegator, doNothing)(PurityAnalysis.purityLattice)
+  val puritySolver = new PuritySolver(ValuesNegator, doNothing)(PurityAnalysis.purityLattice)
 
   var notNullParamsTime: Long = 0
   var nullableParamsTime: Long = 0

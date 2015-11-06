@@ -36,8 +36,8 @@ import scala.annotation.switch
  * - Nested calls (via INVOKESPECIAL, INVOKESTATIC, INVOKEVIRTUAL) are processed by transitivity.
  */
 object PurityAnalysis {
-  val finalTop = new Final(Values.Top)
-  val finalPure = new Final(Values.Pure)
+  val finalTop = Final(Values.Top)
+  val finalPure = Final(Values.Pure)
 
   val unAnalyzable = ACC_ABSTRACT | ACC_NATIVE | ACC_INTERFACE
 
@@ -88,6 +88,10 @@ object PurityAnalysis {
 
   def analyze(method: Method, methodNode: MethodNode, stable: Boolean): Equation[Key, Value] = {
     val aKey = new Key(method, Out, stable)
+
+    for (hardCodedSolution <- HardCodedPurity.getHardCodedSolution(aKey))
+      return Equation(aKey, Final(hardCodedSolution))
+
     val instanceMethod = (methodNode.access & Opcodes.ACC_STATIC) == 0
 
     if ((methodNode.access & unAnalyzable) != 0)
@@ -130,6 +134,7 @@ object PurityAnalysis {
 
       }
     }
+
     if (calls.isEmpty)
       Equation(aKey, finalPure)
     else
@@ -245,4 +250,28 @@ object PurityAnalysis {
         super.merge(v1, v2)
   }
 
+}
+
+object HardCodedPurity {
+
+  val solutions: Map[Key, Value] =
+    Map(Key(Method("java/lang/Throwable", "fillInStackTrace", "(I)Ljava/lang/Throwable;"), Out, stable = true) -> Values.LocalEffect)
+
+  def getHardCodedSolution(aKey: Key): Option[Value] = {
+    aKey match {
+      case Key(Method(_, "fillInStackTrace", "()Ljava/lang/Throwable;"), _, _, _) =>
+        Some(Values.LocalEffect)
+      case _ => solutions.get(aKey)
+    }
+  }
+}
+
+class PuritySolver(negator: Negator[Values.Value], doNothing: Boolean)(implicit lattice: Lattice[Values.Value]) extends Solver[Key, Values.Value](negator, doNothing)(lattice) {
+  override def mkUnstableValue(k: Key, v: Values.Value): Values.Value =
+    HardCodedPurity.getHardCodedSolution(k) match {
+      case Some(u) =>
+        u
+      case _ =>
+        super.mkUnstableValue(k, v)
+    }
 }
