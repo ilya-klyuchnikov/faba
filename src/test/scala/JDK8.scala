@@ -1,6 +1,6 @@
 package faba.examples
 
-import faba.Main
+import faba.MainProcessor
 import faba.source.{JarFileSource, MixedSource}
 import java.io.File
 
@@ -38,5 +38,5 @@ object scalaJDK8 extends App {
     )
 
   val sources = paths.map(p => JarFileSource(new File(p)))
-  Main.process(MixedSource(sources), "jdk8")
+  new MainProcessor().process(MixedSource(sources), "jdk8")
 }

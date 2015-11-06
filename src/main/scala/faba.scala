@@ -22,6 +22,7 @@ import faba.source._
  * Default faba processor. A lot of fine-grained method to override.
  **/
 trait FabaProcessor extends Processor {
+  val onlyPurityAnalysis = false
   val doNothing = false
   var extras = Map[Method, MethodExtra]()
   var complexTime: Long = 0
@@ -91,6 +92,9 @@ trait FabaProcessor extends Processor {
 
     if (!doNothing)
       extras = extras.updated(method, MethodExtra(Option(methodNode.signature), methodNode.access))
+
+    if (onlyPurityAnalysis)
+      return
 
     var added = false
     val graph = buildCFG(className, methodNode, jsr)

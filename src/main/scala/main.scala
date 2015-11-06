@@ -259,9 +259,10 @@ class MainProcessor extends FabaProcessor {
   }
 }
 
-object Main extends MainProcessor {
+object Main {
 
   def main(args: Array[String]) {
+    val processor = new MainProcessor()
     //Thread.sleep(15000)
     if (args(0) == "--dirs") {
       val sources = ListBuffer[Source]()
@@ -279,10 +280,10 @@ object Main extends MainProcessor {
             super.visitFile(file, attrs)
           }
         })
-      process(MixedSource(sources.toList), null)
+      processor.process(MixedSource(sources.toList), null)
     }
     else {
-      process(MixedSource(args.toList.init.map {f => JarFileSource(new File(f))}), args.last)
+      processor.process(MixedSource(args.toList.init.map {f => JarFileSource(new File(f))}), args.last)
     }
   }
 }
