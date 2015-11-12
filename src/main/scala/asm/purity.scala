@@ -127,7 +127,10 @@ object PurityAnalysis {
             calls += Component(Values.NonLocalObject, Set(Key(Method(mNode.owner, mNode.name, mNode.desc), Out, true)))
           }
         case INVOKEVIRTUAL | INVOKESPECIAL =>
-          val locality = if (thisInsns(i)) Values.ThisObject else if (localInsns(i)) Values.LocalObject else Values.NonLocalObject
+          val locality =
+            if (thisInsns(i)) Values.ThisObject
+            else if (localInsns(i)) Values.LocalObject
+            else Values.NonLocalObject
           val mNode = insn.asInstanceOf[MethodInsnNode]
           calls += Component(locality, Set(Key(Method(mNode.owner, mNode.name, mNode.desc), Out, stable = insn.getOpcode == INVOKESPECIAL)))
         case _ =>
@@ -152,6 +155,7 @@ object PurityAnalysis {
     val unknownSourceVal2 = new SourceValue(2)
 
     val insns = m.instructions
+
     // instructions that are executed over owned objects
     // owned objects are objects created inside this method and not passed into another methods
     val localInsns = new Array[Boolean](insns.size())
@@ -182,23 +186,30 @@ object PurityAnalysis {
       }
     }
 
-    override def binaryOperation(insn: AbstractInsnNode, value1: SourceValue, value2: SourceValue) =
+    override def binaryOperation(insn: AbstractInsnNode, value1: SourceValue, value2: SourceValue) = {
+      val index = insns.indexOf(insn)
+      thisInsns(index) = false
+      localInsns(index) = false
       insn.getOpcode match {
         case LALOAD | DALOAD | LADD | DADD | LSUB | DSUB | LMUL | DMUL |
              LDIV | DDIV | LREM | LSHL | LSHR | LUSHR | LAND | LOR | LXOR =>
           unknownSourceVal2
         case PUTFIELD =>
           // if field is put into `this` value, then instruction is this instruction
-          thisInsns(insns.indexOf(insn)) = value1.isInstanceOf[ThisValue]
+          thisInsns(index) = value1.isInstanceOf[ThisValue]
           // if field is put into owned value, then instruction is owned
-          localInsns(insns.indexOf(insn)) = !value1.insns.isEmpty
+          localInsns(index) = !value1.insns.isEmpty
           unknownSourceVal1
         case _ =>
           unknownSourceVal1
       }
+    }
 
 
     final override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: SourceValue]): SourceValue = {
+      val index = insns.indexOf(insn)
+      thisInsns(index) = false
+      localInsns(index) = false
       val opCode = insn.getOpcode
       opCode match {
         case MULTIANEWARRAY =>
@@ -207,11 +218,11 @@ object PurityAnalysis {
           val mNode = insn.asInstanceOf[MethodInsnNode]
           // arraycopy(src, srcPos, dest, destPos, length)
           if (isArrayCopy(mNode)) {
-            localInsns(insns.indexOf(insn)) = !values.get(2).insns.isEmpty
+            localInsns(index) = !values.get(2).insns.isEmpty
           }
           if (opCode == INVOKESPECIAL || opCode == INVOKEVIRTUAL) {
-            thisInsns(insns.indexOf(insn)) = values.get(0).isInstanceOf[ThisValue]
-            localInsns(insns.indexOf(insn)) = !values.get(0).insns.isEmpty
+            thisInsns(index) = values.get(0).isInstanceOf[ThisValue]
+            localInsns(index) = !values.get(0).insns.isEmpty
           }
           val retType = Type.getReturnType(mNode.desc)
           if (retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY)
@@ -233,7 +244,10 @@ object PurityAnalysis {
 
     // writing to an owned array is an owned instruction
     override def ternaryOperation(insn: AbstractInsnNode, value1: SourceValue, value2: SourceValue, value3: SourceValue) = {
-      localInsns(insns.indexOf(insn)) = !value1.insns.isEmpty
+      val index = insns.indexOf(insn)
+      thisInsns(index) = false
+      localInsns(index) = false
+      localInsns(index) = !value1.insns.isEmpty
       unknownSourceVal1
     }
 
