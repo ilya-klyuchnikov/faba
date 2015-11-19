@@ -12,6 +12,7 @@ import org.objectweb.asm.tree.analysis.{SourceValue, SourceInterpreter, Analyzer
 import org.objectweb.asm.tree._
 
 import scala.annotation.switch
+import scala.collection.JavaConverters._
 
 /**
  * Produces equations for inference of @Contract(pure=true) annotations.
@@ -128,7 +129,7 @@ object PurityAnalysis {
             // nothing
           }
           else {
-            calls += Component(Values.NonLocalObject, Set(Key(Method(mNode.owner, mNode.name, mNode.desc), Out, true)))
+            calls += Component(Values.NonLocalObject, Set(Key(Method(mNode.owner, mNode.name, mNode.desc), Out, stable = true)))
           }
         case INVOKEVIRTUAL | INVOKESPECIAL =>
           val locality =
@@ -289,12 +290,20 @@ object PurityAnalysis {
     override def getSize: Int = 2
   }
 
+  // effects
+  sealed trait EffectQuantum
+  case object TopEffectQuantum extends EffectQuantum
+  case object ThisChangeQuantum extends EffectQuantum
+  case class ParamChangeQuantum(i: Int) extends EffectQuantum
+  case class CallQuantum(key: Key, data: List[DataValue]) extends EffectQuantum
+
   class DataInterpreter(m: MethodNode) extends Interpreter[DataValue](ASM5) {
     var called = -1
     // the first time newValue is called for return
     // the second time (if any) for `this`
     val shift = if ((m.access & ACC_STATIC) == 0) 2 else 1
     val range = shift until (Type.getArgumentTypes(m.desc).length + shift)
+    val effects: Array[EffectQuantum] = new Array[EffectQuantum](m.instructions.size())
 
     override def newValue(tp: Type): DataValue = {
       if (tp == null)
@@ -340,6 +349,22 @@ object PurityAnalysis {
         case LALOAD | DALOAD | LADD | DADD | LSUB | DSUB | LMUL | DMUL |
              LDIV | DDIV | LREM | LSHL | LSHR | LUSHR | LAND | LOR | LXOR =>
           UnknownDataValue2
+        case PUTFIELD =>
+          val effectQuantum: EffectQuantum = value1 match {
+            case ThisDataValue =>
+              ThisChangeQuantum
+            case OwnedDataValue =>
+              ThisChangeQuantum
+            case LocalDataValue =>
+              null
+            case ParameterDataValue(n) =>
+              ParamChangeQuantum(n)
+            case UnknownDataValue1 | UnknownDataValue2 =>
+              TopEffectQuantum
+          }
+          val insnIndex = m.instructions.indexOf(insn)
+          effects(insnIndex) = effectQuantum
+          UnknownDataValue1
         case _ =>
           UnknownDataValue1
       }
@@ -347,21 +372,30 @@ object PurityAnalysis {
     override def copyOperation(insn: AbstractInsnNode, value: DataValue): DataValue =
       value
 
-    override def naryOperation(insn: AbstractInsnNode, values: util.List[_ <: DataValue]): DataValue =
-      insn.getOpcode match {
+    override def naryOperation(insn: AbstractInsnNode, values: util.List[_ <: DataValue]): DataValue = {
+      val insnIndex = m.instructions.indexOf(insn)
+      val opCode = insn.getOpcode
+      opCode match {
         case MULTIANEWARRAY =>
           LocalDataValue
         case INVOKEDYNAMIC =>
+          effects(insnIndex) = TopEffectQuantum
           if (Utils.getReturnSizeFast(insn.asInstanceOf[InvokeDynamicInsnNode].desc) == 1)
             UnknownDataValue1
           else
             UnknownDataValue2
-        case _ =>
+        case INVOKEVIRTUAL | INVOKESPECIAL | INVOKESTATIC | INVOKEINTERFACE =>
+          val stable = opCode == INVOKESPECIAL || opCode == INVOKESTATIC
+          val data: List[DataValue] = values.asScala.toList
+          val mNode = insn.asInstanceOf[MethodInsnNode]
+          val key = Key(Method(mNode.owner, mNode.name, mNode.desc), Out, stable)
+          effects(insnIndex) = CallQuantum(key, data)
           if (Utils.getReturnSizeFast(insn.asInstanceOf[MethodInsnNode].desc) == 1)
             UnknownDataValue1
           else
             UnknownDataValue2
       }
+    }
 
     override def unaryOperation(insn: AbstractInsnNode, value: DataValue): DataValue =
       insn.getOpcode match {
@@ -375,12 +409,29 @@ object PurityAnalysis {
           else if (Utils.getSizeFast(fieldInsn.desc) == 1) UnknownDataValue1 else UnknownDataValue2
         case CHECKCAST =>
           value
+        case PUTSTATIC =>
+          val insnIndex = m.instructions.indexOf(insn)
+          effects(insnIndex) = TopEffectQuantum
+          UnknownDataValue1
         case _ =>
           UnknownDataValue1
       }
 
-    override def ternaryOperation(insn: AbstractInsnNode, value1: DataValue, value2: DataValue, value3: DataValue): DataValue =
+    override def ternaryOperation(insn: AbstractInsnNode, value1: DataValue, value2: DataValue, value3: DataValue): DataValue = {
+      val effect: EffectQuantum = value1 match {
+        case ThisDataValue | OwnedDataValue =>
+          ThisChangeQuantum
+        case ParameterDataValue(n) =>
+          ParamChangeQuantum(n)
+        case LocalDataValue =>
+          null
+        case UnknownDataValue1 | UnknownDataValue2 =>
+          TopEffectQuantum
+      }
+      val insnIndex = m.instructions.indexOf(insn)
+      effects(insnIndex) = effect
       UnknownDataValue1
+    }
 
     override def returnOperation(insn: AbstractInsnNode, value: DataValue, expected: DataValue): Unit =
       ()
