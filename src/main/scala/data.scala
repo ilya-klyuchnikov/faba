@@ -1,5 +1,6 @@
 package faba.data
 
+import faba.asm.PurityAnalysis
 import faba.engine.{Negator, IKey}
 import org.objectweb.asm.signature.{SignatureVisitor, SignatureReader}
 import scala.collection.mutable.ListBuffer
@@ -62,11 +63,11 @@ object `package` {
   type Value = Values.Value
 }
 
-case class Annotations(notNulls: Set[Key], contracts: Map[Key, String], pure: Set[Key], localEffects: Set[Key])
+case class Annotations(notNulls: Set[Key], contracts: Map[Key, String], effects: Map[Key, Set[PurityAnalysis.EffectQuantum]])
 
 object Utils {
 
-  def toAnnotations(solutions: Iterable[(Key, Value)], puritySolutions: Iterable[(Key, Value)]): Annotations = {
+  def toAnnotations(solutions: Iterable[(Key, Value)], effects: Map[Key, Set[PurityAnalysis.EffectQuantum]]): Annotations = {
     val inOuts = mutable.HashMap[Method, List[(InOut, Value)]]()
     var notNulls = Set[Key]()
     var contracts = Map[Key, String]()
@@ -92,17 +93,7 @@ object Utils {
       contracts = contracts + (key -> contractValues)
     }
 
-    var pure = Set[Key]()
-    var localEffects = Set[Key]()
-
-    for ((key, value) <- puritySolutions) {
-      if (value == Values.LocalEffect)
-        localEffects = localEffects + key
-      if (value == Values.Pure)
-        pure = pure + key
-    }
-
-    Annotations(notNulls, contracts, pure, localEffects)
+    Annotations(notNulls, contracts, effects)
   }
 
   def contractValueString(v: Value): String = v match {
@@ -134,7 +125,7 @@ object XmlUtils {
 
   def toXmlAnnotations(solutions: Iterable[(Key, Value)],
                        nullableResults: Iterable[(Key, Value)],
-                       pureSolutions: Iterable[(Key, Value)],
+                       pureSolutions: Iterable[(Key, Set[PurityAnalysis.EffectQuantum])],
                        extras: Map[Method, MethodExtra],
                        knownClasses: Set[String],
                        debug: Boolean = false): List[Elem] = {
@@ -183,6 +174,7 @@ object XmlUtils {
 
     // processing purity
     for ((key, value) <- pureSolutions) {
+      // TODO
       if (value == Values.Pure) {
         if (!contracts.contains(key.method)) {
           contracts(key.method) = new Contract()

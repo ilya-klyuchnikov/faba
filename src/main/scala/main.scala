@@ -4,6 +4,7 @@ import _root_.java.io.{PrintWriter, File}
 import java.nio.file.attribute.BasicFileAttributes
 import java.nio.file._
 
+import faba.asm.PurityAnalysis.EffectQuantum
 import faba.asm.{PuritySolver, PurityAnalysis, ParamsValue}
 import org.objectweb.asm.tree.MethodNode
 
@@ -22,7 +23,7 @@ class MainProcessor extends FabaProcessor {
   val nullableParamsSolver = new Solver[Key, Values.Value](ValuesNegator, doNothing)(ELattice(Values.Null, Values.Top))
   val contractsSolver = new Solver[Key, Values.Value](ValuesNegator, doNothing)(ELattice(Values.Bot, Values.Top))
   val nullableResultSolver = new NullableResultSolver[Key, Values.Value](ValuesNegator, doNothing)(ELattice(Values.Bot, Values.Null))
-  val puritySolver = new PuritySolver(ValuesNegator, doNothing)(PurityAnalysis.purityLattice)
+  val puritySolver = new PuritySolver
 
   var notNullParamsTime: Long = 0
   var nullableParamsTime: Long = 0
@@ -123,7 +124,7 @@ class MainProcessor extends FabaProcessor {
     result
   }
 
-  override def handlePurityEquation(eq: Equation[Key, Value]): Unit =
+  override def handlePurityEquation(eq: PurityAnalysis.PurityEquation): Unit =
     puritySolver.addEquation(eq)
   override def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit =
     notNullParamsSolver.addEquation(eq)
@@ -179,10 +180,10 @@ class MainProcessor extends FabaProcessor {
       val byPackageNullableResultSolutions: Map[String, Map[Key, Values.Value]] =
         nullableResults.groupBy(_._1.method.internalPackageName)
 
-      val puritySolutions =
-        puritySolver.solve().filter(p => p._2 == Values.Pure || p._2 == Values.LocalEffect)
+      val puritySolutions: Map[Key, Set[EffectQuantum]] =
+        puritySolver.solve().filter(p => p._2 != Set(PurityAnalysis.TopEffectQuantum))
 
-      val byPackagePuritySolutions: Map[String, Map[Key, Values.Value]] =
+      val byPackagePuritySolutions: Map[String, Map[Key, Set[EffectQuantum]]] =
         puritySolutions.groupBy(_._1.method.internalPackageName)
 
       // combining all packages
@@ -253,8 +254,8 @@ class MainProcessor extends FabaProcessor {
     source.process(this)
     val solutions: Map[Key, Values.Value] =
       (notNullParamsSolver.solve() ++ contractsSolver.solve()).filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
-    val puritySolutions: Map[Key, Values.Value] =
-      puritySolver.solve().filter(p => p._2 == Values.Pure || p._2 == Values.LocalEffect)
+    val puritySolutions =
+      puritySolver.solve().filter(p => p._2 != Set(PurityAnalysis.TopEffectQuantum))
     data.Utils.toAnnotations(solutions, puritySolutions)
   }
 }

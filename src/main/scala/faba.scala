@@ -341,7 +341,7 @@ trait FabaProcessor extends Processor {
   def isReducible(graph: ControlFlowGraph, dfs: DFSTree): Boolean =
     cfg.reducible(graph, dfs)
 
-  def purityEquation(method: Method, methodNode: MethodNode, stable: Boolean): Equation[Key, Value] =
+  def purityEquation(method: Method, methodNode: MethodNode, stable: Boolean): PurityAnalysis.PurityEquation =
     PurityAnalysis.analyze(method, methodNode, stable)
 
   def notNullParamEquation(richControlFlow: RichControlFlow, i: Int, stable: Boolean): (Equation[Key, Value], Boolean) = {
@@ -398,7 +398,7 @@ trait FabaProcessor extends Processor {
   def nullableResultEquation(className: String, methodNode: MethodNode, method: Method, origins: Array[Boolean], stable: Boolean, jsr: Boolean): Equation[Key, Value] =
     Equation(Key(method, Out, stable), NullableResultAnalysis.analyze(className, methodNode, origins, jsr))
 
-  def handlePurityEquation(eq: Equation[Key, Value]): Unit = ()
+  def handlePurityEquation(eq: PurityAnalysis.PurityEquation): Unit = ()
   def handleNotNullParamEquation(eq: Equation[Key, Value]): Unit = ()
   def handleNullableParamEquation(eq: Equation[Key, Value]): Unit = ()
   def handleNotNullContractEquation(eq: Equation[Key, Value]): Unit = ()

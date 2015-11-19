@@ -2,41 +2,18 @@ package faba.asm
 
 import java.util
 
+import faba.asm.PurityAnalysis.PurityEquation
 import faba.data._
 import faba.data.{Key, Method}
 import faba.engine._
 import org.objectweb.asm.{Opcodes, Type}
 
 import org.objectweb.asm.Opcodes._
-import org.objectweb.asm.tree.analysis.{SourceValue, SourceInterpreter, Analyzer, Interpreter}
+import org.objectweb.asm.tree.analysis.{SourceValue, Analyzer, Interpreter}
 import org.objectweb.asm.tree._
 
-import scala.annotation.switch
 import scala.collection.JavaConverters._
 
-/**
- * Produces equations for inference of @Contract(pure=true) annotations.
- *
- * This simple analysis infers @Contract(pure=true) only if the method doesn't have following instructions.
- * <ul>
- * <li>PUTFIELD</li>
- * <li>PUTSTATIC</li>
- * <li>IASTORE</li>
- * <li>LASTORE</li>
- * <li>FASTORE</li>
- * <li>DASTORE</li>
- * <li>AASTORE</li>
- * <li>BASTORE</li>
- * <li>CASTORE</li>
- * <li>SASTORE</li>
- * <li>INVOKEDYNAMIC</li>
- * <li>INVOKEINTERFACE</li>
- * </ul>
- *
- * Although all writes are to owned objects (created inside this method).
- *
- * - Nested calls (via INVOKESPECIAL, INVOKESTATIC, INVOKEVIRTUAL) are processed by transitivity.
- */
 object PurityAnalysis {
   val finalTop = Final(Values.Top)
   val finalPure = Final(Values.Pure)
@@ -88,186 +65,35 @@ object PurityAnalysis {
     }
   }
 
-  def analyze(method: Method, methodNode: MethodNode, stable: Boolean): Equation[Key, Value] = {
+  def analyze(method: Method, methodNode: MethodNode, stable: Boolean): PurityEquation = {
     val aKey = new Key(method, Out, stable)
 
-    for (hardCodedSolution <- HardCodedPurity.getHardCodedSolution(aKey))
-      return Equation(aKey, Final(hardCodedSolution))
+    for (hardCodedSolution <- HardCodedPurity.getHardCodedSolution1(aKey))
+      return PurityEquation(aKey, hardCodedSolution)
 
     val instanceMethod = (methodNode.access & Opcodes.ACC_STATIC) == 0
 
     if ((methodNode.access & unAnalyzable) != 0)
-      return Equation(aKey, finalTop)
-
-    var calls: Set[Component[Key, Value]] = Set()
-    val insns = methodNode.instructions
+      return PurityEquation(aKey, Set[EffectQuantum](TopEffectQuantum))
 
     val dataInterpreter = new DataInterpreter(methodNode)
     new Analyzer(dataInterpreter).analyze("this", methodNode)
-
-    val ownershipInterpreter = new OwnershipInterpreter(methodNode)
-    // hack to initialize this var
-    new Analyzer(ownershipInterpreter).analyze("this", methodNode)
-    val localInsns = ownershipInterpreter.localInsns
-    val thisInsns = ownershipInterpreter.thisInsns
-
-    for (i <- 0 until insns.size()) {
-      val insn = insns.get(i)
-      (insn.getOpcode: @switch) match {
-        case PUTFIELD | IASTORE | LASTORE | FASTORE | DASTORE | AASTORE | BASTORE | CASTORE | SASTORE |
-             INVOKEDYNAMIC | INVOKEINTERFACE =>
-          if (thisInsns(insns.indexOf(insn))) {
-            calls += Component(Values.LocalEffect, Set())
-          }
-          else if (!localInsns(insns.indexOf(insn)))
-            return Equation(aKey, finalTop)
-        case PUTSTATIC | INVOKEDYNAMIC | INVOKEINTERFACE =>
-          return Equation(aKey, finalTop)
-        case INVOKESTATIC =>
-          val mNode = insn.asInstanceOf[MethodInsnNode]
-          if (isArrayCopy(mNode) && localInsns(insns.indexOf(insn))) {
-            // nothing
-          }
-          else {
-            calls += Component(Values.NonLocalObject, Set(Key(Method(mNode.owner, mNode.name, mNode.desc), Out, stable = true)))
-          }
-        case INVOKEVIRTUAL | INVOKESPECIAL =>
-          val locality =
-            if (thisInsns(i)) Values.ThisObject
-            else if (localInsns(i)) Values.LocalObject
-            else Values.NonLocalObject
-          val mNode = insn.asInstanceOf[MethodInsnNode]
-          calls += Component(locality, Set(Key(Method(mNode.owner, mNode.name, mNode.desc), Out, stable = insn.getOpcode == INVOKESPECIAL)))
-        case _ =>
-
+    val quanta = dataInterpreter.effects
+    var effects = Set[EffectQuantum]()
+    for (quantum <- quanta if quantum != null) {
+      if (quantum == TopEffectQuantum) {
+        effects = Set(TopEffectQuantum)
+        return PurityEquation(aKey, effects)
       }
+      effects = effects + quantum
     }
-
-    if (calls.isEmpty)
-      Equation(aKey, finalPure)
-    else
-      Equation(aKey, Pending(calls))
+    PurityEquation(aKey, effects)
   }
 
   def isArrayCopy(mnode: MethodInsnNode) =
     mnode.owner == "java/lang/System" && mnode.name == "arraycopy"
 
   case class ThisValue() extends SourceValue(1)
-
-  class OwnershipInterpreter(m: MethodNode) extends SourceInterpreter {
-    // all values except ones created in this method (new objects and new arrays) are unknown
-    val unknownSourceVal1 = new SourceValue(1)
-    val unknownSourceVal2 = new SourceValue(2)
-
-    val insns = m.instructions
-
-    // instructions that are executed over owned objects
-    // owned objects are objects created inside this method and not passed into another methods
-    val localInsns = new Array[Boolean](insns.size())
-    val thisInsns = new Array[Boolean](insns.size())
-
-    override def newValue(tp: Type): SourceValue =
-      if (tp != null && tp.toString == "Lthis;") ThisValue() else super.newValue(tp)
-
-    override def newOperation(insn: AbstractInsnNode): SourceValue = {
-      val result = super.newOperation(insn)
-      insn.getOpcode match {
-        case NEW =>
-          result // SIC!
-        case _ =>
-          new SourceValue(result.size)
-      }
-    }
-
-    override def unaryOperation(insn: AbstractInsnNode, value: SourceValue) = {
-      val result = super.unaryOperation(insn, value)
-      insn.getOpcode match {
-        case CHECKCAST =>
-          value
-        case NEWARRAY | ANEWARRAY =>
-          result
-        case _ =>
-          new SourceValue(result.size)
-      }
-    }
-
-    override def binaryOperation(insn: AbstractInsnNode, value1: SourceValue, value2: SourceValue) = {
-      val index = insns.indexOf(insn)
-      thisInsns(index) = false
-      localInsns(index) = false
-      insn.getOpcode match {
-        case LALOAD | DALOAD | LADD | DADD | LSUB | DSUB | LMUL | DMUL |
-             LDIV | DDIV | LREM | LSHL | LSHR | LUSHR | LAND | LOR | LXOR =>
-          unknownSourceVal2
-        case PUTFIELD =>
-          // if field is put into `this` value, then instruction is this instruction
-          thisInsns(index) = value1.isInstanceOf[ThisValue]
-          // if field is put into owned value, then instruction is owned
-          localInsns(index) = !value1.insns.isEmpty
-          unknownSourceVal1
-        case _ =>
-          unknownSourceVal1
-      }
-    }
-
-
-    final override def naryOperation(insn: AbstractInsnNode, values: java.util.List[_ <: SourceValue]): SourceValue = {
-      val index = insns.indexOf(insn)
-      thisInsns(index) = false
-      localInsns(index) = false
-      val opCode = insn.getOpcode
-      opCode match {
-        case MULTIANEWARRAY =>
-          new SourceValue(1, insn)
-        case INVOKESTATIC | INVOKESPECIAL | INVOKEVIRTUAL =>
-          val mNode = insn.asInstanceOf[MethodInsnNode]
-          // arraycopy(src, srcPos, dest, destPos, length)
-          if (isArrayCopy(mNode)) {
-            localInsns(index) = !values.get(2).insns.isEmpty
-          }
-          if (opCode == INVOKESPECIAL || opCode == INVOKEVIRTUAL) {
-            thisInsns(index) = values.get(0).isInstanceOf[ThisValue]
-            localInsns(index) = !values.get(0).insns.isEmpty
-          }
-          val retType = Type.getReturnType(mNode.desc)
-          if (retType.getSort == Type.OBJECT || retType.getSort == Type.ARRAY)
-            unknownSourceVal1
-          else if (retType.getSize == 1)
-            unknownSourceVal1
-          else
-            unknownSourceVal2
-        case INVOKEINTERFACE =>
-          val mNode = insn.asInstanceOf[MethodInsnNode]
-          val retType = Type.getReturnType(mNode.desc)
-          if (retType.getSize == 1) unknownSourceVal1 else unknownSourceVal2
-        case _ =>
-          val mNode = insn.asInstanceOf[InvokeDynamicInsnNode]
-          val retType = Type.getReturnType(mNode.desc)
-          if (retType.getSize == 1) unknownSourceVal1 else unknownSourceVal2
-      }
-    }
-
-    // writing to an owned array is an owned instruction
-    override def ternaryOperation(insn: AbstractInsnNode, value1: SourceValue, value2: SourceValue, value3: SourceValue) = {
-      val index = insns.indexOf(insn)
-      thisInsns(index) = false
-      localInsns(index) = false
-      localInsns(index) = !value1.insns.isEmpty
-      unknownSourceVal1
-    }
-
-
-    override def copyOperation(insn: AbstractInsnNode, value: SourceValue) =
-      value
-
-    override def merge(v1: SourceValue, v2: SourceValue): SourceValue =
-      if (v1.isInstanceOf[ThisValue] && v2.isInstanceOf[ThisValue])
-        v1
-      else if (v1.insns.isEmpty || v2.insns.isEmpty)
-        new SourceValue(math.min(v1.size, v2.size))
-      else
-        super.merge(v1, v2)
-  }
 
   // how data are divided
   sealed trait DataValue extends org.objectweb.asm.tree.analysis.Value
@@ -296,6 +122,7 @@ object PurityAnalysis {
   case object ThisChangeQuantum extends EffectQuantum
   case class ParamChangeQuantum(i: Int) extends EffectQuantum
   case class CallQuantum(key: Key, data: List[DataValue]) extends EffectQuantum
+  case class PurityEquation(key: Key, effects: Set[EffectQuantum])
 
   class DataInterpreter(m: MethodNode) extends Interpreter[DataValue](ASM5) {
     var called = -1
@@ -461,14 +288,17 @@ object HardCodedPurity {
       case _ => solutions.get(aKey)
     }
   }
+
+  def getHardCodedSolution1(aKey: Key): Option[Set[PurityAnalysis.EffectQuantum]] = None
 }
 
-class PuritySolver(negator: Negator[Values.Value], doNothing: Boolean)(implicit lattice: Lattice[Values.Value]) extends Solver[Key, Values.Value](negator, doNothing)(lattice) {
-  override def mkUnstableValue(k: Key, v: Values.Value): Values.Value =
-    HardCodedPurity.getHardCodedSolution(k) match {
-      case Some(u) =>
-        u
-      case _ =>
-        super.mkUnstableValue(k, v)
-    }
+
+class PuritySolver {
+  def addEquation(eq: PurityEquation): Unit = {
+
+  }
+
+  def solve(): Map[Key, Set[PurityAnalysis.EffectQuantum]] = {
+    null
+  }
 }
