@@ -1,14 +1,15 @@
 package faba.asm
 
+import java.util
+
 import faba.data._
 import faba.data.{Key, Method}
 import faba.engine._
 import org.objectweb.asm.{Opcodes, Type}
 
 import org.objectweb.asm.Opcodes._
-import org.objectweb.asm.tree.analysis.{SourceValue, SourceInterpreter, Analyzer}
+import org.objectweb.asm.tree.analysis.{SourceValue, SourceInterpreter, Analyzer, Interpreter}
 import org.objectweb.asm.tree._
-
 
 import scala.annotation.switch
 
@@ -99,6 +100,9 @@ object PurityAnalysis {
 
     var calls: Set[Component[Key, Value]] = Set()
     val insns = methodNode.instructions
+
+    val dataInterpreter = new DataInterpreter(methodNode)
+    new Analyzer(dataInterpreter).analyze("this", methodNode)
 
     val ownershipInterpreter = new OwnershipInterpreter(methodNode)
     // hack to initialize this var
@@ -264,9 +268,137 @@ object PurityAnalysis {
         super.merge(v1, v2)
   }
 
+  // how data are divided
+  sealed trait DataValue extends org.objectweb.asm.tree.analysis.Value
+  case object ThisDataValue extends DataValue {
+    override def getSize: Int = 1
+  }
+  case object LocalDataValue extends DataValue {
+    override def getSize: Int = 1
+  }
+  case class ParameterDataValue(i: Int) extends DataValue {
+    override def getSize: Int = 1
+  }
+  case object OwnedDataValue extends DataValue {
+    override def getSize: Int = 1
+  }
+  case object UnknownDataValue1 extends DataValue {
+    override def getSize: Int = 1
+  }
+  case object UnknownDataValue2 extends DataValue {
+    override def getSize: Int = 2
+  }
+
+  class DataInterpreter(m: MethodNode) extends Interpreter[DataValue](ASM5) {
+    var called = -1
+    // the first time newValue is called for return
+    // the second time (if any) for `this`
+    val shift = if ((m.access & ACC_STATIC) == 0) 2 else 1
+    val range = shift until (Type.getArgumentTypes(m.desc).length + shift)
+
+    override def newValue(tp: Type): DataValue = {
+      if (tp == null)
+        return UnknownDataValue1
+      called += 1
+      // hack for analyzer
+      if (tp != null && tp.toString == "Lthis;")
+        ThisDataValue
+      else if (range.contains(called)) {
+        if (tp eq Type.VOID_TYPE) return null
+        if (Utils.isReferenceType(tp)) {
+          ParameterDataValue(called - shift)
+        } else {
+          // we are not interested in such parameters
+          if (tp.getSize == 1) UnknownDataValue1 else UnknownDataValue2
+        }
+      } else {
+        if (tp eq Type.VOID_TYPE) null
+        else if (tp.getSize == 1) UnknownDataValue1
+        else UnknownDataValue1
+      }
+    }
+
+    override def newOperation(insn: AbstractInsnNode): DataValue =
+      insn.getOpcode match {
+        case NEW =>
+          LocalDataValue
+        case LCONST_0 | LCONST_1 | DCONST_0 | DCONST_1 =>
+          UnknownDataValue2
+        case LDC =>
+          val cst = insn.asInstanceOf[LdcInsnNode].cst
+          val size = if (cst.isInstanceOf[Long] || cst.isInstanceOf[Double]) 2 else 1
+          if (size == 1) UnknownDataValue1 else UnknownDataValue2
+        case GETSTATIC =>
+          val size = Type.getType(insn.asInstanceOf[FieldInsnNode].desc).getSize
+          if (size == 1) UnknownDataValue1 else UnknownDataValue2
+        case _ =>
+          UnknownDataValue1
+      }
+
+    override def binaryOperation(insn: AbstractInsnNode, value1: DataValue, value2: DataValue): DataValue =
+      insn.getOpcode match {
+        case LALOAD | DALOAD | LADD | DADD | LSUB | DSUB | LMUL | DMUL |
+             LDIV | DDIV | LREM | LSHL | LSHR | LUSHR | LAND | LOR | LXOR =>
+          UnknownDataValue2
+        case _ =>
+          UnknownDataValue1
+      }
+
+    override def copyOperation(insn: AbstractInsnNode, value: DataValue): DataValue =
+      value
+
+    override def naryOperation(insn: AbstractInsnNode, values: util.List[_ <: DataValue]): DataValue =
+      insn.getOpcode match {
+        case MULTIANEWARRAY =>
+          LocalDataValue
+        case INVOKEDYNAMIC =>
+          if (Utils.getReturnSizeFast(insn.asInstanceOf[InvokeDynamicInsnNode].desc) == 1)
+            UnknownDataValue1
+          else
+            UnknownDataValue2
+        case _ =>
+          if (Utils.getReturnSizeFast(insn.asInstanceOf[MethodInsnNode].desc) == 1)
+            UnknownDataValue1
+          else
+            UnknownDataValue2
+      }
+
+    override def unaryOperation(insn: AbstractInsnNode, value: DataValue): DataValue =
+      insn.getOpcode match {
+        case LNEG | DNEG | I2L | I2D | L2D | F2L | F2D | D2L =>
+          UnknownDataValue2
+        case GETFIELD =>
+          val fieldInsn = insn.asInstanceOf[FieldInsnNode]
+          if (value == ThisDataValue && HardCodedPurity.ownedFields((fieldInsn.owner, fieldInsn.name))) {
+            OwnedDataValue
+          }
+          else if (Utils.getSizeFast(fieldInsn.desc) == 1) UnknownDataValue1 else UnknownDataValue2
+        case CHECKCAST =>
+          value
+        case _ =>
+          UnknownDataValue1
+      }
+
+    override def ternaryOperation(insn: AbstractInsnNode, value1: DataValue, value2: DataValue, value3: DataValue): DataValue =
+      UnknownDataValue1
+
+    override def returnOperation(insn: AbstractInsnNode, value: DataValue, expected: DataValue): Unit =
+      ()
+
+    override def merge(v1: DataValue, v2: DataValue): DataValue =
+      if (v1 == v2)
+        v1
+      else {
+        val size = math.min(v1.getSize, v2.getSize)
+        if (size == 1) UnknownDataValue1 else UnknownDataValue2
+      }
+  }
 }
 
 object HardCodedPurity {
+
+  val ownedFields: Set[(String, String)] =
+    Set()
 
   val solutions: Map[Key, Value] =
     Map(Key(Method("java/lang/Throwable", "fillInStackTrace", "(I)Ljava/lang/Throwable;"), Out, stable = true) -> Values.LocalEffect)
