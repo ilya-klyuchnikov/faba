@@ -67,7 +67,7 @@ object PurityAnalysis {
   def analyze(method: Method, methodNode: MethodNode, stable: Boolean): PurityEquation = {
     val aKey = new Key(method, Out, stable)
 
-    for (hardCodedSolution <- HardCodedPurity.getHardCodedSolution1(aKey))
+    for (hardCodedSolution <- HardCodedPurity.getHardCodedSolution(aKey))
       return PurityEquation(aKey, hardCodedSolution)
 
     val instanceMethod = (methodNode.access & Opcodes.ACC_STATIC) == 0
@@ -281,15 +281,18 @@ object HardCodedPurity {
   val ownedFields: Set[(String, String)] =
     Set()
 
+  val solutions: Map[Method, Set[EffectQuantum]] =
+    Map(
+      Method("java/lang/Throwable", "fillInStackTrace", "(I)Ljava/lang/Throwable;") -> Set(ThisChangeQuantum),
+      Method("java/lang/System", "arraycopy", "(Ljava/lang/Object;ILjava/lang/Object;II)V") -> Set(ParamChangeQuantum(2)),
+      Method("java/lang/Throwable", "fillInStackTrace", "(I)Ljava/lang/Throwable;") -> Set(ThisChangeQuantum)
+    )
+
   def getHardCodedSolution(aKey: Key): Option[Set[EffectQuantum]] = aKey match {
     case Key(Method(_, "fillInStackTrace", "()Ljava/lang/Throwable;"), _, _, _) =>
       Some(Set(ThisChangeQuantum))
-    case Key(Method("java/lang/Throwable", "fillInStackTrace", "(I)Ljava/lang/Throwable;"), _, _, _) =>
-      Some(Set(ThisChangeQuantum))
-    case Key(Method("java/lang/System", "arraycopy", _), _, _, _) =>
-      Some(Set(ParamChangeQuantum(2)))
     case _ =>
-      None
+      solutions.get(aKey.method)
   }
 }
 
