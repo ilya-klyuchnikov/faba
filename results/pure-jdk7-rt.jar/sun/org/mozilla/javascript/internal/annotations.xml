@@ -19,6 +19,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.Arguments void setInstanceIdValue(int, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.BaseFunction BaseFunction()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -61,6 +64,11 @@
     </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.BaseFunction java.lang.String getFunctionName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.BaseFunction java.lang.String getInstanceIdName(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -432,6 +440,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ContextFactory boolean hasFeature(sun.org.mozilla.javascript.internal.Context, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ContextFactory boolean isSealed()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -634,6 +647,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.Icode java.lang.String bytecodeName(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.IdFunctionObject IdFunctionObject(sun.org.mozilla.javascript.internal.IdFunctionCall, java.lang.Object, int, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -691,10 +709,30 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.IdScriptableObject java.lang.Object getInstanceIdValue(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.IdScriptableObject java.lang.String getInstanceIdName(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.IdScriptableObject void activatePrototypeMap(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.IdScriptableObject void fillConstructorProperties(sun.org.mozilla.javascript.internal.IdFunctionObject)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.IdScriptableObject void initPrototypeId(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.IdScriptableObject void setInstanceIdValue(int, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1004,6 +1042,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeArray java.lang.Object getInstanceIdValue(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.NativeArray java.lang.Object remove(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1015,6 +1058,11 @@
     </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeArray java.lang.String getClassName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeArray java.lang.String getInstanceIdName(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1245,6 +1293,11 @@
     </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeJSON java.lang.String getClassName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeJSON java.lang.String repeat(char, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1489,7 +1542,17 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeString java.lang.Object getInstanceIdValue(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.NativeString java.lang.String getClassName()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeString java.lang.String getInstanceIdName(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1544,6 +1607,24 @@
   <item name="sun.org.mozilla.javascript.internal.Node Node(int, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.Node boolean hasChildren()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1580,6 +1661,11 @@
     </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Node java.lang.String propToString(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Node java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1634,6 +1720,12 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Node void addChildAfter(sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Node void addChildToFront(sun.org.mozilla.javascript.internal.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Node void appendPrintId(sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.ObjToIntMap, java.lang.StringBuffer)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1718,6 +1810,11 @@
     </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ObjArray java.lang.Object peek()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ObjArray java.lang.Object[] toArray()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1823,6 +1920,9 @@
   <item name="sun.org.mozilla.javascript.internal.Parser.ParserException ParserException()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.Parser.PerFunctionVariables PerFunctionVariables(sun.org.mozilla.javascript.internal.Parser, sun.org.mozilla.javascript.internal.ast.FunctionNode)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.Ref Ref()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1863,10 +1963,19 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.RhinoException void initColumnNumber(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.RhinoException void initLineNumber(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.RhinoException void initLineSource(java.lang.String)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.RhinoException void initSourceName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.RhinoException void recordErrorOrigin(java.lang.String, int, java.lang.String, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime ScriptRuntime()">
@@ -2011,6 +2120,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ScriptableObject void checkValidAttributes(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptableObject void preventExtensions()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -2030,6 +2144,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ScriptableObject.Slot void setAttributes(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.SecureCaller SecureCaller()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2086,6 +2203,16 @@
     </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Token boolean isValidToken(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Token java.lang.String name(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Token java.lang.String typeToName(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -2228,6 +2355,11 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.UniqueTag UniqueTag(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.UniqueTag java.lang.Object readResolve()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.VMBridge VMBridge()">
     <annotation name="org.jetbrains.annotations.Contract">
