@@ -232,7 +232,7 @@ object HardCodedPurity {
   import PurityAnalysis._
 
   val ownedFields: Set[(String, String)] =
-    Set()
+    Set(("java/lang/AbstractStringBuilder", "value"))
 
   val solutions: Map[Method, Set[EffectQuantum]] =
     Map(
