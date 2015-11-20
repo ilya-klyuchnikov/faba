@@ -168,6 +168,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.jndi.ldap.Filter int indexOf(byte[], java.lang.String, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.Filter int[] findRightParen(byte[], int[], int)">
     <annotation name="org.jetbrains.annotations.ParamChange" params="1"/>
   </item>
@@ -254,6 +259,9 @@
   <item name="com.sun.jndi.ldap.LdapCtx void setHopCount(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapCtx void setRefSeparator(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jndi.ldap.LdapCtx void setReferralMode(java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -334,6 +342,14 @@
   </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser LdapSchemaParser(boolean)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaParser int findTrailingWhitespace(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaParser void skipWhitespace(java.lang.String, int[])">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapSearchEnumeration void setStartName(javax.naming.Name)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>

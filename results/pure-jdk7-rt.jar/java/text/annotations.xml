@@ -38,6 +38,11 @@
   <item name="java.text.AttributedString AttributedString(java.lang.String)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.text.AttributedString char charAt(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.text.AttributedString int length()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -53,6 +58,29 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.text.AttributedString.AttributedStringIterator char current()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.text.AttributedString.AttributedStringIterator char first()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.AttributedString.AttributedStringIterator char internalSetIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.AttributedString.AttributedStringIterator char last()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.AttributedString.AttributedStringIterator char next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.AttributedString.AttributedStringIterator char previous()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.AttributedString.AttributedStringIterator char setIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.AttributedString.AttributedStringIterator int getBeginIndex()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -175,6 +203,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.text.ChoiceFormat java.lang.StringBuffer format(double, java.lang.StringBuffer, java.text.FieldPosition)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1"/>
   </item>
   <item name="java.text.ChoiceFormat java.lang.String[] doubleArraySize(java.lang.String[])">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -676,6 +707,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.text.MessageFormat void copyAndFixQuotes(java.lang.String, int, int, java.lang.StringBuilder)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="3"/>
+  </item>
   <item name="java.text.MessageFormat void setLocale(java.util.Locale)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -955,6 +989,26 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.StringCharacterIterator StringCharacterIterator(java.lang.String, int, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.StringCharacterIterator char current()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.text.StringCharacterIterator char first()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.StringCharacterIterator char last()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.StringCharacterIterator char next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.StringCharacterIterator char previous()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.StringCharacterIterator char setIndex(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.StringCharacterIterator int getBeginIndex()">

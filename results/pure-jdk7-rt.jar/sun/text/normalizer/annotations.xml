@@ -53,6 +53,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.text.normalizer.NormalizerBase NormalizerBase(java.lang.String, sun.text.normalizer.NormalizerBase.Mode)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.text.normalizer.NormalizerBase NormalizerBase(java.lang.String, sun.text.normalizer.NormalizerBase.Mode, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.text.normalizer.NormalizerBase int getBeginIndex()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -377,13 +383,27 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.text.normalizer.ReplaceableString ReplaceableString(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.text.normalizer.ReplaceableString ReplaceableString(java.lang.StringBuffer)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.text.normalizer.ReplaceableString char charAt(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.text.normalizer.ReplaceableString int length()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.text.normalizer.ReplaceableString void getChars(int, int, char[], int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="2"/>
+  </item>
+  <item name="sun.text.normalizer.ReplaceableUCharacterIterator ReplaceableUCharacterIterator(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.text.normalizer.ReplaceableUCharacterIterator ReplaceableUCharacterIterator(java.lang.StringBuffer)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -492,6 +512,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.text.normalizer.UCharacterIterator sun.text.normalizer.UCharacterIterator getInstance(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.text.normalizer.UCharacterIterator sun.text.normalizer.UCharacterIterator getInstance(java.lang.StringBuffer)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -552,7 +577,22 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.text.normalizer.UTF16 int _charAt(java.lang.String, int, char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.text.normalizer.UTF16 int charAt(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.text.normalizer.UTF16 int getCharCount(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.text.normalizer.UTF16 int moveCodePointOffset(char[], int, int, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -573,6 +613,11 @@
     </annotation>
   </item>
   <item name="sun.text.normalizer.UnicodeSet int getRangeStart(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.text.normalizer.UnicodeSet int getSingleCP(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -601,10 +646,21 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.text.normalizer.Utility boolean escapeUnprintable(java.lang.StringBuffer, int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="sun.text.normalizer.Utility boolean isUnprintable(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="sun.text.normalizer.Utility int skipWhitespace(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.text.normalizer.Utility void getChars(java.lang.StringBuffer, int, int, char[], int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="3"/>
   </item>
   <item name="sun.text.normalizer.VersionInfo VersionInfo(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>

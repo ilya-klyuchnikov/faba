@@ -161,6 +161,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.io.ByteArrayOutputStream java.lang.String toString(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.io.ByteArrayOutputStream void close()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -790,7 +795,17 @@
   <item name="java.io.ObjectStreamException ObjectStreamException(java.lang.String)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.io.ObjectStreamField boolean isPrimitive()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.io.ObjectStreamField boolean isUnshared()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.io.ObjectStreamField char getTypeCode()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1036,6 +1051,13 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.io.StringBufferInputStream int read()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.StringBufferInputStream int read(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="java.io.StringBufferInputStream long skip(long)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -1054,6 +1076,13 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.io.StringReader int read()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.StringReader int read(char[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="java.io.StringReader long skip(long)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -1108,6 +1137,11 @@
     </annotation>
   </item>
   <item name="java.io.UnixFileSystem char getSeparator()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.io.UnixFileSystem int prefixLength(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>

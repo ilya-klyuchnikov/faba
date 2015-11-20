@@ -13,12 +13,27 @@
   <item name="java.lang.AbstractStringBuilder AbstractStringBuilder(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.lang.AbstractStringBuilder char charAt(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.lang.AbstractStringBuilder char[] getValue()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="java.lang.AbstractStringBuilder int capacity()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.AbstractStringBuilder int codePointAt(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.AbstractStringBuilder int codePointBefore(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -48,10 +63,55 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.lang.AbstractStringBuilder java.lang.AbstractStringBuilder append(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.AbstractStringBuilder java.lang.AbstractStringBuilder append(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.AbstractStringBuilder java.lang.AbstractStringBuilder append(char[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.AbstractStringBuilder java.lang.AbstractStringBuilder append(char[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.AbstractStringBuilder java.lang.AbstractStringBuilder append(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.AbstractStringBuilder java.lang.AbstractStringBuilder appendCodePoint(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.AbstractStringBuilder java.lang.AbstractStringBuilder delete(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.AbstractStringBuilder java.lang.AbstractStringBuilder deleteCharAt(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.AbstractStringBuilder java.lang.AbstractStringBuilder insert(int, char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.AbstractStringBuilder java.lang.AbstractStringBuilder replace(int, int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.lang.AbstractStringBuilder java.lang.AbstractStringBuilder reverse()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.lang.AbstractStringBuilder void ensureCapacity(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.AbstractStringBuilder void ensureCapacityInternal(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.lang.AbstractStringBuilder void expandCapacity(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.AbstractStringBuilder void getChars(int, int, char[], int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="2"/>
+  </item>
+  <item name="java.lang.AbstractStringBuilder void setCharAt(int, char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.AbstractStringBuilder void setLength(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.AbstractStringBuilder void trimToSize()">
@@ -821,6 +881,11 @@
   </item>
   <item name="java.lang.ClassFormatError ClassFormatError(java.lang.String)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.ClassLoader boolean checkName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.lang.ClassLoader boolean isAncestor(java.lang.ClassLoader)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2142,10 +2207,19 @@
   <item name="java.lang.String String()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.lang.String String(byte[], int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.String String(byte[], int, int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.lang.String String(char[])">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.String String(char[], boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.String String(int[], int, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.String String(java.lang.String)">
@@ -2181,7 +2255,22 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.lang.String char charAt(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.lang.String char[] toCharArray()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.String int codePointAt(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.String int codePointBefore(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -2312,8 +2401,19 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.lang.String void checkBounds(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.String void getBytes(int, int, byte[], int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="2"/>
+  </item>
   <item name="java.lang.String void getChars(char[], int)">
     <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
+  <item name="java.lang.String void getChars(int, int, char[], int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="2"/>
   </item>
   <item name="java.lang.String.CaseInsensitiveComparator CaseInsensitiveComparator()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -2326,7 +2426,25 @@
   <item name="java.lang.StringBuffer StringBuffer(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.lang.StringBuffer StringBuffer(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuffer char charAt(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.lang.StringBuffer int capacity()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.StringBuffer int codePointAt(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.lang.StringBuffer int codePointBefore(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -2366,7 +2484,43 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.lang.StringBuffer java.lang.StringBuffer append(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuffer java.lang.StringBuffer append(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuffer java.lang.StringBuffer append(char[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuffer java.lang.StringBuffer append(char[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuffer java.lang.StringBuffer append(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuffer java.lang.StringBuffer appendCodePoint(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuffer java.lang.StringBuffer delete(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuffer java.lang.StringBuffer deleteCharAt(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuffer java.lang.StringBuffer insert(int, char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuffer java.lang.StringBuffer replace(int, int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.lang.StringBuffer java.lang.StringBuffer reverse()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuffer void getChars(int, int, char[], int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="2"/>
+  </item>
+  <item name="java.lang.StringBuffer void setLength(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.StringBuffer void trimToSize()">
@@ -2376,6 +2530,9 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.StringBuilder StringBuilder(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuilder StringBuilder(java.lang.String)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.StringBuilder int indexOf(java.lang.String)">
@@ -2397,6 +2554,36 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.lang.StringBuilder java.lang.StringBuilder append(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuilder java.lang.StringBuilder append(char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuilder java.lang.StringBuilder append(char[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuilder java.lang.StringBuilder append(char[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuilder java.lang.StringBuilder append(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuilder java.lang.StringBuilder appendCodePoint(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuilder java.lang.StringBuilder delete(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuilder java.lang.StringBuilder deleteCharAt(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuilder java.lang.StringBuilder insert(int, char)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringBuilder java.lang.StringBuilder replace(int, int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.StringBuilder java.lang.StringBuilder reverse()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -2432,6 +2619,9 @@
     </annotation>
   </item>
   <item name="java.lang.StringIndexOutOfBoundsException StringIndexOutOfBoundsException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.lang.StringIndexOutOfBoundsException StringIndexOutOfBoundsException(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.lang.StringIndexOutOfBoundsException StringIndexOutOfBoundsException(java.lang.String)">

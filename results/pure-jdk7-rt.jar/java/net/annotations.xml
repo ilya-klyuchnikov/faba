@@ -316,6 +316,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.net.HttpCookie boolean isToken(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.net.HttpCookie int getVersion()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -462,12 +467,32 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.net.IDN boolean isAllASCII(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.net.IDN boolean isNonLDHAsciiCodePoint(int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.net.IDN boolean startsWithACEPrefix(java.lang.StringBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.net.IDN char toASCIILower(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.net.IDN int searchDots(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.net.IDN java.lang.StringBuffer toASCIILower(java.lang.StringBuffer)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1178,6 +1203,21 @@
   <item name="java.net.URI URI()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.net.URI boolean equal(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.net.URI boolean equalIgnoringCase(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.net.URI boolean equals(java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.net.URI boolean isAbsolute()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1203,6 +1243,16 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.net.URI int compareIgnoringCase(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.net.URI int compareTo(java.net.URI)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.net.URI int decode(char)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -1216,8 +1266,18 @@
   <item name="java.net.URI int hash(int, java.lang.String)">
     <annotation name="org.jetbrains.annotations.ParamChange" params="1"/>
   </item>
+  <item name="java.net.URI int hashIgnoringCase(int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.net.URI int join(char[], int[])">
     <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
+  <item name="java.net.URI int needsNormalization(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.net.URI int toLower(char)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -1264,7 +1324,25 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.net.URI long highMask(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.net.URI long lowMask(char, char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.net.URI long lowMask(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.net.URI void appendEscape(java.lang.StringBuffer, byte)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
+  <item name="java.net.URI void checkPath(java.lang.String, java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1281,6 +1359,31 @@
   <item name="java.net.URI.Parser Parser(java.net.URI, java.lang.String)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
     <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
+  <item name="java.net.URI.Parser boolean at(int, int, char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.net.URI.Parser boolean at(int, int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.net.URI.Parser char charAt(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.net.URI.Parser int scan(int, int, char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.net.URI.Parser int scan(int, int, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.net.URI.Parser void fail(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
