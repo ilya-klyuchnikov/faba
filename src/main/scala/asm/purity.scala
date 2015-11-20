@@ -238,7 +238,11 @@ object HardCodedPurity {
     Map(
       Method("java/lang/Throwable", "fillInStackTrace", "(I)Ljava/lang/Throwable;") -> Set(ThisChangeQuantum),
       Method("java/lang/System", "arraycopy", "(Ljava/lang/Object;ILjava/lang/Object;II)V") -> Set(ParamChangeQuantum(2)),
-      Method("java/lang/Throwable", "fillInStackTrace", "(I)Ljava/lang/Throwable;") -> Set(ThisChangeQuantum)
+      Method("java/lang/Throwable", "fillInStackTrace", "(I)Ljava/lang/Throwable;") -> Set(ThisChangeQuantum),
+      Method("java/lang/AbstractStringBuilder", "expandCapacity", "(I)V") -> Set(ThisChangeQuantum),
+      Method("java/lang/StringBuilder", "expandCapacity", "(I)V") -> Set(ThisChangeQuantum),
+      Method("java/lang/StringBuffer", "expandCapacity", "(I)V") -> Set(ThisChangeQuantum),
+      Method("java/lang/StringIndexOutOfBoundsException", "<init>", "(I)V") -> Set(ThisChangeQuantum)
     )
 
   def getHardCodedSolution(aKey: Key): Option[Set[EffectQuantum]] = aKey match {
