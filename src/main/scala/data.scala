@@ -48,7 +48,7 @@ object Values extends Enumeration {
   // ThisObject - this
   // LocalObject - object created in this method (method being analyzed)
   // NonLocalObject - we do not know about origins
-  val Bot, NotNull, Null, True, False, Pure, LocalEffect, ThisObject, LocalObject, NonLocalObject, Top = Value
+  val Bot, NotNull, Null, True, False, Top = Value
 }
 
 object ValuesNegator extends Negator[Value] {
@@ -181,6 +181,7 @@ object XmlUtils {
         }
         contracts(key.method).pure = true
       }
+      var paramsChanged: List[Int] = Nil
       for (effect <- value) {
         effect match {
           case PurityAnalysis.ThisChangeQuantum =>
@@ -188,8 +189,18 @@ object XmlUtils {
             for (annKey <- annotationKey(method, extras(method), knownClasses)) {
               annotations = annotations.updated(annKey, annotations.getOrElse(annKey, Nil) ::: localAnnotations)
             }
+          case PurityAnalysis.ParamChangeQuantum(n) =>
+            paramsChanged = n :: paramsChanged
           case _ =>
 
+        }
+      }
+      if (paramsChanged.nonEmpty) {
+        val paramsChangedStr = paramsChanged.sorted.mkString(",")
+        val method = key.method
+        for (annKey <- annotationKey(method, extras(method), knownClasses)) {
+          val paramsAnnotations = List(<annotation name='org.jetbrains.annotations.ParamChange' params={paramsChangedStr}/>)
+          annotations = annotations.updated(annKey, annotations.getOrElse(annKey, Nil) ::: paramsAnnotations)
         }
       }
     }

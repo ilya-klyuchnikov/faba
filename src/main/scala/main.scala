@@ -205,8 +205,9 @@ class MainProcessor extends FabaProcessor {
       }
       val writingEnd = System.currentTimeMillis()
 
-      val pureAnnotations = puritySolutions.count(_._2 == Values.Pure)
-      val localEffectAnnotations = puritySolutions.count(_._2 == Values.LocalEffect)
+      val pureAnnotations = puritySolutions.count(_._2.isEmpty)
+      val localEffectAnnotations = puritySolutions.count(_._2(PurityAnalysis.ThisChangeQuantum))
+      val paramEffectAnnotations = puritySolutions.map(_._2.count(_.isInstanceOf[PurityAnalysis.ParamChangeQuantum])).sum
 
       println(s"solving took ${(solvingEnd - indexEnd) / 1000.0} sec")
       println(s"saving took ${(writingEnd - solvingEnd) / 1000.0} sec")
@@ -216,7 +217,7 @@ class MainProcessor extends FabaProcessor {
       println(s"${nullableResults.size} @Nullable results")
       println(s"${pureAnnotations} @Pure methods")
       println(s"${localEffectAnnotations} @LocalEffect methods")
-
+      println(s"${paramEffectAnnotations} @ParamChange annotations")
     }
 
     println("====")

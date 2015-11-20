@@ -14,55 +14,8 @@ import org.objectweb.asm.tree._
 import scala.collection.JavaConverters._
 
 object PurityAnalysis {
-  val finalTop = Final(Values.Top)
-  val finalPure = Final(Values.Pure)
 
   val unAnalyzable = ACC_ABSTRACT | ACC_NATIVE | ACC_INTERFACE
-
-  // Pure < local < top
-  val purityLattice = new Lattice[Values.Value] {
-    override val top: Values.Value = Values.Top
-    override val bot: Values.Value = Values.Pure
-
-    override def join(x: Values.Value, y: Values.Value): Values.Value = {
-      (x, y) match {
-        case (`bot`, _) => y
-        case (_, `bot`) => x
-        case (`top`, _) => top
-        case (_, `top`) => top
-        case (Values.Pure, Values.LocalEffect) =>
-          Values.LocalEffect
-        case (Values.LocalEffect, Values.Pure) =>
-          Values.LocalEffect
-        case _ => if (equiv(x, y)) x else top
-      }
-    }
-
-
-    // current hack: one of values is locality
-    override def meet(x: Values.Value, y: Values.Value): Values.Value = {
-      (x, y) match {
-        case (`top`, _) => top
-        case (_, `top`) => top
-        case (`bot`, _) => bot
-        case (_, `bot`) => bot
-        case (Values.LocalObject, Values.LocalEffect) =>
-          Values.Pure
-        case (Values.LocalEffect, Values.LocalObject) =>
-          Values.Pure
-        case (Values.ThisObject, Values.LocalEffect) =>
-          Values.LocalEffect
-        case (Values.LocalEffect, Values.ThisObject) =>
-          Values.LocalEffect
-        case (Values.NonLocalObject, Values.LocalEffect) =>
-          Values.Top
-        case (Values.LocalEffect, Values.NonLocalObject) =>
-          Values.Top
-        case _ =>
-          if (equiv(x, y)) x else bot
-      }
-    }
-  }
 
   def analyze(method: Method, methodNode: MethodNode, stable: Boolean): PurityEquation = {
     val aKey = new Key(method, Out, stable)
