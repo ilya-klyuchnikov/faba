@@ -3,6 +3,7 @@ package faba.test
 import annotations.{ExpectLocalEffect, ExpectPure}
 import data.PurityData
 import faba.MainProcessor
+import faba.asm.PurityAnalysis
 import faba.data.{Key, Method, Out}
 import faba.source.ClassSource
 import org.objectweb.asm.Type
@@ -21,16 +22,16 @@ class PuritySuite extends FunSuite with Matchers {
     for (jClass <- allClasses; jMethod <- jClass.getDeclaredMethods) {
       val method = Method(Type.getType(jClass).getInternalName, jMethod.getName, Type.getMethodDescriptor(jMethod))
       info(s"$method")
-      annotations.pure(Key(method, Out, true)) should equal (jMethod.getAnnotation(classOf[ExpectPure]) != null)
-      annotations.localEffects(Key(method, Out, true)) should equal (jMethod.getAnnotation(classOf[ExpectLocalEffect]) != null)
+      annotations.effects(Key(method, Out, true)).isEmpty should equal (jMethod.getAnnotation(classOf[ExpectPure]) != null)
+      annotations.effects(Key(method, Out, true))(PurityAnalysis.ThisChangeQuantum) should equal (jMethod.getAnnotation(classOf[ExpectLocalEffect]) != null)
 
     }
 
     for (jClass <- allClasses; jMethod <- jClass.getDeclaredConstructors) {
       val method = Method(Type.getType(jClass).getInternalName, "<init>", Type.getConstructorDescriptor(jMethod))
       info(s"$method")
-      annotations.pure(Key(method, Out, true)) should equal (jMethod.getAnnotation(classOf[ExpectPure]) != null)
-      annotations.localEffects(Key(method, Out, true)) should equal (jMethod.getAnnotation(classOf[ExpectLocalEffect]) != null)
+      annotations.effects(Key(method, Out, true)).isEmpty should equal (jMethod.getAnnotation(classOf[ExpectPure]) != null)
+      annotations.effects(Key(method, Out, true))(PurityAnalysis.ThisChangeQuantum) should equal (jMethod.getAnnotation(classOf[ExpectLocalEffect]) != null)
     }
   }
 }

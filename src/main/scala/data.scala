@@ -174,17 +174,22 @@ object XmlUtils {
 
     // processing purity
     for ((key, value) <- pureSolutions) {
-      // TODO
-      if (value == Values.Pure) {
+      // pure
+      if (value == Set()) {
         if (!contracts.contains(key.method)) {
           contracts(key.method) = new Contract()
         }
         contracts(key.method).pure = true
       }
-      if (value == Values.LocalEffect) {
-        val method = key.method
-        for (annKey <- annotationKey(method, extras(method), knownClasses)) {
-          annotations = annotations.updated(annKey, annotations.getOrElse(annKey, Nil) ::: localAnnotations)
+      for (effect <- value) {
+        effect match {
+          case PurityAnalysis.ThisChangeQuantum =>
+            val method = key.method
+            for (annKey <- annotationKey(method, extras(method), knownClasses)) {
+              annotations = annotations.updated(annKey, annotations.getOrElse(annKey, Nil) ::: localAnnotations)
+            }
+          case _ =>
+
         }
       }
     }

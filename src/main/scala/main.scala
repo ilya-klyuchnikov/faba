@@ -181,7 +181,7 @@ class MainProcessor extends FabaProcessor {
         nullableResults.groupBy(_._1.method.internalPackageName)
 
       val puritySolutions: Map[Key, Set[EffectQuantum]] =
-        puritySolver.solve().filter(p => p._2 != Set(PurityAnalysis.TopEffectQuantum))
+        puritySolver.solve(extras).filter(p => p._2 != Set(PurityAnalysis.TopEffectQuantum))
 
       val byPackagePuritySolutions: Map[String, Map[Key, Set[EffectQuantum]]] =
         puritySolutions.groupBy(_._1.method.internalPackageName)
@@ -255,7 +255,7 @@ class MainProcessor extends FabaProcessor {
     val solutions: Map[Key, Values.Value] =
       (notNullParamsSolver.solve() ++ contractsSolver.solve()).filterNot(p => p._2 == Values.Top || p._2 == Values.Bot)
     val puritySolutions =
-      puritySolver.solve().filter(p => p._2 != Set(PurityAnalysis.TopEffectQuantum))
+      puritySolver.solve(extras).filter(p => p._2 != Set(PurityAnalysis.TopEffectQuantum))
     data.Utils.toAnnotations(solutions, puritySolutions)
   }
 }

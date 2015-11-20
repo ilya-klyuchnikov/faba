@@ -2,7 +2,6 @@ package faba.asm
 
 import java.util
 
-import faba.asm.PurityAnalysis.PurityEquation
 import faba.data._
 import faba.data.{Key, Method}
 import faba.engine._
@@ -275,6 +274,8 @@ object PurityAnalysis {
 
 object HardCodedPurity {
 
+  import PurityAnalysis._
+
   val ownedFields: Set[(String, String)] =
     Set()
 
@@ -289,16 +290,135 @@ object HardCodedPurity {
     }
   }
 
-  def getHardCodedSolution1(aKey: Key): Option[Set[PurityAnalysis.EffectQuantum]] = None
+  def getHardCodedSolution1(aKey: Key): Option[Set[EffectQuantum]] = None
 }
 
 
 class PuritySolver {
+  import PurityAnalysis._
+  import scala.collection.mutable
+
+  private var solved : Map[Key, Set[EffectQuantum]] = Map()
+  private val dependencies = mutable.HashMap[Key, Set[Key]]()
+  private val moving = mutable.Queue[PurityEquation]()
+  private val pending = mutable.HashMap[Key, Set[EffectQuantum]]()
+
   def addEquation(eq: PurityEquation): Unit = {
+    val key = eq.key
+    val effects = eq.effects
+    var callKeys = Set[Key]()
+    for (effect <- effects) {
+      effect match {
+        case CallQuantum(callKey, _) =>
+          callKeys = callKeys + callKey
+        case _ =>
 
+      }
+    }
+
+    if (callKeys.isEmpty) {
+      moving.enqueue(eq)
+    } else {
+      pending(key) = effects
+      for (callKey <- callKeys) {
+        dependencies(callKey) = dependencies.getOrElse(callKey, Set()) + key
+      }
+    }
   }
 
-  def solve(): Map[Key, Set[PurityAnalysis.EffectQuantum]] = {
-    null
+  def mkUnstableValue(key: Key, effects: Set[EffectQuantum]): Set[EffectQuantum] =
+    HardCodedPurity.getHardCodedSolution1(key) match {
+      case Some(set) => set
+      case None => Set(TopEffectQuantum)
+    }
+
+  def solve(extras: Map[Method, MethodExtra]): Map[Key, Set[EffectQuantum]] = {
+    while (moving.nonEmpty) {
+      val eq = moving.dequeue()
+      val key = eq.key
+      val effects = eq.effects
+      solved = solved + (key -> effects)
+      val isStatic = (extras(key.method).access & Opcodes.ACC_STATIC) != 0
+
+      val toPropagate: List[(Key, Set[EffectQuantum])] =
+        if (key.stable)
+          List((key, effects), (key.mkUnstable, effects))
+        else
+          List((key.mkStable, effects), (key, mkUnstableValue(key, effects)))
+
+      // pEffect mayBe pure!
+      for {
+        (pKey, pEffects) <- toPropagate
+        dKeys <- dependencies.remove(pKey)
+        dKey <- dKeys
+        dEffects <- pending.remove(dKey)
+      } {
+        var callKeys = Set[Key]()
+        var newEffects = Set[EffectQuantum]()
+        var delta: Set[EffectQuantum] = null
+        for (dEffect <- dEffects) dEffect match {
+          case CallQuantum(`pKey`, data) =>
+            delta = substitute(isStatic, pEffects, data)
+            newEffects = newEffects ++ delta
+          case otherCall:CallQuantum =>
+            callKeys = callKeys + otherCall.key
+            newEffects = newEffects + otherCall
+          case _ =>
+            newEffects = newEffects + dEffect
+        }
+
+        if (delta == Set(TopEffectQuantum)) {
+          moving.enqueue(PurityEquation(dKey, Set(TopEffectQuantum)))
+          // TODO - cleanup dependencies?
+        } else if (callKeys.isEmpty) {
+          moving.enqueue(PurityEquation(dKey, newEffects))
+        } else {
+          pending(dKey) = newEffects
+        }
+
+      }
+    }
+    solved
   }
+
+  def substitute(isStatic: Boolean, effects: Set[EffectQuantum], data: List[DataValue]): Set[EffectQuantum] =
+    if (effects.isEmpty) {
+      effects
+    } else if (effects == Set(TopEffectQuantum)) {
+      Set(TopEffectQuantum)
+    } else {
+      var newEffects = Set[EffectQuantum]()
+      val shift = if (isStatic) 0 else 1
+      for (effect <- effects) effect match {
+        case ThisChangeQuantum =>
+          data.head match {
+            case ThisDataValue | OwnedDataValue =>
+              newEffects = newEffects + ThisChangeQuantum
+            case LocalDataValue =>
+              // nothing - pure
+            case ParameterDataValue(n) =>
+              newEffects = newEffects + ParamChangeQuantum(n)
+            case _ =>
+              // top
+              return Set(TopEffectQuantum)
+          }
+
+        case ParamChangeQuantum(i) =>
+          data(i + shift) match {
+            case ThisDataValue | OwnedDataValue =>
+              newEffects = newEffects + ThisChangeQuantum
+            case LocalDataValue =>
+              // nothing - pure
+            case ParameterDataValue(n) =>
+              newEffects = newEffects + ParamChangeQuantum(n)
+            case _ =>
+              // top
+              return Set(TopEffectQuantum)
+          }
+      }
+
+      newEffects
+    }
+
+
 }
