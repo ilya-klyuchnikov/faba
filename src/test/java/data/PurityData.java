@@ -2,6 +2,7 @@ package data;
 
 import annotations.ExpectLocalEffect;
 import annotations.ExpectPure;
+import annotations.ExpectParamChange;
 
 public class PurityData {
     private int i;
@@ -31,6 +32,23 @@ public class PurityData {
     @ExpectLocalEffect
     private void inc() {
         i++;
+    }
+
+    public final void changeParam(@ExpectParamChange PurityData pd) {
+        pd.setI(1);
+    }
+
+    public final void arraycopy(Object src,  int  srcPos,
+                                @ExpectParamChange Object dest, int destPos,
+                                int length) {
+        System.arraycopy(src, srcPos, dest, destPos, length);
+    }
+
+    @ExpectPure
+    public static boolean[] copyOf(boolean[] original, int newLength) {
+        boolean[] copy = new boolean[newLength];
+        System.arraycopy(original, 0, copy, 0, original.length);
+        return copy;
     }
 
     @ExpectPure

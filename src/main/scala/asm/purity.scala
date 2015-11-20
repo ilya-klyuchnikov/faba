@@ -239,6 +239,8 @@ object PurityAnalysis {
           val insnIndex = m.instructions.indexOf(insn)
           effects(insnIndex) = TopEffectQuantum
           UnknownDataValue1
+        case NEWARRAY | ANEWARRAY =>
+          LocalDataValue
         case _ =>
           UnknownDataValue1
       }
@@ -279,18 +281,16 @@ object HardCodedPurity {
   val ownedFields: Set[(String, String)] =
     Set()
 
-  val solutions: Map[Key, Value] =
-    Map(Key(Method("java/lang/Throwable", "fillInStackTrace", "(I)Ljava/lang/Throwable;"), Out, stable = true) -> Values.LocalEffect)
-
-  def getHardCodedSolution(aKey: Key): Option[Value] = {
-    aKey match {
-      case Key(Method(_, "fillInStackTrace", "()Ljava/lang/Throwable;"), _, _, _) =>
-        Some(Values.LocalEffect)
-      case _ => solutions.get(aKey)
-    }
+  def getHardCodedSolution(aKey: Key): Option[Set[EffectQuantum]] = aKey match {
+    case Key(Method(_, "fillInStackTrace", "()Ljava/lang/Throwable;"), _, _, _) =>
+      Some(Set(ThisChangeQuantum))
+    case Key(Method("java/lang/Throwable", "fillInStackTrace", "(I)Ljava/lang/Throwable;"), _, _, _) =>
+      Some(Set(ThisChangeQuantum))
+    case Key(Method("java/lang/System", "arraycopy", _), _, _, _) =>
+      Some(Set(ParamChangeQuantum(2)))
+    case _ =>
+      None
   }
-
-  def getHardCodedSolution1(aKey: Key): Option[Set[EffectQuantum]] = None
 }
 
 
@@ -327,7 +327,7 @@ class PuritySolver {
   }
 
   def mkUnstableValue(key: Key, effects: Set[EffectQuantum]): Set[EffectQuantum] =
-    HardCodedPurity.getHardCodedSolution1(key) match {
+    HardCodedPurity.getHardCodedSolution(key) match {
       case Some(set) => set
       case None => Set(TopEffectQuantum)
     }
