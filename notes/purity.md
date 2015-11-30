@@ -66,3 +66,13 @@ All other instructions are not interesting for us at all!
 2. Instructions analysis - first, analyzing `PUTFIELD`, `PUTSTATIC`, `_STORE`, then - `invoke`
 
 For each `invoke` instruction we need to store receiver and arguments. That's it.
+
+### Todo
+
+For final classes we can "devirtualize" virtual calls to `this`.
+Also we can consider "hard-coded closed hierarchies" - like `AbstractStringBuilder`, `StringBuilder`, `StringBuffer`.
+Other problems are with hierarchy.
+
+What can we do? - Apply the same logic?
+
+The solution: option to resolve inheritance.
