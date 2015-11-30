@@ -202,6 +202,9 @@
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.HeaderTokenizer HeaderTokenizer(java.lang.String, java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.HeaderTokenizer int skipWhiteSpace()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.HeaderTokenizer java.lang.String filterToken(java.lang.String, int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -418,8 +421,23 @@
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility int checkAscii(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility int checkAscii(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility int checkAscii(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility int indexOfAny(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility int indexOfAny(java.lang.String, java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility java.io.InputStream decode(java.io.InputStream, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">

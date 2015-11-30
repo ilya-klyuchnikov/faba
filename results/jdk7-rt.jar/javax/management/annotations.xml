@@ -1395,6 +1395,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;null-&gt;true&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.management.ObjectName boolean isDomain(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1436,6 +1437,9 @@
   <item name="javax.management.ObjectName int parseKey(char[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.management.ObjectName int writeKeyPropertyListString(char[], char[], int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1"/>
+  </item>
   <item name="javax.management.ObjectName int[] parseValue(char[], int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1454,9 +1458,15 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.ObjectName java.lang.String getKeyPropertyListString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.ObjectName java.lang.String getSerializedNameString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.ObjectName java.lang.String quote(java.lang.String)">
@@ -1466,6 +1476,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.ObjectName java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.management.ObjectName java.lang.String unquote(java.lang.String)">

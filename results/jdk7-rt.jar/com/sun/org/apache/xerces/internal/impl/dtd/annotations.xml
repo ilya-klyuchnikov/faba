@@ -43,6 +43,7 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val val="&quot;_,null-&gt;false&quot;"/>
     </annotation>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dtd.DTDGrammar boolean getElementDecl(int, com.sun.org.apache.xerces.internal.impl.dtd.XMLElementDecl)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -159,8 +160,14 @@
   <item name="com.sun.org.apache.xerces.internal.impl.dtd.DTDGrammar int getElementDeclIndex(com.sun.org.apache.xerces.internal.xni.QName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dtd.DTDGrammar int getElementDeclIndex(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dtd.DTDGrammar int getElementDeclIndex(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dtd.DTDGrammar int getEntityDeclIndex(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dtd.DTDGrammar int getEntityDeclIndex(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -184,6 +191,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dtd.DTDGrammar int getNotationDeclIndex(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dtd.DTDGrammar int getNotationDeclIndex(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -502,6 +512,9 @@
   <item name="com.sun.org.apache.xerces.internal.impl.dtd.DTDGrammar.QNameHashtable QNameHashtable()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dtd.DTDGrammar.QNameHashtable int get(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dtd.DTDGrammar.QNameHashtable int get(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -530,8 +543,18 @@
   <item name="com.sun.org.apache.xerces.internal.impl.dtd.XML11DTDProcessor XML11DTDProcessor(com.sun.org.apache.xerces.internal.util.SymbolTable, com.sun.org.apache.xerces.internal.xni.grammars.XMLGrammarPool, com.sun.org.apache.xerces.internal.impl.XMLErrorReporter, com.sun.org.apache.xerces.internal.xni.parser.XMLEntityResolver) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dtd.XML11DTDProcessor boolean isValidName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dtd.XML11DTDProcessor boolean isValidName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dtd.XML11DTDProcessor boolean isValidNmtoken(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dtd.XML11DTDProcessor boolean isValidNmtoken(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -662,8 +685,18 @@
   <item name="com.sun.org.apache.xerces.internal.impl.dtd.XMLDTDLoader void setProperty(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dtd.XMLDTDProcessor boolean isValidName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dtd.XMLDTDProcessor boolean isValidName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dtd.XMLDTDProcessor boolean isValidNmtoken(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dtd.XMLDTDProcessor boolean isValidNmtoken(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

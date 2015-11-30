@@ -1120,6 +1120,9 @@
   <item name="sun.security.x509.CertificateX509Key void set(java.lang.String, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.security.x509.DNSName DNSName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.security.x509.DNSName DNSName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2558,7 +2561,8 @@
   </item>
   <item name="sun.security.x509.X500Name boolean escaped(int, int, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;_,_,null-&gt;false&quot;"/>
+      <val name="value" val="&quot;_,_,null-&gt;false&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="sun.security.x509.X500Name boolean isEmpty()">
@@ -2571,6 +2575,11 @@
   </item>
   <item name="sun.security.x509.X500Name int constrains(sun.security.x509.GeneralNameInterface) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.security.x509.X500Name int countQuotes(java.lang.String, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.security.x509.X500Name int getType()">
     <annotation name="org.jetbrains.annotations.Contract">

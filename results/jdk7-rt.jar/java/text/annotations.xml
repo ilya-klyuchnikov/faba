@@ -94,6 +94,11 @@
   <item name="java.text.AttributedString boolean valuesMatch(java.lang.Object, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.text.AttributedString char charAt(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.text.AttributedString int length()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -148,6 +153,29 @@
   </item>
   <item name="java.text.AttributedString.AttributedStringIterator boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.text.AttributedString.AttributedStringIterator char current()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.text.AttributedString.AttributedStringIterator char first()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.AttributedString.AttributedStringIterator char internalSetIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.AttributedString.AttributedStringIterator char last()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.AttributedString.AttributedStringIterator char next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.AttributedString.AttributedStringIterator char previous()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.AttributedString.AttributedStringIterator char setIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.AttributedString.AttributedStringIterator int getBeginIndex()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -356,6 +384,7 @@
     </annotation>
   </item>
   <item name="java.text.ChoiceFormat java.lang.Number parse(java.lang.String, java.text.ParsePosition)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.ChoiceFormat java.lang.Number parse(java.lang.String, java.text.ParsePosition) 1">
@@ -370,6 +399,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.ChoiceFormat java.lang.StringBuffer format(double, java.lang.StringBuffer, java.text.FieldPosition)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.text.ChoiceFormat java.lang.StringBuffer format(double, java.lang.StringBuffer, java.text.FieldPosition) 1">
@@ -1432,6 +1462,9 @@
   <item name="java.text.MessageFormat void applyPattern(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.text.MessageFormat void copyAndFixQuotes(java.lang.String, int, int, java.lang.StringBuilder)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="3"/>
+  </item>
   <item name="java.text.MessageFormat void makeFormat(int, int, java.lang.StringBuilder[]) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2062,6 +2095,26 @@
   </item>
   <item name="java.text.StringCharacterIterator boolean equals(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="java.text.StringCharacterIterator char current()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.text.StringCharacterIterator char first()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.StringCharacterIterator char last()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.StringCharacterIterator char next()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.StringCharacterIterator char previous()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.text.StringCharacterIterator char setIndex(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.text.StringCharacterIterator int getBeginIndex()">
     <annotation name="org.jetbrains.annotations.Contract">

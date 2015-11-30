@@ -33,6 +33,9 @@
   <item name="sun.org.mozilla.javascript.internal.Arguments sun.org.mozilla.javascript.internal.ScriptableObject getOwnPropertyDescriptor(sun.org.mozilla.javascript.internal.Context, java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.Arguments void setInstanceIdValue(int, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.BaseFunction BaseFunction()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -63,6 +66,11 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.BaseFunction int findInstanceIdInfo(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.BaseFunction int findPrototypeId(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.BaseFunction int findPrototypeId(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -136,6 +144,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.BaseFunction java.lang.String getInstanceIdName(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.BaseFunction java.lang.String getTypeOf()">
@@ -814,6 +825,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ContextFactory boolean hasFeature(sun.org.mozilla.javascript.internal.Context, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ContextFactory boolean isSealed()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -972,8 +988,14 @@
   <item name="sun.org.mozilla.javascript.internal.DToA void JS_dtostr(java.lang.StringBuffer, int, int, double) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.DToA void stripTrailingZeroes(java.lang.StringBuffer)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.DToA void stripTrailingZeroes(java.lang.StringBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.DToA void stuffBits(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.DToA void stuffBits(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -982,6 +1004,11 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Decompiler int getCurrentOffset()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Decompiler int getNext(java.lang.String, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1216,6 +1243,7 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.IRFactory sun.org.mozilla.javascript.internal.Node createExprStatementNoReturn(sun.org.mozilla.javascript.internal.Node, int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.IRFactory sun.org.mozilla.javascript.internal.Node createExprStatementNoReturn(sun.org.mozilla.javascript.internal.Node, int) 0">
@@ -1620,6 +1648,9 @@
     </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Icode java.lang.String bytecodeName(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.IdFunctionObject IdFunctionObject(sun.org.mozilla.javascript.internal.IdFunctionCall, java.lang.Object, int, int)">
@@ -1742,6 +1773,16 @@
   <item name="sun.org.mozilla.javascript.internal.IdScriptableObject java.lang.Object get(java.lang.String, sun.org.mozilla.javascript.internal.Scriptable)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.IdScriptableObject java.lang.Object getInstanceIdValue(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.IdScriptableObject java.lang.String getInstanceIdName(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.IdScriptableObject sun.org.mozilla.javascript.internal.EcmaError incompatibleCallError(sun.org.mozilla.javascript.internal.IdFunctionObject) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1783,11 +1824,21 @@
   <item name="sun.org.mozilla.javascript.internal.IdScriptableObject void initPrototypeConstructor(sun.org.mozilla.javascript.internal.IdFunctionObject) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.IdScriptableObject void initPrototypeId(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.IdScriptableObject void initPrototypeMethod(java.lang.Object, int, java.lang.String, int) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.IdScriptableObject void initPrototypeValue(int, java.lang.String, java.lang.Object, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.IdScriptableObject void setInstanceIdValue(int, java.lang.Object)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.IdScriptableObject void setInstanceIdValue(int, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1816,6 +1867,11 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ImporterTopLevel ImporterTopLevel()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ImporterTopLevel int findPrototypeId(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ImporterTopLevel int findPrototypeId(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2089,6 +2145,9 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.Interpreter java.lang.String getPatchedStack(sun.org.mozilla.javascript.internal.RhinoException, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Interpreter java.lang.String getSourcePositionFromStack(sun.org.mozilla.javascript.internal.Context, int[])">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Interpreter java.lang.String getSourcePositionFromStack(sun.org.mozilla.javascript.internal.Context, int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2593,6 +2652,11 @@
   <item name="sun.org.mozilla.javascript.internal.NativeArray int findInstanceIdInfo(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeArray int findPrototypeId(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.NativeArray int findPrototypeId(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2631,6 +2695,11 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeArray java.lang.Object getElem(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable, long) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeArray java.lang.Object getInstanceIdValue(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeArray java.lang.Object getRawElem(sun.org.mozilla.javascript.internal.Scriptable, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2724,6 +2793,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeArray java.lang.String getInstanceIdName(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeArray java.lang.String js_join(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable, java.lang.Object[])">
@@ -2835,6 +2907,11 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeBoolean NativeBoolean(boolean)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeBoolean int findPrototypeId(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeBoolean int findPrototypeId(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3008,6 +3085,11 @@
   <item name="sun.org.mozilla.javascript.internal.NativeDate double makeDate(sun.org.mozilla.javascript.internal.Context, double, java.lang.Object[], int) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeDate int findPrototypeId(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.NativeDate int findPrototypeId(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3058,11 +3140,22 @@
   <item name="sun.org.mozilla.javascript.internal.NativeDate void append0PaddedUint(java.lang.StringBuffer, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeDate void appendMonthName(java.lang.StringBuffer, int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeDate void appendWeekDayName(java.lang.StringBuffer, int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.NativeDate void init(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeError NativeError()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeError int findPrototypeId(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeError int findPrototypeId(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3147,6 +3240,11 @@
   <item name="sun.org.mozilla.javascript.internal.NativeGenerator NativeGenerator(sun.org.mozilla.javascript.internal.Scriptable, sun.org.mozilla.javascript.internal.NativeFunction, java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeGenerator int findPrototypeId(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.NativeGenerator int findPrototypeId(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3192,6 +3290,9 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeGlobal boolean isEvalFunction(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeGlobal int oneUcs4ToUtf8Char(byte[], int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeGlobal int oneUcs4ToUtf8Char(byte[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3435,6 +3536,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeJSON java.lang.String repeat(char, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeJSON void init(sun.org.mozilla.javascript.internal.Scriptable, boolean) 0">
@@ -3897,6 +4001,11 @@
   <item name="sun.org.mozilla.javascript.internal.NativeMath NativeMath()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeMath int findPrototypeId(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.NativeMath int findPrototypeId(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3923,6 +4032,11 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeNumber NativeNumber(double)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeNumber int findPrototypeId(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeNumber int findPrototypeId(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -3969,6 +4083,11 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeObject boolean containsValue(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeObject int findPrototypeId(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeObject int findPrototypeId(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -4110,6 +4229,11 @@
   <item name="sun.org.mozilla.javascript.internal.NativeString int findInstanceIdInfo(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeString int findPrototypeId(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.NativeString int findPrototypeId(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -4138,6 +4262,11 @@
   <item name="sun.org.mozilla.javascript.internal.NativeString java.lang.Object execIdCall(sun.org.mozilla.javascript.internal.IdFunctionObject, sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable, sun.org.mozilla.javascript.internal.Scriptable, java.lang.Object[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.NativeString java.lang.Object getInstanceIdValue(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.NativeString java.lang.String getClassName()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -4145,6 +4274,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeString java.lang.String getInstanceIdName(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.NativeString java.lang.String js_concat(java.lang.String, java.lang.Object[])">
@@ -4291,11 +4423,23 @@
   <item name="sun.org.mozilla.javascript.internal.Node Node(int, int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1,2"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -4303,11 +4447,19 @@
   <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1,2"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node, int) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1,2,3"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -4317,6 +4469,10 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1,2,3"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Node Node(int, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -4370,6 +4526,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Node java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Node java.lang.String toStringTree(sun.org.mozilla.javascript.internal.ast.ScriptNode)">
@@ -4444,6 +4603,10 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.Node void addChildAfter(sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0,1"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.Node void addChildAfter(sun.org.mozilla.javascript.internal.Node, sun.org.mozilla.javascript.internal.Node) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -4455,6 +4618,10 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.Node void addChildToBack(sun.org.mozilla.javascript.internal.Node) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.Node void addChildToFront(sun.org.mozilla.javascript.internal.Node)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Node void addChildToFront(sun.org.mozilla.javascript.internal.Node) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -4659,6 +4826,9 @@
     </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ObjArray java.lang.Object[] toArray()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ObjArray java.lang.RuntimeException onEmptyStackTopRead()">
@@ -4676,6 +4846,12 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ObjArray void seal()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ObjArray void toArray(java.lang.Object[])">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ObjArray void toArray(java.lang.Object[], int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ObjToIntMap boolean has(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -4718,6 +4894,12 @@
       <val name="pure" val="true"/>
     </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ObjToIntMap void getKeys(java.lang.Object[], int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ObjToIntMap void initIterator(sun.org.mozilla.javascript.internal.ObjToIntMap.Iterator)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ObjToIntMap void initIterator(sun.org.mozilla.javascript.internal.ObjToIntMap.Iterator) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -4999,6 +5181,10 @@
   <item name="sun.org.mozilla.javascript.internal.Parser.ParserException ParserException()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.Parser.PerFunctionVariables PerFunctionVariables(sun.org.mozilla.javascript.internal.Parser, sun.org.mozilla.javascript.internal.ast.FunctionNode)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.Parser.PerFunctionVariables PerFunctionVariables(sun.org.mozilla.javascript.internal.Parser, sun.org.mozilla.javascript.internal.ast.FunctionNode) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -5059,6 +5245,12 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.RhinoException void initColumnNumber(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.RhinoException void initLineNumber(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.RhinoException void initLineSource(java.lang.String)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
@@ -5070,6 +5262,9 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.RhinoException void initSourceName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.RhinoException void recordErrorOrigin(java.lang.String, int, java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.RhinoException void recordErrorOrigin(java.lang.String, int, java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -5317,6 +5512,11 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime java.lang.Object evalSpecial(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable, java.lang.Object, java.lang.Object[], java.lang.String, int) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ScriptRuntime java.lang.Object getIndexObject(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime java.lang.Object getIndexObject(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -5660,6 +5860,11 @@
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime java.lang.String uneval(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable, java.lang.Object) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ScriptRuntime long indexFromString(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime long indexFromString(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -5670,6 +5875,11 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime long lastUint32Result(sun.org.mozilla.javascript.internal.Context) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ScriptRuntime long testUint32String(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime long testUint32String(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -5836,6 +6046,9 @@
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime sun.org.mozilla.javascript.internal.Scriptable getTopCallScope(sun.org.mozilla.javascript.internal.Context) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ScriptRuntime sun.org.mozilla.javascript.internal.Scriptable lastStoredScriptable(sun.org.mozilla.javascript.internal.Context)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime sun.org.mozilla.javascript.internal.Scriptable lastStoredScriptable(sun.org.mozilla.javascript.internal.Context) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -5952,6 +6165,9 @@
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime void checkDeprecated(sun.org.mozilla.javascript.internal.Context, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ScriptRuntime void enterActivationFunction(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0,1"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime void enterActivationFunction(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -5979,6 +6195,9 @@
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime void initScript(sun.org.mozilla.javascript.internal.NativeFunction, sun.org.mozilla.javascript.internal.Scriptable, sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable, boolean) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ScriptRuntime void setEnumNumbers(java.lang.Object, boolean)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime void setEnumNumbers(java.lang.Object, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -5994,17 +6213,29 @@
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime void setObjectProtoAndParent(sun.org.mozilla.javascript.internal.ScriptableObject, sun.org.mozilla.javascript.internal.Scriptable) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ScriptRuntime void setRegExpProxy(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.RegExpProxy)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime void setRegExpProxy(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.RegExpProxy) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime void setRegExpProxy(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.RegExpProxy) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ScriptRuntime void storeIndexResult(sun.org.mozilla.javascript.internal.Context, int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime void storeIndexResult(sun.org.mozilla.javascript.internal.Context, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ScriptRuntime void storeScriptable(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime void storeScriptable(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ScriptRuntime void storeUint32Result(sun.org.mozilla.javascript.internal.Context, long)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptRuntime void storeUint32Result(sun.org.mozilla.javascript.internal.Context, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -6326,6 +6557,11 @@
   <item name="sun.org.mozilla.javascript.internal.ScriptableObject void addKnownAbsentSlot(sun.org.mozilla.javascript.internal.ScriptableObject.Slot[], sun.org.mozilla.javascript.internal.ScriptableObject.Slot, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="sun.org.mozilla.javascript.internal.ScriptableObject void checkValidAttributes(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptableObject void checkValidPropertyDefinition(sun.org.mozilla.javascript.internal.ScriptableObject.Slot, sun.org.mozilla.javascript.internal.ScriptableObject) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -6420,6 +6656,9 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.ScriptableObject.Slot sun.org.mozilla.javascript.internal.ScriptableObject getPropertyDescriptor(sun.org.mozilla.javascript.internal.Context, sun.org.mozilla.javascript.internal.Scriptable) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.ScriptableObject.Slot void setAttributes(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.SecureCaller SecureCaller()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -6519,9 +6758,15 @@
     </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Token java.lang.String name(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Token java.lang.String typeToName(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="sun.org.mozilla.javascript.internal.Token.CommentType CommentType(java.lang.String, int)">
@@ -6546,6 +6791,11 @@
     </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.TokenStream boolean isDigit(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.TokenStream boolean isKeyword(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -6604,6 +6854,11 @@
     </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.TokenStream int getTokenLength()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.TokenStream int stringToKeyword(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -6684,6 +6939,11 @@
   </item>
   <item name="sun.org.mozilla.javascript.internal.UniqueTag UniqueTag(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="sun.org.mozilla.javascript.internal.UniqueTag java.lang.Object readResolve()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="sun.org.mozilla.javascript.internal.UniqueTag java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>

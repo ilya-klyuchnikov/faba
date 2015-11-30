@@ -124,6 +124,9 @@
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.ClassReader com.sun.xml.internal.ws.org.objectweb.asm.Attribute readAttribute(com.sun.xml.internal.ws.org.objectweb.asm.Attribute[], java.lang.String, int, int, char[], int, com.sun.xml.internal.ws.org.objectweb.asm.Label[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.ClassReader com.sun.xml.internal.ws.org.objectweb.asm.Label readLabel(int, com.sun.xml.internal.ws.org.objectweb.asm.Label[])">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1"/>
+  </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.ClassReader com.sun.xml.internal.ws.org.objectweb.asm.Label readLabel(int, com.sun.xml.internal.ws.org.objectweb.asm.Label[]) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -262,6 +265,10 @@
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.ClassWriter void visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[]) 5">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.ClassWriter void visitAttribute(com.sun.xml.internal.ws.org.objectweb.asm.Attribute)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.ClassWriter void visitAttribute(com.sun.xml.internal.ws.org.objectweb.asm.Attribute) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -310,6 +317,10 @@
   </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.FieldWriter void put(com.sun.xml.internal.ws.org.objectweb.asm.ByteVector) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.FieldWriter void visitAttribute(com.sun.xml.internal.ws.org.objectweb.asm.Attribute)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.FieldWriter void visitAttribute(com.sun.xml.internal.ws.org.objectweb.asm.Attribute) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -372,6 +383,10 @@
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.Item void set(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.Item void set(int, java.lang.String, java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1,2,3"/>
+  </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.Item void set(int, java.lang.String, java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -393,6 +408,10 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.Label boolean resolve(com.sun.xml.internal.ws.org.objectweb.asm.MethodWriter, int, byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="2"/>
   </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.Label boolean resolve(com.sun.xml.internal.ws.org.objectweb.asm.MethodWriter, int, byte[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -432,6 +451,11 @@
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.MethodWriter com.sun.xml.internal.ws.org.objectweb.asm.AnnotationVisitor visitParameterAnnotation(int, java.lang.String, boolean)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.MethodWriter int getArgumentsAndReturnSizes(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.MethodWriter int getArgumentsAndReturnSizes(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -466,6 +490,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.MethodWriter short readShort(byte[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.MethodWriter void getNewOffset(int[], int[], com.sun.xml.internal.ws.org.objectweb.asm.Label)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="2"/>
   </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.MethodWriter void getNewOffset(int[], int[], com.sun.xml.internal.ws.org.objectweb.asm.Label) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -521,6 +548,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.MethodWriter void writeFrameType(java.lang.Object) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.MethodWriter void writeShort(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.MethodWriter void writeShort(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -655,6 +685,9 @@
   </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.Type java.lang.String getMethodDescriptor(java.lang.reflect.Method) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.xml.internal.ws.org.objectweb.asm.Type void getDescriptor(java.lang.StringBuffer)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="com.sun.xml.internal.ws.org.objectweb.asm.Type void getDescriptor(java.lang.StringBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

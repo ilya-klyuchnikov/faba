@@ -57,6 +57,10 @@
   <item name="com.sun.jndi.ldap.BerDecoder int parseLength()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.jndi.ldap.BerDecoder int parseSeq(int[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="com.sun.jndi.ldap.BerDecoder int parseSeq(int[]) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -217,6 +221,10 @@
   <item name="com.sun.jndi.ldap.Connection void abandonRequest(com.sun.jndi.ldap.LdapRequest, javax.naming.ldap.Control[]) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jndi.ldap.Connection void addRequest(com.sun.jndi.ldap.LdapRequest)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="com.sun.jndi.ldap.Connection void addRequest(com.sun.jndi.ldap.LdapRequest) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -330,10 +338,16 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.jndi.ldap.Filter int indexOf(byte[], java.lang.String, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.Filter int indexOf(byte[], java.lang.String, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.Filter int[] findRightParen(byte[], int[], int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1"/>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.jndi.ldap.Filter int[] findRightParen(byte[], int[], int) 1">
@@ -1073,6 +1087,9 @@
   <item name="com.sun.jndi.ldap.LdapCtx void setReadTimeout(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapCtx void setRefSeparator(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="com.sun.jndi.ldap.LdapCtx void setRefSeparator(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1606,6 +1623,11 @@
   <item name="com.sun.jndi.ldap.LdapSchemaParser LdapSchemaParser(boolean)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaParser int findTrailingWhitespace(java.lang.String, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser java.lang.Object[] desc2Def(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1799,6 +1821,9 @@
   </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser void LDAP2JNDISchema(javax.naming.directory.Attributes, com.sun.jndi.ldap.LdapSchemaCtx) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.ldap.LdapSchemaParser void skipWhitespace(java.lang.String, int[])">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1"/>
   </item>
   <item name="com.sun.jndi.ldap.LdapSchemaParser void skipWhitespace(java.lang.String, int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

@@ -502,6 +502,9 @@
   <item name="java.awt.image.ColorConvertOp void getMinMaxValsFromProfiles(java.awt.color.ICC_Profile, java.awt.color.ICC_Profile) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.awt.image.ColorConvertOp void setMinMax(int, int, float[], float[])">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="2,3"/>
+  </item>
   <item name="java.awt.image.ColorModel ColorModel(int, int[], java.awt.color.ColorSpace, boolean, boolean, int, int) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1463,7 +1466,15 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.awt.image.IndexColorModel java.math.BigInteger getAllValid()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.awt.image.IndexColorModel java.math.BigInteger getValidPixels()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.awt.image.IndexColorModel void calculatePixelMask()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -1472,6 +1483,21 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.awt.image.IndexColorModel void getAlphas(byte[])">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
+  <item name="java.awt.image.IndexColorModel void getBlues(byte[])">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
+  <item name="java.awt.image.IndexColorModel void getGreens(byte[])">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
+  <item name="java.awt.image.IndexColorModel void getRGBs(int[])">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
+  <item name="java.awt.image.IndexColorModel void getReds(byte[])">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="java.awt.image.IndexColorModel void setRGBs(int, byte[], byte[], byte[], byte[]) 4">
     <annotation name="org.jetbrains.annotations.Nullable"/>

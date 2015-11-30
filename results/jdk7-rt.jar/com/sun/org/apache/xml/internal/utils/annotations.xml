@@ -141,6 +141,10 @@
   <item name="com.sun.org.apache.xml.internal.utils.Context2 void declarePrefix(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xml.internal.utils.Context2 void setParent(com.sun.org.apache.xml.internal.utils.Context2)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.Context2 void setParent(com.sun.org.apache.xml.internal.utils.Context2) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -494,6 +498,10 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.utils.FastStringBuffer FastStringBuffer(com.sun.org.apache.xml.internal.utils.FastStringBuffer)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.FastStringBuffer FastStringBuffer(com.sun.org.apache.xml.internal.utils.FastStringBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1558,7 +1566,8 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.URI boolean isURIString(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
+      <val name="value" val="&quot;null-&gt;false&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.URI boolean isURIString(java.lang.String) 0">
@@ -2320,11 +2329,26 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.xml.internal.utils.XML11Char boolean isXML11ValidNCName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.XML11Char boolean isXML11ValidNCName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xml.internal.utils.XML11Char boolean isXML11ValidName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.XML11Char boolean isXML11ValidName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.utils.XML11Char boolean isXML11ValidNmtoken(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.XML11Char boolean isXML11ValidNmtoken(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2404,7 +2428,8 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.XMLChar boolean isValidIANAEncoding(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
+      <val name="value" val="&quot;null-&gt;false&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.XMLChar boolean isValidIANAEncoding(java.lang.String) 0">
@@ -2412,17 +2437,33 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.XMLChar boolean isValidJavaEncoding(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
+      <val name="value" val="&quot;null-&gt;false&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.XMLChar boolean isValidJavaEncoding(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xml.internal.utils.XMLChar boolean isValidNCName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.XMLChar boolean isValidNCName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xml.internal.utils.XMLChar boolean isValidName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xml.internal.utils.XMLChar boolean isValidName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.utils.XMLChar boolean isValidNmtoken(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.XMLChar boolean isValidNmtoken(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2463,7 +2504,13 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.XMLCharacterRecognizer boolean isWhiteSpace(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;true&quot;"/>
+      <val name="value" val="&quot;null-&gt;true&quot;"/>
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.utils.XMLCharacterRecognizer boolean isWhiteSpace(java.lang.StringBuffer)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.XMLCharacterRecognizer boolean isWhiteSpace(java.lang.StringBuffer) 0">
@@ -2563,6 +2610,11 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.XMLStringDefault boolean startsWith(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.utils.XMLStringDefault char charAt(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.XMLStringDefault com.sun.org.apache.xml.internal.utils.XMLString concat(java.lang.String)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2686,6 +2738,9 @@
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.XMLStringDefault void dispatchCharactersEvents(org.xml.sax.ContentHandler) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xml.internal.utils.XMLStringDefault void getChars(int, int, char[], int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="2"/>
   </item>
   <item name="com.sun.org.apache.xml.internal.utils.XMLStringFactory XMLStringFactory()">
     <annotation name="org.jetbrains.annotations.Contract">

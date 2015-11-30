@@ -61,8 +61,16 @@
   <item name="com.sun.jndi.dns.DnsClient void makeQueryName(com.sun.jndi.dns.DnsName, com.sun.jndi.dns.Packet, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.dns.DnsContext DnsContext(com.sun.jndi.dns.DnsContext)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="com.sun.jndi.dns.DnsContext DnsContext(com.sun.jndi.dns.DnsContext) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.DnsContext DnsContext(com.sun.jndi.dns.DnsContext, com.sun.jndi.dns.DnsName)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="com.sun.jndi.dns.DnsContext DnsContext(com.sun.jndi.dns.DnsContext, com.sun.jndi.dns.DnsName) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -404,6 +412,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.jndi.dns.DnsName boolean isHostNameLabel(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.dns.DnsName boolean isHostNameLabel(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -412,6 +425,11 @@
   </item>
   <item name="com.sun.jndi.dns.DnsName char getEscapedOctet(java.lang.String, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.DnsName int compareLabels(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.dns.DnsName int compareLabels(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -477,6 +495,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.jndi.dns.DnsName void escape(java.lang.StringBuffer, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="com.sun.jndi.dns.DnsName void escape(java.lang.StringBuffer, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -628,6 +649,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.jndi.dns.ResourceRecord int decodeCharString(int, java.lang.StringBuffer)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1"/>
+  </item>
   <item name="com.sun.jndi.dns.ResourceRecord int decodeCharString(int, java.lang.StringBuffer) 1">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -702,8 +726,23 @@
   <item name="com.sun.jndi.dns.ResourceRecord java.lang.String decodeTxt(int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.jndi.dns.ResourceRecord java.lang.String getRrclassName(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.jndi.dns.ResourceRecord java.lang.String getTypeName(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.jndi.dns.ResourceRecord java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.jndi.dns.ResourceRecord java.lang.String valueToName(int, java.lang.String[])">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.jndi.dns.ResourceRecord long getUInt(int)">
     <annotation name="org.jetbrains.annotations.Contract">

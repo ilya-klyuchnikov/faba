@@ -177,6 +177,9 @@
   <item name="javax.swing.text.AbstractDocument.BranchElement javax.swing.text.Element positionToElement(int)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="javax.swing.text.AbstractDocument.BranchElement void replace(int, int, javax.swing.text.Element[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="javax.swing.text.AbstractDocument.BranchElement void replace(int, int, javax.swing.text.Element[]) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -3115,6 +3118,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="javax.swing.text.Segment char charAt(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="javax.swing.text.Segment char current()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -3147,6 +3155,9 @@
     </annotation>
   </item>
   <item name="javax.swing.text.Segment java.lang.CharSequence subSequence(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.Segment java.lang.Object clone()">
@@ -3299,8 +3310,14 @@
   <item name="javax.swing.text.StringContent javax.swing.undo.UndoableEdit remove(int, int)">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="javax.swing.text.StringContent void getChars(int, int, javax.swing.text.Segment)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="2"/>
+  </item>
   <item name="javax.swing.text.StringContent void getChars(int, int, javax.swing.text.Segment) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="javax.swing.text.StringContent void replace(int, int, char[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="javax.swing.text.StringContent void resize(int)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
@@ -3329,6 +3346,9 @@
     </annotation>
   </item>
   <item name="javax.swing.text.StringContent.StickyPosition java.lang.String toString()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="javax.swing.text.StringContent.UndoPosRef UndoPosRef(javax.swing.text.StringContent, javax.swing.text.StringContent.PosRec)">
@@ -3898,6 +3918,9 @@
   </item>
   <item name="javax.swing.text.TableView void invalidateGrid()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="javax.swing.text.TableView void layoutColumns(int, int[], int[], javax.swing.SizeRequirements[])">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1,2"/>
   </item>
   <item name="javax.swing.text.TableView void layoutColumns(int, int[], int[], javax.swing.SizeRequirements[]) 2">
     <annotation name="org.jetbrains.annotations.NotNull"/>

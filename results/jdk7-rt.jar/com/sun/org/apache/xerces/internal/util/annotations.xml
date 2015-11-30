@@ -1191,6 +1191,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.util.SymbolHash int getValues(java.lang.Object[], int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.util.SymbolHash java.lang.Object get(java.lang.Object)">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
@@ -1224,6 +1227,11 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.util.SymbolTable int hash(char[], int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.util.SymbolTable int hash(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1396,7 +1404,8 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.util.URI boolean isURIString(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
+      <val name="value" val="&quot;null-&gt;false&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.util.URI boolean isURIString(java.lang.String) 0">
@@ -1408,6 +1417,11 @@
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.util.URI boolean isUserinfoCharacter(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.util.URI boolean isValidRegistryBasedAuthority(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1429,6 +1443,11 @@
   <item name="com.sun.org.apache.xerces.internal.util.URI boolean isWellFormedAddress(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.util.URI boolean isWellFormedIPv4Address(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.util.URI boolean isWellFormedIPv4Address(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1439,6 +1458,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.util.URI int scanHexSequence(java.lang.String, int, int, int[])">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="3"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.util.URI java.lang.String getAuthority()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1510,6 +1532,9 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.util.URI void setQueryString(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.util.URI void setRegBasedAuthority(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.util.URI void setRegBasedAuthority(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -1586,11 +1611,26 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.util.XML11Char boolean isXML11ValidNCName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.util.XML11Char boolean isXML11ValidNCName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.util.XML11Char boolean isXML11ValidName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.util.XML11Char boolean isXML11ValidName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.util.XML11Char boolean isXML11ValidNmtoken(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.util.XML11Char boolean isXML11ValidNmtoken(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1680,8 +1720,14 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.util.XMLAttributesImpl int getTableViewBucket(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.util.XMLAttributesImpl int getTableViewBucket(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.util.XMLAttributesImpl int getTableViewBucket(java.lang.String, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0,1"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.util.XMLAttributesImpl int getTableViewBucket(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1720,13 +1766,17 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.util.XMLAttributesImpl java.lang.String getReportableType(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null-&gt;!null&quot;"/>
+      <val name="value" val="&quot;!null-&gt;!null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.util.XMLAttributesImpl java.lang.String getReportableType(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.util.XMLAttributesImpl java.lang.String getType(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.util.XMLAttributesImpl java.lang.String getType(java.lang.String)">
@@ -1931,7 +1981,8 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.util.XMLChar boolean isValidIANAEncoding(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
+      <val name="value" val="&quot;null-&gt;false&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.util.XMLChar boolean isValidIANAEncoding(java.lang.String) 0">
@@ -1939,17 +1990,33 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.util.XMLChar boolean isValidJavaEncoding(java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null-&gt;false&quot;"/>
+      <val name="value" val="&quot;null-&gt;false&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.util.XMLChar boolean isValidJavaEncoding(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.util.XMLChar boolean isValidNCName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.util.XMLChar boolean isValidNCName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.util.XMLChar boolean isValidName(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.util.XMLChar boolean isValidName(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.util.XMLChar boolean isValidNmtoken(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.util.XMLChar boolean isValidNmtoken(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

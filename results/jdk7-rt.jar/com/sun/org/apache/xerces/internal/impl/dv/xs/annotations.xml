@@ -22,11 +22,17 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV boolean isNextCharUTCSign(java.lang.String, int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;null,_,_-&gt;false&quot;"/>
+      <val name="value" val="&quot;null,_,_-&gt;false&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV double parseSecond(java.lang.String, int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV int findUTCSign(java.lang.String, int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV int getDate(java.lang.String, int, int, com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -39,6 +45,11 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV int getYearMonth(java.lang.String, int, int, com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData) 3">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV int indexOf(java.lang.String, int, int, char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV int maxDayInMonthFor(int, int)">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -110,6 +121,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV void cloneDate(com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData, com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV void cloneDate(com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData, com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -131,8 +145,14 @@
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV void normalize(com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV void resetDateObj(com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV void resetDateObj(com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV void saveUnnormalized(com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV void saveUnnormalized(com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV.DateTimeData) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -555,6 +575,11 @@
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.DoubleDV boolean isIdentical(java.lang.Object, java.lang.Object) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.DoubleDV boolean isPossibleFP(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.DoubleDV boolean isPossibleFP(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -664,7 +689,8 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.EntityDV java.lang.Object getActualValue(java.lang.String, com.sun.org.apache.xerces.internal.impl.dv.ValidationContext)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
+      <val name="value" val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.EntityDV java.lang.Object getActualValue(java.lang.String, com.sun.org.apache.xerces.internal.impl.dv.ValidationContext) 0">
@@ -808,7 +834,8 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.IDDV java.lang.Object getActualValue(java.lang.String, com.sun.org.apache.xerces.internal.impl.dv.ValidationContext)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
+      <val name="value" val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.IDDV java.lang.Object getActualValue(java.lang.String, com.sun.org.apache.xerces.internal.impl.dv.ValidationContext) 0">
@@ -832,7 +859,8 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.IDREFDV java.lang.Object getActualValue(java.lang.String, com.sun.org.apache.xerces.internal.impl.dv.ValidationContext)">
     <annotation name="org.jetbrains.annotations.Contract">
-      <val val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
+      <val name="value" val="&quot;!null,_-&gt;!null;null,_-&gt;null&quot;"/>
+      <val name="pure" val="true"/>
     </annotation>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.IDREFDV java.lang.Object getActualValue(java.lang.String, com.sun.org.apache.xerces.internal.impl.dv.ValidationContext) 0">
@@ -1061,6 +1089,9 @@
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.PrecisionDecimalDV.XPrecisionDecimal void makeCanonical()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.PrecisionDecimalDV.XPrecisionDecimal void truncateTrailingZeros(java.lang.StringBuffer, java.lang.StringBuffer)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0,1"/>
   </item>
   <item name="com.sun.org.apache.xerces.internal.impl.dv.xs.PrecisionDecimalDV.XPrecisionDecimal void truncateTrailingZeros(java.lang.StringBuffer, java.lang.StringBuffer) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>

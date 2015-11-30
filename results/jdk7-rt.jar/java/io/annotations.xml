@@ -50,8 +50,14 @@
   <item name="java.io.Bits short getShort(byte[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.Bits void putBoolean(byte[], int, boolean)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="java.io.Bits void putBoolean(byte[], int, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.io.Bits void putChar(byte[], int, char)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="java.io.Bits void putChar(byte[], int, char) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -62,11 +68,20 @@
   <item name="java.io.Bits void putFloat(byte[], int, float) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.Bits void putInt(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="java.io.Bits void putInt(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.Bits void putLong(byte[], int, long)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="java.io.Bits void putLong(byte[], int, long) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.io.Bits void putShort(byte[], int, short)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="java.io.Bits void putShort(byte[], int, short) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -188,6 +203,10 @@
   <item name="java.io.ByteArrayInputStream int read()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.io.ByteArrayInputStream int read(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="java.io.ByteArrayInputStream int read(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -225,6 +244,9 @@
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.io.ByteArrayOutputStream java.lang.String toString(int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.io.ByteArrayOutputStream java.lang.String toString(java.lang.String)">
@@ -277,6 +299,10 @@
   </item>
   <item name="java.io.CharArrayReader int read()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.CharArrayReader int read(char[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="java.io.CharArrayReader int read(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -1614,7 +1640,17 @@
   <item name="java.io.ObjectStreamField ObjectStreamField(java.lang.reflect.Field, boolean, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.io.ObjectStreamField boolean isPrimitive()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.io.ObjectStreamField boolean isUnshared()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="java.io.ObjectStreamField char getTypeCode()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
@@ -1733,6 +1769,10 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.io.PipedOutputStream void connect(java.io.PipedInputStream)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="java.io.PipedOutputStream void connect(java.io.PipedInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -1759,6 +1799,10 @@
   </item>
   <item name="java.io.PipedWriter PipedWriter()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.PipedWriter void connect(java.io.PipedReader)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="java.io.PipedWriter void connect(java.io.PipedReader) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2147,6 +2191,13 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.io.StringBufferInputStream int read()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.StringBufferInputStream int read(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="java.io.StringBufferInputStream int read(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -2171,6 +2222,13 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.io.StringReader int read()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.io.StringReader int read(char[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="java.io.StringReader int read(char[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -2273,6 +2331,11 @@
   </item>
   <item name="java.io.UnixFileSystem int hashCode(java.io.File) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.io.UnixFileSystem int prefixLength(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
   </item>
   <item name="java.io.UnixFileSystem int prefixLength(java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
