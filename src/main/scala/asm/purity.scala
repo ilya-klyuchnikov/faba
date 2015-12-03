@@ -64,7 +64,7 @@ object PurityAnalysis {
   case object TopEffectQuantum extends EffectQuantum
   case object ThisChangeQuantum extends EffectQuantum
   case class ParamChangeQuantum(i: Int) extends EffectQuantum
-  case class CallQuantum(key: Key, data: List[DataValue]) extends EffectQuantum
+  case class CallQuantum(key: Key, data: List[DataValue], isStatic: Boolean) extends EffectQuantum
   case class PurityEquation(key: Key, effects: Set[EffectQuantum])
 
   class DataInterpreter(m: MethodNode) extends Interpreter[DataValue](ASM5) {
@@ -159,7 +159,7 @@ object PurityAnalysis {
           val data: List[DataValue] = values.asScala.toList
           val mNode = insn.asInstanceOf[MethodInsnNode]
           val key = Key(Method(mNode.owner, mNode.name, mNode.desc), Out, stable)
-          effects(insnIndex) = CallQuantum(key, data)
+          effects(insnIndex) = CallQuantum(key, data, opCode == INVOKESTATIC)
           if (Utils.getReturnSizeFast(mNode.desc) == 1)
             UnknownDataValue1
           else
@@ -259,7 +259,7 @@ class PuritySolver {
     var callKeys = Set[Key]()
     for (effect <- effects) {
       effect match {
-        case CallQuantum(callKey, _) =>
+        case CallQuantum(callKey, _, _) =>
           callKeys = callKeys + callKey
         case _ =>
 
@@ -282,13 +282,12 @@ class PuritySolver {
       case None => Set(TopEffectQuantum)
     }
 
-  def solve(extras: Map[Method, MethodExtra]): Map[Key, Set[EffectQuantum]] = {
+  def solve(): Map[Key, Set[EffectQuantum]] = {
     while (moving.nonEmpty) {
       val eq = moving.dequeue()
       val key = eq.key
       val effects = eq.effects
       solved = solved + (key -> effects)
-      val isStatic = (extras(key.method).access & Opcodes.ACC_STATIC) != 0
 
       val toPropagate: List[(Key, Set[EffectQuantum])] =
         if (key.stable)
@@ -307,7 +306,7 @@ class PuritySolver {
         var newEffects = Set[EffectQuantum]()
         var delta: Set[EffectQuantum] = null
         for (dEffect <- dEffects) dEffect match {
-          case CallQuantum(`pKey`, data) =>
+          case CallQuantum(`pKey`, data, isStatic) =>
             delta = substitute(isStatic, pEffects, data)
             newEffects = newEffects ++ delta
           case otherCall:CallQuantum =>
