@@ -3,12 +3,10 @@ package faba.asm
 import java.util
 
 import faba.data._
-import faba.data.{Key, Method}
-import faba.engine._
 import org.objectweb.asm.{Opcodes, Type}
 
 import org.objectweb.asm.Opcodes._
-import org.objectweb.asm.tree.analysis.{SourceValue, Analyzer, Interpreter}
+import org.objectweb.asm.tree.analysis.{Analyzer, Interpreter}
 import org.objectweb.asm.tree._
 
 import scala.collection.JavaConverters._
@@ -22,8 +20,6 @@ object PurityAnalysis {
 
     for (hardCodedSolution <- HardCodedPurity.getHardCodedSolution(aKey))
       return PurityEquation(aKey, hardCodedSolution)
-
-    val instanceMethod = (methodNode.access & Opcodes.ACC_STATIC) == 0
 
     if ((methodNode.access & unAnalyzable) != 0)
       return PurityEquation(aKey, Set[EffectQuantum](TopEffectQuantum))
@@ -41,11 +37,6 @@ object PurityAnalysis {
     }
     PurityEquation(aKey, effects)
   }
-
-  def isArrayCopy(mnode: MethodInsnNode) =
-    mnode.owner == "java/lang/System" && mnode.name == "arraycopy"
-
-  case class ThisValue() extends SourceValue(1)
 
   // how data are divided
   sealed trait DataValue extends org.objectweb.asm.tree.analysis.Value
@@ -89,7 +80,7 @@ object PurityAnalysis {
         return UnknownDataValue1
       called += 1
       // hack for analyzer
-      if (tp != null && tp.toString == "Lthis;")
+      if (tp.toString == "Lthis;")
         ThisDataValue
       else if (range.contains(called)) {
         if (tp eq Type.VOID_TYPE) return null
@@ -102,7 +93,7 @@ object PurityAnalysis {
       } else {
         if (tp eq Type.VOID_TYPE) null
         else if (tp.getSize == 1) UnknownDataValue1
-        else UnknownDataValue1
+        else UnknownDataValue2
       }
     }
 
@@ -169,7 +160,7 @@ object PurityAnalysis {
           val mNode = insn.asInstanceOf[MethodInsnNode]
           val key = Key(Method(mNode.owner, mNode.name, mNode.desc), Out, stable)
           effects(insnIndex) = CallQuantum(key, data)
-          if (Utils.getReturnSizeFast(insn.asInstanceOf[MethodInsnNode].desc) == 1)
+          if (Utils.getReturnSizeFast(mNode.desc) == 1)
             UnknownDataValue1
           else
             UnknownDataValue2
@@ -238,7 +229,6 @@ object HardCodedPurity {
     Map(
       Method("java/lang/Throwable", "fillInStackTrace", "(I)Ljava/lang/Throwable;") -> Set(ThisChangeQuantum),
       Method("java/lang/System", "arraycopy", "(Ljava/lang/Object;ILjava/lang/Object;II)V") -> Set(ParamChangeQuantum(2)),
-      Method("java/lang/Throwable", "fillInStackTrace", "(I)Ljava/lang/Throwable;") -> Set(ThisChangeQuantum),
       Method("java/lang/AbstractStringBuilder", "expandCapacity", "(I)V") -> Set(ThisChangeQuantum),
       Method("java/lang/StringBuilder", "expandCapacity", "(I)V") -> Set(ThisChangeQuantum),
       Method("java/lang/StringBuffer", "expandCapacity", "(I)V") -> Set(ThisChangeQuantum),
