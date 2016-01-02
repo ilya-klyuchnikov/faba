@@ -1,6 +1,18 @@
 <root>
+  <item name="java.net.ConnectException ConnectException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.ConnectException ConnectException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.DatagramPacket DatagramPacket(byte[], int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.DatagramPacket DatagramPacket(byte[], int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.DatagramPacket DatagramPacket(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.DatagramPacket DatagramPacket(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -39,11 +51,20 @@
   <item name="java.net.DatagramPacket void setAddress(java.net.InetAddress)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
+  <item name="java.net.DatagramPacket void setData(byte[])">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.DatagramPacket void setData(byte[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.DatagramPacket void setData(byte[], int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.DatagramPacket void setData(byte[], int, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.DatagramPacket void setLength(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.DatagramSocket boolean isBound()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -217,6 +238,12 @@
   <item name="java.net.InetAddress java.net.InetAddress[] getAllByName0(java.lang.String, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.MalformedURLException MalformedURLException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.MalformedURLException MalformedURLException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.ServerSocket boolean isBound()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -295,6 +322,12 @@
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.Socket void setCreated()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.SocketException SocketException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.SocketException SocketException(java.lang.String)">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="java.net.URI URI()">
@@ -384,6 +417,11 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="java.net.URI byte decode(char, char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.net.URI int compare(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -404,10 +442,18 @@
   <item name="java.net.URI int compareTo(java.net.URI) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.URI int decode(char)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="java.net.URI int getPort()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="java.net.URI int hash(int, java.lang.String)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1"/>
   </item>
   <item name="java.net.URI int hash(int, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
@@ -590,6 +636,9 @@
   <item name="java.net.URI void appendAuthority(java.lang.StringBuffer, java.lang.String, java.lang.String, java.lang.String, int) 3">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.net.URI void appendEscape(java.lang.StringBuffer, byte)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="java.net.URI void appendEscape(java.lang.StringBuffer, byte) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -620,11 +669,17 @@
   <item name="java.net.URI void checkPath(java.lang.String, java.lang.String, java.lang.String) 2">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.net.URI void maybeAddLeadingDot(char[], int[])">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0,1"/>
+  </item>
   <item name="java.net.URI void maybeAddLeadingDot(char[], int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="java.net.URI void readObject(java.io.ObjectInputStream) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.URI void removeDots(char[], int[])">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="1"/>
   </item>
   <item name="java.net.URI void removeDots(char[], int[]) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -856,6 +911,12 @@
   <item name="java.net.URLConnection void addRequestProperty(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="java.net.URLConnection void setAllowUserInteraction(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.URLConnection void setConnectTimeout(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.URLConnection void setDefaultRequestProperty(java.lang.String, java.lang.String)">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -867,7 +928,28 @@
   <item name="java.net.URLConnection void setDefaultRequestProperty(java.lang.String, java.lang.String) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
+  <item name="java.net.URLConnection void setDoInput(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.URLConnection void setDoOutput(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.URLConnection void setIfModifiedSince(long)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.URLConnection void setReadTimeout(int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
   <item name="java.net.URLConnection void setRequestProperty(java.lang.String, java.lang.String) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
+  </item>
+  <item name="java.net.URLConnection void setUseCaches(boolean)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.UnknownHostException UnknownHostException()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="java.net.UnknownHostException UnknownHostException(java.lang.String)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>

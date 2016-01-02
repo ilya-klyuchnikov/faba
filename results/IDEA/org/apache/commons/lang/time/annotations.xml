@@ -279,6 +279,11 @@
   <item name="org.apache.commons.lang.time.DateUtils void modify(java.util.Calendar, int, boolean) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="org.apache.commons.lang.time.DateUtils.DateIterator void remove()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="org.apache.commons.lang.time.DurationFormatUtils DurationFormatUtils()">
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
@@ -426,6 +431,9 @@
     <annotation name="org.jetbrains.annotations.Nullable"/>
   </item>
   <item name="org.apache.commons.lang.time.FastDateFormat org.apache.commons.lang.time.FastDateFormat.NumberRule selectNumberRule(int, int)">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.apache.commons.lang.time.FastDateFormat void readObject(java.io.ObjectInputStream) 0">
@@ -439,11 +447,17 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="org.apache.commons.lang.time.FastDateFormat.CharacterLiteral void appendTo(java.lang.StringBuffer, java.util.Calendar)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="org.apache.commons.lang.time.FastDateFormat.CharacterLiteral void appendTo(java.lang.StringBuffer, java.util.Calendar) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
   <item name="org.apache.commons.lang.time.FastDateFormat.CharacterLiteral void appendTo(java.lang.StringBuffer, java.util.Calendar) 1">
     <annotation name="org.jetbrains.annotations.Nullable"/>
+  </item>
+  <item name="org.apache.commons.lang.time.FastDateFormat.PaddedNumberField PaddedNumberField(int, int)">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
   <item name="org.apache.commons.lang.time.FastDateFormat.PaddedNumberField int estimateLength()">
     <annotation name="org.jetbrains.annotations.Contract">
@@ -543,6 +557,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="org.apache.commons.lang.time.FastDateFormat.TwoDigitMonthField void appendTo(java.lang.StringBuffer, int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="org.apache.commons.lang.time.FastDateFormat.TwoDigitMonthField void appendTo(java.lang.StringBuffer, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -579,6 +596,9 @@
       <val name="pure" val="true"/>
     </annotation>
   </item>
+  <item name="org.apache.commons.lang.time.FastDateFormat.TwoDigitYearField void appendTo(java.lang.StringBuffer, int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
+  </item>
   <item name="org.apache.commons.lang.time.FastDateFormat.TwoDigitYearField void appendTo(java.lang.StringBuffer, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
@@ -597,6 +617,9 @@
     <annotation name="org.jetbrains.annotations.Contract">
       <val name="pure" val="true"/>
     </annotation>
+  </item>
+  <item name="org.apache.commons.lang.time.FastDateFormat.UnpaddedMonthField void appendTo(java.lang.StringBuffer, int)">
+    <annotation name="org.jetbrains.annotations.ParamChange" params="0"/>
   </item>
   <item name="org.apache.commons.lang.time.FastDateFormat.UnpaddedMonthField void appendTo(java.lang.StringBuffer, int) 0">
     <annotation name="org.jetbrains.annotations.NotNull"/>
@@ -633,7 +656,20 @@
   <item name="org.apache.commons.lang.time.StopWatch java.lang.String toString()">
     <annotation name="org.jetbrains.annotations.NotNull"/>
   </item>
+  <item name="org.apache.commons.lang.time.StopWatch long getSplitTime()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
+  <item name="org.apache.commons.lang.time.StopWatch long getStartTime()">
+    <annotation name="org.jetbrains.annotations.Contract">
+      <val name="pure" val="true"/>
+    </annotation>
+  </item>
   <item name="org.apache.commons.lang.time.StopWatch void reset()">
+    <annotation name="org.jetbrains.annotations.LocalEffect"/>
+  </item>
+  <item name="org.apache.commons.lang.time.StopWatch void unsplit()">
     <annotation name="org.jetbrains.annotations.LocalEffect"/>
   </item>
 </root>
